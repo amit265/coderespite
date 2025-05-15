@@ -1,0 +1,25 @@
+{
+  "moduleId": "mod01",
+  "title": "JavaScript Basics",
+  "description": "Introduction to variables, data types, and operators.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "lsn01",
+      "title": "What is JavaScript?",
+      "type": "theory",
+      "content": "JavaScript is a scripting language used to create dynamic content on websites."
+    },
+    {
+      "lessonId": "lsn02",
+      "title": "Variables in JS",
+      "type": "theory",
+      "content": "Variables are containers for storing data. Use `let`, `const`, or `var`."
+    },
+    {
+      "lessonId": "lsn03",
+      "type": "code",
+      "content": "let age = 25;"
+    }
+  ]
+}

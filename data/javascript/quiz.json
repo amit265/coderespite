@@ -1,0 +1,24 @@
+[
+    {
+        "quizId": "qz301",
+        "moduleId": "mod01",
+        "question": "Which of the following is not a JavaScript data type?",
+        "options": ["String", "Number", "Float", "Boolean"],
+        "correctAnswer": "Float",
+        "explanation": "JavaScript doesn't have a Float type; it uses Number for all numeric values.",
+        "tags": ["data types", "basics"],
+        "difficulty": "medium"
+      },
+      
+      {
+        "quizId": "qz302",
+        "moduleId": "mod01",
+        "question": "Which of the following is not a JavaScript data type?",
+        "options": ["String", "Number", "Float", "Boolean"],
+        "correctAnswer": "Float",
+        "explanation": "JavaScript doesn't have a Float type; it uses Number for all numeric values.",
+        "tags": ["data types", "basics"],
+        "difficulty": "medium"
+      },
+  ]
+  

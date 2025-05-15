@@ -1,0 +1,17 @@
+[
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "description": "Learn JavaScript from basics to advanced",
+      "icon": "js",
+      "color": "#f7df1e"
+    },
+    {
+      "id": "python",
+      "title": "Python",
+      "description": "Beginner-friendly Python programming course",
+      "icon": "py",
+      "color": "#3776ab"
+    }
+  ]
+  

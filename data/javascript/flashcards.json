@@ -1,0 +1,18 @@
+[{
+
+        "flashcardId": "fc101",
+        "question": "What keyword is used to declare a variable in JavaScript?",
+        "answer": "let",
+        "explanation": "JavaScript has 'var', 'let', and 'const'. 'let' is block scoped.",
+        "tags": ["variables", "keywords"],
+        "difficulty": "easy"
+    },
+    {
+        "flashcardId": "fc102",
+        "question": "How do you declare a constant in JavaScript?",
+        "explanation": "JavaScript has 'var', 'let', and 'const'. 'let' is block scoped.",
+        "answer": "const",
+        "tags": ["variables", "const"],
+        "difficulty": "easy"
+      }
+]
