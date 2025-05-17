@@ -23,7 +23,7 @@ export default function Header() {
           <Text
             style={{
               fontFamily: "Baloo2",
-              fontSize: 24,
+              fontSize: 20,
               color: colors.ERROR,
               fontWeight: 800,
             }}
@@ -33,7 +33,7 @@ export default function Header() {
           <Text
             style={{
               fontFamily: "Baloo2",
-              fontSize: 24,
+              fontSize: 20,
               color: colors.TEXT,
               fontWeight: 800,
             }}
@@ -44,7 +44,7 @@ export default function Header() {
         <View>
           <Text
             style={{
-              fontSize: 11.5,
+              fontSize: 10,
               color: colors.TEXT,
             }}
           >
