@@ -1,6 +1,15 @@
 // app/_layout.tsx
-import { Slot } from 'expo-router';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'react-native';
+import './global.css';
 
 export default function RootLayout() {
-  return <Slot />; // This will render everything under (tabs) or any other layout
+  return (
+    <>
+      <StatusBar backgroundColor="#F3FAFE" barStyle="dark-content" hidden={false} />
+      <Stack screenOptions={{ headerShown: false }} />
+    </>
+
+
+  ); // This will render everything under (tabs) or any other layout
 }

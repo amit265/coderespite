@@ -1,26 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export default function Welcome() {
   return (
-    <View style={styles.card}>
-      <View style={styles.textContainer}>
-        <Text style={{}}>Hi, Aman</Text>
-        <Text>Ready for a quick code break?</Text>
+    <View className="bg-white mx-4 my-4 p-6 rounded-2xl shadow-md border border-gray-200">
+      <View className="items-center space-y-2">
+        <Text className="text-lg font-semibold text-gray-800">Hi, Aman 👋</Text>
+        <Text className="text-base text-gray-600">Ready for a quick code break?</Text>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    margin: 16,
-  },
-  textContainer: {
-    padding: 16,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 10,
-  },
-});

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
@@ -7,15 +7,14 @@ import Header from "../../components/home/Header";
 import ProgressSummary from "../../components/home/ProgressSummary";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
-import colors from "../../constants/colors";
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
+    <ScrollView className="flex-1 bg-[#f8f9fa]">
+      <View className="pt-2 pb-2 items-center bg-[#f8f9fa]">
         <Header />
       </View>
-      <View style={styles.content}>
+      <View className="flex-1 space-y-4">
         <WelcomeCard />
         <ContinueCard />
         <ProgressSummary />
@@ -23,22 +22,6 @@ export default function Home() {
         <FeaturedLessonGrid />
         <DailyTip />
       </View>
-    </View>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.BACKGROUND,
-  },
-  headerContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    backgroundColor: colors.BACKGROUND,
-    alignItems: "center",
-  },
-  content: {
-    flex: 1,
-  },
-});

@@ -3,61 +3,42 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import colors from "../../constants/colors";
+
 export default function Header() {
   const router = useRouter();
 
   return (
-    <View
-      style={{
-        display: "flex",
-
-        flexDirection: "row",
-        justifyContent: "space-between",
-        width: "90%",
-        paddingBottom: 20,
-        borderBottomWidth: 1,
-      }}
-    >
+    <View className="flex-row justify-between items-start w-[90%] pb-5 border-b border-gray-300">
       <View>
-        <View style={{ display: "flex", flexDirection: "row" }}>
+        <View className="flex-row">
           <Text
-            style={{
-              fontFamily: "Baloo2",
-              fontSize: 20,
-              color: colors.ERROR,
-              fontWeight: 800,
-            }}
+            className="text-xl font-extrabold"
+            style={{ fontFamily: "Baloo2", color: colors.ERROR }}
           >
             CODE
           </Text>
           <Text
-            style={{
-              fontFamily: "Baloo2",
-              fontSize: 20,
-              color: colors.TEXT,
-              fontWeight: 800,
-            }}
+            className="text-xl font-extrabold"
+            style={{ fontFamily: "Baloo2", color: colors.TEXT }}
           >
             RESPITE
           </Text>
         </View>
-        <View>
-          <Text
-            style={{
-              fontSize: 10,
-              color: colors.TEXT,
-            }}
-          >
-            REFRESH YOUR TECH SKILLS
-          </Text>
-        </View>
+        <Text
+          className="text-xs mt-1"
+          style={{ color: colors.TEXT }}
+        >
+          REFRESH YOUR TECH SKILLS
+        </Text>
       </View>
-      <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+
+      <View className="flex-row gap-2">
+        {/* Uncomment if needed */}
         {/* <TouchableOpacity onPress={() => router.push("/favorites")}>
-          <Ionicons name="heart" size={36} color="black" />
+          <Ionicons name="heart" size={28} color="black" />
         </TouchableOpacity> */}
         <TouchableOpacity onPress={() => router.push("/settings")}>
-          <Ionicons name="settings-outline" size={36} color="black" />
+          <Ionicons name="settings-outline" size={28} color="black" />
         </TouchableOpacity>
       </View>
     </View>
