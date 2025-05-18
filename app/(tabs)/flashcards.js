@@ -1,14 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  Pressable,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, FlatList, Pressable, Text, View } from "react-native";
 import FlipCard from "react-native-flip-card";
 import * as Progress from "react-native-progress";
 import colors from "../../constants/colors";
@@ -37,11 +30,6 @@ export default function FlashCards() {
   return (
     <View className="flex-1 bg-[#F3FAFE]">
       {/* Header Image */}
-      <Image
-        source={require("../../assets/images/1.png")}
-        style={{ height: 500, width: "100%" }}
-        resizeMode="cover"
-      />
 
       {/* Overlay content */}
       <View className="absolute top-0 left-0 right-0 p-6">
@@ -50,13 +38,14 @@ export default function FlashCards() {
           <Pressable onPress={() => router.back()}>
             <Ionicons name="arrow-back" size={30} color="black" />
           </Pressable>
+          <Text className="text-black font-bold text-xl">FlashCards</Text>
           <Text className="text-black font-bold text-xl">
             {currentPage + 1} / {flashcard?.length}
           </Text>
         </View>
 
         {/* Progress Bar */}
-        <View className="mt-6">
+        <View className="mt-6 mx-auto">
           <Progress.Bar
             progress={getProgress(currentPage)}
             width={screenWidth * 0.85}
