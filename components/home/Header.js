@@ -8,7 +8,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <View className="flex-row justify-between items-start w-[90%] pb-5 border-b border-gray-300">
+    <View className="flex-row mx-auto justify-between items-start w-[90%] py-4 border-b border-gray-300">
       <View>
         <View className="flex-row">
           <Text
@@ -24,10 +24,7 @@ export default function Header() {
             RESPITE
           </Text>
         </View>
-        <Text
-          className="text-xs mt-1"
-          style={{ color: colors.TEXT }}
-        >
+        <Text className="text-xs mt-1" style={{ color: colors.TEXT }}>
           REFRESH YOUR TECH SKILLS
         </Text>
       </View>
