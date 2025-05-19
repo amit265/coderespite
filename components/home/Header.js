@@ -8,17 +8,17 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <View className="flex-row mx-auto justify-between items-start w-[90%] py-4 border-b border-gray-300">
+    <View className="flex-row justify-between items-start p-4 border-b border-gray-300">
       <View>
         <View className="flex-row">
           <Text
-            className="text-xl font-extrabold"
+            className="text-2xl font-extrabold"
             style={{ fontFamily: "Baloo2", color: colors.ERROR }}
           >
             CODE
           </Text>
           <Text
-            className="text-xl font-extrabold"
+            className="text-2xl font-extrabold"
             style={{ fontFamily: "Baloo2", color: colors.TEXT }}
           >
             RESPITE
@@ -29,13 +29,13 @@ export default function Header() {
         </Text>
       </View>
 
-      <View className="flex-row gap-2">
+      <View className="flex-row gap-2 p-2">
         {/* Uncomment if needed */}
         {/* <TouchableOpacity onPress={() => router.push("/favorites")}>
           <Ionicons name="heart" size={28} color="black" />
         </TouchableOpacity> */}
         <TouchableOpacity onPress={() => router.push("/settings")}>
-          <Ionicons name="settings-outline" size={28} color="black" />
+          <Ionicons name="settings-outline" size={32} color="black" />
         </TouchableOpacity>
       </View>
     </View>

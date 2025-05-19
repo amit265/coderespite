@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "CodeRespite: Refresh your skills",
+    "name": "CodeRespite: Refresh your Tech Skills",
     "slug": "coderespite",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,7 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#F3FAFE"
+        "backgroundColor": "#CBE7F7"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.mindcraftlearning.coderespite"
@@ -29,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#F3FAFE",
+          "backgroundColor": "#CBE7F7",
           "image": "./assets//images/splash-icon.png",
           "resizeMode": "contain",
           "width": 200

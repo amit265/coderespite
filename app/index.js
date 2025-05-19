@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../constants/colors";
 
 export default function Index() {
-  
+
   const router = useRouter();
   return (
     <SafeAreaView
@@ -20,7 +20,7 @@ export default function Index() {
           Welcome to CodeRespite!
         </Text>
         <Text className="text-gray-800 text-base text-center mt-2 mx-8">
-          Learn to code with your favorite Meowgrammer! 🚀
+          Learn to code with your favorite Meowgrammer! 🐾
         </Text>
         <Pressable
           onPress={() => {

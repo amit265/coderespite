@@ -1,4 +1,8 @@
-import { Ionicons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
@@ -8,30 +12,36 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: "#007bff",
         tabBarShowLabel: false,
-        // tabBarActiveBackgroundColor: "#F3FAFE",
-        
-        tabBarIcon: ({ color, size,focused }) => {
-          let iconName: any = "home";
+
+        tabBarIcon: ({ color, size }) => {
           switch (route.name) {
             case "index":
-              iconName = "home";
-              break;
+              return <AntDesign name="home" size={28} color={color} />;
             case "learn":
-              iconName = "book-outline";
-              break;
+              return <AntDesign name="book" size={28} color={color} />;
             case "flashcards":
-              iconName = "card-outline";
-              break;
+              return (
+                <MaterialCommunityIcons
+                  name="cards-outline"
+                  size={28}
+                  color={color}
+                />
+              );
             case "quiz":
-              iconName = "help-circle";
-              break;
+              return (
+                <AntDesign name="questioncircleo" size={28} color={color} />
+              );
             case "profile":
-              iconName = "person-circle-outline";
-              break;
+              return (
+                <Ionicons
+                  name="person-circle-outline"
+                  size={28}
+                  color={color}
+                />
+              );
+            default:
+              return <AntDesign name="question" size={28} color={color} />;
           }
-          const iconSize = focused ? 32 : 24; // 👈 Selected tab icon bigger
-
-          return <Ionicons name={iconName} size={iconSize} color={color} />;
         },
       })}
     >

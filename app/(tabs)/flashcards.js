@@ -28,7 +28,7 @@ export default function FlashCards() {
   };
 
   return (
-    <View className="flex-1 bg-[#F3FAFE]">
+    <View className="flex-1 bg-[#CBE7F7]">
       {/* Header Image */}
 
       {/* Overlay content */}

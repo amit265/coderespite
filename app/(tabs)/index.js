@@ -10,7 +10,7 @@ import WelcomeCard from "../../components/home/WelcomeCard";
 
 export default function Home() {
   return (
-    <ScrollView className="flex-1 bg-[#f8f9fa]">
+    <ScrollView className="flex-1 bg-[#CBE7F7]">
       <View className="flex-1 space-y-4 pb-16">
         <Header />
         <WelcomeCard />

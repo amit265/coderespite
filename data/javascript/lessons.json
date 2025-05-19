@@ -1,7 +1,7 @@
 [
   {
     "moduleId": "mod01",
-    "title": "JavaScript Basics",
+    "title": "Getting Started with JavaScript",
     "description": "Introduction to variables, data types, and operators.",
     "level": "Beginner",
     "lessons": [
@@ -27,7 +27,7 @@
   },
   {
     "moduleId": "mod02",
-    "title": "Data Types and Conversion",
+    "title": "Variables & Data Types",
     "description": "Learn about different data types and how to convert between them.",
     "level": "Beginner",
     "lessons": [
@@ -47,7 +47,7 @@
   },
   {
     "moduleId": "mod03",
-    "title": "Functions and Scope",
+    "title": "Operators",
     "description": "Understanding functions, parameters, return values, and scope.",
     "level": "Beginner",
     "lessons": [
@@ -73,7 +73,7 @@
   },
   {
     "moduleId": "mod04",
-    "title": "Control Structures",
+    "title": "Functions Basics",
     "description": "Learn how to control the flow of your program with loops and conditionals.",
     "level": "Beginner",
     "lessons": [
@@ -93,7 +93,7 @@
   },
   {
     "moduleId": "mod05",
-    "title": "Arrays",
+    "title": "Arrays and Objects (Intro)",
     "description": "Working with lists of data using arrays.",
     "level": "Beginner",
     "lessons": [
@@ -113,9 +113,9 @@
   },
   {
     "moduleId": "mod06",
-    "title": "Objects",
+    "title": "Deep Dive: Functions",
     "description": "Storing data with key-value pairs using objects.",
-    "level": "Beginner",
+    "level": "Intermediate",
     "lessons": [
       {
         "lessonId": "lsn01",
@@ -133,7 +133,7 @@
   },
   {
     "moduleId": "mod07",
-    "title": "ES6 Features",
+    "title": "Array Methods",
     "description": "Modern JavaScript syntax: arrow functions, template literals, and destructuring.",
     "level": "Intermediate",
     "lessons": [
@@ -159,7 +159,7 @@
   },
   {
     "moduleId": "mod08",
-    "title": "Promises and Async",
+    "title": "DOM Manipulation",
     "description": "Handling asynchronous code with Promises and async/await.",
     "level": "Intermediate",
     "lessons": [
@@ -179,7 +179,7 @@
   },
   {
     "moduleId": "mod09",
-    "title": "DOM Manipulation",
+    "title": "Asynchronous JS",
     "description": "Interacting with the Document Object Model using JavaScript.",
     "level": "Intermediate",
     "lessons": [
@@ -199,9 +199,89 @@
   },
   {
     "moduleId": "mod10",
+    "title": "Modules & Tooling",
+    "description": "Using try-catch blocks to handle errors gracefully.",
+    "level": "Advanced",
+    "lessons": [
+      {
+        "lessonId": "lsn01",
+        "title": "Try-Catch Syntax",
+        "type": "code",
+        "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
+      },
+      {
+        "lessonId": "lsn02",
+        "title": "Throwing Errors",
+        "type": "code",
+        "content": "throw new Error('Something went wrong');"
+      }
+    ]
+  },
+  {
+    "moduleId": "mod11",
+    "title": "Event Loop and JS Engine",
+    "description": "Using try-catch blocks to handle errors gracefully.",
+    "level": "Advanced",
+    "lessons": [
+      {
+        "lessonId": "lsn01",
+        "title": "Try-Catch Syntax",
+        "type": "code",
+        "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
+      },
+      {
+        "lessonId": "lsn02",
+        "title": "Throwing Errors",
+        "type": "code",
+        "content": "throw new Error('Something went wrong');"
+      }
+    ]
+  },
+  {
+    "moduleId": "mod12",
+    "title": "Advanced this & Binding",
+    "description": "Using try-catch blocks to handle errors gracefully.",
+    "level": "Advanced",
+    "lessons": [
+      {
+        "lessonId": "lsn01",
+        "title": "Try-Catch Syntax",
+        "type": "code",
+        "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
+      },
+      {
+        "lessonId": "lsn02",
+        "title": "Throwing Errors",
+        "type": "code",
+        "content": "throw new Error('Something went wrong');"
+      }
+    ]
+  },
+  {
+    "moduleId": "mod13",
+    "title": "Memory Management",
+    "description": "Using try-catch blocks to handle errors gracefully.",
+    "level": "Advanced",
+    "lessons": [
+      {
+        "lessonId": "lsn01",
+        "title": "Try-Catch Syntax",
+        "type": "code",
+        "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
+      },
+      {
+        "lessonId": "lsn02",
+        "title": "Throwing Errors",
+        "type": "code",
+        "content": "throw new Error('Something went wrong');"
+      }
+    ]
+  },
+  {
+    "moduleId": "mod14",
     "title": "Error Handling",
     "description": "Using try-catch blocks to handle errors gracefully.",
-    "level": "Intermediate",
+    "level": "Advanced",
     "lessons": [
       {
         "lessonId": "lsn01",

@@ -43,7 +43,7 @@ export default function Learn() {
   const levels = ["All", "Beginner", "Intermediate", "Advanced"];
 
   return (
-    <View className="flex-1 bg-[#f9fafb] px-4 pt-6">
+    <View className="flex-1 bg-[#CBE7F7] px-4 pt-6">
       <Text className="text-2xl font-bold mb-6 text-gray-800 text-center">
         JavaScript Modules
       </Text>
