@@ -1,7 +1,7 @@
 import {
   AntDesign,
-  Feather,
   FontAwesome,
+  Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -9,6 +9,7 @@ import React from "react";
 import {
   Alert,
   Linking,
+  Pressable,
   Share,
   StyleSheet,
   Text,
@@ -16,6 +17,7 @@ import {
   View,
 } from "react-native";
 import colors from "../constants/colors";
+import SafeScreen from "../components/SafeScreen";
 export default function Settings() {
   const router = useRouter();
 
@@ -51,25 +53,28 @@ export default function Settings() {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: colors.BACKGROUND,
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 25,
-          fontFamily: "Poppins-Bold",
-          marginBottom: 20,
-          textAlign: "center",
-          color: colors.TEXT,
-          marginTop: 30,
-        }}
-      >
-        Settings
-      </Text>
+  <SafeScreen>
+      <View className="relative w-full items-center justify-center p-4">
+        {/* Back Arrow - Positioned on the left */}
+        <Pressable
+          onPress={() => router.back()}
+          className="absolute left-4 top-4"
+        >
+          <Ionicons name="arrow-back" size={30} color="black" />
+        </Pressable>
+
+        {/* Title - Centered */}
+        <Text
+          style={{
+            fontSize: 25,
+            fontFamily: "Poppins-Bold",
+            color: colors.TEXT,
+            textAlign: "center",
+          }}
+        >
+          Settings
+        </Text>
+      </View>
 
       <View
         style={{
@@ -78,6 +83,7 @@ export default function Settings() {
           borderRadius: 60,
           padding: 20,
           height: "70%",
+          marginTop: 50,
         }}
       >
         {/* Number of Spins */}
@@ -151,9 +157,7 @@ export default function Settings() {
               gap: 20,
             }}
             onPress={() =>
-              Linking.openURL(
-                "https://mindcraftlearning.github.io/coderespite"
-              )
+              Linking.openURL("https://mindcraftlearning.github.io/coderespite")
             }
           >
             <MaterialIcons name="privacy-tip" size={24} color="#000000" />
@@ -197,24 +201,11 @@ export default function Settings() {
         </View>
       </View>
 
-      <TouchableOpacity
-        onPress={() => {
-          router.back();
-        }}
-        style={{
-          padding: 18,
-          zIndex: 1,
-          bottom: 40,
-        }}
-      >
-        <Feather name="x-circle" size={50} color="black" />
-      </TouchableOpacity>
-
       {/* Bottom Banner Ad */}
       {/* <View style={styles.bannerContainer}>
         <BannerAdComponent />
       </View> */}
-    </View>
+    </SafeScreen>
   );
 }
 

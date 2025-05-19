@@ -1,17 +1,12 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, Pressable, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import colors from "../constants/colors";
+import SafeScreen from "../components/SafeScreen";
 
 export default function Index() {
-
   const router = useRouter();
   return (
-    <SafeAreaView
-      className="items-center h-[100%]"
-      style={{ backgroundColor: colors.BACKGROUND }}
-    >
+    <SafeScreen>
       <View className="h-2/3">
         <Image source={require("../assets/images/visual-picture.png")} />
       </View>
@@ -25,13 +20,12 @@ export default function Index() {
         <Pressable
           onPress={() => {
             router.replace("(tabs)");
-
           }}
           className="bg-red-600 px-6 py-3 rounded-lg mt-8 mx-auto"
         >
           <Text className="text-white text-lg font-semibold">Let's Start!</Text>
         </Pressable>
       </View>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }

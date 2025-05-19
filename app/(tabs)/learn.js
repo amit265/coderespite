@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -7,9 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import SafeScreen from "../../components/SafeScreen";
 import modules from "../../data/javascript/lessons.json"; // array of modules
-import { Ionicons } from "@expo/vector-icons";
-
 export default function Learn() {
   const router = useRouter();
   const [courseSelected, setCourseSelected] = useState("All");
@@ -25,7 +25,7 @@ export default function Learn() {
       className="bg-white p-4 rounded-xl shadow-md mb-4 flex flex-row gap-4"
     >
       <View>
-      <Ionicons name="logo-javascript" size={48} color="black" />
+        <Ionicons name="logo-javascript" size={48} color="black" />
       </View>
       <View>
         <Text className="text-xl font-bold text-black mb-1">{item.title}</Text>
@@ -43,7 +43,7 @@ export default function Learn() {
   const levels = ["All", "Beginner", "Intermediate", "Advanced"];
 
   return (
-    <View className="flex-1 bg-[#CBE7F7] px-4 pt-6">
+    <SafeScreen>
       <Text className="text-2xl font-bold mb-6 text-gray-800 text-center">
         JavaScript Modules
       </Text>
@@ -54,9 +54,7 @@ export default function Learn() {
             key={level}
             onPress={() => setCourseSelected(level)}
             className={`px-4 py-2 rounded-full ${
-              courseSelected === level
-                ? "border-b border-[#11426B]"
-                : ""
+              courseSelected === level ? "border-b border-[#11426B]" : ""
             }`}
           >
             <Text
@@ -77,6 +75,6 @@ export default function Learn() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
       />
-    </View>
+    </SafeScreen>
   );
 }

@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from "react";
+import { Text } from "react-native";
+import SafeScreen from "../../components/SafeScreen";
 
 export default function Quiz() {
   return (
-    <View>
+    <SafeScreen>
       <Text>quiz</Text>
-    </View>
-  )
+    </SafeScreen>
+  );
 }

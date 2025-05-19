@@ -1,110 +1,89 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import { Dimensions, FlatList, Pressable, Text, View } from "react-native";
+import React from "react";
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  Pressable,
+    Text,
+  View,
+} from "react-native";
 import FlipCard from "react-native-flip-card";
-import * as Progress from "react-native-progress";
 import colors from "../../constants/colors";
 import flashcard from "../../data/javascript/flashcards.json";
+import SafeScreen from "../../components/SafeScreen"
 
 export default function FlashCards() {
-  const [currentPage, setCurrentPage] = useState(0);
   const router = useRouter();
   const screenWidth = Dimensions.get("screen").width;
 
-  const viewabilityConfig = {
-    itemVisiblePercentThreshold: 50,
-  };
-
-  const onViewableItemsChanged = ({ viewableItems }) => {
-    if (viewableItems.length > 0) {
-      setCurrentPage(viewableItems[0].index);
-    }
-  };
-
-  const getProgress = (currentPage) => {
-    if (flashcard?.length <= 1) return 1;
-    return currentPage / (flashcard.length - 1);
-  };
-
   return (
-    <View className="flex-1 bg-[#CBE7F7]">
-      {/* Header Image */}
-
+    
+    <SafeScreen>
       {/* Overlay content */}
-      <View className="absolute top-0 left-0 right-0 p-6">
-        {/* Top Bar */}
-        <View className="flex-row justify-between items-center">
-          <Pressable onPress={() => router.back()}>
-            <Ionicons name="arrow-back" size={30} color="black" />
-          </Pressable>
-          <Text className="text-black font-bold text-xl">FlashCards</Text>
-          <Text className="text-black font-bold text-xl">
-            {currentPage + 1} / {flashcard?.length}
-          </Text>
-        </View>
-
-        {/* Progress Bar */}
-        <View className="mt-6 mx-auto">
-          <Progress.Bar
-            progress={getProgress(currentPage)}
-            width={screenWidth * 0.85}
-            color={colors.BLACK}
-            height={8}
-            unfilledColor="rgba(0,0,0,0.5)"
-            borderWidth={0}
-          />
-        </View>
-
-        {/* Flashcards */}
-        <FlatList
-          data={flashcard}
-          pagingEnabled
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View className="mt-24 h-[500px]">
-              <FlipCard
-                style={{
-                  width: screenWidth * 0.78,
-                  height: 400,
-                  borderRadius: 20,
-                  marginHorizontal: screenWidth * 0.05,
-                }}
-                friction={12} // Increase for slower, smoother flip
-                perspective={1500} // More realistic 3D effect
-                flipHorizontal
-                flipVertical={false}
-                clickable
-                useNativeDriver={true} // Use native animations
-              >
-                {/* Front Side */}
-                <View className="bg-white flex-1 rounded-2xl justify-center items-center px-4">
-                  <Text className="text-2xl font-bold text-center text-gray-800">
-                    {item?.question}
-                  </Text>
-                </View>
-
-                {/* Back Side */}
-                <View
-                  className="bg-[#FF6B6B] flex-1 rounded-2xl justify-center items-center px-4"
-                  style={{ backgroundColor: colors.PRIMARY }}
-                >
-                  <Text className="text-white text-2xl text-center font-medium py-8">
-                    {item?.answer}
-                  </Text>
-                  <Text className="text-white text-xl text-center font-medium py-8">
-                    {item?.explanation}
-                  </Text>
-                </View>
-              </FlipCard>
-            </View>
-          )}
-        />
+      {/* Top Bar */}
+      <View className="flex-row gap-4 items-center justify-between px-1">
+        <Pressable onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={30} color="black" />
+        </Pressable>
+        <Text className="text-black font-bold text-2xl">Flashcards</Text>
+        <Ionicons name="heart" size={28} color="red" />
       </View>
-    </View>
+
+      {/* Flashcards */}
+      <FlatList
+        data={flashcard}
+        keyExtractor={(_, index) => index.toString()}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <View className="mt-12 mx-auto">
+            <FlipCard
+              style={{
+                width: screenWidth * 0.78,
+                height: 200,
+                borderRadius: 20,
+                marginHorizontal: screenWidth * 0.05,
+              }}
+              friction={12} // Increase for slower, smoother flip
+              perspective={1500} // More realistic 3D effect
+              flipVertical
+              clickable
+            >
+              {/* Front Side */}
+              <View className="bg-white flex-1 rounded-2xl justify-center items-center px-14">
+                <Pressable
+                  style={{
+                    position: "absolute",
+                    bottom: 20,
+                    zIndex: 50,
+                  }}
+                  onPress={() => Alert.alert("you bookmarked this")}
+                >
+                  <Ionicons name="heart-outline" size={20} color="black" />
+                </Pressable>
+
+                <Text className="text-lg font-bold text-center text-gray-800">
+                  {item?.question}
+                </Text>
+              </View>
+
+              {/* Back Side */}
+              <View
+                className="flex-1 rounded-2xl justify-center items-center px-4"
+                style={{ backgroundColor: colors.PRIMARY }}
+              >
+                <Text className="text-white text-xl text-center font-medium py-2">
+                  {item?.answer}
+                </Text>
+                <Text className="text-white text-sm text-center font-medium py-2">
+                  {item?.explanation}
+                </Text>
+              </View>
+            </FlipCard>
+          </View>
+        )}
+      />
+    </SafeScreen>
   );
 }

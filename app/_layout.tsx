@@ -6,7 +6,7 @@ import './global.css';
 export default function RootLayout() {
   return (
     <>
-      <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
+      <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={true} />
       <Stack screenOptions={{ headerShown: false }} />
     </>
 
