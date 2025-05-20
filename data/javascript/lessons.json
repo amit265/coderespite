@@ -6,19 +6,19 @@
     "level": "Beginner",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod01-lsn01",
         "title": "What is JavaScript?",
         "type": "theory",
         "content": "JavaScript is a scripting language used to create dynamic content on websites."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod01-lsn02",
         "title": "Variables in JS",
         "type": "theory",
         "content": "Variables are containers for storing data. Use `let`, `const`, or `var`."
       },
       {
-        "lessonId": "lsn03",
+        "lessonId": "mod01-lsn03",
         "title": "Basic Syntax",
         "type": "code",
         "content": "let age = 25;\nconst name = 'John';"
@@ -32,13 +32,13 @@
     "level": "Beginner",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod02-lsn01",
         "title": "Primitive Data Types",
         "type": "theory",
         "content": "JavaScript has primitive types like string, number, boolean, null, undefined, and symbol."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod02-lsn02",
         "title": "Type Conversion",
         "type": "code",
         "content": "let str = '5';\nlet num = Number(str);"
@@ -52,19 +52,19 @@
     "level": "Beginner",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod03-lsn01",
         "title": "Defining Functions",
         "type": "theory",
         "content": "Functions are reusable blocks of code that perform tasks."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod03-lsn02",
         "title": "Function Example",
         "type": "code",
         "content": "function greet(name) {\n  return `Hello, ${name}`;\n}"
       },
       {
-        "lessonId": "lsn03",
+        "lessonId": "mod03-lsn03",
         "title": "Scope",
         "type": "theory",
         "content": "Scope determines the accessibility of variables. Local scope is inside functions, global is outside."
@@ -78,13 +78,13 @@
     "level": "Beginner",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod04-lsn01",
         "title": "If-Else Statements",
         "type": "theory",
         "content": "Use if-else to run code based on conditions."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod04-lsn02",
         "title": "For Loop Example",
         "type": "code",
         "content": "for(let i=0; i<5; i++) {\n  console.log(i);\n}"
@@ -98,13 +98,13 @@
     "level": "Beginner",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod05-lsn01",
         "title": "What is an Array?",
         "type": "theory",
         "content": "Arrays store multiple values in a single variable."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod05-lsn02",
         "title": "Array Example",
         "type": "code",
         "content": "const fruits = ['apple', 'banana', 'cherry'];"
@@ -118,13 +118,13 @@
     "level": "Intermediate",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod06-lsn01",
         "title": "Object Basics",
         "type": "theory",
         "content": "Objects hold properties and values."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod06-lsn02",
         "title": "Creating Objects",
         "type": "code",
         "content": "const person = { name: 'Alice', age: 30 };"
@@ -138,19 +138,19 @@
     "level": "Intermediate",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod07-lsn01",
         "title": "Arrow Functions",
         "type": "code",
         "content": "const add = (a, b) => a + b;"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod07-lsn02",
         "title": "Template Literals",
         "type": "code",
         "content": "const greeting = `Hello, ${name}!`;"
       },
       {
-        "lessonId": "lsn03",
+        "lessonId": "mod07-lsn03",
         "title": "Destructuring",
         "type": "code",
         "content": "const {name, age} = person;"
@@ -164,13 +164,13 @@
     "level": "Intermediate",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod08-lsn01",
         "title": "What is a Promise?",
         "type": "theory",
         "content": "Promises represent the eventual completion of async operations."
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod08-lsn02",
         "title": "Async/Await Syntax",
         "type": "code",
         "content": "async function fetchData() {\n  const res = await fetch(url);\n  const data = await res.json();\n}"
@@ -184,13 +184,13 @@
     "level": "Intermediate",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod09-lsn01",
         "title": "Selecting Elements",
         "type": "code",
         "content": "const btn = document.querySelector('button');"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod09-lsn02",
         "title": "Event Listeners",
         "type": "code",
         "content": "btn.addEventListener('click', () => alert('Clicked!'));"
@@ -204,13 +204,13 @@
     "level": "Advanced",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod10-lsn01",
         "title": "Try-Catch Syntax",
         "type": "code",
         "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod10-lsn02",
         "title": "Throwing Errors",
         "type": "code",
         "content": "throw new Error('Something went wrong');"
@@ -224,13 +224,13 @@
     "level": "Advanced",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod11-lsn01",
         "title": "Try-Catch Syntax",
         "type": "code",
         "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod11-lsn02",
         "title": "Throwing Errors",
         "type": "code",
         "content": "throw new Error('Something went wrong');"
@@ -244,13 +244,13 @@
     "level": "Advanced",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod12-lsn01",
         "title": "Try-Catch Syntax",
         "type": "code",
         "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod12-lsn02",
         "title": "Throwing Errors",
         "type": "code",
         "content": "throw new Error('Something went wrong');"
@@ -264,13 +264,13 @@
     "level": "Advanced",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod13-lsn01",
         "title": "Try-Catch Syntax",
         "type": "code",
         "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod13-lsn02",
         "title": "Throwing Errors",
         "type": "code",
         "content": "throw new Error('Something went wrong');"
@@ -284,13 +284,13 @@
     "level": "Advanced",
     "lessons": [
       {
-        "lessonId": "lsn01",
+        "lessonId": "mod14-lsn01",
         "title": "Try-Catch Syntax",
         "type": "code",
         "content": "try {\n  riskyCode();\n} catch(e) {\n  console.error(e);\n}"
       },
       {
-        "lessonId": "lsn02",
+        "lessonId": "mod14-lsn02",
         "title": "Throwing Errors",
         "type": "code",
         "content": "throw new Error('Something went wrong');"

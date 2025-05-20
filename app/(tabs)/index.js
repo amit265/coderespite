@@ -12,8 +12,7 @@ import SafeScreen from "../../components/SafeScreen";
 export default function Home() {
   return (
     <SafeScreen>
-      <ScrollView className="flex-1 bg-[#CBE7F7]">
-        <View className="flex-1 space-y-4 pb-16">
+      <ScrollView showsVerticalScrollIndicator = {false}>
           <Header />
           <WelcomeCard />
           <ContinueCard />
@@ -21,7 +20,6 @@ export default function Home() {
           <QuickActionGrid />
           <FeaturedLessonGrid />
           <DailyTip />
-        </View>
       </ScrollView>
     </SafeScreen>
   );

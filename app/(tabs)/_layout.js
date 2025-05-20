@@ -13,6 +13,7 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: "#007bff",
         tabBarShowLabel: false,
+        tabBarStyle: {paddingTop: 8,  color: "black"},
 
         tabBarIcon: ({ color, size }) => {
           switch (route.name) {

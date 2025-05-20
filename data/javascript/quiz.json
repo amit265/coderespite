@@ -12,7 +12,7 @@
       
       {
         "quizId": "qz302",
-        "moduleId": "mod01",
+        "moduleId": "mod02",
         "question": "Which of the following is not a JavaScript data type?",
         "options": ["String", "Number", "Float", "Boolean"],
         "correctAnswer": "Float",

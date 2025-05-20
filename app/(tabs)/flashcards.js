@@ -23,7 +23,7 @@ export default function FlashCards() {
     <SafeScreen>
       {/* Overlay content */}
       {/* Top Bar */}
-      <View className="flex-row gap-4 items-center justify-between px-1">
+      <View className="flex-row gap-4 items-center justify-between">
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>

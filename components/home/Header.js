@@ -8,7 +8,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <View className="flex-row justify-between items-start p-4 border-b border-gray-300">
+    <View className="flex-row justify-between items-start border-b border-gray-300 px-4 mb-4 pb-8">
       <View>
         <View className="flex-row">
           <Text
