@@ -1,0 +1,54 @@
+[
+  {
+    "moduleId": "mod02",
+    "title": "Getting Started with JavaScript",
+    "description": "Introduction to variables, data types, and operators.",
+    "level": "Beginner",
+    "lessons": [
+      {
+        "lessonId": "mod01-lsn01",
+        "title": "What is JavaScript?",
+        "type": "theory",
+        "content": "JavaScript is a scripting language used to create dynamic content on websites."
+      },
+      {
+        "lessonId": "mod01-lsn02",
+        "title": "Variables in JS",
+        "type": "theory",
+        "content": "Variables are containers for storing data. Use `let`, `const`, or `var`."
+      },
+      {
+        "lessonId": "mod01-lsn03",
+        "title": "Basic Syntax",
+        "type": "code",
+        "content": "let age = 25;\nconst name = 'John';"
+      }
+    ]
+  },
+  {
+    "moduleId": "mod03",
+    "title": "Getting Started with JavaScript",
+    "description": "Introduction to variables, data types, and operators.",
+    "level": "Beginner",
+    "lessons": [
+      {
+        "lessonId": "mod01-lsn01",
+        "title": "What is JavaScript?",
+        "type": "theory",
+        "content": "JavaScript is a scripting language used to create dynamic content on websites."
+      },
+      {
+        "lessonId": "mod01-lsn02",
+        "title": "Variables in JS",
+        "type": "theory",
+        "content": "Variables are containers for storing data. Use `let`, `const`, or `var`."
+      },
+      {
+        "lessonId": "mod01-lsn03",
+        "title": "Basic Syntax",
+        "type": "code",
+        "content": "let age = 25;\nconst name = 'John';"
+      }
+    ]
+  }
+]

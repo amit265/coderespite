@@ -3,7 +3,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import colors from "../../constants/colors";
-import modules from "../../data/javascript/lessons.json";
+import modules from "../lessons.json";
 
 export default function ModuleId() {
   const { moduleId } = useLocalSearchParams();

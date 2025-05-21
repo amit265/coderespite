@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import SafeScreen from "../../components/SafeScreen";
-import modules from "../../data/javascript/lessons.json"; // array of modules
+import modules from "../lessons.json"; // array of modules
 export default function Learn() {
   const router = useRouter();
   const [courseSelected, setCourseSelected] = useState("All");

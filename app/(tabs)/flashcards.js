@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import FlipCard from "react-native-flip-card";
 import colors from "../../constants/colors";
-import flashcard from "../../data/javascript/flashcards.json";
+import flashcard from "../flashcards.json";
 import SafeScreen from "../../components/SafeScreen"
 
 export default function FlashCards() {

@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import dailyTip from "../../data/dailyTip.json";
+import dailyTip from "../../assets/data/dailyTip.json";
 import { shuffle } from "../../services/shuffleArray";
 
 export default function DailyTip() {

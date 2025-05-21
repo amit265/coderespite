@@ -12,6 +12,13 @@
       "description": "Beginner-friendly Python programming course",
       "icon": "py",
       "color": "#3776ab"
+    },
+    {
+      "id": "html",
+      "title": "HTML",
+      "description": "Beginner-friendly html",
+      "icon": "html",
+      "color": "#3776ab"
     }
   ]
   
