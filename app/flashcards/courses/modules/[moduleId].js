@@ -29,7 +29,7 @@ export default function ModuleId() {
             style={{ paddingLeft: 10 }}
           />
         </Pressable>
-        <Text className="text-black font-bold text-2xl">{selectedModule?.title}</Text>
+        <Text className="text-black font-nunito-bold text-2xl">{selectedModule?.title}</Text>
         <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
           <Ionicons
             name="heart"

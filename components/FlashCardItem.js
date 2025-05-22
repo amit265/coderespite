@@ -96,12 +96,12 @@ export default function FlashCardItem({ flashcards, title }) {
                     )}
                   </View>
                   {item?.title && (
-                    <View className="absolute border border-gray-300 top-2 p-2 rounded-lg">
-                      <Text className="text-center">{item?.title}</Text>
+                    <View className="absolute border border-gray-300 top-2 p-2 rounded-lg ">
+                      <Text className="text-center font-nunito-semibold">{item?.title}</Text>
                     </View>
                   )}
                   <View>
-                    <Text className="text-lg font-bold text-center text-gray-800">
+                    <Text className="text-lg font-nunito-bold text-center text-gray-800">
                       {item?.question}
                     </Text>
                   </View>
@@ -112,7 +112,7 @@ export default function FlashCardItem({ flashcards, title }) {
                   className="flex-1 rounded-2xl justify-center items-center px-4"
                   style={{ backgroundColor: colors.PRIMARY }}
                 >
-                  <Text className="text-white text-xl text-center font-medium py-2">
+                  <Text className="text-white text-xl text-center font-nunito-bold py-2">
                     {item?.answer}
                   </Text>
                 </View>

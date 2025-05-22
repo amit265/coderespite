@@ -12,19 +12,19 @@ export default function Header() {
       <View>
         <View className="flex-row">
           <Text
-            className="text-2xl font-extrabold"
-            style={{ fontFamily: "Baloo2", color: colors.ERROR }}
+            className="text-2xl"
+            style={{ fontFamily: "Quicksand-bold", color: colors.ERROR }}
           >
             CODE
           </Text>
           <Text
-            className="text-2xl font-extrabold"
-            style={{ fontFamily: "Baloo2", color: colors.TEXT }}
+            className="text-2xl"
+            style={{ fontFamily: "Quicksand-bold", color: colors.TEXT }}
           >
             RESPITE
           </Text>
         </View>
-        <Text className="text-xs mt-1" style={{ color: colors.TEXT }}>
+        <Text className="text-xs mt-1" style={{ color: colors.TEXT, fontFamily: "Quicksand-bold" }}>
           REFRESH YOUR TECH SKILLS
         </Text>
       </View>

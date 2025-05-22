@@ -125,10 +125,10 @@ export default function Index() {
         </View>
       </View>
       <View className="h-1/3">
-        <Text className="text-black text-2xl font-bold text-center mt-2">
+        <Text className="text-black text-2xl font-quicksand-bold text-center mt-2">
           Welcome to CodeRespite!
         </Text>
-        <Text className="text-gray-800 text-base text-center mt-2 mx-8">
+        <Text className="text-gray-800 text-base font-quicksand text-center mt-2 mx-8">
           Learn to code with your favorite Meowgrammer! 🐾
         </Text>
         <Pressable
@@ -137,7 +137,7 @@ export default function Index() {
           }}
           className="bg-red-600 px-6 py-3 rounded-lg mt-12 mx-auto"
         >
-          <Text className="text-white text-lg font-semibold">
+          <Text className="text-white text-lg font-nunito-semibold">
             Let&apos;s Start!
           </Text>
         </Pressable>

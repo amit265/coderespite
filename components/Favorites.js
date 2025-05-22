@@ -1,23 +1,12 @@
-import { Feather, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext, useEffect } from "react";
-import {
-  FlatList,
-  Pressable,
-  Share,
-  StyleSheet,
-  Text,
-  ToastAndroid,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import colors from "../constants/colors";
+import { StyleSheet, Text, View } from "react-native";
 import { favoritesContext } from "../context/context";
 import FlashCardItem from "./FlashCardItem";
 
 export default function Favorites() {
   const { favorites, setFavorites } = useContext(favoritesContext);
-//   console.log("favorites from favorites", favorites);
+  //   console.log("favorites from favorites", favorites);
 
   useEffect(() => {
     const loadData = async () => {
@@ -27,19 +16,7 @@ export default function Favorites() {
     loadData();
   }, []);
 
-  const removeFavorite = async (question) => {
-    console.log("remove favourite called");
-
-    let updated = [];
-    setFavorites((prev) => {
-      updated = prev?.filter((item) => item?.question !== question);
-      return updated;
-    });
-    await AsyncStorage.setItem("favorites", JSON.stringify(updated));
-  };
-
-
-//   console.log("favorites from facourite", favorites);
+  //   console.log("favorites from facourite", favorites);
 
   if (favorites?.length === 0) {
     return (
@@ -58,6 +35,7 @@ export default function Favorites() {
               position: "absolute",
               top: 200,
               alignSelf: "center",
+              fontFamily: "nunito",
             },
           ]}
         >
@@ -67,64 +45,7 @@ export default function Favorites() {
     );
   }
 
-  const renderItem = ({ item }) => (
-    <View
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: colors.WHITE }]}
-        onPress={() => {}}
-      >
-        <Text style={styles.buttonText}>{item?.question}</Text>
-        
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: 10,
-            justifyContent: "space-between",
-            marginTop: 10,
-            alignItems: "center", 
-          }}
-        >
-        
-          <View
-            style={{
-              borderRadius: 10,
-              borderWidth: 1,
-              padding: 5,
-              backgroundColor: colors.BACKGROUND,
-            }}
-          >
-            <Text>{item?.questionType}</Text>
-          </View>
-          <View style={{display: "flex", flexDirection: "row", gap: 15, alignItems: "center"}}>
-           
-            <Pressable onPress={() => removeFavorite(item?.question)}>
-              <MaterialIcons
-                name="delete-forever"
-                size={30}
-                color={colors.ERROR}
-              />
-            </Pressable>
-          </View>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-
-  return (
-    // <FlatList
-    //   data={favorites}
-    //   renderItem={renderItem}
-    //   keyExtractor={(item, index) => `${item}-${index}`}
-    // />
-    <FlashCardItem flashcards={favorites}/>
-  );
+  return <FlashCardItem flashcards={favorites} />;
 }
 
 const styles = StyleSheet.create({
@@ -143,7 +64,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#000",
     fontSize: 16,
-    fontFamily: "Poppins-Regular",
+    fontFamily: "nunito",
     textAlign: "left",
   },
 });

@@ -25,7 +25,7 @@ export default function Index() {
         </Pressable>
         <Text
           style={{
-            fontFamily: "Poppins-Bold",
+            fontFamily: "nunito-bold",
             fontSize: 24,
             color: colors.BLACK,
             textAlign: "center",

@@ -77,13 +77,13 @@ export default function QuizResultScreen() {
             : colors.LIGHT_RED,
         }}
       >
-        <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16 }}>
+        <Text style={{ fontFamily: "nunito", fontSize: 16 }}>
           {quizItem?.question}
         </Text>
         {!quizItem?.isCorrect && (
           <Text
             style={{
-              fontFamily: "Poppins-Regular",
+              fontFamily: "nunito",
               fontSize: 15,
               color: colors.ERROR,
             }}
@@ -93,7 +93,7 @@ export default function QuizResultScreen() {
         )}
         <Text
           style={{
-            fontFamily: "Poppins-Regular",
+            fontFamily: "nunito",
             fontSize: 15,
             color: colors.PRIMARY,
           }}
@@ -104,7 +104,7 @@ export default function QuizResultScreen() {
         {quizItem?.explanation && (
           <Text
             style={{
-              fontFamily: "Poppins-Regular",
+              fontFamily: "nunito",
               fontSize: 16,
               color: colors.GRAY,
             }}
@@ -125,7 +125,7 @@ export default function QuizResultScreen() {
           >
             <Text
               style={{
-                fontFamily: "Poppins-Regular",
+                fontFamily: "nunito",
                 fontSize: 15,
                 color: colors.PRIMARY,
                 paddingTop: 5,
@@ -182,7 +182,7 @@ export default function QuizResultScreen() {
                 </Pressable>
                 <Text
                   style={{
-                    fontFamily: "Poppins-Bold",
+                    fontFamily: "quicksand-bold",
                     fontSize: 28,
                     color: colors.BLACK,
                   }}
@@ -205,12 +205,12 @@ export default function QuizResultScreen() {
                       source={require("../../assets/images/trophy.png")}
                       style={{ width: 100, height: 100, marginTop: -60 }}
                     />
-                    <Text style={{ fontSize: 26, fontFamily: "Poppins-Bold" }}>
+                    <Text style={{ fontSize: 26, fontFamily: "nunito-bold" }}>
                       {getPercMarks > 60 ? "Congratulations" : "Try Again!"}
                     </Text>
                     <Text
                       style={{
-                        fontFamily: "Poppins-Regular",
+                        fontFamily: "nunito",
                         color: colors.GRAY,
                         fontSize: 17,
                       }}
@@ -258,7 +258,7 @@ export default function QuizResultScreen() {
                   <View style={{ marginTop: 25 }}>
                     <Text
                       style={{
-                        fontFamily: "Poppins-Bold",
+                        fontFamily: "nunito-bold",
                         fontSize: 25,
                         color: colors.BLACK,
                         textAlign: "center",
@@ -289,7 +289,7 @@ export default function QuizResultScreen() {
 
 const styles = StyleSheet.create({
   resultText: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: "nunito",
     fontSize: 20,
   },
   resultTextContainer: {

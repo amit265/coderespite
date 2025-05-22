@@ -139,7 +139,7 @@ export default function QuizId() {
 
         <Text
           style={{
-            fontFamily: "Poppins-Bold",
+            fontFamily: "nunito-bold",
             fontSize: 25,
             color: colors.BLACK,
           }}
@@ -151,7 +151,7 @@ export default function QuizId() {
       <Text
         style={{
           textAlign: "center",
-          fontFamily: "Poppins-Regular",
+          fontFamily: "nunito",
           fontSize: 18,
           padding: 10,
           color: colors.BLACK,
@@ -182,7 +182,7 @@ export default function QuizId() {
       >
         <Text
           style={{
-            fontFamily: "Poppins-Bold",
+            fontFamily: "nunito-bold",
             fontSize: 18,
             textAlign: "center",
           }}
@@ -208,7 +208,7 @@ export default function QuizId() {
           >
             <Text
               style={{
-                fontFamily: "Poppins-Regular",
+                fontFamily: "nunito",
                 fontSize: 17,
                 color: selectedOption === index ? colors.WHITE : null,
               }}
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
   hintText: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: "nunito",
     fontSize: 10,
     marginTop: 5,
     color: "#333",

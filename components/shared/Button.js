@@ -1,8 +1,14 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React from "react";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import colors from "../../constants/colors";
 
-export default function Button({ text, type = "fill", onPress, loading, disable = false }) {
+export default function Button({
+  text,
+  type = "fill",
+  onPress,
+  loading,
+  disable = false,
+}) {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -24,7 +30,7 @@ export default function Button({ text, type = "fill", onPress, loading, disable 
             fontSize: 15,
 
             color: type === "fill" ? "black" : colors.PRIMARY,
-            fontFamily: "Poppins-Regular",
+            fontFamily: "nunito",
           }}
         >
           {text}

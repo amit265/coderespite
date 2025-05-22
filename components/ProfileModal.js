@@ -64,7 +64,7 @@ const ProfileModal = ({ setShowModal }) => {
   return (
     <View className="items-center mt-4">
       <View className="p-4 pb-8">
-        <Text className="text-2xl font-bold text-center mb-6">
+        <Text className="text-2xl font-nunito-bold text-center mb-6">
           Let’s set up your profile ✨
         </Text>
       </View>
@@ -73,7 +73,7 @@ const ProfileModal = ({ setShowModal }) => {
         style={{ width: 120, height: 120, borderRadius: 60, marginBottom: 12 }}
       />
 
-      <Text className="text-lg font-semibold mb-2">Select an Avatar:</Text>
+      <Text className="text-lg font-nunito-semibold mb-2">Select an Avatar:</Text>
 
       <ScrollView
         horizontal
@@ -101,13 +101,13 @@ const ProfileModal = ({ setShowModal }) => {
       </ScrollView>
 
       <View className="w-full mb-6" style={{ marginBottom: 20, marginTop: 50 }}>
-        <Text className="text-base font-semibold mb-2">Username</Text>
+        <Text className="text-base font-nunito-semibold mb-2">Username</Text>
         <TextInput
           value={username}
           onChangeText={handleUsernameChange}
           maxLength={15}
           placeholder="Enter your name"
-          className="border border-gray-300 rounded-lg px-4 py-2 bg-white text-base"
+          className="border border-gray-300 rounded-lg px-4 py-2 bg-white"
         />
         {error ? (
           <Text className="text-red-500 text-sm mt-2">{error}</Text>

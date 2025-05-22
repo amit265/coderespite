@@ -31,7 +31,7 @@ export default function FlashCards() {
       />
       <View className="absolute">
         <Text
-          className="text-white text-lg font-semibold"
+          className="text-white text-lg font-nunito-semibold"
           style={{ left: "20%" }}
         >
           {item.title}
@@ -42,7 +42,7 @@ export default function FlashCards() {
 
   return (
     <SafeScreen>
-      <Text className="text-2xl font-bold mb-6 text-gray-800 text-center py-4">
+      <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center py-4">
         FlashCards
       </Text>
 

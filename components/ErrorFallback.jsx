@@ -20,15 +20,14 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 18,
+    fontWeight: 'bold',
     color: '#FF0000',
-    fontFamily: "nunito-bold",
     marginBottom: 10,
   },
   message: {
     fontSize: 16,
     color: '#333',
     marginBottom: 20,
-    fontFamily: "nunito"
   },
 });
 

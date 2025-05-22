@@ -36,7 +36,7 @@ export default function Quiz() {
           />
         </View>
         <View className="flex justify-center items-center">
-          <Text className=" text-sm font-semibold text-gray-800 text-center">
+          <Text className=" text-sm font-nunito-bold text-gray-800 text-center">
             {item?.title?.length > 20
               ? item?.title.slice(0, 20) + "..."
               : item?.title}
@@ -52,7 +52,7 @@ export default function Quiz() {
 
   return (
     <SafeScreen>
-      <Text className="text-2xl font-bold mb-6 text-gray-800 text-center">
+      <Text className="text-2xl font-nunito-bold mb-6 text-gray-800 text-center">
         Quiz
       </Text>
 
@@ -60,7 +60,7 @@ export default function Quiz() {
         <View className="space-y-8 px-4 pb-10">
           {allCourses.map((section) => (
             <View key={section.id}>
-              <Text className="text-lg font-semibold text-gray-700 mb-3">
+              <Text className="text-lg font-nunito-bold text-gray-700 mb-3">
                 {section.title}
               </Text>
               <FlatList

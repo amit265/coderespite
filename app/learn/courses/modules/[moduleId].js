@@ -21,7 +21,7 @@ export default function ModuleId() {
   if (!selectedModule) {
     return (
       <View className="flex-1 justify-center items-center p-4">
-        <Text className="text-red-600 text-lg">Module not found.</Text>
+        <Text className="text-red-600 text-lg font-nunito-semibold">Module not found.</Text>
       </View>
     );
   }
@@ -42,7 +42,7 @@ export default function ModuleId() {
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={35} color="black" />
         </Pressable>
-        <Text className="text-2xl font-bold mb-2 text-gray-900">
+        <Text className="text-2xl font-quicksand-bold mb-2 text-gray-900">
           {selectedCourse.title} Module
         </Text>
       </View>
@@ -63,20 +63,20 @@ export default function ModuleId() {
             />
           </View>
           <View className="flex-1 gap-2 justify-center">
-            <Text className="text-gray-700 text-lg font-bold">
+            <Text className="text-gray-700 text-lg font-nunito-bold">
               {selectedModule?.title}
             </Text>
-            <Text className="text-sm font-semibold text-gray-700">
+            <Text className="text-sm font-nunito-semibold text-gray-700">
               Level: {selectedModule?.level}
             </Text>
-            <Text className="text-sm font-semibold mb-6 text-gray-700">
+            <Text className="text-sm font-nunito-semibold mb-6 text-gray-700">
               📘 {selectedModule?.lessons?.length} Lessons
             </Text>
           </View>
         </View>
 
         <View className="p-4">
-          <Text className="text-base font-semibold text-gray-700">
+          <Text className="text-base font-nunito-semibold text-gray-700">
             {selectedModule?.description}
           </Text>
         </View>
@@ -93,7 +93,7 @@ export default function ModuleId() {
               >
                 <View className="p-4 border border-gray-300 rounded-lg bg-gray-50">
                   <View className="flex flex-row justify-between items-center mb-2">
-                    <Text className="text-lg font-semibold text-gray-800">
+                    <Text className="text-lg font-nunito-semibold text-gray-800">
                       {index + 1}. {lesson.title}
                     </Text>
                     <Ionicons
@@ -106,11 +106,11 @@ export default function ModuleId() {
                   {isExpanded && (
                     <>
                       {lesson.type === "theory" && (
-                        <Text className="text-gray-700">{lesson.content}</Text>
+                        <Text className="text-gray-700 font-nunito">{lesson.content}</Text>
                       )}
                       {lesson.type === "code" && (
                         <View className="bg-gray-900 rounded p-3 mt-2">
-                          <Text className="text-green-400 font-mono">
+                          <Text className="text-green-400 font-nunito">
                             {lesson.content}
                           </Text>
                         </View>

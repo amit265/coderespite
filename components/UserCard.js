@@ -22,12 +22,12 @@ export default function UserCard({ userDetails, setShowModal }) {
       </View>
       <View className="flex justify-center">
         <View className="flex flex-col items-start">
-          <Text className="text-base font-bold">Username: </Text>
-          <Text className="text-base">{profile.name}</Text>
+          <Text className="text-base font-nunito-bold">Username: </Text>
+          <Text className="text-base font-nunito">{profile.name}</Text>
         </View>
         <View className="flex flex-col items-start flex-wrap">
-          <Text className="text-base font-bold">Level: </Text>
-          <Text className="text-base flex-wrap">{level}</Text>
+          <Text className="text-base font-nunito-bold">Level: </Text>
+          <Text className="text-base flex-wrap font-nunito">{level}</Text>
         </View>
       </View>
       <Pressable

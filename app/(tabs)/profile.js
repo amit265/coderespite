@@ -36,7 +36,7 @@ export default function Profile() {
   return (
     <SafeScreen>
       <View className="p-4">
-        <Text className="text-center font-bold text-2xl">Profile</Text>
+        <Text className="text-center font-quicksand-bold text-2xl">Profile</Text>
       </View>
       {/* <View style={{ flex: 1, alignItems: "center", padding: 20 }}>
         <Text style={{ fontSize: 20, marginBottom: 12 }}>Your Streak</Text>

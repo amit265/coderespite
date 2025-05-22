@@ -8,7 +8,16 @@ module.exports = {
   ],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        nunito: ["Nunito-Regular"],
+        "nunito-semibold": ["Nunito-Semibold"],
+        "nunito-bold": ["Nunito-Bold"],
+        quicksand: ["Quicksand-Regular"],
+        "quicksand-semibold": ["Quicksand-Semibold"],
+        "quicksand-bold": ["Quicksand-Bold"],
+      },
+    },
   },
   plugins: [],
 };

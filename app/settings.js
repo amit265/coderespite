@@ -67,7 +67,7 @@ export default function Settings() {
         <Text
           style={{
             fontSize: 25,
-            fontFamily: "Poppins-Bold",
+            fontFamily: "quicksand-bold",
             color: colors.TEXT,
             textAlign: "center",
           }}
@@ -118,7 +118,7 @@ export default function Settings() {
             <Text
               style={{
                 color: "#000000",
-                fontFamily: "Poppins-Regular",
+                fontFamily: "nunito",
                 fontSize: 18,
               }}
             >
@@ -141,7 +141,7 @@ export default function Settings() {
             <Text
               style={{
                 color: "#000000",
-                fontFamily: "Poppins-Regular",
+                fontFamily: "nunito",
                 fontSize: 18,
               }}
             >
@@ -166,7 +166,7 @@ export default function Settings() {
             <Text
               style={{
                 color: "#000000",
-                fontFamily: "Poppins-Regular",
+                fontFamily: "nunito",
                 fontSize: 18,
               }}
             >
@@ -193,7 +193,7 @@ export default function Settings() {
             <Text
               style={{
                 color: "#000000",
-                fontFamily: "Poppins-Regular",
+                fontFamily: "nunito",
                 fontSize: 18,
               }}
             >

@@ -43,10 +43,10 @@ export default function CourseId() {
         ></Image>
       </View>
       <View className="flex-1 justify-center">
-        <Text className="text-xl font-bold text-black mb-1">{item.title}</Text>
+        <Text className="text-xl font-nunito-bold text-black mb-1">{item.title}</Text>
         {/* <Text className="text-gray-700 text-sm">{item.description}</Text> */}
         <View className="flex-col justify-between">
-          <Text className="text-xs text-gray-500">
+          <Text className="text-xs text-gray-500 font-nunito">
             {item.flashcards?.length || 0} cards
           </Text>
         </View>
@@ -60,7 +60,7 @@ export default function CourseId() {
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={35} color="black" />
         </Pressable>
-        <Text className="text-2xl font-bold mb-6 text-gray-800 text-center">
+        <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center">
           {selectedCourse?.title} FlashCards
         </Text>
          <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
