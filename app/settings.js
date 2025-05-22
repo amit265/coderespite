@@ -84,6 +84,8 @@ export default function Settings() {
           padding: 20,
           height: "70%",
           marginTop: 50,
+          marginLeft: "auto",
+          marginRight: "auto"
         }}
       >
         {/* Number of Spins */}
@@ -208,35 +210,3 @@ export default function Settings() {
     </SafeScreen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.BACKGROUND,
-  },
-  headerContainer: {
-    paddingTop: 10, // For status bar spacing, adjust as needed
-    paddingBottom: 10,
-    backgroundColor: colors.BACKGROUND,
-    alignItems: "center",
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 18,
-    color: "white",
-  },
-  bannerContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 4,
-    backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-  },
-});

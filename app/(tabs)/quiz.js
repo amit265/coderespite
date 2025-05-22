@@ -15,7 +15,6 @@ import { allCoursesContext } from "../../context/context";
 export default function Quiz() {
   const router = useRouter();
   const { allCourses, setSelectedCourse, setSelectedQuiz } = useContext(allCoursesContext);
-  console.log("allcourses", allCourses);
 
   const renderQuizItem = (section) => {
     const QuizItem = ({ item }) => (
