@@ -1,5 +1,4 @@
-[
-  {
+{
     "moduleId": "mod03",
     "title": "Getting Started with JavaScript",
     "description": "Introduction to variables, data types, and operators.",
@@ -25,4 +24,3 @@
       }
     ]
   }
-]

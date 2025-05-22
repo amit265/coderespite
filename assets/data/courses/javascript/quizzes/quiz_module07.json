@@ -1,0 +1,85 @@
+{
+  "quizId": "qz7",
+  "moduleId": "mod07",
+  "title": "Array Methods",
+
+  "tags": ["arrays", "methods", "loops", "iteration"],
+  "difficulty": "medium",
+  "description": "Test your understanding of built-in JavaScript array methods and their uses.",
+  "quiz": [{
+      "question": "Which array method creates a new array with the results of calling a function on every element?",
+      "options": ["map()", "forEach()", "filter()", "reduce()"],
+      "correctAnswer": "map()",
+      "explanation": "`map()` returns a new array with the results of the function applied to each element."
+    },
+    {
+      "question": "What does `filter()` do in JavaScript?",
+      "options": [
+        "Removes the last element",
+        "Transforms each element",
+        "Returns a new array with elements that pass a test",
+        "Sorts the array"
+      ],
+      "correctAnswer": "Returns a new array with elements that pass a test",
+      "explanation": "`filter()` creates a new array containing elements that meet the condition."
+    },
+    {
+      "question": "Which method executes a provided function once for each array element but does not return a new array?",
+      "options": ["map()", "forEach()", "filter()", "reduce()"],
+      "correctAnswer": "forEach()",
+      "explanation": "`forEach()` performs operations on each element but doesn’t return anything."
+    },
+    {
+      "question": "Which method combines all elements of an array into a single value?",
+      "options": ["map()", "filter()", "reduce()", "concat()"],
+      "correctAnswer": "reduce()",
+      "explanation": "`reduce()` takes a callback and returns a single value by combining array elements."
+    },
+    {
+      "question": "What is the output of `[1,2,3].includes(2)`?",
+      "options": ["true", "false", "undefined", "2"],
+      "correctAnswer": "true",
+      "explanation": "`includes()` checks if a value is present in the array and returns `true` or `false`."
+    },
+    {
+      "question": "Which method returns the index of the first element that matches a condition?",
+      "options": ["findIndex()", "indexOf()", "filter()", "map()"],
+      "correctAnswer": "findIndex()",
+      "explanation": "`findIndex()` returns the index of the first element that satisfies the condition."
+    },
+    {
+      "question": "What does `some()` return?",
+      "options": [
+        "The matched element",
+        "true if at least one element meets the condition",
+        "A new filtered array",
+        "The first element in the array"
+      ],
+      "correctAnswer": "true if at least one element meets the condition",
+      "explanation": "`some()` returns `true` if at least one array element passes the test."
+    },
+    {
+      "question": "Which method checks that **all** elements in an array pass a test?",
+      "options": ["some()", "every()", "map()", "reduce()"],
+      "correctAnswer": "every()",
+      "explanation": "`every()` checks if all elements satisfy the condition and returns a boolean."
+    },
+    {
+      "question": "What does `Array.from('abc')` return?",
+      "options": [
+        "['abc']",
+        "[a, b, c]",
+        "['a', 'b', 'c']",
+        "['a,b,c']"
+      ],
+      "correctAnswer": "['a', 'b', 'c']",
+      "explanation": "`Array.from()` converts a string into an array of characters."
+    },
+    {
+      "question": "Which method merges two or more arrays?",
+      "options": ["slice()", "splice()", "concat()", "join()"],
+      "correctAnswer": "concat()",
+      "explanation": "`concat()` merges two or more arrays into a single array."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "fc3",
+  "moduleId": "mod03",
+  "title": "Operators",
+  "description": "Understanding functions, parameters, return values, and scope.",
+  "flashcards": [
+    {
+      "question": "What is an operator in JavaScript?",
+      "answer": "An operator performs operations on variables and values."
+    },
+    {
+      "question": "Name the types of operators in JavaScript.",
+      "answer": "Arithmetic, assignment, comparison, logical, bitwise, and ternary operators."
+    },
+    {
+      "question": "What does the `===` operator do?",
+      "answer": "Checks strict equality by comparing both value and type."
+    },
+    {
+      "question": "What is the difference between `==` and `===`?",
+      "answer": "`==` compares values with type coercion, `===` compares values and types strictly."
+    },
+    {
+      "question": "How does the ternary operator work?",
+      "answer": "It is a shorthand for if-else: `condition ? exprIfTrue : exprIfFalse`."
+    },
+    {
+      "question": "What will `5 + '5'` evaluate to?",
+      "answer": "The string `'55'` due to type coercion."
+    },
+    {
+      "question": "What is the purpose of the `typeof` operator?",
+      "answer": "It returns the data type of a given operand."
+    },
+    {
+      "question": "What does the `++` operator do?",
+      "answer": "Increments a numeric value by 1."
+    },
+    {
+      "question": "Explain short-circuit evaluation in logical operators.",
+      "answer": "In `&&` and `||`, evaluation stops as soon as the result is determined."
+    },
+    {
+      "question": "What is operator precedence?",
+      "answer": "Rules that determine the order in which operators are evaluated."
+    }
+  ]
+}

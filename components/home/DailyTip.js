@@ -17,13 +17,13 @@ export default function DailyTip() {
         setRandomTip(storedTip);
       } else {
         const tip = shuffle(dailyTip)[0];
-        setRandomTip(tip);
+        setRandomTip(tip?.tip);
         await AsyncStorage.setItem(`tip-${todayStr}`, tip);
       }
     };
 
     getTip();
-    logAllAsyncStorage();
+    // logAllAsyncStorage();
   }, []);
 
   const logAllAsyncStorage = async () => {

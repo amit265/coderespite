@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod13",
+  "title": "Advanced JavaScript Concepts",
+  "description": "Explore important advanced topics like closures, the event loop, and the call stack to deepen your understanding of JavaScript’s inner workings.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod13-lsn01",
+      "title": "Understanding the Call Stack",
+      "type": "theory",
+      "content": "The call stack is a data structure that keeps track of function calls in your program. It follows a Last In, First Out (LIFO) order, meaning the most recent function call is executed first."
+    },
+    {
+      "lessonId": "mod13-lsn02",
+      "title": "What is a Closure?",
+      "type": "theory",
+      "content": "A closure is a function that remembers the environment in which it was created, allowing it to access variables from its outer scope even after that scope has finished executing."
+    },
+    {
+      "lessonId": "mod13-lsn03",
+      "title": "Example of Closure",
+      "type": "code",
+      "content": "function outer() {\n  let count = 0;\n  return function inner() {\n    count++;\n    return count;\n  };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2"
+    },
+    {
+      "lessonId": "mod13-lsn04",
+      "title": "Understanding the Event Loop",
+      "type": "theory",
+      "content": "The event loop is a mechanism that allows JavaScript to perform non-blocking operations by offloading tasks to the browser or Node.js APIs and executing callbacks asynchronously."
+    },
+    {
+      "lessonId": "mod13-lsn05",
+      "title": "Call Stack vs Event Loop",
+      "type": "theory",
+      "content": "While the call stack executes functions synchronously, the event loop handles asynchronous callbacks by monitoring the task queue and pushing callbacks to the call stack when it’s empty."
+    },
+    {
+      "lessonId": "mod13-lsn06",
+      "title": "Synchronous vs Asynchronous Code",
+      "type": "theory",
+      "content": "Synchronous code runs line by line, blocking the execution until each task completes. Asynchronous code allows other operations to run while waiting for tasks like network requests."
+    },
+    {
+      "lessonId": "mod13-lsn07",
+      "title": "Example: Asynchronous setTimeout",
+      "type": "code",
+      "content": "console.log('Start');\nsetTimeout(() => {\n  console.log('Timeout callback');\n}, 1000);\nconsole.log('End');"
+    },
+    {
+      "lessonId": "mod13-lsn08",
+      "title": "Practical Uses of Closures",
+      "type": "theory",
+      "content": "Closures are useful for data privacy, implementing callback functions, and creating function factories or modules that maintain state."
+    },
+    {
+      "lessonId": "mod13-lsn09",
+      "title": "Memory Management in JavaScript",
+      "type": "theory",
+      "content": "JavaScript automatically manages memory allocation and garbage collection. Understanding how closures keep variables in memory can help avoid memory leaks."
+    },
+    {
+      "lessonId": "mod13-lsn10",
+      "title": "Summary and Best Practices",
+      "type": "theory",
+      "content": "Mastering closures, the call stack, and the event loop is essential for writing efficient and bug-free JavaScript code. Use these concepts to handle asynchronous code elegantly."
+    }
+  ]
+}

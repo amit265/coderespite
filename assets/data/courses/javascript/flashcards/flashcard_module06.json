@@ -1,0 +1,48 @@
+{
+  "id": "fc6",
+  "moduleId": "mod06",
+  "title": "Deep Dive: Functions",
+  "description": "Storing data with key-value pairs using objects.",
+  "flashcards": [
+    {
+      "question": "What is a function declaration?",
+      "answer": "A named function defined using the `function` keyword."
+    },
+    {
+      "question": "What is a function expression?",
+      "answer": "A function assigned to a variable, which can be anonymous."
+    },
+    {
+      "question": "What is a closure in JavaScript?",
+      "answer": "A function that remembers its outer variables even after the outer function has finished."
+    },
+    {
+      "question": "What is the difference between parameters and arguments?",
+      "answer": "Parameters are variables in function definition; arguments are the actual values passed."
+    },
+    {
+      "question": "What is the purpose of the `return` statement in a function?",
+      "answer": "To return a value from the function to the caller."
+    },
+    {
+      "question": "What is a higher-order function?",
+      "answer": "A function that takes another function as an argument or returns a function."
+    },
+    {
+      "question": "How can you make a function anonymous?",
+      "answer": "By defining it without a name, often used in function expressions."
+    },
+    {
+      "question": "What does the `arguments` object do?",
+      "answer": "It holds all arguments passed to a function, even if not explicitly declared."
+    },
+    {
+      "question": "What is recursion?",
+      "answer": "When a function calls itself to solve a problem."
+    },
+    {
+      "question": "What is the scope of variables inside a function?",
+      "answer": "Variables declared inside a function are local to that function."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod08",
+  "title": "DOM Manipulation",
+  "description": "Interacting with the Document Object Model using JavaScript.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod08-lsn01",
+      "title": "What is the DOM?",
+      "type": "theory",
+      "content": "The Document Object Model (DOM) is a programming interface that represents the structure of an HTML or XML document as a tree of objects. It allows scripts to update content, structure, and styles dynamically."
+    },
+    {
+      "lessonId": "mod08-lsn02",
+      "title": "Selecting Elements",
+      "type": "code",
+      "content": "const header = document.getElementById('header');\nconst buttons = document.querySelectorAll('.btn');\n// Use DOM methods to select elements by ID, class, or tag."
+    },
+    {
+      "lessonId": "mod08-lsn03",
+      "title": "Changing Content",
+      "type": "code",
+      "content": "const title = document.querySelector('h1');\ntitle.textContent = 'New Title';\n// Modify the text content of an element."
+    },
+    {
+      "lessonId": "mod08-lsn04",
+      "title": "Changing Styles",
+      "type": "code",
+      "content": "const box = document.querySelector('.box');\nbox.style.backgroundColor = 'lightblue';\n// Dynamically change CSS styles of elements."
+    },
+    {
+      "lessonId": "mod08-lsn05",
+      "title": "Creating and Adding Elements",
+      "type": "code",
+      "content": "const newDiv = document.createElement('div');\nnewDiv.textContent = 'Hello!';\ndocument.body.appendChild(newDiv);\n// Create new DOM elements and add them to the page."
+    },
+    {
+      "lessonId": "mod08-lsn06",
+      "title": "Removing Elements",
+      "type": "code",
+      "content": "const oldElement = document.querySelector('.old');\noldElement.remove();\n// Remove elements from the DOM."
+    },
+    {
+      "lessonId": "mod08-lsn07",
+      "title": "Event Listeners",
+      "type": "code",
+      "content": "const button = document.querySelector('button');\nbutton.addEventListener('click', () => {\n  alert('Button clicked!');\n});\n// Respond to user interactions using event listeners."
+    },
+    {
+      "lessonId": "mod08-lsn08",
+      "title": "Event Delegation",
+      "type": "theory",
+      "content": "Event delegation allows you to attach a single event listener to a parent element to manage events for its child elements, improving performance and simplifying code."
+    },
+    {
+      "lessonId": "mod08-lsn09",
+      "title": "Manipulating Classes",
+      "type": "code",
+      "content": "const box = document.querySelector('.box');\nbox.classList.add('active');\nbox.classList.remove('hidden');\n// Use classList to add, remove, or toggle CSS classes."
+    },
+    {
+      "lessonId": "mod08-lsn10",
+      "title": "Traversing the DOM",
+      "type": "theory",
+      "content": "DOM traversal methods allow you to navigate between elements, accessing parents, children, and siblings to manipulate related nodes efficiently."
+    }
+  ]
+}

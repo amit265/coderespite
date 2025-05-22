@@ -6,6 +6,27 @@ import courses from "../assets/data/courses.json";
 import dailyTips from "../assets/data/dailyTip.json";
 import users from "../assets/data/users.json";
 
+// const readJSONFromAsset = async (assetModule) => {
+//   if (Array.isArray(assetModule)) {
+//     console.error(
+//       "❌ assetModule is an array! Expected a single asset module.",
+//       assetModule
+//     );
+//     return null;
+//   }
+//   try {
+//     const asset = Asset.fromModule(assetModule);
+//     await asset.downloadAsync();
+//     const content = await FileSystem.readAsStringAsync(
+//       asset.localUri || asset.uri
+//     );
+//     return JSON.parse(content);
+//   } catch (e) {
+//     console.error("❌ Failed to read asset:", e);
+//     return null;
+//   }
+// };
+
 const uploadCourseData = async (courseId) => {
   const course = courseFiles[courseId];
   if (!course) {
@@ -18,38 +39,29 @@ const uploadCourseData = async (courseId) => {
     if (!files) continue;
 
     for (const file of files) {
-      if (!file.module || !Array.isArray(file.module)) {
+      if (!file || !file.module || Array.isArray(file.module)) {
         console.warn(
           `⚠️ Skipping invalid module for ${file?.filename || "unknown"}`
         );
         continue;
       }
 
-      file.module.forEach(async (json, index) => {
-        if (!json) {
-          console.warn(
-            `⚠️ Skipping empty item at index ${index} in ${file.filename}`
-          );
-          return;
-        }
+      const json = file.module; // ✅ Directly use the required JSON
+      console.log("logging", json);
 
-        // Make docId unique per item
-        const baseDocId = file.filename.replace(".json", "");
-        const docId = `${baseDocId}_${index + 1}`;
+      if (!json) {
+        console.warn(`Failed to read ${file.filename} for course ${courseId}`);
+        continue;
+      }
 
-        console.log("Uploading:", courseId, type, docId, json);
+      const docId = file.filename.replace(".json", "");
+      console.log("docid", docId, courseId, json);
 
-        try {
-          await setDoc(doc(db, "courses", courseId, type, docId), json);
-          console.log(`✅ Uploaded courses/${courseId}/${type}/${docId}`);
-        } catch (error) {
-          console.error(`❌ Error uploading ${docId}:`, error);
-        }
-      });
+      await setDoc(doc(db, "courses", courseId, type, docId), json);
+      console.log(`✅ Uploaded courses/${courseId}/${type}/${docId}`);
     }
   }
 };
-
 
 export const uploadAllData = async () => {
   try {

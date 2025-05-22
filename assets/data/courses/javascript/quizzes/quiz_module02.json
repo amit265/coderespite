@@ -1,0 +1,190 @@
+{
+  "quizId": "qz2",
+  "moduleId": "mod02",
+  "title": "Variables & Data Types",
+
+  "tags": ["variables", "data types", "conversion"],
+  "difficulty": "medium",
+  "description": "Learn about different data types and how to convert between them.",
+  "quiz": [{
+      "question": "Which keyword is used to declare a variable that can be reassigned later?",
+      "correctAnswer": "let",
+      "explanation": "`let` allows you to declare variables that can be reassigned.",
+      "options": [{
+          "a": "const"
+        },
+        {
+          "b": "var"
+        },
+        {
+          "c": "let"
+        },
+        {
+          "d": "static"
+        }
+      ]
+    },
+    {
+      "question": "Which keyword should you use to declare a constant in JavaScript?",
+      "correctAnswer": "const",
+      "explanation": "`const` declares a block-scoped, read-only constant.",
+      "options": [{
+          "a": "let"
+        },
+        {
+          "b": "const"
+        },
+        {
+          "c": "var"
+        },
+        {
+          "d": "final"
+        }
+      ]
+    },
+    {
+      "question": "What will `typeof '123'` return?",
+      "correctAnswer": "string",
+      "explanation": "The value `'123'` is a string, even though it contains only digits.",
+      "options": [{
+          "a": "number"
+        },
+        {
+          "b": "string"
+        },
+        {
+          "c": "object"
+        },
+        {
+          "d": "undefined"
+        }
+      ]
+    },
+    {
+      "question": "What is the result of `Number('123')`?",
+      "correctAnswer": "123",
+      "explanation": "`Number('123')` converts the string to a number: 123.",
+      "options": [{
+          "a": "'123'"
+        },
+        {
+          "b": "123"
+        },
+        {
+          "c": "NaN"
+        },
+        {
+          "d": "undefined"
+        }
+      ]
+    },
+    {
+      "question": "Which of these is a valid way to convert a number to a string?",
+      "correctAnswer": "String(123)",
+      "explanation": "`String(123)` will return '123'.",
+      "options": [{
+          "a": "toString(123)"
+        },
+        {
+          "b": "123.toString()"
+        },
+        {
+          "c": "String(123)"
+        },
+        {
+          "d": "parseInt(123)"
+        }
+      ]
+    },
+    {
+      "question": "What is the value of `Boolean('false')`?",
+      "correctAnswer": "true",
+      "explanation": "Non-empty strings are truthy, including 'false'.",
+      "options": [{
+          "a": "true"
+        },
+        {
+          "b": "false"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "null"
+        }
+      ]
+    },
+    {
+      "question": "Which of the following is NOT a valid JavaScript variable name?",
+      "correctAnswer": "2name",
+      "explanation": "Variable names cannot start with a digit.",
+      "options": [{
+          "a": "_name"
+        },
+        {
+          "b": "firstName"
+        },
+        {
+          "c": "$amount"
+        },
+        {
+          "d": "2name"
+        }
+      ]
+    },
+    {
+      "question": "What will `parseInt('42px')` return?",
+      "correctAnswer": "42",
+      "explanation": "`parseInt` parses the leading number and ignores the rest.",
+      "options": [{
+          "a": "NaN"
+        },
+        {
+          "b": "42"
+        },
+        {
+          "c": "'42px'"
+        },
+        {
+          "d": "undefined"
+        }
+      ]
+    },
+    {
+      "question": "Which data type is returned by `typeof NaN`?",
+      "correctAnswer": "number",
+      "explanation": "`NaN` is considered a numeric value, even though it means 'Not-a-Number'.",
+      "options": [{
+          "a": "NaN"
+        },
+        {
+          "b": "undefined"
+        },
+        {
+          "c": "number"
+        },
+        {
+          "d": "object"
+        }
+      ]
+    },
+    {
+      "question": "Which conversion method should be used to convert a boolean to a string?",
+      "correctAnswer": "String()",
+      "explanation": "`String(true)` or `true.toString()` converts boolean to string.",
+      "options": [{
+          "a": "Boolean()"
+        },
+        {
+          "b": "String()"
+        },
+        {
+          "c": "parseInt()"
+        },
+        {
+          "d": "toBoolean()"
+        }
+      ]
+    }
+  ]
+}

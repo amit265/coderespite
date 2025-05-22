@@ -1,0 +1,70 @@
+{
+  "quizId": "qz5",
+  "moduleId": "mod05",
+  "title": "Arrays and Objects (Intro)",
+
+  "tags": ["arrays", "objects", "basics"],
+  "difficulty": "medium",
+  "description": "Quiz on basics of arrays and objects in JavaScript.",
+  "quiz": [{
+      "question": "What does `typeof []` return in JavaScript?",
+      "options": ["array", "object", "list", "undefined"],
+      "correctAnswer": "object",
+      "explanation": "In JavaScript, arrays are a type of object, so `typeof []` returns 'object'."
+    },
+    {
+      "question": "How do you access the third item in an array called `colors`?",
+      "options": ["colors(3)", "colors[2]", "colors[3]", "colors{3}"],
+      "correctAnswer": "colors[2]",
+      "explanation": "Array indices start at 0, so index 2 is the third item."
+    },
+    {
+      "question": "Which method adds an element to the end of an array?",
+      "options": ["shift()", "unshift()", "push()", "pop()"],
+      "correctAnswer": "push()",
+      "explanation": "`push()` adds elements to the end of an array."
+    },
+    {
+      "question": "What does `pop()` do?",
+      "options": ["Adds element at end", "Removes first element", "Removes last element", "Adds element at start"],
+      "correctAnswer": "Removes last element",
+      "explanation": "`pop()` removes the last element from an array."
+    },
+    {
+      "question": "How do you access the value 'blue' in `{ color: 'blue' }`?",
+      "options": ["color['blue']", "object[color]", "object['color']", "object.color.blue"],
+      "correctAnswer": "object['color']",
+      "explanation": "Use dot or bracket notation: object.color or object['color']."
+    },
+    {
+      "question": "Which is a correct way to create an array?",
+      "options": ["let a = {}", "let a = []", "let a = ()", "let a = <>"],
+      "correctAnswer": "let a = []",
+      "explanation": "Square brackets are used to define arrays in JS."
+    },
+    {
+      "question": "How to find the length of an array `arr`?",
+      "options": ["arr.length()", "arr.size", "arr.count", "arr.length"],
+      "correctAnswer": "arr.length",
+      "explanation": "`length` is a property, not a method."
+    },
+    {
+      "question": "Which of the following is NOT a valid object property access?",
+      "options": ["obj.key", "obj['key']", "obj(key)", "obj[`key`]"],
+      "correctAnswer": "obj(key)",
+      "explanation": "`obj(key)` is invalid syntax for accessing a property."
+    },
+    {
+      "question": "What is the output of `typeof {}`?",
+      "options": ["array", "object", "function", "null"],
+      "correctAnswer": "object",
+      "explanation": "An empty object `{}` is of type 'object'."
+    },
+    {
+      "question": "What is `Array.isArray([])`?",
+      "options": ["true", "false", "undefined", "null"],
+      "correctAnswer": "true",
+      "explanation": "`Array.isArray()` returns true if the input is an array."
+    }
+  ]
+}

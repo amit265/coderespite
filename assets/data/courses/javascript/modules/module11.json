@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod11",
+  "title": "Event Loop and JS Engine",
+  "description": "Understanding how JavaScript executes code, handles asynchronous tasks, and manages the call stack with the event loop.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod11-lsn01",
+      "title": "JavaScript Engine Overview",
+      "type": "theory",
+      "content": "The JavaScript engine is responsible for executing JS code. It reads, parses, and runs the code using components like the parser, interpreter, and compiler. Popular engines include V8 (Chrome) and SpiderMonkey (Firefox)."
+    },
+    {
+      "lessonId": "mod11-lsn02",
+      "title": "Call Stack Explained",
+      "type": "theory",
+      "content": "The call stack is a data structure that keeps track of the function calls in your program. When a function is called, it’s pushed onto the stack. When the function finishes, it’s popped off. This helps JavaScript know what to execute next."
+    },
+    {
+      "lessonId": "mod11-lsn03",
+      "title": "Synchronous vs Asynchronous",
+      "type": "theory",
+      "content": "JavaScript is synchronous by default, meaning it executes code line by line. However, asynchronous operations let JavaScript perform tasks like fetching data or timers without blocking the main thread."
+    },
+    {
+      "lessonId": "mod11-lsn04",
+      "title": "Understanding the Event Loop",
+      "type": "theory",
+      "content": "The event loop continuously checks the call stack and the task queue. If the call stack is empty, it pushes the first task from the queue to the stack to be executed, allowing asynchronous code to run smoothly."
+    },
+    {
+      "lessonId": "mod11-lsn05",
+      "title": "Task Queue and Microtask Queue",
+      "type": "theory",
+      "content": "The task queue holds callbacks from events like `setTimeout`. The microtask queue holds promises and other microtasks. The event loop gives priority to the microtask queue before processing tasks from the task queue."
+    },
+    {
+      "lessonId": "mod11-lsn06",
+      "title": "Example of Call Stack",
+      "type": "code",
+      "content": "function first() {\n  second();\n  console.log('First finished');\n}\n\nfunction second() {\n  console.log('Second executed');\n}\n\nfirst();"
+    },
+    {
+      "lessonId": "mod11-lsn07",
+      "title": "Example of Event Loop in Action",
+      "type": "code",
+      "content": "console.log('Start');\nsetTimeout(() => {\n  console.log('Timeout callback');\n}, 0);\nconsole.log('End');\n\n// Output order shows how event loop handles async callbacks."
+    },
+    {
+      "lessonId": "mod11-lsn08",
+      "title": "How Promises Work with Event Loop",
+      "type": "theory",
+      "content": "Promises use the microtask queue to schedule `.then()` callbacks. This means promise callbacks execute after the current stack finishes but before the next task from the task queue."
+    },
+    {
+      "lessonId": "mod11-lsn09",
+      "title": "Common Misconceptions about JS Execution",
+      "type": "theory",
+      "content": "JavaScript doesn’t run multiple lines simultaneously in a single thread. Instead, it handles asynchronous operations via the event loop and queues, ensuring smooth, non-blocking behavior."
+    },
+    {
+      "lessonId": "mod11-lsn10",
+      "title": "Summary and Best Practices",
+      "type": "theory",
+      "content": "Understanding the event loop is key to writing efficient, non-blocking JavaScript. Use async patterns wisely to avoid blocking the UI and improve responsiveness."
+    }
+  ]
+}

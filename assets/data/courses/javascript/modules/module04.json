@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod04",
+  "title": "Functions Basics",
+  "description": "Learn how to control the flow of your program with loops and conditionals.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod04-lsn01",
+      "title": "What is a Function?",
+      "type": "theory",
+      "content": "A function is a reusable block of code designed to perform a specific task. Functions help organize code, reduce repetition, and improve readability."
+    },
+    {
+      "lessonId": "mod04-lsn02",
+      "title": "Defining Functions",
+      "type": "code",
+      "content": "function greet() {\n  console.log('Hello, world!');\n}\ngreet(); // Calls the function and prints 'Hello, world!'"
+    },
+    {
+      "lessonId": "mod04-lsn03",
+      "title": "Function Parameters",
+      "type": "code",
+      "content": "function greet(name) {\n  console.log('Hello, ' + name + '!');\n}\ngreet('Alice'); // Prints 'Hello, Alice!'"
+    },
+    {
+      "lessonId": "mod04-lsn04",
+      "title": "Return Statement",
+      "type": "code",
+      "content": "function add(a, b) {\n  return a + b;\n}\nlet sum = add(5, 7);\nconsole.log(sum); // 12"
+    },
+    {
+      "lessonId": "mod04-lsn05",
+      "title": "Function Expressions",
+      "type": "code",
+      "content": "const multiply = function(x, y) {\n  return x * y;\n};\nconsole.log(multiply(3, 4)); // 12"
+    },
+    {
+      "lessonId": "mod04-lsn06",
+      "title": "Arrow Functions",
+      "type": "code",
+      "content": "const square = (n) => n * n;\nconsole.log(square(5)); // 25\n// Arrow functions offer a concise syntax for writing functions."
+    },
+    {
+      "lessonId": "mod04-lsn07",
+      "title": "Scope of Variables",
+      "type": "theory",
+      "content": "Scope defines where variables are accessible. Variables declared inside a function are local to that function and can't be accessed outside."
+    },
+    {
+      "lessonId": "mod04-lsn08",
+      "title": "Conditional Statements",
+      "type": "code",
+      "content": "function checkAge(age) {\n  if (age >= 18) {\n    return 'Adult';\n  } else {\n    return 'Minor';\n  }\n}\nconsole.log(checkAge(20)); // 'Adult'"
+    },
+    {
+      "lessonId": "mod04-lsn09",
+      "title": "Loops Overview",
+      "type": "theory",
+      "content": "Loops allow running the same block of code multiple times. Common loops include for, while, and do-while loops."
+    },
+    {
+      "lessonId": "mod04-lsn10",
+      "title": "For Loop Example",
+      "type": "code",
+      "content": "for (let i = 1; i <= 5; i++) {\n  console.log('Count: ' + i);\n}"
+    }
+  ]
+}

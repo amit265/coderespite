@@ -1,24 +1,189 @@
-[
+{
+  "quizId": "qz1",
+  "moduleId": "mod01",
+  "title": "Getting Started with JavaScript",
+  "tags": ["data types", "basics"],
+  "difficulty": "medium",
+  "description": "Quiz on JavaScript data types and type-related behavior.",
+  "quiz": [{
+      "question": "What is the data type of `null` in JavaScript?",
+      "correctAnswer": "object",
+      "explanation": "`typeof null` returns 'object' due to a long-standing bug in JavaScript.",
+      "options": [{
+          "a": "null"
+        },
+        {
+          "b": "undefined"
+        },
+        {
+          "c": "object"
+        },
+        {
+          "d": "boolean"
+        }
+      ]
+    },
     {
-        "quizId": "qz301",
-        "moduleId": "mod01",
-        "question": "Which of the following is not a JavaScript data type?",
-        "options": ["String", "Number", "Float", "Boolean"],
-        "correctAnswer": "Float",
-        "explanation": "JavaScript doesn't have a Float type; it uses Number for all numeric values.",
-        "tags": ["data types", "basics"],
-        "difficulty": "medium"
-      },
-      
-      {
-        "quizId": "qz302",
-        "moduleId": "mod02",
-        "question": "Which of the following is not a JavaScript data type?",
-        "options": ["String", "Number", "Float", "Boolean"],
-        "correctAnswer": "Float",
-        "explanation": "JavaScript doesn't have a Float type; it uses Number for all numeric values.",
-        "tags": ["data types", "basics"],
-        "difficulty": "medium"
-      },
+      "question": "Which operator is used to determine the data type of a variable?",
+      "correctAnswer": "typeof",
+      "explanation": "The `typeof` operator returns the type of a variable as a string.",
+      "options": [{
+          "a": "typeof"
+        },
+        {
+          "b": "type"
+        },
+        {
+          "c": "instanceof"
+        },
+        {
+          "d": "check"
+        }
+      ]
+    },
+    {
+      "question": "What will `typeof NaN` return?",
+      "correctAnswer": "number",
+      "explanation": "`NaN` is of type 'number' even though it means Not-a-Number.",
+      "options": [{
+          "a": "NaN"
+        },
+        {
+          "b": "undefined"
+        },
+        {
+          "c": "number"
+        },
+        {
+          "d": "object"
+        }
+      ]
+    },
+    {
+      "question": "Which of the following is NOT a primitive data type in JavaScript?",
+      "correctAnswer": "array",
+      "explanation": "Array is an object in JavaScript, not a primitive.",
+      "options": [{
+          "a": "string"
+        },
+        {
+          "b": "boolean"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "array"
+        }
+      ]
+    },
+    {
+      "question": "What is the result of `'5' + 3` in JavaScript?",
+      "correctAnswer": "53",
+      "explanation": "String + number results in string concatenation: '5' + 3 → '53'.",
+      "options": [{
+          "a": "8"
+        },
+        {
+          "b": "53"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "error"
+        }
+      ]
+    },
+    {
+      "question": "Which of these values is considered 'falsy' in JavaScript?",
+      "correctAnswer": "0",
+      "explanation": "Falsy values include 0, '', null, undefined, NaN, and false.",
+      "options": [{
+          "a": "true"
+        },
+        {
+          "b": "1"
+        },
+        {
+          "c": "0"
+        },
+        {
+          "d": "\"false\""
+        }
+      ]
+    },
+    {
+      "question": "What will `Boolean('')` return?",
+      "correctAnswer": "false",
+      "explanation": "An empty string is a falsy value in JavaScript.",
+      "options": [{
+          "a": "true"
+        },
+        {
+          "b": "false"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "error"
+        }
+      ]
+    },
+    {
+      "question": "How many data types are there in JavaScript (ECMAScript 6)?",
+      "correctAnswer": "7",
+      "explanation": "JavaScript has 7 primitive types: string, number, bigint, boolean, undefined, symbol, and null.",
+      "options": [{
+          "a": "5"
+        },
+        {
+          "b": "6"
+        },
+        {
+          "c": "7"
+        },
+        {
+          "d": "8"
+        }
+      ]
+    },
+    {
+      "question": "What is the type of `[]` in JavaScript?",
+      "correctAnswer": "object",
+      "explanation": "Arrays are a special kind of object in JavaScript.",
+      "options": [{
+          "a": "array"
+        },
+        {
+          "b": "list"
+        },
+        {
+          "c": "object"
+        },
+        {
+          "d": "undefined"
+        }
+      ]
+    },
+    {
+      "question": "What will `typeof undefinedVariable` return if the variable is not declared?",
+      "correctAnswer": "undefined",
+      "explanation": "`typeof` returns 'undefined' even for undeclared variables, without throwing an error.",
+      "options": [{
+          "a": "error"
+        },
+        {
+          "b": "null"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "not defined"
+        }
+      ]
+    }
   ]
-  
+}

@@ -1,0 +1,48 @@
+{
+  "id": "fc11",
+  "moduleId": "mod11",
+  "title": "Event Loop and JS Engine",
+  "description": "Using try-catch blocks to handle errors gracefully.",
+  "flashcards": [
+    {
+      "question": "What is the JavaScript engine?",
+      "answer": "It is the program that executes JavaScript code, e.g., V8."
+    },
+    {
+      "question": "What is the event loop in JavaScript?",
+      "answer": "A mechanism that handles asynchronous callbacks by checking the call stack and task queue."
+    },
+    {
+      "question": "What is the call stack?",
+      "answer": "A stack data structure that keeps track of function calls to execute."
+    },
+    {
+      "question": "What is the task queue (or callback queue)?",
+      "answer": "A queue where asynchronous callbacks wait to be pushed onto the call stack."
+    },
+    {
+      "question": "How does the event loop process tasks?",
+      "answer": "It continuously checks if the call stack is empty and moves tasks from the queue to the stack."
+    },
+    {
+      "question": "What is a microtask queue?",
+      "answer": "A queue for promises and mutation observer callbacks that runs before the task queue."
+    },
+    {
+      "question": "What are macrotasks?",
+      "answer": "Tasks such as setTimeout, setInterval, and I/O events processed after microtasks."
+    },
+    {
+      "question": "How does try-catch interact with asynchronous code?",
+      "answer": "Try-catch only catches errors in synchronous code; async errors need promises or async/await handling."
+    },
+    {
+      "question": "What is stack overflow in JS?",
+      "answer": "An error that occurs when the call stack exceeds its limit, often due to infinite recursion."
+    },
+    {
+      "question": "Why is understanding the event loop important?",
+      "answer": "To write efficient async code and avoid blocking the UI."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod10",
+  "title": "Modules & Tooling",
+  "description": "Using try-catch blocks to handle errors gracefully.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod10-lsn01",
+      "title": "What are JavaScript Modules?",
+      "type": "theory",
+      "content": "Modules help organize code by splitting it into reusable pieces, allowing better maintainability and avoiding pollution of the global scope."
+    },
+    {
+      "lessonId": "mod10-lsn02",
+      "title": "Exporting and Importing Modules",
+      "type": "code",
+      "content": "// Exporting a function\nexport function greet() {\n  return 'Hello!';\n}\n\n// Importing the function\nimport { greet } from './greet.js';\nconsole.log(greet());"
+    },
+    {
+      "lessonId": "mod10-lsn03",
+      "title": "Default Exports",
+      "type": "code",
+      "content": "// Default export\nexport default function greet() {\n  return 'Hi!';\n}\n\n// Importing default\nimport greet from './greet.js';\nconsole.log(greet());"
+    },
+    {
+      "lessonId": "mod10-lsn04",
+      "title": "Why Use Modules?",
+      "type": "theory",
+      "content": "Modules enable better code organization, help avoid naming conflicts, and support code reuse across different parts of an application or projects."
+    },
+    {
+      "lessonId": "mod10-lsn05",
+      "title": "Introduction to Bundlers and Tooling",
+      "type": "theory",
+      "content": "Tools like Webpack, Rollup, and Parcel bundle JavaScript modules and assets into optimized files for production, improving load times and developer experience."
+    },
+    {
+      "lessonId": "mod10-lsn06",
+      "title": "Setting Up a Simple Module",
+      "type": "code",
+      "content": "// math.js\nexport function add(a, b) {\n  return a + b;\n}\n\n// app.js\nimport { add } from './math.js';\nconsole.log(add(2, 3)); // 5"
+    },
+    {
+      "lessonId": "mod10-lsn07",
+      "title": "Error Handling with try-catch",
+      "type": "theory",
+      "content": "Try-catch blocks allow you to handle errors gracefully by catching exceptions and defining fallback behaviors, preventing your program from crashing unexpectedly."
+    },
+    {
+      "lessonId": "mod10-lsn08",
+      "title": "Using try-catch Example",
+      "type": "code",
+      "content": "try {\n  let result = riskyFunction();\n  console.log(result);\n} catch (error) {\n  console.error('An error occurred:', error.message);\n}\n// Prevents the script from stopping due to errors."
+    },
+    {
+      "lessonId": "mod10-lsn09",
+      "title": "Modules in Node.js vs Browser",
+      "type": "theory",
+      "content": "Node.js uses CommonJS modules by default (`require`/`module.exports`), while modern browsers support ES modules (`import`/`export`) for modular JavaScript."
+    },
+    {
+      "lessonId": "mod10-lsn10",
+      "title": "Using Module Tooling in Projects",
+      "type": "theory",
+      "content": "Setting up module bundlers and task runners in your workflow automates tasks like code transpiling, bundling, and live-reloading, boosting development efficiency."
+    }
+  ]
+}

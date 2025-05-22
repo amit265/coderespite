@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Text, View } from "react-native";
 import SafeScreen from "../../components/SafeScreen";
 import StreakHeatmap from "../../components/StreakHeatmap";
+import { db } from "../../services/firebaseConfig";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
-import { uploadAllData } from "../../services/uploadData";
-import { collection, getDocs } from 'firebase/firestore';
+import { getAllCoursesWithSubcollections } from "../../services/getAllCoursesWithSubcollections";
 
 export default function Profile() {
   // const data = [
@@ -17,6 +18,9 @@ export default function Profile() {
   console.log("totalCount", totalCount);
 
 
+
+
+  // console.log("dataaaa", dataa);
 
   return (
     <SafeScreen>
@@ -32,7 +36,7 @@ export default function Profile() {
         <View style={{ marginTop: 40 }}>
           <Button
             title="Upload All Data to Firestore"
-            onPress={uploadAllData}
+            onPress={getAllCoursesWithSubcollections}
           />
         </View>
       </View>

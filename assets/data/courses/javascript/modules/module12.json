@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod12",
+  "title": "Debugging and Testing",
+  "description": "Learn techniques and tools to identify and fix errors in your JavaScript code, and how to write tests to ensure code quality.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod12-lsn01",
+      "title": "Introduction to Debugging",
+      "type": "theory",
+      "content": "Debugging is the process of finding and fixing errors or bugs in your code. It helps you understand why your code isn't working as expected and how to correct it."
+    },
+    {
+      "lessonId": "mod12-lsn02",
+      "title": "Using console.log() Effectively",
+      "type": "theory",
+      "content": "The simplest way to debug JavaScript is using `console.log()`. It prints values and program flow in the console, helping you trace variable states and function calls."
+    },
+    {
+      "lessonId": "mod12-lsn03",
+      "title": "Basic Debugging with Browser DevTools",
+      "type": "theory",
+      "content": "Modern browsers offer developer tools with features like breakpoints, stepping through code, inspecting variables, and watching expressions. These help debug complex problems interactively."
+    },
+    {
+      "lessonId": "mod12-lsn04",
+      "title": "Breakpoints and Step Execution",
+      "type": "theory",
+      "content": "Breakpoints pause program execution at specific lines, allowing you to examine the state of variables and the call stack before continuing or stepping through the code."
+    },
+    {
+      "lessonId": "mod12-lsn05",
+      "title": "Common JavaScript Errors",
+      "type": "theory",
+      "content": "Common errors include syntax errors, reference errors, type errors, and logical errors. Recognizing these helps you pinpoint where things go wrong."
+    },
+    {
+      "lessonId": "mod12-lsn06",
+      "title": "Example: Using console.log() for Debugging",
+      "type": "code",
+      "content": "function greet(name) {\n  console.log('Function called with:', name);\n  return 'Hello, ' + name;\n}\n\nconsole.log(greet('Alice'));"
+    },
+    {
+      "lessonId": "mod12-lsn07",
+      "title": "Introduction to Testing",
+      "type": "theory",
+      "content": "Testing involves writing code that verifies your program behaves as expected. Tests can catch bugs early and ensure your code stays reliable as it grows."
+    },
+    {
+      "lessonId": "mod12-lsn08",
+      "title": "Types of Tests: Unit and Integration",
+      "type": "theory",
+      "content": "Unit tests focus on individual functions or components, while integration tests verify that multiple parts work together correctly."
+    },
+    {
+      "lessonId": "mod12-lsn09",
+      "title": "Writing a Simple Unit Test (Conceptual)",
+      "type": "code",
+      "content": "// Example concept (no framework):\nfunction add(a, b) {\n  return a + b;\n}\n\n// Test\nconsole.assert(add(2, 3) === 5, 'add function failed');"
+    },
+    {
+      "lessonId": "mod12-lsn10",
+      "title": "Best Practices for Debugging and Testing",
+      "type": "theory",
+      "content": "Use debugging tools regularly, write tests for critical code, keep tests small and focused, and automate tests to run frequently during development."
+    }
+  ]
+}

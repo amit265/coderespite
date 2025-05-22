@@ -1,79 +1,59 @@
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import {
-  FlatList,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useContext } from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import SafeScreen from "../../components/SafeScreen";
-import modules from "../lessons.json"; // array of modules
+import { courseIcons } from "../../constants/constants";
+import { allCoursesContext } from "../../context/context";
+
 export default function Learn() {
   const router = useRouter();
-  const [courseSelected, setCourseSelected] = useState("All");
-
-  const filteredCourses =
-    courseSelected === "All"
-      ? modules
-      : modules.filter((course) => course.level === courseSelected);
+  const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
 
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
-      onPress={() => router.push(`/learn/${item.moduleId}`)}
-      className="bg-white p-4 rounded-xl shadow-md mb-4 flex flex-row gap-4"
+      key={item.id}
+      onPress={() => {
+        setSelectedCourse(item);
+        router.push(`/learn/courses/${item?.id}`);
+      }}
+      className="mb-6 rounded-3xl overflow-hidden"
+      style={{ width: 160, height: 160 }}
+      activeOpacity={0.85}
     >
-      <View>
-        <Ionicons name="logo-javascript" size={48} color="black" />
-      </View>
-      <View>
-        <Text className="text-xl font-bold text-black mb-1">{item.title}</Text>
-        {/* <Text className="text-gray-700 text-sm">{item.description}</Text> */}
-        <View className="flex-col justify-between">
-          <Text className="text-sm text-gray-500">Level: {item.level}</Text>
-          <Text className="text-xs text-gray-500">
-            {item.lessons?.length || 0} Lessons
-          </Text>
-        </View>
+      <Image
+        source={courseIcons[item?.icon]}
+        style={{
+          width: "100%",
+          height: "100%",
+          resizeMode: "cover",
+          borderRadius: 20,
+        }}
+      />
+      <View className="absolute">
+        <Text
+          className="text-white text-lg font-semibold"
+          style={{ left: "20%" }}
+        >
+          {item.title}
+        </Text>
       </View>
     </TouchableOpacity>
   );
 
-  const levels = ["All", "Beginner", "Intermediate", "Advanced"];
-
   return (
     <SafeScreen>
-      <Text className="text-2xl font-bold mb-6 text-gray-800 text-center">
-        JavaScript Modules
+      <Text className="text-2xl font-bold mb-6 text-gray-800 text-center py-4">
+        Courses
       </Text>
 
-      <View className="flex-row justify-center gap-2 mb-6 flex-wrap">
-        {levels.map((level) => (
-          <Pressable
-            key={level}
-            onPress={() => setCourseSelected(level)}
-            className={`px-4 py-2 rounded-full ${
-              courseSelected === level ? "border-b border-[#11426B]" : ""
-            }`}
-          >
-            <Text
-              className={`text-sm font-semibold ${
-                courseSelected === level ? "text-black" : "text-gray-400"
-              }`}
-            >
-              {level}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
-
       <FlatList
-        data={filteredCourses}
+        data={allCourses}
         renderItem={renderModuleItem}
-        keyExtractor={(item) => item.moduleId}
+        keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        numColumns={2}
+        contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 8 }}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
       />
     </SafeScreen>
   );

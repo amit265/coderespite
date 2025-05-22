@@ -1,24 +1,37 @@
 [
-    {
-      "id": "javascript",
-      "title": "JavaScript",
-      "description": "Learn JavaScript from basics to advanced",
-      "icon": "js",
-      "color": "#f7df1e"
-    },
-    {
-      "id": "python",
-      "title": "Python",
-      "description": "Beginner-friendly Python programming course",
-      "icon": "py",
-      "color": "#3776ab"
-    },
-    {
-      "id": "html",
-      "title": "HTML",
-      "description": "Beginner-friendly html",
-      "icon": "html",
-      "color": "#3776ab"
-    }
-  ]
-  
+  {
+    "id": "javascript",
+    "title": "JavaScript",
+    "description": "Master JavaScript from fundamentals to advanced concepts, including DOM, async, and ES6+ features.",
+    "icon": "js",
+    "color": "#f0db4f"
+  },
+  {
+    "id": "python",
+    "title": "Python",
+    "description": "Learn Python programming with a focus on simplicity, readability, and real-world projects.",
+    "icon": "py",
+    "color": "#306998"
+  },
+  {
+    "id": "html",
+    "title": "HTML",
+    "description": "Understand the structure of the web with a complete guide to HTML5 and semantic markup.",
+    "icon": "html",
+    "color": "#e34c26"
+  },
+  {
+    "id": "react",
+    "title": "React.js",
+    "description": "Build interactive UIs and modern web apps with React, JSX, hooks, and component-based architecture.",
+    "icon": "react",
+    "color": "#61dafb"
+  },
+  {
+    "id": "css",
+    "title": "CSS",
+    "description": "Design beautiful and responsive websites using modern CSS techniques and layouts.",
+    "icon": "css",
+    "color": "#264de4"
+  }
+]

@@ -1,0 +1,190 @@
+{
+  "quizId": "qz4",
+  "moduleId": "mod04",
+  "title": "Functions Basics",
+
+  "tags": ["functions", "basics", "parameters", "return"],
+  "difficulty": "medium",
+  "description": "Learn how to control the flow of your program with loops and conditionals.",
+  "quiz": [{
+      "question": "What keyword is used to define a function in JavaScript?",
+      "correctAnswer": "function",
+      "explanation": "JavaScript functions are declared using the `function` keyword.",
+      "options": [{
+          "a": "func"
+        },
+        {
+          "b": "function"
+        },
+        {
+          "c": "def"
+        },
+        {
+          "d": "method"
+        }
+      ]
+    },
+    {
+      "question": "What does a function return if no return statement is provided?",
+      "correctAnswer": "undefined",
+      "explanation": "If a return statement is not used, the function returns `undefined` by default.",
+      "options": [{
+          "a": "null"
+        },
+        {
+          "b": "0"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "false"
+        }
+      ]
+    },
+    {
+      "question": "What is the term for values passed into a function?",
+      "correctAnswer": "Arguments",
+      "explanation": "Values passed to a function when calling it are called arguments.",
+      "options": [{
+          "a": "Variables"
+        },
+        {
+          "b": "Parameters"
+        },
+        {
+          "c": "Arguments"
+        },
+        {
+          "d": "Properties"
+        }
+      ]
+    },
+    {
+      "question": "What is the term for the names listed in the function definition?",
+      "correctAnswer": "Parameters",
+      "explanation": "Parameters are placeholders defined in a function’s declaration.",
+      "options": [{
+          "a": "Arguments"
+        },
+        {
+          "b": "Returns"
+        },
+        {
+          "c": "Parameters"
+        },
+        {
+          "d": "Inputs"
+        }
+      ]
+    },
+    {
+      "question": "What is the output of: `function greet(){ return 'Hi'; } console.log(greet());`",
+      "correctAnswer": "Hi",
+      "explanation": "The function `greet` returns the string 'Hi', which is logged.",
+      "options": [{
+          "a": "undefined"
+        },
+        {
+          "b": "greet"
+        },
+        {
+          "c": "Hi"
+        },
+        {
+          "d": "null"
+        }
+      ]
+    },
+    {
+      "question": "How do you call a function named `myFunc`?",
+      "correctAnswer": "myFunc()",
+      "explanation": "Functions are called using parentheses: `myFunc()`.",
+      "options": [{
+          "a": "call myFunc"
+        },
+        {
+          "b": "myFunc"
+        },
+        {
+          "c": "run(myFunc)"
+        },
+        {
+          "d": "myFunc()"
+        }
+      ]
+    },
+    {
+      "question": "Which keyword is used to send a value back from a function?",
+      "correctAnswer": "return",
+      "explanation": "The `return` keyword is used to output a value from a function.",
+      "options": [{
+          "a": "give"
+        },
+        {
+          "b": "return"
+        },
+        {
+          "c": "output"
+        },
+        {
+          "d": "yield"
+        }
+      ]
+    },
+    {
+      "question": "What is a function without a name called?",
+      "correctAnswer": "Anonymous function",
+      "explanation": "A function without a name is called an anonymous function.",
+      "options": [{
+          "a": "Void function"
+        },
+        {
+          "b": "Null function"
+        },
+        {
+          "c": "Anonymous function"
+        },
+        {
+          "d": "Callback function"
+        }
+      ]
+    },
+    {
+      "question": "Which of the following is a valid arrow function?",
+      "correctAnswer": "() => 5",
+      "explanation": "Arrow functions are written using `=>` and can return values directly.",
+      "options": [{
+          "a": "function => 5"
+        },
+        {
+          "b": "return => 5"
+        },
+        {
+          "c": "() => 5"
+        },
+        {
+          "d": "() <= 5"
+        }
+      ]
+    },
+    {
+      "question": "What will be the output of `console.log(typeof function(){});`?",
+      "correctAnswer": "function",
+      "explanation": "`typeof` on a function returns 'function' in JavaScript.",
+      "options": [{
+          "a": "object"
+        },
+        {
+          "b": "function"
+        },
+        {
+          "c": "undefined"
+        },
+        {
+          "d": "string"
+        }
+      ]
+    }
+  ]
+}

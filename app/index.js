@@ -1,6 +1,7 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen, useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
@@ -12,16 +13,33 @@ import {
 import SafeScreen from "../components/SafeScreen";
 import SplashScreenComponent from "../components/SplashScreenComponent";
 import colors from "../constants/colors";
+import { allCoursesContext } from "../context/context";
+import { getAllCoursesWithSubcollections } from "../services/getAllCoursesWithSubcollections";
 const { width, height } = Dimensions.get("window");
 
 export default function Index() {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
+  const { allCourses, setAllCourses } = useContext(allCoursesContext);
+  const loadData = async () => {
+    try {
+      const data = await AsyncStorage.getItem("allCourses");
+      if (data) {
+        setAllCourses(JSON.parse(data));
+        // console.log("from async storage", JSON.parse(data));
+      } else {
+        await getAllCoursesWithSubcollections(); // first-time load
+      }
+    } catch (error) {
+      console.error("❌ Error loading AsyncStorage: ", error);
+    }
+  };
 
   useEffect(() => {
     async function prepare() {
       try {
         // Simulate loading fonts/assets
+        loadData();
         await new Promise((resolve) => setTimeout(resolve, 1000));
       } catch (e) {
         console.warn(e);
@@ -46,6 +64,8 @@ export default function Index() {
   if (showSplash) {
     return <SplashScreenComponent />;
   }
+
+  // console.log("allCourses from context", allCourses);
 
   return (
     <SafeScreen>

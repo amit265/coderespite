@@ -1,0 +1,68 @@
+{
+  "moduleId": "mod09",
+  "title": "Asynchronous JS",
+  "description": "Handling asynchronous code with Promises and async/await.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod09-lsn01",
+      "title": "What is Asynchronous JavaScript?",
+      "type": "theory",
+      "content": "Asynchronous JavaScript allows your program to perform tasks without blocking the main thread, enabling smoother user experiences by handling operations like data fetching or timers in the background."
+    },
+    {
+      "lessonId": "mod09-lsn02",
+      "title": "Callbacks",
+      "type": "code",
+      "content": "function fetchData(callback) {\n  setTimeout(() => {\n    callback('Data loaded');\n  }, 1000);\n}\nfetchData(data => console.log(data));\n// Using callbacks to handle async operations."
+    },
+    {
+      "lessonId": "mod09-lsn03",
+      "title": "Problems with Callbacks",
+      "type": "theory",
+      "content": "Callbacks can lead to nested, hard-to-read code known as 'callback hell,' making error handling and flow control complex."
+    },
+    {
+      "lessonId": "mod09-lsn04",
+      "title": "Promises Introduction",
+      "type": "theory",
+      "content": "Promises are objects representing the eventual completion or failure of an asynchronous operation, providing cleaner syntax and better error handling than callbacks."
+    },
+    {
+      "lessonId": "mod09-lsn05",
+      "title": "Creating and Using Promises",
+      "type": "code",
+      "content": "const promise = new Promise((resolve, reject) => {\n  setTimeout(() => {\n    resolve('Success!');\n  }, 1000);\n});\npromise.then(result => console.log(result));\n// Basic promise usage."
+    },
+    {
+      "lessonId": "mod09-lsn06",
+      "title": "Promise Chaining",
+      "type": "code",
+      "content": "promise\n  .then(result => {\n    console.log(result);\n    return 'Next step';\n  })\n  .then(next => console.log(next));\n// Chain multiple async operations sequentially."
+    },
+    {
+      "lessonId": "mod09-lsn07",
+      "title": "Async/Await Syntax",
+      "type": "code",
+      "content": "async function fetchData() {\n  const result = await promise;\n  console.log(result);\n}\nfetchData();\n// Using async/await for cleaner asynchronous code."
+    },
+    {
+      "lessonId": "mod09-lsn08",
+      "title": "Error Handling with Async/Await",
+      "type": "code",
+      "content": "async function fetchData() {\n  try {\n    const result = await promise;\n    console.log(result);\n  } catch (error) {\n    console.error('Error:', error);\n  }\n}\n// Handle errors gracefully with try-catch."
+    },
+    {
+      "lessonId": "mod09-lsn09",
+      "title": "Promise.all and Promise.race",
+      "type": "theory",
+      "content": "Promise.all waits for multiple promises to resolve, while Promise.race resolves or rejects as soon as one promise settles, useful for concurrent async operations."
+    },
+    {
+      "lessonId": "mod09-lsn10",
+      "title": "Practical Use Cases",
+      "type": "theory",
+      "content": "Asynchronous JavaScript is crucial in web development for tasks such as API calls, reading files, or handling timers, allowing responsive applications."
+    }
+  ]
+}
