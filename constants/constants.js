@@ -18,33 +18,7 @@ export const flashcardIcons = {
   // Add other mappings
 };
 
-export const user = {
-  id: "user",
-  firstTime: true,
-  profile: {
-    name: "User",
-    avatar: "avatar3.png",
-    createdAt: "2025-05-13",
-    lastAccessed: "2025-05-13",
-  },
-  progress: {
-    mod01: 75,
-    mod02: 100,
-  },
-  bookmarkedFlashcards: ["fc101", "fc105"],
-  quizHistory: [
-    {
-      quizId: "qz201",
-      score: 80,
-      date: "2025-05-13",
-    },
-  ],
-  streak: 3,
-  settings: {
-    darkMode: true,
-    notifications: false,
-  },
-};
+
 
 export const availableImages = [
   {
@@ -95,7 +69,7 @@ export const availableImages = [
     name: "avatar12.png",
     source: require("../assets/images/avatar/avatar12.png"),
   },
- 
+
   // add more as needed
 ];
 
@@ -129,57 +103,92 @@ export const getAvatarImage = (name) => {
       return require("../assets/images/avatar/avatar1.png"); // fallback image
   }
 };
-
 export const levels = [
   {
     id: 1,
-    title: "Level 1 — Curious Kitten",
-    description: "You’ve taken your first pawstep into the code world. The yarn ball of knowledge awaits!",
+    level: "Level 1",
+    title: "Curious Kitten",
+    description:
+      "You've just wandered into the world of code. Everything is new, shiny, and full of wonder.",
   },
   {
     id: 2,
-    title: "Level 2 — Loop Kitten",
-    description: "You're starting to chase those loops like a pro. Just don’t get tangled!",
+    level: "Level 2",
+    title: "Playful Pouncer",
+    description:
+      "You're playfully exploring concepts, pouncing on ideas and testing your paws.",
   },
   {
     id: 3,
-    title: "Level 3 — Callback Cat",
-    description: "You're getting snappy with functions and callbacks. Fast paws, smart claws!",
+    level: "Level 3",
+    title: "Clever Climber",
+    description:
+      "You’re scaling learning walls with grace. Each concept is a branch you confidently leap to.",
   },
   {
     id: 4,
-    title: "Level 4 — Async Aficionado",
-    description: "You wait like a champ 🕒 but your code doesn’t have to. Mastering async like a sleek cat in the shadows.",
+    level: "Level 4",
+    title: "Nimble Navigator",
+    description:
+      "You’re darting through syntax and concepts like a cat through a maze of furniture.",
   },
   {
     id: 5,
-    title: "Level 5 — Function Feline",
-    description: "Functions? Declawed. Recursion? Batted like a toy mouse.",
+    level: "Level 5",
+    title: "Code Catnip",
+    description:
+      "You've found your groove! Concepts excite you like a whiff of catnip.",
   },
   {
     id: 6,
-    title: "Level 6 — Object-Oriented Ocelot",
-    description: "You’re organizing your code and stalking bugs like a jungle cat.",
+    level: "Level 6",
+    title: "Debugging Lynx",
+    description:
+      "You’ve developed sharp senses. Errors don’t stand a chance under your focused gaze.",
   },
   {
     id: 7,
-    title: "Level 7 — DOM Panther",
-    description: "You roam the document jungle with precision. Everything’s under control... almost.",
+    level: "Level 7",
+    title: "Tactical Tabby",
+    description:
+      "Strategic and precise — your learning is no longer random, but calculated.",
   },
   {
     id: 8,
-    title: "Level 8 — Purrformance Prowler",
-    description: "You’ve optimized your naps and your code. Now that’s efficiency!",
+    level: "Level 8",
+    title: "Purring Prodigy",
+    description:
+      "You’re confident, calm, and consistently improving. Others can feel your confident purr.",
   },
   {
     id: 9,
-    title: "Level 9 — Bug-Hunting Bobcat",
-    description: "Not all heroes wear capes. Some just pounce on bugs.",
+    level: "Level 9",
+    title: "Whiskered Wizard",
+    description:
+      "Your instincts and logic are perfectly in sync. You make the complex look easy.",
   },
   {
     id: 10,
-    title: "Level 10 — Supreme Meowster",
-    description: "Legend says your whiskers vibrate with pure JavaScript energy. You are the Code Respite Meowster.",
+    level: "Level 10",
+    title: "Supreme Meowster",
+    description:
+      "You’ve mastered the art of learning. A legendary coder-cat with stories told in every byte.",
   },
 ];
 
+export const WELCOME_MESSAGES = [
+  "Ready for a quick code break?",
+  "Let's sharpen those skills! 💡",
+  "Back for more challenges? 🚀",
+  "Code. Learn. Repeat. 🔁",
+  "Fuel up your brain with some quizzes 🧠",
+  "Time for a quick revision? Let’s brush up your skills! 🔁",
+  "Flashcards and quizzes ready — let’s reinforce your knowledge! 🧠",
+  "Just a few minutes a day keeps the bugs away! 🐞",
+  "Master one concept at a time. You've got this! 💪",
+  "Quick recap time! Let’s tackle a few flashcards 🔄",
+  "Your dev journey just got smarter. Ready to revise? 🚀",
+  "Repetition builds mastery. Start your revision now! 🔁",
+  "Short sessions, big progress. Let’s dive in! 🌊",
+  "Your learning playground is ready. Jump in! 🎮",
+];

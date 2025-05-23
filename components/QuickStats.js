@@ -1,8 +1,9 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-export default function QuickStats({ userDetails }) {
-  console.log("userdetails", userDetails);
+export default function QuickStats({ userData }) {
+  
+  console.log("userdetails", userData);
   return (
     <View className="flex flex-col gap-4 mt-4 p-4 bg-white rounded-xl">
       <View

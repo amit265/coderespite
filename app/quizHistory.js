@@ -1,0 +1,74 @@
+import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import QuizHistoryCard from "../components/QuizHistoryCard";
+import SafeScreen from "../components/SafeScreen";
+import Button from "../components/shared/Button";
+import colors from "../constants/colors";
+
+export default function QuizHistory() {
+  const router = useRouter();
+  const [quizData, setQuizData] = useState([]);
+
+  useEffect(() => {
+    loadAttemptedQuizzes();
+  }, []);
+
+  const loadAttemptedQuizzes = async () => {
+    try {
+      const stored = await AsyncStorage.getItem("@attemptedQuiz_data");
+      setQuizData(stored ? JSON.parse(stored) : []);
+    } catch (err) {
+      console.error("Failed to load quiz history:", err);
+    }
+  };
+
+  return (
+    <SafeScreen>
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          flexDirection: "row",
+          gap: 20,
+          paddingLeft: 20,
+          paddingBottom: 10,
+        }}
+      >
+        <Pressable onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={30} color="black" />
+        </Pressable>
+        <Text
+          style={{
+            fontFamily: "nunito-bold",
+            fontSize: 24,
+            color: colors.BLACK,
+            textAlign: "center",
+          }}
+        >
+          Quiz History
+        </Text>
+      </View>
+      <View className="flex justify-center items-center h-2/3">
+        {quizData?.length !== 0 ? (
+          <QuizHistoryCard quizData={quizData} />
+        ) : (
+          <View>
+            <Text className="font-2xl text-center mt-24">
+              No attempted quiz yet
+            </Text>
+            <View className="px-12">
+              <Button
+                text={"Go to Quiz"}
+                onPress={() => router.push("/(tabs)/quiz")}
+              />
+            </View>
+          </View>
+        )}
+      </View>
+    </SafeScreen>
+  );
+}

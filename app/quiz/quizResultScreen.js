@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -15,31 +15,39 @@ import {
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
+import { allCoursesContext } from "../../context/context";
 
 export default function QuizResultScreen() {
   const { quizIdParam } = useLocalSearchParams();
+  const { setSelectedCourse, setSelectedQuiz, allCourses } =
+    useContext(allCoursesContext);
+
   const quizData = JSON.parse(quizIdParam);
+  // console.log("quizdata from quiz result screen", quizData);
+  // console.log("allCourse from quiz result screen", allCourses);
+  // console.log("selectedQuiz from quiz result screen", selectedQuiz);
+  // console.log("selectedCourse from quiz result screen", selectedCourse);
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   // console.log("quiz id from result screen", quizId);
   const getPercMarks = quizData?.quizResultPercentage;
-
   const quizResult = quizData?.result || {};
 
-  console.log("showConfetti", showConfetti);
+  // console.log("showConfetti", showConfetti);
 
   useEffect(() => {
     if (!quizData) {
       setLoading(true);
     }
-
     if (
       quizData &&
       Object.keys(quizData.result || {}).length > 0 &&
       getPercMarks > 60
     ) {
+      setLoading(false);
+
       setTimeout(() => setShowConfetti(true), 1000); // Small delay to ensure proper rendering
     }
   }, []);
@@ -56,6 +64,18 @@ export default function QuizResultScreen() {
       totalQuestion: Object.keys(quizData.result).length,
     };
   }, [quizData]);
+
+  const attemptAgain = () => {
+    const currentCourse = allCourses.find(
+      (item) => item.title === quizData?.courseTitle
+    );
+    const currentQuiz = currentCourse?.quizzes.find(
+      (item) => item?.id === quizData?.quizId
+    );
+    setSelectedQuiz(currentQuiz);
+    setSelectedCourse(currentCourse);
+    router.push(`/quiz/courses/${quizData?.quizId}`);
+  };
 
   const renderItem = ({ item, index }) => {
     const quizItem = item[1];
@@ -170,6 +190,19 @@ export default function QuizResultScreen() {
             />
           </View>
         )}
+        {loading && (
+          <View
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: [{ translateX: -18 }, { translateY: -18 }],
+              zIndex: 999,
+            }}
+          >
+            <ActivityIndicator color="black" size={36} />
+          </View>
+        )}
         <FlatList
           data={quizResult ? Object.entries(quizResult) : []}
           renderItem={renderItem}
@@ -247,14 +280,7 @@ export default function QuizResultScreen() {
                     text={"Back to Home"}
                     onPress={() => router.replace("/(tabs)")}
                   />
-                  <Button
-                    text={"Attempt Again"}
-                    onPress={() =>
-                      router.push({
-                        pathname: "/quiz/courses/" + quizData?.quizId,
-                      })
-                    }
-                  />
+                  <Button text={"Attempt Again"} onPress={attemptAgain} />
                   <View style={{ marginTop: 25 }}>
                     <Text
                       style={{

@@ -3,6 +3,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import * as Progress from "react-native-progress";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   ActivityIndicator,
   Alert,
@@ -16,15 +17,15 @@ import {
 } from "react-native";
 import Button from "../../../components/shared/Button";
 import colors from "../../../constants/colors";
-import { allCoursesContext } from "../../../context/context";
+import { allCoursesContext, dbUpdateContext } from "../../../context/context";
 export default function QuizId() {
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedOption, setSelectedOption] = useState();
   const [result, setResult] = useState([]);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false);  
+  
   const [shuffledOptions, setShuffledOptions] = useState([]);
   // const { setShowConfetti } = useContext(showConfettiContext);
   const { selectedCourse, selectedQuiz } = useContext(allCoursesContext);
@@ -32,6 +33,7 @@ export default function QuizId() {
   const quizTitle = selectedQuiz?.title;
   // console.log("selectedCourse", selectedCourseTitle, selectedQuizTitle);
   const quiz = selectedQuiz?.quiz;
+  const quizIcon = selectedCourse?.icon;
 
   useEffect(() => {
     if (quiz[currentPage]?.options) {
@@ -91,25 +93,61 @@ export default function QuizId() {
   };
 
   const onQuizFinish = async () => {
-    setLoading(true);
-    console.log("result of the quiz", result);
+    try {
+      setLoading(true);
+      const quizResultPercentage = calculateQuizPercent();
+      const now = new Date();
+      const attemptedDate = now.toISOString().split("T")[0];
 
-    const quizResultPercentage = calculateQuizPercent();
+      const newAttempt = {
+        quizId,
+        quizIcon,
+        result,
+        quizResultPercentage,
+        courseTitle,
+        quizTitle,
+        attemptedDate,
+      };
 
-    const quizData = {
-      quizId,
-      result,
-      quizResultPercentage,
-      courseTitle,
-      quizTitle,
-    };
+      let attemptsArray = [];
 
-    router.replace({
-      pathname: "/quiz/quizResultScreen",
-      params: {
-        quizIdParam: JSON.stringify(quizData),
-      },
-    });
+      // Get existing attempts
+      const storedAttempts = await AsyncStorage.getItem("@attemptedQuiz_data");
+      const parsed = storedAttempts ? JSON.parse(storedAttempts) : null;
+
+      if (Array.isArray(parsed)) {
+        attemptsArray = parsed;
+      } else if (parsed) {
+        attemptsArray = [parsed]; // wrap old single object into array
+      }
+
+      // 🔒 Remove any previous entry with same quizId
+      attemptsArray = attemptsArray.filter(
+        (attempt) =>
+          !(attempt.quizId === quizId && attempt.courseTitle === courseTitle)
+      );
+
+      attemptsArray.push(newAttempt);
+
+      // Save updated array
+      await AsyncStorage.setItem(
+        "@attemptedQuiz_data",
+        JSON.stringify(attemptsArray)
+      );
+
+
+      // Navigate
+      router.replace({
+        pathname: "/quiz/quizResultScreen",
+        params: {
+          quizIdParam: JSON.stringify(newAttempt),
+        },
+      });
+    } catch (error) {
+      console.error("Error saving quiz result:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!quiz) {
@@ -157,7 +195,7 @@ export default function QuizId() {
           color: colors.BLACK,
         }}
       >
-        {selectedCourse?.title}
+        {quizTitle}
       </Text>
       <View style={{ marginTop: 10, alignSelf: "center" }}>
         <Progress.Bar

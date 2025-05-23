@@ -44,10 +44,9 @@ export default function CourseId() {
       </View>
       <View className="flex-1 justify-center">
         <Text className="text-xl font-nunito-bold text-black mb-1">{item.title}</Text>
-        {/* <Text className="text-gray-700 text-sm">{item.description}</Text> */}
         <View className="flex-col justify-between">
           <Text className="text-xs text-gray-500 font-nunito">
-            {item.flashcards?.length || 0} cards
+            {item?.flashcards?.length || 0} cards
           </Text>
         </View>
       </View>

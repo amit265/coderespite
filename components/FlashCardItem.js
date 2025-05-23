@@ -16,9 +16,8 @@ export default function FlashCardItem({ flashcards, title }) {
   console.log("flashcards from flashcardcomponentfhgffhg", favorites);
 
   const addFavorite = async (question, title, answer) => {
-    // console.log("question", question);
 
-    setFavorites((prev) => {
+    setFavorites((prev = []) => {
       const exists = prev?.some((item) => item?.question === question);
 
       if (exists) {
@@ -28,7 +27,7 @@ export default function FlashCardItem({ flashcards, title }) {
       }
 
       const updateFavorites = [...prev, { question, title, answer }];
-      AsyncStorage.setItem("favorites", JSON.stringify(updateFavorites));
+      AsyncStorage.setItem("@favoriteFlashcard_data", JSON.stringify(updateFavorites));
 
       return updateFavorites;
     });

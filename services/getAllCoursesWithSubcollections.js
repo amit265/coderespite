@@ -2,7 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
+
 export const getAllCoursesWithSubcollections = async () => {
+  
   try {
     // Step 1: Fetch all courses
     const coursesSnapshot = await getDocs(collection(db, "courses"));
@@ -52,7 +54,7 @@ export const getAllCoursesWithSubcollections = async () => {
     }
     console.log("from firestore allCourses", allCourses);
 
-    await AsyncStorage.setItem("allCourses", JSON.stringify(allCourses));
+    await AsyncStorage.setItem("@allCourses_data", JSON.stringify(allCourses));
 
     return allCourses;
   } catch (error) {

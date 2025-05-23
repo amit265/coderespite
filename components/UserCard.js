@@ -3,10 +3,11 @@ import React from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import { getAvatarImage, levels } from "../constants/constants";
 
-export default function UserCard({ userDetails, setShowModal }) {
-  console.log("userdetails", userDetails);
-  const profile = userDetails?.profile;
-  const level = levels[profile.level - 1].title;
+export default function UserCard({ userData, setShowModal }) {
+  console.log("userdetails frlmo user card", userData);
+  const profile = userData?.profile;
+  const level = levels[userData?.level?.currentLevel - 1]?.title || "Curious Kitten";
+    
   return (
     <View className="flex flex-row gap-10 mt-4 p-4 bg-white rounded-xl">
       <View>
@@ -22,12 +23,12 @@ export default function UserCard({ userDetails, setShowModal }) {
       </View>
       <View className="flex justify-center">
         <View className="flex flex-col items-start">
-          <Text className="text-base font-nunito-bold">Username: </Text>
-          <Text className="text-base font-nunito">{profile.name}</Text>
+          <Text className="text-base" style={{fontFamily: "nunito-bold"}}>Username: </Text>
+          <Text className="text-base" style={{fontFamily: "nunito"}}>{profile?.name}</Text>
         </View>
         <View className="flex flex-col items-start flex-wrap">
-          <Text className="text-base font-nunito-bold">Level: </Text>
-          <Text className="text-base flex-wrap font-nunito">{level}</Text>
+          <Text className="text-base font-nunito-bold" style={{fontFamily: "nunito-bold"}}>Level: </Text>
+          <Text className="text-base flex-wrap font-nunito" style={{fontFamily: "nunito"}}>{level}</Text>
         </View>
       </View>
       <Pressable

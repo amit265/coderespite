@@ -5,6 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import colors from "../../constants/colors";
 
 export default function Header() {
+
   const router = useRouter();
 
   return (
@@ -13,18 +14,18 @@ export default function Header() {
         <View className="flex-row">
           <Text
             className="text-2xl"
-            style={{ fontFamily: "Quicksand-bold", color: colors.ERROR }}
+            style={{ fontFamily: "quicksand-bold", color: colors.ERROR }}
           >
             CODE
           </Text>
           <Text
             className="text-2xl"
-            style={{ fontFamily: "Quicksand-bold", color: colors.TEXT }}
+            style={{ fontFamily: "quicksand-bold", color: colors.TEXT }}
           >
             RESPITE
           </Text>
         </View>
-        <Text className="text-xs mt-1" style={{ color: colors.TEXT, fontFamily: "Quicksand-bold" }}>
+        <Text className="text-xs mt-1" style={{ color: colors.TEXT, fontFamily: "quicksand-bold" }}>
           REFRESH YOUR TECH SKILLS
         </Text>
       </View>

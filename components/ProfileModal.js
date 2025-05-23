@@ -14,16 +14,15 @@ import Button from "./shared/Button";
 
 const ProfileModal = ({ setShowModal }) => {
   const [selectedImage, setSelectedImage] = useState(availableImages[0]);
-  const { userDetails, setUserDetails } = useContext(userDetailsContext);
+  const { userData, updateUser } = useContext(userDetailsContext);
 
   console.log("seleted image", selectedImage);
   const [error, setError] = useState("");
 
-  const [username, setUsername] = useState(userDetails?.profile.name);
+  const [username, setUsername] = useState(userData?.profile.name);
   const router = useRouter();
   const handleUsernameChange = (text) => {
     const trimmed = text.trim();
-
     // Check for length
     if (trimmed.length > 15) {
       setError("Username can't be more than 15 characters.");
@@ -37,7 +36,9 @@ const ProfileModal = ({ setShowModal }) => {
     } else {
       setError("");
     }
-
+    if (trimmed === "User") return;
+    console.log("hey there", (trimmed === "User"));
+    
     setUsername(trimmed);
   };
   const saveData = () => {
@@ -45,19 +46,19 @@ const ProfileModal = ({ setShowModal }) => {
     const now = new Date();
     const formattedDate = now.toISOString().split("T")[0];
 
-    setUserDetails((prev) => ({
+    updateUser((prev) => ({
       ...prev,
-      firstTime: false,
       profile: {
         ...prev.profile,
         avatar: selectedImage.name,
         name: username,
-        level: 1,
         createdAt: formattedDate,
+        firstTime: false,
       },
+
     }));
 
-    router.replace("/(tabs)/profile");
+    // router.replace("/(tabs)/profile");
     setShowModal(false);
   };
 
@@ -73,7 +74,9 @@ const ProfileModal = ({ setShowModal }) => {
         style={{ width: 120, height: 120, borderRadius: 60, marginBottom: 12 }}
       />
 
-      <Text className="text-lg font-nunito-semibold mb-2">Select an Avatar:</Text>
+      <Text className="text-lg font-nunito-semibold mb-2">
+        Select an Avatar:
+      </Text>
 
       <ScrollView
         horizontal

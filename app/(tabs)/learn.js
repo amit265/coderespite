@@ -7,7 +7,10 @@ import { allCoursesContext } from "../../context/context";
 
 export default function Learn() {
   const router = useRouter();
-  const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
+  const { allCourses, setSelectedCourse, setUpdate } =
+    useContext(allCoursesContext);
+  if (allCourses?.length === 0) setUpdate((prev) => !prev);
+  console.log("allcourses", allCourses.length);
 
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity

@@ -11,6 +11,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@expo/metro-config": "^0.20.14",
     "@expo/vector-icons": "^14.1.0",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
@@ -39,6 +40,7 @@
     "react-dom": "19.0.0",
     "react-error-boundary": "^6.0.0",
     "react-native": "0.79.2",
+    "react-native-card-flip": "^1.0.7",
     "react-native-flip-card": "^3.5.7",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-image-picker": "^8.2.1",

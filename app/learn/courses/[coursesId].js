@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   Pressable,
@@ -20,7 +21,7 @@ export default function CourseId() {
   const router = useRouter();
   const [courseSelected, setCourseSelected] = useState("All");
   const course = allCourses.find((item) => item?.id === coursesId);
-
+  const [loading, setLoading] = useState(false);
   const filteredCourses =
     courseSelected === "All"
       ? course?.modules
@@ -29,11 +30,25 @@ export default function CourseId() {
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
+        setLoading(true);
         setSelectedModule(item);
         router.push(`/learn/courses/modules/${item.moduleId}`);
+        setLoading(false);
       }}
       className="bg-white p-4 rounded-xl shadow-md mb-4 flex flex-row gap-4"
     >
+      {loading && (
+        <View
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: [{ translateX: -18 }, { translateY: -18 }],
+          }}
+        >
+          <ActivityIndicator color="black" size={36} />
+        </View>
+      )}
       <View style={{ width: 100, height: 100 }}>
         <Image
           source={courseIcons[selectedCourse?.icon]}
@@ -46,10 +61,14 @@ export default function CourseId() {
         ></Image>
       </View>
       <View className="flex-1 justify-center">
-        <Text className="text-xl font-nunito-bold text-black mb-1">{item.title}</Text>
+        <Text className="text-xl font-nunito-bold text-black mb-1">
+          {item.title}
+        </Text>
         {/* <Text className="text-gray-700 text-sm">{item.description}</Text> */}
         <View className="flex-col justify-between">
-          <Text className="text-sm text-gray-500 font-nunito">Level: {item.level}</Text>
+          <Text className="text-sm text-gray-500 font-nunito">
+            Level: {item.level}
+          </Text>
           <Text className="text-xs text-gray-500 font-nunito">
             {item.lessons?.length || 0} Lessons
           </Text>

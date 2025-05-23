@@ -31,7 +31,7 @@ export default function Index() {
             textAlign: "center",
           }}
         >
-          Flash Card
+          Flash Cards
 
         </Text>
       </View>

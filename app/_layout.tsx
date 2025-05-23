@@ -3,29 +3,23 @@ import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { StatusBar, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { user } from "../constants/constants";
-import { allCoursesContext, favoritesContext, userDetailsContext } from "../context/context";
-import './global.css';
-import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from "../components/ErrorFallback";
-
+import { allCoursesContext, favoritesContext, userDetailsContext } from "../context/context";
+import { getUserData, setUserData } from "../services/userStorage";
+import './global.css';
 export default function RootLayout() {
-
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     "nunito": require("../assets/fonts/Nunito-Regular.ttf"),
     "nunito-bold": require("../assets/fonts/Nunito-Bold.ttf"),
     "nunito-semiBold": require("../assets/fonts/Nunito-SemiBold.ttf"),
     "quicksand": require("../assets/fonts/Quicksand-Regular.ttf"),
     "quicksand-semiBold": require("../assets/fonts/Quicksand-SemiBold.ttf"),
     "quicksand-bold": require("../assets/fonts/Quicksand-Bold.ttf"),
-
-
-
-
-
   });
+
   const [adConfig, setAdConfig] = useState({
     showAds: true,
     showInterstitialAds: true,
@@ -36,29 +30,84 @@ export default function RootLayout() {
     interstitialFrequency: 10,
     appOpenAdFrequency: 10
   });
-  const [userDetails, setUserDetails] = useState(user);
-
-
-  const [dbUpdate, setUpdate] = useState(false);
+  const [userData, setUserDataState] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [update, setUpdate] = useState(false);
   const [isConnected, setIsConnected] = useState(true);
-  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [clickCount, setClickCount] = useState(1);
-  const [questionData, setQuestionData] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState([]);
   const [selectedModule, setSelectedModule] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState([]);
+  const [attemptedQuizData, setAttemptedQuizData] = useState([]);
 
 
 
-  const dbUpdateValue = useMemo(() => ({ dbUpdate, setUpdate }), [dbUpdate]);
   const adConfigValue = useMemo(() => ({ adConfig, setAdConfig, clickCount, setClickCount }), [clickCount, setClickCount, adConfig])
-  const settingModalValue = useMemo(() => ({ settingsModalVisible, setSettingsModalVisible }), [settingsModalVisible])
-  const questionDataValue = useMemo(() => ({ questionData, setQuestionData }), [questionData])
   const favoritesValue = useMemo(() => ({ favorites, setFavorites }), [favorites])
-  const allCoursesValue = useMemo(() => ({ allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz }), [allCourses, selectedCourse, selectedModule, selectedQuiz])
-  const userDetailsValue = useMemo(() => ({ userDetails, setUserDetails }), [userDetails])
+
+
+  const allCoursesValue = useMemo(() => ({ allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
+  const userDetailsValue = useMemo(() => ({ userData, setUserDataState }), [userData])
+
+
+
+  // Load user data initially
+  useEffect(() => {
+    const load = async () => {
+      const data = await getUserData();
+      console.log("data from firs tlayout", data);
+
+      setUserDataState(data);
+      setLoading(false);
+    };
+    load();
+  }, []);
+
+
+  // Update AsyncStorage + context state
+  const updateUser = async (updateFn) => {
+    const updated = updateFn({ ...userData });
+    await setUserData(updated);
+    setUserDataState(updated);
+  };
+
+  // Expose helper methods
+  const value = {
+    userData,
+    loading,
+    updateUser,
+    // Example methods you can call from anywhere
+    gainXP: async (xp) => {
+      await updateUser((data) => {
+        data.level.xp += xp;
+        while (data.level.xp >= data.level.nextLevelXP) {
+          data.level.xp -= data.level.nextLevelXP;
+          data.level.currentLevel += 1;
+          data.level.nextLevelXP += 100;
+        }
+        return data;
+      });
+    },
+    updateCourse: async (course, updates) => {
+      await updateUser((data) => {
+        if (!data.progress[course]) {
+          data.progress[course] = {
+            quizzesAttempted: 0,
+            flashcardsLoved: 0,
+            completed: false,
+            percentage: 0,
+          };
+        }
+        data.progress[course] = {
+          ...data.progress[course],
+          ...updates,
+        };
+        return data;
+      });
+    },
+  };
 
 
   const checkConnection = useCallback(async () => {
@@ -80,7 +129,7 @@ export default function RootLayout() {
 
     return () => subscription && subscription.remove();
 
-  }, []);
+  }, [checkConnection]);
 
 
   if (!isConnected) {
@@ -91,9 +140,12 @@ export default function RootLayout() {
     );
   }
 
-  if (!fontsLoaded) {
-    return null; // Or a loading spinner
+  if (fontError) {
+    console.error("Error loading fonts:", fontError);
+    return null; // or show fallback UI
   }
+  if (!fontsLoaded) return null;
+
 
   return (
     <>
@@ -106,7 +158,7 @@ export default function RootLayout() {
         }}
       >
         <SafeAreaProvider>
-          <userDetailsContext.Provider value={userDetailsValue}>
+          <userDetailsContext.Provider value={value}>
             <favoritesContext.Provider value={favoritesValue}>
               <allCoursesContext.Provider value={allCoursesValue}>
                 <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />

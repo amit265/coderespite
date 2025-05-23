@@ -8,6 +8,8 @@ export default function Button({
   onPress,
   loading,
   disable = false,
+  backgroundColor = colors.BUTTON,
+  color= colors.WHITE
 }) {
   return (
     <TouchableOpacity
@@ -17,10 +19,8 @@ export default function Button({
         padding: 15,
         width: "100%",
         borderRadius: 15,
-        borderWidth: 1,
-        borderColor: colors.PRIMARY,
         marginTop: 15,
-        backgroundColor: type === "fill" ? colors.BUTTON : colors.WHITE,
+        backgroundColor: type === "fill" ? backgroundColor : colors.WHITE,
       }}
     >
       {!loading ? (
@@ -29,8 +29,8 @@ export default function Button({
             textAlign: "center",
             fontSize: 15,
 
-            color: type === "fill" ? "black" : colors.PRIMARY,
-            fontFamily: "nunito",
+            color: type === "fill" ? color : colors.PRIMARY,
+            fontFamily: "nunito-bold",
           }}
         >
           {text}

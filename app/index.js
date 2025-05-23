@@ -2,19 +2,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen, useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Dimensions,
-  Image,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import ProfileModal from "../components/ProfileModal";
+import { ActivityIndicator, Dimensions, Image, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
+import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
-import colors from "../constants/colors";
 import { allCoursesContext, userDetailsContext } from "../context/context";
 import { getAllCoursesWithSubcollections } from "../services/getAllCoursesWithSubcollections";
 const { width, height } = Dimensions.get("window");
@@ -22,27 +13,43 @@ const { width, height } = Dimensions.get("window");
 export default function Index() {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
-  const { allCourses, setAllCourses } = useContext(allCoursesContext);
-  const { userDetails, setUserDetails } = useContext(userDetailsContext);
-  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { allCourses, setAllCourses, update, setUpdate } =
+    useContext(allCoursesContext);
+  const { userData, updateUser } = useContext(userDetailsContext);
+
   const loadData = async () => {
     try {
-      await AsyncStorage.setItem("user", JSON.stringify(userDetails));
-      const storedUser = await AsyncStorage.getItem("user");
+      await AsyncStorage.setItem("@user_data", JSON.stringify(userData));
+      const storedUser = await AsyncStorage.getItem("@user_data");
       if (storedUser) {
-        setUserDetails(JSON.parse(storedUser));
+        updateUser(JSON.parse(storedUser));
       }
-      const data = await AsyncStorage.getItem("allCourses");
+      const storedCourses = await AsyncStorage.getItem("@allCourses_data");
 
-      if (data) {
-        setAllCourses(JSON.parse(data));
+      if (storedCourses) {
+        setAllCourses(JSON.parse(storedCourses));
       } else {
-        await getAllCoursesWithSubcollections(); // first-time load
+        const freshData = await getAllCoursesWithSubcollections();
+        setAllCourses(freshData); // update context
+        await AsyncStorage.setItem(
+          "@allCourses_data",
+          JSON.stringify(freshData)
+        ); // cache for future
       }
     } catch (error) {
       console.error("❌ Error loading AsyncStorage: ", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect( () => {
+    const fetch = async () => {
+      await loadData();
+    };
+    fetch();
+  }, [update]);
 
   useEffect(() => {
     async function prepare() {
@@ -70,11 +77,6 @@ export default function Index() {
     };
   }, []);
 
-  useEffect(() => {
-    const firstTime = userDetails.firstTime;
-    if (firstTime) setShowModal(true);
-  }, [userDetails]);
-
   if (showSplash) {
     return <SplashScreenComponent />;
   }
@@ -90,7 +92,7 @@ export default function Index() {
           <View
             style={{
               position: "absolute",
-              top: height / 2 + 155, // Half of screen - half of Lottie height
+              top: height / 2 + 170, // Half of screen - half of Lottie height
               left: width / 2 - 55, // Half of screen - half of Lottie width
             }}
           >
@@ -131,44 +133,28 @@ export default function Index() {
         <Text className="text-gray-800 text-base font-quicksand text-center mt-2 mx-8">
           Learn to code with your favorite Meowgrammer! 🐾
         </Text>
-        <Pressable
-          onPress={() => {
-            router.replace("(tabs)");
-          }}
-          className="bg-red-600 px-6 py-3 rounded-lg mt-12 mx-auto"
-        >
-          <Text className="text-white text-lg font-nunito-semibold">
-            Let&apos;s Start!
-          </Text>
-        </Pressable>
+        <View className="rounded-lg mt-12 mx-auto">
+          <Button
+            text={"Let's Start!"}
+            loading={loading}
+            onPress={() => {
+              router.replace("(tabs)");
+            }}
+          />
+        </View>
       </View>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
+      {loading && (
         <View
           style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: [{ translateX: -18 }, { translateY: -18 }],
           }}
         >
-          <View
-            style={{
-              width: "90%",
-              backgroundColor: "white",
-              borderRadius: 10,
-              padding: 20,
-            }}
-          >
-            <ProfileModal setShowModal={setShowModal} />
-          </View>
+          <ActivityIndicator color="black" size={36} />
         </View>
-      </Modal>
+      )}
     </SafeScreen>
   );
 }
