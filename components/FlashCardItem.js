@@ -13,16 +13,23 @@ export default function FlashCardItem({
 }) {
   const screenWidth = Dimensions.get("screen").width;
   const { favorites, setFavorites } = useContext(favoritesContext);
-  const { updateCourse, userData } = useContext(userDetailsContext);
+  const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const isFavorite = (question) => {
     return favorites?.some((item) => item?.question === question);
   };
 
   const handleFlashcardViewed = async (item) => {
     if (favorite) return;
-    console.log("handle flash card");
+ 
     const currentProgress = userData?.progress?.[courseTitle] || {};
     const previousViewed = currentProgress.flashcardsViewed || [];
+    const alreadyViewed = previousViewed.some(
+      (fc) => fc?.question === item?.question
+    );
+  
+    if (alreadyViewed) return; // ✅ Skip if already viewed
+  
+
 
     const now = new Date();
     const viewedDate = now.toISOString().split("T")[0];
@@ -48,6 +55,9 @@ export default function FlashCardItem({
     await updateCourse(courseTitle, {
       flashcardsViewed: updatedFlashcards,
     });
+
+    await gainXP(2);
+
   };
 
   const handleFlashcardLoved = async (item) => {

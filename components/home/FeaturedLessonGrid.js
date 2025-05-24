@@ -5,33 +5,35 @@ import Button from "../shared/Button";
 import colors from "../../constants/colors";
 
 export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
-  const [randomModules, setRandomModules] = useState([]);
+  const [randomModule, setRandomModule] = useState(null);
   const router = useRouter();
-  const courses = allCourses.map((a) => a.id);
-  const courseName = "JavaScript"
-  const randomCourseId = "javascript";
-  console.log("allcourses from feature", allCourses);
-  
-  const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
 
-  console.log("random course from deature", randomCourse);
-  
+  const courseName = "JavaScript";
+  const randomCourseId = "javascript";
+
   useEffect(() => {
     if (
-      randomCourse &&
-      Array.isArray(randomCourse.modules) &&
-      randomCourse.modules.length > 0
+      Array.isArray(allCourses) &&
+      allCourses.length > 0
     ) {
-      const randomIndex = Math.floor(
-        Math.random() * randomCourse.modules.length
-      );
-      const randomModule = randomCourse.modules[randomIndex];
-      setRandomModules(randomModule);
-      console.log("Random module:", randomModule);
-    } else {
-      console.log("No modules found for this course.");
+      const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
+
+      if (
+        randomCourse &&
+        Array.isArray(randomCourse.modules) &&
+        randomCourse.modules.length > 0
+      ) {
+        const randomIndex = Math.floor(Math.random() * randomCourse.modules.length);
+        const selectedModule = randomCourse.modules[randomIndex];
+        setRandomModule(selectedModule);
+        console.log("Random module set:", selectedModule);
+      } else {
+        console.log("No modules found in the course:", randomCourseId);
+      }
     }
-  }, []);
+  }, [allCourses]); // <- listen for data changes!
+
+  if (!randomModule) return null; // or show a loading indicator
 
   return (
     <TouchableOpacity className="bg-white rounded-xl shadow-md mx-4 mb-4 p-6">
@@ -39,19 +41,18 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
         📚 Featured Lesson
       </Text>
       <Text className="text-lg font-nunito-bold text-gray-800 mb-2">
-      🔷 {courseName}
+        🔷 {courseName}
       </Text>
-
       <Text className="text-base text-gray-600 font-nunito">
-        🎯 {randomModules?.title}
+        🎯 {randomModule.title}
       </Text>
       <Button
-        backgroundColor = {colors.BACKGROUND}
+        backgroundColor={colors.BACKGROUND}
         color={colors.BLACK}
         text={"Start"}
         onPress={() => {
-          setSelectedModule(randomModules);
-          router.push(`/learn/courses/modules/${randomModules?.moduleId}`);
+          setSelectedModule(randomModule);
+          router.push(`/learn/courses/modules/${randomModule.moduleId}`);
         }}
       />
     </TouchableOpacity>

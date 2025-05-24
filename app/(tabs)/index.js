@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Modal, ScrollView, View } from "react-native";
+import { BackHandler, Modal, ScrollView, View } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
 import Header from "../../components/home/Header";
-import ProgressBar from "../../components/home/ProgressBar";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
 import ProfileModal from "../../components/ProfileModal";
@@ -22,10 +21,25 @@ export default function Home() {
     if (firstTime || name === "user") setShowModal(true);
   }, [userData]);
 
+  useEffect(() => {
+    if (!showModal) return;
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        // Block back press when modal is open
+        return true;
+      }
+    );
+
+    return () => backHandler.remove();
+  }, [showModal]);
+
   return (
     <SafeScreen>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header />
+
         <WelcomeCard userData={userData} />
         <ContinueCard userData={userData} />
         <FeaturedLessonGrid
@@ -36,34 +50,33 @@ export default function Home() {
         {/* <ProgressSummary /> */}
         <QuickActionGrid />
         <DailyTip />
-        <ProgressBar />
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={showModal}
-          onRequestClose={() => setShowModal(false)}
+      </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={() => {}}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
         >
           <View
             style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "rgba(0,0,0,0.5)",
+              width: "90%",
+              backgroundColor: "white",
+              borderRadius: 10,
+              padding: 20,
             }}
           >
-            <View
-              style={{
-                width: "90%",
-                backgroundColor: "white",
-                borderRadius: 10,
-                padding: 20,
-              }}
-            >
-              <ProfileModal setShowModal={setShowModal} />
-            </View>
+            <ProfileModal setShowModal={setShowModal} />
           </View>
-        </Modal>
-      </ScrollView>
+        </View>
+      </Modal>
     </SafeScreen>
   );
 }

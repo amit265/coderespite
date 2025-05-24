@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
+  BackHandler,
   Image,
   ScrollView,
   Text,
@@ -21,6 +22,9 @@ const ProfileModal = ({ setShowModal }) => {
 
   const [username, setUsername] = useState(userData?.profile.name);
   const router = useRouter();
+
+  
+
   const handleUsernameChange = (text) => {
     const trimmed = text.trim();
 
@@ -37,7 +41,6 @@ const ProfileModal = ({ setShowModal }) => {
     } else {
       setError("");
     }
-  
 
     setUsername(trimmed);
   };

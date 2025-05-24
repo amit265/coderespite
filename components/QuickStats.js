@@ -15,6 +15,14 @@ export default function QuickStats({ userData }) {
       </View>
 
       <View className="flex flex-row items-start">
+        <Text className="text-base font-nunito-bold">📚 Courses Enrolled:</Text>
+        <Text className="text-base font-nunito">
+          {" "}
+          {Object.keys(progress)}
+        </Text>
+      </View>
+
+      <View className="flex flex-row items-start">
         <Text className="text-base font-nunito-bold">
         💙 Flashcards Loved:
         </Text>
@@ -75,13 +83,7 @@ export default function QuickStats({ userData }) {
           ))}
         </View>
       )}
-      <View className="flex flex-row items-start">
-        <Text className="text-base font-nunito-bold">📚 Courses Enrolled:</Text>
-        <Text className="text-base font-nunito">
-          {" "}
-          {Object.keys(progress).length}
-        </Text>
-      </View>
+     
     </View>
   );
 }

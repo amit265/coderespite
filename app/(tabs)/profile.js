@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
 import { Modal, ScrollView, Text, View } from "react-native";
+import ProgressBar from "../../components/home/ProgressBar";
 import ProfileModal from "../../components/ProfileModal";
 import QuickStats from "../../components/QuickStats";
 import SafeScreen from "../../components/SafeScreen";
@@ -9,13 +10,14 @@ import UserCard from "../../components/UserCard";
 import { allCoursesContext, userDetailsContext } from "../../context/context";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
+import colors from "../../constants/colors";
 export default function Profile() {
   const { userData } = useContext(userDetailsContext);
   console.log("userData from profile", userData);
   const { attemptedQuizData } = useContext(allCoursesContext);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const show = true;
+  const show = false;
   // const data = [
   //   { count: 3, date: "2025-05-14" },
   //   { count: 5, date: "2025-05-15" },
@@ -59,23 +61,12 @@ export default function Profile() {
           <UserCard userData={userData} setShowModal={setShowModal} />
         </View>
         <View className="px-4">
+          <ProgressBar />
+        </View>
+        <View className="px-4">
           <QuickStats userData={userData} />
         </View>
 
-        <View className="px-4">
-          <Button
-            text={"Quiz History"}
-            type
-            onPress={() => router.push("/quizHistory")}
-          />
-        </View>
-        <View className="px-4">
-          <Button
-            text={"Favorite FlashCards"}
-            type
-            onPress={() => router.push("/flashcards/favoritesFc")}
-          />
-        </View>
         {show && (
           <View>
             <View className="px-4">
@@ -86,7 +77,23 @@ export default function Profile() {
               <Button text={"log all data"} type onPress={logAllAsyncStorage} />
             </View>
           </View>
-        )}
+        )} 
+
+        <View className="px-4">
+          <Button
+            text={"Quiz History"}
+            type
+            onPress={() => router.push("/quizHistory")}
+          />
+        </View>
+        <View className="px-4" style={{marginBottom: 20}}>
+          <Button
+            text={"Favorite FlashCards"}
+            type
+            onPress={() => router.push("/flashcards/favoritesFc")}
+          />
+        </View>
+     
 
         <Modal
           animationType="slide"
@@ -110,7 +117,7 @@ export default function Profile() {
                 padding: 20,
               }}
             >
-              <ProfileModal setShowModal={setShowModal} />
+              <ProfileModal setShowModal={setShowModal}/>
             </View>
           </View>
         </Modal>

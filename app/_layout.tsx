@@ -5,11 +5,13 @@ import { Stack } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { StatusBar, Text, View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ErrorFallback from "../components/ErrorFallback";
 import { allCoursesContext, favoritesContext, userDetailsContext } from "../context/context";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
+
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     "nunito": require("../assets/fonts/Nunito-Regular.ttf"),
@@ -81,15 +83,33 @@ export default function RootLayout() {
     // Example methods you can call from anywhere
     gainXP: async (xp) => {
       await updateUser((data) => {
+        if (!data.level) {
+          data.level = {
+            currentLevel: 1,
+            xp: 0,
+            nextLevelXP: 100,
+          };
+        }
+
+        if (data.level.currentLevel >= 10) {
+          // Cap XP at max level
+          data.level.xp = Math.min(data.level.xp + xp, data.level.nextLevelXP);
+          return data;
+        }
+
         data.level.xp += xp;
-        while (data.level.xp >= data.level.nextLevelXP) {
+
+        while (data.level.xp >= data.level.nextLevelXP && data.level.currentLevel < 10) {
           data.level.xp -= data.level.nextLevelXP;
           data.level.currentLevel += 1;
-          data.level.nextLevelXP += 100;
+          data.level.nextLevelXP += 100; // each new level needs 100 more XP than the last
         }
+
         return data;
       });
     },
+
+
     updateCourse: async (course, updates) => {
       await updateUser((data) => {
         if (!data.progress) {
@@ -164,14 +184,18 @@ export default function RootLayout() {
       }}
     >
       <SafeAreaProvider>
-        <userDetailsContext.Provider value={value}>
-          <favoritesContext.Provider value={favoritesValue}>
-            <allCoursesContext.Provider value={allCoursesValue}>
-              <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
-              <Stack screenOptions={{ headerShown: false }} />
-            </allCoursesContext.Provider>
-          </favoritesContext.Provider>
-        </userDetailsContext.Provider>
+        <PaperProvider>
+
+          <userDetailsContext.Provider value={value}>
+            <favoritesContext.Provider value={favoritesValue}>
+              <allCoursesContext.Provider value={allCoursesValue}>
+                <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
+                <Stack screenOptions={{ headerShown: false }} />
+              </allCoursesContext.Provider>
+            </favoritesContext.Provider>
+          </userDetailsContext.Provider>
+        </PaperProvider>
+
       </SafeAreaProvider>
     </ErrorBoundary>
 

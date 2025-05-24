@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import * as Progress from "react-native-progress";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -28,10 +28,11 @@ export default function QuizId() {
   const [result, setResult] = useState([]);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const { updateCourse, userData } = useContext(userDetailsContext);
+  const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
   // const { setShowConfetti } = useContext(showConfettiContext);
-  const { selectedCourse, selectedQuiz, selectedModule } = useContext(allCoursesContext);
+  const { selectedCourse, selectedQuiz, selectedModule } =
+    useContext(allCoursesContext);
   const courseTitle = selectedCourse?.title;
   const courseId = selectedCourse?.id;
   const quizTitle = selectedQuiz?.title;
@@ -39,6 +40,7 @@ export default function QuizId() {
   console.log("selectedModule", selectedModule);
   const quiz = selectedQuiz?.quiz;
   const quizIcon = selectedCourse?.icon;
+  const hasGainedXP = useRef(false);
 
   useEffect(() => {
     if (quiz[currentPage]?.options) {
@@ -98,9 +100,16 @@ export default function QuizId() {
   };
 
   const onQuizFinish = async () => {
+    if (hasGainedXP.current) return; // prevent double execution
+    hasGainedXP.current = true;
     try {
       setLoading(true);
+
       const quizResultPercentage = calculateQuizPercent();
+      console.log("qainxp called from quiz");
+
+      await gainXP(quizResultPercentage / 2);
+
       const now = new Date();
       const attemptedDate = now.toISOString().split("T")[0];
 
@@ -159,6 +168,7 @@ export default function QuizId() {
         attemptedQuizzes: [...filtered, detailedQuizData],
       });
       // Navigate
+
       router.replace({
         pathname: "/quiz/quizResultScreen",
         params: {
