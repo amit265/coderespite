@@ -12,7 +12,7 @@ const actions = [
 export default function QuickActionGrid() {
   const router = useRouter();
   return (
-    <View className="bg-white p-4 rounded-xl shadow-md mx-4 my-2">
+    <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4 ">
       <Text className="text-lg font-nunito-semibold mb-4">🔀 Quick Actions</Text>
       <View className="flex-row flex-wrap justify-between">
         {actions.map((action, index) => (

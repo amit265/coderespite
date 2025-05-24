@@ -192,3 +192,53 @@ export const WELCOME_MESSAGES = [
   "Short sessions, big progress. Let’s dive in! 🌊",
   "Your learning playground is ready. Jump in! 🎮",
 ];
+
+
+export const getQuizFeedback = (score) => {
+  if (score === null || score === undefined) {
+    return {
+      title: "Ready to Challenge Yourself?",
+      message:
+        "Wrap up this module by taking a short quiz. Score more than ",
+      highlight: "90%",
+      emoji: "💪",
+    };
+  }
+
+  if (score >= 90) {
+    return {
+      title: "You Nailed It! 🔥",
+      message:
+        "You've scored above 90%! Still, give it another go to sharpen your skills or try a new module!",
+      highlight: "",
+      emoji: "",
+    };
+  }
+
+  if (score >= 70) {
+    return {
+      title: "Great Effort! ✨",
+      message:
+        "You're almost there. Just a bit more effort to cross the 90% mark!",
+      highlight: "",
+      emoji: "",
+    };
+  }
+
+  if (score >= 50) {
+    return {
+      title: "Keep Pushing Forward! 🚀",
+      message: "You've made a start, now let’s boost that score. Try again!",
+      highlight: "",
+      emoji: "",
+    };
+  }
+
+  return {
+    title: "Don't Give Up! 💡",
+    message:
+      "Mistakes are proof you're trying. Retake the quiz and conquer it!",
+    highlight: "",
+    emoji: "",
+  };
+};

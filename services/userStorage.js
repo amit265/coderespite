@@ -5,8 +5,8 @@ const STORAGE_KEY = "@user_data";
 // Default structure
 const defaultUserData = {
   profile: {
-    name: "",
-    avatar: "",
+    name: "user",
+    avatar: "avatar2.png",
     firstTime: true,
   },
   preferences: {
@@ -72,8 +72,8 @@ export const updateCourseProgress = async (course, updates) => {
   await updateUserData((data) => {
     if (!data.progress[course]) {
       data.progress[course] = {
-        quizzesAttempted: 0,
-        flashcardsLoved: 0,
+        quizzesAttempted: [],
+        flashcardsLoved: [],
         completed: false,
         percentage: 0,
         flashcardsViewed: [], // initialize here if no course progress

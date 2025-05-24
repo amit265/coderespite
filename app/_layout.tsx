@@ -2,7 +2,7 @@
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { StatusBar, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -98,21 +98,22 @@ export default function RootLayout() {
         if (!data.progress[course]) {
           data.progress[course] = {
             attemptedQuizzes: [],
-            flashcardsLoved: 0,
+            flashcardsViewed: [],
+            flashcardsLoved: [],
             completed: false,
             percentage: 0,
           };
         }
-    
+
         data.progress[course] = {
           ...data.progress[course],
           ...updates,
         };
-    
+
         return data;
       });
     }
-    
+
   };
 
 
@@ -154,27 +155,25 @@ export default function RootLayout() {
 
 
   return (
-    <>
-      <ErrorBoundary
-        FallbackComponent={ErrorFallback}
-        onError={(error, info) => {
-          console.log('Global Error:', error);
-          console.log('Component Stack:', info.componentStack);
-          // Log the error to an external service like Sentry or Firebase
-        }}
-      >
-        <SafeAreaProvider>
-          <userDetailsContext.Provider value={value}>
-            <favoritesContext.Provider value={favoritesValue}>
-              <allCoursesContext.Provider value={allCoursesValue}>
-                <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
-                <Stack screenOptions={{ headerShown: false }} />
-              </allCoursesContext.Provider>
-            </favoritesContext.Provider>
-          </userDetailsContext.Provider>
-        </SafeAreaProvider>
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onError={(error, info) => {
+        console.log('Global Error:', error);
+        console.log('Component Stack:', info.componentStack);
+        // Log the error to an external service like Sentry or Firebase
+      }}
+    >
+      <SafeAreaProvider>
+        <userDetailsContext.Provider value={value}>
+          <favoritesContext.Provider value={favoritesValue}>
+            <allCoursesContext.Provider value={allCoursesValue}>
+              <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
+              <Stack screenOptions={{ headerShown: false }} />
+            </allCoursesContext.Provider>
+          </favoritesContext.Provider>
+        </userDetailsContext.Provider>
+      </SafeAreaProvider>
+    </ErrorBoundary>
 
 
   ); // This will render everything under (tabs) or any other layout

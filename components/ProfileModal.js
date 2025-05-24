@@ -23,6 +23,7 @@ const ProfileModal = ({ setShowModal }) => {
   const router = useRouter();
   const handleUsernameChange = (text) => {
     const trimmed = text.trim();
+
     // Check for length
     if (trimmed.length > 15) {
       setError("Username can't be more than 15 characters.");
@@ -36,13 +37,16 @@ const ProfileModal = ({ setShowModal }) => {
     } else {
       setError("");
     }
-    if (trimmed === "User") return;
-    console.log("hey there", (trimmed === "User"));
-    
+  
+
     setUsername(trimmed);
   };
   const saveData = () => {
-    if (!username) return;
+    if (!username || username === "user") {
+      setError("Change username");
+      return;
+    }
+
     const now = new Date();
     const formattedDate = now.toISOString().split("T")[0];
 
@@ -55,7 +59,6 @@ const ProfileModal = ({ setShowModal }) => {
         createdAt: formattedDate,
         firstTime: false,
       },
-
     }));
 
     // router.replace("/(tabs)/profile");

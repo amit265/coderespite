@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen, useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, Dimensions, Image, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
@@ -108,24 +108,26 @@ export default function Index() {
               />
             </View>
           )}
-          <View
-            style={{
-              position: "absolute",
-              top: 110, // Half of screen - half of Lottie height
-              right: -50,
-            }}
-          >
-            {/* <LottieView
-              source={require("../assets/paw.json")}
-              autoPlay
-              loop={false} 
+          {!loading && (
+            <View
               style={{
-                height: 500,
-                width: 600,
-                transform: [{ rotate: "-45deg" }],
+                position: "absolute",
+                top: height / 2 + 250, // Half of screen - half of Lottie height
+                left: width / 2 - 175, // Half of screen - half of Lottie width
               }}
-            /> */}
-          </View>
+            >
+              <LottieView
+                source={require("../assets/paw.json")}
+                autoPlay
+                loop
+                style={{
+                  height: 150,
+                  width: 160,
+                  transform: [{ rotate: "45deg" }],
+                }}
+              />
+            </View>
+          )}
         </View>
       </View>
       <View className="h-1/3">
@@ -135,26 +137,40 @@ export default function Index() {
         <Text className="text-gray-800 text-base font-quicksand text-center mt-2 mx-8">
           Learn to code with your favorite Meowgrammer! 🐾
         </Text>
-        <View className="rounded-lg mt-12 mx-auto">
-          <Button
-            text={"Let's Start!"}
-            loading={loading}
-            onPress={() => {
-              router.replace("(tabs)");
-            }}
-          />
-        </View>
+        {!loading && (
+          <View className="rounded-lg mt-12 mx-auto">
+            <Button
+              text={"Let's Start!"}
+              onPress={() => {
+                router.replace("(tabs)");
+              }}
+            />
+          </View>
+        )}
       </View>
       {loading && (
         <View
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: [{ translateX: -18 }, { translateY: -18 }],
+            ...StyleSheet.absoluteFillObject,
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 999,
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+
+            top: -50,
+            left: -50,
+            right: -50,
           }}
         >
-          <ActivityIndicator color="black" size={36} />
+          <LottieView
+            source={require("../assets/loading.json")}
+            autoPlay
+            loop
+            style={{
+              height: 200,
+              width: 200,
+            }}
+          />
         </View>
       )}
     </SafeScreen>

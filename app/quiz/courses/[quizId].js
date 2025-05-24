@@ -31,10 +31,12 @@ export default function QuizId() {
   const { updateCourse, userData } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
   // const { setShowConfetti } = useContext(showConfettiContext);
-  const { selectedCourse, selectedQuiz } = useContext(allCoursesContext);
+  const { selectedCourse, selectedQuiz, selectedModule } = useContext(allCoursesContext);
   const courseTitle = selectedCourse?.title;
+  const courseId = selectedCourse?.id;
   const quizTitle = selectedQuiz?.title;
-  // console.log("selectedCourse", selectedCourseTitle, selectedQuizTitle);
+  const moduleId = quizId.replace("quiz_", ""); // "module01"
+  console.log("selectedModule", selectedModule);
   const quiz = selectedQuiz?.quiz;
   const quizIcon = selectedCourse?.icon;
 
@@ -146,8 +148,11 @@ export default function QuizId() {
 
       const detailedQuizData = {
         id: quizId,
+        courseTitle,
+        moduleId,
+        courseId,
         score: quizResultPercentage,
-        attemptedDate,
+        date: attemptedDate,
       };
 
       await updateCourse(courseTitle, {

@@ -16,10 +16,29 @@ export default function QuickStats({ userData }) {
 
       <View className="flex flex-row items-start">
         <Text className="text-base font-nunito-bold">
+        💙 Flashcards Loved:
+        </Text>
+        <Text className="text-base font-nunito">
+          {Object.keys(progress).length === 0 ? 0 : ""}
+        </Text>
+      </View>
+      {userData?.progress && (
+        <View className="flex flex-col justify-center items-center px-2">
+          {Object.entries(progress).map(([courseName, courseData]) => (
+            <View key={courseName} className="flex flex-row gap-4">
+              <Text className="text-base  ">{courseName}:</Text>
+              <Text className="text-base  ">
+                {courseData.flashcardsLoved?.length || 0}
+              </Text>
+            </View>
+          ))}
+        </View>
+      )}
+      <View className="flex flex-row items-start">
+        <Text className="text-base font-nunito-bold">
           🧠 Flashcards Viewed:
         </Text>
         <Text className="text-base font-nunito">
-          
           {Object.keys(progress).length === 0 ? 0 : ""}
         </Text>
       </View>
@@ -58,7 +77,10 @@ export default function QuickStats({ userData }) {
       )}
       <View className="flex flex-row items-start">
         <Text className="text-base font-nunito-bold">📚 Courses Enrolled:</Text>
-        <Text className="text-base font-nunito"> {Object.keys(progress).length}</Text>
+        <Text className="text-base font-nunito">
+          {" "}
+          {Object.keys(progress).length}
+        </Text>
       </View>
     </View>
   );

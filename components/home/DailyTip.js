@@ -32,7 +32,7 @@ export default function DailyTip() {
   }, []);
 
   return (
-    <View className="bg-white p-4 rounded-xl shadow-md mx-4 my-2">
+    <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4">
       <Text className="text-xl font-nunito-bold text-gray-800 mb-2">
         💡 Tip of The Day
       </Text>

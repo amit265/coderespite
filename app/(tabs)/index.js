@@ -14,20 +14,12 @@ import { allCoursesContext, userDetailsContext } from "../../context/context";
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const { userData } = useContext(userDetailsContext);
-  const { update, setUpdate } = useContext(allCoursesContext);
-
-  useEffect(() => {
-    if (!userData) setUpdate(!update);
-    console.log("useeffect called");
-    console.log("update", update);
-  }, []);
+  const { allCourses, setSelectedModule } = useContext(allCoursesContext);
 
   useEffect(() => {
     const firstTime = userData?.profile?.firstTime;
-    const timeout = setTimeout(() => {
-      if (firstTime) setShowModal(true);
-    }, 1000);
-    return () => clearTimeout(timeout);
+    const name = userData?.profile?.name;
+    if (firstTime || name === "user") setShowModal(true);
   }, [userData]);
 
   return (
@@ -36,7 +28,10 @@ export default function Home() {
         <Header />
         <WelcomeCard userData={userData} />
         <ContinueCard userData={userData} />
-        <FeaturedLessonGrid />
+        <FeaturedLessonGrid
+          allCourses={allCourses}
+          setSelectedModule={setSelectedModule}
+        />
 
         {/* <ProgressSummary /> */}
         <QuickActionGrid />

@@ -14,30 +14,100 @@ export default function FlashCardItem({
   const screenWidth = Dimensions.get("screen").width;
   const { favorites, setFavorites } = useContext(favoritesContext);
   const { updateCourse, userData } = useContext(userDetailsContext);
-
   const isFavorite = (question) => {
     return favorites?.some((item) => item?.question === question);
   };
 
-  const handleFlashcardViewed = async (flashcardId) => {
+  const handleFlashcardViewed = async (item) => {
     if (favorite) return;
+    console.log("handle flash card");
     const currentProgress = userData?.progress?.[courseTitle] || {};
     const previousViewed = currentProgress.flashcardsViewed || [];
 
-    console.log("clicked", flashcardId);
-    console.log("currentProgress", currentProgress);
-    console.log("previousViewed", previousViewed);
+    const now = new Date();
+    const viewedDate = now.toISOString().split("T")[0];
 
-    // Avoid duplicates
-    const updatedFlashcards = previousViewed.includes(flashcardId)
+    console.log("handle flash card again");
+
+    const flashCardDetail = {
+      title,
+      courseTitle,
+      question: item?.question,
+      answer: item?.answer,
+      date: viewedDate,
+    };
+    console.log("handle flash card again", flashCardDetail);
+
+    const updatedFlashcards = previousViewed.some(
+      (fc) => fc?.question === item?.question
+    )
       ? previousViewed
-      : [...previousViewed, flashcardId];
-
-    console.log("updatedFlashcards", updatedFlashcards);
+      : [...previousViewed, flashCardDetail];
+    console.log("unohandle flash card again", flashCardDetail);
 
     await updateCourse(courseTitle, {
-      ...currentProgress,
       flashcardsViewed: updatedFlashcards,
+    });
+  };
+
+  const handleFlashcardLoved = async (item) => {
+    if (favorite) return;
+
+    const currentProgress = userData?.progress?.[courseTitle] || {};
+    const previousLoved = currentProgress.flashcardsLoved || [];
+    const now = new Date();
+    const lovedDate = now.toISOString().split("T")[0];
+
+    const flashCardDetail = {
+      title,
+      courseTitle,
+      question: item?.question,
+      answer: item?.answer,
+      date: lovedDate,
+    };
+
+    const isAlreadyLoved = previousLoved.some(
+      (fc) => fc.question === item?.question
+    );
+
+    const updatedFlashcardsLoved = isAlreadyLoved
+      ? previousLoved
+      : [...previousLoved, flashCardDetail];
+
+    await updateCourse(courseTitle, {
+      flashcardsLoved: updatedFlashcardsLoved,
+    });
+  };
+
+  const removeFlashcardLoved = async (question) => {
+    if (favorite) return;
+
+    console.log("remove flash card called");
+    const currentProgress = userData?.progress?.[courseTitle] || {};
+    const previousLoved = currentProgress.flashcardsLoved || [];
+
+    console.log("question from remove card", question);
+
+    const normalize = (str) =>
+      String(str || "")
+        .trim()
+        .toLowerCase();
+
+    const updatedLoved = previousLoved.filter(
+      (fc) => normalize(fc?.question) !== normalize(question)
+    );
+    console.log(
+      "updated previousLoved from remo flash card loved",
+      previousLoved
+    );
+
+    console.log(
+      "updated updatedLoved from remo flash card loved",
+      updatedLoved
+    );
+
+    await updateCourse(courseTitle, {
+      flashcardsLoved: updatedLoved,
     });
   };
 
@@ -53,9 +123,8 @@ export default function FlashCardItem({
 
       const updatedFavorites = [...currentFavorites, newFavorite];
       setFavorites(updatedFavorites);
-      await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
 
-      console.log("Added favorite:", updatedFavorites);
+      await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     } catch (err) {
       console.error("Error adding favorite:", err);
     }
@@ -70,8 +139,6 @@ export default function FlashCardItem({
 
       setFavorites(updatedFavorites);
       await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-
-      console.log("Removed favorite:", updatedFavorites);
     } catch (err) {
       console.error("Error removing favorite:", err);
     }
@@ -81,11 +148,11 @@ export default function FlashCardItem({
     <View style={{ marginBottom: 50 }}>
       <FlatList
         data={flashcards}
-        keyExtractor={(_, index) => index.toString()}
+        keyExtractor={(item) => item.question}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           const currentQuestion = item.question;
-          const favorite = isFavorite(currentQuestion);
+          const isFav = isFavorite(currentQuestion);
 
           return (
             <View className="mt-12 mx-auto">
@@ -100,26 +167,33 @@ export default function FlashCardItem({
                 perspective={1500}
                 flipVertical
                 clickable
-                onFlipEnd={() => handleFlashcardViewed(item?.question)}
+                onFlipEnd={() => handleFlashcardViewed(item)}
               >
                 {/* Front Side */}
                 <View className="bg-white flex-1 rounded-2xl justify-center items-center px-14">
                   <View className="absolute bottom-2 p-4 z-50">
                     <Pressable
-                      onPress={() => {
-                        requestAnimationFrame(() => {
-                          if (favorite) {
-                            removeFavorite(currentQuestion);
+                      onPress={async () => {
+                        requestAnimationFrame(async () => {
+                          if (isFav) {
+                            await removeFavorite(currentQuestion);
+                            await removeFlashcardLoved(currentQuestion);
                           } else {
-                            addFavorite(item.question, title, item.answer);
+                            await addFavorite(
+                              item.question,
+                              title,
+                              item.answer
+                            );
                           }
+
+                          await handleFlashcardLoved(item);
                         });
                       }}
                     >
                       <Ionicons
-                        name={favorite ? "heart" : "heart-outline"}
+                        name={isFav ? "heart" : "heart-outline"}
                         size={30}
-                        color={favorite ? colors.ERROR : colors.PRIMARY}
+                        color={isFav ? colors.ERROR : colors.PRIMARY}
                       />
                     </Pressable>
                   </View>

@@ -9,7 +9,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <View className="flex-row justify-between items-start border-b border-gray-300 px-4 mb-4 pb-8">
+    <View className="flex-row justify-between items-start border-b border-gray-400 px-4 pb-8" style={{marginBottom: 32}}>
       <View>
         <View className="flex-row">
           <Text

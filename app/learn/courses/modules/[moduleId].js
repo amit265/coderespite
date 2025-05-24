@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Image,
   Pressable,
@@ -9,22 +9,57 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Button from "../../../../components/shared/Button";
 import colors from "../../../../constants/colors";
-import { courseIcons } from "../../../../constants/constants";
-import { allCoursesContext } from "../../../../context/context";
+import { courseIcons, getQuizFeedback } from "../../../../constants/constants";
+import {
+  allCoursesContext,
+  userDetailsContext,
+} from "../../../../context/context";
 
 export default function ModuleId() {
-  const { selectedCourse, selectedModule } = useContext(allCoursesContext);
+  const { selectedCourse, selectedModule, setSelectedQuiz } =
+    useContext(allCoursesContext);
+  const { userData } = useContext(userDetailsContext);
   const [expandedLessons, setExpandedLessons] = useState({});
+  const [moduleQuizStatus, setModuleQuizStatus] = useState(null);
+  const [feedback, setFeedback] = useState(null);
   const router = useRouter();
+  const selectedQuizId = `quiz_${selectedModule?.id}`;
 
-  if (!selectedModule) {
-    return (
-      <View className="flex-1 justify-center items-center p-4">
-        <Text className="text-red-600 text-lg font-nunito-semibold">Module not found.</Text>
-      </View>
+  useEffect(() => {
+    const selectedQuizType = Array.isArray(selectedCourse?.quizzes)
+      ? selectedCourse.quizzes.find((a) => a.id === selectedQuizId)
+      : null;
+
+    setSelectedQuiz(selectedQuizType);
+
+    const progress = userData?.progress;
+    const allAttemptedQuizzes = Object.values(progress || {}).flatMap(
+      (course) => course.attemptedQuizzes || []
     );
-  }
+
+    const filterCourse = allAttemptedQuizzes.filter(
+      (a) => a.courseId === selectedCourse?.id
+    );
+
+    const filterModule = filterCourse.find(
+      (a) => a.moduleId === selectedModule?.id
+    );
+
+    setModuleQuizStatus(filterModule);
+  }, [
+    selectedCourse,
+    selectedModule,
+    userData,
+    selectedQuizId,
+    setSelectedQuiz,
+  ]);
+
+  useEffect(() => {
+    const feedback = getQuizFeedback(moduleQuizStatus?.score);
+    setFeedback(feedback);
+  }, [moduleQuizStatus]);
 
   const toggleLesson = (lessonId) => {
     setExpandedLessons((prev) => ({
@@ -32,6 +67,16 @@ export default function ModuleId() {
       [lessonId]: !prev[lessonId],
     }));
   };
+
+  if (!selectedModule) {
+    return (
+      <View className="flex-1 justify-center items-center p-4">
+        <Text className="text-red-600 text-lg font-nunito-semibold">
+          Module not found.
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -43,9 +88,10 @@ export default function ModuleId() {
           <Ionicons name="arrow-back" size={35} color="black" />
         </Pressable>
         <Text className="text-2xl font-quicksand-bold mb-2 text-gray-900">
-          {selectedCourse.title} Module
+          {selectedCourse?.title} Module
         </Text>
       </View>
+
       <ScrollView
         className="flex-1 px-6 py-4"
         style={{ backgroundColor: colors.BACKGROUND }}
@@ -69,7 +115,7 @@ export default function ModuleId() {
             <Text className="text-sm font-nunito-semibold text-gray-700">
               Level: {selectedModule?.level}
             </Text>
-            <Text className="text-sm font-nunito-semibold mb-6 text-gray-700">
+            <Text className="text-sm font-nunito-semibold text-gray-700">
               📘 {selectedModule?.lessons?.length} Lessons
             </Text>
           </View>
@@ -82,7 +128,7 @@ export default function ModuleId() {
         </View>
 
         <View style={{ marginBottom: 20 }}>
-          {selectedModule.lessons.map((lesson, index) => {
+          {selectedModule?.lessons?.map((lesson, index) => {
             const isExpanded = expandedLessons[lesson.lessonId];
             return (
               <TouchableOpacity
@@ -106,7 +152,9 @@ export default function ModuleId() {
                   {isExpanded && (
                     <>
                       {lesson.type === "theory" && (
-                        <Text className="text-gray-700 font-nunito">{lesson.content}</Text>
+                        <Text className="text-gray-700 font-nunito">
+                          {lesson.content}
+                        </Text>
                       )}
                       {lesson.type === "code" && (
                         <View className="bg-gray-900 rounded p-3 mt-2">
@@ -122,6 +170,38 @@ export default function ModuleId() {
             );
           })}
         </View>
+
+        {feedback && (
+          <View
+            className="px-6 py-4 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
+            style={{ marginBottom: 50 }}
+          >
+            <Text className="text-xl font-nunito-bold text-gray-800 mb-3">
+              {feedback.title}
+            </Text>
+
+            <Text className="text-base text-gray-600 mb-6">
+              {feedback.message}
+              {feedback.highlight ? (
+                <Text className="text-green-600 font-nunito-semibold">
+                  {feedback.highlight}
+                </Text>
+              ) : null}
+              {feedback.emoji}
+            </Text>
+
+            {moduleQuizStatus && (
+              <View>
+                <Text>Your last score: {moduleQuizStatus?.score}</Text>
+              </View>
+            )}
+
+            <Button
+              text={moduleQuizStatus ? "Retake Quiz" : "Start Quiz"}
+              onPress={() => router.push(`/quiz/courses/${selectedQuizId}`)}
+            />
+          </View>
+        )}
       </ScrollView>
     </>
   );
