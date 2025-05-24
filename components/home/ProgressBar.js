@@ -25,7 +25,7 @@ export default function ProgressBar() {
       <PaperProgressBar
         progress={progress}
         color= {colors.PRIMARY} // Tailwind's green-500
-        style={{ height: 10, borderRadius: 2, backgroundColor: "#ccc" }}
+        style={{ height: 10, borderRadius: 4, backgroundColor: colors.BACKGROUND }}
       />
     </View>
   );
