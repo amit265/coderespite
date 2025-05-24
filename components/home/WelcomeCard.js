@@ -12,7 +12,7 @@ export default function Welcome({ userData }) {
     <View className="bg-white mx-4 my-4 p-6 rounded-2xl shadow-md border border-gray-200">
       <View className="flex gap-2">
         <Text className="text-lg text-gray-800">
-          Hi, {userData?.profile?.name} 👋
+          Hi, {userData?.profile?.name || "user"} 👋
         </Text>
         <Text className="text-base text-gray-600">{randomMessage}</Text>
       </View>

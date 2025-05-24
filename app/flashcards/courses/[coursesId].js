@@ -22,12 +22,26 @@ export default function CourseId() {
     () => allCourses.find((item) => item?.id === coursesId),
     [allCourses, coursesId]
   );
+  const courseTitle = course?.title;
+  console.log("courses", courseTitle);
+
+  // pathname: "/quizExplainer/",
+  // params: {
+  //   questionParams: JSON.stringify(quizItem),
+  // },
+  console.log("Navigating to module with courseTitle:", courseTitle);
 
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
         setSelectedModule(item);
-        router.push(`/flashcards/courses/modules/${item.moduleId}`);
+        router.push({
+          pathname: `/flashcards/courses/modules/[moduleId]`,
+          params: {
+            moduleId: item.moduleId,
+            courseTitle: courseTitle,
+          },
+        });
       }}
       className="bg-white p-4 rounded-xl shadow-md mb-4 flex flex-row gap-4"
     >
@@ -43,7 +57,9 @@ export default function CourseId() {
         ></Image>
       </View>
       <View className="flex-1 justify-center">
-        <Text className="text-xl font-nunito-bold text-black mb-1">{item.title}</Text>
+        <Text className="text-xl font-nunito-bold text-black mb-1">
+          {item.title}
+        </Text>
         <View className="flex-col justify-between">
           <Text className="text-xs text-gray-500 font-nunito">
             {item?.flashcards?.length || 0} cards
@@ -62,14 +78,14 @@ export default function CourseId() {
         <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center">
           {selectedCourse?.title} FlashCards
         </Text>
-         <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
-                  <Ionicons
-                    name="heart"
-                    size={32}
-                    color="red"
-                    style={{ paddingRight: 10 }}
-                  />
-                </Pressable>
+        <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
+          <Ionicons
+            name="heart"
+            size={32}
+            color="red"
+            style={{ paddingRight: 10 }}
+          />
+        </Pressable>
       </View>
       <FlatList
         data={course?.flashcards}

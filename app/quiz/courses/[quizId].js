@@ -17,15 +17,18 @@ import {
 } from "react-native";
 import Button from "../../../components/shared/Button";
 import colors from "../../../constants/colors";
-import { allCoursesContext, dbUpdateContext } from "../../../context/context";
+import {
+  allCoursesContext,
+  userDetailsContext,
+} from "../../../context/context";
 export default function QuizId() {
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedOption, setSelectedOption] = useState();
   const [result, setResult] = useState([]);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);  
-  
+  const [loading, setLoading] = useState(false);
+  const { updateCourse, userData } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
   // const { setShowConfetti } = useContext(showConfettiContext);
   const { selectedCourse, selectedQuiz } = useContext(allCoursesContext);
@@ -135,7 +138,21 @@ export default function QuizId() {
         JSON.stringify(attemptsArray)
       );
 
+      // 🔥 Update user progress with quiz details
+      const currentProgress = userData?.progress?.[courseTitle] || {};
+      const previousAttempts = currentProgress?.attemptedQuizzes || [];
 
+      const filtered = previousAttempts.filter((q) => q.id !== quizId);
+
+      const detailedQuizData = {
+        id: quizId,
+        score: quizResultPercentage,
+        attemptedDate,
+      };
+
+      await updateCourse(courseTitle, {
+        attemptedQuizzes: [...filtered, detailedQuizData],
+      });
       // Navigate
       router.replace({
         pathname: "/quiz/quizResultScreen",

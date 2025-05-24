@@ -44,7 +44,7 @@ export default function Index() {
     }
   };
 
-  useEffect( () => {
+  useEffect(() => {
     const fetch = async () => {
       await loadData();
     };
@@ -89,23 +89,25 @@ export default function Index() {
         <View className="flex-1 flex-col gap-10">
           <Image source={require("../assets/images/visual-picture.png")} />
 
-          <View
-            style={{
-              position: "absolute",
-              top: height / 2 + 170, // Half of screen - half of Lottie height
-              left: width / 2 - 55, // Half of screen - half of Lottie width
-            }}
-          >
-            <LottieView
-              source={require("../assets/cat.json")}
-              autoPlay
-              loop
+          {!loading && (
+            <View
               style={{
-                height: 100,
-                width: 100,
+                position: "absolute",
+                top: height / 2 + 170, // Half of screen - half of Lottie height
+                left: width / 2 - 55, // Half of screen - half of Lottie width
               }}
-            />
-          </View>
+            >
+              <LottieView
+                source={require("../assets/cat.json")}
+                autoPlay
+                loop
+                style={{
+                  height: 100,
+                  width: 100,
+                }}
+              />
+            </View>
+          )}
           <View
             style={{
               position: "absolute",

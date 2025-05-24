@@ -24,7 +24,7 @@ export default function UserCard({ userData, setShowModal }) {
       <View className="flex justify-center">
         <View className="flex flex-col items-start">
           <Text className="text-base" style={{fontFamily: "nunito-bold"}}>Username: </Text>
-          <Text className="text-base" style={{fontFamily: "nunito"}}>{profile?.name}</Text>
+          <Text className="text-base" style={{fontFamily: "nunito"}}>{profile?.name || "user"}</Text>
         </View>
         <View className="flex flex-col items-start flex-wrap">
           <Text className="text-base font-nunito-bold" style={{fontFamily: "nunito-bold"}}>Level: </Text>

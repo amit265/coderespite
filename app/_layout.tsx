@@ -57,13 +57,13 @@ export default function RootLayout() {
   useEffect(() => {
     const load = async () => {
       const data = await getUserData();
-      console.log("data from firs tlayout", data);
+      console.log("data from first layout", data);
 
       setUserDataState(data);
       setLoading(false);
     };
     load();
-  }, []);
+  }, [update]);
 
 
   // Update AsyncStorage + context state
@@ -92,21 +92,27 @@ export default function RootLayout() {
     },
     updateCourse: async (course, updates) => {
       await updateUser((data) => {
+        if (!data.progress) {
+          data.progress = {};
+        }
         if (!data.progress[course]) {
           data.progress[course] = {
-            quizzesAttempted: 0,
+            attemptedQuizzes: [],
             flashcardsLoved: 0,
             completed: false,
             percentage: 0,
           };
         }
+    
         data.progress[course] = {
           ...data.progress[course],
           ...updates,
         };
+    
         return data;
       });
-    },
+    }
+    
   };
 
 

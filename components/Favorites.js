@@ -1,42 +1,55 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { favoritesContext } from "../context/context";
 import FlashCardItem from "./FlashCardItem";
 import Button from "./shared/Button";
 
 export default function Favorites() {
   const { favorites, setFavorites } = useContext(favoritesContext);
-  console.log("favorites from favorites", favorites);
   const router = useRouter();
+  console.log("ffaoivreis", favorites);
+  
   useEffect(() => {
     const loadData = async () => {
-      const data = await AsyncStorage.getItem("@favoriteFlashcard_data");
-      setFavorites(JSON.parse(data));
+      try {
+        const data = await AsyncStorage.getItem("favorites"); // ✅ consistent key
+        if (data) {
+          const parsed = JSON.parse(data);
+          if (Array.isArray(parsed)) {
+            setFavorites(parsed);
+          } else {
+            console.warn("Parsed favorites is not an array:", parsed);
+          }
+        } else {
+          console.log("No favorites found in storage.");
+        }
+      } catch (err) {
+        console.error("Error loading favorites:", err);
+      }
     };
+
     loadData();
   }, []);
 
-  //   console.log("favorites from facourite", favorites);
+  console.log("favorites from Favorites screen:", favorites);
 
-  if (!favorites || favorites?.length === 0) {
+  if (!favorites || favorites.length === 0) {
     return (
       <View className="flex justify-center items-center h-2/3">
-        <View>
-          <Text className="font-2xl text-center mt-24">
-            No favorite FlashCards yet
-          </Text>
-          <View className="px-12">
-            <Button
-              text={"Go to FlashCards"}
-              onPress={() => router.push("/(tabs)/flashcards")}
-            />
-          </View>
+        <Text className="text-2xl text-center mt-24">
+          No favorite FlashCards yet
+        </Text>
+        <View className="px-12">
+          <Button
+            text="Go to FlashCards"
+            onPress={() => router.push("/(tabs)/flashcards")}
+          />
         </View>
       </View>
     );
   }
 
-  return <FlashCardItem flashcards={favorites} />;
+  return <FlashCardItem flashcards={favorites} favorite = {"favorite"}/>;
 }

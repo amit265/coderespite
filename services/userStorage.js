@@ -27,6 +27,8 @@ const defaultUserData = {
 export const getUserData = async () => {
   try {
     const data = await AsyncStorage.getItem(STORAGE_KEY);
+    console.log("data from getUserdate", data);
+
     return data ? JSON.parse(data) : defaultUserData;
   } catch (error) {
     console.error("Error getting user data:", error);
@@ -74,6 +76,7 @@ export const updateCourseProgress = async (course, updates) => {
         flashcardsLoved: 0,
         completed: false,
         percentage: 0,
+        flashcardsViewed: [], // initialize here if no course progress
       };
     }
 
@@ -81,7 +84,6 @@ export const updateCourseProgress = async (course, updates) => {
       ...data.progress[course],
       ...updates,
     };
-
     return data;
   });
 };
@@ -94,27 +96,25 @@ export const markNotFirstTime = async () => {
   });
 };
 
-
-
 export const clearAllData = async () => {
-    try {
-      await AsyncStorage.clear();
-      console.log("All data cleared from AsyncStorage.");
-    } catch (e) {
-      console.error("Failed to clear AsyncStorage:", e);
-    }
-  };
+  try {
+    await AsyncStorage.clear();
+    console.log("All data cleared from AsyncStorage.");
+  } catch (e) {
+    console.error("Failed to clear AsyncStorage:", e);
+  }
+};
 
- export const logAllAsyncStorage = async () => {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      const items = await AsyncStorage.multiGet(keys);
-  
-      console.log("📦 AsyncStorage Contents:");
-      items.forEach(([key, value]) => {
-        console.log(`🗝️ ${key}:`, JSON.parse(value));
-      });
-    } catch (e) {
-      console.error("Failed to log AsyncStorage:", e);
-    }
-  };
+export const logAllAsyncStorage = async () => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const items = await AsyncStorage.multiGet(keys);
+
+    console.log("📦 AsyncStorage Contents:");
+    items.forEach(([key, value]) => {
+      console.log(`🗝️ ${key}:`, JSON.parse(value));
+    });
+  } catch (e) {
+    console.error("Failed to log AsyncStorage:", e);
+  }
+};

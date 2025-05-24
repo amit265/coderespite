@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
-import { Modal, Text, View } from "react-native";
+import { Modal, ScrollView, Text, View } from "react-native";
 import ProfileModal from "../../components/ProfileModal";
 import QuickStats from "../../components/QuickStats";
 import SafeScreen from "../../components/SafeScreen";
@@ -15,6 +15,7 @@ export default function Profile() {
   const { attemptedQuizData } = useContext(allCoursesContext);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const show = true;
   // const data = [
   //   { count: 3, date: "2025-05-14" },
   //   { count: 5, date: "2025-05-15" },
@@ -35,12 +36,13 @@ export default function Profile() {
 
   return (
     <SafeScreen>
-      <View className="p-4">
-        <Text className="text-center font-quicksand-bold text-2xl">
-          Profile
-        </Text>
-      </View>
-      {/* <View style={{ flex: 1, alignItems: "center", padding: 20 }}>
+      <ScrollView>
+        <View className="p-4">
+          <Text className="text-center font-quicksand-bold text-2xl">
+            Profile
+          </Text>
+        </View>
+        {/* <View style={{ flex: 1, alignItems: "center", padding: 20 }}>
         <Text style={{ fontSize: 20, marginBottom: 12 }}>Your Streak</Text>
         <Text className="text-left p-2 text-sm w-full">
           {totalCount} days in the last 60 days
@@ -53,62 +55,66 @@ export default function Profile() {
         </View>
       </View> */}
 
-      <View className="px-4">
-        <UserCard userData={userData} setShowModal={setShowModal} />
-      </View>
-      <View className="px-4">
-        <QuickStats userData={userData} />
-      </View>
+        <View className="px-4">
+          <UserCard userData={userData} setShowModal={setShowModal} />
+        </View>
+        <View className="px-4">
+          <QuickStats userData={userData} />
+        </View>
 
-      <View className="px-4">
-        <Button
-          text={"Quiz History"}
-          type
-          onPress={() => router.push("/quizHistory")}
-        />
-      </View>
-      <View className="px-4">
-        <Button
-          text={"Favorite FlashCards"}
-          type
-          onPress={() => router.push("/flashcards/favoritesFc")}
-        />
-      </View>
+        <View className="px-4">
+          <Button
+            text={"Quiz History"}
+            type
+            onPress={() => router.push("/quizHistory")}
+          />
+        </View>
+        <View className="px-4">
+          <Button
+            text={"Favorite FlashCards"}
+            type
+            onPress={() => router.push("/flashcards/favoritesFc")}
+          />
+        </View>
+        {show && (
+          <View>
+            <View className="px-4">
+              <Button text={"Clear all data"} type onPress={clearAllData} />
+            </View>
 
-      <View className="px-4">
-        <Button text={"Clear all data"} type onPress={clearAllData} />
-      </View>
+            <View className="px-4">
+              <Button text={"log all data"} type onPress={logAllAsyncStorage} />
+            </View>
+          </View>
+        )}
 
-      <View className="px-4">
-        <Button text={"log all data"} type onPress={logAllAsyncStorage} />
-      </View>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)",
-          }}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showModal}
+          onRequestClose={() => setShowModal(false)}
         >
           <View
             style={{
-              width: "90%",
-              backgroundColor: "white",
-              borderRadius: 10,
-              padding: 20,
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "rgba(0,0,0,0.5)",
             }}
           >
-            <ProfileModal setShowModal={setShowModal} />
+            <View
+              style={{
+                width: "90%",
+                backgroundColor: "white",
+                borderRadius: 10,
+                padding: 20,
+              }}
+            >
+              <ProfileModal setShowModal={setShowModal} />
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+      </ScrollView>
     </SafeScreen>
   );
 }

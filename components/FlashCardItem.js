@@ -4,33 +4,77 @@ import React, { useContext } from "react";
 import { Dimensions, FlatList, Pressable, Text, View } from "react-native";
 import FlipCard from "react-native-flip-card";
 import colors from "../constants/colors";
-import { favoritesContext } from "../context/context";
-
-export default function FlashCardItem({ flashcards, title }) {
+import { favoritesContext, userDetailsContext } from "../context/context";
+export default function FlashCardItem({
+  flashcards,
+  title,
+  courseTitle,
+  favorite,
+}) {
   const screenWidth = Dimensions.get("screen").width;
   const { favorites, setFavorites } = useContext(favoritesContext);
+  const { updateCourse, userData } = useContext(userDetailsContext);
 
   const isFavorite = (question) => {
     return favorites?.some((item) => item?.question === question);
   };
-  console.log("flashcards from flashcardcomponentfhgffhg", favorites);
+
+  const handleFlashcardViewed = async (flashcardId) => {
+    if (favorite) return;
+    const currentProgress = userData?.progress?.[courseTitle] || {};
+    const previousViewed = currentProgress.flashcardsViewed || [];
+
+    console.log("clicked", flashcardId);
+    console.log("currentProgress", currentProgress);
+    console.log("previousViewed", previousViewed);
+
+    // Avoid duplicates
+    const updatedFlashcards = previousViewed.includes(flashcardId)
+      ? previousViewed
+      : [...previousViewed, flashcardId];
+
+    console.log("updatedFlashcards", updatedFlashcards);
+
+    await updateCourse(courseTitle, {
+      ...currentProgress,
+      flashcardsViewed: updatedFlashcards,
+    });
+  };
 
   const addFavorite = async (question, title, answer) => {
+    try {
+      const newFavorite = { question, title, answer };
+      const currentFavorites = Array.isArray(favorites) ? favorites : [];
 
-    setFavorites((prev = []) => {
-      const exists = prev?.some((item) => item?.question === question);
+      const exists = currentFavorites.some(
+        (item) => item.question === question
+      );
+      if (exists) return;
 
-      if (exists) {
-        console.log("exsts", exists);
+      const updatedFavorites = [...currentFavorites, newFavorite];
+      setFavorites(updatedFavorites);
+      await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
 
-        return prev;
-      }
+      console.log("Added favorite:", updatedFavorites);
+    } catch (err) {
+      console.error("Error adding favorite:", err);
+    }
+  };
 
-      const updateFavorites = [...prev, { question, title, answer }];
-      AsyncStorage.setItem("@favoriteFlashcard_data", JSON.stringify(updateFavorites));
+  const removeFavorite = async (question) => {
+    try {
+      const currentFavorites = Array.isArray(favorites) ? favorites : [];
+      const updatedFavorites = currentFavorites.filter(
+        (item) => item.question !== question
+      );
 
-      return updateFavorites;
-    });
+      setFavorites(updatedFavorites);
+      await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+      console.log("Removed favorite:", updatedFavorites);
+    } catch (err) {
+      console.error("Error removing favorite:", err);
+    }
   };
 
   return (
@@ -39,9 +83,8 @@ export default function FlashCardItem({ flashcards, title }) {
         data={flashcards}
         keyExtractor={(_, index) => index.toString()}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }, index) => {
+        renderItem={({ item }) => {
           const currentQuestion = item.question;
-
           const favorite = isFavorite(currentQuestion);
 
           return (
@@ -53,52 +96,42 @@ export default function FlashCardItem({ flashcards, title }) {
                   borderRadius: 20,
                   marginHorizontal: screenWidth * 0.05,
                 }}
-                friction={12} // Increase for slower, smoother flip
-                perspective={1500} // More realistic 3D effect
+                friction={12}
+                perspective={1500}
                 flipVertical
                 clickable
+                onFlipEnd={() => handleFlashcardViewed(item?.question)}
               >
                 {/* Front Side */}
                 <View className="bg-white flex-1 rounded-2xl justify-center items-center px-14">
                   <View className="absolute bottom-2 p-4 z-50">
-                    {favorite ? (
-                      <Pressable
-                        onPress={() => {
-                          requestAnimationFrame(() => {
-                            const updated = favorites.filter(
-                              (item) => item.question !== currentQuestion
-                            );
-                            setFavorites(updated);
-                            AsyncStorage.setItem(
-                              "favorites",
-                              JSON.stringify(updated)
-                            );
-                          });
-                        }}
-                      >
-                        <Ionicons name="heart" size={30} color={colors.ERROR} />
-                      </Pressable>
-                    ) : (
-                      <Pressable
-                        onPress={() => {
-                          requestAnimationFrame(() => {
-                            addFavorite(item?.question, title, item?.answer);
-                          });
-                        }}
-                      >
-                        <Ionicons
-                          name="heart-outline"
-                          size={30}
-                          color={colors.PRIMARY}
-                        />
-                      </Pressable>
-                    )}
+                    <Pressable
+                      onPress={() => {
+                        requestAnimationFrame(() => {
+                          if (favorite) {
+                            removeFavorite(currentQuestion);
+                          } else {
+                            addFavorite(item.question, title, item.answer);
+                          }
+                        });
+                      }}
+                    >
+                      <Ionicons
+                        name={favorite ? "heart" : "heart-outline"}
+                        size={30}
+                        color={favorite ? colors.ERROR : colors.PRIMARY}
+                      />
+                    </Pressable>
                   </View>
+
                   {item?.title && (
-                    <View className="absolute border border-gray-300 top-2 p-2 rounded-lg ">
-                      <Text className="text-center font-nunito-semibold">{item?.title}</Text>
+                    <View className="absolute border border-gray-300 top-2 p-2 rounded-lg">
+                      <Text className="text-center font-nunito-semibold">
+                        {item?.title}
+                      </Text>
                     </View>
                   )}
+
                   <View>
                     <Text className="text-lg font-nunito-bold text-center text-gray-800">
                       {item?.question}

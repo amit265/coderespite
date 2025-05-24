@@ -4,17 +4,23 @@ import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
 import Header from "../../components/home/Header";
-import ProgressSummary from "../../components/home/ProgressSummary";
+import ProgressBar from "../../components/home/ProgressBar";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
 import ProfileModal from "../../components/ProfileModal";
 import SafeScreen from "../../components/SafeScreen";
-import { userDetailsContext } from "../../context/context";
-import ProgressBar from "../../components/home/ProgressBar";
+import { allCoursesContext, userDetailsContext } from "../../context/context";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const { userData } = useContext(userDetailsContext);
+  const { update, setUpdate } = useContext(allCoursesContext);
+
+  useEffect(() => {
+    if (!userData) setUpdate(!update);
+    console.log("useeffect called");
+    console.log("update", update);
+  }, []);
 
   useEffect(() => {
     const firstTime = userData?.profile?.firstTime;
@@ -29,7 +35,7 @@ export default function Home() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header />
         <WelcomeCard userData={userData} />
-        <ContinueCard userData={userData}/>
+        <ContinueCard userData={userData} />
         <FeaturedLessonGrid />
 
         {/* <ProgressSummary /> */}
