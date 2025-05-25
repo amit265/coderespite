@@ -2,14 +2,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect } from "react";
 import { Text, View } from "react-native";
-import { favoritesContext } from "../context/context";
+import { adConfigContext, favoritesContext } from "../context/context";
 import FlashCardItem from "./FlashCardItem";
 import Button from "./shared/Button";
 
 export default function Favorites() {
   const { favorites, setFavorites } = useContext(favoritesContext);
   const router = useRouter();
-  
+  const { setClickCount } = useContext(adConfigContext);
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -32,7 +32,6 @@ export default function Favorites() {
     loadData();
   }, []);
 
-
   if (!favorites || favorites.length === 0) {
     return (
       <View className="flex justify-center items-center h-2/3">
@@ -42,12 +41,15 @@ export default function Favorites() {
         <View className="px-12">
           <Button
             text="Go to FlashCards"
-            onPress={() => router.push("/(tabs)/flashcards")}
+            onPress={() => {
+              setClickCount((prev) => prev + 1);
+              router.push("/(tabs)/flashcards");
+            }}
           />
         </View>
       </View>
     );
   }
 
-  return <FlashCardItem flashcards={favorites} favorite = {"favorite"}/>;
+  return <FlashCardItem flashcards={favorites} favorite={"favorite"} />;
 }

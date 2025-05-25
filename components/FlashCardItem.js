@@ -143,11 +143,13 @@ export default function FlashCardItem({
   };
 
   return (
-    <View style={{ marginBottom: 50 }}>
+    <View>
       <FlatList
         data={flashcards}
         keyExtractor={(item) => item.question}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 180 }}
+
         renderItem={({ item }) => {
           const currentQuestion = item.question;
           const isFav = isFavorite(currentQuestion);

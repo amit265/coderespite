@@ -11,14 +11,17 @@ import {
   View,
 } from "react-native";
 import SafeScreen from "../../../components/SafeScreen";
+import colors from "../../../constants/colors";
 import { courseIcons } from "../../../constants/constants";
-import { allCoursesContext } from "../../../context/context";
+import { adConfigContext, allCoursesContext } from "../../../context/context";
+import { BannerAdComponent } from "../../../services/AdManager";
 
 export default function CourseId() {
   const { coursesId } = useLocalSearchParams();
   const { allCourses, selectedCourse, setSelectedModule } =
     useContext(allCoursesContext);
   const router = useRouter();
+  const { setClickCount, clickCount } = useContext(adConfigContext);
   const [courseSelected, setCourseSelected] = useState("All");
   const course = allCourses.find((item) => item?.id === coursesId);
   const [loading, setLoading] = useState(false);
@@ -26,12 +29,14 @@ export default function CourseId() {
     courseSelected === "All"
       ? course?.modules
       : course?.modules.filter((course) => course.level === courseSelected);
-
+  console.log("click count form course", clickCount);
+  
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
         setLoading(true);
         setSelectedModule(item);
+        setClickCount((prev) => prev + 1);
         router.push(`/learn/courses/modules/${item.moduleId}`);
         setLoading(false);
       }}
@@ -85,7 +90,7 @@ export default function CourseId() {
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={35} color="black" />
         </Pressable>
-        <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center">
+        <Text className="text-2xl font-quicksand-bold mb-4 text-gray-800 text-center">
           {selectedCourse?.title}
         </Text>
       </View>
@@ -115,8 +120,22 @@ export default function CourseId() {
         renderItem={renderModuleItem}
         keyExtractor={(item) => item.moduleId}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{ paddingBottom: 120 }}
       />
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
+        <BannerAdComponent />
+      </View>
     </SafeScreen>
   );
 }

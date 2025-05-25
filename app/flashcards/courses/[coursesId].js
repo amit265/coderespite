@@ -10,11 +10,14 @@ import {
   View,
 } from "react-native";
 import SafeScreen from "../../../components/SafeScreen";
+import colors from "../../../constants/colors";
 import { flashcardIcons } from "../../../constants/constants";
-import { allCoursesContext } from "../../../context/context";
+import { adConfigContext, allCoursesContext } from "../../../context/context";
+import { BannerAdComponent } from "../../../services/AdManager";
 
 export default function CourseId() {
   const { coursesId } = useLocalSearchParams();
+  const { setClickCount } = useContext(adConfigContext);
   const { allCourses, selectedCourse, setSelectedModule } =
     useContext(allCoursesContext);
   const router = useRouter();
@@ -34,6 +37,7 @@ export default function CourseId() {
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
+        setClickCount(prev => prev + 1)
         setSelectedModule(item);
         router.push({
           pathname: `/flashcards/courses/modules/[moduleId]`,
@@ -92,8 +96,23 @@ export default function CourseId() {
         renderItem={renderModuleItem}
         keyExtractor={(item) => item.moduleId}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{ paddingBottom: 60 }}
       />
+      {/* Bottom Banner Ad */}
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
+        <BannerAdComponent />
+      </View>
     </SafeScreen>
   );
 }

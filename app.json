@@ -17,7 +17,9 @@
         "backgroundColor": "#CBE7F7"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.mindcraftlearning.coderespite"
+      "package": "com.mindcraftlearning.coderespite",
+      "versionCode": 1
+
     },
     "web": {
       "bundler": "metro",
@@ -33,6 +35,27 @@
           "image": "./assets//images/icon.png",
           "resizeMode": "contain",
           "width": 200
+        }
+      ],
+      "expo-font",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-7433519007687449~1317833947",
+          "iosAppId": ""
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "minSdkVersion": 24,
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true,
+            "enableHermes": true
+          }
         }
       ]
     ],

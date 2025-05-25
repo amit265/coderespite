@@ -1,18 +1,26 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen, useRouter } from "expo-router";
+import { doc, onSnapshot } from "firebase/firestore";
 import LottieView from "lottie-react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
-import { allCoursesContext, userDetailsContext } from "../context/context";
+import {
+  adConfigContext,
+  allCoursesContext,
+  userDetailsContext,
+} from "../context/context";
+import { db } from "../services/firebaseConfig";
 import { getAllCoursesWithSubcollections } from "../services/getAllCoursesWithSubcollections";
-const { width, height } = Dimensions.get("window");
+import { showInterstitialAd } from "../services/AdManager";
 
+const { width, height } = Dimensions.get("window");
 export default function Index() {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
+  const { setAdConfig, adConfig, clickCount, setClickCount } = useContext(adConfigContext);
   const [loading, setLoading] = useState(true);
   const { allCourses, setAllCourses, update, setUpdate } =
     useContext(allCoursesContext);
@@ -74,6 +82,36 @@ export default function Index() {
 
     return () => {
       if (timer) clearTimeout(timer);
+    };
+  }, []);
+
+
+
+  useEffect(() => {
+    let unsubscribe;
+
+    const fetchAdSettings = () => {
+      try {
+        unsubscribe = onSnapshot(
+          doc(db, "config", "adSettings"),
+          (doc) => {
+            if (doc.exists()) {
+              setAdConfig(doc.data());
+            }
+          },
+          (error) => {
+            console.log("Error fetching ad settings:", error);
+          }
+        );
+      } catch (error) {
+        console.log("Error setting up snapshot:", error);
+      }
+    };
+
+    fetchAdSettings();
+
+    return () => {
+      if (unsubscribe) unsubscribe();
     };
   }, []);
 

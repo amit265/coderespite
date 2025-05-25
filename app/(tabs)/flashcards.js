@@ -3,17 +3,19 @@ import React, { useContext } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import SafeScreen from "../../components/SafeScreen";
 import { flashcardIcons } from "../../constants/constants";
-import { allCoursesContext } from "../../context/context";
+import { adConfigContext, allCoursesContext } from "../../context/context";
 
 export default function FlashCards() {
   const router = useRouter();
   const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
+  const { setClickCount } = useContext(adConfigContext);
 
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       key={item.id}
       onPress={() => {
         setSelectedCourse(item);
+        setClickCount(prev => prev + 1)
         router.push(`/flashcards/courses/${item?.id}`);
       }}
       className="mb-6 rounded-3xl overflow-hidden"

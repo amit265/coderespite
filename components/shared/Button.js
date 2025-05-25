@@ -9,18 +9,32 @@ export default function Button({
   loading,
   disable = false,
   backgroundColor = colors.BUTTON,
-  color= colors.WHITE
+  color = colors.WHITE,
+  variant = "active"
 }) {
+  const isInactive = disable || variant === "inactive";
+
+  const getBackgroundColor = () => {
+    if (isInactive) return colors.BUTTON;
+    return type === "fill" ? backgroundColor : colors.WHITE;
+  };
+
+  const getTextColor = () => {
+    if (isInactive) return colors.GRAY || "#999"; // Fallback gray text
+    return type === "fill" ? color : colors.PRIMARY;
+  };
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      disabled={loading || disable}
+      disabled={loading || isInactive}
       style={{
         padding: 15,
         width: "100%",
         borderRadius: 15,
         marginTop: 15,
-        backgroundColor: type === "fill" ? backgroundColor : colors.WHITE,
+        backgroundColor: getBackgroundColor(),
+        opacity: isInactive ? 0.5 : 1,
       }}
     >
       {!loading ? (
@@ -28,8 +42,7 @@ export default function Button({
           style={{
             textAlign: "center",
             fontSize: 15,
-
-            color: type === "fill" ? color : colors.PRIMARY,
+            color: getTextColor(),
             fontFamily: "nunito-bold",
           }}
         >

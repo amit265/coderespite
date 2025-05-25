@@ -18,9 +18,11 @@ import SafeScreen from "../../../components/SafeScreen";
 import Button from "../../../components/shared/Button";
 import colors from "../../../constants/colors";
 import {
+  adConfigContext,
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
+import { BannerAdComponent } from "../../../services/AdManager";
 export default function QuizId() {
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
@@ -33,6 +35,7 @@ export default function QuizId() {
   // const { setShowConfetti } = useContext(showConfettiContext);
   const { selectedCourse, selectedQuiz, selectedModule } =
     useContext(allCoursesContext);
+  const { setClickCount } = useContext(adConfigContext);
   const courseTitle = selectedCourse?.title;
   const courseId = selectedCourse?.id;
   const quizTitle = selectedQuiz?.title;
@@ -231,90 +234,96 @@ export default function QuizId() {
             height={8}
           />
         </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
+        <View
           style={{
-            paddingHorizontal: 25,
-            paddingVertical: 20,
             backgroundColor: colors.WHITE,
-            marginTop: 20,
             elevation: 1,
             borderRadius: 20,
             flexGrow: 1,
-            paddingBottom: 100,
+            paddingHorizontal: 25,
+            paddingVertical: 20,
+            marginTop: 20,
           }}
         >
-          <Text
-            style={{
-              fontFamily: "nunito-bold",
-              fontSize: 18,
-              textAlign: "center",
-            }}
-          >
-            {quiz[currentPage]?.question}
-          </Text>
-          {shuffledOptions.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => {
-                setSelectedOption(index);
-                onOptionSelect(item);
-              }}
+          <ScrollView showsVerticalScrollIndicator={false} style={{}}>
+            <Text
               style={{
-                padding: 20,
-                borderWidth: 1,
-                borderRadius: 15,
-                marginTop: 8,
-                backgroundColor:
-                  selectedOption === index ? colors.PRIMARY : null,
-
-                borderColor: selectedOption === index ? colors.GREEN : null,
+                fontFamily: "nunito-bold",
+                fontSize: 18,
+                textAlign: "center",
               }}
             >
-              <Text
+              {quiz[currentPage]?.question}
+            </Text>
+            {shuffledOptions.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  setSelectedOption(index);
+                  onOptionSelect(item);
+                }}
                 style={{
-                  fontFamily: "nunito",
-                  fontSize: 17,
-                  color: selectedOption === index ? colors.WHITE : null,
+                  padding: 20,
+                  borderWidth: 1,
+                  borderRadius: 15,
+                  marginTop: 8,
+                  backgroundColor:
+                    selectedOption === index ? colors.PRIMARY : null,
+
+                  borderColor: selectedOption === index ? colors.GREEN : null,
                 }}
               >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          ))}
-
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              paddingTop: 10,
-              marginTop: "10",
-              borderRadius: 20,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          ></View>
-        </ScrollView>
-        <View>
-          {selectedOption?.toString() && quiz?.length - 1 > currentPage && (
-            <Button
-              text={"Next"}
-              onPress={() => {
-                setCurrentPage(currentPage + 1);
-                setSelectedOption(null);
-              }}
-            />
-          )}
-          {selectedOption?.toString() && quiz?.length - 1 === currentPage && (
-            <Button
-              text={"Finish"}
-              onPress={() => {
-                onQuizFinish();
-              }}
-              loading={loading}
-            />
-          )}
+                <Text
+                  style={{
+                    fontFamily: "nunito",
+                    fontSize: 17,
+                    color: selectedOption === index ? colors.WHITE : null,
+                  }}
+                >
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+          <View>
+            {quiz?.length - 1 > currentPage ? (
+              <Button
+                text="Next"
+                onPress={() => {
+                  setCurrentPage(currentPage + 1);
+                  setSelectedOption(null);
+                }}
+                disable={!selectedOption}
+                variant={selectedOption ? "active" : "inactive"}
+              />
+            ) : (
+              <Button
+                text="Finish"
+                onPress={() => {
+                  onQuizFinish();
+                  setClickCount((prev) => prev + 1);
+                }}
+                loading={loading}
+                disable={!selectedOption}
+                variant={selectedOption ? "active" : "inactive"}
+              />
+            )}
+          </View>
         </View>
+      </View>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
+        <BannerAdComponent />
       </View>
     </SafeScreen>
   );

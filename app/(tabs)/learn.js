@@ -3,10 +3,11 @@ import React, { useContext } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import SafeScreen from "../../components/SafeScreen";
 import { courseIcons } from "../../constants/constants";
-import { allCoursesContext } from "../../context/context";
+import { adConfigContext, allCoursesContext } from "../../context/context";
 
 export default function Learn() {
   const router = useRouter();
+  const { setClickCount } = useContext(adConfigContext);
   const { allCourses, setSelectedCourse, setUpdate } =
     useContext(allCoursesContext);
   if (allCourses?.length === 0) setUpdate((prev) => !prev);
@@ -16,6 +17,7 @@ export default function Learn() {
     <TouchableOpacity
       key={item.id}
       onPress={() => {
+        setClickCount(prev => prev + 1)
         setSelectedCourse(item);
         router.push(`/learn/courses/${item?.id}`);
       }}

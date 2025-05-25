@@ -4,20 +4,20 @@ import React, { useContext, useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
 import FlashCardItem from "../../../../components/FlashCardItem";
 import SafeScreen from "../../../../components/SafeScreen";
+import colors from "../../../../constants/colors";
 import { allCoursesContext } from "../../../../context/context";
+import { BannerAdComponent } from "../../../../services/AdManager";
 
 export default function ModuleId() {
   const { selectedModule } = useContext(allCoursesContext);
   const { moduleId, courseTitle } = useLocalSearchParams();
   // const courseTitle = JSON.parse(courseTitleParams);
-  console.log("use localkfsa", useLocalSearchParams());
-  
+
   useEffect(() => {
     console.log("Course Title:", courseTitle); // parse if JSON string
   }, []);
   // const [expandedLessons, setExpandedLessons] = useState({});
   const router = useRouter();
-
 
   if (!selectedModule) {
     return (
@@ -29,32 +29,46 @@ export default function ModuleId() {
 
   return (
     <SafeScreen>
-      <View className="flex-row gap-4 items-center justify-between pb-4">
-        <Pressable onPress={() => router.back()}>
-          <Ionicons
-            name="arrow-back"
-            size={30}
-            color="black"
-            style={{ paddingLeft: 10 }}
-          />
-        </Pressable>
-        <Text className="text-black font-nunito-bold text-2xl">
-          {selectedModule?.title}
-        </Text>
-        <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
-          <Ionicons
-            name="heart"
-            size={32}
-            color="red"
-            style={{ paddingRight: 10 }}
-          />
-        </Pressable>
+      <View>
+        <View className="flex-row items-center justify-between px-4 py-2">
+          <Pressable onPress={() => router.back()}>
+            <Ionicons name="arrow-back" size={30} color="black" />
+          </Pressable>
+
+          <View className="flex-1 mx-4 items-center">
+            <Text
+              className="text-black font-quicksand-bold text-xl text-center"
+              numberOfLines={1}
+            >
+              {selectedModule?.title}
+            </Text>
+          </View>
+
+          <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
+            <Ionicons name="heart" size={30} color="red" />
+          </Pressable>
+        </View>
+
+        <FlashCardItem
+          flashcards={selectedModule?.flashcards}
+          title={selectedModule?.title}
+          courseTitle={courseTitle}
+        />
       </View>
-      <FlashCardItem
-        flashcards={selectedModule?.flashcards}
-        title={selectedModule?.title}
-        courseTitle={courseTitle}
-      />
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
+        <BannerAdComponent />
+      </View>
     </SafeScreen>
   );
 }

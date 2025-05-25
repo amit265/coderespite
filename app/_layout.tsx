@@ -1,17 +1,19 @@
 // app/_layout.tsx
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { StatusBar, Text, View } from 'react-native';
+import MobileAds from "react-native-google-mobile-ads";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ErrorFallback from "../components/ErrorFallback";
-import { allCoursesContext, favoritesContext, LevelContext, userDetailsContext } from "../context/context";
+import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, userDetailsContext } from "../context/context";
+import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -27,7 +29,7 @@ export default function RootLayout() {
     showAds: true,
     showInterstitialAds: true,
     showAppOpenAds: true,
-    showRewardedAds: true,
+    showNativeAds: true,
     showBannerAds: true,
     testAds: true,
     interstitialFrequency: 10,
@@ -180,6 +182,7 @@ export default function RootLayout() {
   }, []);
 
 
+
   useEffect(() => {
 
     checkConnection();
@@ -190,6 +193,22 @@ export default function RootLayout() {
     return () => subscription && subscription.remove();
 
   }, [checkConnection]);
+
+  // ✅ Use useEffect for side effects (initialize mobile ads)
+  useEffect(() => {
+    MobileAds()
+      .initialize()
+      .then(adapterStatuses => {
+        console.log('Mobile Ads Initialized');
+      })
+      .catch(error => {
+        console.error("Mobile Ads Init Error:", error);
+      });
+
+
+
+  }, [checkConnection]); // Only runs once
+
 
 
   if (!isConnected) {
@@ -217,19 +236,22 @@ export default function RootLayout() {
       }}
     >
       <SafeAreaProvider>
-        <PaperProvider>
-          <LevelContext.Provider value={{levelLoading, lastShownLevel, setLastShownLevel, updateLastShownLevel }}>
+        <adConfigContext.Provider value={adConfigValue}>
+          <PaperProvider>
+            <LevelContext.Provider value={{ levelLoading, lastShownLevel, setLastShownLevel, updateLastShownLevel }}>
 
-            <userDetailsContext.Provider value={value}>
-              <favoritesContext.Provider value={favoritesValue}>
-                <allCoursesContext.Provider value={allCoursesValue}>
-                  <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
-                  <Stack screenOptions={{ headerShown: false }} />
-                </allCoursesContext.Provider>
-              </favoritesContext.Provider>
-            </userDetailsContext.Provider>
-          </LevelContext.Provider>
-        </PaperProvider>
+              <userDetailsContext.Provider value={value}>
+                <favoritesContext.Provider value={favoritesValue}>
+                  <allCoursesContext.Provider value={allCoursesValue}>
+                    <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
+                    <AdManager />
+                    <Stack screenOptions={{ headerShown: false }} />
+                  </allCoursesContext.Provider>
+                </favoritesContext.Provider>
+              </userDetailsContext.Provider>
+            </LevelContext.Provider>
+          </PaperProvider>
+        </adConfigContext.Provider>
 
       </SafeAreaProvider>
     </ErrorBoundary>

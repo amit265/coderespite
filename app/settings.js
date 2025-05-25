@@ -11,13 +11,14 @@ import {
   Linking,
   Pressable,
   Share,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import colors from "../constants/colors";
 import SafeScreen from "../components/SafeScreen";
+import colors from "../constants/colors";
+import { BannerAdComponent, NativeAdComponent } from "../services/AdManager";
+
 export default function Settings() {
   const router = useRouter();
 
@@ -53,7 +54,7 @@ export default function Settings() {
   };
 
   return (
-  <SafeScreen>
+    <SafeScreen>
       <View className="relative w-full items-center justify-center p-4">
         {/* Back Arrow - Positioned on the left */}
         <Pressable
@@ -85,7 +86,7 @@ export default function Settings() {
           height: "70%",
           marginTop: 50,
           marginLeft: "auto",
-          marginRight: "auto"
+          marginRight: "auto",
         }}
       >
         {/* Number of Spins */}
@@ -204,9 +205,21 @@ export default function Settings() {
       </View>
 
       {/* Bottom Banner Ad */}
-      {/* <View style={styles.bannerContainer}>
+
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
         <BannerAdComponent />
-      </View> */}
+      </View>
     </SafeScreen>
   );
 }

@@ -14,9 +14,11 @@ import Button from "../../../../components/shared/Button";
 import colors from "../../../../constants/colors";
 import { courseIcons, getQuizFeedback } from "../../../../constants/constants";
 import {
+  adConfigContext,
   allCoursesContext,
   userDetailsContext,
 } from "../../../../context/context";
+import { BannerAdComponent } from "../../../../services/AdManager";
 
 export default function ModuleId() {
   const { selectedCourse, selectedModule, setSelectedQuiz } =
@@ -27,7 +29,7 @@ export default function ModuleId() {
   const [feedback, setFeedback] = useState(null);
   const router = useRouter();
   const selectedQuizId = `quiz_${selectedModule?.id}`;
-
+  const { setClickCount } = useContext(adConfigContext);
   useEffect(() => {
     const selectedQuizType = Array.isArray(selectedCourse?.quizzes)
       ? selectedCourse.quizzes.find((a) => a.id === selectedQuizId)
@@ -94,7 +96,7 @@ export default function ModuleId() {
       </View>
 
       <ScrollView
-        className="flex-1 px-6 py-4"
+        className="flex px-6"
         style={{ backgroundColor: colors.BACKGROUND }}
       >
         <View className="flex flex-row gap-4 p-4">
@@ -128,7 +130,7 @@ export default function ModuleId() {
           </Text>
         </View>
 
-        <View style={{ marginBottom: 20 }}>
+        <View style={{ marginBottom: 60 }}>
           {selectedModule?.lessons?.map((lesson, index) => {
             const isExpanded = expandedLessons[lesson.lessonId];
             return (
@@ -175,7 +177,7 @@ export default function ModuleId() {
         {feedback && (
           <View
             className="px-6 py-4 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
-            style={{ marginBottom: 50 }}
+            style={{ marginBottom: 150 }}
           >
             <Text className="text-xl font-nunito-bold text-gray-800 mb-3">
               {feedback.title}
@@ -199,11 +201,27 @@ export default function ModuleId() {
 
             <Button
               text={moduleQuizStatus ? "Retake Quiz" : "Start Quiz"}
-              onPress={() => router.push(`/quiz/courses/${selectedQuizId}`)}
+              onPress={() => {
+                setClickCount(prev => prev + 1)
+                router.push(`/quiz/courses/${selectedQuizId}`)}}
             />
           </View>
         )}
       </ScrollView>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
+        <BannerAdComponent />
+      </View>
     </SafeScreen>
   );
 }
