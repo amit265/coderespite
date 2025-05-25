@@ -17,7 +17,6 @@ const ProfileModal = ({ setShowModal }) => {
   const [selectedImage, setSelectedImage] = useState(availableImages[0]);
   const { userData, updateUser } = useContext(userDetailsContext);
 
-  console.log("seleted image", selectedImage);
   const [error, setError] = useState("");
 
   const [username, setUsername] = useState(userData?.profile.name);

@@ -43,14 +43,12 @@ export default function FlashCardItem({
       answer: item?.answer,
       date: viewedDate,
     };
-    console.log("handle flash card again", flashCardDetail);
 
     const updatedFlashcards = previousViewed.some(
       (fc) => fc?.question === item?.question
     )
       ? previousViewed
       : [...previousViewed, flashCardDetail];
-    console.log("unohandle flash card again", flashCardDetail);
 
     await updateCourse(courseTitle, {
       flashcardsViewed: updatedFlashcards,
@@ -96,7 +94,6 @@ export default function FlashCardItem({
     const currentProgress = userData?.progress?.[courseTitle] || {};
     const previousLoved = currentProgress.flashcardsLoved || [];
 
-    console.log("question from remove card", question);
 
     const normalize = (str) =>
       String(str || "")
@@ -106,16 +103,7 @@ export default function FlashCardItem({
     const updatedLoved = previousLoved.filter(
       (fc) => normalize(fc?.question) !== normalize(question)
     );
-    console.log(
-      "updated previousLoved from remo flash card loved",
-      previousLoved
-    );
-
-    console.log(
-      "updated updatedLoved from remo flash card loved",
-      updatedLoved
-    );
-
+   
     await updateCourse(courseTitle, {
       flashcardsLoved: updatedLoved,
     });

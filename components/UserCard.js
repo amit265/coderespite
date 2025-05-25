@@ -5,7 +5,6 @@ import { getAvatarImage, levels } from "../constants/constants";
 import ProgressBar from "./home/ProgressBar";
 
 export default function UserCard({ userData, setShowModal }) {
-  console.log("userdetails frlmo user card", userData);
   const profile = userData?.profile;
   const level =
     levels[userData?.level?.currentLevel - 1]?.title || "Curious Kitten";

@@ -26,9 +26,8 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
         const randomIndex = Math.floor(Math.random() * randomCourse.modules.length);
         const selectedModule = randomCourse.modules[randomIndex];
         setRandomModule(selectedModule);
-        console.log("Random module set:", selectedModule);
       } else {
-        console.log("No modules found in the course:", randomCourseId);
+        console.log("No modules found in the course:");
       }
     }
   }, [allCourses]); // <- listen for data changes!

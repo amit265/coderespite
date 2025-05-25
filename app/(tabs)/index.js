@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { BackHandler, Modal, ScrollView, View } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
@@ -6,20 +6,41 @@ import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
 import Header from "../../components/home/Header";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
+import LevelUpModal from "../../components/LevelUpModal";
 import ProfileModal from "../../components/ProfileModal";
 import SafeScreen from "../../components/SafeScreen";
-import { allCoursesContext, userDetailsContext } from "../../context/context";
+import {
+  allCoursesContext,
+  LevelContext,
+  userDetailsContext,
+} from "../../context/context";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const { userData } = useContext(userDetailsContext);
   const { allCourses, setSelectedModule } = useContext(allCoursesContext);
+  const [showLevelModal, setShowLevelModal] = useState(false);
+  const { lastShownLevel, updateLastShownLevel, levelLoading } = useContext(LevelContext);
 
   useEffect(() => {
-    const firstTime = userData?.profile?.firstTime;
-    const name = userData?.profile?.name;
-    if (firstTime || name === "user") setShowModal(true);
-  }, [userData]);
+
+    if(levelLoading) return;
+    const currentLevel = userData?.level?.currentLevel;
+    if (!currentLevel) return;
+
+    // If already shown for this level, don't show again
+    if (lastShownLevel === currentLevel) return;
+
+    // Show modal only if level increased
+    if (lastShownLevel === null || currentLevel > lastShownLevel) {
+      setShowLevelModal(true);
+      updateLastShownLevel(currentLevel);
+    }
+  }, [userData?.level?.currentLevel]);
+
+  const handleCloseModal = () => {
+    setShowLevelModal(false);
+  };
 
   useEffect(() => {
     if (!showModal) return;
@@ -77,6 +98,11 @@ export default function Home() {
           </View>
         </View>
       </Modal>
+      <LevelUpModal
+        visible={showLevelModal}
+        onClose={handleCloseModal}
+        currentLevel={userData?.level?.currentLevel || 1}
+      />
     </SafeScreen>
   );
 }

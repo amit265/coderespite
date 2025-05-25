@@ -15,12 +15,13 @@ import {
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
-import { allCoursesContext } from "../../context/context";
+import { allCoursesContext, userDetailsContext } from "../../context/context";
 
 export default function QuizResultScreen() {
   const { quizIdParam } = useLocalSearchParams();
   const { setSelectedCourse, setSelectedQuiz, allCourses } =
     useContext(allCoursesContext);
+  const { gainXP } = useContext(userDetailsContext);
 
   const quizData = JSON.parse(quizIdParam);
   // console.log("quizdata from quiz result screen", quizData);
@@ -37,6 +38,14 @@ export default function QuizResultScreen() {
 
   // console.log("showConfetti", showConfetti);
 
+  useEffect(() => {
+    const init = async () => {
+      await gainXP(getPercMarks * 0.5);
+    };
+    init();
+
+    console.log("xp increasinf in quiz result screen");
+  }, []);
   useEffect(() => {
     if (!quizData) {
       setLoading(true);

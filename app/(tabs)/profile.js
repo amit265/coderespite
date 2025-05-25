@@ -10,7 +10,6 @@ import UserCard from "../../components/UserCard";
 import { allCoursesContext, userDetailsContext } from "../../context/context";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
-import colors from "../../constants/colors";
 export default function Profile() {
   const { userData } = useContext(userDetailsContext);
   console.log("userData from profile", userData);
@@ -38,7 +37,7 @@ export default function Profile() {
 
   return (
     <SafeScreen>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="p-4">
           <Text className="text-center font-quicksand-bold text-2xl">
             Profile
@@ -77,7 +76,7 @@ export default function Profile() {
               <Button text={"log all data"} type onPress={logAllAsyncStorage} />
             </View>
           </View>
-        )} 
+        )}
 
         <View className="px-4">
           <Button
@@ -86,14 +85,13 @@ export default function Profile() {
             onPress={() => router.push("/quizHistory")}
           />
         </View>
-        <View className="px-4" style={{marginBottom: 20}}>
+        <View className="px-4" style={{ marginBottom: 20 }}>
           <Button
             text={"Favorite FlashCards"}
             type
             onPress={() => router.push("/flashcards/favoritesFc")}
           />
         </View>
-     
 
         <Modal
           animationType="slide"
@@ -117,7 +115,7 @@ export default function Profile() {
                 padding: 20,
               }}
             >
-              <ProfileModal setShowModal={setShowModal}/>
+              <ProfileModal setShowModal={setShowModal} />
             </View>
           </View>
         </Modal>

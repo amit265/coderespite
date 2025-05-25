@@ -16,7 +16,6 @@ export default function Quiz() {
   const router = useRouter();
   const { allCourses, setSelectedCourse, setSelectedQuiz, selectedCourse } = useContext(allCoursesContext);
 
-  console.log("selectedQuiz from quiz page", selectedCourse);
   
 
   const renderQuizItem = (section) => {

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import SafeScreen from "../../../../components/SafeScreen";
 import Button from "../../../../components/shared/Button";
 import colors from "../../../../constants/colors";
 import { courseIcons, getQuizFeedback } from "../../../../constants/constants";
@@ -79,7 +80,7 @@ export default function ModuleId() {
   }
 
   return (
-    <>
+    <SafeScreen>
       <View
         className="flex flex-row gap-2 py-4 px-2"
         style={{ backgroundColor: colors.BACKGROUND }}
@@ -203,6 +204,6 @@ export default function ModuleId() {
           </View>
         )}
       </ScrollView>
-    </>
+    </SafeScreen>
   );
 }

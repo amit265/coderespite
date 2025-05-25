@@ -1,16 +1,18 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { levels } from "../../constants/constants";
+import LevelUpModal from "../LevelUpModal";
 import ProgressBar from "./ProgressBar";
 
 export default function ContinueCard({ userData }) {
   const currentLevelIndex = (userData?.level?.currentLevel || 1) - 1;
-
+  const userLevel = userData?.level?.currentLevel;
   // fallback values to avoid out-of-range or undefined levels
   const level = levels[currentLevelIndex] ?? levels[0];
   const nextLevel = levels[currentLevelIndex + 1] ?? {
     title: "Supreme Meowster",
-    description: "You've reached the top level. Keep maintaining your purrfection!",
+    description:
+      "You've reached the top level. Keep maintaining your purrfection!",
   };
 
   const currentXp = userData?.level?.xp ?? 0;

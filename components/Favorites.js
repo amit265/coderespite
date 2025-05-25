@@ -9,7 +9,6 @@ import Button from "./shared/Button";
 export default function Favorites() {
   const { favorites, setFavorites } = useContext(favoritesContext);
   const router = useRouter();
-  console.log("ffaoivreis", favorites);
   
   useEffect(() => {
     const loadData = async () => {
@@ -33,7 +32,6 @@ export default function Favorites() {
     loadData();
   }, []);
 
-  console.log("favorites from Favorites screen:", favorites);
 
   if (!favorites || favorites.length === 0) {
     return (

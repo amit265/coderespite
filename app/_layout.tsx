@@ -8,9 +8,10 @@ import { StatusBar, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ErrorFallback from "../components/ErrorFallback";
-import { allCoursesContext, favoritesContext, userDetailsContext } from "../context/context";
+import { allCoursesContext, favoritesContext, LevelContext, userDetailsContext } from "../context/context";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -43,6 +44,8 @@ export default function RootLayout() {
   const [selectedModule, setSelectedModule] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState([]);
   const [attemptedQuizData, setAttemptedQuizData] = useState([]);
+  const [lastShownLevel, setLastShownLevel] = useState(null);
+  const [levelLoading, setLevelLoading] = useState(true);
 
 
 
@@ -53,6 +56,31 @@ export default function RootLayout() {
   const allCoursesValue = useMemo(() => ({ allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
   const userDetailsValue = useMemo(() => ({ userData, setUserDataState }), [userData])
 
+  useEffect(() => {
+    const loadLevel = async () => {
+      try {
+        const storedLevel = await AsyncStorage.getItem("lastShownLevel");
+        if (storedLevel !== null) {
+          setLastShownLevel(parseInt(storedLevel));
+        }
+      } catch (error) {
+        console.error("Failed to load lastShownLevel", error);
+      } finally {
+        setLevelLoading(false);
+      }
+    };
+    loadLevel();
+  }, []);
+
+  // Save to AsyncStorage when updated
+  const updateLastShownLevel = async (level) => {
+    try {
+      await AsyncStorage.setItem("lastShownLevel", level.toString());
+      setLastShownLevel(level);
+    } catch (error) {
+      console.error("Failed to save lastShownLevel", error);
+    }
+  };
 
 
   // Load user data initially
@@ -85,29 +113,34 @@ export default function RootLayout() {
       await updateUser((data) => {
         if (!data.level) {
           data.level = {
-            currentLevel: 1,
             xp: 0,
-            nextLevelXP: 100,
+            currentLevel: 1,
+            nextLevelXP: 100, // Starting point for Level 1
           };
         }
 
+        const xpTable = [0, 100, 200, 400, 700, 1000, 1400, 1800, 2200, 2600]; // index = currentLevel
+
         if (data.level.currentLevel >= 10) {
-          // Cap XP at max level
           data.level.xp = Math.min(data.level.xp + xp, data.level.nextLevelXP);
           return data;
         }
 
         data.level.xp += xp;
 
-        while (data.level.xp >= data.level.nextLevelXP && data.level.currentLevel < 10) {
+        while (
+          data.level.currentLevel < 10 &&
+          data.level.xp >= data.level.nextLevelXP
+        ) {
           data.level.xp -= data.level.nextLevelXP;
           data.level.currentLevel += 1;
-          data.level.nextLevelXP += 100; // each new level needs 100 more XP than the last
+          data.level.nextLevelXP = xpTable[data.level.currentLevel] || 0;
         }
 
         return data;
       });
-    },
+    }
+    ,
 
 
     updateCourse: async (course, updates) => {
@@ -185,15 +218,17 @@ export default function RootLayout() {
     >
       <SafeAreaProvider>
         <PaperProvider>
+          <LevelContext.Provider value={{levelLoading, lastShownLevel, setLastShownLevel, updateLastShownLevel }}>
 
-          <userDetailsContext.Provider value={value}>
-            <favoritesContext.Provider value={favoritesValue}>
-              <allCoursesContext.Provider value={allCoursesValue}>
-                <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
-                <Stack screenOptions={{ headerShown: false }} />
-              </allCoursesContext.Provider>
-            </favoritesContext.Provider>
-          </userDetailsContext.Provider>
+            <userDetailsContext.Provider value={value}>
+              <favoritesContext.Provider value={favoritesValue}>
+                <allCoursesContext.Provider value={allCoursesValue}>
+                  <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
+                  <Stack screenOptions={{ headerShown: false }} />
+                </allCoursesContext.Provider>
+              </favoritesContext.Provider>
+            </userDetailsContext.Provider>
+          </LevelContext.Provider>
         </PaperProvider>
 
       </SafeAreaProvider>
