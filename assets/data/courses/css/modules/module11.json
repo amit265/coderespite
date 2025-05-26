@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod11",
+  "title": "Advanced Selectors and Combinators",
+  "description": "Explore powerful CSS selectors and combinators to target elements precisely for advanced styling.",
+  "level": "Intermediate to Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod11-lsn01",
+      "title": "Overview of CSS Selectors",
+      "type": "theory",
+      "content": "CSS selectors let you target HTML elements to apply styles; advanced selectors provide greater precision."
+    },
+    {
+      "lessonId": "mod11-lsn02",
+      "title": "Attribute Selectors",
+      "type": "code",
+      "content": "input[type=\"text\"] {\n  border: 1px solid #000;\n}\na[href^=\"https\"] {\n  color: green;\n}"
+    },
+    {
+      "lessonId": "mod11-lsn03",
+      "title": "Group Selectors and Multiple Selectors",
+      "type": "code",
+      "content": "h1, h2, h3 {\n  font-family: Arial, sans-serif;\n}\n.button, .btn-primary {\n  padding: 10px;\n}"
+    },
+    {
+      "lessonId": "mod11-lsn04",
+      "title": "Descendant and Child Combinators",
+      "type": "code",
+      "content": "div p {\n  color: blue; /* descendant */\n}\ndiv > p {\n  color: red; /* direct child */\n}"
+    },
+    {
+      "lessonId": "mod11-lsn05",
+      "title": "Adjacent Sibling Combinator (+)",
+      "type": "code",
+      "content": "h1 + p {\n  margin-top: 0;\n  font-style: italic;\n}"
+    },
+    {
+      "lessonId": "mod11-lsn06",
+      "title": "General Sibling Combinator (~)",
+      "type": "code",
+      "content": "h2 ~ p {\n  color: gray;\n}"
+    },
+    {
+      "lessonId": "mod11-lsn07",
+      "title": "Negation Pseudo-class :not()",
+      "type": "code",
+      "content": "button:not(.disabled) {\n  cursor: pointer;\n  background-color: blue;\n}"
+    },
+    {
+      "lessonId": "mod11-lsn08",
+      "title": "nth-of-type and nth-last-child Selectors",
+      "type": "code",
+      "content": "li:nth-of-type(2) {\n  color: orange;\n}\nli:nth-last-child(1) {\n  font-weight: bold;\n}"
+    },
+    {
+      "lessonId": "mod11-lsn09",
+      "title": "Using :has() Selector (CSS4)",
+      "type": "theory",
+      "content": ":has() selects elements containing specific descendants, e.g., div:has(> p) {} (browser support varies)."
+    },
+    {
+      "lessonId": "mod11-lsn10",
+      "title": "Mini Project: Complex Selector Styling",
+      "type": "code",
+      "content": "/* Style a navigation menu using combinators and advanced selectors */"
+    }
+  ]
+}

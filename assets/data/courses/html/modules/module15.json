@@ -1,0 +1,69 @@
+{
+  "courseId": "html",
+  "moduleId": "mod15",
+  "title": "HTML and JavaScript Integration",
+  "description": "Learn how to integrate JavaScript with HTML to make web pages interactive.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod15-lsn01",
+      "title": "Introduction to JavaScript in HTML",
+      "type": "theory",
+      "content": "JavaScript can be embedded directly in HTML using the <script> tag, allowing dynamic content and interactive behavior on web pages."
+    },
+    {
+      "lessonId": "mod15-lsn02",
+      "title": "Using the <script> Tag",
+      "type": "code",
+      "content": "<!-- Inline JavaScript example -->\n<script>\n  alert('Hello from JavaScript!');\n</script>"
+    },
+    {
+      "lessonId": "mod15-lsn03",
+      "title": "External JavaScript Files",
+      "type": "code",
+      "content": "<!-- Linking an external JavaScript file -->\n<script src=\"script.js\"></script>"
+    },
+    {
+      "lessonId": "mod15-lsn04",
+      "title": "JavaScript Event Attributes",
+      "type": "theory",
+      "content": "HTML elements can use event attributes like onclick, onmouseover, oninput to trigger JavaScript functions when user interacts."
+    },
+    {
+      "lessonId": "mod15-lsn05",
+      "title": "Example: onclick Event",
+      "type": "code",
+      "content": "<button onclick=\"alert('Button clicked!')\">Click Me</button>"
+    },
+    {
+      "lessonId": "mod15-lsn06",
+      "title": "Manipulating HTML Elements with JavaScript",
+      "type": "code",
+      "content": "<!-- Change content dynamically -->\n<p id=\"demo\">Original Text</p>\n<script>\n  document.getElementById('demo').innerText = 'Text changed by JavaScript!';\n</script>"
+    },
+    {
+      "lessonId": "mod15-lsn07",
+      "title": "JavaScript and the DOM",
+      "type": "theory",
+      "content": "The Document Object Model (DOM) represents the HTML document as nodes and objects, which JavaScript can manipulate to change page content, style, and structure."
+    },
+    {
+      "lessonId": "mod15-lsn08",
+      "title": "Listening for Events in JavaScript",
+      "type": "code",
+      "content": "<!-- Add event listener -->\n<button id=\"btn\">Click Me</button>\n<script>\n  document.getElementById('btn').addEventListener('click', function() {\n    alert('Button clicked via event listener!');\n  });\n</script>"
+    },
+    {
+      "lessonId": "mod15-lsn09",
+      "title": "JavaScript Timing Events",
+      "type": "theory",
+      "content": "Use setTimeout and setInterval to run JavaScript code after a delay or repeatedly at intervals, enabling animations and timed updates."
+    },
+    {
+      "lessonId": "mod15-lsn10",
+      "title": "Best Practices for Integrating JavaScript and HTML",
+      "type": "theory",
+      "content": "Keep JavaScript separate from HTML when possible, use unobtrusive event handling, and ensure scripts load efficiently to maintain performance."
+    }
+  ]
+}

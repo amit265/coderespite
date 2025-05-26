@@ -51,7 +51,8 @@ export default function CourseId() {
     >
       <View style={{ width: 100, height: 100 }}>
         <Image
-          source={flashcardIcons[selectedCourse?.icon]}
+          source={flashcardIcons[selectedCourse?.icon]||
+            require("../../../assets/default-icon.png")}
           style={{
             width: "100%",
             height: "100%",

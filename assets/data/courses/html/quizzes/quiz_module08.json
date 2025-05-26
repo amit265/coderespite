@@ -1,0 +1,71 @@
+{
+  "quizId": "qz08",
+  "courseId": "html",
+  "moduleId": "mod08",
+  "title": "Forms and Input Elements",
+  "tags": ["html", "forms", "input", "textarea", "select", "radio", "checkbox", "submit"],
+  "difficulty": "medium",
+  "description": "Learn to create forms with various input types including text fields, textareas, select dropdowns, radio buttons, checkboxes, and submit buttons.",
+  "quiz": [
+    {
+      "question": "Which tag is used to create a form in HTML?",
+      "options": ["<input>", "<form>", "<fieldset>", "<label>"],
+      "correctAnswer": "<form>",
+      "explanation": "The `<form>` tag wraps all form elements."
+    },
+    {
+      "question": "What attribute of the <form> tag specifies where to send form data on submission?",
+      "options": ["action", "method", "type", "submit"],
+      "correctAnswer": "action",
+      "explanation": "The `action` attribute defines the URL to which the form data is sent."
+    },
+    {
+      "question": "Which input type creates a multi-line text box?",
+      "options": ["<input type='text'>", "<textarea>", "<input type='textarea'>", "<text>"],
+      "correctAnswer": "<textarea>",
+      "explanation": "`<textarea>` creates a multi-line text input."
+    },
+    {
+      "question": "Which input type creates a dropdown list?",
+      "options": ["<select>", "<input type='dropdown'>", "<dropdown>", "<input type='select'>"],
+      "correctAnswer": "<select>",
+      "explanation": "`<select>` is used for dropdown menus."
+    },
+    {
+      "question": "What attribute groups radio buttons so only one can be selected at a time?",
+      "options": ["id", "name", "value", "group"],
+      "correctAnswer": "name",
+      "explanation": "Radio buttons with the same `name` attribute belong to one group."
+    },
+    {
+      "question": "Which input type creates a checkbox?",
+      "options": ["<input type='checkbox'>", "<input type='check'>", "<checkbox>", "<input type='option'>"],
+      "correctAnswer": "<input type='checkbox'>",
+      "explanation": "`checkbox` allows multiple selections."
+    },
+    {
+      "question": "How do you create a submit button in a form?",
+      "options": ["<button>", "<input type='submit'>", "<input type='button'>", "Both a and b"],
+      "correctAnswer": "Both a and b",
+      "explanation": "You can use `<button>` or `<input type='submit'>` for submitting forms."
+    },
+    {
+      "question": "Which attribute specifies the placeholder text inside an input field?",
+      "options": ["placeholder", "value", "label", "title"],
+      "correctAnswer": "placeholder",
+      "explanation": "The `placeholder` attribute shows hint text inside inputs."
+    },
+    {
+      "question": "What attribute is used to disable a form input?",
+      "options": ["readonly", "disabled", "inactive", "block"],
+      "correctAnswer": "disabled",
+      "explanation": "The `disabled` attribute makes the input uneditable and excluded from submission."
+    },
+    {
+      "question": "Which tag is used to associate text labels with form inputs?",
+      "options": ["<label>", "<text>", "<caption>", "<legend>"],
+      "correctAnswer": "<label>",
+      "explanation": "The `<label>` tag improves accessibility by linking labels to inputs."
+    }
+  ]
+}

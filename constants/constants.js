@@ -4,6 +4,9 @@ export const courseIcons = {
   js: require("../assets/images/courses/js.png"),
   react: require("../assets/images/courses/react.png"),
   py: require("../assets/images/courses/py.png"),
+  node: require("../assets/images/flashcards/py.png"),
+  rn: require("../assets/images/flashcards/py.png"),
+  dsa: require("../assets/images/flashcards/py.png"),
 
   // Add other mappings
 };
@@ -14,6 +17,9 @@ export const flashcardIcons = {
   js: require("../assets/images/flashcards/js.png"),
   react: require("../assets/images/flashcards/react.png"),
   py: require("../assets/images/flashcards/py.png"),
+  node: require("../assets/images/flashcards/py.png"),
+  rn: require("../assets/images/flashcards/py.png"),
+  dsa: require("../assets/images/flashcards/py.png"),
 
   // Add other mappings
 };

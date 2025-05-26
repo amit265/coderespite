@@ -1,0 +1,121 @@
+{
+  "quizId": "qz14",
+  "courseId": "css",
+  "moduleId": "mod14",
+  "title": "Reusable and Scalable CSS (BEM & Utilities)",
+  "tags": ["css", "scalable", "BEM", "utilities", "best-practices"],
+  "difficulty": "medium",
+  "description": "Learn techniques for writing reusable and scalable CSS using BEM methodology and utility classes.",
+  "quiz": [
+    {
+      "question": "What does BEM stand for in CSS?",
+      "options": [
+        "Block Element Modifier",
+        "Base Element Model",
+        "Boolean Element Method",
+        "Block Element Method"
+      ],
+      "correctAnswer": "Block Element Modifier",
+      "explanation": "BEM is a naming convention for CSS classes to improve code maintainability."
+    },
+    {
+      "question": "In BEM, what is a 'Block'?",
+      "options": [
+        "A standalone entity that is meaningful on its own",
+        "A child element inside another element",
+        "A CSS property",
+        "A JavaScript function"
+      ],
+      "correctAnswer": "A standalone entity that is meaningful on its own",
+      "explanation": "Blocks are the top-level abstraction of a component."
+    },
+    {
+      "question": "How are elements represented in BEM naming?",
+      "options": [
+        "block__element",
+        "block-element",
+        "block.element",
+        "block_element"
+      ],
+      "correctAnswer": "block__element",
+      "explanation": "Elements are connected to blocks with double underscores."
+    },
+    {
+      "question": "What symbol is used in BEM to denote modifiers?",
+      "options": [
+        "--",
+        "__",
+        "-",
+        "_"
+      ],
+      "correctAnswer": "--",
+      "explanation": "Modifiers are connected with double dashes."
+    },
+    {
+      "question": "What is the primary benefit of using utility classes in CSS?",
+      "options": [
+        "Reusability and consistency",
+        "Faster rendering",
+        "Avoiding the use of JavaScript",
+        "Reducing file size only"
+      ],
+      "correctAnswer": "Reusability and consistency",
+      "explanation": "Utility classes allow applying small, reusable styles quickly."
+    },
+    {
+      "question": "Which of these is a common utility class?",
+      "options": [
+        ".text-center",
+        ".btn-primary",
+        ".nav__item",
+        ".header__logo"
+      ],
+      "correctAnswer": ".text-center",
+      "explanation": "Utility classes like .text-center apply common styles like text alignment."
+    },
+    {
+      "question": "Why is BEM considered a scalable CSS methodology?",
+      "options": [
+        "It reduces specificity conflicts",
+        "It encourages inline styles",
+        "It uses IDs extensively",
+        "It requires JavaScript"
+      ],
+      "correctAnswer": "It reduces specificity conflicts",
+      "explanation": "BEM uses flat class structure that avoids deep nesting and specificity issues."
+    },
+    {
+      "question": "Which of these is NOT a part of BEM naming convention?",
+      "options": [
+        "Block",
+        "Element",
+        "Modifier",
+        "Attribute"
+      ],
+      "correctAnswer": "Attribute",
+      "explanation": "Attributes are not part of BEM naming convention."
+    },
+    {
+      "question": "What approach helps in maintaining CSS at scale?",
+      "options": [
+        "Modular and reusable components",
+        "Writing all styles in one file",
+        "Using inline styles everywhere",
+        "Avoiding classes"
+      ],
+      "correctAnswer": "Modular and reusable components",
+      "explanation": "Modularity and reusability help manage CSS effectively."
+    },
+    {
+      "question": "How does BEM improve collaboration among developers?",
+      "options": [
+        "By providing a clear naming convention",
+        "By hiding CSS files",
+        "By using inline styles",
+        "By avoiding comments"
+      ],
+      "correctAnswer": "By providing a clear naming convention",
+      "explanation": "Consistent naming helps teams understand and work on the codebase efficiently."
+    }
+  ]
+}

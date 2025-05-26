@@ -14,10 +14,10 @@ export default function ProgressBar() {
   return (
     <View className="mt-4 p-2 bg-white rounded-xl">
       <View className="flex-row justify-between items-center mb-4">
-        <Text className="text-base font-nunito-semibold text-gray-700">
+        <Text className="text-base font-nunito-semibold text-gray-800 font-bold">
           Level: {userData?.level?.currentLevel || 1}
         </Text>
-        <Text className="text-base font-nunito-semibold text-gray-700">
+        <Text className="text-base font-nunito-semibold text-gray-800 font-bold">
           XP: {xp}/{nextXP}
         </Text>
       </View>

@@ -7,12 +7,28 @@ import Button from "../shared/Button";
 
 export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
   const [randomModule, setRandomModule] = useState(null);
+  const [courseName, setCourseName] = useState("");
   const router = useRouter();
   const { setClickCount } = useContext(adConfigContext);
-  const courseName = "JavaScript";
-  const randomCourseId = "javascript";
+
+  // console.log("allcourses", allCourses);
+
+  // console.log("randomCourseId", randomCourseId);
+
+  const defaultModule = {
+    title: "Introduction to JavaScript",
+    moduleId: "mod01",
+  };
 
   useEffect(() => {
+    const allCourseId = allCourses.map((a) => a?.id);
+
+    const randomCourseId =
+      allCourseId[Math.floor(Math.random() * allCourseId.length)];
+    console.log("randomCourseId", randomCourseId);
+    const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
+    console.log("randomCourse", randomCourse);
+    setCourseName(randomCourse?.title || "Featured Course");
     if (Array.isArray(allCourses) && allCourses.length > 0) {
       const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
 
@@ -27,12 +43,17 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
         const selectedModule = randomCourse.modules[randomIndex];
         setRandomModule(selectedModule);
       } else {
-        console.log("No modules found in the course:");
+        console.log("No modules found in the course, using default.");
+        setRandomModule(defaultModule);
       }
+    } else {
+      // If allCourses itself is not valid, still provide fallback
+      console.log("No valid courses found, using default.");
+      setRandomModule(defaultModule);
     }
-  }, [allCourses]); // <- listen for data changes!
+  }, [allCourses]);
 
-  if (!randomModule) return null; // or show a loading indicator
+  if (!randomModule) return null;
 
   return (
     <TouchableOpacity className="bg-white rounded-xl shadow-md mx-4 mb-4 p-6">
@@ -52,7 +73,7 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
         onPress={() => {
           setClickCount((prev) => prev + 1);
           setSelectedModule(randomModule);
-          router.push(`/learn/courses/modules/${randomModule.moduleId}`);
+          router.push(`/learn/courses/modules/${randomModule?.moduleId}`);
         }}
       />
     </TouchableOpacity>

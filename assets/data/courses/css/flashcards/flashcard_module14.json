@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod14",
+  "courseId": "css",
+  "moduleId": "mod14",
+  "title": "Reusable and Scalable CSS (BEM & Utilities)",
+  "description": "Techniques for writing maintainable, reusable, and scalable CSS using methodologies like BEM and utility classes.",
+  "flashcards": [
+    {
+      "question": "What does BEM stand for in CSS?",
+      "answer": "Block, Element, Modifier."
+    },
+    {
+      "question": "What is the purpose of the BEM naming convention?",
+      "answer": "To create clear, modular, and reusable CSS classes."
+    },
+    {
+      "question": "In BEM, what is a Block?",
+      "answer": "A standalone component that is meaningful on its own."
+    },
+    {
+      "question": "In BEM, what is an Element?",
+      "answer": "A part of a block that performs a certain function."
+    },
+    {
+      "question": "In BEM, what is a Modifier?",
+      "answer": "A flag on a block or element to change appearance or behavior."
+    },
+    {
+      "question": "Give an example of a BEM class name.",
+      "answer": "block__element--modifier."
+    },
+    {
+      "question": "What are utility classes in CSS?",
+      "answer": "Small, single-purpose classes that apply specific styles."
+    },
+    {
+      "question": "Why are utility classes useful?",
+      "answer": "They reduce code duplication and speed up development."
+    },
+    {
+      "question": "How does using BEM help in teamwork?",
+      "answer": "It creates a consistent structure that is easy to understand and maintain."
+    },
+    {
+      "question": "Can BEM be combined with utility classes?",
+      "answer": "Yes, they complement each other for scalable and maintainable CSS."
+    }
+  ]
+}

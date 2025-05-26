@@ -102,7 +102,8 @@ export default function ModuleId() {
         <View className="flex flex-row gap-4 p-4">
           <View style={{ width: 120, height: 120 }}>
             <Image
-              source={courseIcons[selectedCourse?.icon]}
+              source={courseIcons[selectedCourse?.icon]||
+                require("../../../../assets/default-icon.png")}
               style={{
                 width: "100%",
                 height: "100%",

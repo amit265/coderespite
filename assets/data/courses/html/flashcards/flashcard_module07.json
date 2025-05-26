@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod07",
+  "courseId": "html",
+  "moduleId": "mod07",
+  "title": "Lists and Tables",
+  "description": "Understanding different list types and table structures in HTML.",
+  "flashcards": [
+    {
+      "question": "What are the three main types of lists in HTML?",
+      "answer": "Ordered lists (<ol>), unordered lists (<ul>), and definition lists (<dl>)."
+    },
+    {
+      "question": "Which tag is used to create an item in an ordered or unordered list?",
+      "answer": "The <li> tag."
+    },
+    {
+      "question": "What tags define terms and their descriptions in a definition list?",
+      "answer": "<dt> for the term and <dd> for the description."
+    },
+    {
+      "question": "Which tag is used to create a table in HTML?",
+      "answer": "The <table> tag."
+    },
+    {
+      "question": "What tags are used to define a table row and a table header cell?",
+      "answer": "<tr> for table row and <th> for table header cell."
+    },
+    {
+      "question": "How do you define a normal cell in a table?",
+      "answer": "Using the <td> tag."
+    },
+    {
+      "question": "What attribute can be used to merge cells horizontally in a table?",
+      "answer": "The colspan attribute."
+    },
+    {
+      "question": "How can you merge cells vertically in a table?",
+      "answer": "Using the rowspan attribute."
+    },
+    {
+      "question": "What tags group the header, body, and footer sections of a table?",
+      "answer": "<thead>, <tbody>, and <tfoot> respectively."
+    },
+    {
+      "question": "Why are tables generally not recommended for layout purposes?",
+      "answer": "Because they reduce accessibility and flexibility; CSS should be used for layout instead."
+    }
+  ]
+}

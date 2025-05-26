@@ -2,14 +2,14 @@
   {
     "id": "javascript",
     "title": "JavaScript",
-    "description": "Master JavaScript from fundamentals to advanced concepts, including DOM, async, and ES6+ features.",
+    "description": "Master JavaScript from fundamentals to advanced concepts, including DOM, async, ES6+, and TypeScript essentials.",
     "icon": "js",
     "color": "#f0db4f"
   },
   {
     "id": "python",
     "title": "Python",
-    "description": "Learn Python programming with a focus on simplicity, readability, and real-world projects.",
+    "description": "Learn Python programming with a focus on simplicity, readability, problem solving, and real-world projects.",
     "icon": "py",
     "color": "#306998"
   },
@@ -33,5 +33,26 @@
     "description": "Design beautiful and responsive websites using modern CSS techniques and layouts.",
     "icon": "css",
     "color": "#264de4"
+  },
+  {
+    "id": "nodejs",
+    "title": "Node.js",
+    "description": "Develop fast and scalable server-side applications using Node.js and Express.",
+    "icon": "node",
+    "color": "#68a063"
+  },
+  {
+    "id": "reactnative",
+    "title": "React Native",
+    "description": "Create powerful mobile applications for Android and iOS using React Native.",
+    "icon": "rn",
+    "color": "#61dafb"
+  },
+  {
+    "id": "dsa",
+    "title": "Data Structures & Algorithms",
+    "description": "Strengthen your coding skills by mastering data structures and algorithms with hands-on problem solving.",
+    "icon": "dsa",
+    "color": "#4b0082"
   }
 ]

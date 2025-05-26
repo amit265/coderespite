@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod13",
+  "courseId": "html",
+  "moduleId": "mod13",
+  "title": "Forms: Validation and Accessibility",
+  "description": "Learn about HTML5 form validation, accessibility features, and best practices for creating user-friendly forms.",
+  "flashcards": [
+    {
+      "question": "What attribute makes a form input field mandatory?",
+      "answer": "The `required` attribute."
+    },
+    {
+      "question": "How can you enforce a specific pattern in an input field?",
+      "answer": "Using the `pattern` attribute with a regular expression."
+    },
+    {
+      "question": "What is the purpose of the `<label>` tag in forms?",
+      "answer": "It associates a text label with a form control, improving accessibility."
+    },
+    {
+      "question": "How do you link a `<label>` to an input element?",
+      "answer": "By matching the label's `for` attribute with the input's `id` attribute."
+    },
+    {
+      "question": "What does the `type='email'` input do?",
+      "answer": "It validates the input to ensure it is a correctly formatted email address."
+    },
+    {
+      "question": "What is the use of the `<fieldset>` and `<legend>` tags?",
+      "answer": "They group related form elements and provide a caption for the group."
+    },
+    {
+      "question": "Why is accessibility important in forms?",
+      "answer": "To ensure users with disabilities can navigate and interact with forms effectively."
+    },
+    {
+      "question": "What ARIA role can be used to improve form accessibility?",
+      "answer": "Roles like `aria-required`, `aria-invalid`, and `aria-describedby` can be used."
+    },
+    {
+      "question": "How does the `novalidate` attribute affect a form?",
+      "answer": "It disables the browser's default form validation."
+    },
+    {
+      "question": "What attribute allows you to set a custom validation message?",
+      "answer": "Using JavaScript’s `setCustomValidity()` method."
+    }
+  ]
+}

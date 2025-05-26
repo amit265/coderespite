@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod15",
+  "courseId": "css",
+  "moduleId": "mod15",
+  "title": "Final Project: Build a Responsive Website",
+  "description": "Applying all learned CSS concepts to create a fully responsive and visually appealing website.",
+  "flashcards": [
+    {
+      "question": "What is the primary goal of a responsive website?",
+      "answer": "To ensure the website looks good and functions well on all device sizes."
+    },
+    {
+      "question": "Which CSS techniques are essential for responsive design?",
+      "answer": "Media queries, flexible grids, and responsive units like %, em, and rem."
+    },
+    {
+      "question": "How do media queries work in CSS?",
+      "answer": "They apply CSS rules conditionally based on device characteristics like screen width."
+    },
+    {
+      "question": "What is the advantage of using relative units (%, em, rem) over fixed units (px)?",
+      "answer": "They allow layouts and typography to scale appropriately on different devices."
+    },
+    {
+      "question": "Why is mobile-first design recommended?",
+      "answer": "It ensures a solid base design for small screens, then progressively enhances for larger ones."
+    },
+    {
+      "question": "How can Flexbox help in building responsive layouts?",
+      "answer": "By allowing flexible arrangement and distribution of elements that adapt to screen size."
+    },
+    {
+      "question": "What role does the viewport meta tag play in responsive design?",
+      "answer": "It controls the viewport’s size and scale on mobile devices."
+    },
+    {
+      "question": "Why is testing on multiple devices important?",
+      "answer": "To ensure consistent user experience across different screen sizes and browsers."
+    },
+    {
+      "question": "How can CSS Grid enhance responsive design?",
+      "answer": "By providing a powerful two-dimensional layout system that adapts to varying screen sizes."
+    },
+    {
+      "question": "What is the benefit of combining CSS Grid and Flexbox in a project?",
+      "answer": "It leverages the strengths of both layout models for complex and flexible designs."
+    }
+  ]
+}

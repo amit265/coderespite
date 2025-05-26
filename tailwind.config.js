@@ -10,12 +10,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        nunito: ["Nunito-Regular"],
-        "nunito-semibold": ["Nunito-Semibold"],
-        "nunito-bold": ["Nunito-Bold"],
-        quicksand: ["Quicksand-Regular"],
-        "quicksand-semibold": ["Quicksand-Semibold"],
-        "quicksand-bold": ["Quicksand-Bold"],
+        nunito: ["nunito"],
+        "nunito-semibold": ["nunito-semibold"],
+        "nunito-bold": ["nunito-bold"],
+        quicksand: ["quicksand"],
+        "quicksand-semibold": ["quicksand-semibold"],
+        "quicksand-bold": ["quicksand-bold"],
       },
     },
   },

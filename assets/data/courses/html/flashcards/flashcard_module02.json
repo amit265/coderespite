@@ -1,82 +1,49 @@
-[{
-    "flashcardId": "fc101",
-    "question": "What keyword is used to declare a variable in JavaScript?",
-    "answer": "let",
-    "explanation": "JavaScript has 'var', 'let', and 'const'. 'let' is block scoped.",
-    "tags": ["variables", "keywords"],
-    "difficulty": "easy"
-  },
-  {
-    "flashcardId": "fc102",
-    "question": "How do you declare a constant in JavaScript?",
-    "answer": "const",
-    "explanation": "JavaScript has 'var', 'let', and 'const'. 'const' is used for immutable values.",
-    "tags": ["variables", "const"],
-    "difficulty": "easy"
-  },
-  {
-    "flashcardId": "fc103",
-    "question": "What is the output of typeof null?",
-    "answer": "object",
-    "explanation": "This is a well-known JavaScript quirk where typeof null returns 'object'.",
-    "tags": ["types", "quirks"],
-    "difficulty": "medium"
-  },
-  {
-    "flashcardId": "fc104",
-    "question": "How do you write a single-line comment in JavaScript?",
-    "answer": "// comment",
-    "explanation": "Use double forward slashes for single-line comments.",
-    "tags": ["syntax", "comments"],
-    "difficulty": "easy"
-  },
-  {
-    "flashcardId": "fc105",
-    "question": "What is a closure in JavaScript?",
-    "answer": "A function that retains access to its lexical scope",
-    "explanation": "Closures allow functions to access variables from an outer function after the outer function has returned.",
-    "tags": ["functions", "closures"],
-    "difficulty": "hard"
-  },
-  {
-    "flashcardId": "fc106",
-    "question": "What does NaN stand for?",
-    "answer": "Not-a-Number",
-    "explanation": "NaN is a special value indicating an invalid number result.",
-    "tags": ["types", "numbers"],
-    "difficulty": "easy"
-  },
-  {
-    "flashcardId": "fc107",
-    "question": "How do you define a function in JavaScript?",
-    "answer": "function name() {}",
-    "explanation": "The function keyword is used followed by the name and parentheses.",
-    "tags": ["functions", "syntax"],
-    "difficulty": "easy"
-  },
-  {
-    "flashcardId": "fc108",
-    "question": "What does '===' do in JavaScript?",
-    "answer": "Checks for strict equality",
-    "explanation": "'===' checks for value and type equality without type coercion.",
-    "tags": ["comparison", "operators"],
-    "difficulty": "medium"
-  },
-  {
-    "flashcardId": "fc109",
-    "question": "What is the result of '2' + 2 in JavaScript?",
-    "answer": "22",
-    "explanation": "JavaScript coerces the number 2 into a string, resulting in concatenation.",
-    "tags": ["coercion", "types"],
-    "difficulty": "medium"
-  },
-  {
-    "flashcardId": "fc110",
-    "question": "How do you create an array in JavaScript?",
-    "answer": "[1, 2, 3]",
-    "explanation": "Arrays are created using square brackets.",
-    "tags": ["arrays", "syntax"],
-    "difficulty": "easy"
-  }
-
-]
+{
+  "id": "fc-mod02",
+  "courseId": "html",
+  "moduleId": "mod02",
+  "title": "What is HTML? Structure, Syntax, and Doctype",
+  "description": "Understanding HTML's role, basic syntax, and the doctype declaration.",
+  "flashcards": [
+    {
+      "question": "What is the main role of HTML in web development?",
+      "answer": "To create the structure and content of a web page."
+    },
+    {
+      "question": "What does a typical HTML element consist of?",
+      "answer": "An opening tag, content, and a closing tag."
+    },
+    {
+      "question": "What is an empty (self-closing) tag in HTML?",
+      "answer": "A tag that doesn't have any content or closing tag, e.g., <br> or <img>."
+    },
+    {
+      "question": "Why is the <!DOCTYPE html> declaration important?",
+      "answer": "It tells the browser to render the page in standards mode using HTML5."
+    },
+    {
+      "question": "What characters define the start and end of an HTML tag?",
+      "answer": "Angle brackets: < and >."
+    },
+    {
+      "question": "What is the syntax for an HTML comment?",
+      "answer": "<!-- Your comment here -->."
+    },
+    {
+      "question": "What is the difference between an element and a tag?",
+      "answer": "A tag is the markup (like <p>), and an element includes the tag plus its content and closing tag."
+    },
+    {
+      "question": "Can HTML tags be nested inside each other?",
+      "answer": "Yes, tags can be nested to create complex structures."
+    },
+    {
+      "question": "Are HTML tag names case sensitive?",
+      "answer": "No, HTML tag names are case-insensitive."
+    },
+    {
+      "question": "What is the purpose of attributes in an HTML tag?",
+      "answer": "To provide additional information or settings for an element."
+    }
+  ]
+}

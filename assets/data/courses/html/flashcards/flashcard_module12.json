@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod12",
+  "courseId": "html",
+  "moduleId": "mod12",
+  "title": "Embedding Content",
+  "description": "Learn how to embed external content such as videos, maps, and other media using HTML.",
+  "flashcards": [
+    {
+      "question": "What HTML tag is commonly used to embed another webpage or document?",
+      "answer": "The <iframe> tag."
+    },
+    {
+      "question": "How do you embed a YouTube video in an HTML page?",
+      "answer": "Using an <iframe> tag with the YouTube video URL as the src attribute."
+    },
+    {
+      "question": "What attributes are important for the <iframe> tag?",
+      "answer": "src, width, height, allowfullscreen, frameborder, and title."
+    },
+    {
+      "question": "What is the purpose of the <embed> tag?",
+      "answer": "It embeds external content like PDFs, videos, or Flash files."
+    },
+    {
+      "question": "How is the <object> tag different from <embed>?",
+      "answer": "The <object> tag is more versatile and can contain fallback content if the embedded resource fails to load."
+    },
+    {
+      "question": "Can you embed Google Maps in a webpage? If yes, how?",
+      "answer": "Yes, by copying the embed code from Google Maps and placing it inside an <iframe>."
+    },
+    {
+      "question": "What attribute controls whether an iframe allows fullscreen?",
+      "answer": "The allowfullscreen attribute."
+    },
+    {
+      "question": "Are there any security concerns with using <iframe>?",
+      "answer": "Yes, including potential cross-site scripting (XSS) and clickjacking risks, mitigated by sandboxing and Content Security Policy."
+    },
+    {
+      "question": "What does the sandbox attribute do in an iframe?",
+      "answer": "It imposes restrictions on the content inside the iframe for better security."
+    },
+    {
+      "question": "Can multimedia content be embedded directly in HTML without external services?",
+      "answer": "Yes, using <audio> and <video> tags."
+    }
+  ]
+}

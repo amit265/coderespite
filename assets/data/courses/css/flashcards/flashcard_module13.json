@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod13",
+  "courseId": "css",
+  "moduleId": "mod13",
+  "title": "Advanced Layout Techniques",
+  "description": "Using advanced CSS methods to build complex and flexible layouts.",
+  "flashcards": [
+    {
+      "question": "What is the CSS Multi-column Layout?",
+      "answer": "A layout method that divides content into multiple columns, similar to newspaper style."
+    },
+    {
+      "question": "Which properties are used in multi-column layout?",
+      "answer": "column-count, column-width, column-gap, column-rule."
+    },
+    {
+      "question": "What is the difference between Flexbox and Grid layouts?",
+      "answer": "Flexbox is one-dimensional (row or column), Grid is two-dimensional (rows and columns)."
+    },
+    {
+      "question": "How does the CSS subgrid feature work?",
+      "answer": "It allows nested grids to inherit the parent grid’s track sizing."
+    },
+    {
+      "question": "What is the purpose of the CSS float property?",
+      "answer": "To place elements to the left or right and allow text to wrap around them."
+    },
+    {
+      "question": "Why is clearfix used in CSS layouts?",
+      "answer": "To clear floats and ensure the container wraps floated children."
+    },
+    {
+      "question": "What are CSS regions?",
+      "answer": "A module that allows content to flow through multiple containers or regions."
+    },
+    {
+      "question": "How do you center a block element horizontally using CSS?",
+      "answer": "By setting margin-left and margin-right to auto."
+    },
+    {
+      "question": "What is the difference between position: relative and position: absolute?",
+      "answer": "Relative positions relative to its normal place; absolute positions relative to the nearest positioned ancestor."
+    },
+    {
+      "question": "What CSS property controls stacking order of elements?",
+      "answer": "z-index."
+    }
+  ]
+}

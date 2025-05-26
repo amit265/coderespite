@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod06",
+  "courseId": "html",
+  "moduleId": "mod06",
+  "title": "Images and Multimedia",
+  "description": "Using images, audio, and video elements to embed multimedia content in web pages.",
+  "flashcards": [
+    {
+      "question": "Which tag is used to embed an image in HTML?",
+      "answer": "The <img> tag."
+    },
+    {
+      "question": "What attribute specifies the image source URL?",
+      "answer": "The src attribute."
+    },
+    {
+      "question": "Why is the alt attribute important for images?",
+      "answer": "It provides alternative text for accessibility and when the image fails to load."
+    },
+    {
+      "question": "How do you embed an audio file?",
+      "answer": "Using the <audio> tag."
+    },
+    {
+      "question": "Which attribute adds playback controls to audio and video elements?",
+      "answer": "The controls attribute."
+    },
+    {
+      "question": "How do you embed a video in HTML?",
+      "answer": "Using the <video> tag."
+    },
+    {
+      "question": "What attribute defines multiple video sources for browser compatibility?",
+      "answer": "The <source> tag inside the <video> element."
+    },
+    {
+      "question": "Can you autoplay audio or video in HTML?",
+      "answer": "Yes, by using the autoplay attribute, but some browsers restrict autoplay for usability reasons."
+    },
+    {
+      "question": "How do you make a video loop continuously?",
+      "answer": "Using the loop attribute."
+    },
+    {
+      "question": "What is the purpose of the poster attribute in the <video> tag?",
+      "answer": "It specifies an image to show before the video plays."
+    }
+  ]
+}

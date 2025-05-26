@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Modal, ScrollView, Text, View } from "react-native";
 import ProgressBar from "../../components/home/ProgressBar";
 import ProfileModal from "../../components/ProfileModal";
@@ -7,21 +7,27 @@ import QuickStats from "../../components/QuickStats";
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import UserCard from "../../components/UserCard";
-import { allCoursesContext, userDetailsContext } from "../../context/context";
+import { userDetailsContext } from "../../context/context";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
+import { uploadAllData, uploadData } from "../../services/uploadData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
 export default function Profile() {
   const { userData } = useContext(userDetailsContext);
   console.log("userData from profile", userData);
-  const { attemptedQuizData } = useContext(allCoursesContext);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const show = false;
+  const show = true;
   // const data = [
   //   { count: 3, date: "2025-05-14" },
   //   { count: 5, date: "2025-05-15" },
 
   // ];
+  useEffect(() => {
+    const username = userData?.profile?.name;
+    if (username === "user") {
+      setShowModal(true);
+    }
+  }, []);
 
   const data = useMemo(() => generateLastNDaysData(60), []); // 13 weeks x 7 days
   // console.log("data", data);
@@ -59,7 +65,7 @@ export default function Profile() {
         <View className="px-4">
           <UserCard userData={userData} setShowModal={setShowModal} />
         </View>
-        <View className="px-4">
+        <View className="px-4 bg-white mx-4 rounded-lg mt-4 pb-4">
           <ProgressBar />
         </View>
         <View className="px-4">
@@ -74,6 +80,10 @@ export default function Profile() {
 
             <View className="px-4">
               <Button text={"log all data"} type onPress={logAllAsyncStorage} />
+            </View>
+
+            <View className="px-4">
+              <Button text={"upload all data"} type onPress={uploadAllData} />
             </View>
           </View>
         )}

@@ -1,0 +1,119 @@
+{
+  "quizId": "qz09",
+  "courseId": "css",
+  "moduleId": "mod09",
+  "title": "Responsive Design and Media Queries",
+  "tags": ["css", "responsive", "media queries", "design"],
+  "difficulty": "medium",
+  "description": "Understanding how to make websites adapt to different screen sizes using media queries and responsive design principles.",
+  "quiz": [
+    {
+      "question": "What is the main goal of responsive web design?",
+      "options": [
+        "Make websites look good on all devices",
+        "Increase website loading speed",
+        "Use only fixed-width layouts",
+        "Remove all images for mobile"
+      ],
+      "correctAnswer": "Make websites look good on all devices",
+      "explanation": "Responsive design ensures websites adapt to different screen sizes and devices."
+    },
+    {
+      "question": "Which CSS feature is primarily used to apply styles based on device characteristics?",
+      "options": [
+        "Media Queries",
+        "Flexbox",
+        "Grid Layout",
+        "Pseudo-classes"
+      ],
+      "correctAnswer": "Media Queries",
+      "explanation": "Media queries allow CSS to be applied conditionally based on screen size, resolution, etc."
+    },
+    {
+      "question": "How do you write a media query for devices with a maximum width of 600px?",
+      "options": [
+        "@media (max-width: 600px) { ... }",
+        "@media max-width: 600px { ... }",
+        "@media screen and max-width 600px { ... }",
+        "@media (min-width: 600px) { ... }"
+      ],
+      "correctAnswer": "@media (max-width: 600px) { ... }",
+      "explanation": "Correct syntax uses parentheses and max-width in media queries."
+    },
+    {
+      "question": "Which unit is commonly used in responsive design to represent a percentage of the viewport width?",
+      "options": [
+        "vw",
+        "px",
+        "em",
+        "rem"
+      ],
+      "correctAnswer": "vw",
+      "explanation": "vw (viewport width) units are relative to the width of the viewport."
+    },
+    {
+      "question": "What does the 'viewport' meta tag in HTML do?",
+      "options": [
+        "Controls layout on mobile browsers",
+        "Adds a CSS stylesheet",
+        "Defines JavaScript scripts",
+        "Sets background color"
+      ],
+      "correctAnswer": "Controls layout on mobile browsers",
+      "explanation": "The viewport meta tag tells browsers how to adjust page dimensions on mobile."
+    },
+    {
+      "question": "Which media query targets devices with a minimum screen width of 768px?",
+      "options": [
+        "@media (min-width: 768px) { ... }",
+        "@media (max-width: 768px) { ... }",
+        "@media (width: 768px) { ... }",
+        "@media (height: 768px) { ... }"
+      ],
+      "correctAnswer": "@media (min-width: 768px) { ... }",
+      "explanation": "min-width targets devices equal or wider than the specified width."
+    },
+    {
+      "question": "Which CSS property is often used alongside media queries to create flexible layouts?",
+      "options": [
+        "flex",
+        "position",
+        "z-index",
+        "float"
+      ],
+      "correctAnswer": "flex",
+      "explanation": "Flexbox provides a flexible layout structure that works well with responsive design."
+    },
+    {
+      "question": "True or False: Responsive design always requires multiple versions of the same HTML page.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": "False",
+      "explanation": "Responsive design uses one HTML page with CSS to adapt layout, no need for multiple pages."
+    },
+    {
+      "question": "Which CSS unit is relative to the font size of the root element?",
+      "options": [
+        "rem",
+        "px",
+        "em",
+        "vw"
+      ],
+      "correctAnswer": "rem",
+      "explanation": "rem units are relative to the root element’s font size, useful in responsive typography."
+    },
+    {
+      "question": "What is the effect of using 'display: none;' inside a media query?",
+      "options": [
+        "Hides an element on certain screen sizes",
+        "Deletes an element from the DOM",
+        "Changes element's color",
+        "Makes element visible on all devices"
+      ],
+      "correctAnswer": "Hides an element on certain screen sizes",
+      "explanation": "'display: none;' hides the element but it still exists in the DOM."
+    }
+  ]
+}

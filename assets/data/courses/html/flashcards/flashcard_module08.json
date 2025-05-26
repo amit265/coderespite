@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod08",
+  "courseId": "html",
+  "moduleId": "mod08",
+  "title": "Forms and Input Elements",
+  "description": "Introduction to creating interactive forms and using various input types.",
+  "flashcards": [
+    {
+      "question": "Which tag is used to create a form in HTML?",
+      "answer": "The <form> tag."
+    },
+    {
+      "question": "What attribute specifies where to send the form data upon submission?",
+      "answer": "The action attribute."
+    },
+    {
+      "question": "What attribute defines the HTTP method to send form data?",
+      "answer": "The method attribute (usually 'GET' or 'POST')."
+    },
+    {
+      "question": "Name three common input types used in forms.",
+      "answer": "text, password, email (also others like number, checkbox, radio, submit)."
+    },
+    {
+      "question": "Which tag is used for multi-line text input?",
+      "answer": "The <textarea> tag."
+    },
+    {
+      "question": "How do you group related options in a dropdown list?",
+      "answer": "Using the <select> tag with multiple <option> tags."
+    },
+    {
+      "question": "What is the difference between checkbox and radio input types?",
+      "answer": "Checkboxes allow multiple selections; radio buttons allow only one selection within a group."
+    },
+    {
+      "question": "Which attribute is used to make an input field required?",
+      "answer": "The required attribute."
+    },
+    {
+      "question": "How do you add a label to an input for accessibility?",
+      "answer": "Using the <label> tag with the for attribute linked to the input's id."
+    },
+    {
+      "question": "What input type would you use to submit a form?",
+      "answer": "The input type 'submit'."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod03",
+  "courseId": "html",
+  "moduleId": "mod03",
+  "title": "Basic Tags and Page Structure",
+  "description": "Learn about the essential HTML tags that form the structure of a web page.",
+  "flashcards": [
+    {
+      "question": "What are the three main sections of a basic HTML page?",
+      "answer": "<!DOCTYPE>, <html>, and inside <html>: <head> and <body>."
+    },
+    {
+      "question": "What is the purpose of the <html> tag?",
+      "answer": "It wraps all the content of an HTML document and represents the root element."
+    },
+    {
+      "question": "What kind of information goes inside the <head> tag?",
+      "answer": "Metadata like the title, links to stylesheets, scripts, and meta tags."
+    },
+    {
+      "question": "What content is placed inside the <body> tag?",
+      "answer": "All the visible content such as text, images, links, and other elements."
+    },
+    {
+      "question": "Name at least three heading tags in HTML.",
+      "answer": "<h1>, <h2>, <h3> (also <h4>, <h5>, and <h6>)."
+    },
+    {
+      "question": "What is the purpose of the <p> tag?",
+      "answer": "It defines a paragraph of text."
+    },
+    {
+      "question": "How do you add a comment in HTML?",
+      "answer": "Using <!-- comment text here -->."
+    },
+    {
+      "question": "Which tag is used to add a line break?",
+      "answer": "The <br> tag."
+    },
+    {
+      "question": "What is the difference between block-level and inline elements?",
+      "answer": "Block-level elements start on a new line and take full width; inline elements flow within text."
+    },
+    {
+      "question": "Give an example of a block-level and an inline element.",
+      "answer": "<div> is block-level; <span> is inline."
+    }
+  ]
+}

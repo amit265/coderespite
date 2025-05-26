@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod14",
+  "title": "Reusable and Scalable CSS (BEM & Utilities)",
+  "description": "Learn methodologies and best practices for writing reusable, maintainable, and scalable CSS using BEM and utility classes.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod14-lsn01",
+      "title": "Introduction to Scalable CSS",
+      "type": "theory",
+      "content": "Why scalable CSS matters for large projects and maintainability."
+    },
+    {
+      "lessonId": "mod14-lsn02",
+      "title": "Understanding BEM Methodology",
+      "type": "theory",
+      "content": "Block, Element, Modifier naming convention and its benefits."
+    },
+    {
+      "lessonId": "mod14-lsn03",
+      "title": "Writing BEM CSS Selectors",
+      "type": "code",
+      "content": ".block {}\n.block__element {}\n.block--modifier {}"
+    },
+    {
+      "lessonId": "mod14-lsn04",
+      "title": "Structuring Projects with BEM",
+      "type": "theory",
+      "content": "Organizing CSS files and components using BEM."
+    },
+    {
+      "lessonId": "mod14-lsn05",
+      "title": "Introduction to Utility-First CSS",
+      "type": "theory",
+      "content": "Using small, reusable utility classes for rapid development."
+    },
+    {
+      "lessonId": "mod14-lsn06",
+      "title": "Creating Custom Utility Classes",
+      "type": "code",
+      "content": ".text-center { text-align: center; }\n.m-10 { margin: 10px; }"
+    },
+    {
+      "lessonId": "mod14-lsn07",
+      "title": "Combining BEM with Utility Classes",
+      "type": "theory",
+      "content": "Best practices for combining structured BEM classes with utility helpers."
+    },
+    {
+      "lessonId": "mod14-lsn08",
+      "title": "Avoiding CSS Specificity Issues",
+      "type": "theory",
+      "content": "Tips to keep CSS specificity low and manageable."
+    },
+    {
+      "lessonId": "mod14-lsn09",
+      "title": "Using Preprocessors with BEM",
+      "type": "code",
+      "content": "Nesting and variables in SCSS to support BEM structure."
+    },
+    {
+      "lessonId": "mod14-lsn10",
+      "title": "Mini Project: Build a Reusable Component Library",
+      "type": "code",
+      "content": "Create a set of UI components using BEM and utility classes for reuse."
+    }
+  ]
+}

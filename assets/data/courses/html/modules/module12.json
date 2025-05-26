@@ -1,0 +1,69 @@
+{
+  "courseId": "html",
+  "moduleId": "mod12",
+  "title": "Embedding Content",
+  "description": "Learn how to embed external content like other web pages, videos, maps, and interactive objects using HTML tags.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod12-lsn01",
+      "title": "Introduction to Embedding Content",
+      "type": "theory",
+      "content": "Embedding content allows you to display external resources such as videos, maps, and other web pages directly inside your HTML document."
+    },
+    {
+      "lessonId": "mod12-lsn02",
+      "title": "The <iframe> Element",
+      "type": "theory",
+      "content": "The <iframe> tag embeds another HTML page within the current page. It can be used for embedding videos, maps, and other web content."
+    },
+    {
+      "lessonId": "mod12-lsn03",
+      "title": "Attributes of <iframe>",
+      "type": "theory",
+      "content": "Important attributes include src (source URL), width, height, frameborder, allowfullscreen, and sandbox for security."
+    },
+    {
+      "lessonId": "mod12-lsn04",
+      "title": "Embedding YouTube Videos with <iframe>",
+      "type": "code",
+      "content": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\" frameborder=\"0\" allowfullscreen></iframe>"
+    },
+    {
+      "lessonId": "mod12-lsn05",
+      "title": "The <object> Element",
+      "type": "theory",
+      "content": "The <object> tag embeds multimedia like PDFs, Flash content, or SVG images. It provides fallback content if the object cannot be loaded."
+    },
+    {
+      "lessonId": "mod12-lsn06",
+      "title": "Embedding Google Maps",
+      "type": "code",
+      "content": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18...\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen></iframe>"
+    },
+    {
+      "lessonId": "mod12-lsn07",
+      "title": "Difference Between <iframe> and <embed>",
+      "type": "theory",
+      "content": "While <iframe> embeds an entire HTML document, <embed> is used primarily for multimedia content like videos, audio, or interactive plugins."
+    },
+    {
+      "lessonId": "mod12-lsn08",
+      "title": "The <embed> Element",
+      "type": "code",
+      "content": "<embed src=\"movie.swf\" width=\"400\" height=\"300\" type=\"application/x-shockwave-flash\">"
+    },
+    {
+      "lessonId": "mod12-lsn09",
+      "title": "Security Considerations",
+      "type": "theory",
+      "content": "Embedding content from untrusted sources can lead to security risks. Use attributes like sandbox on <iframe> to limit capabilities."
+    },
+    {
+      "lessonId": "mod12-lsn10",
+      "title": "Best Practices for Embedding Content",
+      "type": "theory",
+      "content": "Always provide fallback content, use responsive design techniques for embedded content, and ensure accessibility for all users."
+    }
+  ]
+}

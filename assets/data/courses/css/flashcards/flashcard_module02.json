@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod02",
+  "courseId": "css",
+  "moduleId": "mod02",
+  "title": "CSS Syntax, Selectors, and Application",
+  "description": "Understanding CSS syntax, different types of selectors, and how to apply styles effectively.",
+  "flashcards": [
+    {
+      "question": "What is the basic structure of a CSS rule?",
+      "answer": "A selector followed by a declaration block enclosed in curly braces, e.g., selector { property: value; }."
+    },
+    {
+      "question": "What is a CSS selector?",
+      "answer": "It specifies the HTML element(s) to which a set of CSS rules apply."
+    },
+    {
+      "question": "Name three common types of CSS selectors.",
+      "answer": "Type selector, class selector, and ID selector."
+    },
+    {
+      "question": "How do you select an element by its class in CSS?",
+      "answer": "Using a dot (.) followed by the class name, e.g., .classname."
+    },
+    {
+      "question": "How do you select an element by its ID in CSS?",
+      "answer": "Using a hash (#) followed by the ID name, e.g., #idname."
+    },
+    {
+      "question": "What does the universal selector (*) do?",
+      "answer": "It selects all elements on the page."
+    },
+    {
+      "question": "How do you write multiple selectors for one declaration block?",
+      "answer": "Separate selectors with commas, e.g., h1, h2, p { color: blue; }."
+    },
+    {
+      "question": "What is the difference between a class selector and an ID selector?",
+      "answer": "Class selectors can be applied to multiple elements; IDs should be unique per page."
+    },
+    {
+      "question": "How do you write a CSS declaration?",
+      "answer": "As property and value pairs separated by a colon and ending with a semicolon, e.g., color: red;"
+    },
+    {
+      "question": "Can CSS selectors be combined? Give an example.",
+      "answer": "Yes, e.g., div.container or p.intro selects a <div> with class 'container' or a <p> with class 'intro'."
+    }
+  ]
+}

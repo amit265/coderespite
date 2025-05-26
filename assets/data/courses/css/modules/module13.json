@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod13",
+  "title": "Advanced Layout Techniques",
+  "description": "Master advanced CSS layout methods including Flexbox, Grid, and multi-column layouts for responsive and complex designs.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod13-lsn01",
+      "title": "Overview of Modern CSS Layouts",
+      "type": "theory",
+      "content": "Introduction to Flexbox, CSS Grid, and multi-column layouts for responsive web design."
+    },
+    {
+      "lessonId": "mod13-lsn02",
+      "title": "Flexbox Basics and Terminology",
+      "type": "code",
+      "content": "display: flex;\nflex-direction: row | column;\nalign-items: center;\njustify-content: space-between;"
+    },
+    {
+      "lessonId": "mod13-lsn03",
+      "title": "Advanced Flexbox Techniques",
+      "type": "code",
+      "content": "flex-grow, flex-shrink, flex-basis properties to control flexible item sizes."
+    },
+    {
+      "lessonId": "mod13-lsn04",
+      "title": "CSS Grid Fundamentals",
+      "type": "code",
+      "content": "display: grid;\ngrid-template-columns: repeat(3, 1fr);\ngrid-gap: 20px;"
+    },
+    {
+      "lessonId": "mod13-lsn05",
+      "title": "Grid Areas and Named Lines",
+      "type": "code",
+      "content": "grid-template-areas: \"header header header\" \"sidebar content content\" \"footer footer footer\";"
+    },
+    {
+      "lessonId": "mod13-lsn06",
+      "title": "Combining Flexbox and Grid",
+      "type": "theory",
+      "content": "Use Flexbox inside Grid containers for complex layouts and better responsiveness."
+    },
+    {
+      "lessonId": "mod13-lsn07",
+      "title": "Multi-column Layouts",
+      "type": "code",
+      "content": "column-count: 3;\ncolumn-gap: 15px;"
+    },
+    {
+      "lessonId": "mod13-lsn08",
+      "title": "Responsive Layout Strategies",
+      "type": "code",
+      "content": "@media (max-width: 768px) {\n  .container {\n    display: block;\n  }\n}"
+    },
+    {
+      "lessonId": "mod13-lsn09",
+      "title": "Dealing with Overflow and Alignment Issues",
+      "type": "theory",
+      "content": "Techniques to handle content overflow, alignment fixes, and layout bugs."
+    },
+    {
+      "lessonId": "mod13-lsn10",
+      "title": "Mini Project: Responsive Dashboard Layout",
+      "type": "code",
+      "content": "Create a dashboard using CSS Grid and Flexbox that adapts to different screen sizes."
+    }
+  ]
+}

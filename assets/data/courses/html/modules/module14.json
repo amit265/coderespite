@@ -1,0 +1,69 @@
+{
+  "courseId": "html",
+  "moduleId": "mod14",
+  "title": "Meta Tags and SEO Basics",
+  "description": "Understand how meta tags improve website SEO, responsiveness, and social media sharing.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod14-lsn01",
+      "title": "What are Meta Tags?",
+      "type": "theory",
+      "content": "Meta tags provide metadata about the HTML document, such as descriptions, keywords, author information, and instructions for browsers and search engines."
+    },
+    {
+      "lessonId": "mod14-lsn02",
+      "title": "The <meta> Charset Tag",
+      "type": "code",
+      "content": "<meta charset=\"UTF-8\">\n<!-- Specifies the character encoding for the document -->"
+    },
+    {
+      "lessonId": "mod14-lsn03",
+      "title": "Viewport Meta Tag for Responsiveness",
+      "type": "code",
+      "content": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<!-- Ensures the page scales correctly on mobile devices -->"
+    },
+    {
+      "lessonId": "mod14-lsn04",
+      "title": "Description Meta Tag",
+      "type": "code",
+      "content": "<meta name=\"description\" content=\"Learn HTML meta tags and SEO basics.\">\n<!-- Helps search engines understand page content -->"
+    },
+    {
+      "lessonId": "mod14-lsn05",
+      "title": "Keywords Meta Tag",
+      "type": "code",
+      "content": "<meta name=\"keywords\" content=\"HTML, meta tags, SEO, web development\">\n<!-- Lists relevant keywords for SEO (less important today) -->"
+    },
+    {
+      "lessonId": "mod14-lsn06",
+      "title": "Author and Robots Meta Tags",
+      "type": "code",
+      "content": "<meta name=\"author\" content=\"Your Name\">\n<meta name=\"robots\" content=\"index, follow\">\n<!-- Provides author info and instructions to search engines -->"
+    },
+    {
+      "lessonId": "mod14-lsn07",
+      "title": "Open Graph Meta Tags for Social Sharing",
+      "type": "code",
+      "content": "<meta property=\"og:title\" content=\"My Awesome Website\">\n<meta property=\"og:description\" content=\"A great site about HTML and SEO\">\n<meta property=\"og:image\" content=\"image.jpg\">\n<meta property=\"og:url\" content=\"https://example.com\">\n<!-- Controls how links appear on social media -->"
+    },
+    {
+      "lessonId": "mod14-lsn08",
+      "title": "Twitter Card Meta Tags",
+      "type": "code",
+      "content": "<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:title\" content=\"My Awesome Website\">\n<meta name=\"twitter:description\" content=\"Learn HTML meta tags\">\n<meta name=\"twitter:image\" content=\"image.jpg\">\n<!-- Optimizes sharing on Twitter -->"
+    },
+    {
+      "lessonId": "mod14-lsn09",
+      "title": "Best Practices for Meta Tags",
+      "type": "theory",
+      "content": "Keep descriptions concise, use relevant keywords, avoid duplication, and update meta tags regularly for SEO effectiveness."
+    },
+    {
+      "lessonId": "mod14-lsn10",
+      "title": "Testing and Debugging Meta Tags",
+      "type": "theory",
+      "content": "Use tools like Google Search Console, Facebook Sharing Debugger, and Twitter Card Validator to test and troubleshoot your meta tags."
+    }
+  ]
+}

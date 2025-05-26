@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod10",
+  "courseId": "html",
+  "moduleId": "mod10",
+  "title": "HTML Attributes and Global Attributes",
+  "description": "Learning how to use HTML attributes to control element behavior and styling.",
+  "flashcards": [
+    {
+      "question": "What are HTML attributes?",
+      "answer": "Additional information included inside an HTML tag that defines element behavior or appearance."
+    },
+    {
+      "question": "Name some common global attributes.",
+      "answer": "id, class, style, title, data-*, tabindex, hidden."
+    },
+    {
+      "question": "What is the purpose of the 'id' attribute?",
+      "answer": "It uniquely identifies an element within the document."
+    },
+    {
+      "question": "How is the 'class' attribute used?",
+      "answer": "It groups elements for styling or scripting purposes."
+    },
+    {
+      "question": "What does the 'title' attribute do?",
+      "answer": "Displays additional information as a tooltip on hover."
+    },
+    {
+      "question": "Explain the use of 'data-*' attributes.",
+      "answer": "They store custom data private to the page or application for use in scripts."
+    },
+    {
+      "question": "How does the 'style' attribute work?",
+      "answer": "It applies inline CSS styles directly to an element."
+    },
+    {
+      "question": "What is the purpose of the 'hidden' attribute?",
+      "answer": "It hides the element from rendering on the page."
+    },
+    {
+      "question": "Can attributes have boolean values? Give an example.",
+      "answer": "Yes, e.g., the 'disabled' attribute on form inputs disables the element."
+    },
+    {
+      "question": "Why should you use global attributes?",
+      "answer": "They provide consistent control over behavior and appearance across all HTML elements."
+    }
+  ]
+}

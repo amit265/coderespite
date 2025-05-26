@@ -14,15 +14,14 @@ import {
 } from "../context/context";
 import { db } from "../services/firebaseConfig";
 import { getAllCoursesWithSubcollections } from "../services/getAllCoursesWithSubcollections";
-import { showInterstitialAd } from "../services/AdManager";
 
 const { width, height } = Dimensions.get("window");
 export default function Index() {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
-  const { setAdConfig, adConfig, clickCount, setClickCount } = useContext(adConfigContext);
+  const { setAdConfig } = useContext(adConfigContext);
   const [loading, setLoading] = useState(true);
-  const { allCourses, setAllCourses, update, setUpdate } =
+  const { setAllCourses, update } =
     useContext(allCoursesContext);
   const { userData, updateUser } = useContext(userDetailsContext);
 

@@ -1,0 +1,70 @@
+{
+    "courseId": "html",
+    "moduleId": "mod16",
+    "title": "Project: Build a Complete Web Page Using HTML",
+    "description": "Apply all your HTML knowledge to build a fully structured and semantic web page, including multimedia, forms, and JavaScript integration.",
+    "level": "Advanced",
+    "lessons": [
+      {
+        "lessonId": "mod16-lsn01",
+        "title": "Project Overview and Requirements",
+        "type": "theory",
+        "content": "Learn the project goals: create a multi-section web page with header, navigation, main content, images, forms, and JavaScript interactions."
+      },
+      {
+        "lessonId": "mod16-lsn02",
+        "title": "Setting Up Your HTML Document",
+        "type": "code",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Complete Web Page</title>\n</head>\n<body>\n  <!-- Start building your page structure here -->\n</body>\n</html>"
+      },
+      {
+        "lessonId": "mod16-lsn03",
+        "title": "Creating the Header and Navigation",
+        "type": "code",
+        "content": "<header>\n  <h1>Welcome to My Website</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#home\">Home</a></li>\n      <li><a href=\"#about\">About</a></li>\n      <li><a href=\"#contact\">Contact</a></li>\n    </ul>\n  </nav>\n</header>"
+      },
+      {
+        "lessonId": "mod16-lsn04",
+        "title": "Adding Main Content Sections",
+        "type": "code",
+        "content": "<main>\n  <section id=\"home\">\n    <h2>Home</h2>\n    <p>This is the homepage section.</p>\n  </section>\n  <section id=\"about\">\n    <h2>About</h2>\n    <p>About us content goes here.</p>\n  </section>\n</main>"
+      },
+      {
+        "lessonId": "mod16-lsn05",
+        "title": "Including Images and Multimedia",
+        "type": "code",
+        "content": "<section id=\"gallery\">\n  <h2>Gallery</h2>\n  <img src=\"image1.jpg\" alt=\"Description of image 1\">\n  <video controls>\n    <source src=\"video.mp4\" type=\"video/mp4\">\n    Your browser does not support the video tag.\n  </video>\n</section>"
+      },
+      {
+        "lessonId": "mod16-lsn06",
+        "title": "Creating a Contact Form",
+        "type": "code",
+        "content": "<section id=\"contact\">\n  <h2>Contact Us</h2>\n  <form>\n    <label for=\"name\">Name:</label>\n    <input type=\"text\" id=\"name\" name=\"name\" required>\n    <label for=\"email\">Email:</label>\n    <input type=\"email\" id=\"email\" name=\"email\" required>\n    <input type=\"submit\" value=\"Send\">\n  </form>\n</section>"
+      },
+      {
+        "lessonId": "mod16-lsn07",
+        "title": "Adding Semantic Elements",
+        "type": "code",
+        "content": "<footer>\n  <p>&copy; 2025 My Website</p>\n</footer>"
+      },
+      {
+        "lessonId": "mod16-lsn08",
+        "title": "Enhancing Interactivity with JavaScript",
+        "type": "code",
+        "content": "<script>\n  document.querySelector('form').addEventListener('submit', function(event) {\n    event.preventDefault();\n    alert('Form submitted! Thank you.');\n  });\n</script>"
+      },
+      {
+        "lessonId": "mod16-lsn09",
+        "title": "Testing and Debugging Your Page",
+        "type": "theory",
+        "content": "Learn how to test your web page on different browsers and devices, use browser developer tools to inspect and debug HTML and JavaScript."
+      },
+      {
+        "lessonId": "mod16-lsn10",
+        "title": "Project Submission and Next Steps",
+        "type": "theory",
+        "content": "Review your project, prepare documentation, and explore how to enhance your page further with CSS and React in upcoming courses."
+      }
+    ]
+  }
+  

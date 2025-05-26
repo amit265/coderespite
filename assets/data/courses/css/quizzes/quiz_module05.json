@@ -1,0 +1,121 @@
+{
+  "quizId": "qz05",
+  "courseId": "css",
+  "moduleId": "mod05",
+  "title": "Layout with Display and Positioning",
+  "tags": ["css", "layout", "display", "positioning"],
+  "difficulty": "medium",
+  "description": "Understanding CSS display properties and positioning techniques for layout.",
+  "quiz": [
+    {
+      "question": "What is the default value of the CSS 'display' property for most elements?",
+      "options": [
+        "block",
+        "inline",
+        "inline-block",
+        "none"
+      ],
+      "correctAnswer": "block",
+      "explanation": "Most elements like <div> default to 'block' display."
+    },
+    {
+      "question": "Which display value allows elements to sit next to each other but still respect height and width?",
+      "options": [
+        "block",
+        "inline",
+        "inline-block",
+        "none"
+      ],
+      "correctAnswer": "inline-block",
+      "explanation": "'inline-block' lets elements flow inline but keep box model properties."
+    },
+    {
+      "question": "What does 'display: none;' do to an element?",
+      "options": [
+        "Hides the element and removes it from the layout",
+        "Makes the element invisible but still occupies space",
+        "Changes the element to block level",
+        "Adds a border"
+      ],
+      "correctAnswer": "Hides the element and removes it from the layout",
+      "explanation": "'display: none' removes the element from the page layout entirely."
+    },
+    {
+      "question": "What is the difference between 'relative' and 'absolute' positioning?",
+      "options": [
+        "Relative positions element relative to its normal position, absolute positions it relative to nearest positioned ancestor",
+        "Relative positions element to viewport, absolute to parent",
+        "Both are the same",
+        "Absolute positions element relative to the document only"
+      ],
+      "correctAnswer": "Relative positions element relative to its normal position, absolute positions it relative to nearest positioned ancestor",
+      "explanation": "'relative' offsets from normal position, 'absolute' positions relative to nearest positioned ancestor."
+    },
+    {
+      "question": "Which CSS property is used to set an element's stacking order?",
+      "options": [
+        "z-index",
+        "stack-order",
+        "position",
+        "display"
+      ],
+      "correctAnswer": "z-index",
+      "explanation": "'z-index' controls the stack order for overlapping elements."
+    },
+    {
+      "question": "What does 'position: fixed;' do?",
+      "options": [
+        "Positions element relative to the viewport and stays fixed during scrolling",
+        "Positions element relative to its parent",
+        "Positions element relative to normal flow",
+        "Hides the element"
+      ],
+      "correctAnswer": "Positions element relative to the viewport and stays fixed during scrolling",
+      "explanation": "'fixed' positions an element relative to the viewport and it doesn't move when scrolling."
+    },
+    {
+      "question": "Which display value makes the element behave like an inline element but allows setting width and height?",
+      "options": [
+        "inline",
+        "inline-block",
+        "block",
+        "flex"
+      ],
+      "correctAnswer": "inline-block",
+      "explanation": "'inline-block' elements can have width and height while flowing inline."
+    },
+    {
+      "question": "What does 'position: static;' mean?",
+      "options": [
+        "Default position, elements follow normal flow",
+        "Element is removed from flow",
+        "Element is positioned relative to parent",
+        "Element is fixed on the screen"
+      ],
+      "correctAnswer": "Default position, elements follow normal flow",
+      "explanation": "'static' is default; elements flow in normal document order."
+    },
+    {
+      "question": "What is required for an absolutely positioned element to be positioned relative to a specific parent?",
+      "options": [
+        "The parent must have a position value other than static",
+        "The parent must have display: block",
+        "The parent must have z-index set",
+        "The parent must have overflow hidden"
+      ],
+      "correctAnswer": "The parent must have a position value other than static",
+      "explanation": "Absolute positioning is relative to the nearest ancestor with a position other than static."
+    },
+    {
+      "question": "Which CSS property controls how inline content wraps inside a block element?",
+      "options": [
+        "white-space",
+        "overflow",
+        "text-wrap",
+        "word-break"
+      ],
+      "correctAnswer": "white-space",
+      "explanation": "'white-space' controls how spaces and wrapping behave inside elements."
+    }
+  ]
+}

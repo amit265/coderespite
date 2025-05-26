@@ -1,0 +1,121 @@
+{
+  "quizId": "qz12",
+  "courseId": "css",
+  "moduleId": "mod12",
+  "title": "CSS Variables (Custom Properties)",
+  "tags": ["css", "variables", "custom properties", "advanced"],
+  "difficulty": "medium",
+  "description": "Learn about CSS custom properties, how to declare and use them for reusable styles.",
+  "quiz": [
+    {
+      "question": "How do you declare a CSS custom property (variable)?",
+      "options": [
+        "--main-color: blue;",
+        "$main-color: blue;",
+        "@main-color: blue;",
+        "var(--main-color);"
+      ],
+      "correctAnswer": "--main-color: blue;",
+      "explanation": "CSS custom properties are declared with two dashes before the name."
+    },
+    {
+      "question": "How do you use a CSS variable inside a rule?",
+      "options": [
+        "color: var(--main-color);",
+        "color: --main-color;",
+        "color: $main-color;",
+        "color: @main-color;"
+      ],
+      "correctAnswer": "color: var(--main-color);",
+      "explanation": "You use the var() function to access the value of a CSS variable."
+    },
+    {
+      "question": "Where are CSS variables usually declared for global scope?",
+      "options": [
+        ":root",
+        "body",
+        "html",
+        "head"
+      ],
+      "correctAnswer": ":root",
+      "explanation": "Declaring variables under :root makes them globally available."
+    },
+    {
+      "question": "Can CSS variables be updated dynamically with JavaScript?",
+      "options": [
+        "Yes",
+        "No",
+        "Only in inline styles",
+        "Only with preprocessors"
+      ],
+      "correctAnswer": "Yes",
+      "explanation": "CSS variables can be changed dynamically via JavaScript by modifying the style property."
+    },
+    {
+      "question": "What happens if a CSS variable is not defined and used with var()?",
+      "options": [
+        "The property becomes invalid",
+        "The browser uses default value if provided",
+        "It throws an error",
+        "It ignores the property"
+      ],
+      "correctAnswer": "The browser uses default value if provided",
+      "explanation": "You can provide a fallback value in var(), e.g. var(--main-color, black)."
+    },
+    {
+      "question": "Which syntax provides a fallback value for a CSS variable?",
+      "options": [
+        "var(--color, red)",
+        "--color: red;",
+        "$color: red;",
+        "color: var(--color);"
+      ],
+      "correctAnswer": "var(--color, red)",
+      "explanation": "The second argument in var() is a fallback if the variable is undefined."
+    },
+    {
+      "question": "Are CSS variables inherited by default?",
+      "options": [
+        "Yes",
+        "No",
+        "Only on certain elements",
+        "Depends on browser"
+      ],
+      "correctAnswer": "Yes",
+      "explanation": "CSS variables are inherited like other CSS properties."
+    },
+    {
+      "question": "Can CSS variables store complex values like calc() or colors with alpha?",
+      "options": [
+        "Yes",
+        "No",
+        "Only numbers",
+        "Only strings"
+      ],
+      "correctAnswer": "Yes",
+      "explanation": "CSS variables can store any valid CSS value, including functions."
+    },
+    {
+      "question": "Which of the following is a benefit of CSS variables?",
+      "options": [
+        "Easier theming and maintenance",
+        "Improves browser rendering speed",
+        "Automatically minifies CSS",
+        "Replaces JavaScript"
+      ],
+      "correctAnswer": "Easier theming and maintenance",
+      "explanation": "CSS variables make updating styles across the site easier."
+    },
+    {
+      "question": "Can CSS variables be scoped to a specific selector?",
+      "options": [
+        "Yes",
+        "No",
+        "Only with :root",
+        "Only in inline styles"
+      ],
+      "correctAnswer": "Yes",
+      "explanation": "Variables can be declared in any selector to limit their scope."
+    }
+  ]
+}

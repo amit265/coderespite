@@ -1,0 +1,86 @@
+{
+  "quizId": "qz16",
+  "moduleId": "mod16",
+  "courseId": "html",
+  "title": "Project: Build a Complete Web Page Using HTML",
+  "tags": ["html", "project", "webpage", "structure", "elements", "layout"],
+  "difficulty": "medium",
+  "description": "Apply your knowledge of HTML to build a complete, structured, and well-organized web page.",
+  "quiz": [
+    {
+      "question": "Which HTML element represents the main content of a webpage?",
+      "options": ["<main>", "<section>", "<article>", "<div>"],
+      "correctAnswer": "<main>",
+      "explanation": "The `<main>` tag specifies the main content of a document."
+    },
+    {
+      "question": "What is the purpose of the `<header>` element in a webpage?",
+      "options": [
+        "To contain introductory content or navigation links",
+        "To hold footer information",
+        "To define a sidebar",
+        "To include metadata"
+      ],
+      "correctAnswer": "To contain introductory content or navigation links",
+      "explanation": "`<header>` is typically used for introductory content or navigational links."
+    },
+    {
+      "question": "Which tag is used to create navigation links in a webpage?",
+      "options": ["<nav>", "<menu>", "<ul>", "<links>"],
+      "correctAnswer": "<nav>",
+      "explanation": "The `<nav>` element defines a set of navigation links."
+    },
+    {
+      "question": "How do you create a hyperlink to another page in HTML?",
+      "options": [
+        "<a href=\"url\">Link Text</a>",
+        "<link url=\"url\">Link Text</link>",
+        "<anchor src=\"url\">Link Text</anchor>",
+        "<hyperlink url=\"url\">Link Text</hyperlink>"
+      ],
+      "correctAnswer": "<a href=\"url\">Link Text</a>",
+      "explanation": "The `<a>` tag with the href attribute creates hyperlinks."
+    },
+    {
+      "question": "Which element is best used to group related content together on a webpage?",
+      "options": ["<div>", "<span>", "<p>", "<section>"],
+      "correctAnswer": "<section>",
+      "explanation": "`<section>` is used to group related content in a section."
+    },
+    {
+      "question": "What attribute should you add to the `<img>` tag to improve accessibility?",
+      "options": ["alt", "title", "src", "href"],
+      "correctAnswer": "alt",
+      "explanation": "The `alt` attribute provides alternative text for images."
+    },
+    {
+      "question": "How can you create a form section inside your webpage project?",
+      "options": ["<form>", "<input>", "<section>", "<fieldset>"],
+      "correctAnswer": "<form>",
+      "explanation": "The `<form>` tag defines an HTML form for user input."
+    },
+    {
+      "question": "Which element is used to add a footer to your webpage?",
+      "options": ["<footer>", "<end>", "<bottom>", "<section>"],
+      "correctAnswer": "<footer>",
+      "explanation": "The `<footer>` element represents the footer of a document or section."
+    },
+    {
+      "question": "What is the correct way to include a comment in an HTML file?",
+      "options": [
+        "<!-- This is a comment -->",
+        "// This is a comment",
+        "/* This is a comment */",
+        "# This is a comment"
+      ],
+      "correctAnswer": "<!-- This is a comment -->",
+      "explanation": "HTML comments are enclosed within `<!--` and `-->`."
+    },
+    {
+      "question": "Which HTML5 semantic element can be used to define an independent, self-contained piece of content?",
+      "options": ["<article>", "<section>", "<div>", "<aside>"],
+      "correctAnswer": "<article>",
+      "explanation": "`<article>` defines a piece of content that can stand on its own."
+    }
+  ]
+}

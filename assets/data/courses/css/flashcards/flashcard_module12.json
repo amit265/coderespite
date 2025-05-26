@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod12",
+  "courseId": "css",
+  "moduleId": "mod12",
+  "title": "CSS Variables (Custom Properties)",
+  "description": "Using CSS variables to store reusable values and create maintainable stylesheets.",
+  "flashcards": [
+    {
+      "question": "What is a CSS variable (custom property)?",
+      "answer": "A CSS property that stores a value which can be reused throughout the stylesheet."
+    },
+    {
+      "question": "How do you define a CSS variable?",
+      "answer": "Using -- followed by the variable name, e.g., --main-color: blue;"
+    },
+    {
+      "question": "Where are CSS variables typically declared?",
+      "answer": "Inside a selector, often :root for global scope."
+    },
+    {
+      "question": "How do you use a CSS variable in a property?",
+      "answer": "Using the var() function, e.g., color: var(--main-color);"
+    },
+    {
+      "question": "Can CSS variables be overridden?",
+      "answer": "Yes, variables can be redefined in more specific selectors."
+    },
+    {
+      "question": "Are CSS variables static or dynamic?",
+      "answer": "They are dynamic and can be changed with JavaScript."
+    },
+    {
+      "question": "Can CSS variables hold any type of CSS value?",
+      "answer": "Yes, colors, sizes, fonts, even complex values like calc() or gradients."
+    },
+    {
+      "question": "What happens if a CSS variable is not defined when used?",
+      "answer": "The var() function can take a fallback value as a second parameter."
+    },
+    {
+      "question": "How do CSS variables improve maintainability?",
+      "answer": "By centralizing values, making it easy to update styles consistently."
+    },
+    {
+      "question": "Can CSS variables be animated?",
+      "answer": "No, CSS variables themselves cannot be animated directly."
+    }
+  ]
+}

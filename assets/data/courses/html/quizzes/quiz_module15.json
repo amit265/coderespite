@@ -1,0 +1,116 @@
+{
+  "quizId": "qz15",
+  "moduleId": "mod15",
+  "courseId": "html",
+  "title": "HTML and JavaScript Integration",
+  "tags": ["html", "javascript", "integration", "DOM", "events", "scripting"],
+  "difficulty": "medium",
+  "description": "Learn how to integrate JavaScript with HTML to create dynamic and interactive web pages.",
+  "quiz": [
+    {
+      "question": "Which HTML tag is used to include JavaScript code in a webpage?",
+      "options": ["<script>", "<js>", "<javascript>", "<code>"],
+      "correctAnswer": "<script>",
+      "explanation": "The `<script>` tag is used to embed or reference JavaScript code."
+    },
+    {
+      "question": "How do you include an external JavaScript file in HTML?",
+      "options": [
+        "<script src=\"file.js\"></script>",
+        "<script href=\"file.js\"></script>",
+        "<js src=\"file.js\"></js>",
+        "<link src=\"file.js\">"
+      ],
+      "correctAnswer": "<script src=\"file.js\"></script>",
+      "explanation": "The `src` attribute inside the `<script>` tag specifies the external JavaScript file."
+    },
+    {
+      "question": "Where is the best place to put the `<script>` tag to ensure the HTML content loads first?",
+      "options": [
+        "Inside the `<head>` tag",
+        "At the end of the `<body>` tag",
+        "Before the `<html>` tag",
+        "Anywhere in the document"
+      ],
+      "correctAnswer": "At the end of the `<body>` tag",
+      "explanation": "Placing scripts at the end of the body ensures the DOM is loaded before JavaScript runs."
+    },
+    {
+      "question": "What does the `defer` attribute do when added to a `<script>` tag?",
+      "options": [
+        "Runs the script immediately",
+        "Delays script execution until the HTML is fully parsed",
+        "Prevents the script from running",
+        "Loads the script synchronously"
+      ],
+      "correctAnswer": "Delays script execution until the HTML is fully parsed",
+      "explanation": "`defer` loads the script asynchronously and executes it after parsing is complete."
+    },
+    {
+      "question": "How can JavaScript access and modify HTML elements?",
+      "options": [
+        "Using DOM methods like `getElementById()`",
+        "Using the `<modify>` tag",
+        "By embedding JavaScript directly in HTML attributes",
+        "Using CSS selectors"
+      ],
+      "correctAnswer": "Using DOM methods like `getElementById()`",
+      "explanation": "JavaScript uses DOM APIs to manipulate HTML elements dynamically."
+    },
+    {
+      "question": "Which event listener method is commonly used to handle user interactions in JavaScript?",
+      "options": [
+        "addEventListener()",
+        "onEvent()",
+        "attachEvent()",
+        "listenEvent()"
+      ],
+      "correctAnswer": "addEventListener()",
+      "explanation": "It attaches an event handler to an element without overwriting existing events."
+    },
+    {
+      "question": "What is the result of this code snippet?\n`document.getElementById('demo').innerHTML = 'Hello!';`",
+      "options": [
+        "Sets the text inside the element with id 'demo' to 'Hello!'",
+        "Creates a new element with the text 'Hello!'",
+        "Deletes the element with id 'demo'",
+        "Alerts 'Hello!' to the user"
+      ],
+      "correctAnswer": "Sets the text inside the element with id 'demo' to 'Hello!'",
+      "explanation": "The `innerHTML` property modifies the HTML content inside the targeted element."
+    },
+    {
+      "question": "How can you run JavaScript code after the page content is fully loaded?",
+      "options": [
+        "Using the `DOMContentLoaded` event",
+        "Using `window.onload`",
+        "Both of the above",
+        "Using the `onload` attribute on `<body>` only"
+      ],
+      "correctAnswer": "Both of the above",
+      "explanation": "`DOMContentLoaded` and `window.onload` are common ways to run JS after loading."
+    },
+    {
+      "question": "What attribute allows inline JavaScript execution on HTML elements (e.g., on a button click)?",
+      "options": [
+        "onclick",
+        "onexecute",
+        "onrun",
+        "onstart"
+      ],
+      "correctAnswer": "onclick",
+      "explanation": "The `onclick` attribute allows JavaScript code to run when the element is clicked."
+    },
+    {
+      "question": "How do you comment out JavaScript code?",
+      "options": [
+        "// single line and /* multi-line */",
+        "<!-- comment -->",
+        "# comment",
+        "** comment **"
+      ],
+      "correctAnswer": "// single line and /* multi-line */",
+      "explanation": "JavaScript uses `//` for single-line and `/* */` for multi-line comments."
+    }
+  ]
+}

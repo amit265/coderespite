@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod05",
+  "courseId": "html",
+  "moduleId": "mod05",
+  "title": "Links and Navigation",
+  "description": "Understanding how to create links and navigation using the <a> tag.",
+  "flashcards": [
+    {
+      "question": "What HTML tag is used to create a hyperlink?",
+      "answer": "The <a> tag."
+    },
+    {
+      "question": "How do you specify the destination URL of a link?",
+      "answer": "Using the href attribute in the <a> tag."
+    },
+    {
+      "question": "What attribute opens a link in a new browser tab?",
+      "answer": "The target=\"_blank\" attribute."
+    },
+    {
+      "question": "How do you create an internal page link (anchor)?",
+      "answer": "By using an id attribute on the target element and href=\"#id\" in the link."
+    },
+    {
+      "question": "What attribute is used to provide a tooltip on hover for a link?",
+      "answer": "The title attribute."
+    },
+    {
+      "question": "How do you create a mailto link?",
+      "answer": "Use href=\"mailto:email@example.com\" in the <a> tag."
+    },
+    {
+      "question": "Can the <a> tag link to files other than web pages?",
+      "answer": "Yes, it can link to files like PDFs, images, or downloads."
+    },
+    {
+      "question": "What is the default behavior of a link if target is not specified?",
+      "answer": "It opens the link in the same tab or window."
+    },
+    {
+      "question": "How can you make a link visually stand out as a button?",
+      "answer": "By using CSS styles like background, padding, and border on the <a> tag."
+    },
+    {
+      "question": "Why should descriptive link text be used?",
+      "answer": "For better accessibility and SEO, so users and search engines understand the link's purpose."
+    }
+  ]
+}

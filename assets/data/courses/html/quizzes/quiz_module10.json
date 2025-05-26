@@ -1,0 +1,96 @@
+{
+  "quizId": "qz10",
+  "courseId": "html",
+  "moduleId": "mod10",
+  "title": "HTML Attributes and Global Attributes",
+  "tags": ["html", "attributes", "global", "id", "class", "style", "data-*", "event handlers"],
+  "difficulty": "medium",
+  "description": "Learn about HTML attributes including global attributes and their use cases.",
+  "quiz": [
+    {
+      "question": "What is an HTML attribute?",
+      "options": [
+        "A tag that wraps content",
+        "Additional information provided inside a tag",
+        "The content between tags",
+        "A comment in HTML"
+      ],
+      "correctAnswer": "Additional information provided inside a tag",
+      "explanation": "Attributes provide extra information or behavior to HTML elements."
+    },
+    {
+      "question": "Which of the following is NOT a global attribute?",
+      "options": ["id", "class", "style", "src"],
+      "correctAnswer": "src",
+      "explanation": "`src` is specific to certain tags like <img>, not global."
+    },
+    {
+      "question": "What is the purpose of the `id` attribute?",
+      "options": [
+        "To apply CSS styles",
+        "To uniquely identify an element",
+        "To add a tooltip",
+        "To add a link"
+      ],
+      "correctAnswer": "To uniquely identify an element",
+      "explanation": "`id` must be unique and can be used for CSS or JavaScript targeting."
+    },
+    {
+      "question": "Which attribute is used to assign one or more class names to an element?",
+      "options": ["class", "id", "name", "style"],
+      "correctAnswer": "class",
+      "explanation": "`class` groups elements for styling or scripting."
+    },
+    {
+      "question": "What does the `style` attribute do?",
+      "options": [
+        "Defines inline CSS styles",
+        "Links an external stylesheet",
+        "Sets the language of the document",
+        "Adds comments"
+      ],
+      "correctAnswer": "Defines inline CSS styles",
+      "explanation": "`style` applies CSS rules directly on an element."
+    },
+    {
+      "question": "What are data-* attributes used for?",
+      "options": [
+        "Storing custom data private to the page or application",
+        "Adding images",
+        "Defining links",
+        "Creating tables"
+      ],
+      "correctAnswer": "Storing custom data private to the page or application",
+      "explanation": "data-* attributes store custom data that JavaScript can access."
+    },
+    {
+      "question": "Which attribute specifies a tooltip text when hovering over an element?",
+      "options": ["title", "alt", "name", "id"],
+      "correctAnswer": "title",
+      "explanation": "`title` shows extra info on mouse hover."
+    },
+    {
+      "question": "What is the purpose of event handler attributes like `onclick`?",
+      "options": [
+        "To apply styles",
+        "To add interactivity by handling user events",
+        "To link external scripts",
+        "To add metadata"
+      ],
+      "correctAnswer": "To add interactivity by handling user events",
+      "explanation": "Event handlers run JavaScript in response to user actions."
+    },
+    {
+      "question": "True or False: The `class` attribute values must be unique in a document.",
+      "options": ["True", "False"],
+      "correctAnswer": "False",
+      "explanation": "`class` can be shared by multiple elements; `id` must be unique."
+    },
+    {
+      "question": "Which attribute is used to disable an HTML element like a button or input?",
+      "options": ["disabled", "readonly", "inert", "hidden"],
+      "correctAnswer": "disabled",
+      "explanation": "`disabled` makes elements uninteractive."
+    }
+  ]
+}

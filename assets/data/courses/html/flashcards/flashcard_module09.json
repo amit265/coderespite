@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod09",
+  "courseId": "html",
+  "moduleId": "mod09",
+  "title": "Semantic HTML",
+  "description": "Understanding semantic elements to create meaningful and accessible web pages.",
+  "flashcards": [
+    {
+      "question": "What is Semantic HTML?",
+      "answer": "HTML that uses meaningful tags to clearly describe the content's purpose and structure."
+    },
+    {
+      "question": "Name five semantic HTML5 elements.",
+      "answer": "<section>, <article>, <aside>, <nav>, <footer>."
+    },
+    {
+      "question": "What is the purpose of the <nav> element?",
+      "answer": "To define a section containing navigation links."
+    },
+    {
+      "question": "How does the <article> tag differ from <section>?",
+      "answer": "<article> represents a self-contained piece of content; <section> is a thematic grouping of content."
+    },
+    {
+      "question": "Why should you use semantic elements instead of generic <div>?",
+      "answer": "They improve accessibility, SEO, and code readability by clearly defining content roles."
+    },
+    {
+      "question": "What semantic element is used to contain the main content of a document?",
+      "answer": "The <main> element."
+    },
+    {
+      "question": "What element is typically used to contain sidebars or tangential content?",
+      "answer": "The <aside> element."
+    },
+    {
+      "question": "Which semantic element is used to define the footer of a document or section?",
+      "answer": "The <footer> element."
+    },
+    {
+      "question": "Can semantic elements contain other semantic elements?",
+      "answer": "Yes, semantic elements can be nested as needed."
+    },
+    {
+      "question": "How do semantic elements help screen readers?",
+      "answer": "They provide meaningful landmarks to help users navigate content easily."
+    }
+  ]
+}

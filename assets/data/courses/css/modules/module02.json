@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod02",
+  "title": "CSS Syntax, Selectors, and Application",
+  "description": "Dive deeper into CSS syntax, different types of selectors, and how CSS rules are applied to HTML elements.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod02-lsn01",
+      "title": "CSS Rule Structure Recap",
+      "type": "theory",
+      "content": "A CSS rule consists of a selector and a declaration block. The declaration block contains property-value pairs that define how the selected elements should be styled."
+    },
+    {
+      "lessonId": "mod02-lsn02",
+      "title": "Element, Class, and ID Selectors",
+      "type": "code",
+      "content": "h1 { color: blue; }\n.title { font-size: 20px; }\n#header { background-color: lightgray; }"
+    },
+    {
+      "lessonId": "mod02-lsn03",
+      "title": "Group Selectors",
+      "type": "code",
+      "content": "h1, h2, h3 {\n  font-family: Arial;\n}"
+    },
+    {
+      "lessonId": "mod02-lsn04",
+      "title": "Descendant and Child Selectors",
+      "type": "code",
+      "content": "/* Descendant Selector */\ndiv p {\n  color: green;\n}\n\n/* Child Selector */\ndiv > p {\n  color: red;\n}"
+    },
+    {
+      "lessonId": "mod02-lsn05",
+      "title": "Adjacent and General Sibling Selectors",
+      "type": "code",
+      "content": "/* Adjacent sibling */\nh1 + p {\n  font-style: italic;\n}\n\n/* General sibling */\nh1 ~ p {\n  color: purple;\n}"
+    },
+    {
+      "lessonId": "mod02-lsn06",
+      "title": "Attribute Selectors",
+      "type": "code",
+      "content": "input[type=\"text\"] {\n  border: 1px solid #000;\n}"
+    },
+    {
+      "lessonId": "mod02-lsn07",
+      "title": "Universal and Wildcard Selector",
+      "type": "code",
+      "content": "* {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}"
+    },
+    {
+      "lessonId": "mod02-lsn08",
+      "title": "Combining Selectors",
+      "type": "code",
+      "content": "section.article h2.title {\n  color: teal;\n}"
+    },
+    {
+      "lessonId": "mod02-lsn09",
+      "title": "Specificity and Inheritance",
+      "type": "theory",
+      "content": "CSS applies rules based on specificity: Inline > ID > Class > Element. Some properties like `color` and `font-family` are inherited by default."
+    },
+    {
+      "lessonId": "mod02-lsn10",
+      "title": "Important Rule and Best Practices",
+      "type": "theory",
+      "content": "The `!important` declaration overrides all other rules, but should be used sparingly. Organize selectors clearly and avoid overly specific rules to maintain flexibility."
+    }
+  ]
+}

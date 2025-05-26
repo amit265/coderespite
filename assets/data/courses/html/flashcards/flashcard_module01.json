@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod01",
+  "courseId": "html",
+  "moduleId": "mod01",
+  "title": "Introduction to HTML",
+  "description": "Basics of HTML including what it is, structure, syntax, and doctype.",
+  "flashcards": [
+    {
+      "question": "What does HTML stand for?",
+      "answer": "HyperText Markup Language."
+    },
+    {
+      "question": "What is the purpose of HTML?",
+      "answer": "To structure content on the web by using elements and tags."
+    },
+    {
+      "question": "What tag defines the root of an HTML document?",
+      "answer": "The <html> tag."
+    },
+    {
+      "question": "What does the <!DOCTYPE html> declaration do?",
+      "answer": "It tells the browser that the document is an HTML5 document."
+    },
+    {
+      "question": "Name the three main parts of an HTML document.",
+      "answer": "<html>, <head>, and <body>."
+    },
+    {
+      "question": "What kind of content goes inside the <head> tag?",
+      "answer": "Metadata like title, styles, scripts, and meta tags."
+    },
+    {
+      "question": "What is the role of the <body> tag?",
+      "answer": "It contains all the visible content on the web page."
+    },
+    {
+      "question": "How do you add comments in HTML?",
+      "answer": "Using <!-- Comment goes here -->."
+    },
+    {
+      "question": "What are HTML tags?",
+      "answer": "Keywords surrounded by angle brackets used to create elements."
+    },
+    {
+      "question": "Is HTML case sensitive?",
+      "answer": "No, HTML tags and attributes are case-insensitive."
+    }
+  ]
+}

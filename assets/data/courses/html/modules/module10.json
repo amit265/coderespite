@@ -1,0 +1,69 @@
+{
+  "courseId": "html",
+  "moduleId": "mod10",
+  "title": "HTML Attributes and Global Attributes",
+  "description": "Learn about HTML attributes including id, class, title, style, data-* attributes, and event attributes that enhance element functionality and styling.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod10-lsn01",
+      "title": "What are HTML Attributes?",
+      "type": "theory",
+      "content": "Attributes provide additional information about HTML elements and are always included in the opening tag. They usually come in name/value pairs."
+    },
+    {
+      "lessonId": "mod10-lsn02",
+      "title": "The id Attribute",
+      "type": "theory",
+      "content": "The id attribute uniquely identifies an element on the page and is often used for styling and scripting."
+    },
+    {
+      "lessonId": "mod10-lsn03",
+      "title": "The class Attribute",
+      "type": "theory",
+      "content": "The class attribute assigns one or more class names to an element. Classes are used to apply CSS styles to multiple elements and for scripting."
+    },
+    {
+      "lessonId": "mod10-lsn04",
+      "title": "The title Attribute",
+      "type": "theory",
+      "content": "The title attribute provides additional information about an element, often displayed as a tooltip when hovering over the element."
+    },
+    {
+      "lessonId": "mod10-lsn05",
+      "title": "The style Attribute",
+      "type": "code",
+      "content": "<p style=\"color: blue; font-size: 18px;\">This paragraph has inline styles applied.</p>"
+    },
+    {
+      "lessonId": "mod10-lsn06",
+      "title": "Global Attributes Overview",
+      "type": "theory",
+      "content": "Global attributes like id, class, style, title, hidden, and data-* can be added to any HTML element to control behavior and appearance."
+    },
+    {
+      "lessonId": "mod10-lsn07",
+      "title": "Using data-* Attributes",
+      "type": "theory",
+      "content": "data-* attributes allow you to store custom data on elements that can be accessed via JavaScript."
+    },
+    {
+      "lessonId": "mod10-lsn08",
+      "title": "Event Attributes in HTML",
+      "type": "theory",
+      "content": "Event attributes like onclick, onmouseover, and oninput enable interaction by triggering JavaScript functions when events occur."
+    },
+    {
+      "lessonId": "mod10-lsn09",
+      "title": "Example: Using id, class, and data-*",
+      "type": "code",
+      "content": "<div id=\"header\" class=\"main-header\" data-user=\"guest\">\n  Welcome to the site!\n</div>"
+    },
+    {
+      "lessonId": "mod10-lsn10",
+      "title": "Best Practices for Using Attributes",
+      "type": "theory",
+      "content": "Use id attributes uniquely, apply classes for styling multiple elements, prefer CSS over inline styles, and use data-* for storing custom data."
+    }
+  ]
+}

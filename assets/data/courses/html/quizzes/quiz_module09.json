@@ -1,0 +1,86 @@
+{
+  "quizId": "qz09",
+  "courseId": "html",
+  "moduleId": "mod09",
+  "title": "Semantic HTML",
+  "tags": ["html", "semantic", "accessibility", "section", "article", "aside", "nav", "main", "footer"],
+  "difficulty": "medium",
+  "description": "Understanding the use of semantic HTML tags to improve page structure and accessibility.",
+  "quiz": [
+    {
+      "question": "What is semantic HTML?",
+      "options": [
+        "HTML that uses tags based on meaning and purpose",
+        "HTML with inline styles",
+        "HTML without any tags",
+        "HTML that uses only divs and spans"
+      ],
+      "correctAnswer": "HTML that uses tags based on meaning and purpose",
+      "explanation": "Semantic HTML uses tags that describe the meaning of content to browsers and developers."
+    },
+    {
+      "question": "Which tag is used to define the main content of a page?",
+      "options": ["<main>", "<section>", "<article>", "<footer>"],
+      "correctAnswer": "<main>",
+      "explanation": "`<main>` contains the central content unique to the page."
+    },
+    {
+      "question": "Which tag defines navigation links?",
+      "options": ["<nav>", "<aside>", "<header>", "<footer>"],
+      "correctAnswer": "<nav>",
+      "explanation": "`<nav>` groups primary navigation links."
+    },
+    {
+      "question": "What is the purpose of the <article> tag?",
+      "options": [
+        "To define a self-contained composition",
+        "To define a sidebar",
+        "To group footer content",
+        "To add metadata"
+      ],
+      "correctAnswer": "To define a self-contained composition",
+      "explanation": "`<article>` is for content that could be independently distributed or reused."
+    },
+    {
+      "question": "Which tag is appropriate for content tangentially related to the main content?",
+      "options": ["<aside>", "<section>", "<main>", "<footer>"],
+      "correctAnswer": "<aside>",
+      "explanation": "`<aside>` is used for sidebars or related info not central to the page."
+    },
+    {
+      "question": "Which tag is used to define a thematic grouping of content, usually with a heading?",
+      "options": ["<section>", "<article>", "<div>", "<header>"],
+      "correctAnswer": "<section>",
+      "explanation": "`<section>` groups related content with a common theme."
+    },
+    {
+      "question": "Why is using semantic tags important for accessibility?",
+      "options": [
+        "They make pages load faster",
+        "They provide meaning to assistive technologies",
+        "They change the style automatically",
+        "They reduce server load"
+      ],
+      "correctAnswer": "They provide meaning to assistive technologies",
+      "explanation": "Semantic tags help screen readers understand page structure."
+    },
+    {
+      "question": "Which semantic tag is used to contain footer content?",
+      "options": ["<footer>", "<header>", "<section>", "<nav>"],
+      "correctAnswer": "<footer>",
+      "explanation": "`<footer>` holds footer info like copyright or contact."
+    },
+    {
+      "question": "Which attribute can improve accessibility by associating labels to form inputs?",
+      "options": ["aria-label", "class", "id", "style"],
+      "correctAnswer": "aria-label",
+      "explanation": "`aria-label` provides accessible names to elements."
+    },
+    {
+      "question": "True or False: Using semantic HTML helps improve SEO.",
+      "options": ["True", "False"],
+      "correctAnswer": "True",
+      "explanation": "Search engines use semantic structure to better index content."
+    }
+  ]
+}

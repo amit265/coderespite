@@ -1,26 +1,69 @@
 {
-    "moduleId": "mod03",
-    "title": "Getting Started with JavaScript",
-    "description": "Introduction to variables, data types, and operators.",
-    "level": "Beginner",
-    "lessons": [
-      {
-        "lessonId": "mod01-lsn01",
-        "title": "What is JavaScript?",
-        "type": "theory",
-        "content": "JavaScript is a scripting language used to create dynamic content on websites."
-      },
-      {
-        "lessonId": "mod01-lsn02",
-        "title": "Variables in JS",
-        "type": "theory",
-        "content": "Variables are containers for storing data. Use `let`, `const`, or `var`."
-      },
-      {
-        "lessonId": "mod01-lsn03",
-        "title": "Basic Syntax",
-        "type": "code",
-        "content": "let age = 25;\nconst name = 'John';"
-      }
-    ]
-  }
+  "courseId": "html",
+  "moduleId": "mod03",
+  "title": "Lists and Tables",
+  "description": "Learn to organize content using ordered/unordered lists and display tabular data using HTML tables.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod03-lsn01",
+      "title": "Introduction to Lists in HTML",
+      "type": "theory",
+      "content": "HTML supports three main types of lists: unordered lists (<ul>), ordered lists (<ol>), and description lists (<dl>). Lists help present grouped information clearly and semantically."
+    },
+    {
+      "lessonId": "mod03-lsn02",
+      "title": "Creating Unordered Lists",
+      "type": "code",
+      "content": "<ul>\n  <li>Apples</li>\n  <li>Bananas</li>\n  <li>Cherries</li>\n</ul>\n\n<!-- <ul> defines an unordered list, <li> defines list items -->"
+    },
+    {
+      "lessonId": "mod03-lsn03",
+      "title": "Creating Ordered Lists",
+      "type": "code",
+      "content": "<ol>\n  <li>Wake up</li>\n  <li>Brush teeth</li>\n  <li>Start coding</li>\n</ol>\n\n<!-- <ol> creates numbered lists -->"
+    },
+    {
+      "lessonId": "mod03-lsn04",
+      "title": "Description Lists",
+      "type": "code",
+      "content": "<dl>\n  <dt>HTML</dt>\n  <dd>HyperText Markup Language</dd>\n  <dt>CSS</dt>\n  <dd>Cascading Style Sheets</dd>\n</dl>\n\n<!-- <dl> contains <dt> (term) and <dd> (description) pairs -->"
+    },
+    {
+      "lessonId": "mod03-lsn05",
+      "title": "Nested Lists",
+      "type": "code",
+      "content": "<ul>\n  <li>Fruits\n    <ul>\n      <li>Apple</li>\n      <li>Banana</li>\n    </ul>\n  </li>\n  <li>Vegetables</li>\n</ul>\n\n<!-- Nesting lists helps in creating sub-items -->"
+    },
+    {
+      "lessonId": "mod03-lsn06",
+      "title": "Introduction to Tables in HTML",
+      "type": "theory",
+      "content": "Tables in HTML are used to display data in rows and columns. The basic elements include <table>, <tr> (table row), <th> (table header), and <td> (table data)."
+    },
+    {
+      "lessonId": "mod03-lsn07",
+      "title": "Creating a Simple Table",
+      "type": "code",
+      "content": "<table>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>Alice</td>\n    <td>25</td>\n  </tr>\n</table>\n\n<!-- Basic table structure with headers and data rows -->"
+    },
+    {
+      "lessonId": "mod03-lsn08",
+      "title": "Table Borders and Alignment",
+      "type": "code",
+      "content": "<table border=\"1\">\n  <tr align=\"center\">\n    <th>Name</th>\n    <th>Score</th>\n  </tr>\n  <tr>\n    <td>Bob</td>\n    <td align=\"right\">85</td>\n  </tr>\n</table>\n\n<!-- Use border and alignment attributes for visual formatting -->"
+    },
+    {
+      "lessonId": "mod03-lsn09",
+      "title": "Table Headers, Rows, and Cells",
+      "type": "theory",
+      "content": "Use `<th>` for header cells (bold and centered by default), `<tr>` for each table row, and `<td>` for regular data cells. Headers help structure data meaningfully."
+    },
+    {
+      "lessonId": "mod03-lsn10",
+      "title": "Spanning Rows and Columns",
+      "type": "code",
+      "content": "<table border=\"1\">\n  <tr>\n    <th rowspan=\"2\">Name</th>\n    <th colspan=\"2\">Scores</th>\n  </tr>\n  <tr>\n    <td>Math</td>\n    <td>Science</td>\n  </tr>\n  <tr>\n    <td>Alice</td>\n    <td>90</td>\n    <td>95</td>\n  </tr>\n</table>\n\n<!-- rowspan and colspan merge cells across rows and columns -->"
+    }
+  ]
+}

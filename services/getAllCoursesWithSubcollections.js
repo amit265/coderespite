@@ -9,7 +9,8 @@ export const getAllCoursesWithSubcollections = async () => {
     // Step 1: Fetch all courses
     const coursesSnapshot = await getDocs(collection(db, "courses"));
     const allCourses = [];
-
+    console.log("log all data from upload");
+    
     for (const courseDoc of coursesSnapshot.docs) {
       const courseId = courseDoc.id;
       const courseData = courseDoc.data();
@@ -52,7 +53,7 @@ export const getAllCoursesWithSubcollections = async () => {
         // flashcards, // Add if fetched
       });
     }
-    console.log("from firestore allCourses", allCourses.length);
+    console.log("from firestore allCourses", allCourses);
 
     await AsyncStorage.setItem("@allCourses_data", JSON.stringify(allCourses));
 

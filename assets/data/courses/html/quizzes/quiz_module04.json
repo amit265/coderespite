@@ -1,0 +1,76 @@
+{
+  "quizId": "qz04",
+  "courseId": "html",
+  "moduleId": "mod04",
+  "title": "Text Formatting and Typography",
+  "tags": ["html", "text formatting", "typography", "bold", "italic", "underline", "quotes"],
+  "difficulty": "easy",
+  "description": "Learn about text formatting tags like bold, italic, underline, superscript, subscript, and quotes in HTML.",
+  "quiz": [
+    {
+      "question": "Which tag is used to make text bold in HTML?",
+      "options": ["<b>", "<i>", "<u>", "<strong>"],
+      "correctAnswer": "<b>",
+      "explanation": "The `<b>` tag makes text bold without implying extra importance."
+    },
+    {
+      "question": "What is the difference between <b> and <strong> tags?",
+      "options": [
+        "<b> is stylistic; <strong> indicates importance",
+        "<b> is deprecated; <strong> is not",
+        "<b> italicizes text; <strong> underlines text",
+        "No difference"
+      ],
+      "correctAnswer": "<b> is stylistic; <strong> indicates importance",
+      "explanation": "`<b>` simply styles text bold; `<strong>` also semantically means strong importance."
+    },
+    {
+      "question": "Which tag italicizes text?",
+      "options": ["<i>", "<em>", "<u>", "<cite>"],
+      "correctAnswer": "<i>",
+      "explanation": "The `<i>` tag italicizes text without extra emphasis."
+    },
+    {
+      "question": "Which tag is used for emphasized text that is usually italicized?",
+      "options": ["<em>", "<i>", "<b>", "<mark>"],
+      "correctAnswer": "<em>",
+      "explanation": "The `<em>` tag indicates emphasis, typically rendered in italics."
+    },
+    {
+      "question": "How do you underline text in HTML?",
+      "options": ["<u>", "<underline>", "<em>", "<mark>"],
+      "correctAnswer": "<u>",
+      "explanation": "The `<u>` tag underlines text."
+    },
+    {
+      "question": "Which tag is used for superscript text?",
+      "options": ["<sup>", "<sub>", "<small>", "<mark>"],
+      "correctAnswer": "<sup>",
+      "explanation": "The `<sup>` tag makes text appear as superscript."
+    },
+    {
+      "question": "Which tag is used for subscript text?",
+      "options": ["<sub>", "<sup>", "<small>", "<mark>"],
+      "correctAnswer": "<sub>",
+      "explanation": "The `<sub>` tag makes text appear as subscript."
+    },
+    {
+      "question": "How do you insert a block quotation in HTML?",
+      "options": ["<blockquote>", "<q>", "<cite>", "<quote>"],
+      "correctAnswer": "<blockquote>",
+      "explanation": "The `<blockquote>` tag is used for long quotations."
+    },
+    {
+      "question": "Which tag is used for short inline quotations?",
+      "options": ["<q>", "<blockquote>", "<cite>", "<quote>"],
+      "correctAnswer": "<q>",
+      "explanation": "The `<q>` tag is used for inline quotes and usually adds quotation marks automatically."
+    },
+    {
+      "question": "Which tag is used to cite a source or reference?",
+      "options": ["<cite>", "<blockquote>", "<q>", "<ref>"],
+      "correctAnswer": "<cite>",
+      "explanation": "The `<cite>` tag is used to reference a source."
+    }
+  ]
+}

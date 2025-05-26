@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod01",
+  "title": "Introduction to CSS",
+  "description": "Get started with the basics of CSS, its purpose, syntax, and how it integrates with HTML to style web pages.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod01-lsn01",
+      "title": "What is CSS?",
+      "type": "theory",
+      "content": "CSS (Cascading Style Sheets) is used to style and layout HTML elements. It controls colors, fonts, spacing, positioning, and responsiveness across the web."
+    },
+    {
+      "lessonId": "mod01-lsn02",
+      "title": "Why Use CSS?",
+      "type": "theory",
+      "content": "CSS separates content from design, improves website maintainability, reduces code duplication, and allows consistent styling across multiple pages."
+    },
+    {
+      "lessonId": "mod01-lsn03",
+      "title": "Ways to Apply CSS: Inline, Internal, External",
+      "type": "theory",
+      "content": "CSS can be applied in three ways: inline (within HTML tags), internal (inside a <style> tag), and external (linked CSS file). External CSS is best for scalability."
+    },
+    {
+      "lessonId": "mod01-lsn04",
+      "title": "Basic CSS Syntax",
+      "type": "code",
+      "content": "/* CSS Syntax */\nselector {\n  property: value;\n}\n\n/* Example */\nh1 {\n  color: blue;\n  font-size: 24px;\n}"
+    },
+    {
+      "lessonId": "mod01-lsn05",
+      "title": "CSS Selectors: Element, Class, ID",
+      "type": "code",
+      "content": "/* Element Selector */\np {\n  color: green;\n}\n\n/* Class Selector */\n.title {\n  font-weight: bold;\n}\n\n/* ID Selector */\n#main {\n  background-color: yellow;\n}"
+    },
+    {
+      "lessonId": "mod01-lsn06",
+      "title": "How to Link a CSS File to HTML",
+      "type": "code",
+      "content": "<!-- Inside the <head> of your HTML document -->\n<link rel=\"stylesheet\" href=\"styles.css\">"
+    },
+    {
+      "lessonId": "mod01-lsn07",
+      "title": "CSS Comments and Best Practices",
+      "type": "theory",
+      "content": "CSS comments use /* like this */. Use comments to organize styles logically. Keep selectors clean, avoid inline CSS, and use external stylesheets for large projects."
+    },
+    {
+      "lessonId": "mod01-lsn08",
+      "title": "Applying Multiple Rules to One Element",
+      "type": "code",
+      "content": "/* You can apply multiple properties to one selector */\nh2 {\n  color: red;\n  text-align: center;\n  margin-top: 20px;\n}"
+    },
+    {
+      "lessonId": "mod01-lsn09",
+      "title": "Understanding Cascading and Specificity",
+      "type": "theory",
+      "content": "When multiple rules target the same element, CSS decides which one applies based on specificity and order. IDs > Classes > Elements in specificity."
+    },
+    {
+      "lessonId": "mod01-lsn10",
+      "title": "Inspecting Styles in the Browser",
+      "type": "theory",
+      "content": "Right-click and choose 'Inspect' to open DevTools. Use the 'Elements' and 'Styles' panel to see how CSS is applied and debug your styles live."
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "quizId": "qz13",
+  "moduleId": "mod13",
+  "courseId": "html",
+  "title": "Forms: Validation and Accessibility",
+  "tags": ["forms", "validation", "accessibility", "input", "aria", "usability"],
+  "difficulty": "medium",
+  "description": "Learn how to validate form inputs and make forms accessible for all users.",
+  "quiz": [
+    {
+      "question": "Which HTML attribute is used to make a form input required?",
+      "options": ["mandatory", "required", "validate", "checked"],
+      "correctAnswer": "required",
+      "explanation": "The required attribute forces the user to fill out the input before submitting."
+    },
+    {
+      "question": "What type of input is validated by the 'email' input type?",
+      "options": [
+        "Only text",
+        "Only numbers",
+        "Email addresses",
+        "URLs"
+      ],
+      "correctAnswer": "Email addresses",
+      "explanation": "Input type='email' ensures the entered value follows a valid email format."
+    },
+    {
+      "question": "Which attribute can you use to specify a pattern that the input value must match?",
+      "options": ["pattern", "match", "regex", "validate"],
+      "correctAnswer": "pattern",
+      "explanation": "The pattern attribute allows you to specify a regular expression for validation."
+    },
+    {
+      "question": "How can you provide custom validation messages in HTML5?",
+      "options": [
+        "Using the 'title' attribute",
+        "Using the 'pattern' attribute",
+        "Using the 'setCustomValidity()' method in JavaScript",
+        "Using the 'alert()' function"
+      ],
+      "correctAnswer": "Using the 'setCustomValidity()' method in JavaScript",
+      "explanation": "setCustomValidity() lets you define custom validation messages."
+    },
+    {
+      "question": "Which attribute improves form accessibility by linking a label to its input?",
+      "options": ["for", "aria-label", "aria-labelledby", "id"],
+      "correctAnswer": "for",
+      "explanation": "The for attribute on <label> connects it to the corresponding input’s id."
+    },
+    {
+      "question": "What is the purpose of the 'aria-describedby' attribute?",
+      "options": [
+        "To describe an element with text from another element",
+        "To hide an element from screen readers",
+        "To set a tooltip",
+        "To disable an input field"
+      ],
+      "correctAnswer": "To describe an element with text from another element",
+      "explanation": "aria-describedby associates additional descriptive text with an element."
+    },
+    {
+      "question": "Which of the following is NOT a valid HTML5 input type?",
+      "options": ["color", "date", "range", "phone"],
+      "correctAnswer": "phone",
+      "explanation": "'phone' is not a valid input type; the correct type is 'tel'."
+    },
+    {
+      "question": "Which attribute should be added to input fields to improve keyboard navigation for screen readers?",
+      "options": ["tabindex", "aria-hidden", "aria-checked", "aria-live"],
+      "correctAnswer": "tabindex",
+      "explanation": "tabindex manages keyboard focus order for better accessibility."
+    },
+    {
+      "question": "What role does the <fieldset> element play in forms?",
+      "options": [
+        "Groups related elements",
+        "Creates a checkbox",
+        "Defines an input field",
+        "Submits the form"
+      ],
+      "correctAnswer": "Groups related elements",
+      "explanation": "<fieldset> groups related form controls together, improving semantics and accessibility."
+    },
+    {
+      "question": "Which attribute on form elements can improve accessibility by providing a short description or instructions?",
+      "options": ["placeholder", "title", "alt", "label"],
+      "correctAnswer": "title",
+      "explanation": "The title attribute provides supplementary information useful for screen readers."
+    }
+  ]
+}

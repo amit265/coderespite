@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BackHandler, Modal, ScrollView, View } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
@@ -20,11 +20,18 @@ export default function Home() {
   const { userData } = useContext(userDetailsContext);
   const { allCourses, setSelectedModule } = useContext(allCoursesContext);
   const [showLevelModal, setShowLevelModal] = useState(false);
-  const { lastShownLevel, updateLastShownLevel, levelLoading } = useContext(LevelContext);
+  const { lastShownLevel, updateLastShownLevel, levelLoading } =
+    useContext(LevelContext);
 
   useEffect(() => {
+    const username = userData?.profile?.name;
+    if (username === "user") {
+      setShowModal(true);
+    }
+  }, []);
 
-    if(levelLoading) return;
+  useEffect(() => {
+    if (levelLoading) return;
     const currentLevel = userData?.level?.currentLevel;
     if (!currentLevel) return;
 

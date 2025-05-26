@@ -11,6 +11,7 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
   const [showConfetti, setShowConfetti] = useState(true);
 
   useEffect(() => {
+    
     const newLevel =
       levels.find((lvl) => lvl.id === currentLevel) ||
       levels[levels.length - 1];

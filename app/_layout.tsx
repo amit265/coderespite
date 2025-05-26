@@ -17,9 +17,9 @@ import './global.css';
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    "nunito": require("../assets/fonts/Nunito-Regular.ttf"),
-    "nunito-bold": require("../assets/fonts/Nunito-Bold.ttf"),
-    "nunito-semiBold": require("../assets/fonts/Nunito-SemiBold.ttf"),
+    "nunito": require("../assets/fonts/Poppins-Regular.ttf"),
+    "nunito-bold": require("../assets/fonts/Poppins-Bold.ttf"),
+    "nunito-semiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "quicksand": require("../assets/fonts/Quicksand-Regular.ttf"),
     "quicksand-semiBold": require("../assets/fonts/Quicksand-SemiBold.ttf"),
     "quicksand-bold": require("../assets/fonts/Quicksand-Bold.ttf"),

@@ -24,7 +24,7 @@ export default function ContinueCard({ userData }) {
 
   return (
     <View className="bg-white mx-4 mb-4 p-6 rounded-2xl shadow-md border border-gray-200">
-      <Text className="text-lg font-nunito-semibold text-gray-800 mb-4">
+      <Text className="text-xl text-black mb-4" style={{ fontFamily: "nunito-semibold" }}>
         🐾 Pawgress Tracker
       </Text>
 

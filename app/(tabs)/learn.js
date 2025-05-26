@@ -17,16 +17,18 @@ export default function Learn() {
     <TouchableOpacity
       key={item.id}
       onPress={() => {
-        setClickCount(prev => prev + 1)
+        setClickCount((prev) => prev + 1);
         setSelectedCourse(item);
         router.push(`/learn/courses/${item?.id}`);
       }}
       className="mb-6 rounded-3xl overflow-hidden"
-      style={{ width: 160, height: 160 }}
+      style={{ width: 160, height: 160, position: "relative" }}
       activeOpacity={0.85}
     >
       <Image
-        source={courseIcons[item?.icon]}
+        source={
+          courseIcons[item?.icon] || require("../../assets/default-icon.png")
+        }
         style={{
           width: "100%",
           height: "100%",
@@ -34,10 +36,10 @@ export default function Learn() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute">
+      <View className="absolute flex justify-center items-center w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
         <Text
-          className="text-white text-lg font-nunito-semibold"
-          style={{ left: "20%" }}
+          className="text-white text-2xl font-nunito-semibold"
+          numberOfLines={1}
         >
           {item.title}
         </Text>

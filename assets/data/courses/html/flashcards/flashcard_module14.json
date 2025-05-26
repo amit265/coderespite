@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod14",
+  "courseId": "html",
+  "moduleId": "mod14",
+  "title": "Meta Tags and SEO Basics",
+  "description": "Understanding meta tags, their role in SEO, and best practices for optimizing web pages for search engines.",
+  "flashcards": [
+    {
+      "question": "What is the purpose of the `<meta charset>` tag?",
+      "answer": "It specifies the character encoding for the HTML document, commonly set to `UTF-8`."
+    },
+    {
+      "question": "How does the `<meta name='viewport'>` tag help in responsive design?",
+      "answer": "It controls the viewport’s size and scale, ensuring the page is optimized for different devices."
+    },
+    {
+      "question": "What meta tag is used to provide a description of the webpage?",
+      "answer": "The `<meta name='description'>` tag."
+    },
+    {
+      "question": "Why are keywords in meta tags important?",
+      "answer": "They help search engines understand the content focus of the page, though their importance has decreased."
+    },
+    {
+      "question": "What does the `<meta http-equiv='X-UA-Compatible'>` tag do?",
+      "answer": "It tells Internet Explorer which version to use for rendering the page."
+    },
+    {
+      "question": "What is Open Graph protocol used for in meta tags?",
+      "answer": "To control how the webpage appears when shared on social media platforms."
+    },
+    {
+      "question": "How can you specify the author of a webpage using meta tags?",
+      "answer": "Using `<meta name='author' content='Author Name'>`."
+    },
+    {
+      "question": "What is the role of the `<title>` tag in SEO?",
+      "answer": "It defines the title shown in browser tabs and search engine results, influencing SEO."
+    },
+    {
+      "question": "Can meta tags improve page loading speed?",
+      "answer": "Indirectly, by specifying viewport and charset, they can enhance rendering but do not directly affect speed."
+    },
+    {
+      "question": "Why is it important to have unique meta descriptions for each page?",
+      "answer": "To avoid duplicate content issues and improve search engine rankings."
+    }
+  ]
+}

@@ -28,6 +28,8 @@ import users from "../assets/data/users.json";
 // };
 
 const uploadCourseData = async (courseId) => {
+  console.log("uploading data");
+  
   const course = courseFiles[courseId];
   if (!course) {
     console.warn(`No files registered for course ${courseId}`);

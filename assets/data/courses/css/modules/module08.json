@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod08",
+  "title": "Responsive Design with Media Queries",
+  "description": "Learn to build responsive websites using media queries to adapt layouts to various screen sizes and devices.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod08-lsn01",
+      "title": "Introduction to Responsive Design",
+      "type": "theory",
+      "content": "Responsive design ensures your website looks good on all devices by adapting layout, content, and styles to screen size."
+    },
+    {
+      "lessonId": "mod08-lsn02",
+      "title": "What Are Media Queries?",
+      "type": "theory",
+      "content": "Media queries apply CSS rules based on device characteristics like width, height, orientation, resolution, etc."
+    },
+    {
+      "lessonId": "mod08-lsn03",
+      "title": "Basic Media Query Syntax",
+      "type": "code",
+      "content": "@media (max-width: 768px) {\n  body {\n    background-color: lightblue;\n  }\n}"
+    },
+    {
+      "lessonId": "mod08-lsn04",
+      "title": "Using Min-Width and Max-Width",
+      "type": "code",
+      "content": "@media (min-width: 600px) and (max-width: 1024px) {\n  .container {\n    padding: 20px;\n  }\n}"
+    },
+    {
+      "lessonId": "mod08-lsn05",
+      "title": "Responsive Typography",
+      "type": "code",
+      "content": "@media (max-width: 600px) {\n  h1 {\n    font-size: 1.5rem;\n  }\n}"
+    },
+    {
+      "lessonId": "mod08-lsn06",
+      "title": "Hiding and Showing Content",
+      "type": "code",
+      "content": "@media (max-width: 500px) {\n  .desktop-only {\n    display: none;\n  }\n}"
+    },
+    {
+      "lessonId": "mod08-lsn07",
+      "title": "Mobile-First vs Desktop-First Design",
+      "type": "theory",
+      "content": "Mobile-first design writes default styles for small screens and uses min-width queries for larger devices. Desktop-first does the opposite."
+    },
+    {
+      "lessonId": "mod08-lsn08",
+      "title": "Responsive Navigation Menu",
+      "type": "code",
+      "content": "/* Convert horizontal navbar to hamburger menu for smaller screens */"
+    },
+    {
+      "lessonId": "mod08-lsn09",
+      "title": "Media Queries for Orientation and Resolution",
+      "type": "code",
+      "content": "@media (orientation: landscape) {\n  .layout {\n    flex-direction: row;\n  }\n}"
+    },
+    {
+      "lessonId": "mod08-lsn10",
+      "title": "Mini Project: Responsive Blog Layout",
+      "type": "code",
+      "content": "/* Create a blog post layout that adjusts typography and columns based on screen width */"
+    }
+  ]
+}

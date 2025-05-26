@@ -27,6 +27,7 @@ export default function QuizId() {
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedOption, setSelectedOption] = useState();
+  const [selectOption, setSelectOption] = useState(false);
   const [result, setResult] = useState([]);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -46,16 +47,11 @@ export default function QuizId() {
 
   useEffect(() => {
     if (quiz[currentPage]?.options) {
-      const valuesOnly = quiz[currentPage].options.map(
-        (optionObj) => Object.values(optionObj)[0]
+      setShuffledOptions(
+        [...quiz[currentPage].options].sort(() => Math.random() - 0.5)
       );
-
-      setShuffledOptions([...valuesOnly].sort(() => Math.random() - 0.5));
     }
-    const timer = setTimeout(() => {}, 5000);
-
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, [quiz, currentPage]);
+  }, [currentPage, quiz]);
 
   const getProgress = (currentPage) => {
     const precentage = currentPage / quiz?.length;
@@ -260,6 +256,7 @@ export default function QuizId() {
                 key={index}
                 onPress={() => {
                   setSelectedOption(index);
+                  setSelectOption(true);
                   onOptionSelect(item);
                 }}
                 style={{
@@ -292,9 +289,10 @@ export default function QuizId() {
                 onPress={() => {
                   setCurrentPage(currentPage + 1);
                   setSelectedOption(null);
+                  setSelectOption(false);
                 }}
-                disable={!selectedOption}
-                variant={selectedOption ? "active" : "inactive"}
+                disable={!selectOption}
+                variant={selectOption ? "active" : "inactive"}
               />
             ) : (
               <Button
@@ -304,8 +302,8 @@ export default function QuizId() {
                   setClickCount((prev) => prev + 1);
                 }}
                 loading={loading}
-                disable={!selectedOption}
-                variant={selectedOption ? "active" : "inactive"}
+                disable={!selectOption}
+                variant={selectOption ? "active" : "inactive"}
               />
             )}
           </View>

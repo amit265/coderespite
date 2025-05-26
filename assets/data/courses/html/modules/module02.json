@@ -1,26 +1,69 @@
- {
-    "moduleId": "mod01",
-    "title": "Getting Started with JavaScript",
-    "description": "Introduction to variables, data types, and operators.",
-    "level": "Beginner",
-    "lessons": [
-      {
-        "lessonId": "mod01-lsn01",
-        "title": "What is JavaScript?",
-        "type": "theory",
-        "content": "JavaScript is a scripting language used to create dynamic content on websites."
-      },
-      {
-        "lessonId": "mod01-lsn02",
-        "title": "Variables in JS",
-        "type": "theory",
-        "content": "Variables are containers for storing data. Use `let`, `const`, or `var`."
-      },
-      {
-        "lessonId": "mod01-lsn03",
-        "title": "Basic Syntax",
-        "type": "code",
-        "content": "let age = 25;\nconst name = 'John';"
-      }
-    ]
-  }
+{
+  "courseId": "html",
+  "moduleId": "mod02",
+  "title": "Text Formatting and Links",
+  "description": "Learn how to format text and create hyperlinks in HTML documents.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod02-lsn01",
+      "title": "Text Formatting Tags Overview",
+      "type": "theory",
+      "content": "HTML offers a variety of tags to format text including <strong>, <em>, <u>, <small>, <mark>, <sub>, and <sup>. These tags help emphasize and style content meaningfully."
+    },
+    {
+      "lessonId": "mod02-lsn02",
+      "title": "Bold and Italic Text",
+      "type": "code",
+      "content": "<p><strong>This text is bold.</strong></p>\n<p><em>This text is italic.</em></p>\n\n<!-- Use <strong> for bold and <em> for italic emphasis -->"
+    },
+    {
+      "lessonId": "mod02-lsn03",
+      "title": "Underlined, Marked, and Small Text",
+      "type": "code",
+      "content": "<p><u>This is underlined text.</u></p>\n<p><mark>Highlighted text using mark.</mark></p>\n<p><small>This is small text.</small></p>"
+    },
+    {
+      "lessonId": "mod02-lsn04",
+      "title": "Subscript and Superscript",
+      "type": "code",
+      "content": "<p>H<sub>2</sub>O is water.</p>\n<p>E = mc<sup>2</sup></p>\n\n<!-- <sub> for subscript, <sup> for superscript -->"
+    },
+    {
+      "lessonId": "mod02-lsn05",
+      "title": "Creating Hyperlinks with <a>",
+      "type": "theory",
+      "content": "The `<a>` tag is used to create hyperlinks. The `href` attribute specifies the destination URL. Links can navigate to websites, pages, or even sections within the same page."
+    },
+    {
+      "lessonId": "mod02-lsn06",
+      "title": "Basic Hyperlink Example",
+      "type": "code",
+      "content": "<a href=\"https://www.example.com\">Visit Example</a>\n\n<!-- Clicking this will open the example website -->"
+    },
+    {
+      "lessonId": "mod02-lsn07",
+      "title": "Open Link in a New Tab",
+      "type": "code",
+      "content": "<a href=\"https://openai.com\" target=\"_blank\">OpenAI (new tab)</a>\n\n<!-- The target=\"_blank\" attribute opens the link in a new tab -->"
+    },
+    {
+      "lessonId": "mod02-lsn08",
+      "title": "Linking to Sections within a Page",
+      "type": "code",
+      "content": "<a href=\"#section2\">Go to Section 2</a>\n...\n<h2 id=\"section2\">Section 2</h2>\n\n<!-- Internal links using id attributes -->"
+    },
+    {
+      "lessonId": "mod02-lsn09",
+      "title": "Using Mailto Links",
+      "type": "code",
+      "content": "<a href=\"mailto:someone@example.com\">Send Email</a>\n\n<!-- Opens the default email client with the recipient pre-filled -->"
+    },
+    {
+      "lessonId": "mod02-lsn10",
+      "title": "Best Practices for Links and Text",
+      "type": "theory",
+      "content": "Use descriptive text for links instead of 'click here'. Always validate URLs. Use `rel=\"noopener noreferrer\"` for external links with `target=\"_blank\"` to improve security and performance."
+    }
+  ]
+}

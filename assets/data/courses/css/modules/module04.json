@@ -1,0 +1,69 @@
+{
+  "courseId": "css",
+  "moduleId": "mod04",
+  "title": "The Box Model and Overflow Handling",
+  "description": "Master the CSS box model, padding, borders, margins, and overflow to build structured layouts and avoid common spacing issues.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod04-lsn01",
+      "title": "What is the CSS Box Model?",
+      "type": "theory",
+      "content": "The CSS box model includes the content, padding, border, and margin. Every HTML element is considered a rectangular box."
+    },
+    {
+      "lessonId": "mod04-lsn02",
+      "title": "Understanding Content, Padding, Border, Margin",
+      "type": "theory",
+      "content": "Content is the innermost area. Padding is space around content. Border surrounds the padding. Margin is the outer space between elements."
+    },
+    {
+      "lessonId": "mod04-lsn03",
+      "title": "Padding Property and Examples",
+      "type": "code",
+      "content": "div {\n  padding: 10px; /* top, right, bottom, left */\n  padding: 10px 15px; /* top-bottom, right-left */\n}"
+    },
+    {
+      "lessonId": "mod04-lsn04",
+      "title": "Border Property and Customization",
+      "type": "code",
+      "content": "div {\n  border: 2px solid #000;\n  border-radius: 8px;\n}"
+    },
+    {
+      "lessonId": "mod04-lsn05",
+      "title": "Margin Property and Collapsing Margins",
+      "type": "code",
+      "content": "div {\n  margin: 20px 0;\n}\n\n/* Note: Vertical margins may collapse (merge) between elements */"
+    },
+    {
+      "lessonId": "mod04-lsn06",
+      "title": "Box Sizing: content-box vs border-box",
+      "type": "code",
+      "content": "div {\n  box-sizing: border-box;\n}\n\n/* border-box includes padding and border in the element’s total width */"
+    },
+    {
+      "lessonId": "mod04-lsn07",
+      "title": "Outline vs Border",
+      "type": "code",
+      "content": "div {\n  outline: 2px dashed red;\n  outline-offset: 5px;\n}"
+    },
+    {
+      "lessonId": "mod04-lsn08",
+      "title": "Controlling Overflow: visible, hidden, scroll, auto",
+      "type": "code",
+      "content": "div {\n  overflow: auto;\n  max-height: 100px;\n}"
+    },
+    {
+      "lessonId": "mod04-lsn09",
+      "title": "Overflow-X and Overflow-Y",
+      "type": "code",
+      "content": "div {\n  overflow-x: scroll;\n  overflow-y: hidden;\n}"
+    },
+    {
+      "lessonId": "mod04-lsn10",
+      "title": "Practical Box Model Debugging Tips",
+      "type": "theory",
+      "content": "Use browser dev tools to inspect spacing, enable element outlines for visual help, and always set `box-sizing: border-box` globally for consistency."
+    }
+  ]
+}

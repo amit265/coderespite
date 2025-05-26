@@ -23,7 +23,8 @@ export default function FlashCards() {
       activeOpacity={0.85}
     >
       <Image
-        source={flashcardIcons[item?.icon]}
+        source={flashcardIcons[item?.icon]||
+          require("../../assets/default-icon.png")}
         style={{
           width: "100%",
           height: "100%",
@@ -31,10 +32,11 @@ export default function FlashCards() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute">
+      <View className="absolute flex justify-center items-center w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
         <Text
-          className="text-white text-lg font-nunito-semibold"
-          style={{ left: "20%" }}
+          className="text-white text-xl font-nunito-semibold"
+          numberOfLines={1}
+
         >
           {item.title}
         </Text>

@@ -1,0 +1,69 @@
+{
+  "courseId": "html",
+  "moduleId": "mod08",
+  "title": "Forms and User Input",
+  "description": "Learn how to create interactive HTML forms to collect user input efficiently and accessibly.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod08-lsn01",
+      "title": "Introduction to HTML Forms",
+      "type": "theory",
+      "content": "HTML forms allow users to enter and submit data to web servers. Forms are essential for user registration, login, feedback, and more."
+    },
+    {
+      "lessonId": "mod08-lsn02",
+      "title": "Creating a Basic Form",
+      "type": "code",
+      "content": "<form action=\"/submit\" method=\"post\">\n  <input type=\"text\" name=\"username\">\n  <input type=\"submit\" value=\"Submit\">\n</form>\n// The <form> tag defines a form with an action URL and method."
+    },
+    {
+      "lessonId": "mod08-lsn03",
+      "title": "Text Inputs and Labels",
+      "type": "code",
+      "content": "<label for=\"email\">Email:</label>\n<input type=\"email\" id=\"email\" name=\"email\">\n// Use <label> for accessibility and form usability."
+    },
+    {
+      "lessonId": "mod08-lsn04",
+      "title": "Input Types in Forms",
+      "type": "theory",
+      "content": "HTML supports many input types: text, password, email, number, date, file, checkbox, radio, and more, each tailored for specific data entry."
+    },
+    {
+      "lessonId": "mod08-lsn05",
+      "title": "Checkboxes and Radio Buttons",
+      "type": "code",
+      "content": "<input type=\"checkbox\" name=\"subscribe\" checked> Subscribe\n<input type=\"radio\" name=\"gender\" value=\"male\"> Male\n<input type=\"radio\" name=\"gender\" value=\"female\"> Female"
+    },
+    {
+      "lessonId": "mod08-lsn06",
+      "title": "Dropdowns and Select Menus",
+      "type": "code",
+      "content": "<select name=\"country\">\n  <option value=\"in\">India</option>\n  <option value=\"us\">USA</option>\n</select>"
+    },
+    {
+      "lessonId": "mod08-lsn07",
+      "title": "Textareas and Multi-line Input",
+      "type": "code",
+      "content": "<label for=\"message\">Your Message:</label>\n<textarea id=\"message\" name=\"message\" rows=\"4\" cols=\"50\"></textarea>"
+    },
+    {
+      "lessonId": "mod08-lsn08",
+      "title": "Form Attributes and Validation",
+      "type": "theory",
+      "content": "Use attributes like `required`, `placeholder`, `min`, `max`, and `pattern` for client-side validation to improve data quality."
+    },
+    {
+      "lessonId": "mod08-lsn09",
+      "title": "Grouping Inputs with Fieldset and Legend",
+      "type": "code",
+      "content": "<fieldset>\n  <legend>Personal Info</legend>\n  <input type=\"text\" name=\"fname\" placeholder=\"First Name\">\n</fieldset>"
+    },
+    {
+      "lessonId": "mod08-lsn10",
+      "title": "Best Practices for Form Design",
+      "type": "theory",
+      "content": "Ensure forms are accessible, mobile-friendly, clearly labeled, and include helpful validation messages and logical structure."
+    }
+  ]
+}
