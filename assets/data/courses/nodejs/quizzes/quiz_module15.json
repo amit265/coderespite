@@ -1,0 +1,106 @@
+{
+  "quizId": "qz15",
+  "courseId": "nodejs",
+  "moduleId": "mod15",
+  "title": "Scaling and Performance Optimization",
+  "tags": ["nodejs", "scaling", "performance", "optimization", "clustering", "caching", "load balancing"],
+  "difficulty": "advanced",
+  "description": "Techniques to scale Node.js applications and optimize their performance for production environments.",
+  "quiz": [
+    {
+      "question": "What Node.js module allows you to create child processes to utilize multiple CPU cores?",
+      "options": ["cluster", "child_process", "worker_threads", "os"],
+      "correctAnswer": "cluster",
+      "explanation": "The cluster module helps create child processes to enable multi-core utilization."
+    },
+    {
+      "question": "Which of the following is a common caching strategy to improve Node.js app performance?",
+      "options": ["In-memory caching", "Database replication", "File logging", "Using callbacks"],
+      "correctAnswer": "In-memory caching",
+      "explanation": "In-memory caching stores frequently accessed data in RAM to reduce database calls."
+    },
+    {
+      "question": "What is load balancing?",
+      "options": [
+        "Distributing incoming network traffic across multiple servers",
+        "Backing up databases",
+        "Increasing server RAM",
+        "Monitoring server logs"
+      ],
+      "correctAnswer": "Distributing incoming network traffic across multiple servers",
+      "explanation": "Load balancing spreads client requests across servers to ensure no single server is overwhelmed."
+    },
+    {
+      "question": "Which tool can be used to monitor Node.js app performance in production?",
+      "options": ["New Relic", "Nodemon", "PM2", "Webpack"],
+      "correctAnswer": "New Relic",
+      "explanation": "New Relic provides real-time performance monitoring and analytics."
+    },
+    {
+      "question": "What does the term 'event loop' refer to in Node.js?",
+      "options": [
+        "Mechanism to handle asynchronous operations",
+        "Process manager for apps",
+        "Memory allocation technique",
+        "Database query executor"
+      ],
+      "correctAnswer": "Mechanism to handle asynchronous operations",
+      "explanation": "The event loop processes asynchronous callbacks in Node.js."
+    },
+    {
+      "question": "How can you prevent blocking the event loop?",
+      "options": [
+        "Use asynchronous APIs and non-blocking code",
+        "Increase server RAM",
+        "Use synchronous file I/O",
+        "Write more functions"
+      ],
+      "correctAnswer": "Use asynchronous APIs and non-blocking code",
+      "explanation": "Non-blocking code prevents delays in processing other events."
+    },
+    {
+      "question": "Which database optimization can improve Node.js app performance?",
+      "options": [
+        "Indexing frequently queried fields",
+        "Using large images",
+        "Avoiding database altogether",
+        "Storing all data in JSON files"
+      ],
+      "correctAnswer": "Indexing frequently queried fields",
+      "explanation": "Indexes speed up data retrieval in databases."
+    },
+    {
+      "question": "What is vertical scaling?",
+      "options": [
+        "Adding more resources (CPU, RAM) to a single server",
+        "Adding more servers to the system",
+        "Dividing traffic based on user location",
+        "Using caching layers"
+      ],
+      "correctAnswer": "Adding more resources (CPU, RAM) to a single server",
+      "explanation": "Vertical scaling means upgrading the capacity of existing hardware."
+    },
+    {
+      "question": "What is horizontal scaling?",
+      "options": [
+        "Adding more servers to handle increased load",
+        "Increasing CPU speed on a single server",
+        "Optimizing code for speed",
+        "Using faster storage"
+      ],
+      "correctAnswer": "Adding more servers to handle increased load",
+      "explanation": "Horizontal scaling means distributing load by adding servers."
+    },
+    {
+      "question": "How does caching improve performance?",
+      "options": [
+        "Reduces the number of database calls",
+        "Increases CPU usage",
+        "Slows down app startup",
+        "Uses more disk space"
+      ],
+      "correctAnswer": "Reduces the number of database calls",
+      "explanation": "Caching stores frequently accessed data for quick retrieval."
+    }
+  ]
+}

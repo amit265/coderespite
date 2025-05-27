@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod04",
+  "courseId": "reactnative",
+  "moduleId": "mod04",
+  "title": "State Management and Hooks",
+  "description": "Learn how to manage component state using React hooks for dynamic and interactive apps.",
+  "flashcards": [
+    {
+      "question": "What is state in React Native?",
+      "answer": "State is an object that holds data that can change over time and affects what is rendered."
+    },
+    {
+      "question": "How do you create state in a functional component?",
+      "answer": "By using the `useState` hook from React."
+    },
+    {
+      "question": "What does the `useState` hook return?",
+      "answer": "An array with two items: the current state value and a function to update it."
+    },
+    {
+      "question": "How do you update state created by `useState`?",
+      "answer": "By calling the updater function with the new state value."
+    },
+    {
+      "question": "What is a hook in React?",
+      "answer": "A special function that lets you use React features like state and lifecycle in functional components."
+    },
+    {
+      "question": "Can you use hooks inside class components?",
+      "answer": "No, hooks work only in functional components."
+    },
+    {
+      "question": "What does `useEffect` hook do?",
+      "answer": "It performs side effects like fetching data or subscribing to events after rendering."
+    },
+    {
+      "question": "When does the function inside `useEffect` run?",
+      "answer": "It runs after the component mounts and when any dependency values change."
+    },
+    {
+      "question": "How do you prevent an infinite loop with `useEffect`?",
+      "answer": "By specifying dependencies in the dependency array to control when the effect runs."
+    },
+    {
+      "question": "Why is state management important in React Native?",
+      "answer": "It controls the dynamic data and user interaction, making apps responsive and interactive."
+    }
+  ]
+}

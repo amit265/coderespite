@@ -67,7 +67,7 @@ export default function CourseId() {
         ></Image>
       </View>
       <View className="flex-1 justify-center">
-        <Text className="text-xl font-nunito-bold text-black mb-1">
+        <Text className="text-base font-nunito-bold text-black mb-1">
           {item.title}
         </Text>
         {/* <Text className="text-gray-700 text-sm">{item.description}</Text> */}
@@ -91,7 +91,7 @@ export default function CourseId() {
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={35} color="black" />
         </Pressable>
-        <Text className="text-2xl font-quicksand-bold mb-4 text-gray-800 text-center">
+        <Text className="text-2xl font-nunito-semibold mb-4 text-gray-800 text-center">
           {selectedCourse?.title}
         </Text>
       </View>
@@ -106,7 +106,7 @@ export default function CourseId() {
             }`}
           >
             <Text
-              className={`text-base font-nunito-bold ${
+              className={`text-base font-nunito-semibold ${
                 courseSelected === level ? "text-black" : "text-gray-400"
               }`}
             >

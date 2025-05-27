@@ -36,10 +36,9 @@ export default function Learn() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute flex justify-center items-center w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
+      <View className="absolute flex p-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
         <Text
-          className="text-white text-2xl font-nunito-semibold"
-          numberOfLines={1}
+          className="text-white text-xl font-nunito-semibold"
         >
           {item.title}
         </Text>

@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod11",
+  "courseId": "react",
+  "moduleId": "mod11",
+  "title": "Custom Hooks and Code Organization",
+  "description": "Creating reusable custom hooks and structuring React code for better maintainability.",
+  "flashcards": [
+    {
+      "question": "What is a custom hook in React?",
+      "answer": "A reusable function that uses React hooks to encapsulate and share logic."
+    },
+    {
+      "question": "Why create custom hooks?",
+      "answer": "To avoid code duplication and improve code reuse across components."
+    },
+    {
+      "question": "What naming convention is used for custom hooks?",
+      "answer": "Custom hooks names start with 'use', e.g., useFetchData."
+    },
+    {
+      "question": "Can custom hooks use other hooks inside them?",
+      "answer": "Yes, custom hooks can use built-in hooks like useState, useEffect, etc."
+    },
+    {
+      "question": "How do custom hooks improve code organization?",
+      "answer": "By separating logic from UI components, making components cleaner and easier to read."
+    },
+    {
+      "question": "Where should you place custom hooks in a React project?",
+      "answer": "In a dedicated folder like 'hooks' for better project structure."
+    },
+    {
+      "question": "What is a good practice for organizing React components?",
+      "answer": "Organize by feature or domain rather than by file type."
+    },
+    {
+      "question": "Why is consistent file naming important?",
+      "answer": "It improves code readability and makes navigating the codebase easier."
+    },
+    {
+      "question": "What tools can help with code organization?",
+      "answer": "Linters, formatters, and code analysis tools like ESLint and Prettier."
+    },
+    {
+      "question": "Can custom hooks manage side effects?",
+      "answer": "Yes, custom hooks often use useEffect to handle side effects."
+    }
+  ]
+}

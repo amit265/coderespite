@@ -1,0 +1,69 @@
+{
+  "courseId": "python",
+  "moduleId": "mod13",
+  "title": "Introduction to Web Development with Flask/Django",
+  "description": "Get started with web development in Python using Flask and Django, two popular web frameworks for building web applications.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod13-lsn01",
+      "title": "What is Web Development?",
+      "type": "theory",
+      "content": "Web development involves creating websites or web applications accessible via browsers. It includes frontend (UI) and backend (server, database) development."
+    },
+    {
+      "lessonId": "mod13-lsn02",
+      "title": "Overview of Flask",
+      "type": "theory",
+      "content": "Flask is a lightweight, micro web framework in Python, known for its simplicity and flexibility, ideal for small to medium web apps."
+    },
+    {
+      "lessonId": "mod13-lsn03",
+      "title": "Overview of Django",
+      "type": "theory",
+      "content": "Django is a full-featured Python web framework that follows the MVC pattern, offering built-in features like ORM, authentication, and admin panel."
+    },
+    {
+      "lessonId": "mod13-lsn04",
+      "title": "Setting Up Flask Environment",
+      "type": "code",
+      "content": "Install Flask and run a basic app:\n```\npip install flask\n```\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, Flask!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```"
+    },
+    {
+      "lessonId": "mod13-lsn05",
+      "title": "Setting Up Django Environment",
+      "type": "code",
+      "content": "Install Django and create a project:\n```\npip install django\n```\n```\ndjango-admin startproject mysite\ncd mysite\npython manage.py runserver\n```"
+    },
+    {
+      "lessonId": "mod13-lsn06",
+      "title": "Routing and Views in Flask",
+      "type": "code",
+      "content": "Define URL routes and views:\n```python\n@app.route('/about')\ndef about():\n    return 'About Page'\n```"
+    },
+    {
+      "lessonId": "mod13-lsn07",
+      "title": "Routing and Views in Django",
+      "type": "code",
+      "content": "Configure URLs and views:\n```python\n# urls.py\nfrom django.urls import path\nfrom . import views\nurlpatterns = [\n    path('', views.home, name='home'),\n]\n\n# views.py\ndef home(request):\n    from django.http import HttpResponse\n    return HttpResponse('Hello, Django!')\n```"
+    },
+    {
+      "lessonId": "mod13-lsn08",
+      "title": "Templates and Rendering in Flask",
+      "type": "code",
+      "content": "Use Jinja2 templates:\n```python\nfrom flask import render_template\n\n@app.route('/hello/<name>')\ndef hello(name):\n    return render_template('hello.html', name=name)\n```\nTemplate example:\n```html\n<h1>Hello, {{ name }}!</h1>\n```"
+    },
+    {
+      "lessonId": "mod13-lsn09",
+      "title": "Templates and Rendering in Django",
+      "type": "code",
+      "content": "Use Django templates:\n```python\n# views.py\ndef hello(request, name):\n    return render(request, 'hello.html', {'name': name})\n```\nTemplate example:\n```html\n<h1>Hello, {{ name }}!</h1>\n```"
+    },
+    {
+      "lessonId": "mod13-lsn10",
+      "title": "Basic Database Operations with Django ORM",
+      "type": "code",
+      "content": "Define models and query data:\n```python\nfrom django.db import models\n\nclass Person(models.Model):\n    name = models.CharField(max_length=100)\n    age = models.IntegerField()\n\n# Query example\npersons = Person.objects.all()\n```"
+    }
+  ]
+}

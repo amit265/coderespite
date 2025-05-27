@@ -1,0 +1,121 @@
+{
+  "quizId": "qz06",
+  "courseId": "nodejs",
+  "moduleId": "mod06",
+  "title": "Middleware in Express",
+  "tags": ["nodejs", "express", "middleware", "web development"],
+  "difficulty": "medium",
+  "description": "Learn about middleware functions in Express.js and how to use them for processing requests.",
+  "quiz": [
+    {
+      "question": "What is middleware in Express.js?",
+      "options": [
+        "A function that executes during the request-response cycle",
+        "A database management tool",
+        "A frontend framework",
+        "A method to deploy Express apps"
+      ],
+      "correctAnswer": "A function that executes during the request-response cycle",
+      "explanation": "Middleware functions process requests before they reach the route handler or send responses."
+    },
+    {
+      "question": "How do you add middleware globally in an Express app?",
+      "options": [
+        "app.use(middlewareFunction)",
+        "app.middleware(middlewareFunction)",
+        "app.add(middlewareFunction)",
+        "app.global(middlewareFunction)"
+      ],
+      "correctAnswer": "app.use(middlewareFunction)",
+      "explanation": "`app.use()` adds middleware that applies to all routes."
+    },
+    {
+      "question": "Which of these is the correct signature of a middleware function?",
+      "options": [
+        "(req, res)",
+        "(req, res, next)",
+        "(req, next)",
+        "(res, next)"
+      ],
+      "correctAnswer": "(req, res, next)",
+      "explanation": "Middleware functions take three arguments: request, response, and next."
+    },
+    {
+      "question": "What is the purpose of the `next()` function in middleware?",
+      "options": [
+        "To stop the request",
+        "To pass control to the next middleware",
+        "To send a response",
+        "To handle errors"
+      ],
+      "correctAnswer": "To pass control to the next middleware",
+      "explanation": "`next()` passes control to the next matching middleware function."
+    },
+    {
+      "question": "Which middleware is used to serve static files in Express?",
+      "options": [
+        "express.static()",
+        "app.static()",
+        "app.useStatic()",
+        "express.staticFiles()"
+      ],
+      "correctAnswer": "express.static()",
+      "explanation": "`express.static()` serves static files like images, CSS, and JavaScript."
+    },
+    {
+      "question": "How can you apply middleware to a specific route?",
+      "options": [
+        "app.use('/route', middlewareFunction)",
+        "app.get('/route', middlewareFunction, handler)",
+        "Both of the above",
+        "None of the above"
+      ],
+      "correctAnswer": "Both of the above",
+      "explanation": "Middleware can be applied globally or to specific routes."
+    },
+    {
+      "question": "What happens if middleware does not call `next()` or send a response?",
+      "options": [
+        "The request hangs and never completes",
+        "The server crashes",
+        "The request is automatically completed",
+        "The next middleware is called automatically"
+      ],
+      "correctAnswer": "The request hangs and never completes",
+      "explanation": "Without calling `next()` or sending a response, the request stays pending."
+    },
+    {
+      "question": "Which middleware would you use to parse incoming JSON request bodies?",
+      "options": [
+        "express.json()",
+        "body-parser",
+        "express.urlencoded()",
+        "Both 1 and 2"
+      ],
+      "correctAnswer": "Both 1 and 2",
+      "explanation": "`express.json()` and `body-parser` can parse JSON request bodies."
+    },
+    {
+      "question": "How do error-handling middleware differ from regular middleware?",
+      "options": [
+        "They have four arguments: (err, req, res, next)",
+        "They have three arguments: (req, res, next)",
+        "They do not call next()",
+        "They only run on successful requests"
+      ],
+      "correctAnswer": "They have four arguments: (err, req, res, next)",
+      "explanation": "Error-handling middleware includes an error parameter as the first argument."
+    },
+    {
+      "question": "What is a common use case for middleware in Express?",
+      "options": [
+        "Logging requests",
+        "Authentication",
+        "Parsing request bodies",
+        "All of the above"
+      ],
+      "correctAnswer": "All of the above",
+      "explanation": "Middleware is used for various tasks like logging, authentication, and parsing."
+    }
+  ]
+}

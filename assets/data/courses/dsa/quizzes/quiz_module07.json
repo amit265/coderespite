@@ -1,0 +1,121 @@
+{
+  "quizId": "qz07",
+  "courseId": "dsa",
+  "moduleId": "mod07",
+  "title": "Recursion and Divide & Conquer Techniques",
+  "tags": ["recursion", "divide and conquer", "algorithms", "dsa", "problem solving"],
+  "difficulty": "medium",
+  "description": "Understanding recursion concepts and applying divide and conquer algorithms to solve problems efficiently.",
+  "quiz": [
+    {
+      "question": "What is recursion in programming?",
+      "options": [
+        "A function calling itself",
+        "A loop inside a function",
+        "A function that calls another function",
+        "A function that never ends"
+      ],
+      "correctAnswer": "A function calling itself",
+      "explanation": "Recursion occurs when a function calls itself directly or indirectly."
+    },
+    {
+      "question": "What is the base case in recursion?",
+      "options": [
+        "The case where the recursion stops",
+        "The case where recursion continues",
+        "A loop inside recursion",
+        "An error in recursion"
+      ],
+      "correctAnswer": "The case where the recursion stops",
+      "explanation": "The base case defines the condition to end recursive calls."
+    },
+    {
+      "question": "Which of these is an example of a divide and conquer algorithm?",
+      "options": [
+        "Merge Sort",
+        "Linear Search",
+        "Bubble Sort",
+        "Stack"
+      ],
+      "correctAnswer": "Merge Sort",
+      "explanation": "Merge Sort divides the array and conquers by merging sorted parts."
+    },
+    {
+      "question": "What does the 'divide' step mean in divide and conquer?",
+      "options": [
+        "Breaking the problem into smaller subproblems",
+        "Combining results",
+        "Sorting the data",
+        "Finding the base case"
+      ],
+      "correctAnswer": "Breaking the problem into smaller subproblems",
+      "explanation": "Divide step splits the problem into smaller parts."
+    },
+    {
+      "question": "What is the time complexity of the classic recursive Fibonacci algorithm?",
+      "options": [
+        "O(2^n)",
+        "O(n)",
+        "O(log n)",
+        "O(n^2)"
+      ],
+      "correctAnswer": "O(2^n)",
+      "explanation": "Naive recursive Fibonacci runs in exponential time due to overlapping subproblems."
+    },
+    {
+      "question": "Which statement about recursion is TRUE?",
+      "options": [
+        "Every recursive function must have a base case",
+        "Recursive functions never use memory",
+        "Recursion is always slower than iteration",
+        "Recursion does not use function call stack"
+      ],
+      "correctAnswer": "Every recursive function must have a base case",
+      "explanation": "A base case is necessary to avoid infinite recursion."
+    },
+    {
+      "question": "Which of the following is NOT a characteristic of divide and conquer algorithms?",
+      "options": [
+        "Divide problem into subproblems",
+        "Solve subproblems recursively",
+        "Combine results",
+        "Use only iteration"
+      ],
+      "correctAnswer": "Use only iteration",
+      "explanation": "Divide and conquer typically relies on recursion, not just iteration."
+    },
+    {
+      "question": "What technique improves the efficiency of recursive Fibonacci calculation?",
+      "options": [
+        "Memoization",
+        "Brute force",
+        "Bubble sort",
+        "Stack"
+      ],
+      "correctAnswer": "Memoization",
+      "explanation": "Memoization stores results of subproblems to avoid repeated work."
+    },
+    {
+      "question": "Which of these problems is NOT typically solved by divide and conquer?",
+      "options": [
+        "Binary Search",
+        "Quick Sort",
+        "Tower of Hanoi",
+        "Linear Search"
+      ],
+      "correctAnswer": "Linear Search",
+      "explanation": "Linear search is a straightforward iteration, not divide and conquer."
+    },
+    {
+      "question": "In recursion, what happens if the base case is missing?",
+      "options": [
+        "Infinite recursion leading to stack overflow",
+        "Program runs faster",
+        "Function returns immediately",
+        "Recursion becomes iterative"
+      ],
+      "correctAnswer": "Infinite recursion leading to stack overflow",
+      "explanation": "Without a base case, recursion never stops and crashes the program."
+    }
+  ]
+}

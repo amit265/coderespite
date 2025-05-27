@@ -1,0 +1,87 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod13",
+  "title": "Dynamic Programming: Optimizing Overlapping Subproblems",
+  "description": "Dynamic Programming (DP) is a powerful optimization technique used to solve problems with overlapping subproblems and optimal substructure properties. This module covers the fundamentals of DP, introduces common problem-solving strategies, and provides implementations of classic DP problems. You will learn how to recognize DP problems, formulate recurrence relations, and implement both top-down (memoization) and bottom-up (tabulation) solutions in JavaScript.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod13-lsn01",
+      "title": "Introduction to Dynamic Programming",
+      "type": "theory",
+      "content": "Dynamic Programming breaks down complex problems into simpler overlapping subproblems and solves each subproblem only once, storing the results to avoid redundant computations. This technique helps reduce exponential time complexities to polynomial time."
+    },
+    {
+      "lessonId": "mod13-lsn02",
+      "title": "Identifying Overlapping Subproblems and Optimal Substructure",
+      "type": "theory",
+      "content": "Two key properties define DP problems: overlapping subproblems (same subproblems solved multiple times) and optimal substructure (optimal solution depends on optimal solutions of subproblems). Recognizing these helps in deciding if DP can be applied."
+    },
+    {
+      "lessonId": "mod13-lsn03",
+      "title": "Memoization: Top-Down Approach",
+      "type": "theory",
+      "content": "Memoization stores results of expensive function calls and returns cached results when the same inputs occur again. It uses recursion with a lookup table to save results."
+    },
+    {
+      "lessonId": "mod13-lsn04",
+      "title": "Memoization Example: Fibonacci Sequence",
+      "type": "code",
+      "content": "```js\nfunction fib(n, memo = {}) {\n  if (n <= 1) return n;\n  if (memo[n]) return memo[n];\n  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);\n  return memo[n];\n}\n// Usage: fib(10) returns 55\n```"
+    },
+    {
+      "lessonId": "mod13-lsn05",
+      "title": "Tabulation: Bottom-Up Approach",
+      "type": "theory",
+      "content": "Tabulation builds up a table iteratively from the base cases to solve larger subproblems. This approach avoids recursion and can be more space/time efficient."
+    },
+    {
+      "lessonId": "mod13-lsn06",
+      "title": "Tabulation Example: Fibonacci Sequence",
+      "type": "code",
+      "content": "```js\nfunction fibTab(n) {\n  if (n <= 1) return n;\n  const dp = Array(n + 1).fill(0);\n  dp[1] = 1;\n  for (let i = 2; i <= n; i++) {\n    dp[i] = dp[i - 1] + dp[i - 2];\n  }\n  return dp[n];\n}\n// Usage: fibTab(10) returns 55\n```"
+    },
+    {
+      "lessonId": "mod13-lsn07",
+      "title": "Classic DP Problem: Coin Change (Minimum Coins)",
+      "type": "theory",
+      "content": "Given an amount and coin denominations, find the minimum number of coins required to make that amount. This problem demonstrates building solutions from smaller amounts."
+    },
+    {
+      "lessonId": "mod13-lsn08",
+      "title": "Coin Change Implementation (Bottom-Up)",
+      "type": "code",
+      "content": "```js\nfunction coinChange(coins, amount) {\n  const dp = Array(amount + 1).fill(Infinity);\n  dp[0] = 0;\n  for (let i = 1; i <= amount; i++) {\n    for (let coin of coins) {\n      if (coin <= i) {\n        dp[i] = Math.min(dp[i], dp[i - coin] + 1);\n      }\n    }\n  }\n  return dp[amount] === Infinity ? -1 : dp[amount];\n}\n// Usage: coinChange([1, 2, 5], 11) returns 3 (5+5+1)\n```"
+    },
+    {
+      "lessonId": "mod13-lsn09",
+      "title": "Longest Common Subsequence (LCS)",
+      "type": "theory",
+      "content": "LCS finds the longest subsequence common to two sequences. It illustrates DP’s power in string comparison problems used in diff tools and bioinformatics."
+    },
+    {
+      "lessonId": "mod13-lsn10",
+      "title": "LCS Implementation (Bottom-Up)",
+      "type": "code",
+      "content": "```js\nfunction longestCommonSubsequence(text1, text2) {\n  const m = text1.length, n = text2.length;\n  const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));\n  for (let i = 1; i <= m; i++) {\n    for (let j = 1; j <= n; j++) {\n      if (text1[i - 1] === text2[j - 1]) {\n        dp[i][j] = dp[i - 1][j - 1] + 1;\n      } else {\n        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);\n      }\n    }\n  }\n  return dp[m][n];\n}\n// Usage: longestCommonSubsequence('abcde', 'ace') returns 3 ('ace')\n```"
+    },
+    {
+      "lessonId": "mod13-lsn11",
+      "title": "Knapsack Problem: 0/1 Knapsack",
+      "type": "theory",
+      "content": "Given weights and values of items, determine the maximum value attainable with a weight limit, choosing items fully or not at all. It exemplifies resource allocation optimization."
+    },
+    {
+      "lessonId": "mod13-lsn12",
+      "title": "0/1 Knapsack Implementation (Bottom-Up)",
+      "type": "code",
+      "content": "```js\nfunction knapsack(weights, values, capacity) {\n  const n = weights.length;\n  const dp = Array(n + 1).fill(null).map(() => Array(capacity + 1).fill(0));\n  for (let i = 1; i <= n; i++) {\n    for (let w = 0; w <= capacity; w++) {\n      if (weights[i - 1] <= w) {\n        dp[i][w] = Math.max(\n          values[i - 1] + dp[i - 1][w - weights[i - 1]],\n          dp[i - 1][w]\n        );\n      } else {\n        dp[i][w] = dp[i - 1][w];\n      }\n    }\n  }\n  return dp[n][capacity];\n}\n// Usage: knapsack([1, 3, 4], [15, 50, 60], 5) returns 65\n```"
+    },
+    {
+      "lessonId": "mod13-lsn13",
+      "title": "Tips for Solving DP Problems",
+      "type": "theory",
+      "content": "- Clearly define the problem’s subproblems.\n- Identify base cases.\n- Decide on top-down or bottom-up approach.\n- Use memoization or tabulation to store results.\n- Trace back solutions when required.\n- Practice problems regularly to build intuition."
+    }
+  ]
+}

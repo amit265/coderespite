@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod16",
+  "courseId": "reactnative",
+  "moduleId": "mod16",
+  "title": "File-Based Routing in React Native",
+  "description": "Flashcards covering the core concepts and code examples of file-based routing in React Native using Expo Router.",
+  "flashcards": [
+    {
+      "question": "What is file-based routing in React Native?",
+      "answer": "A navigation method where routes are automatically generated based on the project’s file and folder structure, eliminating manual route setup."
+    },
+    {
+      "question": "Name one tool that supports file-based routing in React Native.",
+      "answer": "Expo Router."
+    },
+    {
+      "question": "How do you install Expo Router?",
+      "answer": "Run `npm install expo-router` in your React Native project."
+    },
+    {
+      "question": "Where do you place your route files when using file-based routing?",
+      "answer": "Inside an `app` folder at the root of your project."
+    },
+    {
+      "question": "What route does `app/index.js` correspond to?",
+      "answer": "The root route `/`."
+    },
+    {
+      "question": "How do you create a nested route for `/settings/profile`?",
+      "answer": "Create files like `app/settings/index.js` for `/settings` and `app/settings/profile.js` for `/settings/profile`."
+    },
+    {
+      "question": "How do you define a dynamic route for user IDs?",
+      "answer": "By naming the file with square brackets, e.g., `app/user/[id].js`."
+    },
+    {
+      "question": "How do you access route parameters inside a dynamic route component?",
+      "answer": "Use `useLocalSearchParams()` hook from `expo-router`."
+    },
+    {
+      "question": "Show a simple example of navigating to another route using a `Link` component.",
+      "answer": "```jsx\nimport { Link } from 'expo-router';\n\n<Link href=\"/about\">Go to About</Link>\n```"
+    },
+    {
+      "question": "How to navigate programmatically to `/settings/profile`?",
+      "answer": "Use the `useRouter` hook and call `router.push('/settings/profile')`."
+    },
+    {
+      "question": "What special folder is used for modal screens in file-based routing?",
+      "answer": "The `(modal)` folder."
+    },
+    {
+      "question": "What folder naming convention is used to organize tab navigation screens?",
+      "answer": "The `(tabs)` folder."
+    },
+    {
+      "question": "List two benefits of using file-based routing over traditional navigation setup.",
+      "answer": "- Automatic route generation from files\n- Less boilerplate and easier maintenance"
+    },
+    {
+      "question": "What should you avoid to keep file-based routing simple and maintainable?",
+      "answer": "Avoid deeply nested folders and unclear naming conventions."
+    },
+    {
+      "question": "What is the difference between file-based routing and React Navigation?",
+      "answer": "File-based routing auto-generates routes from files, while React Navigation requires manual route configuration but offers more flexibility."
+    }
+  ]
+}

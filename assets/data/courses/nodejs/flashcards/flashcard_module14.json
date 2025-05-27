@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod14",
+  "courseId": "nodejs",
+  "moduleId": "mod14",
+  "title": "Deploying Node.js Applications",
+  "description": "Learn how to deploy Node.js applications to production environments, including preparing, hosting, and managing deployments.",
+  "flashcards": [
+    {
+      "question": "What does deploying a Node.js application mean?",
+      "answer": "Deploying means making your application available to users by hosting it on a server or cloud platform."
+    },
+    {
+      "question": "Name some popular platforms to deploy Node.js applications.",
+      "answer": "Heroku, AWS (Amazon Web Services), DigitalOcean, Vercel, and Google Cloud Platform."
+    },
+    {
+      "question": "Why is environment configuration important in deployment?",
+      "answer": "It allows you to manage settings like database URLs, API keys, and ports without hardcoding them in the code."
+    },
+    {
+      "question": "What is the purpose of process managers like PM2?",
+      "answer": "Process managers keep your Node.js app running, restart it if it crashes, and manage multiple instances for load balancing."
+    },
+    {
+      "question": "What are environment variables?",
+      "answer": "Environment variables are key-value pairs that store configuration data accessible by your application at runtime."
+    },
+    {
+      "question": "How do you prepare a Node.js app for production?",
+      "answer": "Remove development dependencies, set NODE_ENV to 'production', optimize performance, and ensure error handling is robust."
+    },
+    {
+      "question": "What is continuous deployment (CD)?",
+      "answer": "A process where code changes are automatically deployed to production after passing tests and reviews."
+    },
+    {
+      "question": "Why should you use HTTPS in your deployed app?",
+      "answer": "HTTPS encrypts data between the client and server, enhancing security and trust."
+    },
+    {
+      "question": "How do you handle scaling in deployment?",
+      "answer": "By using multiple instances, load balancers, and cloud services that can dynamically allocate resources."
+    },
+    {
+      "question": "What role does a reverse proxy play in deployment?",
+      "answer": "A reverse proxy (like Nginx) routes client requests to your Node.js app and can handle SSL termination, caching, and load balancing."
+    }
+  ]
+}

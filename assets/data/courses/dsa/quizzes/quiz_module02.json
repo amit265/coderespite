@@ -1,0 +1,91 @@
+{
+  "quizId": "qz02",
+  "courseId": "dsa",
+  "moduleId": "mod02",
+  "title": "Mastering Arrays and Array Operations",
+  "tags": ["arrays", "javascript", "data structures", "operations"],
+  "difficulty": "easy",
+  "description": "Understanding arrays and common operations on them in JavaScript.",
+  "quiz": [
+    {
+      "question": "Which of the following is the correct way to declare an array in JavaScript?",
+      "options": [
+        "var arr = [];",
+        "var arr = ();",
+        "var arr = {};",
+        "var arr = '';"
+      ],
+      "correctAnswer": "var arr = [];",
+      "explanation": "Arrays in JavaScript are declared using square brackets []."
+    },
+    {
+      "question": "How do you access the first element of an array named `arr`?",
+      "options": [
+        "arr[0]",
+        "arr[1]",
+        "arr.first()",
+        "arr.get(0)"
+      ],
+      "correctAnswer": "arr[0]",
+      "explanation": "Array indexing in JavaScript starts at 0, so `arr[0]` is the first element."
+    },
+    {
+      "question": "What method removes the last element from an array?",
+      "options": ["pop()", "push()", "shift()", "unshift()"],
+      "correctAnswer": "pop()",
+      "explanation": "`pop()` removes and returns the last element of the array."
+    },
+    {
+      "question": "Which array method adds one or more elements to the end of an array?",
+      "options": ["push()", "pop()", "shift()", "unshift()"],
+      "correctAnswer": "push()",
+      "explanation": "`push()` appends elements to the end of the array."
+    },
+    {
+      "question": "What will be the length of this array: `[1, 2, 3, 4].length`?",
+      "options": ["3", "4", "5", "0"],
+      "correctAnswer": "4",
+      "explanation": "The `length` property returns the number of elements in the array."
+    },
+    {
+      "question": "Which method removes the first element from an array?",
+      "options": ["pop()", "push()", "shift()", "unshift()"],
+      "correctAnswer": "shift()",
+      "explanation": "`shift()` removes the first element and shifts the remaining elements."
+    },
+    {
+      "question": "What does the `slice()` method do in arrays?",
+      "options": [
+        "Removes elements",
+        "Returns a shallow copy of a portion of the array",
+        "Adds elements",
+        "Sorts the array"
+      ],
+      "correctAnswer": "Returns a shallow copy of a portion of the array",
+      "explanation": "`slice(start, end)` returns a new array from start index to end index (exclusive)."
+    },
+    {
+      "question": "How do you check if a variable is an array in JavaScript?",
+      "options": [
+        "typeof var === 'array'",
+        "Array.isArray(var)",
+        "var.isArray()",
+        "var instanceof Array"
+      ],
+      "correctAnswer": "Array.isArray(var)",
+      "explanation": "`Array.isArray()` is the recommended way to check for arrays."
+    },
+    {
+      "question": "Which method combines two or more arrays into one?",
+      "options": ["concat()", "join()", "split()", "push()"],
+      "correctAnswer": "concat()",
+      "explanation": "`concat()` merges arrays without modifying the originals."
+    },
+    {
+      "question": "What does the `indexOf()` method return if the element is not found?",
+      "options": ["-1", "0", "null", "undefined"],
+      "correctAnswer": "-1",
+      "explanation": "`indexOf()` returns `-1` when the element does not exist in the array."
+    }
+  ]
+}

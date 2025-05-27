@@ -1,0 +1,121 @@
+{
+  "quizId": "qz05",
+  "courseId": "nodejs",
+  "moduleId": "mod05",
+  "title": "Routing in Express",
+  "tags": ["nodejs", "express", "routing", "web development"],
+  "difficulty": "easy",
+  "description": "Understanding routing concepts and how to handle different HTTP requests in Express.js.",
+  "quiz": [
+    {
+      "question": "What is routing in Express.js?",
+      "options": [
+        "Handling HTTP requests to different endpoints",
+        "Setting up database connections",
+        "Configuring server hardware",
+        "Creating frontend components"
+      ],
+      "correctAnswer": "Handling HTTP requests to different endpoints",
+      "explanation": "Routing defines how an application responds to client requests to specific endpoints."
+    },
+    {
+      "question": "Which method handles HTTP POST requests in Express?",
+      "options": [
+        "app.get()",
+        "app.post()",
+        "app.put()",
+        "app.delete()"
+      ],
+      "correctAnswer": "app.post()",
+      "explanation": "`app.post()` is used to handle HTTP POST requests."
+    },
+    {
+      "question": "How do you define a route for the path '/users' that responds with 'User List'?",
+      "options": [
+        "app.get('/users', (req, res) => res.send('User List'));",
+        "app.route('/users', (req, res) => res.send('User List'));",
+        "app.listen('/users', (req, res) => res.send('User List'));",
+        "app.post('/users', (req, res) => res.send('User List'));"
+      ],
+      "correctAnswer": "app.get('/users', (req, res) => res.send('User List'));",
+      "explanation": "`app.get()` defines a GET route for '/users'."
+    },
+    {
+      "question": "Which HTTP method is typically used to update resources in RESTful APIs?",
+      "options": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "correctAnswer": "PUT",
+      "explanation": "PUT is commonly used to update existing resources."
+    },
+    {
+      "question": "How can you handle all HTTP methods for a single route in Express?",
+      "options": [
+        "app.all('/path', handler)",
+        "app.any('/path', handler)",
+        "app.route('/path', handler)",
+        "app.handle('/path', handler)"
+      ],
+      "correctAnswer": "app.all('/path', handler)",
+      "explanation": "`app.all()` matches all HTTP methods for the given route."
+    },
+    {
+      "question": "What is the purpose of route parameters in Express?",
+      "options": [
+        "To handle static files",
+        "To capture dynamic values from the URL",
+        "To define middleware",
+        "To set server configurations"
+      ],
+      "correctAnswer": "To capture dynamic values from the URL",
+      "explanation": "Route parameters allow dynamic matching of URL segments."
+    },
+    {
+      "question": "How do you define a route parameter named 'id' in Express?",
+      "options": [
+        "/user:id",
+        "/user/:id",
+        "/user/id",
+        "/user?=id"
+      ],
+      "correctAnswer": "/user/:id",
+      "explanation": "A colon `:` is used to declare route parameters in Express."
+    },
+    {
+      "question": "How can you access the route parameter 'id' inside the route handler?",
+      "options": [
+        "req.body.id",
+        "req.params.id",
+        "req.query.id",
+        "req.route.id"
+      ],
+      "correctAnswer": "req.params.id",
+      "explanation": "Route parameters are accessed via `req.params`."
+    },
+    {
+      "question": "Which of the following is true about middleware in routing?",
+      "options": [
+        "Middleware can modify request and response objects",
+        "Middleware can end the request-response cycle",
+        "Middleware can call next() to pass control",
+        "All of the above"
+      ],
+      "correctAnswer": "All of the above",
+      "explanation": "Middleware functions have all these capabilities."
+    },
+    {
+      "question": "How do you chain multiple handlers for a single route?",
+      "options": [
+        "app.get('/path', handler1, handler2);",
+        "app.chain('/path', handler1, handler2);",
+        "app.route('/path').get(handler1, handler2);",
+        "Both 1 and 3"
+      ],
+      "correctAnswer": "Both 1 and 3",
+      "explanation": "Both approaches allow chaining multiple handlers in Express."
+    }
+  ]
+}

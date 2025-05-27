@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod03",
+  "title": "JSX, Components, and Props",
+  "description": "Understand how to use JSX syntax, create functional components, and pass data using props in React Native.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod03-lsn01",
+      "title": "What is JSX?",
+      "type": "theory",
+      "content": "JSX stands for JavaScript XML. It's a syntax extension that looks similar to HTML and is used in React to describe UI structure.\n\nExample:\n```jsx\nconst element = <Text>Hello, world!</Text>;\n```\nJSX makes it easier to write and visualize the UI layout in code."
+    },
+    {
+      "lessonId": "mod03-lsn02",
+      "title": "Rendering Elements in JSX",
+      "type": "code",
+      "content": "In React Native, use built-in components like `Text` and `View`.\n\n```jsx\nimport { Text, View } from 'react-native';\n\nexport default function App() {\n  return (\n    <View>\n      <Text>Hello from React Native!</Text>\n    </View>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod03-lsn03",
+      "title": "Creating Functional Components",
+      "type": "code",
+      "content": "Functional components are JavaScript functions that return JSX.\n\n```jsx\nfunction Welcome() {\n  return <Text>Welcome to React Native</Text>;\n}\n\nexport default Welcome;\n```"
+    },
+    {
+      "lessonId": "mod03-lsn04",
+      "title": "Component Hierarchy",
+      "type": "theory",
+      "content": "React Native apps are built using small components. Components can contain other components, creating a hierarchy or tree structure.\n\nExample:\n`App` \u279d `Header`, `MainContent`, `Footer`"
+    },
+    {
+      "lessonId": "mod03-lsn05",
+      "title": "Using Props in Components",
+      "type": "code",
+      "content": "Props allow you to pass data from one component to another.\n\n```jsx\nfunction Greeting(props) {\n  return <Text>Hello, {props.name}!</Text>;\n}\n\n<Greeting name=\"Alice\" />\n```"
+    },
+    {
+      "lessonId": "mod03-lsn06",
+      "title": "Default Props",
+      "type": "code",
+      "content": "You can set default values for props.\n\n```jsx\nGreeting.defaultProps = {\n  name: 'Guest'\n};\n```"
+    },
+    {
+      "lessonId": "mod03-lsn07",
+      "title": "PropTypes for Type Checking",
+      "type": "theory",
+      "content": "Use `prop-types` library to validate the types of props.\n\n```jsx\nimport PropTypes from 'prop-types';\n\nGreeting.propTypes = {\n  name: PropTypes.string\n};\n```"
+    },
+    {
+      "lessonId": "mod03-lsn08",
+      "title": "Props vs State",
+      "type": "theory",
+      "content": "`Props` are read-only and passed from parent to child. `State` is local to a component and can change over time."
+    },
+    {
+      "lessonId": "mod03-lsn09",
+      "title": "Self-closing Components and Nesting",
+      "type": "code",
+      "content": "Use self-closing tags when there are no children.\n\n```jsx\n<Image source={...} />\n\n<View>\n  <Text>Nested inside a view</Text>\n</View>\n```"
+    },
+    {
+      "lessonId": "mod03-lsn10",
+      "title": "Best Practices for JSX and Props",
+      "type": "theory",
+      "content": "- Keep components small and focused.\n- Use clear and descriptive prop names.\n- Avoid deeply nested structures when possible.\n- Comment your JSX when needed for clarity."
+    }
+  ]
+}

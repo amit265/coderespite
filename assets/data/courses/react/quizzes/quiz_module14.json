@@ -1,0 +1,121 @@
+{
+  "quizId": "qz14",
+  "courseId": "react",
+  "moduleId": "mod14",
+  "title": "Performance Optimization and Lazy Loading",
+  "tags": ["react", "performance", "optimization", "lazy-loading", "code-splitting"],
+  "difficulty": "medium",
+  "description": "Assess your knowledge on techniques to optimize React app performance including lazy loading and code splitting.",
+  "quiz": [
+    {
+      "question": "What is the main benefit of lazy loading components in React?",
+      "options": [
+        "Faster initial load time",
+        "Better styling",
+        "More animations",
+        "Improved SEO"
+      ],
+      "correctAnswer": "Faster initial load time",
+      "explanation": "Lazy loading delays loading components until they are needed, reducing initial bundle size."
+    },
+    {
+      "question": "Which React feature allows you to lazy load components?",
+      "options": [
+        "React.lazy()",
+        "React.memo()",
+        "useEffect()",
+        "useState()"
+      ],
+      "correctAnswer": "React.lazy()",
+      "explanation": "React.lazy() enables components to be loaded lazily when they are rendered."
+    },
+    {
+      "question": "What is code splitting in React?",
+      "options": [
+        "Dividing code into multiple bundles loaded on demand",
+        "Splitting CSS and JS files",
+        "Separating client and server code",
+        "Breaking code into different functions"
+      ],
+      "correctAnswer": "Dividing code into multiple bundles loaded on demand",
+      "explanation": "Code splitting helps load only the necessary code bundles, improving performance."
+    },
+    {
+      "question": "Which component is used to wrap a lazy-loaded component to show fallback UI while loading?",
+      "options": [
+        "<Suspense>",
+        "<ErrorBoundary>",
+        "<Loader>",
+        "<Fallback>"
+      ],
+      "correctAnswer": "<Suspense>",
+      "explanation": "React’s <Suspense> shows fallback content while the lazy component is loading."
+    },
+    {
+      "question": "What does React.memo() do?",
+      "options": [
+        "Memoizes a functional component to avoid unnecessary re-renders",
+        "Caches API data",
+        "Schedules updates",
+        "Improves CSS loading"
+      ],
+      "correctAnswer": "Memoizes a functional component to avoid unnecessary re-renders",
+      "explanation": "React.memo() wraps a component to prevent re-rendering if props don’t change."
+    },
+    {
+      "question": "Which hook helps optimize expensive calculations by memoizing values?",
+      "options": [
+        "useMemo",
+        "useCallback",
+        "useEffect",
+        "useState"
+      ],
+      "correctAnswer": "useMemo",
+      "explanation": "useMemo caches the result of a function, avoiding expensive recalculations."
+    },
+    {
+      "question": "What can cause performance issues due to unnecessary re-renders in React?",
+      "options": [
+        "Passing new object or array literals as props each render",
+        "Using useState",
+        "Using React Router",
+        "Using CSS modules"
+      ],
+      "correctAnswer": "Passing new object or array literals as props each render",
+      "explanation": "Passing new objects/arrays triggers re-renders because their references change."
+    },
+    {
+      "question": "Which hook can be used to memoize callback functions to avoid re-creating them on every render?",
+      "options": [
+        "useCallback",
+        "useMemo",
+        "useEffect",
+        "useRef"
+      ],
+      "correctAnswer": "useCallback",
+      "explanation": "useCallback memoizes functions, preventing them from being recreated unnecessarily."
+    },
+    {
+      "question": "What is tree shaking in the context of bundlers like Webpack?",
+      "options": [
+        "Removing unused code during bundling",
+        "Splitting code into chunks",
+        "Caching code bundles",
+        "Minifying CSS"
+      ],
+      "correctAnswer": "Removing unused code during bundling",
+      "explanation": "Tree shaking eliminates dead code to reduce bundle size."
+    },
+    {
+      "question": "Which of the following is NOT a recommended performance optimization technique in React?",
+      "options": [
+        "Avoiding inline functions in render",
+        "Using React.memo for pure components",
+        "Updating state directly without setState",
+        "Lazy loading components"
+      ],
+      "correctAnswer": "Updating state directly without setState",
+      "explanation": "State should never be mutated directly; use setState or hooks instead."
+    }
+  ]
+}

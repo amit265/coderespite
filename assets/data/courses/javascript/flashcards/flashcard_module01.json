@@ -1,0 +1,50 @@
+{
+  "id": "fc-mod01",
+  "moduleId": "mod01",
+  "courseId": "javascript",
+
+  "title": "Getting Started with JavaScript",
+  "description": "Introduction to variables, data types, and operators.",
+  "flashcards": [
+    {
+      "question": "What is a variable in JavaScript?",
+      "answer": "A container used to store data values."
+    },
+    {
+      "question": "Which keyword is used to declare a constant variable?",
+      "answer": "`const` is used to declare a variable whose value cannot be changed."
+    },
+    {
+      "question": "Name the three ways to declare a variable in JavaScript.",
+      "answer": "`var`, `let`, and `const`."
+    },
+    {
+      "question": "What is the difference between `let` and `var`?",
+      "answer": "`let` has block scope, while `var` has function scope."
+    },
+    {
+      "question": "List five primitive data types in JavaScript.",
+      "answer": "String, Number, Boolean, Null, Undefined."
+    },
+    {
+      "question": "What operator is used for string concatenation?",
+      "answer": "The `+` operator."
+    },
+    {
+      "question": "How do you check the data type of a variable?",
+      "answer": "Using the `typeof` operator."
+    },
+    {
+      "question": "What is the result of `typeof null`?",
+      "answer": "`object` - this is a known quirk in JavaScript."
+    },
+    {
+      "question": "What will `5 + '5'` evaluate to?",
+      "answer": "`'55'` - because the number is coerced to a string."
+    },
+    {
+      "question": "What is the difference between `==` and `===`?",
+      "answer": "`==` compares values with type coercion, `===` compares values and types (strict equality)."
+    }
+  ]
+}

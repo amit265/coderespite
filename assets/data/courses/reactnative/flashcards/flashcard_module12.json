@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod12",
+  "courseId": "reactnative",
+  "moduleId": "mod12",
+  "title": "Advanced Navigation and Deep Linking",
+  "description": "Learn advanced navigation techniques in React Native including deep linking to navigate to specific screens from outside the app.",
+  "flashcards": [
+    {
+      "question": "What is deep linking in React Native?",
+      "answer": "A method to open specific screens in the app from external URLs or other apps."
+    },
+    {
+      "question": "Which library is commonly used for navigation in React Native?",
+      "answer": "React Navigation."
+    },
+    {
+      "question": "What is a stack navigator?",
+      "answer": "A navigator that manages a stack of screens, allowing push and pop navigation."
+    },
+    {
+      "question": "How does a tab navigator work?",
+      "answer": "It allows switching between different screens using tabs."
+    },
+    {
+      "question": "How do you configure deep linking with React Navigation?",
+      "answer": "By defining a linking configuration with URL prefixes and screen mappings."
+    },
+    {
+      "question": "What are URL prefixes in deep linking?",
+      "answer": "Schemes or domains that the app listens to for deep linking."
+    },
+    {
+      "question": "Can deep linking handle parameters in URLs?",
+      "answer": "Yes, parameters can be passed via the URL and accessed in screens."
+    },
+    {
+      "question": "What is the benefit of using deep linking?",
+      "answer": "Improves user experience by allowing direct navigation to specific app content."
+    },
+    {
+      "question": "How do you test deep linking in React Native?",
+      "answer": "By using tools like `adb` for Android or URL schemes on iOS."
+    },
+    {
+      "question": "Is React Navigation only for basic navigation?",
+      "answer": "No, it supports advanced navigation patterns including deep linking, nested navigators, and custom transitions."
+    }
+  ]
+}

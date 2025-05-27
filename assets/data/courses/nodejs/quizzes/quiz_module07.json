@@ -1,0 +1,121 @@
+{
+  "quizId": "qz07",
+  "courseId": "nodejs",
+  "moduleId": "mod07",
+  "title": "Working with RESTful APIs",
+  "tags": ["nodejs", "express", "REST", "API", "web development"],
+  "difficulty": "medium",
+  "description": "Understanding REST principles and how to build and consume RESTful APIs using Node.js and Express.",
+  "quiz": [
+    {
+      "question": "What does REST stand for?",
+      "options": [
+        "Representational State Transfer",
+        "Remote Server Technology",
+        "Reliable System Transfer",
+        "Rapid Software Testing"
+      ],
+      "correctAnswer": "Representational State Transfer",
+      "explanation": "REST is an architectural style for designing networked applications."
+    },
+    {
+      "question": "Which HTTP method is used to retrieve data from a RESTful API?",
+      "options": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "correctAnswer": "GET",
+      "explanation": "GET requests are used to retrieve data."
+    },
+    {
+      "question": "Which HTTP method is typically used to create a new resource?",
+      "options": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "correctAnswer": "POST",
+      "explanation": "POST requests are used to create new resources."
+    },
+    {
+      "question": "What HTTP status code indicates a successful GET request?",
+      "options": [
+        "200",
+        "201",
+        "400",
+        "404"
+      ],
+      "correctAnswer": "200",
+      "explanation": "200 OK means the request succeeded."
+    },
+    {
+      "question": "Which HTTP method is used to update an existing resource entirely?",
+      "options": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "correctAnswer": "PUT",
+      "explanation": "PUT is used for full updates of a resource."
+    },
+    {
+      "question": "How do you send JSON data in an Express POST request handler?",
+      "options": [
+        "Using req.body after enabling middleware",
+        "Using req.params",
+        "Using req.query",
+        "Using req.headers"
+      ],
+      "correctAnswer": "Using req.body after enabling middleware",
+      "explanation": "Express requires middleware like `express.json()` to parse JSON bodies."
+    },
+    {
+      "question": "What is the purpose of RESTful API endpoints?",
+      "options": [
+        "To define URLs for resources and actions",
+        "To design frontend layouts",
+        "To store database credentials",
+        "To handle user authentication only"
+      ],
+      "correctAnswer": "To define URLs for resources and actions",
+      "explanation": "Endpoints specify how clients access and manipulate resources."
+    },
+    {
+      "question": "Which of these is a valid RESTful API endpoint to get a user by ID?",
+      "options": [
+        "/users/:id",
+        "/getUser",
+        "/fetchUser?id=",
+        "/user_get"
+      ],
+      "correctAnswer": "/users/:id",
+      "explanation": "RESTful APIs use path parameters to identify resources."
+    },
+    {
+      "question": "What does idempotent mean in REST methods?",
+      "options": [
+        "Multiple identical requests have the same effect as a single request",
+        "Requests must include an ID",
+        "Requests must be encrypted",
+        "Requests should not have a body"
+      ],
+      "correctAnswer": "Multiple identical requests have the same effect as a single request",
+      "explanation": "Idempotent methods (like GET, PUT, DELETE) don’t cause additional effects when repeated."
+    },
+    {
+      "question": "Which tool can be used to test RESTful APIs?",
+      "options": [
+        "Postman",
+        "VS Code",
+        "Node.js",
+        "GitHub"
+      ],
+      "correctAnswer": "Postman",
+      "explanation": "Postman is widely used to test and debug APIs."
+    }
+  ]
+}

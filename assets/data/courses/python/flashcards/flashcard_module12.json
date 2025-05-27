@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod12",
+  "courseId": "python",
+  "moduleId": "mod12",
+  "title": "Introduction to Data Analysis with Pandas",
+  "description": "Learn how to use the Pandas library for data manipulation and analysis in Python.",
+  "flashcards": [
+    {
+      "question": "What is Pandas?",
+      "answer": "A powerful Python library used for data manipulation and analysis."
+    },
+    {
+      "question": "What are the two primary data structures in Pandas?",
+      "answer": "Series and DataFrame."
+    },
+    {
+      "question": "What is a Pandas Series?",
+      "answer": "A one-dimensional labeled array capable of holding any data type."
+    },
+    {
+      "question": "What is a Pandas DataFrame?",
+      "answer": "A two-dimensional labeled data structure with columns of potentially different types."
+    },
+    {
+      "question": "How do you import Pandas in Python?",
+      "answer": "Using `import pandas as pd`."
+    },
+    {
+      "question": "How can you read a CSV file into a Pandas DataFrame?",
+      "answer": "By using `pd.read_csv('filename.csv')`."
+    },
+    {
+      "question": "How do you get the first few rows of a DataFrame?",
+      "answer": "Use the `head()` method."
+    },
+    {
+      "question": "How do you select a single column in a DataFrame?",
+      "answer": "By using the column name, like `df['column_name']`."
+    },
+    {
+      "question": "How do you filter rows in a DataFrame?",
+      "answer": "By applying a boolean condition, e.g., `df[df['column'] > value]`."
+    },
+    {
+      "question": "How do you handle missing data in Pandas?",
+      "answer": "Using methods like `dropna()` to remove or `fillna()` to fill missing values."
+    }
+  ]
+}

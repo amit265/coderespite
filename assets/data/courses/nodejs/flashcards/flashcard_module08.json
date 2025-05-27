@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod08",
+  "courseId": "nodejs",
+  "moduleId": "mod08",
+  "title": "Handling Forms and Data",
+  "description": "Learn how to handle form submissions, parse incoming data, and manage different data formats in Node.js applications.",
+  "flashcards": [
+    {
+      "question": "How do HTML forms send data to the server?",
+      "answer": "Forms send data using HTTP methods, typically GET or POST, where data is sent as query parameters or in the request body."
+    },
+    {
+      "question": "What is `body-parser` middleware used for?",
+      "answer": "`body-parser` parses incoming request bodies in middleware before your handlers, making form data accessible via `req.body`."
+    },
+    {
+      "question": "Which content types can Express parse by default?",
+      "answer": "Express can parse JSON and URL-encoded form data using built-in middleware."
+    },
+    {
+      "question": "How do you handle file uploads in Node.js?",
+      "answer": "Using middleware like `multer` which processes multipart/form-data for file uploads."
+    },
+    {
+      "question": "What is the difference between `application/json` and `application/x-www-form-urlencoded`?",
+      "answer": "`application/json` sends data as JSON, while `application/x-www-form-urlencoded` encodes form data as key-value pairs in URL format."
+    },
+    {
+      "question": "How do you access form data sent via POST in Express?",
+      "answer": "You access it through `req.body` after using appropriate middleware to parse the body."
+    },
+    {
+      "question": "Why is handling validation important when processing form data?",
+      "answer": "To ensure data integrity, security, and to provide user-friendly error messages."
+    },
+    {
+      "question": "What is CSRF and how can it be prevented?",
+      "answer": "Cross-Site Request Forgery is an attack that tricks users into submitting unwanted actions; it can be prevented using tokens and proper validation."
+    },
+    {
+      "question": "How can you handle large data submissions efficiently?",
+      "answer": "By streaming data, setting size limits, and using asynchronous processing."
+    },
+    {
+      "question": "What are some common security practices when handling user input?",
+      "answer": "Sanitize inputs, validate data, limit size, and use HTTPS to encrypt transmissions."
+    }
+  ]
+}

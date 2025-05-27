@@ -1,0 +1,69 @@
+{
+  "courseId": "python",
+  "moduleId": "mod04",
+  "title": "Control Flow: Conditionals and Loops",
+  "description": "Learn how to control the flow of execution using if-else statements and loops to write logic-driven Python programs.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod04-lsn01",
+      "title": "What is Control Flow?",
+      "type": "theory",
+      "content": "Control flow refers to the order in which individual statements, instructions, or function calls are executed in a Python program. It allows decisions and repetitions."
+    },
+    {
+      "lessonId": "mod04-lsn02",
+      "title": "if Statement",
+      "type": "code",
+      "content": "```python\nx = 10\nif x > 5:\n    print(\"x is greater than 5\")\n```"
+    },
+    {
+      "lessonId": "mod04-lsn03",
+      "title": "if-else Statement",
+      "type": "code",
+      "content": "```python\nage = 18\nif age >= 18:\n    print(\"You can vote\")\nelse:\n    print(\"You cannot vote\")\n```"
+    },
+    {
+      "lessonId": "mod04-lsn04",
+      "title": "if-elif-else Statement",
+      "type": "code",
+      "content": "```python\nscore = 85\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelse:\n    print(\"C or below\")\n```"
+    },
+    {
+      "lessonId": "mod04-lsn05",
+      "title": "Comparison and Logical Operators",
+      "type": "theory",
+      "content": "- **Comparison**: `==`, `!=`, `>`, `<`, `>=`, `<=`\n- **Logical**: `and`, `or`, `not`\nExample:\n```python\nif age > 18 and age < 60:\n    print(\"Working age\")\n```"
+    },
+    {
+      "lessonId": "mod04-lsn06",
+      "title": "while Loop",
+      "type": "code",
+      "content": "```python\ncount = 0\nwhile count < 5:\n    print(\"Count:\", count)\n    count += 1\n```"
+    },
+    {
+      "lessonId": "mod04-lsn07",
+      "title": "for Loop",
+      "type": "code",
+      "content": "```python\nfor i in range(5):\n    print(i)\n```"
+    },
+    {
+      "lessonId": "mod04-lsn08",
+      "title": "break and continue",
+      "type": "code",
+      "content": "```python\nfor i in range(10):\n    if i == 5:\n        break\n    if i % 2 == 0:\n        continue\n    print(i)\n```"
+    },
+    {
+      "lessonId": "mod04-lsn09",
+      "title": "Nested Loops and Conditions",
+      "type": "code",
+      "content": "```python\nfor i in range(3):\n    for j in range(2):\n        print(f\"i={i}, j={j}\")\n```"
+    },
+    {
+      "lessonId": "mod04-lsn10",
+      "title": "Practice: Guess the Number Game",
+      "type": "code",
+      "content": "```python\nsecret = 7\nguess = int(input(\"Guess a number between 1 and 10: \"))\nwhile guess != secret:\n    print(\"Wrong! Try again.\")\n    guess = int(input(\"Guess: \"))\nprint(\"Correct!\")\n```"
+    }
+  ]
+}

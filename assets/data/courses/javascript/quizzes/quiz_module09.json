@@ -1,0 +1,107 @@
+{
+  "quizId": "qz9",
+  "moduleId": "mod09",
+  "courseId": "javascript",
+
+  "title": "Asynchronous JS",
+  "tags": ["async", "promises", "callbacks", "await"],
+  "difficulty": "medium",
+  "description": "Handling asynchronous code with Promises and async/await.",
+  "quiz": [
+    {
+      "question": "What is asynchronous programming in JavaScript?",
+      "options": [
+        "Executing code line by line",
+        "Running code only after a page reloads",
+        "Executing tasks without blocking the main thread",
+        "Running code inside a for loop"
+      ],
+      "correctAnswer": "Executing tasks without blocking the main thread",
+      "explanation": "Asynchronous programming allows tasks like API calls to run in the background without freezing the UI."
+    },
+    {
+      "question": "Which of the following is used to handle asynchronous operations?",
+      "options": ["Loops", "Classes", "Promises", "Variables"],
+      "correctAnswer": "Promises",
+      "explanation": "Promises are used to handle asynchronous operations by representing the eventual result of an operation."
+    },
+    {
+      "question": "What are the possible states of a Promise?",
+      "options": [
+        "open, close, complete",
+        "start, stop, finish",
+        "pending, fulfilled, rejected",
+        "run, wait, fail"
+      ],
+      "correctAnswer": "pending, fulfilled, rejected",
+      "explanation": "A Promise can be pending (waiting), fulfilled (successful), or rejected (failed)."
+    },
+    {
+      "question": "What does `.then()` do in a Promise?",
+      "options": [
+        "Rejects the promise",
+        "Cancels the operation",
+        "Defines what happens after the Promise is resolved",
+        "Delays execution"
+      ],
+      "correctAnswer": "Defines what happens after the Promise is resolved",
+      "explanation": "`.then()` is called when a Promise is fulfilled and is used to handle the result."
+    },
+    {
+      "question": "How do you catch errors in a Promise chain?",
+      "options": [".catch()", ".fail()", ".error()", ".handle()"],
+      "correctAnswer": ".catch()",
+      "explanation": "`.catch()` handles any error that occurs in the Promise chain."
+    },
+    {
+      "question": "Which keyword is used to pause execution in an async function?",
+      "options": ["await", "pause", "stop", "delay"],
+      "correctAnswer": "await",
+      "explanation": "`await` pauses the execution of an async function until the Promise is resolved."
+    },
+    {
+      "question": "What is the purpose of `async` keyword before a function?",
+      "options": [
+        "It speeds up the function",
+        "It allows the use of `await` inside the function",
+        "It blocks the main thread",
+        "It makes the function synchronous"
+      ],
+      "correctAnswer": "It allows the use of `await` inside the function",
+      "explanation": "`async` turns a function into an asynchronous function, enabling the use of `await` inside it."
+    },
+    {
+      "question": "What will `await` return if the Promise is rejected?",
+      "options": [
+        "A success value",
+        "Nothing",
+        "An exception is thrown",
+        "An alert box appears"
+      ],
+      "correctAnswer": "An exception is thrown",
+      "explanation": "If a Promise is rejected, `await` throws the rejection reason as an exception."
+    },
+    {
+      "question": "Which one is a valid async function declaration?",
+      "options": [
+        "function async fetchData() {}",
+        "async function fetchData() {}",
+        "function fetchData async() {}",
+        "async fetchData() => {}"
+      ],
+      "correctAnswer": "async function fetchData() {}",
+      "explanation": "The correct syntax is to place `async` before the function declaration."
+    },
+    {
+      "question": "Which method runs multiple promises in parallel?",
+      "options": [
+        "Promise.runAll()",
+        "Promise.parallel()",
+        "Promise.all()",
+        "Promise.join()"
+      ],
+      "correctAnswer": "Promise.all()",
+      "explanation": "`Promise.all()` takes multiple Promises and runs them in parallel, returning a single Promise."
+    }
+  ]
+}

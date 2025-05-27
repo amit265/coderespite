@@ -1,0 +1,63 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod04",
+  "title": "Hash Tables: Maps, Sets, and Object-Based Storage",
+  "description": "This module covers one of the most important data structures in computer science: Hash Tables. In JavaScript, hash tables are implemented using objects, Maps, and Sets. They allow for fast lookups, insertions, and deletions — all in constant average time. You’ll learn how hashing works internally, when and how to use plain objects versus Map/Set, and solve common algorithmic problems such as detecting duplicates, counting frequencies, and implementing custom hash functions. Hash tables are not just powerful — they’re everywhere in real-world code, from databases to compilers to caches.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod04-lsn01",
+      "title": "What is a Hash Table?",
+      "type": "theory",
+      "content": "A hash table is a data structure that maps keys to values using a hash function. The idea is to transform a key (like a string) into an index in an array using a hash function. This allows constant-time average complexity for insertions, deletions, and lookups. JavaScript provides built-in support for hash tables through `Object`, `Map`, and `Set`.\n\nBasic hash table concepts:\n- **Hash function**: Converts a key into a unique index.\n- **Collision**: Occurs when two keys hash to the same index.\n- **Load factor**: Measures how full the table is (affects resizing).\n\nReal-world examples:\n- Storing user sessions\n- Implementing dictionaries\n- Caching results of expensive function calls\n\nHash tables are everywhere because they make lookup blazing fast."
+    },
+    {
+      "lessonId": "mod04-lsn02",
+      "title": "Objects as Hash Maps in JavaScript",
+      "type": "code",
+      "content": "In JavaScript, plain objects (`{}`) can be used as hash maps to store key-value pairs.\n\n```js\nlet studentScores = {\n  alice: 85,\n  bob: 92,\n  charlie: 78\n};\n\nconsole.log(studentScores[\"bob\"]); // 92\n\n// Add a new key\nstudentScores[\"david\"] = 88;\n\n// Delete a key\ndelete studentScores[\"alice\"];\n\n// Check existence\nconsole.log(\"charlie\" in studentScores); // true\n```\n\nNote:\n- Keys are always coerced to strings.\n- Doesn’t preserve insertion order.\n- Can have prototype pollution issues."
+    },
+    {
+      "lessonId": "mod04-lsn03",
+      "title": "Map: A Better Hash Table",
+      "type": "code",
+      "content": "`Map` is a built-in JavaScript object that allows any value as key (including objects, arrays, and functions) and preserves insertion order.\n\n```js\nlet userScores = new Map();\nuserScores.set(\"alice\", 91);\nuserScores.set(\"bob\", 87);\nuserScores.set({ name: \"charlie\" }, 78);\n\nconsole.log(userScores.get(\"alice\")); // 91\nconsole.log(userScores.has(\"bob\"));    // true\n\n// Iterating\nfor (let [key, value] of userScores) {\n  console.log(`${key}: ${value}`);\n}\n```\n\nWhy `Map` is better than plain objects:\n- Maintains insertion order\n- Accepts any data type as key\n- More performance-consistent in large datasets"
+    },
+    {
+      "lessonId": "mod04-lsn04",
+      "title": "Set: Storing Unique Values",
+      "type": "code",
+      "content": "`Set` is a JavaScript object that stores unique values. It’s excellent for checking existence quickly, removing duplicates, or modeling collections without duplicates.\n\n```js\nlet nums = [1, 2, 2, 3, 4, 4, 5];\nlet unique = new Set(nums);\n\nconsole.log(unique); // Set { 1, 2, 3, 4, 5 }\n\nunique.add(6);\nunique.delete(2);\nconsole.log(unique.has(3)); // true\n```\n\nSets use hashing under the hood and give **constant-time** lookups on average. Useful in problems like:\n- Finding duplicates\n- Removing duplicates\n- Tracking visited elements"
+    },
+    {
+      "lessonId": "mod04-lsn05",
+      "title": "Hash Table Use Case: Frequency Counters",
+      "type": "code",
+      "content": "Frequency counting is one of the most common uses of hash tables. Let's count character frequency in a string:\n\n```js\nfunction charFrequency(str) {\n  let freq = {};\n  for (let char of str) {\n    freq[char] = (freq[char] || 0) + 1;\n  }\n  return freq;\n}\n\nconsole.log(charFrequency(\"banana\")); // { b: 1, a: 3, n: 2 }\n```\n\nYou can use this approach to solve problems like:\n- Most frequent character\n- Anagram detection\n- Word frequency in text"
+    },
+    {
+      "lessonId": "mod04-lsn06",
+      "title": "Checking for Duplicates with Sets",
+      "type": "code",
+      "content": "Here’s a quick way to check for duplicates in an array:\n\n```js\nfunction hasDuplicates(arr) {\n  return new Set(arr).size !== arr.length;\n}\n\nconsole.log(hasDuplicates([1, 2, 3, 4])); // false\nconsole.log(hasDuplicates([1, 2, 3, 2])); // true\n```\n\n`Set` helps eliminate duplicates naturally. If the size of the `Set` is less than the array, duplicates exist. Clean and efficient."
+    },
+    {
+      "lessonId": "mod04-lsn07",
+      "title": "Word Count Problem with Map",
+      "type": "code",
+      "content": "Let’s count how many times each word appears in a sentence using a `Map`.\n\n```js\nfunction wordCount(sentence) {\n  let words = sentence.toLowerCase().match(/\\w+/g);\n  let map = new Map();\n\n  for (let word of words) {\n    map.set(word, (map.get(word) || 0) + 1);\n  }\n\n  return map;\n}\n\nconsole.log(wordCount(\"The cat chased the dog. The dog barked.\"));\n// Map { 'the' => 3, 'cat' => 1, 'chased' => 1, 'dog' => 2, 'barked' => 1 }\n```\n\nThis technique is especially useful in search engines, log analysis, and natural language processing."
+    },
+    {
+      "lessonId": "mod04-lsn08",
+      "title": "Object vs Map vs Set: When to Use What",
+      "type": "theory",
+      "content": "**Object**:\n- Use when keys are always strings\n- Great for static configuration or JSON data\n\n**Map**:\n- Better when keys can be any type\n- Maintains insertion order\n- Ideal for dynamic key-value data\n\n**Set**:\n- Use for fast existence checks\n- Ideal for unique collections and de-duplication\n\n**Comparison**:\n| Feature         | Object | Map  | Set  |\n|----------------|--------|------|------|\n| Key Types      | String | Any  | Any  |\n| Order          | Unordered | Ordered | Ordered |\n| Uniqueness     | ❌     | ❌   | ✅   |\n| Use Case       | Lookup | Dynamic pairs | Existence testing |\n\nChoose the right tool for the right situation!"
+    },
+    {
+      "lessonId": "mod04-lsn09",
+      "title": "Building a Simple Custom Hash Function",
+      "type": "code",
+      "content": "While JavaScript doesn't expose low-level hash functions, we can simulate a basic one to understand the logic.\n\n```js\nfunction simpleHash(str, tableSize) {\n  let hash = 0;\n  for (let i = 0; i < str.length; i++) {\n    hash = (hash + str.charCodeAt(i) * i) % tableSize;\n  }\n  return hash;\n}\n\nconsole.log(simpleHash(\"hello\", 100)); // e.g., 72\n```\n\nThis isn't secure or collision-resistant but helps you understand how strings are turned into indexes. Useful in interviews and building your own hash tables."
+    }
+  ]
+}

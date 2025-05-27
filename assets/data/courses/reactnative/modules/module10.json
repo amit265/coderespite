@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod10",
+  "title": "Local Storage and AsyncStorage",
+  "description": "Learn how to store data locally on a device using AsyncStorage in React Native to persist user preferences, app state, and offline data.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod10-lsn01",
+      "title": "What is AsyncStorage?",
+      "type": "theory",
+      "content": "AsyncStorage is an asynchronous, unencrypted, persistent, key-value storage system for React Native apps. It lets you store small amounts of data locally on the device."
+    },
+    {
+      "lessonId": "mod10-lsn02",
+      "title": "Installing AsyncStorage",
+      "type": "code",
+      "content": "AsyncStorage used to be part of React Native core but now is a separate package. Install it using:\n\n```bash\nnpm install @react-native-async-storage/async-storage\n```\n\nThen import it:\n\n```js\nimport AsyncStorage from '@react-native-async-storage/async-storage';\n```"
+    },
+    {
+      "lessonId": "mod10-lsn03",
+      "title": "Saving Data with AsyncStorage",
+      "type": "code",
+      "content": "Use `setItem` to save data as a string. Example:\n\n```js\nconst saveData = async () => {\n  try {\n    await AsyncStorage.setItem('@username', 'JohnDoe');\n    console.log('Data saved');\n  } catch (error) {\n    console.error('Failed to save data', error);\n  }\n};\n```"
+    },
+    {
+      "lessonId": "mod10-lsn04",
+      "title": "Reading Data with AsyncStorage",
+      "type": "code",
+      "content": "Use `getItem` to read data. Returns `null` if key not found.\n\n```js\nconst readData = async () => {\n  try {\n    const username = await AsyncStorage.getItem('@username');\n    if (username !== null) {\n      console.log('Username:', username);\n    } else {\n      console.log('No data found');\n    }\n  } catch (error) {\n    console.error('Failed to fetch data', error);\n  }\n};\n```"
+    },
+    {
+      "lessonId": "mod10-lsn05",
+      "title": "Removing Data with AsyncStorage",
+      "type": "code",
+      "content": "Use `removeItem` to delete data:\n\n```js\nconst removeData = async () => {\n  try {\n    await AsyncStorage.removeItem('@username');\n    console.log('Data removed');\n  } catch (error) {\n    console.error('Failed to remove data', error);\n  }\n};\n```"
+    },
+    {
+      "lessonId": "mod10-lsn06",
+      "title": "Storing Complex Data Types",
+      "type": "theory",
+      "content": "AsyncStorage stores only strings. To save objects or arrays, convert them to JSON strings using `JSON.stringify()` before saving, and parse them back with `JSON.parse()` when reading."
+    },
+    {
+      "lessonId": "mod10-lsn07",
+      "title": "Example: Save and Load a User Object",
+      "type": "code",
+      "content": "```js\nconst user = { name: 'John', age: 30 };\n\nconst saveUser = async () => {\n  try {\n    const jsonValue = JSON.stringify(user);\n    await AsyncStorage.setItem('@user', jsonValue);\n  } catch (e) {\n    console.error(e);\n  }\n};\n\nconst loadUser = async () => {\n  try {\n    const jsonValue = await AsyncStorage.getItem('@user');\n    return jsonValue != null ? JSON.parse(jsonValue) : null;\n  } catch (e) {\n    console.error(e);\n  }\n};\n```"
+    },
+    {
+      "lessonId": "mod10-lsn08",
+      "title": "Using AsyncStorage in React Components",
+      "type": "code",
+      "content": "Example of saving/loading data using React hooks:\n\n```jsx\nimport React, { useState, useEffect } from 'react';\nimport { View, TextInput, Button, Text } from 'react-native';\nimport AsyncStorage from '@react-native-async-storage/async-storage';\n\nexport default function App() {\n  const [name, setName] = useState('');\n  const [savedName, setSavedName] = useState('');\n\n  useEffect(() => {\n    const loadName = async () => {\n      const storedName = await AsyncStorage.getItem('@name');\n      if (storedName) setSavedName(storedName);\n    };\n    loadName();\n  }, []);\n\n  const saveName = async () => {\n    await AsyncStorage.setItem('@name', name);\n    setSavedName(name);\n  };\n\n  return (\n    <View style={{ padding: 20 }}>\n      <TextInput placeholder=\"Enter your name\" value={name} onChangeText={setName} />\n      <Button title=\"Save Name\" onPress={saveName} />\n      <Text>Saved Name: {savedName}</Text>\n    </View>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod10-lsn09",
+      "title": "Limitations of AsyncStorage",
+      "type": "theory",
+      "content": "- Not suitable for large data\n- Data stored as plain text (not encrypted)\n- Limited to simple key-value pairs\n- AsyncStorage operations are asynchronous, so handle accordingly\n\nFor complex or secure storage, consider databases like Realm or encrypted storage libraries."
+    },
+    {
+      "lessonId": "mod10-lsn10",
+      "title": "Summary and Best Practices",
+      "type": "theory",
+      "content": "- Use AsyncStorage for simple persistent data like settings or user tokens\n- Always handle errors in async operations\n- Convert objects to JSON strings for storage\n- Avoid blocking UI while reading/writing\n- Consider user privacy and data security when storing sensitive info"
+    }
+  ]
+}

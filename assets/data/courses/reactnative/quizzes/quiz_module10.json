@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod10",
+  "courseId": "reactnative",
+  "moduleId": "mod10",
+  "title": "Local Storage and AsyncStorage",
+  "tags": ["local storage", "asyncstorage", "react native", "data persistence", "storage"],
+  "difficulty": "medium",
+  "description": "Learn how to persist data locally in React Native apps using AsyncStorage.",
+  "quiz": [
+    {
+      "question": "What is AsyncStorage in React Native?",
+      "options": [
+        "A synchronous storage system",
+        "An asynchronous, unencrypted, persistent key-value storage system",
+        "A database for large data sets",
+        "A tool for remote data fetching"
+      ],
+      "correctAnswer": "An asynchronous, unencrypted, persistent key-value storage system",
+      "explanation": "AsyncStorage provides simple key-value storage that persists data across app restarts."
+    },
+    {
+      "question": "Which of the following is the correct method to save data using AsyncStorage?",
+      "options": [
+        "AsyncStorage.setItem(key, value)",
+        "AsyncStorage.save(key, value)",
+        "AsyncStorage.store(key, value)",
+        "AsyncStorage.put(key, value)"
+      ],
+      "correctAnswer": "AsyncStorage.setItem(key, value)",
+      "explanation": "setItem is used to save a key-value pair in AsyncStorage."
+    },
+    {
+      "question": "Which method is used to retrieve data from AsyncStorage?",
+      "options": [
+        "AsyncStorage.getItem(key)",
+        "AsyncStorage.fetch(key)",
+        "AsyncStorage.retrieve(key)",
+        "AsyncStorage.read(key)"
+      ],
+      "correctAnswer": "AsyncStorage.getItem(key)",
+      "explanation": "getItem retrieves the value associated with the given key."
+    },
+    {
+      "question": "AsyncStorage methods return what kind of object?",
+      "options": [
+        "String",
+        "Promise",
+        "Number",
+        "Boolean"
+      ],
+      "correctAnswer": "Promise",
+      "explanation": "AsyncStorage methods are asynchronous and return Promises."
+    },
+    {
+      "question": "Which method is used to remove an item from AsyncStorage?",
+      "options": [
+        "AsyncStorage.removeItem(key)",
+        "AsyncStorage.delete(key)",
+        "AsyncStorage.erase(key)",
+        "AsyncStorage.clearItem(key)"
+      ],
+      "correctAnswer": "AsyncStorage.removeItem(key)",
+      "explanation": "removeItem deletes a key-value pair from storage."
+    },
+    {
+      "question": "How can you clear all data stored in AsyncStorage?",
+      "options": [
+        "AsyncStorage.clear()",
+        "AsyncStorage.reset()",
+        "AsyncStorage.removeAll()",
+        "AsyncStorage.deleteAll()"
+      ],
+      "correctAnswer": "AsyncStorage.clear()",
+      "explanation": "clear() removes all keys and values from AsyncStorage."
+    },
+    {
+      "question": "Why is AsyncStorage considered asynchronous?",
+      "options": [
+        "Because it blocks the UI thread",
+        "Because storage operations happen in the background and return Promises",
+        "Because it uses synchronous APIs",
+        "Because it only works with async functions"
+      ],
+      "correctAnswer": "Because storage operations happen in the background and return Promises",
+      "explanation": "AsyncStorage APIs perform storage operations asynchronously to avoid blocking the UI."
+    },
+    {
+      "question": "Which data types can be stored directly in AsyncStorage?",
+      "options": [
+        "Only strings",
+        "Strings and numbers",
+        "Objects and arrays",
+        "All JavaScript data types"
+      ],
+      "correctAnswer": "Only strings",
+      "explanation": "AsyncStorage stores data as strings; other data types must be serialized."
+    },
+    {
+      "question": "How do you store an object in AsyncStorage?",
+      "options": [
+        "By using JSON.stringify before storing",
+        "By storing it directly",
+        "By converting to XML",
+        "By using the toString method"
+      ],
+      "correctAnswer": "By using JSON.stringify before storing",
+      "explanation": "Objects must be serialized to a string using JSON.stringify."
+    },
+    {
+      "question": "How do you retrieve an object stored in AsyncStorage?",
+      "options": [
+        "Use JSON.parse on the retrieved string",
+        "Retrieve it directly as an object",
+        "Use JSON.stringify on retrieval",
+        "No special method needed"
+      ],
+      "correctAnswer": "Use JSON.parse on the retrieved string",
+      "explanation": "After retrieval, JSON.parse is used to convert the string back to an object."
+    }
+  ]
+}

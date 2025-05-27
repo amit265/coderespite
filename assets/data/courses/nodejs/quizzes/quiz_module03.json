@@ -1,0 +1,121 @@
+{
+  "quizId": "qz03",
+  "courseId": "nodejs",
+  "moduleId": "mod03",
+  "title": "Node.js Modules and Packages",
+  "tags": ["nodejs", "modules", "packages", "npm", "basics"],
+  "difficulty": "easy",
+  "description": "Understanding Node.js modules, how to use them, and managing packages with npm.",
+  "quiz": [
+    {
+      "question": "What is a Node.js module?",
+      "options": [
+        "A standalone executable file",
+        "A reusable block of code organized in a file",
+        "A Node.js package manager",
+        "A command-line tool"
+      ],
+      "correctAnswer": "A reusable block of code organized in a file",
+      "explanation": "A module is a reusable piece of code wrapped in a file in Node.js."
+    },
+    {
+      "question": "Which keyword is used to import a module in Node.js?",
+      "options": [
+        "import",
+        "require",
+        "include",
+        "use"
+      ],
+      "correctAnswer": "require",
+      "explanation": "Node.js uses `require()` to import modules."
+    },
+    {
+      "question": "What does the npm stand for?",
+      "options": [
+        "Node Package Manager",
+        "Node Programming Method",
+        "New Package Module",
+        "Node Performance Monitor"
+      ],
+      "correctAnswer": "Node Package Manager",
+      "explanation": "npm stands for Node Package Manager, the default package manager for Node.js."
+    },
+    {
+      "question": "How do you install a package locally in a Node.js project?",
+      "options": [
+        "npm install package-name",
+        "npm global package-name",
+        "npm get package-name",
+        "npm init package-name"
+      ],
+      "correctAnswer": "npm install package-name",
+      "explanation": "Use `npm install package-name` to install packages locally."
+    },
+    {
+      "question": "Where are local npm packages installed by default?",
+      "options": [
+        "node_modules folder inside the project",
+        "Global system folder",
+        "bin folder",
+        "lib folder"
+      ],
+      "correctAnswer": "node_modules folder inside the project",
+      "explanation": "Local packages are installed in the node_modules directory inside your project."
+    },
+    {
+      "question": "Which file keeps track of installed packages and their versions in a project?",
+      "options": [
+        "package.json",
+        "package-lock.json",
+        "node_modules",
+        "index.js"
+      ],
+      "correctAnswer": "package.json",
+      "explanation": "package.json records dependencies and their versions."
+    },
+    {
+      "question": "What command installs all dependencies listed in package.json?",
+      "options": [
+        "npm install",
+        "npm update",
+        "npm run",
+        "npm init"
+      ],
+      "correctAnswer": "npm install",
+      "explanation": "`npm install` installs all dependencies listed."
+    },
+    {
+      "question": "What is the difference between require and import in Node.js?",
+      "options": [
+        "require is synchronous, import is asynchronous",
+        "require is used in CommonJS modules, import is used in ES modules",
+        "require is used for local modules, import is for npm packages",
+        "There is no difference"
+      ],
+      "correctAnswer": "require is used in CommonJS modules, import is used in ES modules",
+      "explanation": "`require` is CommonJS syntax; `import` is used in ES6 modules."
+    },
+    {
+      "question": "Which command removes a package from your project?",
+      "options": [
+        "npm remove package-name",
+        "npm uninstall package-name",
+        "npm delete package-name",
+        "npm erase package-name"
+      ],
+      "correctAnswer": "npm uninstall package-name",
+      "explanation": "`npm uninstall` removes a package from the project."
+    },
+    {
+      "question": "How do you create a module in Node.js?",
+      "options": [
+        "Write functions or variables in a file and export them using module.exports",
+        "Install npm packages",
+        "Use the import keyword",
+        "Run npm init"
+      ],
+      "correctAnswer": "Write functions or variables in a file and export them using module.exports",
+      "explanation": "You create a module by exporting code with module.exports."
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "quizId": "qz11",
+  "moduleId": "mod11",
+  "courseId": "javascript",
+
+  "title": "Event Loop and JS Engine",
+  "tags": ["event-loop", "call-stack", "task-queue", "js-engine", "concurrency"],
+  "difficulty": "medium",
+  "description": "Understanding how JavaScript runs behind the scenes.",
+  "quiz": [
+    {
+      "question": "What is the role of the JavaScript engine?",
+      "options": [
+        "To design HTML",
+        "To create databases",
+        "To compile and execute JavaScript code",
+        "To build APIs"
+      ],
+      "correctAnswer": "To compile and execute JavaScript code",
+      "explanation": "The JS engine interprets and runs the JavaScript code in browsers or environments like Node.js."
+    },
+    {
+      "question": "What is the call stack?",
+      "options": [
+        "A function generator",
+        "A memory management tool",
+        "A data structure that keeps track of function calls",
+        "A Promise handler"
+      ],
+      "correctAnswer": "A data structure that keeps track of function calls",
+      "explanation": "The call stack stores function execution contexts in a LIFO (Last In First Out) order."
+    },
+    {
+      "question": "What does the event loop do?",
+      "options": [
+        "Creates loops in JS",
+        "Processes CSS events",
+        "Handles async callbacks and moves them to the call stack when ready",
+        "Runs only once"
+      ],
+      "correctAnswer": "Handles async callbacks and moves them to the call stack when ready",
+      "explanation": "The event loop continuously checks the task queue and pushes callbacks to the call stack."
+    },
+    {
+      "question": "Where are async callbacks placed before execution?",
+      "options": ["Call stack", "Web API", "Task queue", "Heap"],
+      "correctAnswer": "Task queue",
+      "explanation": "Once an async task completes, its callback is placed in the task queue, waiting for the call stack to be empty."
+    },
+    {
+      "question": "What happens if the call stack is never empty?",
+      "options": [
+        "Async callbacks execute immediately",
+        "UI updates faster",
+        "Callbacks in the queue never get executed",
+        "The app crashes"
+      ],
+      "correctAnswer": "Callbacks in the queue never get executed",
+      "explanation": "The event loop cannot push new tasks if the call stack is always busy."
+    },
+    {
+      "question": "What is the 'heap' used for in JavaScript?",
+      "options": [
+        "Storing local variables",
+        "Tracking async tasks",
+        "Dynamic memory allocation",
+        "Function queueing"
+      ],
+      "correctAnswer": "Dynamic memory allocation",
+      "explanation": "The heap is an unstructured memory pool for storing objects and functions."
+    },
+    {
+      "question": "Which of the following is an example of a Web API?",
+      "options": ["setTimeout", "console.log", "for loop", "if statement"],
+      "correctAnswer": "setTimeout",
+      "explanation": "`setTimeout` is provided by the browser's Web API, not the JS engine itself."
+    },
+    {
+      "question": "Which runs first: call stack or task queue?",
+      "options": [
+        "Task queue always runs first",
+        "Call stack is cleared before task queue runs",
+        "They run in parallel",
+        "JS doesn't have this order"
+      ],
+      "correctAnswer": "Call stack is cleared before task queue runs",
+      "explanation": "The event loop waits for the call stack to clear before pushing queued tasks."
+    },
+    {
+      "question": "What does 'non-blocking' mean in JavaScript?",
+      "options": [
+        "JS skips errors",
+        "JS handles multiple threads",
+        "JS can continue executing without waiting for tasks to finish",
+        "JS blocks the UI"
+      ],
+      "correctAnswer": "JS can continue executing without waiting for tasks to finish",
+      "explanation": "Non-blocking allows asynchronous operations to run without pausing main code execution."
+    },
+    {
+      "question": "What tool visualizes the event loop in action?",
+      "options": ["Node Profiler", "Chrome DevTools", "Event Loop Simulator", "JS Debugger"],
+      "correctAnswer": "Event Loop Simulator",
+      "explanation": "Tools like Loupe (event loop visualizer) help understand how the call stack and task queue interact."
+    }
+  ]
+}

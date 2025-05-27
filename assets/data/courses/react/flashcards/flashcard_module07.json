@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod07",
+  "courseId": "react",
+  "moduleId": "mod07",
+  "title": "Forms and Form Management (Formik / React Hook Form)",
+  "description": "Handling form state, validation, and submission in React using popular libraries Formik and React Hook Form.",
+  "flashcards": [
+    {
+      "question": "Why are forms important in React apps?",
+      "answer": "Forms collect user input and allow interaction like login, signup, and data submission."
+    },
+    {
+      "question": "What challenges do forms present in React?",
+      "answer": "Managing state, validation, and handling submission efficiently."
+    },
+    {
+      "question": "What is Formik?",
+      "answer": "A popular library to build and manage forms easily in React with built-in validation support."
+    },
+    {
+      "question": "What is React Hook Form?",
+      "answer": "A lightweight React library that leverages hooks for performant and simple form management."
+    },
+    {
+      "question": "How does React Hook Form improve performance?",
+      "answer": "It reduces re-renders by managing form state outside React's state system."
+    },
+    {
+      "question": "What is form validation?",
+      "answer": "The process of ensuring user input meets required rules before submission."
+    },
+    {
+      "question": "How do you handle form submission in Formik?",
+      "answer": "By passing an onSubmit function to Formik's component or hook."
+    },
+    {
+      "question": "What is controlled vs uncontrolled components in forms?",
+      "answer": "Controlled components have React manage input state; uncontrolled use refs to access values."
+    },
+    {
+      "question": "How do you reset form fields in React Hook Form?",
+      "answer": "Using the reset() method provided by React Hook Form."
+    },
+    {
+      "question": "Can Formik and React Hook Form be used together?",
+      "answer": "Generally no, you pick one for consistent form management."
+    }
+  ]
+}

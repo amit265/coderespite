@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod02",
+  "courseId": "nodejs",
+  "moduleId": "mod02",
+  "title": "Setting Up Node.js Environment",
+  "description": "Guidance on installing Node.js, using Node Package Manager (NPM), and setting up a development environment.",
+  "flashcards": [
+    {
+      "question": "How do you install Node.js on your system?",
+      "answer": "You can download the installer from the official website (nodejs.org) for your OS and follow the installation instructions."
+    },
+    {
+      "question": "What is NPM in Node.js?",
+      "answer": "NPM (Node Package Manager) is the default package manager for Node.js used to install and manage third-party libraries and dependencies."
+    },
+    {
+      "question": "How can you verify if Node.js is installed correctly?",
+      "answer": "By running the command `node -v` in the terminal to check the Node.js version installed."
+    },
+    {
+      "question": "How do you check the NPM version installed on your system?",
+      "answer": "By running the command `npm -v` in the terminal."
+    },
+    {
+      "question": "What is the difference between Node.js and NPM?",
+      "answer": "Node.js is the runtime environment for running JavaScript on the server, while NPM is the tool used to manage Node.js packages and dependencies."
+    },
+    {
+      "question": "What is a package.json file?",
+      "answer": "It is a JSON file that holds metadata about the project and manages dependencies, scripts, and configurations for the Node.js application."
+    },
+    {
+      "question": "How do you initialize a new Node.js project?",
+      "answer": "By running `npm init` in your project folder to create a package.json file interactively."
+    },
+    {
+      "question": "What are global vs local NPM packages?",
+      "answer": "Global packages are installed system-wide and accessible from anywhere, while local packages are installed per project and stored in the project's node_modules folder."
+    },
+    {
+      "question": "Why is it recommended to use a code editor like VS Code for Node.js development?",
+      "answer": "Because it offers syntax highlighting, debugging, integrated terminal, and many useful extensions tailored for JavaScript and Node.js."
+    },
+    {
+      "question": "How can you run a Node.js file from the terminal?",
+      "answer": "By using the command `node filename.js` where filename.js is your JavaScript file."
+    }
+  ]
+}

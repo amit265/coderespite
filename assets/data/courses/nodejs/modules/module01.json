@@ -1,0 +1,39 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod01",
+  "title": "Introduction to Node.js",
+  "description": "Learn what Node.js is, its history, features, and why it has become a popular runtime environment for JavaScript outside the browser.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod01-lsn01",
+      "title": "What is Node.js?",
+      "type": "theory",
+      "content": "Node.js is an open-source, cross-platform runtime environment that allows developers to run JavaScript on the server side. It is built on Chrome's V8 JavaScript engine and enables scalable network applications."
+    },
+    {
+      "lessonId": "mod01-lsn02",
+      "title": "History and Evolution of Node.js",
+      "type": "theory",
+      "content": "Node.js was created by Ryan Dahl in 2009 to build scalable network applications. It introduced an event-driven, non-blocking I/O model that made it efficient and suitable for data-intensive real-time applications."
+    },
+    {
+      "lessonId": "mod01-lsn03",
+      "title": "Key Features of Node.js",
+      "type": "theory",
+      "content": "- Asynchronous and Event-Driven\n- Single-threaded but highly scalable\n- Fast execution with V8 engine\n- Rich ecosystem with npm (Node Package Manager)\n- Suitable for real-time applications like chat and gaming"
+    },
+    {
+      "lessonId": "mod01-lsn04",
+      "title": "Why Use Node.js?",
+      "type": "theory",
+      "content": "Node.js allows developers to use JavaScript for both client and server-side code, which simplifies development. It excels in building fast, scalable network applications and is widely used in modern web development."
+    },
+    {
+      "lessonId": "mod01-lsn05",
+      "title": "Overview of Node.js Architecture",
+      "type": "theory",
+      "content": "Node.js uses a single-threaded event loop architecture to handle concurrent connections efficiently. This design avoids traditional thread-based concurrency and allows high throughput."
+    }
+  ]
+}

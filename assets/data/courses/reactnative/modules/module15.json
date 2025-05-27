@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod15",
+  "title": "Deploying and Publishing Apps",
+  "description": "Learn how to prepare your React Native app for production, and publish it on app stores like Google Play and Apple App Store.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod15-lsn01",
+      "title": "Why Deploy and Publish?",
+      "type": "theory",
+      "content": "Deploying your app makes it accessible to users worldwide. Publishing on app stores helps you reach millions, get feedback, and grow your user base."
+    },
+    {
+      "lessonId": "mod15-lsn02",
+      "title": "Preparing Your App for Production",
+      "type": "theory",
+      "content": "Before publishing, optimize your app by removing debug code, enabling ProGuard (Android), setting up app icons, splash screens, and configuring permissions."
+    },
+    {
+      "lessonId": "mod15-lsn03",
+      "title": "Generating a Signed APK for Android",
+      "type": "code",
+      "content": "1. Generate a signing key using keytool:\n\n```\nkeytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000\n```\n\n2. Place the keystore in `android/app` folder.\n\n3. Edit `android/gradle.properties`:\n\n```\nMYAPP_UPLOAD_STORE_FILE=my-release-key.keystore\nMYAPP_UPLOAD_KEY_ALIAS=my-key-alias\nMYAPP_UPLOAD_STORE_PASSWORD=your-store-password\nMYAPP_UPLOAD_KEY_PASSWORD=your-key-password\n```\n\n4. Edit `android/app/build.gradle` to add signing configs.\n\n5. Build the release APK:\n\n```\ncd android\n./gradlew assembleRelease\n```\n\n6. The APK will be at `android/app/build/outputs/apk/release/app-release.apk`."
+    },
+    {
+      "lessonId": "mod15-lsn04",
+      "title": "Publishing on Google Play Store",
+      "type": "theory",
+      "content": "Create a Google Play Developer account, pay the one-time fee, create a new app, upload your signed APK or AAB, add app details, screenshots, privacy policy, and submit for review."
+    },
+    {
+      "lessonId": "mod15-lsn05",
+      "title": "Building and Archiving for iOS",
+      "type": "code",
+      "content": "1. Open your React Native iOS project in Xcode.\n2. Configure your app’s bundle identifier, signing team, and provisioning profiles.\n3. Select 'Generic iOS Device' and create an archive via Product > Archive.\n4. Export the archive as an IPA for App Store submission."
+    },
+    {
+      "lessonId": "mod15-lsn06",
+      "title": "Publishing on Apple App Store",
+      "type": "theory",
+      "content": "Enroll in the Apple Developer Program, use App Store Connect to create your app listing, upload your IPA using Transporter or Xcode, fill in app info, and submit for review."
+    },
+    {
+      "lessonId": "mod15-lsn07",
+      "title": "App Store Guidelines and Compliance",
+      "type": "theory",
+      "content": "Follow platform guidelines on content, privacy, and functionality to avoid rejection. Include clear privacy policies and test on real devices."
+    },
+    {
+      "lessonId": "mod15-lsn08",
+      "title": "Over-the-Air Updates with CodePush",
+      "type": "theory",
+      "content": "CodePush lets you push JS updates instantly without going through app store reviews, speeding up bug fixes and feature delivery."
+    },
+    {
+      "lessonId": "mod15-lsn09",
+      "title": "Monitoring App Performance and Crashes",
+      "type": "theory",
+      "content": "Use tools like Firebase Crashlytics or Sentry to track app crashes and performance issues post-deployment."
+    },
+    {
+      "lessonId": "mod15-lsn10",
+      "title": "Maintaining and Updating Your App",
+      "type": "theory",
+      "content": "Regularly update your app to fix bugs, add features, and keep dependencies up to date to provide users the best experience."
+    }
+  ]
+}

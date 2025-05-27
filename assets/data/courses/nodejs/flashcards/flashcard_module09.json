@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod09",
+  "courseId": "nodejs",
+  "moduleId": "mod09",
+  "title": "Authentication and Authorization",
+  "description": "Understand the concepts and implementation of authentication and authorization in Node.js applications to secure user access.",
+  "flashcards": [
+    {
+      "question": "What is authentication?",
+      "answer": "Authentication is the process of verifying the identity of a user or system."
+    },
+    {
+      "question": "What is authorization?",
+      "answer": "Authorization determines what an authenticated user is allowed to do or access."
+    },
+    {
+      "question": "What are common methods of authentication in Node.js?",
+      "answer": "Methods include sessions and cookies, JSON Web Tokens (JWT), OAuth, and third-party services."
+    },
+    {
+      "question": "What is a JSON Web Token (JWT)?",
+      "answer": "JWT is a compact, URL-safe token used to securely transmit information between parties and often used for stateless authentication."
+    },
+    {
+      "question": "How does session-based authentication work?",
+      "answer": "Server creates a session on login, stores user info, and sends a session ID cookie to the client for subsequent requests."
+    },
+    {
+      "question": "What is OAuth used for?",
+      "answer": "OAuth is an open standard for access delegation, allowing users to grant limited access to their resources on one site to another site."
+    },
+    {
+      "question": "Why is password hashing important?",
+      "answer": "Hashing passwords protects user data by storing hashed versions, so plain passwords are never saved."
+    },
+    {
+      "question": "What are some popular Node.js packages for authentication?",
+      "answer": "Packages like Passport.js, bcrypt, jsonwebtoken, and express-session are widely used."
+    },
+    {
+      "question": "What is the difference between authentication and authorization?",
+      "answer": "Authentication verifies identity, while authorization controls access to resources based on identity."
+    },
+    {
+      "question": "How can you protect routes in Express to allow only authenticated users?",
+      "answer": "By creating middleware that checks for valid authentication tokens or sessions before granting access."
+    }
+  ]
+}

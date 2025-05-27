@@ -1,0 +1,81 @@
+{
+  "quizId": "qz04",
+  "courseId": "dsa",
+  "moduleId": "mod04",
+  "title": "Hash Tables: Maps, Sets, and Object-Based Storage",
+  "tags": ["hash tables", "maps", "sets", "javascript", "data structures"],
+  "difficulty": "easy",
+  "description": "Understanding hash tables, Map and Set data structures, and their usage in JavaScript.",
+  "quiz": [
+    {
+      "question": "What is a hash table?",
+      "options": [
+        "A data structure that stores key-value pairs using a hash function",
+        "A linked list",
+        "A type of array",
+        "A queue"
+      ],
+      "correctAnswer": "A data structure that stores key-value pairs using a hash function",
+      "explanation": "Hash tables store data as key-value pairs with efficient lookup using hashing."
+    },
+    {
+      "question": "Which JavaScript object is designed specifically to hold key-value pairs and maintains insertion order?",
+      "options": ["Object", "Map", "Set", "Array"],
+      "correctAnswer": "Map",
+      "explanation": "Map stores key-value pairs and maintains insertion order."
+    },
+    {
+      "question": "What method is used to add a key-value pair to a Map?",
+      "options": ["set()", "add()", "push()", "insert()"],
+      "correctAnswer": "set()",
+      "explanation": "The `set()` method adds or updates key-value pairs in a Map."
+    },
+    {
+      "question": "Which JavaScript structure stores unique values of any type?",
+      "options": ["Map", "Set", "Array", "Object"],
+      "correctAnswer": "Set",
+      "explanation": "Set stores unique values, preventing duplicates."
+    },
+    {
+      "question": "How do you check if a key exists in a Map?",
+      "options": ["has()", "includes()", "contains()", "exists()"],
+      "correctAnswer": "has()",
+      "explanation": "`has()` checks if a Map contains a specified key."
+    },
+    {
+      "question": "What is the output of this code? `new Set([1, 2, 2, 3]).size`",
+      "options": ["4", "3", "2", "Error"],
+      "correctAnswer": "3",
+      "explanation": "Set removes duplicates; the unique values are 1, 2, and 3."
+    },
+    {
+      "question": "Which method removes a key-value pair from a Map?",
+      "options": ["delete()", "remove()", "pop()", "discard()"],
+      "correctAnswer": "delete()",
+      "explanation": "`delete()` removes a key and its associated value from a Map."
+    },
+    {
+      "question": "Can Object keys be of any type?",
+      "options": ["Yes", "No, only strings and symbols", "No, only numbers", "No, only booleans"],
+      "correctAnswer": "No, only strings and symbols",
+      "explanation": "Object keys are converted to strings or symbols."
+    },
+    {
+      "question": "Which data structure would you prefer for fast insertion, deletion, and lookup of unique elements?",
+      "options": ["Array", "Set", "Map", "Linked List"],
+      "correctAnswer": "Set",
+      "explanation": "Set provides fast operations for unique elements."
+    },
+    {
+      "question": "What is the difference between Map and Object in JavaScript?",
+      "options": [
+        "Map keys can be any type; Object keys are strings or symbols",
+        "Map maintains insertion order; Object does not",
+        "Map has size property; Object does not",
+        "All of the above"
+      ],
+      "correctAnswer": "All of the above",
+      "explanation": "Maps are more versatile with key types and maintain order, unlike Objects."
+    }
+  ]
+}

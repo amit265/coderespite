@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod13",
+  "title": "Native Modules and Platform APIs",
+  "description": "Understand how to extend React Native apps by using native modules and accessing platform-specific APIs to unlock device features.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod13-lsn01",
+      "title": "What are Native Modules?",
+      "type": "theory",
+      "content": "Native modules let you write platform-specific code (Java/Kotlin for Android, Objective-C/Swift for iOS) to access features not available in React Native by default."
+    },
+    {
+      "lessonId": "mod13-lsn02",
+      "title": "When to Use Native Modules",
+      "type": "theory",
+      "content": "Use native modules when you need advanced device capabilities like sensors, background services, or custom UI elements that React Native doesn’t provide out-of-the-box."
+    },
+    {
+      "lessonId": "mod13-lsn03",
+      "title": "How Native Modules Work with React Native",
+      "type": "theory",
+      "content": "React Native bridges JavaScript and native code using a communication layer. Native modules expose functions to JS, and JS can call them asynchronously."
+    },
+    {
+      "lessonId": "mod13-lsn04",
+      "title": "Using Existing Native Modules",
+      "type": "code",
+      "content": "Many native modules are available as libraries, like `react-native-camera` or `react-native-geolocation`. You install and link them, then import and use in JS.\n\nExample:\n```js\nimport Geolocation from '@react-native-community/geolocation';\n\nGeolocation.getCurrentPosition(\n  position => console.log(position),\n  error => console.error(error),\n);\n```"
+    },
+    {
+      "lessonId": "mod13-lsn05",
+      "title": "Creating a Simple Native Module (Android)",
+      "type": "code",
+      "content": "1. Create Java class extending `ReactContextBaseJavaModule`.\n2. Implement a method annotated with `@ReactMethod`.\n3. Register the module in a `ReactPackage`.\n\nExample Java method:\n```java\n@ReactMethod\npublic void showToast(String message) {\n  Toast.makeText(getReactApplicationContext(), message, Toast.LENGTH_SHORT).show();\n}\n```"
+    },
+    {
+      "lessonId": "mod13-lsn06",
+      "title": "Creating a Simple Native Module (iOS)",
+      "type": "code",
+      "content": "1. Create Objective-C or Swift class implementing `RCTBridgeModule`.\n2. Export methods with `RCT_EXPORT_METHOD`.\n\nExample Objective-C:\n```objc\nRCT_EXPORT_MODULE();\n\nRCT_EXPORT_METHOD(showToast:(NSString *)message) {\n  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@\"Toast\"\n                                                                 message:message\n                                                          preferredStyle:UIAlertControllerStyleAlert];\n  UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;\n  [root presentViewController:alert animated:YES completion:nil];\n  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{\n    [alert dismissViewControllerAnimated:YES completion:nil];\n  });\n}\n```"
+    },
+    {
+      "lessonId": "mod13-lsn07",
+      "title": "Calling Native Module Methods from JS",
+      "type": "code",
+      "content": "After linking, import NativeModules and call methods:\n\n```js\nimport { NativeModules } from 'react-native';\n\nNativeModules.ToastModule.showToast('Hello from React Native!');\n```"
+    },
+    {
+      "lessonId": "mod13-lsn08",
+      "title": "Accessing Platform APIs with React Native",
+      "type": "theory",
+      "content": "React Native provides APIs for common platform features like Camera, Location, Sensors, and Push Notifications via native modules, often wrapped in JavaScript."
+    },
+    {
+      "lessonId": "mod13-lsn09",
+      "title": "Permissions in React Native",
+      "type": "theory",
+      "content": "Many native features require user permissions. Use `react-native-permissions` or built-in APIs to request and check permissions at runtime for both Android and iOS."
+    },
+    {
+      "lessonId": "mod13-lsn10",
+      "title": "Best Practices for Native Modules",
+      "type": "theory",
+      "content": "- Keep native module logic simple and focused\n- Handle errors gracefully and inform JS side\n- Document native APIs clearly\n- Test on both Android and iOS devices\n- Use community libraries when possible to save time"
+    }
+  ]
+}

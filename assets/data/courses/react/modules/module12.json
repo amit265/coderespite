@@ -1,0 +1,69 @@
+{
+  "courseId": "react",
+  "moduleId": "mod12",
+  "title": "State Management with Redux Toolkit / Zustand",
+  "description": "Explore modern state management in React using Redux Toolkit and Zustand for scalable and efficient app state handling.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod12-lsn01",
+      "title": "Why State Management?",
+      "type": "theory",
+      "content": "State management helps manage shared data and UI state across components, improving app organization and predictability."
+    },
+    {
+      "lessonId": "mod12-lsn02",
+      "title": "Introduction to Redux Toolkit",
+      "type": "theory",
+      "content": "Redux Toolkit is the official, opinionated Redux toolset that simplifies store setup, reducers, and actions with less boilerplate."
+    },
+    {
+      "lessonId": "mod12-lsn03",
+      "title": "Setting Up Redux Toolkit",
+      "type": "code",
+      "content": "```jsx\n// store.js\nimport { configureStore } from '@reduxjs/toolkit';\nimport counterReducer from './counterSlice';\n\nexport const store = configureStore({\n  reducer: {\n    counter: counterReducer,\n  },\n});\n```"
+    },
+    {
+      "lessonId": "mod12-lsn04",
+      "title": "Creating a Slice with Redux Toolkit",
+      "type": "code",
+      "content": "```jsx\nimport { createSlice } from '@reduxjs/toolkit';\n\nconst counterSlice = createSlice({\n  name: 'counter',\n  initialState: { value: 0 },\n  reducers: {\n    increment: (state) => { state.value += 1; },\n    decrement: (state) => { state.value -= 1; },\n  },\n});\n\nexport const { increment, decrement } = counterSlice.actions;\nexport default counterSlice.reducer;\n```"
+    },
+    {
+      "lessonId": "mod12-lsn05",
+      "title": "Using Redux State in Components",
+      "type": "code",
+      "content": "```jsx\nimport React from 'react';\nimport { useSelector, useDispatch } from 'react-redux';\nimport { increment, decrement } from './counterSlice';\n\nfunction Counter() {\n  const count = useSelector((state) => state.counter.value);\n  const dispatch = useDispatch();\n\n  return (\n    <div>\n      <button onClick={() => dispatch(decrement())}>-</button>\n      <span>{count}</span>\n      <button onClick={() => dispatch(increment())}>+</button>\n    </div>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod12-lsn06",
+      "title": "Introduction to Zustand",
+      "type": "theory",
+      "content": "Zustand is a lightweight and simple state management library that uses hooks and provides minimal boilerplate."
+    },
+    {
+      "lessonId": "mod12-lsn07",
+      "title": "Setting Up Zustand Store",
+      "type": "code",
+      "content": "```jsx\nimport create from 'zustand';\n\nconst useStore = create((set) => ({\n  count: 0,\n  increment: () => set((state) => ({ count: state.count + 1 })),\n  decrement: () => set((state) => ({ count: state.count - 1 })),\n}));\n\nexport default useStore;\n```"
+    },
+    {
+      "lessonId": "mod12-lsn08",
+      "title": "Using Zustand State in Components",
+      "type": "code",
+      "content": "```jsx\nimport React from 'react';\nimport useStore from './store';\n\nfunction Counter() {\n  const { count, increment, decrement } = useStore();\n\n  return (\n    <div>\n      <button onClick={decrement}>-</button>\n      <span>{count}</span>\n      <button onClick={increment}>+</button>\n    </div>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod12-lsn09",
+      "title": "Comparing Redux Toolkit and Zustand",
+      "type": "theory",
+      "content": "- Redux Toolkit: Powerful, great for large apps, has devtools and middleware support\n- Zustand: Lightweight, minimal setup, great for simple to medium apps\nChoose based on your app complexity."
+    },
+    {
+      "lessonId": "mod12-lsn10",
+      "title": "Best Practices for State Management",
+      "type": "theory",
+      "content": "- Keep state minimal and focused\n- Use appropriate tools for app size\n- Keep UI and state logic separated\n- Use middleware or async tools like RTK Query or React Query for async state"
+    }
+  ]
+}

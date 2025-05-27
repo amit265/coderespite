@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod01",
+  "courseId": "react",
+  "moduleId": "mod01",
+  "title": "Introduction to React and Environment Setup",
+  "description": "Overview of React library, its purpose, advantages, and setting up the development environment.",
+  "flashcards": [
+    {
+      "question": "What is React?",
+      "answer": "React is a JavaScript library for building user interfaces, mainly for single-page applications."
+    },
+    {
+      "question": "Who developed React and when?",
+      "answer": "React was developed by Facebook and released in 2013."
+    },
+    {
+      "question": "What is the main concept behind React?",
+      "answer": "Building reusable UI components that efficiently update and render based on state changes."
+    },
+    {
+      "question": "Why use React over plain JavaScript?",
+      "answer": "React simplifies building complex UIs with declarative syntax, component reuse, and virtual DOM for performance."
+    },
+    {
+      "question": "What is JSX?",
+      "answer": "JSX is a syntax extension that looks like HTML and is used in React to describe UI structure."
+    },
+    {
+      "question": "Which tools are commonly used to set up a React development environment?",
+      "answer": "Node.js, npm (or yarn), and create-react-app CLI tool."
+    },
+    {
+      "question": "What is the purpose of create-react-app?",
+      "answer": "It is a command-line tool to quickly bootstrap a React project with default configurations."
+    },
+    {
+      "question": "What role does Node.js play in React development?",
+      "answer": "Node.js provides the runtime to manage development tools like npm and bundlers such as webpack."
+    },
+    {
+      "question": "What is the virtual DOM in React?",
+      "answer": "A lightweight copy of the real DOM that React uses to optimize UI updates."
+    },
+    {
+      "question": "How do you start a React development server after creating a project?",
+      "answer": "Run 'npm start' or 'yarn start' in the project directory."
+    }
+  ]
+}

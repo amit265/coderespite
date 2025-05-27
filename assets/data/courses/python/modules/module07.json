@@ -1,0 +1,69 @@
+{
+  "courseId": "python",
+  "moduleId": "mod07",
+  "title": "File Handling and Exceptions",
+  "description": "Learn how to work with files in Python—reading, writing, and managing them—and handle exceptions to build robust and error-resilient programs.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod07-lsn01",
+      "title": "Introduction to File Handling",
+      "type": "theory",
+      "content": "File handling in Python allows you to create, read, write, and delete files. This is useful for data storage, configuration, and logging."
+    },
+    {
+      "lessonId": "mod07-lsn02",
+      "title": "Opening and Reading a File",
+      "type": "code",
+      "content": "```python\nfile = open(\"sample.txt\", \"r\")\ncontent = file.read()\nprint(content)\nfile.close()\n```"
+    },
+    {
+      "lessonId": "mod07-lsn03",
+      "title": "Writing to a File",
+      "type": "code",
+      "content": "```python\nfile = open(\"sample.txt\", \"w\")\nfile.write(\"Hello, World!\")\nfile.close()\n```"
+    },
+    {
+      "lessonId": "mod07-lsn04",
+      "title": "Appending Data to a File",
+      "type": "code",
+      "content": "```python\nfile = open(\"sample.txt\", \"a\")\nfile.write(\"\\nAppended line\")\nfile.close()\n```"
+    },
+    {
+      "lessonId": "mod07-lsn05",
+      "title": "Using 'with' Statement for File Handling",
+      "type": "code",
+      "content": "```python\nwith open(\"sample.txt\", \"r\") as file:\n    print(file.read())\n```"
+    },
+    {
+      "lessonId": "mod07-lsn06",
+      "title": "Working with File Paths",
+      "type": "code",
+      "content": "```python\nimport os\nprint(os.path.exists(\"sample.txt\"))\nprint(os.path.abspath(\"sample.txt\"))\n```"
+    },
+    {
+      "lessonId": "mod07-lsn07",
+      "title": "Handling Exceptions with try-except",
+      "type": "code",
+      "content": "```python\ntry:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")\n```"
+    },
+    {
+      "lessonId": "mod07-lsn08",
+      "title": "Catching Multiple Exceptions",
+      "type": "code",
+      "content": "```python\ntry:\n    x = int(\"abc\")\nexcept (ValueError, TypeError):\n    print(\"Invalid conversion\")\n```"
+    },
+    {
+      "lessonId": "mod07-lsn09",
+      "title": "Using finally Block",
+      "type": "code",
+      "content": "```python\ntry:\n    file = open(\"sample.txt\")\nfinally:\n    file.close()\n```"
+    },
+    {
+      "lessonId": "mod07-lsn10",
+      "title": "Raising Custom Exceptions",
+      "type": "code",
+      "content": "```python\ndef check_age(age):\n    if age < 18:\n        raise ValueError(\"Age must be at least 18\")\n\ncheck_age(15)\n```"
+    }
+  ]
+}

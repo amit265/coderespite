@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod13",
+  "courseId": "nodejs",
+  "moduleId": "mod13",
+  "title": "Testing Node.js Applications",
+  "description": "Learn the importance of testing, different types of testing, and how to write and run tests in Node.js applications.",
+  "flashcards": [
+    {
+      "question": "Why is testing important in Node.js applications?",
+      "answer": "Testing ensures code quality, helps find bugs early, improves reliability, and makes maintenance easier."
+    },
+    {
+      "question": "What are the common types of testing?",
+      "answer": "Unit testing, integration testing, functional testing, and end-to-end testing."
+    },
+    {
+      "question": "What is unit testing?",
+      "answer": "Testing individual units or functions of code in isolation to ensure they work correctly."
+    },
+    {
+      "question": "Name some popular testing frameworks for Node.js.",
+      "answer": "Mocha, Jest, Jasmine, and AVA."
+    },
+    {
+      "question": "What is the role of assertion libraries in testing?",
+      "answer": "Assertion libraries provide functions to check if the code behaves as expected, e.g., `assert.equal()`."
+    },
+    {
+      "question": "How do you write a simple test case using Mocha and Chai?",
+      "answer": "You define a 'describe' block for the test suite and 'it' blocks for test cases, using assertions inside them."
+    },
+    {
+      "question": "What is test coverage?",
+      "answer": "A metric that indicates the percentage of code executed by tests, helping identify untested parts."
+    },
+    {
+      "question": "Why should tests be automated?",
+      "answer": "Automated tests can be run frequently and consistently, saving time and catching regressions quickly."
+    },
+    {
+      "question": "What is mocking in testing?",
+      "answer": "Replacing real functions or modules with fake ones to isolate parts of the code during testing."
+    },
+    {
+      "question": "How can you run tests in Node.js?",
+      "answer": "By using the command line to run test scripts, e.g., `npm test` configured with a testing framework."
+    }
+  ]
+}

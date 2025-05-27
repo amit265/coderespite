@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod09",
+  "title": "Lists and ScrollViews",
+  "description": "Understand how to display scrollable lists and manage large data sets efficiently using ScrollView and FlatList components in React Native.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod09-lsn01",
+      "title": "What is ScrollView?",
+      "type": "theory",
+      "content": "ScrollView is a React Native component that provides a scrolling container for views and components. It renders all its children at once, which is suitable for smaller lists or static content."
+    },
+    {
+      "lessonId": "mod09-lsn02",
+      "title": "Basic Usage of ScrollView",
+      "type": "code",
+      "content": "```jsx\nimport React from 'react';\nimport { ScrollView, Text, StyleSheet } from 'react-native';\n\nexport default function App() {\n  return (\n    <ScrollView style={styles.container}>\n      {Array.from({ length: 20 }, (_, i) => (\n        <Text key={i} style={styles.item}>Item {i + 1}</Text>\n      ))}\n    </ScrollView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: { flex: 1, padding: 20 },\n  item: { fontSize: 20, marginVertical: 10 }\n});\n```"
+    },
+    {
+      "lessonId": "mod09-lsn03",
+      "title": "Limitations of ScrollView",
+      "type": "theory",
+      "content": "ScrollView renders all child components immediately, which can cause performance issues with large lists due to high memory usage and slow rendering."
+    },
+    {
+      "lessonId": "mod09-lsn04",
+      "title": "Introduction to FlatList",
+      "type": "theory",
+      "content": "FlatList is designed for rendering large lists efficiently by rendering only visible items and recycling views as the user scrolls, improving performance."
+    },
+    {
+      "lessonId": "mod09-lsn05",
+      "title": "Basic FlatList Usage",
+      "type": "code",
+      "content": "```jsx\nimport React from 'react';\nimport { FlatList, Text, View, StyleSheet } from 'react-native';\n\nconst data = Array.from({ length: 50 }, (_, i) => ({ id: String(i), title: `Item ${i + 1}` }));\n\nexport default function App() {\n  return (\n    <FlatList\n      data={data}\n      keyExtractor={item => item.id}\n      renderItem={({ item }) => <Text style={styles.item}>{item.title}</Text>}\n    />\n  );\n}\n\nconst styles = StyleSheet.create({\n  item: { padding: 20, fontSize: 18, borderBottomWidth: 1, borderColor: '#ccc' }\n});\n```"
+    },
+    {
+      "lessonId": "mod09-lsn06",
+      "title": "Important FlatList Props Explained",
+      "type": "theory",
+      "content": "Key FlatList props:\n- `data`: The array of items to render.\n- `renderItem`: Function to render each item.\n- `keyExtractor`: Unique key for each item.\n- `horizontal`: Makes list horizontal.\n- `ListHeaderComponent` and `ListFooterComponent`: Add header/footer.\n- `onEndReached`: Callback when the end is reached (for infinite scrolling)."
+    },
+    {
+      "lessonId": "mod09-lsn07",
+      "title": "Adding Pull-to-Refresh in FlatList",
+      "type": "code",
+      "content": "```jsx\nimport React, { useState } from 'react';\nimport { FlatList, Text, RefreshControl } from 'react-native';\n\nconst initialData = [{ id: '1', title: 'Item 1' }, { id: '2', title: 'Item 2' }];\n\nexport default function App() {\n  const [data, setData] = useState(initialData);\n  const [refreshing, setRefreshing] = useState(false);\n\n  const onRefresh = () => {\n    setRefreshing(true);\n    setTimeout(() => {\n      setData([...data, { id: String(data.length + 1), title: `New Item ${data.length + 1}` }]);\n      setRefreshing(false);\n    }, 1500);\n  };\n\n  return (\n    <FlatList\n      data={data}\n      keyExtractor={item => item.id}\n      renderItem={({ item }) => <Text>{item.title}</Text>}\n      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}\n    />\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn08",
+      "title": "Handling Empty Lists",
+      "type": "code",
+      "content": "```jsx\n<FlatList\n  data={[]}\n  renderItem={({ item }) => <Text>{item.title}</Text>}\n  ListEmptyComponent={() => <Text>No data available</Text>}\n/> \n```"
+    },
+    {
+      "lessonId": "mod09-lsn09",
+      "title": "Optimizing Performance with getItemLayout",
+      "type": "theory",
+      "content": "Using `getItemLayout` prop improves scroll performance by providing the height of each item, so the list can calculate scroll positions without rendering all items."
+    },
+    {
+      "lessonId": "mod09-lsn10",
+      "title": "Summary and Best Practices",
+      "type": "theory",
+      "content": "- Use ScrollView for small static content\n- Use FlatList for large or dynamic lists\n- Always provide `keyExtractor` for list items\n- Use pull-to-refresh for better UX\n- Optimize performance with `getItemLayout` and pagination"
+    }
+  ]
+}

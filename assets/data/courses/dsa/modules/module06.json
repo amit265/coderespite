@@ -1,0 +1,57 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod06",
+  "title": "Linked Lists: Singly and Doubly Connected Structures",
+  "description": "This module introduces learners to Linked Lists—linear data structures where elements (nodes) are stored in non-contiguous memory and linked via pointers. We'll begin with the fundamentals of singly linked lists, including node creation, insertion, deletion, and traversal. Then, we explore the more versatile doubly linked lists, which allow bi-directional navigation. Through visual aids, code examples, and hands-on problems, students will build a strong intuition for dynamic memory structures and use cases like implementing stacks, queues, and even undo-redo functionality.",
+  "level": "Beginner to Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod06-lsn01",
+      "title": "Introduction to Linked Lists",
+      "type": "theory",
+      "content": "A **Linked List** is a linear data structure where each element (called a node) contains two parts:\n- `data`: The value\n- `next`: A pointer/reference to the next node\n\nUnlike arrays, linked lists do not use contiguous memory. This allows efficient insertion and deletion, especially in the middle or beginning of the list.\n\nTypes:\n- **Singly Linked List**: Each node links to the next\n- **Doubly Linked List**: Each node links to both next and previous nodes\n- **Circular Linked List**: Last node links back to the first\n\nLinked lists are used in:\n- Dynamic memory allocation\n- Implementing stacks/queues\n- Navigating browser history\n- Undo-redo in editors"
+    },
+    {
+      "lessonId": "mod06-lsn02",
+      "title": "Creating a Singly Linked List in JavaScript",
+      "type": "code",
+      "content": "Here's a basic implementation of a singly linked list:\n\n```js\nclass Node {\n  constructor(data) {\n    this.data = data;\n    this.next = null;\n  }\n}\n\nclass LinkedList {\n  constructor() {\n    this.head = null;\n  }\n\n  append(data) {\n    const newNode = new Node(data);\n    if (!this.head) {\n      this.head = newNode;\n      return;\n    }\n    let current = this.head;\n    while (current.next) {\n      current = current.next;\n    }\n    current.next = newNode;\n  }\n\n  print() {\n    let current = this.head;\n    let result = \"\";\n    while (current) {\n      result += current.data + \" -> \";\n      current = current.next;\n    }\n    console.log(result + \"null\");\n  }\n}\n\nconst list = new LinkedList();\nlist.append(10);\nlist.append(20);\nlist.append(30);\nlist.print(); // 10 -> 20 -> 30 -> null\n```"
+    },
+    {
+      "lessonId": "mod06-lsn03",
+      "title": "Insertion and Deletion in Singly Linked Lists",
+      "type": "code",
+      "content": "Let's implement insertion at the beginning and deletion by value:\n\n```js\nclass LinkedList {\n  constructor() {\n    this.head = null;\n  }\n\n  insertAtBeginning(data) {\n    const newNode = new Node(data);\n    newNode.next = this.head;\n    this.head = newNode;\n  }\n\n  deleteByValue(data) {\n    if (!this.head) return;\n    if (this.head.data === data) {\n      this.head = this.head.next;\n      return;\n    }\n    let current = this.head;\n    while (current.next && current.next.data !== data) {\n      current = current.next;\n    }\n    if (current.next) {\n      current.next = current.next.next;\n    }\n  }\n}\n\nconst list = new LinkedList();\nlist.insertAtBeginning(30);\nlist.insertAtBeginning(20);\nlist.insertAtBeginning(10);\nlist.deleteByValue(20);\nlist.print(); // 10 -> 30 -> null\n```"
+    },
+    {
+      "lessonId": "mod06-lsn04",
+      "title": "Traversing and Searching a Linked List",
+      "type": "code",
+      "content": "Traversal means visiting every node. Searching looks for a particular value.\n\n```js\nsearch(value) {\n  let current = this.head;\n  while (current) {\n    if (current.data === value) return true;\n    current = current.next;\n  }\n  return false;\n}\n\n// Usage:\nconsole.log(list.search(30)); // true\nconsole.log(list.search(40)); // false\n```"
+    },
+    {
+      "lessonId": "mod06-lsn05",
+      "title": "Reversing a Singly Linked List",
+      "type": "code",
+      "content": "This is a classic interview question:\n\n```js\nreverse() {\n  let prev = null;\n  let current = this.head;\n  while (current) {\n    let nextNode = current.next;\n    current.next = prev;\n    prev = current;\n    current = nextNode;\n  }\n  this.head = prev;\n}\n\nlist.reverse();\nlist.print(); // prints the reversed list\n```"
+    },
+    {
+      "lessonId": "mod06-lsn06",
+      "title": "Introduction to Doubly Linked Lists",
+      "type": "theory",
+      "content": "**Doubly Linked Lists** allow navigation both forwards and backwards by adding a `prev` pointer to each node. This is useful in scenarios like:\n- Browser back/forward navigation\n- Music players (next/previous song)\n- Undo-redo operations\n\nEach node contains:\n- `data`: the value\n- `next`: pointer to the next node\n- `prev`: pointer to the previous node\n\nDoubly linked lists consume more memory but are more versatile in editing operations."
+    },
+    {
+      "lessonId": "mod06-lsn07",
+      "title": "Implementing a Doubly Linked List",
+      "type": "code",
+      "content": "```js\nclass DoublyNode {\n  constructor(data) {\n    this.data = data;\n    this.prev = null;\n    this.next = null;\n  }\n}\n\nclass DoublyLinkedList {\n  constructor() {\n    this.head = null;\n    this.tail = null;\n  }\n\n  append(data) {\n    const newNode = new DoublyNode(data);\n    if (!this.head) {\n      this.head = this.tail = newNode;\n    } else {\n      this.tail.next = newNode;\n      newNode.prev = this.tail;\n      this.tail = newNode;\n    }\n  }\n\n  printForward() {\n    let current = this.head;\n    let output = \"\";\n    while (current) {\n      output += current.data + \" <-> \";\n      current = current.next;\n    }\n    console.log(output + \"null\");\n  }\n\n  printBackward() {\n    let current = this.tail;\n    let output = \"\";\n    while (current) {\n      output += current.data + \" <-> \";\n      current = current.prev;\n    }\n    console.log(output + \"null\");\n  }\n}\n\nconst dlist = new DoublyLinkedList();\ndlist.append(1);\ndlist.append(2);\ndlist.append(3);\ndlist.printForward();  // 1 <-> 2 <-> 3 <-> null\ndlist.printBackward(); // 3 <-> 2 <-> 1 <-> null\n```"
+    },
+    {
+      "lessonId": "mod06-lsn08",
+      "title": "Linked List vs Array: When and Why",
+      "type": "theory",
+      "content": "**Linked Lists** vs **Arrays**:\n\n| Feature            | Array                  | Linked List             |\n|--------------------|------------------------|--------------------------|\n| Memory Allocation | Contiguous             | Non-contiguous          |\n| Access Time       | O(1) via index         | O(n) via traversal       |\n| Insertion         | O(n) (worst case)      | O(1) at head             |\n| Deletion          | O(n) (worst case)      | O(1) with pointer access |\n| Memory Overhead   | Low                    | High (extra pointers)    |\n\nUse **linked lists** when:\n- Frequent insertions/deletions in the middle\n- Unknown size upfront\n- You need dynamic memory\n\nUse **arrays** when:\n- Fast random access is required\n- Memory efficiency is important"
+    }
+  ]
+}

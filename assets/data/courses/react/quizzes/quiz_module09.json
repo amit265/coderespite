@@ -1,0 +1,106 @@
+{
+  "quizId": "qz09",
+  "courseId": "react",
+  "moduleId": "mod09",
+  "title": "Conditional Rendering and List Rendering",
+  "tags": ["react", "conditional-rendering", "list-rendering", "jsx"],
+  "difficulty": "easy",
+  "description": "Assess your knowledge of how to render content conditionally and iterate over lists in React components.",
+  "quiz": [
+    {
+      "question": "Which operator is commonly used for conditional rendering in React?",
+      "options": ["&&", "||", "??", "==="],
+      "correctAnswer": "&&",
+      "explanation": "The `&&` operator is commonly used to conditionally render elements based on a boolean expression."
+    },
+    {
+      "question": "What will `true && <h1>Hello</h1>` render?",
+      "options": [
+        "Nothing",
+        "An error",
+        "<h1>Hello</h1>",
+        "false"
+      ],
+      "correctAnswer": "<h1>Hello</h1>",
+      "explanation": "When the condition is true, the right-hand side (JSX element) is rendered."
+    },
+    {
+      "question": "How can you render different JSX based on a condition in React?",
+      "options": [
+        "Using if-else statements inside return",
+        "Using switch statements only",
+        "Using ternary operators or if conditions outside return",
+        "You cannot use conditions in JSX"
+      ],
+      "correctAnswer": "Using ternary operators or if conditions outside return",
+      "explanation": "You can conditionally render different JSX elements using ternary operators or pre-process logic with if-else."
+    },
+    {
+      "question": "Which method is used to render lists in React?",
+      "options": ["map()", "filter()", "reduce()", "forEach()"],
+      "correctAnswer": "map()",
+      "explanation": "The `map()` method is commonly used to iterate over arrays and return JSX elements."
+    },
+    {
+      "question": "What is required when rendering a list of elements in React?",
+      "options": ["className", "unique key", "style attribute", "index value only"],
+      "correctAnswer": "unique key",
+      "explanation": "Each item in a rendered list should have a unique `key` prop to help React identify which items have changed."
+    },
+    {
+      "question": "What is the result of using `list.map(item => <div>{item}</div>)`?",
+      "options": [
+        "A syntax error",
+        "A list of divs containing each item",
+        "A single div with all items",
+        "Nothing gets rendered"
+      ],
+      "correctAnswer": "A list of divs containing each item",
+      "explanation": "`map()` creates a new array of JSX elements from the original array."
+    },
+    {
+      "question": "Where should the `key` prop be placed when rendering a list?",
+      "options": [
+        "On the parent container",
+        "On the `<React.Fragment>`",
+        "On the outermost returned JSX element of each iteration",
+        "It is optional"
+      ],
+      "correctAnswer": "On the outermost returned JSX element of each iteration",
+      "explanation": "React requires the `key` to be placed on the outermost element returned by the `.map()` callback."
+    },
+    {
+      "question": "Which of the following is NOT a good choice for a React `key`?",
+      "options": [
+        "A unique ID from your data",
+        "An index of the array",
+        "A UUID",
+        "A database record ID"
+      ],
+      "correctAnswer": "An index of the array",
+      "explanation": "Using an index can lead to issues in list reordering or performance. Prefer stable and unique identifiers."
+    },
+    {
+      "question": "What is the benefit of using conditional rendering in React?",
+      "options": [
+        "Reduces bundle size",
+        "Improves code readability and shows content dynamically",
+        "Avoids state management",
+        "Eliminates the need for components"
+      ],
+      "correctAnswer": "Improves code readability and shows content dynamically",
+      "explanation": "Conditional rendering helps display different content based on the app's current state."
+    },
+    {
+      "question": "Which of the following syntaxes correctly uses a ternary for conditional rendering?",
+      "options": [
+        "{isLoggedIn ? <Dashboard /> : <Login />}",
+        "{if (isLoggedIn) <Dashboard /> else <Login />}",
+        "{isLoggedIn then <Dashboard /> else <Login />}",
+        "{isLoggedIn and <Dashboard /> or <Login />}"
+      ],
+      "correctAnswer": "{isLoggedIn ? <Dashboard /> : <Login />}",
+      "explanation": "This is the correct syntax for using a ternary operator in JSX."
+    }
+  ]
+}

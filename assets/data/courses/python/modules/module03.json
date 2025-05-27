@@ -1,0 +1,69 @@
+{
+  "courseId": "python",
+  "moduleId": "mod03",
+  "title": "Variables, Data Types, and Operators",
+  "description": "Learn how to store data in variables, understand different data types, and perform operations using Python's built-in operators.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod03-lsn01",
+      "title": "What are Variables?",
+      "type": "theory",
+      "content": "Variables are containers for storing data values. In Python, you don’t need to declare the type of variable explicitly:\n```python\nname = \"Alice\"\nage = 25\n```"
+    },
+    {
+      "lessonId": "mod03-lsn02",
+      "title": "Variable Naming Rules",
+      "type": "theory",
+      "content": "- Can contain letters, digits, and underscores\n- Cannot start with a digit\n- Case-sensitive (`Name` and `name` are different)\n- Avoid using reserved keywords like `if`, `class`, etc."
+    },
+    {
+      "lessonId": "mod03-lsn03",
+      "title": "Primitive Data Types",
+      "type": "theory",
+      "content": "- **int**: Whole numbers (e.g., `10`)\n- **float**: Decimal numbers (e.g., `3.14`)\n- **str**: Text (e.g., `'hello'`)\n- **bool**: Boolean values (`True` or `False`)"
+    },
+    {
+      "lessonId": "mod03-lsn04",
+      "title": "Type Conversion and Casting",
+      "type": "code",
+      "content": "Convert between types:\n```python\nx = int(\"5\")\npi = float(\"3.14\")\ntext = str(100)\n```"
+    },
+    {
+      "lessonId": "mod03-lsn05",
+      "title": "Operators in Python",
+      "type": "theory",
+      "content": "- **Arithmetic**: `+`, `-`, `*`, `/`, `%`, `**`, `//`\n- **Assignment**: `=`, `+=`, `-=`, `*=`, `/=`, etc.\n- **Comparison**: `==`, `!=`, `<`, `>`, `<=`, `>=`\n- **Logical**: `and`, `or`, `not`"
+    },
+    {
+      "lessonId": "mod03-lsn06",
+      "title": "Working with Strings",
+      "type": "code",
+      "content": "```python\nfirst = \"Hello\"\nsecond = \"World\"\nfull = first + \" \" + second\nprint(full)\n```"
+    },
+    {
+      "lessonId": "mod03-lsn07",
+      "title": "The `type()` and `id()` Functions",
+      "type": "code",
+      "content": "Use `type()` to check data type:\n```python\nx = 10\nprint(type(x))  # <class 'int'>\n```\nUse `id()` to get the memory address."
+    },
+    {
+      "lessonId": "mod03-lsn08",
+      "title": "Input from User",
+      "type": "code",
+      "content": "```python\nname = input(\"Enter your name: \")\nprint(\"Hello,\", name)\n```"
+    },
+    {
+      "lessonId": "mod03-lsn09",
+      "title": "String Formatting",
+      "type": "code",
+      "content": "Use f-strings or `.format()`:\n```python\nname = \"Alice\"\nage = 25\nprint(f\"{name} is {age} years old.\")\n```"
+    },
+    {
+      "lessonId": "mod03-lsn10",
+      "title": "Practice: Mini Calculator",
+      "type": "code",
+      "content": "```python\na = int(input(\"Enter first number: \"))\nb = int(input(\"Enter second number: \"))\nprint(\"Sum:\", a + b)\nprint(\"Product:\", a * b)\n```"
+    }
+  ]
+}

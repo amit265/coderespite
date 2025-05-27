@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod14",
+  "title": "Animations in React Native",
+  "description": "Learn how to create smooth and interactive animations in React Native to enhance user experience.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod14-lsn01",
+      "title": "Why Use Animations?",
+      "type": "theory",
+      "content": "Animations improve user engagement, provide visual feedback, and make the app feel lively and responsive. They guide users through interactions smoothly."
+    },
+    {
+      "lessonId": "mod14-lsn02",
+      "title": "Introduction to the Animated API",
+      "type": "theory",
+      "content": "React Native's Animated API is a powerful way to create performant animations. It provides a set of components and methods to animate values and styles."
+    },
+    {
+      "lessonId": "mod14-lsn03",
+      "title": "Animated.Value and Interpolation",
+      "type": "code",
+      "content": "/* Animated.Value stores the current value of animation */\nimport React, { useRef, useEffect } from 'react';\nimport { Animated, View, Button } from 'react-native';\n\nexport default function FadeInExample() {\n  const fadeAnim = useRef(new Animated.Value(0)).current;\n\n  useEffect(() => {\n    Animated.timing(fadeAnim, {\n      toValue: 1,\n      duration: 2000,\n      useNativeDriver: true,\n    }).start();\n  }, [fadeAnim]);\n\n  return (\n    <Animated.View style={{ opacity: fadeAnim, width: 100, height: 100, backgroundColor: 'blue' }} />\n  );\n}"
+    },
+    {
+      "lessonId": "mod14-lsn04",
+      "title": "Basic Animation Types: Timing, Spring, Decay",
+      "type": "theory",
+      "content": "Timing animations animate a value over time linearly or easing. Spring animations simulate spring physics for bounce effects. Decay animations slow down over time like a flick."
+    },
+    {
+      "lessonId": "mod14-lsn05",
+      "title": "Animating Styles and Transforms",
+      "type": "code",
+      "content": "Animated supports animating properties like opacity, position, scale, rotation.\n\nExample: Move and scale a box\n\n```js\nconst moveAnim = useRef(new Animated.Value(0)).current;\n\nAnimated.timing(moveAnim, {\n  toValue: 100,\n  duration: 1000,\n  useNativeDriver: true\n}).start();\n\nreturn (\n  <Animated.View\n    style={{\n      transform: [\n        { translateX: moveAnim },\n        { scale: moveAnim.interpolate({\n            inputRange: [0, 100],\n            outputRange: [1, 2]\n          })\n        }\n      ]\n    }}\n  />\n)\n```"
+    },
+    {
+      "lessonId": "mod14-lsn06",
+      "title": "Animated.event for Gesture Handling",
+      "type": "theory",
+      "content": "Animated.event maps gestures to animated values, allowing smooth, native-driven animations tied to user interactions like dragging or swiping."
+    },
+    {
+      "lessonId": "mod14-lsn07",
+      "title": "LayoutAnimation for Layout Changes",
+      "type": "theory",
+      "content": "LayoutAnimation lets you animate global layout changes (like adding/removing views) without manually animating each component."
+    },
+    {
+      "lessonId": "mod14-lsn08",
+      "title": "Using React Native Reanimated Library",
+      "type": "theory",
+      "content": "Reanimated is a powerful library that improves animation performance and allows complex gesture animations with a declarative API."
+    },
+    {
+      "lessonId": "mod14-lsn09",
+      "title": "Animation Best Practices",
+      "type": "theory",
+      "content": "- Use `useNativeDriver` for better performance\n- Keep animations subtle and meaningful\n- Avoid animating too many properties at once\n- Test on real devices for smoothness"
+    },
+    {
+      "lessonId": "mod14-lsn10",
+      "title": "Simple Fade In and Slide Up Animation Example",
+      "type": "code",
+      "content": "import React, { useRef, useEffect } from 'react';\nimport { Animated, View, Text } from 'react-native';\n\nexport default function FadeSlideExample() {\n  const fadeAnim = useRef(new Animated.Value(0)).current;\n  const slideAnim = useRef(new Animated.Value(50)).current;\n\n  useEffect(() => {\n    Animated.parallel([\n      Animated.timing(fadeAnim, {\n        toValue: 1,\n        duration: 1000,\n        useNativeDriver: true,\n      }),\n      Animated.timing(slideAnim, {\n        toValue: 0,\n        duration: 1000,\n        useNativeDriver: true,\n      }),\n    ]).start();\n  }, []);\n\n  return (\n    <Animated.View style={{\n      opacity: fadeAnim,\n      transform: [{ translateY: slideAnim }],\n      backgroundColor: 'tomato',\n      padding: 20,\n      borderRadius: 10\n    }}>\n      <Text style={{ color: 'white' }}>Hello Animations!</Text>\n    </Animated.View>\n  );\n}\n"
+    }
+  ]
+}

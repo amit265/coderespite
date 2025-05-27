@@ -1,0 +1,76 @@
+{
+  "quizId": "qz06",
+  "courseId": "python",
+  "moduleId": "mod06",
+  "title": "Data Structures: Lists, Tuples, and Dictionaries",
+  "tags": ["python", "data structures", "lists", "tuples", "dictionaries"],
+  "difficulty": "medium",
+  "description": "Learn the basics of Python's fundamental data structures: lists, tuples, and dictionaries.",
+  "quiz": [
+    {
+      "question": "Which data structure is mutable in Python?",
+      "options": ["List", "Tuple", "String", "Integer"],
+      "correctAnswer": "List",
+      "explanation": "Lists are mutable, meaning their contents can be changed after creation."
+    },
+    {
+      "question": "Which data structure is immutable in Python?",
+      "options": ["List", "Tuple", "Dictionary", "Set"],
+      "correctAnswer": "Tuple",
+      "explanation": "Tuples cannot be changed once created; they are immutable."
+    },
+    {
+      "question": "How do you create an empty dictionary in Python?",
+      "options": ["{}", "[]", "()", "<>"],
+      "correctAnswer": "{}",
+      "explanation": "Empty dictionaries are created using curly braces {}."
+    },
+    {
+      "question": "Which method adds an item to the end of a list?",
+      "options": ["append()", "add()", "insert()", "extend()"],
+      "correctAnswer": "append()",
+      "explanation": "`append()` adds a single element to the end of the list."
+    },
+    {
+      "question": "How do you access the first element of a list named `my_list`?",
+      "options": ["my_list[0]", "my_list[1]", "my_list.first()", "my_list(0)"],
+      "correctAnswer": "my_list[0]",
+      "explanation": "List indices start at 0 in Python."
+    },
+    {
+      "question": "What symbol is used to separate keys and values in a dictionary?",
+      "options": [":", ",", "=", "=>"],
+      "correctAnswer": ":",
+      "explanation": "Dictionary key-value pairs use a colon to separate them."
+    },
+    {
+      "question": "Which of the following is a valid tuple?",
+      "options": ["(1, 2, 3)", "[1, 2, 3]", "{1, 2, 3}", "<1, 2, 3>"],
+      "correctAnswer": "(1, 2, 3)",
+      "explanation": "Tuples are defined with parentheses."
+    },
+    {
+      "question": "How can you remove an item from a dictionary by key?",
+      "options": ["del dict[key]", "remove(dict[key])", "pop(key)", "Both 'del dict[key]' and 'pop(key)'"],
+      "correctAnswer": "Both 'del dict[key]' and 'pop(key)'",
+      "explanation": "Both `del` and `pop()` can remove items from a dictionary."
+    },
+    {
+      "question": "Which method can be used to get all keys from a dictionary?",
+      "options": ["keys()", "values()", "items()", "get_keys()"],
+      "correctAnswer": "keys()",
+      "explanation": "`keys()` returns all keys from a dictionary."
+    },
+    {
+      "question": "What happens if you try to change an element inside a tuple?",
+      "options": [
+        "It changes successfully",
+        "TypeError is raised",
+        "The element is deleted",
+        "The tuple converts to list"
+      ],
+      "correctAnswer": "TypeError is raised",
+      "explanation": "Tuples are immutable, so modifying an element causes a TypeError."
+    }
+  ]
+}

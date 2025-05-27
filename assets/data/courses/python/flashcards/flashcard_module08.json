@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod08",
+  "courseId": "python",
+  "moduleId": "mod08",
+  "title": "Object-Oriented Programming in Python",
+  "description": "Learn the basics of OOP concepts like classes, objects, inheritance, and encapsulation in Python.",
+  "flashcards": [
+    {
+      "question": "What is a class in Python?",
+      "answer": "A blueprint for creating objects, defining properties and behaviors."
+    },
+    {
+      "question": "What is an object?",
+      "answer": "An instance of a class containing data and functions."
+    },
+    {
+      "question": "How do you define a class in Python?",
+      "answer": "Using the `class` keyword followed by the class name."
+    },
+    {
+      "question": "What is a constructor?",
+      "answer": "A special method `__init__` used to initialize new objects."
+    },
+    {
+      "question": "What is inheritance?",
+      "answer": "A mechanism where one class derives properties and methods from another."
+    },
+    {
+      "question": "What is encapsulation?",
+      "answer": "Hiding internal data and restricting access using private/protected variables."
+    },
+    {
+      "question": "What is polymorphism?",
+      "answer": "The ability to use a single interface for different data types or methods."
+    },
+    {
+      "question": "How do you define a method in a class?",
+      "answer": "Functions defined inside a class that operate on its objects."
+    },
+    {
+      "question": "What is `self` in Python classes?",
+      "answer": "A reference to the current instance of the class."
+    },
+    {
+      "question": "How do you create an object of a class?",
+      "answer": "By calling the class name followed by parentheses, e.g., `obj = ClassName()`."
+    }
+  ]
+}

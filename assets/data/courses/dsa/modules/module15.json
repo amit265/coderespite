@@ -1,0 +1,81 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod15",
+  "title": "Real-World Applications and System Design with Data Structures",
+  "description": "Understanding data structures deeply empowers you to design efficient, scalable systems in real-world scenarios. This module explores how common and advanced data structures are applied in system design, software engineering, and large-scale applications. You will learn to choose the right data structures for different problems, analyze trade-offs, and architect components such as caches, databases, messaging queues, and more using data structure principles. This knowledge bridges the gap between algorithmic thinking and practical system implementation.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod15-lsn01",
+      "title": "Why Data Structures Matter in System Design",
+      "type": "theory",
+      "content": "Data structures are fundamental to building efficient systems. Choosing the right data structure affects performance, scalability, and maintainability. This lesson covers how data structure choices impact real-world software systems, from latency-sensitive applications to storage and retrieval systems."
+    },
+    {
+      "lessonId": "mod15-lsn02",
+      "title": "Caching Mechanisms: Using Hash Tables and LRU Cache",
+      "type": "code",
+      "content": "Caching improves system response by storing frequent data. We explore hash maps and implement an LRU (Least Recently Used) cache in JavaScript using a doubly linked list and a map to achieve O(1) get and put operations."
+    },
+    {
+      "lessonId": "mod15-lsn03",
+      "title": "Databases: Indexing Using B-Trees and Hash Indexes",
+      "type": "theory",
+      "content": "Databases use B-Trees for indexing due to their balanced structure and efficient disk reads. Hash indexes are another approach for quick key lookups. This lesson covers how these data structures optimize database queries and transactions."
+    },
+    {
+      "lessonId": "mod15-lsn04",
+      "title": "Message Queues and Task Scheduling with Queues and Heaps",
+      "type": "theory",
+      "content": "Message queues enable asynchronous processing. Queues manage order while heaps prioritize tasks. Learn how data structures power job scheduling, task prioritization, and event-driven systems."
+    },
+    {
+      "lessonId": "mod15-lsn05",
+      "title": "Graph Data Structures in Social Networks and Recommendations",
+      "type": "theory",
+      "content": "Graphs model relationships in social networks, enabling friend suggestions, shortest path computations, and community detection. Explore graph representations and traversal algorithms applied in recommendation systems."
+    },
+    {
+      "lessonId": "mod15-lsn06",
+      "title": "Trie Usage in Autocomplete and Search Engines",
+      "type": "theory",
+      "content": "Tries enable prefix search, autocompletion, and spell checking. Learn how search engines and input suggestion systems leverage trie data structures for fast lookup."
+    },
+    {
+      "lessonId": "mod15-lsn07",
+      "title": "Designing Scalable File Systems and Storage Using Trees",
+      "type": "theory",
+      "content": "File systems use tree-like data structures to organize directories and files hierarchically. Understand how balanced trees and tries are used to efficiently manage storage metadata."
+    },
+    {
+      "lessonId": "mod15-lsn08",
+      "title": "Implementing Undo/Redo Features Using Stacks",
+      "type": "code",
+      "content": "Stacks naturally model undo and redo operations in software. This lesson implements an undo/redo mechanism in JavaScript using two stacks to track user actions."
+    },
+    {
+      "lessonId": "mod15-lsn09",
+      "title": "Memory Management: Using Linked Lists and Bitmaps",
+      "type": "theory",
+      "content": "Memory allocators use linked lists for free memory blocks and bitmaps to track usage. Learn how these data structures support efficient dynamic memory allocation."
+    },
+    {
+      "lessonId": "mod15-lsn10",
+      "title": "Choosing the Right Data Structure: Trade-offs and Best Practices",
+      "type": "theory",
+      "content": "Different applications demand different data structure trade-offs — speed, memory, concurrency, and ease of use. This lesson helps you evaluate and select data structures to optimize your system’s performance."
+    },
+    {
+      "lessonId": "mod15-lsn11",
+      "title": "Case Study: Designing a URL Shortener Service",
+      "type": "code",
+      "content": "This case study uses hash maps for fast URL lookup and queues for background tasks like link expiration. Learn how data structures guide system architecture decisions."
+    },
+    {
+      "lessonId": "mod15-lsn12",
+      "title": "Case Study: Real-Time Chat Application Architecture",
+      "type": "theory",
+      "content": "Explore how queues, graphs, and hash tables underpin real-time messaging systems, handling user connections, message delivery, and presence."
+    }
+  ]
+}

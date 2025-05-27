@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod04",
+  "courseId": "reactnative",
+  "moduleId": "mod04",
+  "title": "State Management and Hooks",
+  "tags": ["state", "hooks", "react native", "useState", "useEffect"],
+  "difficulty": "medium",
+  "description": "Understanding how to manage state and use React hooks effectively.",
+  "quiz": [
+    {
+      "question": "What is state in React?",
+      "options": [
+        "A permanent data storage",
+        "An object that holds dynamic data for a component",
+        "A method to style components",
+        "A type of prop"
+      ],
+      "correctAnswer": "An object that holds dynamic data for a component",
+      "explanation": "State holds data that can change over time and affects component rendering."
+    },
+    {
+      "question": "Which hook is used to add state to a functional component?",
+      "options": [
+        "useState",
+        "useEffect",
+        "useContext",
+        "useReducer"
+      ],
+      "correctAnswer": "useState",
+      "explanation": "useState is the hook for adding state variables in functional components."
+    },
+    {
+      "question": "What does the useEffect hook do?",
+      "options": [
+        "Manages state changes",
+        "Performs side effects in function components",
+        "Handles styling updates",
+        "Renders JSX"
+      ],
+      "correctAnswer": "Performs side effects in function components",
+      "explanation": "useEffect runs side effects like data fetching, subscriptions, or manually changing the DOM."
+    },
+    {
+      "question": "How do you update state using useState?",
+      "options": [
+        "Directly assign new value to state variable",
+        "Call the updater function returned by useState",
+        "Use setState method",
+        "Modify props"
+      ],
+      "correctAnswer": "Call the updater function returned by useState",
+      "explanation": "State updates in functional components are done by calling the updater function."
+    },
+    {
+      "question": "What happens when state changes in a React component?",
+      "options": [
+        "The component re-renders",
+        "The app crashes",
+        "Nothing happens",
+        "The component unmounts"
+      ],
+      "correctAnswer": "The component re-renders",
+      "explanation": "State changes trigger React to re-render the component to reflect updated data."
+    },
+    {
+      "question": "Which hook would you use for complex state logic involving multiple sub-values?",
+      "options": [
+        "useState",
+        "useEffect",
+        "useReducer",
+        "useCallback"
+      ],
+      "correctAnswer": "useReducer",
+      "explanation": "useReducer is ideal for complex state logic and state management resembling Redux."
+    },
+    {
+      "question": "How do you run a side effect only once when the component mounts?",
+      "options": [
+        "useEffect with empty dependency array []",
+        "useState with true parameter",
+        "useEffect without dependencies",
+        "useState with empty dependency"
+      ],
+      "correctAnswer": "useEffect with empty dependency array []",
+      "explanation": "An empty dependency array makes useEffect run only after the initial render."
+    },
+    {
+      "question": "Can hooks be used inside class components?",
+      "options": [
+        "Yes",
+        "No",
+        "Only some hooks",
+        "Only useState"
+      ],
+      "correctAnswer": "No",
+      "explanation": "Hooks work only in functional components, not in class components."
+    },
+    {
+      "question": "What is the rule about calling hooks in React?",
+      "options": [
+        "Call hooks only at the top level and never inside loops or conditions",
+        "Call hooks anywhere",
+        "Call hooks only inside loops",
+        "Call hooks inside conditionals"
+      ],
+      "correctAnswer": "Call hooks only at the top level and never inside loops or conditions",
+      "explanation": "Hooks must be called consistently to maintain state order."
+    },
+    {
+      "question": "Which hook is used to memoize a value to avoid expensive recalculations?",
+      "options": [
+        "useMemo",
+        "useState",
+        "useEffect",
+        "useRef"
+      ],
+      "correctAnswer": "useMemo",
+      "explanation": "useMemo memoizes values between renders to optimize performance."
+    }
+  ]
+}

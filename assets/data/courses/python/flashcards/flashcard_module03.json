@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod03",
+  "courseId": "python",
+  "moduleId": "mod03",
+  "title": "Variables, Data Types, and Operators",
+  "description": "Understand how to use variables, the different data types in Python, and operators for operations.",
+  "flashcards": [
+    {
+      "question": "What is a variable in Python?",
+      "answer": "A variable is a named location used to store data in memory."
+    },
+    {
+      "question": "How do you declare a variable in Python?",
+      "answer": "Simply assign a value to a variable name, e.g., `x = 5`."
+    },
+    {
+      "question": "Name the main built-in data types in Python.",
+      "answer": "int, float, str, bool, list, tuple, dict, set."
+    },
+    {
+      "question": "What data type would the value `3.14` be classified as?",
+      "answer": "float (floating-point number)."
+    },
+    {
+      "question": "What operator is used for addition in Python?",
+      "answer": "`+` operator."
+    },
+    {
+      "question": "What is the difference between `=` and `==` operators?",
+      "answer": "`=` is for assignment; `==` is for equality comparison."
+    },
+    {
+      "question": "What operator is used for exponentiation?",
+      "answer": "`**` operator."
+    },
+    {
+      "question": "Which data type is immutable: list or tuple?",
+      "answer": "Tuple is immutable; list is mutable."
+    },
+    {
+      "question": "What does the `type()` function do?",
+      "answer": "Returns the data type of a variable or value."
+    },
+    {
+      "question": "How do you concatenate two strings in Python?",
+      "answer": "Using the `+` operator, e.g., `'Hello' + ' World'`."
+    }
+  ]
+}

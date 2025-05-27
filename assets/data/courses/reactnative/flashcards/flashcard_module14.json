@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod14",
+  "courseId": "reactnative",
+  "moduleId": "mod14",
+  "title": "Animations in React Native",
+  "description": "Learn how to create smooth and engaging animations in React Native using built-in APIs and libraries.",
+  "flashcards": [
+    {
+      "question": "What are animations used for in React Native?",
+      "answer": "To enhance user experience by adding smooth transitions and interactive effects."
+    },
+    {
+      "question": "Name two core animation APIs in React Native.",
+      "answer": "Animated API and LayoutAnimation."
+    },
+    {
+      "question": "What is the Animated API used for?",
+      "answer": "Creating declarative, performant animations that can be driven by gestures or timing."
+    },
+    {
+      "question": "How does LayoutAnimation simplify animations?",
+      "answer": "It automatically animates layout changes like position and size without manual intervention."
+    },
+    {
+      "question": "What are animated values in React Native?",
+      "answer": "Special objects that track animation state and can be interpolated to animate styles."
+    },
+    {
+      "question": "How do you start an animation using the Animated API?",
+      "answer": "By calling methods like Animated.timing or Animated.spring on an animated value."
+    },
+    {
+      "question": "Can animations be combined in React Native?",
+      "answer": "Yes, using Animated.sequence, Animated.parallel, or Animated.stagger."
+    },
+    {
+      "question": "What role do easing functions play in animations?",
+      "answer": "They control the acceleration curve of animations to make them feel natural."
+    },
+    {
+      "question": "What is Reanimated library?",
+      "answer": "A powerful React Native library that enables complex animations with better performance."
+    },
+    {
+      "question": "Why is performance important in React Native animations?",
+      "answer": "Smooth animations improve user experience and prevent UI lag."
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "quizId": "qz10",
+  "courseId": "react",
+  "moduleId": "mod10",
+  "title": "Context API and Component Reusability",
+  "tags": ["react", "context-api", "component-reusability", "state-management"],
+  "difficulty": "medium",
+  "description": "Test your understanding of sharing state using Context API and writing reusable React components.",
+  "quiz": [
+    {
+      "question": "What problem does the Context API solve in React?",
+      "options": [
+        "It adds CSS styling",
+        "It replaces props completely",
+        "It helps pass data deeply without prop drilling",
+        "It increases component rendering speed"
+      ],
+      "correctAnswer": "It helps pass data deeply without prop drilling",
+      "explanation": "The Context API allows data to be passed through the component tree without manually passing props at every level."
+    },
+    {
+      "question": "Which function is used to create a context in React?",
+      "options": [
+        "React.useContext()",
+        "createReactContext()",
+        "createContext()",
+        "useContextProvider()"
+      ],
+      "correctAnswer": "createContext()",
+      "explanation": "The `createContext()` function is used to create a new context object."
+    },
+    {
+      "question": "Which component provides the context value to its descendants?",
+      "options": [
+        "ContextProvider",
+        "Context.Consumer",
+        "Provider",
+        "useContext"
+      ],
+      "correctAnswer": "Provider",
+      "explanation": "The `Provider` component on the context object supplies the context value to all components below it."
+    },
+    {
+      "question": "How do you consume a context in a functional component?",
+      "options": [
+        "ReactContext.use()",
+        "useContext()",
+        "React.useContextProvider()",
+        "contextHook()"
+      ],
+      "correctAnswer": "useContext()",
+      "explanation": "`useContext()` is the hook used to access context values inside functional components."
+    },
+    {
+      "question": "Which of the following is NOT an advantage of component reusability?",
+      "options": [
+        "Code duplication",
+        "Easier maintenance",
+        "Consistency across UI",
+        "Faster development"
+      ],
+      "correctAnswer": "Code duplication",
+      "explanation": "Component reusability helps reduce code duplication, not increase it."
+    },
+    {
+      "question": "What makes a component reusable?",
+      "options": [
+        "Hardcoded values",
+        "Direct use of global state",
+        "Configurable props",
+        "Tightly coupled dependencies"
+      ],
+      "correctAnswer": "Configurable props",
+      "explanation": "Reusable components receive data and behavior through props so they can be used in different contexts."
+    },
+    {
+      "question": "Which of the following is the correct pattern for creating a reusable button component?",
+      "options": [
+        "function Button() { return <button>Click</button>; }",
+        "function Button({ label }) { return <button>{label}</button>; }",
+        "function Button() { return <input />; }",
+        "function Button(props) { return 'Button'; }"
+      ],
+      "correctAnswer": "function Button({ label }) { return <button>{label}</button>; }",
+      "explanation": "Passing `label` as a prop allows the Button component to be reused with different text."
+    },
+    {
+      "question": "How can you avoid unnecessary re-renders when using Context API?",
+      "options": [
+        "Use global variables",
+        "Split context and memoize values",
+        "Use multiple return statements",
+        "Avoid using hooks"
+      ],
+      "correctAnswer": "Split context and memoize values",
+      "explanation": "To prevent unnecessary re-renders, split large context objects and memoize the provided values."
+    },
+    {
+      "question": "Which hook is used alongside Context API for consuming context in functional components?",
+      "options": [
+        "useState",
+        "useEffect",
+        "useRef",
+        "useContext"
+      ],
+      "correctAnswer": "useContext",
+      "explanation": "`useContext` allows a functional component to access the current context value."
+    },
+    {
+      "question": "Why is it important to design reusable components?",
+      "options": [
+        "It reduces performance",
+        "It increases code size",
+        "It improves scalability and consistency",
+        "It requires more effort than benefits"
+      ],
+      "correctAnswer": "It improves scalability and consistency",
+      "explanation": "Reusable components promote cleaner code, consistency, and better scalability."
+    }
+  ]
+}

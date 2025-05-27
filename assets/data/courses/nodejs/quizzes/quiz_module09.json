@@ -1,0 +1,121 @@
+{
+  "quizId": "qz09",
+  "courseId": "nodejs",
+  "moduleId": "mod09",
+  "title": "Authentication and Authorization",
+  "tags": ["nodejs", "authentication", "authorization", "security", "express"],
+  "difficulty": "medium",
+  "description": "Understand how to implement user authentication and authorization mechanisms in Node.js applications.",
+  "quiz": [
+    {
+      "question": "What is the main difference between authentication and authorization?",
+      "options": [
+        "Authentication verifies identity; authorization grants access",
+        "Authorization verifies identity; authentication grants access",
+        "They are the same",
+        "Authentication encrypts data; authorization decrypts data"
+      ],
+      "correctAnswer": "Authentication verifies identity; authorization grants access",
+      "explanation": "Authentication confirms who the user is, while authorization determines what they can do."
+    },
+    {
+      "question": "Which package is commonly used for handling authentication in Express.js?",
+      "options": [
+        "passport",
+        "express-session",
+        "cors",
+        "multer"
+      ],
+      "correctAnswer": "passport",
+      "explanation": "Passport is a flexible authentication middleware for Node.js."
+    },
+    {
+      "question": "What is a JWT (JSON Web Token) mainly used for?",
+      "options": [
+        "Stateless authentication",
+        "Storing images",
+        "Logging errors",
+        "Handling file uploads"
+      ],
+      "correctAnswer": "Stateless authentication",
+      "explanation": "JWTs are used to securely transmit information for stateless user authentication."
+    },
+    {
+      "question": "Which HTTP header typically contains the JWT token for authorization?",
+      "options": [
+        "Authorization",
+        "Content-Type",
+        "Accept",
+        "User-Agent"
+      ],
+      "correctAnswer": "Authorization",
+      "explanation": "JWT tokens are usually sent in the Authorization header using the Bearer scheme."
+    },
+    {
+      "question": "What is the purpose of sessions in authentication?",
+      "options": [
+        "To maintain user login state across requests",
+        "To store user passwords",
+        "To upload files",
+        "To serve static files"
+      ],
+      "correctAnswer": "To maintain user login state across requests",
+      "explanation": "Sessions help keep track of authenticated users during their interaction with the app."
+    },
+    {
+      "question": "Which of the following is a best practice for storing user passwords?",
+      "options": [
+        "Hash passwords with a salt before storing",
+        "Store passwords as plain text",
+        "Encrypt passwords with reversible encryption",
+        "Send passwords via URL parameters"
+      ],
+      "correctAnswer": "Hash passwords with a salt before storing",
+      "explanation": "Hashing with salt improves security by protecting against password theft."
+    },
+    {
+      "question": "What does middleware like 'express-session' do in authentication?",
+      "options": [
+        "Manages session data on the server side",
+        "Parses JSON bodies",
+        "Handles file uploads",
+        "Serves static files"
+      ],
+      "correctAnswer": "Manages session data on the server side",
+      "explanation": "express-session stores session data to track authenticated users."
+    },
+    {
+      "question": "In OAuth, what role does the 'access token' play?",
+      "options": [
+        "Allows access to user data after authorization",
+        "Encrypts communication",
+        "Stores user passwords",
+        "Validates form inputs"
+      ],
+      "correctAnswer": "Allows access to user data after authorization",
+      "explanation": "Access tokens grant permission to access protected resources."
+    },
+    {
+      "question": "What type of attack is prevented by implementing CSRF protection?",
+      "options": [
+        "Cross-site request forgery",
+        "SQL injection",
+        "Cross-site scripting",
+        "Brute force attacks"
+      ],
+      "correctAnswer": "Cross-site request forgery",
+      "explanation": "CSRF protection prevents unauthorized commands sent from trusted users."
+    },
+    {
+      "question": "What is the function of 'bcrypt' in authentication?",
+      "options": [
+        "Hashing passwords securely",
+        "Generating JWT tokens",
+        "Creating sessions",
+        "Parsing request bodies"
+      ],
+      "correctAnswer": "Hashing passwords securely",
+      "explanation": "bcrypt is used to hash and salt passwords securely before storage."
+    }
+  ]
+}

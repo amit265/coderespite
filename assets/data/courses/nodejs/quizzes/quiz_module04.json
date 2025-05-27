@@ -1,0 +1,121 @@
+{
+  "quizId": "qz04",
+  "courseId": "nodejs",
+  "moduleId": "mod04",
+  "title": "Introduction to Express.js",
+  "tags": ["nodejs", "express", "web framework", "basics"],
+  "difficulty": "easy",
+  "description": "Basics of Express.js, a minimal and flexible Node.js web application framework.",
+  "quiz": [
+    {
+      "question": "What is Express.js?",
+      "options": [
+        "A frontend JavaScript framework",
+        "A Node.js web application framework",
+        "A database management system",
+        "A package manager"
+      ],
+      "correctAnswer": "A Node.js web application framework",
+      "explanation": "Express.js is a minimal and flexible Node.js web framework."
+    },
+    {
+      "question": "Which command is used to install Express.js?",
+      "options": [
+        "npm install express",
+        "npm install expressjs",
+        "npm get express",
+        "npm init express"
+      ],
+      "correctAnswer": "npm install express",
+      "explanation": "Use `npm install express` to add Express to your project."
+    },
+    {
+      "question": "What is the main purpose of Express.js?",
+      "options": [
+        "To build user interfaces",
+        "To handle server-side routing and middleware",
+        "To manage databases",
+        "To compile code"
+      ],
+      "correctAnswer": "To handle server-side routing and middleware",
+      "explanation": "Express handles HTTP requests, routing, and middleware in Node.js apps."
+    },
+    {
+      "question": "How do you create a new Express application?",
+      "options": [
+        "const app = express();",
+        "const app = new Express();",
+        "const app = require('express')();",
+        "Both 1 and 3"
+      ],
+      "correctAnswer": "Both 1 and 3",
+      "explanation": "Both `const app = express();` and `const app = require('express')();` are valid."
+    },
+    {
+      "question": "Which method is used to define a route handler for GET requests?",
+      "options": [
+        "app.post()",
+        "app.get()",
+        "app.route()",
+        "app.listen()"
+      ],
+      "correctAnswer": "app.get()",
+      "explanation": "`app.get()` defines route handlers for GET HTTP requests."
+    },
+    {
+      "question": "What is middleware in Express.js?",
+      "options": [
+        "Functions that execute during request-response cycle",
+        "Database queries",
+        "Frontend scripts",
+        "Static files"
+      ],
+      "correctAnswer": "Functions that execute during request-response cycle",
+      "explanation": "Middleware functions process requests and responses in Express."
+    },
+    {
+      "question": "Which method starts the Express server and listens on a port?",
+      "options": [
+        "app.run()",
+        "app.start()",
+        "app.listen()",
+        "app.execute()"
+      ],
+      "correctAnswer": "app.listen()",
+      "explanation": "`app.listen()` starts the server and listens for connections."
+    },
+    {
+      "question": "How do you send a response 'Hello World!' from an Express route handler?",
+      "options": [
+        "res.send('Hello World!')",
+        "res.write('Hello World!')",
+        "res.end('Hello World!')",
+        "res.reply('Hello World!')"
+      ],
+      "correctAnswer": "res.send('Hello World!')",
+      "explanation": "`res.send()` sends the HTTP response in Express."
+    },
+    {
+      "question": "How do you import Express in your Node.js file?",
+      "options": [
+        "import express from 'express';",
+        "const express = require('express');",
+        "Both 1 and 2 depending on module system",
+        "None of the above"
+      ],
+      "correctAnswer": "Both 1 and 2 depending on module system",
+      "explanation": "You can use either `import` or `require` depending on ES modules or CommonJS."
+    },
+    {
+      "question": "Which of the following is NOT a feature of Express.js?",
+      "options": [
+        "Routing",
+        "Middleware support",
+        "Templating engines support",
+        "Built-in database ORM"
+      ],
+      "correctAnswer": "Built-in database ORM",
+      "explanation": "Express does not include a built-in ORM for databases."
+    }
+  ]
+}

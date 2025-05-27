@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod15",
+  "courseId": "python",
+  "moduleId": "mod15",
+  "title": "Deploying Python Applications",
+  "description": "Understand how to deploy Python applications to make them available for users on servers or cloud platforms.",
+  "flashcards": [
+    {
+      "question": "What does 'deployment' mean in software development?",
+      "answer": "The process of making an application available for use on a server or platform."
+    },
+    {
+      "question": "Name a popular platform for deploying Python web apps.",
+      "answer": "Heroku."
+    },
+    {
+      "question": "What is a WSGI server?",
+      "answer": "Web Server Gateway Interface, a specification to run Python web apps on servers (e.g., Gunicorn)."
+    },
+    {
+      "question": "Why use virtual environments during deployment?",
+      "answer": "To isolate project dependencies and avoid conflicts."
+    },
+    {
+      "question": "What file is commonly used to list dependencies for deployment?",
+      "answer": "requirements.txt."
+    },
+    {
+      "question": "What is Docker and why is it useful for deployment?",
+      "answer": "Docker packages apps in containers for consistent environments across machines."
+    },
+    {
+      "question": "What is continuous deployment (CD)?",
+      "answer": "Automatically deploying code changes to production after passing tests."
+    },
+    {
+      "question": "How can environment variables be used in deployment?",
+      "answer": "To manage sensitive info like API keys without hardcoding them."
+    },
+    {
+      "question": "What is a reverse proxy server?",
+      "answer": "A server that forwards client requests to backend servers (e.g., Nginx)."
+    },
+    {
+      "question": "Name a cloud service provider for deploying Python applications.",
+      "answer": "AWS (Amazon Web Services)."
+    }
+  ]
+}

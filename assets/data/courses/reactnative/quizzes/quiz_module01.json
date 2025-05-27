@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod01",
+  "courseId": "reactnative",
+  "moduleId": "mod01",
+  "title": "Introduction to React Native",
+  "tags": ["react native", "basics", "introduction", "mobile development"],
+  "difficulty": "easy",
+  "description": "Basic understanding of React Native and its core concepts.",
+  "quiz": [
+    {
+      "question": "What is React Native primarily used for?",
+      "options": [
+        "Web development",
+        "Mobile app development",
+        "Database management",
+        "Game development"
+      ],
+      "correctAnswer": "Mobile app development",
+      "explanation": "React Native is a framework used to build native mobile apps using JavaScript and React."
+    },
+    {
+      "question": "Which programming language is primarily used in React Native?",
+      "options": [
+        "Java",
+        "Swift",
+        "JavaScript",
+        "Python"
+      ],
+      "correctAnswer": "JavaScript",
+      "explanation": "React Native apps are developed using JavaScript and React."
+    },
+    {
+      "question": "React Native allows you to build apps for which platforms?",
+      "options": [
+        "Android only",
+        "iOS only",
+        "Both Android and iOS",
+        "Windows"
+      ],
+      "correctAnswer": "Both Android and iOS",
+      "explanation": "React Native supports building apps for both Android and iOS platforms."
+    },
+    {
+      "question": "What is the name of the core UI building blocks in React Native?",
+      "options": [
+        "Widgets",
+        "Components",
+        "Modules",
+        "Elements"
+      ],
+      "correctAnswer": "Components",
+      "explanation": "React Native apps are built using components, which define pieces of the UI."
+    },
+    {
+      "question": "Which company developed React Native?",
+      "options": [
+        "Google",
+        "Microsoft",
+        "Facebook (Meta)",
+        "Apple"
+      ],
+      "correctAnswer": "Facebook (Meta)",
+      "explanation": "React Native was developed and is maintained by Facebook (now Meta)."
+    },
+    {
+      "question": "What kind of apps does React Native create?",
+      "options": [
+        "Web apps",
+        "Native mobile apps",
+        "Hybrid apps",
+        "Desktop apps"
+      ],
+      "correctAnswer": "Native mobile apps",
+      "explanation": "React Native compiles to native code, enabling apps to have native performance."
+    },
+    {
+      "question": "What is JSX in React Native?",
+      "options": [
+        "A JavaScript syntax extension used to describe UI",
+        "A styling language",
+        "A database query language",
+        "A testing framework"
+      ],
+      "correctAnswer": "A JavaScript syntax extension used to describe UI",
+      "explanation": "JSX allows developers to write UI components in a syntax similar to HTML."
+    },
+    {
+      "question": "Which of these is NOT a feature of React Native?",
+      "options": [
+        "Hot Reloading",
+        "Cross-platform support",
+        "Using native UI components",
+        "Server-side rendering"
+      ],
+      "correctAnswer": "Server-side rendering",
+      "explanation": "React Native does not support server-side rendering as it focuses on mobile apps."
+    },
+    {
+      "question": "What does 'Hot Reloading' do in React Native?",
+      "options": [
+        "Reloads the app automatically after code changes without losing state",
+        "Reloads the entire phone",
+        "Reloads only the style sheets",
+        "Reloads the native modules"
+      ],
+      "correctAnswer": "Reloads the app automatically after code changes without losing state",
+      "explanation": "Hot Reloading helps developers see code changes instantly without losing the app state."
+    },
+    {
+      "question": "Which tool do you typically use to start a new React Native project?",
+      "options": [
+        "npm init",
+        "react-native init",
+        "create-react-app",
+        "expo init"
+      ],
+      "correctAnswer": "react-native init",
+      "explanation": "The `react-native init` command initializes a new React Native project (though Expo is also popular)."
+    }
+  ]
+}

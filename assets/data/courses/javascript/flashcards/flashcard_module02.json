@@ -1,0 +1,50 @@
+{
+  "id": "fc-mod02",
+  "moduleId": "mod02",
+  "courseId": "javascript",
+
+  "title": "Variables & Data Types",
+  "description": "Learn about different data types and how to convert between them.",
+  "flashcards": [
+    {
+      "question": "What are the main primitive data types in JavaScript?",
+      "answer": "String, Number, Boolean, Null, Undefined, Symbol, and BigInt."
+    },
+    {
+      "question": "What does `typeof NaN` return?",
+      "answer": "`'number'` – NaN is still considered a number in JavaScript."
+    },
+    {
+      "question": "How do you convert a string to a number?",
+      "answer": "Use `Number('123')`, `parseInt('123')`, or the unary `+` operator."
+    },
+    {
+      "question": "What is the difference between `null` and `undefined`?",
+      "answer": "`null` is an assigned value meaning 'no value', while `undefined` means a variable has been declared but not assigned."
+    },
+    {
+      "question": "What does the `typeof` operator return for an array?",
+      "answer": "`'object'` – arrays are a type of object in JavaScript."
+    },
+    {
+      "question": "What is type coercion in JavaScript?",
+      "answer": "Automatic conversion of one data type to another during operations."
+    },
+    {
+      "question": "How do you convert a number to a string?",
+      "answer": "Use `.toString()`, `String(123)`, or template literals like `` `${123}` ``."
+    },
+    {
+      "question": "Which method checks if a value is not a number?",
+      "answer": "`isNaN(value)` – returns true if the value is NaN."
+    },
+    {
+      "question": "What value does `Boolean('')` return?",
+      "answer": "`false` – an empty string is a falsy value."
+    },
+    {
+      "question": "What is the output of `typeof undefined`?",
+      "answer": "`'undefined'` – it indicates the variable has not been assigned."
+    }
+  ]
+}

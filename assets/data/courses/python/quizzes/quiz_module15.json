@@ -1,0 +1,121 @@
+{
+  "quizId": "qz15",
+  "courseId": "python",
+  "moduleId": "mod15",
+  "title": "Deploying Python Applications",
+  "tags": ["python", "deployment", "applications", "devops", "cloud"],
+  "difficulty": "medium",
+  "description": "Key concepts and steps involved in deploying Python applications to different environments.",
+  "quiz": [
+    {
+      "question": "What is deployment in the context of Python applications?",
+      "options": [
+        "Writing Python code",
+        "Running Python scripts locally",
+        "Making the application available to users on servers or cloud",
+        "Testing the application"
+      ],
+      "correctAnswer": "Making the application available to users on servers or cloud",
+      "explanation": "Deployment refers to the process of making the application accessible to end-users."
+    },
+    {
+      "question": "Which tool is commonly used to create isolated Python environments for deployment?",
+      "options": [
+        "pip",
+        "virtualenv",
+        "pytest",
+        "flask"
+      ],
+      "correctAnswer": "virtualenv",
+      "explanation": "Virtualenv creates isolated environments to manage dependencies for deployment."
+    },
+    {
+      "question": "Which file is typically used to list Python dependencies for deployment?",
+      "options": [
+        "requirements.txt",
+        "setup.py",
+        "deploy.yml",
+        "config.json"
+      ],
+      "correctAnswer": "requirements.txt",
+      "explanation": "`requirements.txt` lists all Python packages needed to run the application."
+    },
+    {
+      "question": "What does the 'wsgi' in 'WSGI server' stand for?",
+      "options": [
+        "Web Server Gateway Interface",
+        "Web Server General Interface",
+        "Wide Server Gateway Interface",
+        "Web Service General Interface"
+      ],
+      "correctAnswer": "Web Server Gateway Interface",
+      "explanation": "WSGI is a specification that describes how a web server communicates with web applications."
+    },
+    {
+      "question": "Which of these is a popular platform for deploying Python web apps?",
+      "options": [
+        "Heroku",
+        "Photoshop",
+        "WordPress",
+        "MySQL"
+      ],
+      "correctAnswer": "Heroku",
+      "explanation": "Heroku is a cloud platform that supports easy deployment of Python applications."
+    },
+    {
+      "question": "What command is used to install dependencies from requirements.txt?",
+      "options": [
+        "pip install -r requirements.txt",
+        "python setup.py install",
+        "pip list",
+        "pip uninstall -r requirements.txt"
+      ],
+      "correctAnswer": "pip install -r requirements.txt",
+      "explanation": "This command installs all packages listed in the requirements file."
+    },
+    {
+      "question": "What is the purpose of Docker in deploying Python apps?",
+      "options": [
+        "Packaging applications with their dependencies in containers",
+        "Writing Python code",
+        "Testing code performance",
+        "Debugging applications"
+      ],
+      "correctAnswer": "Packaging applications with their dependencies in containers",
+      "explanation": "Docker allows applications to run consistently across different environments by using containers."
+    },
+    {
+      "question": "Which Python web framework commonly pairs with Gunicorn for deployment?",
+      "options": [
+        "Flask",
+        "Django",
+        "Pyramid",
+        "Both Flask and Django"
+      ],
+      "correctAnswer": "Both Flask and Django",
+      "explanation": "Gunicorn is a WSGI server often used with both Flask and Django."
+    },
+    {
+      "question": "What is Continuous Integration/Continuous Deployment (CI/CD)?",
+      "options": [
+        "A process to automatically test and deploy code changes",
+        "A Python debugging tool",
+        "A database management system",
+        "An editor for Python"
+      ],
+      "correctAnswer": "A process to automatically test and deploy code changes",
+      "explanation": "CI/CD automates testing and deployment to streamline updates."
+    },
+    {
+      "question": "Which cloud provider is NOT typically used for Python app deployment?",
+      "options": [
+        "AWS",
+        "Google Cloud",
+        "Microsoft Azure",
+        "Photoshop Cloud"
+      ],
+      "correctAnswer": "Photoshop Cloud",
+      "explanation": "Photoshop Cloud is unrelated to app deployment."
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "quizId": "qz13",
+  "courseId": "nodejs",
+  "moduleId": "mod13",
+  "title": "Testing Node.js Applications",
+  "tags": ["nodejs", "testing", "mocha", "chai", "jest", "unit testing", "integration testing"],
+  "difficulty": "advanced",
+  "description": "Understanding how to test Node.js applications using different frameworks and techniques.",
+  "quiz": [
+    {
+      "question": "Which of the following is a popular testing framework for Node.js?",
+      "options": ["Mocha", "Express", "Socket.io", "Mongoose"],
+      "correctAnswer": "Mocha",
+      "explanation": "Mocha is a widely used testing framework for Node.js applications."
+    },
+    {
+      "question": "What assertion library is commonly used with Mocha?",
+      "options": ["Chai", "Lodash", "Axios", "Jest"],
+      "correctAnswer": "Chai",
+      "explanation": "Chai provides assertion styles for testing in Mocha."
+    },
+    {
+      "question": "Which command runs tests in a Node.js project using Mocha?",
+      "options": ["mocha", "node test", "npm run test", "npm start"],
+      "correctAnswer": "mocha",
+      "explanation": "The `mocha` command is used to run tests written using the Mocha framework."
+    },
+    {
+      "question": "What is the purpose of 'describe' blocks in Mocha tests?",
+      "options": [
+        "Group related tests",
+        "Define variables",
+        "Run code asynchronously",
+        "Handle errors"
+      ],
+      "correctAnswer": "Group related tests",
+      "explanation": "'describe' blocks organize tests into suites."
+    },
+    {
+      "question": "Which of the following is used to write an individual test case in Mocha?",
+      "options": ["it", "test", "check", "run"],
+      "correctAnswer": "it",
+      "explanation": "'it' defines a single test case."
+    },
+    {
+      "question": "What is the difference between unit testing and integration testing?",
+      "options": [
+        "Unit testing tests individual components; integration testing tests combined components",
+        "Unit testing is slower than integration testing",
+        "Integration testing tests UI only",
+        "Unit testing requires database"
+      ],
+      "correctAnswer": "Unit testing tests individual components; integration testing tests combined components",
+      "explanation": "Unit tests focus on small parts, while integration tests check how parts work together."
+    },
+    {
+      "question": "Which Jest function is used to mock modules or functions?",
+      "options": ["jest.mock()", "jest.spyOn()", "jest.fn()", "jest.run()"],
+      "correctAnswer": "jest.mock()",
+      "explanation": "jest.mock() is used to mock modules or dependencies."
+    },
+    {
+      "question": "How can you run tests automatically on file changes?",
+      "options": [
+        "Using watch mode (`mocha --watch` or `jest --watch`)",
+        "Running `node app.js`",
+        "Using `npm start`",
+        "Restarting server"
+      ],
+      "correctAnswer": "Using watch mode (`mocha --watch` or `jest --watch`)",
+      "explanation": "Watch mode reruns tests whenever code files change."
+    },
+    {
+      "question": "What is code coverage in testing?",
+      "options": [
+        "Measure of how much code is executed by tests",
+        "Number of tests written",
+        "Time tests take to run",
+        "Number of bugs found"
+      ],
+      "correctAnswer": "Measure of how much code is executed by tests",
+      "explanation": "Code coverage indicates which parts of code are tested."
+    },
+    {
+      "question": "Which of the following is NOT a type of test commonly used in Node.js applications?",
+      "options": ["UI Testing", "Unit Testing", "Integration Testing", "End-to-End Testing"],
+      "correctAnswer": "UI Testing",
+      "explanation": "UI Testing is typically done with front-end frameworks, not directly with Node.js backend testing."
+    }
+  ]
+}

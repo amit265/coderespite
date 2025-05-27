@@ -1,0 +1,81 @@
+{
+  "quizId": "qz03",
+  "courseId": "dsa",
+  "moduleId": "mod03",
+  "title": "String Manipulation and Pattern Matching",
+  "tags": ["strings", "javascript", "pattern matching", "data structures"],
+  "difficulty": "easy",
+  "description": "Fundamentals of string handling, manipulation methods, and pattern matching techniques in JavaScript.",
+  "quiz": [
+    {
+      "question": "Which method converts a string to uppercase in JavaScript?",
+      "options": ["toUpperCase()", "toLowerCase()", "capitalize()", "uppercase()"],
+      "correctAnswer": "toUpperCase()",
+      "explanation": "`toUpperCase()` converts all characters of a string to uppercase."
+    },
+    {
+      "question": "How do you find the length of a string `str`?",
+      "options": ["str.length", "str.size", "length(str)", "str.len"],
+      "correctAnswer": "str.length",
+      "explanation": "`length` property returns the number of characters in a string."
+    },
+    {
+      "question": "What does the `indexOf()` method return when the substring is not found?",
+      "options": ["-1", "0", "null", "undefined"],
+      "correctAnswer": "-1",
+      "explanation": "`indexOf()` returns -1 if the substring does not exist in the string."
+    },
+    {
+      "question": "Which method extracts a substring between two indices?",
+      "options": ["substring()", "substr()", "slice()", "All of the above"],
+      "correctAnswer": "All of the above",
+      "explanation": "All three can extract substrings but with slightly different parameters and behavior."
+    },
+    {
+      "question": "How do you check if a string starts with a specific substring?",
+      "options": ["startsWith()", "includes()", "match()", "test()"],
+      "correctAnswer": "startsWith()",
+      "explanation": "`startsWith()` returns true if the string begins with the specified substring."
+    },
+    {
+      "question": "What is the output of `'hello'.charAt(1)`?",
+      "options": ["h", "e", "l", "o"],
+      "correctAnswer": "e",
+      "explanation": "`charAt(1)` returns the character at index 1 (0-based), which is 'e'."
+    },
+    {
+      "question": "Which method splits a string into an array based on a delimiter?",
+      "options": ["split()", "join()", "slice()", "replace()"],
+      "correctAnswer": "split()",
+      "explanation": "`split(separator)` divides a string into substrings and returns them as an array."
+    },
+    {
+      "question": "How can you replace all occurrences of 'cat' with 'dog' in a string?",
+      "options": [
+        "str.replace(/cat/g, 'dog')",
+        "str.replace('cat', 'dog')",
+        "str.replaceAll('cat', 'dog')",
+        "Both A and C"
+      ],
+      "correctAnswer": "Both A and C",
+      "explanation": "`replace(/cat/g, 'dog')` uses regex with global flag, and `replaceAll` replaces all matches."
+    },
+    {
+      "question": "What does the `match()` method do?",
+      "options": [
+        "Returns the first match of a regex",
+        "Returns an array of matches or null",
+        "Replaces a substring",
+        "Splits the string"
+      ],
+      "correctAnswer": "Returns an array of matches or null",
+      "explanation": "`match()` returns all matches of a regex or null if none are found."
+    },
+    {
+      "question": "Which of these is NOT a valid regular expression pattern modifier?",
+      "options": ["g", "i", "m", "x"],
+      "correctAnswer": "x",
+      "explanation": "'x' is not a standard regex modifier in JavaScript; 'g', 'i', and 'm' are valid."
+    }
+  ]
+}

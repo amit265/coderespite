@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod10",
+  "courseId": "reactnative",
+  "moduleId": "mod10",
+  "title": "Local Storage and AsyncStorage",
+  "description": "Learn how to persist data locally in React Native apps using AsyncStorage for offline capability and data caching.",
+  "flashcards": [
+    {
+      "question": "What is AsyncStorage in React Native?",
+      "answer": "A simple, asynchronous, persistent, key-value storage system."
+    },
+    {
+      "question": "Is AsyncStorage synchronous or asynchronous?",
+      "answer": "Asynchronous."
+    },
+    {
+      "question": "Which React Native community package provides AsyncStorage?",
+      "answer": "@react-native-async-storage/async-storage."
+    },
+    {
+      "question": "How do you save data to AsyncStorage?",
+      "answer": "Using `AsyncStorage.setItem(key, value)`."
+    },
+    {
+      "question": "How do you retrieve data from AsyncStorage?",
+      "answer": "Using `AsyncStorage.getItem(key)`."
+    },
+    {
+      "question": "How do you remove an item from AsyncStorage?",
+      "answer": "Using `AsyncStorage.removeItem(key)`."
+    },
+    {
+      "question": "What type of data does AsyncStorage store?",
+      "answer": "Strings (other types need to be stringified)."
+    },
+    {
+      "question": "Why should you use AsyncStorage in React Native apps?",
+      "answer": "To persist user data, settings, and cache information across app restarts."
+    },
+    {
+      "question": "Can AsyncStorage be used to store large amounts of data?",
+      "answer": "No, it is best suited for small data like tokens, preferences."
+    },
+    {
+      "question": "How do you handle errors when using AsyncStorage?",
+      "answer": "By using try-catch blocks or handling Promise rejections."
+    }
+  ]
+}

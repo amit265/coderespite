@@ -1,0 +1,69 @@
+{
+  "courseId": "python",
+  "moduleId": "mod02",
+  "title": "Setting Up Python Environment",
+  "description": "Learn how to install Python, set up an IDE, run scripts, and configure your development environment for a smooth coding experience.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod02-lsn01",
+      "title": "Downloading and Installing Python",
+      "type": "theory",
+      "content": "Visit https://www.python.org/downloads to download Python. Choose your OS (Windows, macOS, Linux) and install it. During installation on Windows, check the option 'Add Python to PATH'."
+    },
+    {
+      "lessonId": "mod02-lsn02",
+      "title": "Verifying Python Installation",
+      "type": "code",
+      "content": "Open terminal or command prompt and type:\n```\npython --version\n```\nYou should see the installed Python version (e.g., Python 3.11.0)."
+    },
+    {
+      "lessonId": "mod02-lsn03",
+      "title": "Setting Up VS Code for Python",
+      "type": "theory",
+      "content": "Download VS Code from https://code.visualstudio.com/. Install the Python extension from the Extensions Marketplace. Configure the interpreter using `Ctrl+Shift+P` > 'Python: Select Interpreter'."
+    },
+    {
+      "lessonId": "mod02-lsn04",
+      "title": "Alternative Editors: PyCharm, Thonny, Jupyter",
+      "type": "theory",
+      "content": "- **PyCharm**: Powerful IDE by JetBrains, best for large projects.\n- **Thonny**: Beginner-friendly IDE.\n- **Jupyter Notebook**: Ideal for data science and quick visual code."
+    },
+    {
+      "lessonId": "mod02-lsn05",
+      "title": "Running Python in Terminal",
+      "type": "code",
+      "content": "To enter interactive mode, type `python` in terminal:\n```\n>>> print(\"Hello, Python!\")\nHello, Python!\n```"
+    },
+    {
+      "lessonId": "mod02-lsn06",
+      "title": "Writing and Running Python Scripts",
+      "type": "code",
+      "content": "Create a file named `hello.py`:\n```python\nprint(\"Hello, World!\")\n```\nThen run it using:\n```\npython hello.py\n```"
+    },
+    {
+      "lessonId": "mod02-lsn07",
+      "title": "Understanding Python File Structure",
+      "type": "theory",
+      "content": "Python scripts end with `.py`. You can organize code into modules (files) and packages (folders with `__init__.py` files) for better structure in bigger projects."
+    },
+    {
+      "lessonId": "mod02-lsn08",
+      "title": "Using pip to Manage Packages",
+      "type": "code",
+      "content": "`pip` is Python’s package installer. Example:\n```\npip install requests\n```\nUse `pip list` to view installed packages."
+    },
+    {
+      "lessonId": "mod02-lsn09",
+      "title": "Installing Python on macOS and Linux",
+      "type": "theory",
+      "content": "- **macOS**: Use Homebrew: `brew install python`\n- **Linux**: Use package manager like `apt` or `yum`: `sudo apt install python3`\nAlways verify installation with `python3 --version`."
+    },
+    {
+      "lessonId": "mod02-lsn10",
+      "title": "Troubleshooting Setup Issues",
+      "type": "theory",
+      "content": "- Check PATH variable\n- Use `python3` if `python` points to Python 2\n- Reinstall or use the official installer if issues persist\n- Use forums like Stack Overflow or the Python Discord for help"
+    }
+  ]
+}

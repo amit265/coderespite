@@ -1,0 +1,69 @@
+{
+  "courseId": "reactnative",
+  "moduleId": "mod02",
+  "title": "Environment Setup and Tooling",
+  "description": "Learn how to set up the React Native development environment on your system, including installing necessary tools and running your first app.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod02-lsn01",
+      "title": "Prerequisites for React Native",
+      "type": "theory",
+      "content": "Before starting with React Native, you should have a basic understanding of JavaScript and React. Familiarity with mobile platforms (Android/iOS) is helpful but not necessary."
+    },
+    {
+      "lessonId": "mod02-lsn02",
+      "title": "Installing Node.js and npm",
+      "type": "code",
+      "content": "Download and install Node.js from https://nodejs.org/\nTo check installation:\n```bash\nnode -v\nnpm -v\n```"
+    },
+    {
+      "lessonId": "mod02-lsn03",
+      "title": "Installing Expo CLI",
+      "type": "code",
+      "content": "Expo CLI is the easiest way to start with React Native:\n```bash\nnpm install -g expo-cli\n```"
+    },
+    {
+      "lessonId": "mod02-lsn04",
+      "title": "Setting Up Android Studio (for Android Development)",
+      "type": "theory",
+      "content": "Install Android Studio, then install Android SDK and configure environment variables (e.g., ANDROID_HOME). This setup is essential for running apps on Android emulators or physical devices."
+    },
+    {
+      "lessonId": "mod02-lsn05",
+      "title": "Setting Up Xcode (for iOS Development)",
+      "type": "theory",
+      "content": "Install Xcode from the Mac App Store. Xcode includes all the tools required for iOS development, including the iOS simulator."
+    },
+    {
+      "lessonId": "mod02-lsn06",
+      "title": "Creating a New Project with Expo",
+      "type": "code",
+      "content": "```bash\nexpo init MyFirstApp\ncd MyFirstApp\nexpo start\n```"
+    },
+    {
+      "lessonId": "mod02-lsn07",
+      "title": "Running the App on Emulator or Device",
+      "type": "theory",
+      "content": "- Use Android Emulator or iOS Simulator.\n- Or scan the QR code with the Expo Go app on your phone to run the app instantly."
+    },
+    {
+      "lessonId": "mod02-lsn08",
+      "title": "Using Visual Studio Code",
+      "type": "theory",
+      "content": "Visual Studio Code is a powerful editor with React Native support. Install extensions like 'React Native Tools' for enhanced development experience."
+    },
+    {
+      "lessonId": "mod02-lsn09",
+      "title": "Debugging React Native Apps",
+      "type": "theory",
+      "content": "- Use console.log for quick debugging.\n- Use Expo Developer Tools for inspecting logs and performance.\n- React Native Debugger can be connected for advanced debugging."
+    },
+    {
+      "lessonId": "mod02-lsn10",
+      "title": "Common Setup Errors and Fixes",
+      "type": "theory",
+      "content": "- Metro bundler not found: Restart your terminal.\n- Android emulator not detected: Ensure it's running before `expo start`.\n- Permission issues: Run commands with admin rights if needed."
+    }
+  ]
+}

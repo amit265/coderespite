@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod01",
+  "courseId": "nodejs",
+  "moduleId": "mod01",
+  "title": "Introduction to Node.js",
+  "description": "Basics of Node.js including what it is, its history, key features, and why it's popular for backend development.",
+  "flashcards": [
+    {
+      "question": "What is Node.js?",
+      "answer": "Node.js is an open-source, cross-platform JavaScript runtime environment that allows running JavaScript code outside of a browser."
+    },
+    {
+      "question": "Who created Node.js and when was it first released?",
+      "answer": "Node.js was created by Ryan Dahl and first released in 2009."
+    },
+    {
+      "question": "What programming language does Node.js use?",
+      "answer": "Node.js uses JavaScript as its primary programming language."
+    },
+    {
+      "question": "What is the main purpose of Node.js?",
+      "answer": "Node.js is mainly used to build fast, scalable backend and server-side applications."
+    },
+    {
+      "question": "What is unique about Node.js’s architecture?",
+      "answer": "Node.js uses a single-threaded, event-driven, non-blocking I/O model that makes it efficient and suitable for I/O-heavy tasks."
+    },
+    {
+      "question": "Why is Node.js considered good for real-time applications?",
+      "answer": "Because it handles many connections simultaneously with low latency thanks to its event-driven architecture."
+    },
+    {
+      "question": "What is the V8 engine in Node.js?",
+      "answer": "V8 is Google’s open-source JavaScript engine that compiles JavaScript into native machine code, powering Node.js’s speed."
+    },
+    {
+      "question": "Which company backs Node.js?",
+      "answer": "Node.js is maintained by the OpenJS Foundation, supported by companies like IBM, Microsoft, and Google."
+    },
+    {
+      "question": "Name some common use cases for Node.js.",
+      "answer": "Web servers, APIs, real-time chat apps, streaming applications, and microservices."
+    },
+    {
+      "question": "How does Node.js handle multiple requests?",
+      "answer": "Node.js handles multiple requests asynchronously using its event loop and non-blocking I/O operations."
+    }
+  ]
+}

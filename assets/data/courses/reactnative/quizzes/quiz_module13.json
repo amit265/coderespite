@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod13",
+  "courseId": "reactnative",
+  "moduleId": "mod13",
+  "title": "Native Modules and Platform APIs",
+  "tags": ["native modules", "platform apis", "react native", "android", "ios", "bridging"],
+  "difficulty": "medium",
+  "description": "Understanding how to use native modules and platform APIs to extend React Native apps with native functionality.",
+  "quiz": [
+    {
+      "question": "What are Native Modules in React Native?",
+      "options": [
+        "Modules written in native code that can be called from JavaScript",
+        "JavaScript libraries only",
+        "Modules for styling components",
+        "Modules for navigation"
+      ],
+      "correctAnswer": "Modules written in native code that can be called from JavaScript",
+      "explanation": "Native Modules bridge native platform code (Java/Swift/Obj-C) with React Native JavaScript."
+    },
+    {
+      "question": "Which languages are commonly used to write native modules for Android and iOS respectively?",
+      "options": [
+        "Java/Kotlin for Android and Objective-C/Swift for iOS",
+        "JavaScript for both",
+        "Python for Android and Ruby for iOS",
+        "C# for both"
+      ],
+      "correctAnswer": "Java/Kotlin for Android and Objective-C/Swift for iOS",
+      "explanation": "Android native modules are usually in Java/Kotlin, and iOS ones in Objective-C or Swift."
+    },
+    {
+      "question": "How do you access a native module from React Native JavaScript?",
+      "options": [
+        "Using the NativeModules API",
+        "Using import statements",
+        "Directly calling native code",
+        "Using require()"
+      ],
+      "correctAnswer": "Using the NativeModules API",
+      "explanation": "NativeModules API provides access to registered native modules."
+    },
+    {
+      "question": "What is the purpose of the React Native Bridge?",
+      "options": [
+        "To enable communication between JavaScript and native code",
+        "To speed up app launch time",
+        "To style native components",
+        "To manage app state"
+      ],
+      "correctAnswer": "To enable communication between JavaScript and native code",
+      "explanation": "The bridge facilitates asynchronous communication between JS and native threads."
+    },
+    {
+      "question": "Which platform API can you use to access the device camera in React Native?",
+      "options": [
+        "Native Camera Module or third-party libraries like react-native-camera",
+        "React Native core only",
+        "JavaScript DOM APIs",
+        "React Navigation"
+      ],
+      "correctAnswer": "Native Camera Module or third-party libraries like react-native-camera",
+      "explanation": "Device camera access requires native code or libraries bridging to native APIs."
+    },
+    {
+      "question": "Which command helps link native modules in older React Native versions before auto-linking?",
+      "options": [
+        "react-native link",
+        "npm install",
+        "expo install",
+        "react-native run"
+      ],
+      "correctAnswer": "react-native link",
+      "explanation": "react-native link was used to manually link native dependencies before auto-linking."
+    },
+    {
+      "question": "What is a common reason to create a custom native module?",
+      "options": [
+        "To access platform-specific features not exposed by React Native",
+        "To change component styles",
+        "To improve JavaScript performance",
+        "To handle navigation"
+      ],
+      "correctAnswer": "To access platform-specific features not exposed by React Native",
+      "explanation": "Custom native modules extend React Native with native platform features."
+    },
+    {
+      "question": "Which lifecycle method is important when writing native modules for proper resource management?",
+      "options": [
+        "onHostDestroy / onDestroy",
+        "componentDidMount",
+        "render",
+        "useEffect"
+      ],
+      "correctAnswer": "onHostDestroy / onDestroy",
+      "explanation": "Native modules should clean up resources when the host app or module is destroyed."
+    },
+    {
+      "question": "Which tool can help debug native modules and platform APIs?",
+      "options": [
+        "Android Studio and Xcode",
+        "Chrome DevTools only",
+        "Node.js debugger",
+        "Visual Studio Code only"
+      ],
+      "correctAnswer": "Android Studio and Xcode",
+      "explanation": "Native modules require debugging tools native to each platform like Android Studio and Xcode."
+    },
+    {
+      "question": "What is a limitation of native modules in React Native?",
+      "options": [
+        "They introduce asynchronous bridging overhead",
+        "They run faster than JavaScript",
+        "They can be written only in JavaScript",
+        "They replace React Native core components"
+      ],
+      "correctAnswer": "They introduce asynchronous bridging overhead",
+      "explanation": "Communication over the bridge is asynchronous and can add some latency."
+    }
+  ]
+}

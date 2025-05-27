@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod07",
+  "courseId": "python",
+  "moduleId": "mod07",
+  "title": "File Handling and Exceptions",
+  "description": "Understand how to work with files in Python and handle errors gracefully using exceptions.",
+  "flashcards": [
+    {
+      "question": "How do you open a file in Python?",
+      "answer": "Using the `open()` function with the filename and mode."
+    },
+    {
+      "question": "What are the common file modes in Python?",
+      "answer": "`'r'` for read, `'w'` for write, `'a'` for append, and `'b'` for binary mode."
+    },
+    {
+      "question": "How do you read the entire content of a file?",
+      "answer": "Using the `read()` method on the file object."
+    },
+    {
+      "question": "How do you write data to a file?",
+      "answer": "Using the `write()` method on the file object opened in write or append mode."
+    },
+    {
+      "question": "What is a context manager in file handling?",
+      "answer": "Using `with` statement to automatically close files after use."
+    },
+    {
+      "question": "What is an exception in Python?",
+      "answer": "An error that occurs during program execution, disrupting the normal flow."
+    },
+    {
+      "question": "How do you handle exceptions in Python?",
+      "answer": "Using `try` and `except` blocks."
+    },
+    {
+      "question": "What does the `finally` block do?",
+      "answer": "It executes code after `try` and `except`, regardless of exceptions."
+    },
+    {
+      "question": "How can you raise an exception manually?",
+      "answer": "Using the `raise` statement."
+    },
+    {
+      "question": "What is the purpose of the `else` block in exception handling?",
+      "answer": "It runs code only if no exceptions occur in the `try` block."
+    }
+  ]
+}

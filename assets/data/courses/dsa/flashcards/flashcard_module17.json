@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod17",
+  "courseId": "dsa",
+  "moduleId": "mod17",
+  "title": "Final Project: Building a Complex Application with DSA",
+  "description": "Apply your knowledge of data structures and algorithms to design and build a real-world complex application.",
+  "flashcards": [
+    {
+      "question": "Why is planning important before starting a complex DSA project?",
+      "answer": "It helps break down the problem, choose appropriate data structures, and manage development efficiently."
+    },
+    {
+      "question": "What are key considerations when choosing data structures for your project?",
+      "answer": "Time complexity, space complexity, ease of use, and how the data will be accessed or modified."
+    },
+    {
+      "question": "How can modular design benefit your application?",
+      "answer": "It improves maintainability, readability, and allows for easier testing and debugging."
+    },
+    {
+      "question": "Give an example of how you might use a Graph in a complex app.",
+      "answer": "To represent social networks, map routes, or dependencies between tasks."
+    },
+    {
+      "question": "How do you ensure scalability in your application?",
+      "answer": "By choosing efficient algorithms and data structures and optimizing for performance and memory use."
+    },
+    {
+      "question": "What role do testing and debugging play in building your project?",
+      "answer": "They ensure correctness, identify bugs early, and improve code reliability."
+    },
+    {
+      "question": "Why is documentation important in your final project?",
+      "answer": "It helps others understand your design choices and makes future updates easier."
+    },
+    {
+      "question": "How can using recursion and divide & conquer improve your app?",
+      "answer": "They can simplify complex problems by breaking them into smaller subproblems."
+    },
+    {
+      "question": "What is a key challenge when integrating multiple data structures?",
+      "answer": "Ensuring seamless interaction without performance bottlenecks or data inconsistency."
+    },
+    {
+      "question": "How does memory management affect your complex application?",
+      "answer": "Poor memory management can cause leaks and slow down the app; good management optimizes resource use."
+    },
+    {
+      "question": "What is the benefit of using design patterns in your project?",
+      "answer": "They provide reusable solutions to common problems, making your code more robust."
+    },
+    {
+      "question": "How can you apply dynamic programming in your project?",
+      "answer": "To optimize solutions that involve overlapping subproblems, such as caching results."
+    },
+    {
+      "question": "How do you handle edge cases in a large project?",
+      "answer": "By writing comprehensive tests and carefully considering inputs that might break your code."
+    },
+    {
+      "question": "What tools can help you track performance and bottlenecks?",
+      "answer": "Profilers, debuggers, and benchmarking tools."
+    },
+    {
+      "question": "Why is version control important in your project?",
+      "answer": "It tracks changes, facilitates collaboration, and helps revert to earlier versions if needed."
+    }
+  ]
+}

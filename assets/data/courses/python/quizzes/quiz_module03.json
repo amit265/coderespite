@@ -1,0 +1,76 @@
+{
+  "quizId": "qz03",
+  "courseId": "python",
+  "moduleId": "mod03",
+  "title": "Variables, Data Types, and Operators",
+  "tags": ["python", "variables", "data types", "operators", "basics"],
+  "difficulty": "easy",
+  "description": "Understand Python variables, common data types, and operators.",
+  "quiz": [
+    {
+      "question": "Which symbol is used to assign a value to a variable in Python?",
+      "options": ["=", "==", ":=", "+="],
+      "correctAnswer": "=",
+      "explanation": "The `=` symbol is used for assignment in Python."
+    },
+    {
+      "question": "Which of these is NOT a valid Python data type?",
+      "options": ["int", "float", "char", "str"],
+      "correctAnswer": "char",
+      "explanation": "Python does not have a separate 'char' type; characters are strings of length one."
+    },
+    {
+      "question": "What is the output type of `3 / 2` in Python 3?",
+      "options": ["int", "float", "str", "bool"],
+      "correctAnswer": "float",
+      "explanation": "Division `/` always returns a float in Python 3."
+    },
+    {
+      "question": "Which operator is used for exponentiation in Python?",
+      "options": ["^", "**", "%", "//"],
+      "correctAnswer": "**",
+      "explanation": "The `**` operator raises a number to the power of another."
+    },
+    {
+      "question": "What does the `%` operator do?",
+      "options": ["Division", "Modulo (remainder)", "Exponentiation", "Floor division"],
+      "correctAnswer": "Modulo (remainder)",
+      "explanation": "The `%` operator gives the remainder of a division."
+    },
+    {
+      "question": "How do you declare a multi-line string in Python?",
+      "options": [
+        "Using triple quotes `'''` or `\"\"\"`",
+        "Using double quotes `\"`",
+        "Using single quotes `'`",
+        "Using backticks `` ` ``"
+      ],
+      "correctAnswer": "Using triple quotes `'''` or `\"\"\"`",
+      "explanation": "Triple quotes allow multi-line strings."
+    },
+    {
+      "question": "Which of these is a mutable data type?",
+      "options": ["list", "tuple", "str", "int"],
+      "correctAnswer": "list",
+      "explanation": "Lists are mutable; tuples, strings, and ints are immutable."
+    },
+    {
+      "question": "What will `type(5.0)` return?",
+      "options": ["int", "float", "str", "bool"],
+      "correctAnswer": "float",
+      "explanation": "`5.0` is a floating point number."
+    },
+    {
+      "question": "Which operator is used for floor division in Python?",
+      "options": ["/", "//", "%", "**"],
+      "correctAnswer": "//",
+      "explanation": "`//` returns the quotient without the remainder (floored)."
+    },
+    {
+      "question": "What will be the result of `True + 1` in Python?",
+      "options": ["2", "1", "True", "Error"],
+      "correctAnswer": "2",
+      "explanation": "Boolean `True` is treated as 1, so `True + 1` equals 2."
+    }
+  ]
+}

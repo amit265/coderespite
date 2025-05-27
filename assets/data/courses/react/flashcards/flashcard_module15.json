@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod15",
+  "courseId": "react",
+  "moduleId": "mod15",
+  "title": "Testing and Deploying React Apps (RTL, Vercel/Netlify)",
+  "description": "How to test React applications using React Testing Library and deploy apps using Vercel or Netlify.",
+  "flashcards": [
+    {
+      "question": "What is React Testing Library (RTL)?",
+      "answer": "A testing library focused on testing React components from the user’s perspective."
+    },
+    {
+      "question": "Why use React Testing Library over Enzyme?",
+      "answer": "RTL encourages better testing practices by focusing on behavior rather than implementation."
+    },
+    {
+      "question": "What is the primary goal of unit testing in React?",
+      "answer": "To test individual components or functions in isolation."
+    },
+    {
+      "question": "How do you write a simple test for a React component with RTL?",
+      "answer": "Render the component, then assert expected behavior using queries like getByText."
+    },
+    {
+      "question": "What are Vercel and Netlify?",
+      "answer": "Cloud platforms for deploying modern web applications easily with continuous deployment."
+    },
+    {
+      "question": "How do you deploy a React app on Vercel?",
+      "answer": "Connect your Git repo to Vercel, and it auto-builds and deploys on each push."
+    },
+    {
+      "question": "What is continuous deployment?",
+      "answer": "Automatically deploying app updates whenever code changes are pushed to the repository."
+    },
+    {
+      "question": "How can you test asynchronous code with RTL?",
+      "answer": "Using async utilities like waitFor and findBy queries."
+    },
+    {
+      "question": "Why is testing important before deploying?",
+      "answer": "To catch bugs early, ensure functionality, and improve app reliability."
+    },
+    {
+      "question": "What command is commonly used to run tests in a React app?",
+      "answer": "npm test or yarn test."
+    }
+  ]
+}

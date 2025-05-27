@@ -88,9 +88,9 @@ export default function ModuleId() {
         style={{ backgroundColor: colors.BACKGROUND }}
       >
         <Pressable onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={35} color="black" />
+          <Ionicons name="arrow-back" size={25} color="black" />
         </Pressable>
-        <Text className="text-2xl font-quicksand-bold mb-2 text-gray-900">
+        <Text className="text-xl font-quicksand-bold mb-2 text-gray-900">
           {selectedCourse?.title} Module
         </Text>
       </View>
@@ -100,7 +100,7 @@ export default function ModuleId() {
         style={{ backgroundColor: colors.BACKGROUND }}
       >
         <View className="flex flex-row gap-4 p-4">
-          <View style={{ width: 120, height: 120 }}>
+          <View style={{ width: 150, height: 150 }}>
             <Image
               source={courseIcons[selectedCourse?.icon]||
                 require("../../../../assets/default-icon.png")}
@@ -113,7 +113,7 @@ export default function ModuleId() {
             />
           </View>
           <View className="flex-1 gap-2 justify-center">
-            <Text className="text-gray-700 text-lg font-nunito-bold">
+            <Text className="text-gray-700 text-lg font-nunito-semibold">
               {selectedModule?.title}
             </Text>
             <Text className="text-sm font-nunito-semibold text-gray-700">
@@ -141,9 +141,9 @@ export default function ModuleId() {
                 onPress={() => toggleLesson(lesson.lessonId)}
                 activeOpacity={0.9}
               >
-                <View className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <View className="py-4 border border-gray-300 rounded-lg bg-gray-50">
                   <View className="flex flex-row justify-between items-center mb-2">
-                    <Text className="text-lg font-nunito-semibold text-gray-800">
+                    <Text className="text-base font-nunito-semibold text-gray-800 px-2">
                       {index + 1}. {lesson.title}
                     </Text>
                     <Ionicons
@@ -156,13 +156,13 @@ export default function ModuleId() {
                   {isExpanded && (
                     <>
                       {lesson.type === "theory" && (
-                        <Text className="text-gray-700 font-nunito">
+                        <Text className="text-gray-700 font-nunito px-2">
                           {lesson.content}
                         </Text>
                       )}
                       {lesson.type === "code" && (
                         <View className="bg-gray-900 rounded p-3 mt-2">
-                          <Text className="text-green-400 font-nunito">
+                          <Text className="text-green-400 font-nunito px-2">
                             {lesson.content}
                           </Text>
                         </View>

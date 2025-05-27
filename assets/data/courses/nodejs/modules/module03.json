@@ -1,0 +1,45 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod03",
+  "title": "Node.js Modules and Packages",
+  "description": "Understand how Node.js uses modules to organize code, and how to use npm packages to extend functionality.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod03-lsn01",
+      "title": "What are Modules in Node.js?",
+      "type": "theory",
+      "content": "Modules are reusable blocks of code whose existence does not accidentally impact other code. Node.js uses CommonJS modules where each file is a module."
+    },
+    {
+      "lessonId": "mod03-lsn02",
+      "title": "Built-in Core Modules",
+      "type": "theory",
+      "content": "Node.js comes with several built-in modules like `fs` for file system operations, `http` for server creation, `path` for handling file paths, and others."
+    },
+    {
+      "lessonId": "mod03-lsn03",
+      "title": "Creating Your Own Modules",
+      "type": "practice",
+      "content": "Learn how to create your own modules by exporting functions, objects, or variables using `module.exports` and importing them using `require()`."
+    },
+    {
+      "lessonId": "mod03-lsn04",
+      "title": "Using npm Packages",
+      "type": "theory",
+      "content": "npm is a vast repository of open-source packages. Learn how to search, install, update, and uninstall packages using npm commands."
+    },
+    {
+      "lessonId": "mod03-lsn05",
+      "title": "package.json File",
+      "type": "theory",
+      "content": "The `package.json` file holds metadata about the project and its dependencies. Learn how to manage this file and understand its key fields."
+    },
+    {
+      "lessonId": "mod03-lsn06",
+      "title": "Semantic Versioning (SemVer)",
+      "type": "theory",
+      "content": "Understand versioning of npm packages using SemVer: Major.Minor.Patch, and how it impacts dependency management."
+    }
+  ]
+}

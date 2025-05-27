@@ -1,0 +1,121 @@
+{
+  "quizId": "qz12",
+  "courseId": "python",
+  "moduleId": "mod12",
+  "title": "Introduction to Data Analysis with Pandas",
+  "tags": ["python", "pandas", "data analysis", "dataframes", "series"],
+  "difficulty": "medium",
+  "description": "Basics of using the Pandas library for data analysis, including working with Series and DataFrames.",
+  "quiz": [
+    {
+      "question": "What is Pandas primarily used for in Python?",
+      "options": [
+        "Data analysis and manipulation",
+        "Web development",
+        "Game development",
+        "Machine learning modeling"
+      ],
+      "correctAnswer": "Data analysis and manipulation",
+      "explanation": "Pandas is a library used mainly for data analysis and manipulation."
+    },
+    {
+      "question": "Which two main data structures does Pandas provide?",
+      "options": [
+        "Series and DataFrame",
+        "Array and List",
+        "Tuple and Dictionary",
+        "Matrix and Vector"
+      ],
+      "correctAnswer": "Series and DataFrame",
+      "explanation": "Pandas provides Series (1D) and DataFrame (2D) data structures."
+    },
+    {
+      "question": "How do you import the Pandas library in Python?",
+      "options": [
+        "import pandas as pd",
+        "import pandas",
+        "from pandas import *",
+        "import pd"
+      ],
+      "correctAnswer": "import pandas as pd",
+      "explanation": "The conventional import statement is `import pandas as pd`."
+    },
+    {
+      "question": "What method is used to read a CSV file into a DataFrame?",
+      "options": [
+        "pd.read_csv()",
+        "pd.load_csv()",
+        "pd.readFile()",
+        "pd.import_csv()"
+      ],
+      "correctAnswer": "pd.read_csv()",
+      "explanation": "`pd.read_csv()` is used to read CSV files into a DataFrame."
+    },
+    {
+      "question": "Which method returns the first few rows of a DataFrame?",
+      "options": [
+        "head()",
+        "tail()",
+        "info()",
+        "describe()"
+      ],
+      "correctAnswer": "head()",
+      "explanation": "`head()` returns the first 5 rows by default."
+    },
+    {
+      "question": "How do you select a single column named 'Age' from a DataFrame `df`?",
+      "options": [
+        "df['Age']",
+        "df.Age()",
+        "df.Age[]",
+        "df.get('Age')"
+      ],
+      "correctAnswer": "df['Age']",
+      "explanation": "Use `df['Age']` to select a column."
+    },
+    {
+      "question": "What does the `describe()` method provide for a DataFrame?",
+      "options": [
+        "Summary statistics of numeric columns",
+        "Column data types",
+        "First 10 rows",
+        "Column names"
+      ],
+      "correctAnswer": "Summary statistics of numeric columns",
+      "explanation": "`describe()` returns count, mean, std, min, max, and quartiles."
+    },
+    {
+      "question": "How can you check for missing values in a DataFrame `df`?",
+      "options": [
+        "df.isnull()",
+        "df.null()",
+        "df.isna()",
+        "Both df.isnull() and df.isna()"
+      ],
+      "correctAnswer": "Both df.isnull() and df.isna()",
+      "explanation": "`isnull()` and `isna()` both detect missing values."
+    },
+    {
+      "question": "Which method is used to remove rows with missing values?",
+      "options": [
+        "dropna()",
+        "fillna()",
+        "remove_na()",
+        "deletena()"
+      ],
+      "correctAnswer": "dropna()",
+      "explanation": "`dropna()` removes rows with missing values."
+    },
+    {
+      "question": "How do you add a new column 'Total' to a DataFrame `df`?",
+      "options": [
+        "df['Total'] = some_values",
+        "df.add_column('Total')",
+        "df.append('Total')",
+        "df.insert_column('Total')"
+      ],
+      "correctAnswer": "df['Total'] = some_values",
+      "explanation": "Assigning a list or Series to `df['Total']` adds a new column."
+    }
+  ]
+}

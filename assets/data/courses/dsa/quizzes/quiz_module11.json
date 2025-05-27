@@ -1,0 +1,121 @@
+{
+  "quizId": "qz11",
+  "courseId": "dsa",
+  "moduleId": "mod11",
+  "title": "Graphs and Basic Traversal Algorithms",
+  "tags": ["graphs", "traversal", "BFS", "DFS", "data structures", "algorithms"],
+  "difficulty": "medium",
+  "description": "Learn graph representations and basic traversal algorithms like BFS and DFS.",
+  "quiz": [
+    {
+      "question": "What is a graph in computer science?",
+      "options": [
+        "A collection of nodes and edges connecting them",
+        "A type of array",
+        "A sorted list",
+        "A linear data structure"
+      ],
+      "correctAnswer": "A collection of nodes and edges connecting them",
+      "explanation": "Graphs consist of vertices (nodes) connected by edges."
+    },
+    {
+      "question": "Which of the following is NOT a way to represent a graph?",
+      "options": [
+        "Adjacency matrix",
+        "Adjacency list",
+        "Edge list",
+        "Binary tree"
+      ],
+      "correctAnswer": "Binary tree",
+      "explanation": "Binary trees are a specific tree structure, not a general graph representation."
+    },
+    {
+      "question": "What does BFS stand for?",
+      "options": [
+        "Breadth First Search",
+        "Binary First Search",
+        "Basic First Search",
+        "Breadth Function Search"
+      ],
+      "correctAnswer": "Breadth First Search",
+      "explanation": "BFS is a graph traversal algorithm that explores neighbors level by level."
+    },
+    {
+      "question": "Which data structure is commonly used in BFS?",
+      "options": [
+        "Queue",
+        "Stack",
+        "Heap",
+        "Priority Queue"
+      ],
+      "correctAnswer": "Queue",
+      "explanation": "BFS uses a queue to explore nodes in FIFO order."
+    },
+    {
+      "question": "What does DFS stand for?",
+      "options": [
+        "Depth First Search",
+        "Data Flow Search",
+        "Direct First Search",
+        "Depth Function Search"
+      ],
+      "correctAnswer": "Depth First Search",
+      "explanation": "DFS explores as far as possible along each branch before backtracking."
+    },
+    {
+      "question": "Which data structure is commonly used in DFS?",
+      "options": [
+        "Stack or recursion",
+        "Queue",
+        "Heap",
+        "Priority Queue"
+      ],
+      "correctAnswer": "Stack or recursion",
+      "explanation": "DFS uses a stack (explicit or implicit via recursion) to backtrack."
+    },
+    {
+      "question": "What is the time complexity of both BFS and DFS in terms of vertices V and edges E?",
+      "options": [
+        "O(V + E)",
+        "O(V^2)",
+        "O(E^2)",
+        "O(log V)"
+      ],
+      "correctAnswer": "O(V + E)",
+      "explanation": "Both BFS and DFS visit each vertex and edge once, leading to O(V + E)."
+    },
+    {
+      "question": "Which traversal method is better to find the shortest path in an unweighted graph?",
+      "options": [
+        "BFS",
+        "DFS",
+        "Heap Sort",
+        "Binary Search"
+      ],
+      "correctAnswer": "BFS",
+      "explanation": "BFS finds shortest paths in unweighted graphs because it explores neighbors level-wise."
+    },
+    {
+      "question": "In an adjacency matrix representation, what is the space complexity for a graph with V vertices?",
+      "options": [
+        "O(V^2)",
+        "O(V)",
+        "O(E)",
+        "O(log V)"
+      ],
+      "correctAnswer": "O(V^2)",
+      "explanation": "Adjacency matrices use V×V space regardless of the number of edges."
+    },
+    {
+      "question": "Which traversal technique can be implemented recursively?",
+      "options": [
+        "DFS",
+        "BFS",
+        "Heap Sort",
+        "Quick Sort"
+      ],
+      "correctAnswer": "DFS",
+      "explanation": "DFS can be implemented using recursion naturally."
+    }
+  ]
+}

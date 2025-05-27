@@ -1,0 +1,69 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod08",
+  "title": "Handling Forms and Data",
+  "description": "Learn how to receive, process, and validate form data in Node.js using Express. Understand how to work with different data formats, handle file uploads, and ensure secure and efficient data handling in your applications.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod08-lsn01",
+      "title": "Introduction to Form Handling in Node.js",
+      "type": "theory",
+      "content": "Forms are a fundamental way for users to send data to a web server. In Node.js, handling form submissions involves receiving data sent via HTTP requests and processing it on the server side. This lesson introduces the basics of form data flow and how Node.js fits into this process."
+    },
+    {
+      "lessonId": "mod08-lsn02",
+      "title": "Understanding HTTP POST and GET Methods",
+      "type": "theory",
+      "content": "Forms typically submit data via GET or POST methods. GET appends data to the URL, suitable for simple queries, while POST sends data in the request body, ideal for sensitive or large data. You will learn the differences and when to use each method."
+    },
+    {
+      "lessonId": "mod08-lsn03",
+      "title": "Parsing Form Data with Express",
+      "type": "practice",
+      "content": "Express middleware like `express.urlencoded()` and `express.json()` parses incoming form data. `urlencoded()` handles data sent via traditional HTML forms, while `json()` handles JSON-formatted data often used in API calls. This lesson covers how to set up and use these middlewares."
+    },
+    {
+      "lessonId": "mod08-lsn04",
+      "title": "Handling Multipart/Form-Data and File Uploads",
+      "type": "practice",
+      "content": "Multipart/form-data is used for forms that include files. You'll learn how to handle file uploads using middleware such as `multer`, including configuring storage options, handling multiple files, and validating file types and sizes for security."
+    },
+    {
+      "lessonId": "mod08-lsn05",
+      "title": "Validating User Input",
+      "type": "theory",
+      "content": "Input validation is crucial to ensure data integrity and security. This lesson discusses common validation techniques, including checking required fields, data types, formats (like emails), and sanitization to prevent injection attacks."
+    },
+    {
+      "lessonId": "mod08-lsn06",
+      "title": "Working with JSON Data",
+      "type": "theory",
+      "content": "JSON (JavaScript Object Notation) is a lightweight data-interchange format widely used in APIs and modern web apps. You'll learn how to send and receive JSON data in Express, parse JSON payloads, and work with nested objects and arrays."
+    },
+    {
+      "lessonId": "mod08-lsn07",
+      "title": "Handling Query Strings and URL Parameters",
+      "type": "practice",
+      "content": "Forms can also send data via query strings in the URL. This lesson teaches how to access and use query parameters and URL parameters in Express routes to filter, search, or customize responses based on user input."
+    },
+    {
+      "lessonId": "mod08-lsn08",
+      "title": "Storing Form Data in a Database",
+      "type": "practice",
+      "content": "Once data is received and validated, it often needs to be stored persistently. This lesson demonstrates how to save form data to a database like MongoDB or SQL using Node.js, including creating models, connecting to the database, and performing CRUD operations."
+    },
+    {
+      "lessonId": "mod08-lsn09",
+      "title": "Preventing Common Security Issues",
+      "type": "theory",
+      "content": "Handling user data involves risks such as cross-site scripting (XSS), cross-site request forgery (CSRF), and SQL injection. This lesson covers best practices and tools to safeguard your application when processing forms and data."
+    },
+    {
+      "lessonId": "mod08-lsn10",
+      "title": "Building a Complete Form Handling Example",
+      "type": "practice",
+      "content": "In this capstone lesson, you will build a full form submission workflow with Express, including form rendering, data submission, validation, file upload, and storing data in a database. This hands-on project consolidates all concepts covered in the module."
+    }
+  ]
+}

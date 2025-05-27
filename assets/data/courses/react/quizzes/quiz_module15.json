@@ -1,0 +1,121 @@
+{
+  "quizId": "qz15",
+  "courseId": "react",
+  "moduleId": "mod15",
+  "title": "Testing and Deploying React Apps (RTL, Vercel/Netlify)",
+  "tags": ["react", "testing", "deployment", "react-testing-library", "vercel", "netlify"],
+  "difficulty": "medium",
+  "description": "Test your knowledge on testing React applications using React Testing Library and deployment strategies using Vercel and Netlify.",
+  "quiz": [
+    {
+      "question": "What is the primary purpose of React Testing Library (RTL)?",
+      "options": [
+        "Test component implementation details",
+        "Test components as users interact with them",
+        "Test server-side rendering",
+        "Test CSS styling"
+      ],
+      "correctAnswer": "Test components as users interact with them",
+      "explanation": "RTL encourages testing UI from the user's perspective rather than implementation details."
+    },
+    {
+      "question": "Which method is used in RTL to query elements by their displayed text?",
+      "options": [
+        "getByText",
+        "getById",
+        "getByClassName",
+        "getByTagName"
+      ],
+      "correctAnswer": "getByText",
+      "explanation": "`getByText` queries DOM nodes by their visible text content."
+    },
+    {
+      "question": "Which of the following commands installs React Testing Library?",
+      "options": [
+        "npm install @testing-library/react",
+        "npm install react-testing-library",
+        "npm install react-test-utils",
+        "npm install testing-library-react"
+      ],
+      "correctAnswer": "npm install @testing-library/react",
+      "explanation": "The official RTL package is `@testing-library/react`."
+    },
+    {
+      "question": "What is the main advantage of deploying React apps on platforms like Vercel or Netlify?",
+      "options": [
+        "Automatic builds and deployments from Git repositories",
+        "Better CSS support",
+        "Faster rendering on client-side",
+        "Support for legacy browsers"
+      ],
+      "correctAnswer": "Automatic builds and deployments from Git repositories",
+      "explanation": "Vercel and Netlify integrate with Git to automate build and deployment pipelines."
+    },
+    {
+      "question": "Which file is commonly used to configure deployment build settings for React apps?",
+      "options": [
+        "package.json",
+        "webpack.config.js",
+        "babel.config.js",
+        "app.js"
+      ],
+      "correctAnswer": "package.json",
+      "explanation": "Scripts and build commands for deployment are typically configured in `package.json`."
+    },
+    {
+      "question": "How does React Testing Library recommend you avoid testing implementation details?",
+      "options": [
+        "By querying elements through roles, labels, and text",
+        "By testing private methods",
+        "By mocking all components",
+        "By checking component state directly"
+      ],
+      "correctAnswer": "By querying elements through roles, labels, and text",
+      "explanation": "RTL encourages accessibility queries to focus on user-facing behaviors."
+    },
+    {
+      "question": "What command is used to run tests created with React Testing Library using Jest?",
+      "options": [
+        "npm test",
+        "npm run build",
+        "npm start",
+        "npm deploy"
+      ],
+      "correctAnswer": "npm test",
+      "explanation": "`npm test` runs the Jest test runner including RTL tests."
+    },
+    {
+      "question": "Which of these is NOT a feature provided by Vercel for React app deployment?",
+      "options": [
+        "Serverless functions",
+        "Instant rollbacks",
+        "Live collaboration editing",
+        "Custom domains"
+      ],
+      "correctAnswer": "Live collaboration editing",
+      "explanation": "Live collaboration editing is not a feature of Vercel; it's a code editor feature."
+    },
+    {
+      "question": "What is the recommended way to test asynchronous UI updates with React Testing Library?",
+      "options": [
+        "Using `waitFor` or `findBy` queries",
+        "Using `setTimeout`",
+        "Using `useEffect` hook",
+        "Using synchronous `getBy` queries"
+      ],
+      "correctAnswer": "Using `waitFor` or `findBy` queries",
+      "explanation": "RTL provides `waitFor` and `findBy` to handle asynchronous DOM changes."
+    },
+    {
+      "question": "Which of the following environment variables is commonly used in React apps to define the base URL for API endpoints during deployment?",
+      "options": [
+        "REACT_APP_API_URL",
+        "API_BASE_URL",
+        "BASE_API_ENDPOINT",
+        "REACT_API_PATH"
+      ],
+      "correctAnswer": "REACT_APP_API_URL",
+      "explanation": "React requires environment variables prefixed with `REACT_APP_` to be exposed in the app."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod01",
+  "courseId": "dsa",
+  "moduleId": "mod01",
+  "title": "Introduction to Data Structures and JavaScript Fundamentals",
+  "description": "Understanding what data structures are, their importance, and JavaScript basics needed to implement them.",
+  "flashcards": [
+    {
+      "question": "What is a data structure?",
+      "answer": "A data structure is a specialized format for organizing, processing, and storing data efficiently."
+    },
+    {
+      "question": "Why are data structures important in programming?",
+      "answer": "They enable efficient data management, improve performance, and help solve complex problems."
+    },
+    {
+      "question": "Name three common data structures.",
+      "answer": "Arrays, linked lists, and hash tables."
+    },
+    {
+      "question": "In JavaScript, which data structure can store elements in a sequence?",
+      "answer": "An array."
+    },
+    {
+      "question": "What is the difference between primitive and reference data types in JavaScript?",
+      "answer": "Primitive types hold simple values (like numbers, strings), while reference types store references to objects or arrays."
+    },
+    {
+      "question": "How do you declare a variable in JavaScript that cannot be reassigned?",
+      "answer": "Using the keyword `const`."
+    },
+    {
+      "question": "What is a function in JavaScript?",
+      "answer": "A reusable block of code designed to perform a specific task."
+    },
+    {
+      "question": "How do you create a function in JavaScript?",
+      "answer": "Using the `function` keyword or arrow function syntax, e.g., `function myFunc() {}` or `const myFunc = () => {}`."
+    },
+    {
+      "question": "What is the difference between `let` and `var` in JavaScript?",
+      "answer": "`let` has block scope while `var` has function scope."
+    },
+    {
+      "question": "What does 'mutable' mean in the context of data structures?",
+      "answer": "Mutable means the data can be changed after creation, like arrays or objects in JavaScript."
+    },
+    {
+      "question": "Explain the concept of 'index' in JavaScript arrays.",
+      "answer": "Index is the position number of an element in an array, starting at 0."
+    },
+    {
+      "question": "What is the output of `typeof []` in JavaScript and why?",
+      "answer": "`object` because arrays are a type of object in JavaScript."
+    },
+    {
+      "question": "What method would you use to add an element to the end of an array?",
+      "answer": "The `push()` method."
+    },
+    {
+      "question": "What are the three main pillars of programming introduced in JavaScript fundamentals?",
+      "answer": "Variables, data types, and functions."
+    },
+    {
+      "question": "How does JavaScript handle memory management for data structures?",
+      "answer": "JavaScript uses automatic garbage collection to free up memory for data structures no longer in use."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "moduleId": "mod05",
+  "courseId": "javascript",
+
+  "title": "Arrays and Objects (Intro)",
+  "description": "Working with lists of data using arrays.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod05-lsn01",
+      "title": "What is an Array?",
+      "type": "theory",
+      "content": "An array is an ordered collection of values, which can hold multiple items under a single variable name. Arrays allow you to store lists of data like numbers, strings, or even other arrays."
+    },
+    {
+      "lessonId": "mod05-lsn02",
+      "title": "Creating Arrays",
+      "type": "code",
+      "content": "const fruits = ['apple', 'banana', 'cherry'];\nconsole.log(fruits); // ['apple', 'banana', 'cherry']"
+    },
+    {
+      "lessonId": "mod05-lsn03",
+      "title": "Accessing Array Elements",
+      "type": "code",
+      "content": "console.log(fruits[0]); // 'apple'\nconsole.log(fruits[2]); // 'cherry'\n// Arrays are zero-indexed, meaning the first element is at index 0."
+    },
+    {
+      "lessonId": "mod05-lsn04",
+      "title": "Modifying Arrays",
+      "type": "code",
+      "content": "fruits[1] = 'blueberry';\nconsole.log(fruits); // ['apple', 'blueberry', 'cherry']"
+    },
+    {
+      "lessonId": "mod05-lsn05",
+      "title": "Array Length",
+      "type": "code",
+      "content": "console.log(fruits.length); // 3\n// The length property returns the number of elements in the array."
+    },
+    {
+      "lessonId": "mod05-lsn06",
+      "title": "Introduction to Objects",
+      "type": "theory",
+      "content": "Objects store data in key-value pairs, allowing you to represent real-world entities with properties and values. They provide a way to group related data and functions together."
+    },
+    {
+      "lessonId": "mod05-lsn07",
+      "title": "Creating Objects",
+      "type": "code",
+      "content": "const person = {\n  name: 'John',\n  age: 30,\n  isStudent: false\n};\nconsole.log(person);"
+    },
+    {
+      "lessonId": "mod05-lsn08",
+      "title": "Accessing Object Properties",
+      "type": "code",
+      "content": "console.log(person.name); // 'John'\nconsole.log(person['age']); // 30\n// Properties can be accessed with dot notation or bracket notation."
+    },
+    {
+      "lessonId": "mod05-lsn09",
+      "title": "Modifying Object Properties",
+      "type": "code",
+      "content": "person.age = 31;\nperson.isStudent = true;\nconsole.log(person);"
+    },
+    {
+      "lessonId": "mod05-lsn10",
+      "title": "Arrays of Objects",
+      "type": "code",
+      "content": "const students = [\n  { name: 'Alice', grade: 85 },\n  { name: 'Bob', grade: 92 }\n];\nconsole.log(students[1].name); // 'Bob'\n// Arrays can hold objects, making it easy to manage complex data."
+    }
+  ]
+}

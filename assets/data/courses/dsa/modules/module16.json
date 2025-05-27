@@ -1,0 +1,81 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod16",
+  "title": "Interview Preparation and DSA Problem Solving Patterns",
+  "description": "This module focuses on preparing you to excel in technical interviews by mastering common problem-solving patterns in data structures and algorithms (DSA). You'll learn systematic approaches to analyze and solve a wide variety of problems, recognize patterns, and write clean, efficient JavaScript code under time constraints. The lessons include explanations, practice problems, and coding strategies used by top tech companies, making you confident for coding interviews and competitive programming.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod16-lsn01",
+      "title": "Understanding the Interview Mindset and Problem Analysis",
+      "type": "theory",
+      "content": "Learn how to approach coding interviews: clarifying the problem, identifying inputs and outputs, constraints, and edge cases. Understand the importance of clear communication, writing test cases, and iterative refinement."
+    },
+    {
+      "lessonId": "mod16-lsn02",
+      "title": "Two-Pointer Technique",
+      "type": "code",
+      "content": "The two-pointer technique is used to solve problems involving arrays or strings efficiently, such as finding pairs or reversing subarrays. Example: finding a pair with a given sum in a sorted array using two pointers."
+    },
+    {
+      "lessonId": "mod16-lsn03",
+      "title": "Sliding Window Pattern",
+      "type": "code",
+      "content": "Sliding window helps solve problems on subarrays or substrings by maintaining a window that slides over data. Example: finding the longest substring without repeating characters."
+    },
+    {
+      "lessonId": "mod16-lsn04",
+      "title": "Fast and Slow Pointers (Floyd’s Cycle Detection)",
+      "type": "code",
+      "content": "Used mainly in linked lists and arrays to detect cycles or find midpoints. Example: detecting a cycle in a linked list."
+    },
+    {
+      "lessonId": "mod16-lsn05",
+      "title": "Depth-First Search (DFS) and Breadth-First Search (BFS) Patterns",
+      "type": "code",
+      "content": "Fundamental graph traversal techniques applied to trees, grids, and graphs. Learn iterative and recursive DFS, BFS using queues, with example problems like connected components."
+    },
+    {
+      "lessonId": "mod16-lsn06",
+      "title": "Divide and Conquer Pattern",
+      "type": "code",
+      "content": "Break problems into smaller subproblems, solve recursively, and combine results. Example: Merge Sort and Quick Sort implementations in JavaScript."
+    },
+    {
+      "lessonId": "mod16-lsn07",
+      "title": "Backtracking Pattern",
+      "type": "code",
+      "content": "Explore all possible solutions incrementally and backtrack when constraints fail. Example problems: Sudoku solver, generating permutations."
+    },
+    {
+      "lessonId": "mod16-lsn08",
+      "title": "Dynamic Programming: Memoization and Tabulation",
+      "type": "code",
+      "content": "Learn how to optimize recursive solutions using memoization and iterative tabulation, reducing exponential time to polynomial. Example: Fibonacci sequence, knapsack problem."
+    },
+    {
+      "lessonId": "mod16-lsn09",
+      "title": "Greedy Algorithm Pattern",
+      "type": "code",
+      "content": "Make locally optimal choices to find a global optimum. Example: Activity selection, coin change problem."
+    },
+    {
+      "lessonId": "mod16-lsn10",
+      "title": "Pattern Recognition and Hybrid Approaches",
+      "type": "theory",
+      "content": "Learn how to combine patterns, recognize problem characteristics, and choose suitable strategies. Understand when to use which pattern and how to blend them effectively."
+    },
+    {
+      "lessonId": "mod16-lsn11",
+      "title": "Common Interview Problems and Walkthroughs",
+      "type": "code",
+      "content": "Solve and discuss classic interview problems such as Two Sum, Valid Parentheses, Merge Intervals, and others, with detailed explanations and code in JavaScript."
+    },
+    {
+      "lessonId": "mod16-lsn12",
+      "title": "Mock Interview Practice and Tips",
+      "type": "theory",
+      "content": "Guidance on practicing mock interviews, handling pressure, improving coding speed and accuracy, and tips on explaining your thought process clearly."
+    }
+  ]
+}

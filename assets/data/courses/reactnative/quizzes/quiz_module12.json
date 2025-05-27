@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod12",
+  "courseId": "reactnative",
+  "moduleId": "mod12",
+  "title": "Advanced Navigation and Deep Linking",
+  "tags": ["navigation", "deep linking", "react native", "react navigation", "mobile apps"],
+  "difficulty": "medium",
+  "description": "Advanced concepts in React Native navigation including deep linking and nested navigators.",
+  "quiz": [
+    {
+      "question": "What is 'deep linking' in mobile apps?",
+      "options": [
+        "Linking directly to a specific screen or content inside an app",
+        "Linking between websites",
+        "Linking to external apps only",
+        "Linking to the app store"
+      ],
+      "correctAnswer": "Linking directly to a specific screen or content inside an app",
+      "explanation": "Deep linking allows users to open a specific part of the app via a URL or external link."
+    },
+    {
+      "question": "Which React Navigation method is used to handle deep linking configuration?",
+      "options": [
+        "linking",
+        "navigate()",
+        "goBack()",
+        "reset()"
+      ],
+      "correctAnswer": "linking",
+      "explanation": "The `linking` prop is used to configure deep linking in React Navigation."
+    },
+    {
+      "question": "What is a 'nested navigator'?",
+      "options": [
+        "A navigator inside another navigator",
+        "A navigator with only one screen",
+        "A navigation bar inside a screen",
+        "A navigator that handles deep linking"
+      ],
+      "correctAnswer": "A navigator inside another navigator",
+      "explanation": "Nested navigators allow complex navigation flows by embedding navigators within each other."
+    },
+    {
+      "question": "Which package is commonly used for navigation in React Native?",
+      "options": [
+        "react-navigation",
+        "react-router",
+        "redux",
+        "react-native-router-flux"
+      ],
+      "correctAnswer": "react-navigation",
+      "explanation": "React Navigation is the most popular navigation library for React Native."
+    },
+    {
+      "question": "How do you pass parameters when navigating to a new screen?",
+      "options": [
+        "navigate('ScreenName', { paramName: value })",
+        "passParams()",
+        "sendProps()",
+        "navigateWithParams()"
+      ],
+      "correctAnswer": "navigate('ScreenName', { paramName: value })",
+      "explanation": "Parameters are passed as the second argument in the navigate function."
+    },
+    {
+      "question": "Which React Navigation hook allows access to navigation object inside a functional component?",
+      "options": [
+        "useNavigation()",
+        "useRoute()",
+        "useParams()",
+        "useNavigate()"
+      ],
+      "correctAnswer": "useNavigation()",
+      "explanation": "useNavigation() hook provides access to the navigation prop inside functional components."
+    },
+    {
+      "question": "What is the purpose of the 'initialRouteName' property in a navigator?",
+      "options": [
+        "To set the default screen shown when the navigator loads",
+        "To link to the initial route externally",
+        "To reset the navigation state",
+        "To set the background color"
+      ],
+      "correctAnswer": "To set the default screen shown when the navigator loads",
+      "explanation": "initialRouteName determines which screen is loaded first in a navigator."
+    },
+    {
+      "question": "Which deep linking URL scheme is commonly used in React Native apps?",
+      "options": [
+        "myapp://",
+        "http://",
+        "ftp://",
+        "file://"
+      ],
+      "correctAnswer": "myapp://",
+      "explanation": "Custom URL schemes like 'myapp://' are often used to enable deep linking."
+    },
+    {
+      "question": "Which function resets the navigation state to a new state?",
+      "options": [
+        "reset()",
+        "goBack()",
+        "pop()",
+        "navigate()"
+      ],
+      "correctAnswer": "reset()",
+      "explanation": "reset() replaces the navigation state, useful for resetting the navigation stack."
+    },
+    {
+      "question": "How can you listen to navigation state changes for analytics or side effects?",
+      "options": [
+        "Using the onStateChange prop on NavigationContainer",
+        "Using componentDidMount only",
+        "Using navigation.goBack()",
+        "Using props.navigation"
+      ],
+      "correctAnswer": "Using the onStateChange prop on NavigationContainer",
+      "explanation": "onStateChange lets you detect navigation changes to trigger side effects like analytics."
+    }
+  ]
+}

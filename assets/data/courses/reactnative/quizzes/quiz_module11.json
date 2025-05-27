@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod11",
+  "courseId": "reactnative",
+  "moduleId": "mod11",
+  "title": "Context API and Global State Management",
+  "tags": ["context api", "state management", "react native", "global state", "react"],
+  "difficulty": "medium",
+  "description": "Understanding how to manage global state in React Native using the Context API.",
+  "quiz": [
+    {
+      "question": "What is the primary purpose of the Context API in React?",
+      "options": [
+        "To style components globally",
+        "To manage local component state",
+        "To share data globally across components without prop drilling",
+        "To perform API calls"
+      ],
+      "correctAnswer": "To share data globally across components without prop drilling",
+      "explanation": "Context API allows passing data through the component tree without passing props at every level."
+    },
+    {
+      "question": "Which React function is used to create a context?",
+      "options": [
+        "React.createContext()",
+        "React.createState()",
+        "React.useContext()",
+        "React.createGlobal()"
+      ],
+      "correctAnswer": "React.createContext()",
+      "explanation": "createContext() creates a Context object."
+    },
+    {
+      "question": "How do you consume context values inside a functional component?",
+      "options": [
+        "Using the useContext hook",
+        "Using the Context.Consumer component only",
+        "Using props",
+        "Using state"
+      ],
+      "correctAnswer": "Using the useContext hook",
+      "explanation": "useContext hook accesses the current context value inside functional components."
+    },
+    {
+      "question": "What is 'prop drilling'?",
+      "options": [
+        "Passing props from parent to deeply nested child components unnecessarily",
+        "Sending props from child to parent",
+        "Using props in only one component",
+        "Passing props only to siblings"
+      ],
+      "correctAnswer": "Passing props from parent to deeply nested child components unnecessarily",
+      "explanation": "Prop drilling refers to passing props through many layers just to reach a deeply nested component."
+    },
+    {
+      "question": "What component wraps the parts of the app that need access to the context value?",
+      "options": [
+        "Context.Provider",
+        "Context.Consumer",
+        "useContext",
+        "Context.Wrapper"
+      ],
+      "correctAnswer": "Context.Provider",
+      "explanation": "Provider component supplies the context value to its children."
+    },
+    {
+      "question": "How do you update context values?",
+      "options": [
+        "By passing a value prop to Provider with updated state",
+        "Directly modifying context object",
+        "Using setState inside the Context.Consumer",
+        "By calling updateContext()"
+      ],
+      "correctAnswer": "By passing a value prop to Provider with updated state",
+      "explanation": "Context values are updated by changing the value passed to Provider, often managed by state."
+    },
+    {
+      "question": "Can Context API replace all state management needs in large applications?",
+      "options": [
+        "Yes, always",
+        "No, sometimes other libraries like Redux are better for complex state",
+        "No, it is only for styling",
+        "Yes, but only in React Native"
+      ],
+      "correctAnswer": "No, sometimes other libraries like Redux are better for complex state",
+      "explanation": "Context API works well for simple or medium complexity but large apps may need dedicated state libraries."
+    },
+    {
+      "question": "Which hook allows you to avoid using Context.Consumer components for accessing context?",
+      "options": [
+        "useContext",
+        "useState",
+        "useEffect",
+        "useReducer"
+      ],
+      "correctAnswer": "useContext",
+      "explanation": "useContext simplifies consuming context values in functional components."
+    },
+    {
+      "question": "Is it possible to have multiple Context Providers in an app?",
+      "options": [
+        "Yes, you can nest multiple providers",
+        "No, only one provider per app",
+        "No, only one provider per component",
+        "Yes, but only for styling"
+      ],
+      "correctAnswer": "Yes, you can nest multiple providers",
+      "explanation": "You can nest multiple Context Providers to manage different pieces of global state."
+    },
+    {
+      "question": "What is a common use case for Context API in React Native?",
+      "options": [
+        "Theme management",
+        "User authentication status",
+        "Language or localization settings",
+        "All of the above"
+      ],
+      "correctAnswer": "All of the above",
+      "explanation": "Context API is often used for themes, auth, localization, and other global data."
+    }
+  ]
+}

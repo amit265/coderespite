@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod12",
+  "courseId": "dsa",
+  "moduleId": "mod12",
+  "title": "Advanced Graph Algorithms and Applications",
+  "description": "Explore advanced graph algorithms like shortest path, minimum spanning tree, and graph connectivity for complex problem-solving.",
+  "flashcards": [
+    {
+      "question": "What is Dijkstra's algorithm used for?",
+      "answer": "Finding the shortest path from a source vertex to all other vertices in a weighted graph with non-negative weights."
+    },
+    {
+      "question": "How does Dijkstra's algorithm work conceptually?",
+      "answer": "It greedily selects the closest unvisited vertex and updates shortest distances to its neighbors."
+    },
+    {
+      "question": "What is the time complexity of Dijkstra’s algorithm using a min-priority queue?",
+      "answer": "O((V + E) log V), where V is vertices and E is edges."
+    },
+    {
+      "question": "What is the Bellman-Ford algorithm, and how is it different from Dijkstra?",
+      "answer": "It computes shortest paths even with negative edge weights and detects negative weight cycles."
+    },
+    {
+      "question": "What is the Floyd-Warshall algorithm used for?",
+      "answer": "Finding shortest paths between all pairs of vertices."
+    },
+    {
+      "question": "What is a Minimum Spanning Tree (MST)?",
+      "answer": "A subset of edges that connects all vertices with the minimum total edge weight and no cycles."
+    },
+    {
+      "question": "Name two popular algorithms to find the MST.",
+      "answer": "Kruskal's and Prim's algorithms."
+    },
+    {
+      "question": "How does Kruskal’s algorithm work?",
+      "answer": "It sorts edges by weight and adds the smallest edge to the MST if it doesn’t form a cycle."
+    },
+    {
+      "question": "What data structure is often used in Kruskal's algorithm for cycle detection?",
+      "answer": "Disjoint Set Union (Union-Find)."
+    },
+    {
+      "question": "How does Prim’s algorithm differ from Kruskal’s?",
+      "answer": "Prim’s grows the MST by starting from a vertex and adding the smallest edge connecting to a new vertex."
+    },
+    {
+      "question": "What is a topological sort, and when is it applicable?",
+      "answer": "A linear ordering of vertices in a Directed Acyclic Graph (DAG) such that every edge points from an earlier to a later vertex."
+    },
+    {
+      "question": "How can you detect if a graph has a cycle using DFS?",
+      "answer": "By checking if a vertex is visited again in the current recursion stack."
+    },
+    {
+      "question": "What are strongly connected components (SCC) in a directed graph?",
+      "answer": "Subsets of vertices where each vertex is reachable from every other vertex in the same subset."
+    },
+    {
+      "question": "Name an algorithm to find strongly connected components.",
+      "answer": "Kosaraju's algorithm."
+    },
+    {
+      "question": "What real-world problems can advanced graph algorithms solve?",
+      "answer": "Network routing, social network analysis, task scheduling, and resource allocation."
+    }
+  ]
+}

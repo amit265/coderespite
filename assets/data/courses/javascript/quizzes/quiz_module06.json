@@ -1,0 +1,96 @@
+{
+  "quizId": "qz6",
+  "moduleId": "mod06",
+  "title": "Deep Dive: Functions",
+  "courseId": "javascript",
+
+  "tags": ["functions", "parameters", "scope"],
+  "difficulty": "medium",
+  "description": "Quiz on deeper concepts of functions including parameters, return values, and scope.",
+  "quiz": [{
+      "question": "Which keyword is used to define a function in JavaScript?",
+      "options": ["function", "func", "def", "method"],
+      "correctAnswer": "function",
+      "explanation": "The `function` keyword is used to declare a function."
+    },
+    {
+      "question": "What is the output of: `function greet() { return 'Hi'; } greet();`?",
+      "options": ["undefined", "greet", "Hi", "null"],
+      "correctAnswer": "Hi",
+      "explanation": "`greet()` returns the string 'Hi'."
+    },
+    {
+      "question": "What does a function return if it has no return statement?",
+      "options": ["null", "undefined", "0", "false"],
+      "correctAnswer": "undefined",
+      "explanation": "If no return value is specified, JavaScript returns `undefined`."
+    },
+    {
+      "question": "How do you define a function expression?",
+      "options": [
+        "function sayHello() {}",
+        "const sayHello = function() {}",
+        "sayHello() = function {}",
+        "function = sayHello()"
+      ],
+      "correctAnswer": "const sayHello = function() {}",
+      "explanation": "A function expression is assigned to a variable."
+    },
+    {
+      "question": "Which type of function does not bind its own `this`?",
+      "options": ["Named function", "Arrow function", "Anonymous function", "Constructor function"],
+      "correctAnswer": "Arrow function",
+      "explanation": "Arrow functions use the `this` value of their enclosing context."
+    },
+    {
+      "question": "What is function scope?",
+      "options": [
+        "Variables are accessible anywhere",
+        "Variables are accessible only inside the function",
+        "Variables are public",
+        "Variables are only inside loops"
+      ],
+      "correctAnswer": "Variables are accessible only inside the function",
+      "explanation": "Function scope restricts variables to be accessible only within the function."
+    },
+    {
+      "question": "What is the purpose of parameters in functions?",
+      "options": [
+        "To create new variables",
+        "To access global variables",
+        "To pass input to the function",
+        "To end the function"
+      ],
+      "correctAnswer": "To pass input to the function",
+      "explanation": "Parameters allow functions to receive input values when called."
+    },
+    {
+      "question": "What does this function return: `function sum(a, b) { return a + b; }`?",
+      "options": ["Sum of a and b", "String of a and b", "Undefined", "Error"],
+      "correctAnswer": "Sum of a and b",
+      "explanation": "It adds a and b and returns the result."
+    },
+    {
+      "question": "Which of these is a valid arrow function?",
+      "options": [
+        "() -> {}",
+        "() => {}",
+        "() <- {}",
+        "=> () {}"
+      ],
+      "correctAnswer": "() => {}",
+      "explanation": "The arrow function syntax uses `=>`."
+    },
+    {
+      "question": "What is a higher-order function?",
+      "options": [
+        "A function that runs faster",
+        "A function that returns another function or takes a function as input",
+        "A function that uses math operations",
+        "A function defined inside a loop"
+      ],
+      "correctAnswer": "A function that returns another function or takes a function as input",
+      "explanation": "Higher-order functions work with other functions as arguments or return values."
+    }
+  ]
+}

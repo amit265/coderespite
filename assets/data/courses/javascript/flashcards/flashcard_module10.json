@@ -1,0 +1,50 @@
+{
+  "id": "fc-mod10",
+  "moduleId": "mod10",
+  "courseId": "javascript",
+
+  "title": "Modules & Tooling",
+  "description": "Using try-catch blocks to handle errors gracefully.",
+  "flashcards": [
+    {
+      "question": "What is a JavaScript module?",
+      "answer": "A file that exports variables or functions to be imported elsewhere."
+    },
+    {
+      "question": "How do you export a function in ES6 modules?",
+      "answer": "Using `export` keyword before the function or `export default`."
+    },
+    {
+      "question": "How do you import a default export from a module?",
+      "answer": "Using `import name from './module.js';`."
+    },
+    {
+      "question": "What is the purpose of try-catch blocks?",
+      "answer": "To handle runtime errors gracefully without stopping the program."
+    },
+    {
+      "question": "How do you write a try-catch block?",
+      "answer": "Use `try { /* code */ } catch (error) { /* handle error */ }`."
+    },
+    {
+      "question": "Can you use try-catch with async-await?",
+      "answer": "Yes, to catch errors thrown by awaited Promises."
+    },
+    {
+      "question": "What does the `finally` block do?",
+      "answer": "Runs code after try and catch, regardless of success or failure."
+    },
+    {
+      "question": "What tools help in bundling JavaScript modules?",
+      "answer": "Webpack, Rollup, and Parcel."
+    },
+    {
+      "question": "What is tree shaking in modules?",
+      "answer": "Removing unused code during bundling to reduce file size."
+    },
+    {
+      "question": "Why modularize your code?",
+      "answer": "For better organization, reusability, and maintainability."
+    }
+  ]
+}

@@ -51,6 +51,7 @@ export default function QuizId() {
         [...quiz[currentPage].options].sort(() => Math.random() - 0.5)
       );
     }
+ 
   }, [currentPage, quiz]);
 
   const getProgress = (currentPage) => {
@@ -197,13 +198,13 @@ export default function QuizId() {
           }}
         >
           <Pressable onPress={goBack}>
-            <Ionicons name="arrow-back" size={30} color="black" />
+            <Ionicons name="arrow-back" size={24} color="black" />
           </Pressable>
 
           <Text
             style={{
               fontFamily: "nunito-bold",
-              fontSize: 25,
+              fontSize: 16,
               color: colors.BLACK,
             }}
           >
@@ -245,7 +246,7 @@ export default function QuizId() {
             <Text
               style={{
                 fontFamily: "nunito-bold",
-                fontSize: 18,
+                fontSize: 16,
                 textAlign: "center",
               }}
             >
@@ -257,13 +258,13 @@ export default function QuizId() {
                 onPress={() => {
                   setSelectedOption(index);
                   setSelectOption(true);
-                  onOptionSelect(item);
+                  onOptionSelect(item); 
                 }}
                 style={{
-                  padding: 20,
+                  padding: 16,
                   borderWidth: 1,
                   borderRadius: 15,
-                  marginTop: 8,
+                  marginTop: 6,
                   backgroundColor:
                     selectedOption === index ? colors.PRIMARY : null,
 
@@ -273,7 +274,7 @@ export default function QuizId() {
                 <Text
                   style={{
                     fontFamily: "nunito",
-                    fontSize: 17,
+                    fontSize: 14,
                     color: selectedOption === index ? colors.WHITE : null,
                   }}
                 >

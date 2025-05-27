@@ -1,0 +1,70 @@
+{
+  "moduleId": "mod01",
+  "courseId": "javascript",
+
+  "title": "Getting Started with JavaScript",
+  "description": "Introduction to variables, data types, and operators.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod01-lsn01",
+      "title": "What is JavaScript?",
+      "type": "theory",
+      "content": "JavaScript is a powerful, versatile programming language primarily used for enhancing web pages by making them interactive and dynamic. It allows developers to manipulate webpage content, handle user events, and communicate with servers without needing to reload the page."
+    },
+    {
+      "lessonId": "mod01-lsn02",
+      "title": "JavaScript in the Browser",
+      "type": "theory",
+      "content": "Within web browsers, JavaScript acts as the engine that drives user interaction. It interacts with the Document Object Model (DOM) to dynamically change the content, style, and structure of web pages in response to user actions such as clicks, typing, and navigation."
+    },
+    {
+      "lessonId": "mod01-lsn03",
+      "title": "Variables in JavaScript",
+      "type": "theory",
+      "content": "Variables in JavaScript serve as named containers that store data values. These can hold different types of data and are essential for writing flexible and maintainable code. Modern JavaScript encourages the use of `let` and `const` for variable declarations due to their block scope and immutability features."
+    },
+    {
+      "lessonId": "mod01-lsn04",
+      "title": "Declaring Variables",
+      "type": "code",
+      "content": "/* Declaring variables using let, const, and var */\nlet age = 30; // age can be reassigned\nconst name = 'Alice'; // name cannot be changed\nvar isStudent = true; // var is function-scoped and less recommended"
+    },
+    {
+      "lessonId": "mod01-lsn05",
+      "title": "Data Types Overview",
+      "type": "theory",
+      "content": "JavaScript includes several primitive data types: String for text, Number for numeric values, Boolean for true/false, Null representing intentional absence of any object value, Undefined for uninitialized variables, and Symbol for unique identifiers. Understanding these is critical to managing data effectively."
+    },
+    {
+      "lessonId": "mod01-lsn06",
+      "title": "Working with Strings",
+      "type": "code",
+      "content": "/* Creating and manipulating string values */\nlet greeting = 'Hello';\nlet message = greeting + ' World!';\nconsole.log(message); // Output: Hello World!\n// Strings can be concatenated using the + operator."
+    },
+    {
+      "lessonId": "mod01-lsn07",
+      "title": "Numbers and Arithmetic Operators",
+      "type": "code",
+      "content": "/* Performing arithmetic operations */\nlet x = 10;\nlet y = 5;\nlet sum = x + y; // Addition\nlet product = x * y; // Multiplication\nconsole.log(sum); // 15\nconsole.log(product); // 50"
+    },
+    {
+      "lessonId": "mod01-lsn08",
+      "title": "Comments in JavaScript",
+      "type": "theory",
+      "content": "Comments are essential for documenting your code and explaining complex logic. Single-line comments start with `//`, while multi-line comments are wrapped inside `/* */`. Comments are ignored during code execution."
+    },
+    {
+      "lessonId": "mod01-lsn09",
+      "title": "Basic Operators",
+      "type": "theory",
+      "content": "JavaScript provides a variety of operators to perform computations and assignments. Arithmetic operators include addition (+), subtraction (-), multiplication (*), and division (/). Assignment operators like = assign values to variables, enabling dynamic data manipulation."
+    },
+    {
+      "lessonId": "mod01-lsn10",
+      "title": "Logging Output",
+      "type": "code",
+      "content": "/* Using console.log() to output values to the console */\nconsole.log('This is JavaScript!');\n// Useful for debugging and monitoring program flow."
+    }
+  ]
+}

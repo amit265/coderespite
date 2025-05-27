@@ -1,0 +1,75 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod09",
+  "title": "Binary Search Trees: Efficient Searching and Sorting",
+  "description": "This module explores Binary Search Trees (BSTs), a specialized form of binary trees that maintains order to allow efficient search, insertion, and deletion. You’ll learn how to implement BSTs in JavaScript, traverse them for sorted data, and apply advanced operations like finding successors, validating BSTs, and balancing strategies. With practical problems and performance comparisons to other structures, this module builds your skill to handle real-world use cases like databases, auto-complete systems, and in-memory indexing.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod09-lsn01",
+      "title": "What is a Binary Search Tree?",
+      "type": "theory",
+      "content": "A Binary Search Tree (BST) is a binary tree where for each node:\n- All values in the left subtree are less than the node's value.\n- All values in the right subtree are greater than the node's value.\n\n**Properties:**\n- Average-case: O(log n) for search, insert, delete.\n- Worst-case: O(n) (e.g., skewed tree).\n\nUsed in: Databases, in-memory search, sorted maps/sets, priority queues."
+    },
+    {
+      "lessonId": "mod09-lsn02",
+      "title": "Implementing a BST Node and Tree in JavaScript",
+      "type": "code",
+      "content": "```js\nclass TreeNode {\n  constructor(value) {\n    this.value = value;\n    this.left = null;\n    this.right = null;\n  }\n}\n\nclass BST {\n  constructor() {\n    this.root = null;\n  }\n\n  insert(value) {\n    const newNode = new TreeNode(value);\n    if (!this.root) return (this.root = newNode);\n\n    let current = this.root;\n    while (true) {\n      if (value < current.value) {\n        if (!current.left) return (current.left = newNode);\n        current = current.left;\n      } else {\n        if (!current.right) return (current.right = newNode);\n        current = current.right;\n      }\n    }\n  }\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn03",
+      "title": "BST Insertion: Recursively and Iteratively",
+      "type": "code",
+      "content": "```js\ninsertRecursive(node, value) {\n  if (!node) return new TreeNode(value);\n  if (value < node.value) {\n    node.left = this.insertRecursive(node.left, value);\n  } else {\n    node.right = this.insertRecursive(node.right, value);\n  }\n  return node;\n}\n\n// To call: bst.root = bst.insertRecursive(bst.root, 10);\n```"
+    },
+    {
+      "lessonId": "mod09-lsn04",
+      "title": "Searching for a Value in a BST",
+      "type": "code",
+      "content": "```js\nsearch(value) {\n  let current = this.root;\n  while (current) {\n    if (value === current.value) return true;\n    current = value < current.value ? current.left : current.right;\n  }\n  return false;\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn05",
+      "title": "Finding Minimum and Maximum in a BST",
+      "type": "code",
+      "content": "```js\nfindMin() {\n  let current = this.root;\n  while (current.left) {\n    current = current.left;\n  }\n  return current.value;\n}\n\nfindMax() {\n  let current = this.root;\n  while (current.right) {\n    current = current.right;\n  }\n  return current.value;\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn06",
+      "title": "BST Traversals: Inorder for Sorted Output",
+      "type": "code",
+      "content": "```js\ninOrder(node) {\n  if (!node) return;\n  this.inOrder(node.left);\n  console.log(node.value);\n  this.inOrder(node.right);\n}\n\n// Usage: bst.inOrder(bst.root);\n```"
+    },
+    {
+      "lessonId": "mod09-lsn07",
+      "title": "Deleting a Node from a BST",
+      "type": "code",
+      "content": "```js\ndeleteNode(root, key) {\n  if (!root) return null;\n  if (key < root.value) {\n    root.left = this.deleteNode(root.left, key);\n  } else if (key > root.value) {\n    root.right = this.deleteNode(root.right, key);\n  } else {\n    if (!root.left) return root.right;\n    if (!root.right) return root.left;\n    let minNode = root.right;\n    while (minNode.left) minNode = minNode.left;\n    root.value = minNode.value;\n    root.right = this.deleteNode(root.right, minNode.value);\n  }\n  return root;\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn08",
+      "title": "Validating a Binary Search Tree",
+      "type": "code",
+      "content": "```js\nfunction isValidBST(node, min = -Infinity, max = Infinity) {\n  if (!node) return true;\n  if (node.value <= min || node.value >= max) return false;\n  return (\n    isValidBST(node.left, min, node.value) &&\n    isValidBST(node.right, node.value, max)\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn09",
+      "title": "Finding Inorder Successor and Predecessor",
+      "type": "code",
+      "content": "```js\nfunction findSuccessor(root, key) {\n  let succ = null;\n  while (root) {\n    if (key < root.value) {\n      succ = root;\n      root = root.left;\n    } else {\n      root = root.right;\n    }\n  }\n  return succ;\n}\n```"
+    },
+    {
+      "lessonId": "mod09-lsn10",
+      "title": "Balancing a BST (Basic Concepts and Intro to AVL/Red-Black Trees)",
+      "type": "theory",
+      "content": "**Unbalanced BSTs** behave like linked lists in the worst case.\n\n**Balanced BST Types**:\n- **AVL Tree**: Maintains strict balance using rotations.\n- **Red-Black Tree**: Looser balancing, widely used in JavaScript engines.\n\nJavaScript doesn't provide native balanced BSTs, but understanding their mechanics helps with implementing efficient sorted collections and understanding runtime engines like V8."
+    },
+    {
+      "lessonId": "mod09-lsn11",
+      "title": "Real-World Applications of BSTs",
+      "type": "theory",
+      "content": "- **Database Indexing**: BSTs offer O(log n) search performance.\n- **Auto-complete Engines**: Can maintain sorted prefixes.\n- **File Systems**: Directory hierarchies often use variations of BST.\n- **Syntax Trees in Compilers**: Abstract Syntax Trees are often structured as BSTs.\n- **Range Queries**: Efficient for querying ranges of sorted elements."
+    }
+  ]
+}

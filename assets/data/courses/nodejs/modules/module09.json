@@ -1,0 +1,69 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod09",
+  "title": "Authentication and Authorization",
+  "description": "Understand how to secure your Node.js applications by implementing authentication and authorization. Learn different strategies for user login, session management, token-based authentication, and controlling access to resources.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod09-lsn01",
+      "title": "Introduction to Authentication and Authorization",
+      "type": "theory",
+      "content": "Authentication verifies who a user is, while authorization determines what they are allowed to do. This lesson explains the core concepts, why they are essential for application security, and how they differ."
+    },
+    {
+      "lessonId": "mod09-lsn02",
+      "title": "Implementing User Registration",
+      "type": "practice",
+      "content": "Learn how to create a user registration system where new users can sign up. This includes handling form data, validating input, hashing passwords securely using libraries like bcrypt, and storing user information in a database."
+    },
+    {
+      "lessonId": "mod09-lsn03",
+      "title": "User Login and Session Management",
+      "type": "practice",
+      "content": "Explore how users log in using credentials, how sessions are created and maintained with tools like express-session, and how to manage cookies to keep users logged in securely."
+    },
+    {
+      "lessonId": "mod09-lsn04",
+      "title": "JWT (JSON Web Tokens) for Authentication",
+      "type": "practice",
+      "content": "JWT is a popular token-based authentication method. You will learn how to create, sign, and verify JWTs, use them to authenticate API requests, and handle token expiration and refresh workflows."
+    },
+    {
+      "lessonId": "mod09-lsn05",
+      "title": "OAuth and Social Logins",
+      "type": "theory",
+      "content": "OAuth allows users to log in with third-party providers like Google, Facebook, or GitHub. This lesson covers how OAuth works, its benefits, and how to integrate social login in your Node.js applications."
+    },
+    {
+      "lessonId": "mod09-lsn06",
+      "title": "Role-Based Access Control (RBAC)",
+      "type": "theory",
+      "content": "Authorization often involves roles and permissions. You’ll learn how to define roles, assign permissions, and enforce access control so users can only access resources appropriate to their role."
+    },
+    {
+      "lessonId": "mod09-lsn07",
+      "title": "Protecting Routes with Middleware",
+      "type": "practice",
+      "content": "Middleware can guard routes to ensure only authenticated users or users with certain roles can access them. This lesson covers how to create and use middleware for route protection in Express."
+    },
+    {
+      "lessonId": "mod09-lsn08",
+      "title": "Password Reset and Account Recovery",
+      "type": "practice",
+      "content": "Learn how to implement secure password reset functionality, including generating reset tokens, sending emails, and updating passwords safely."
+    },
+    {
+      "lessonId": "mod09-lsn09",
+      "title": "Security Best Practices for Authentication",
+      "type": "theory",
+      "content": "This lesson highlights best practices such as using HTTPS, securing cookies, preventing brute force attacks, and protecting against common vulnerabilities like CSRF and XSS."
+    },
+    {
+      "lessonId": "mod09-lsn10",
+      "title": "Building a Complete Authentication System",
+      "type": "practice",
+      "content": "In this project, you will build a full authentication system with user registration, login, JWT-based session handling, role-based access, and secure password management, integrating all concepts from the module."
+    }
+  ]
+}

@@ -13,7 +13,7 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
 
   // console.log("allcourses", allCourses);
 
-  // console.log("randomCourseId", randomCourseId);
+  console.log("randomCourseId", randomModule);
 
   const defaultModule = {
     title: "Introduction to JavaScript",
@@ -25,9 +25,9 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
 
     const randomCourseId =
       allCourseId[Math.floor(Math.random() * allCourseId.length)];
-    console.log("randomCourseId", randomCourseId);
+    // console.log("randomCourseId", randomCourseId);
     const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
-    console.log("randomCourse", randomCourse);
+    // console.log("randomCourse", randomCourse);
     setCourseName(randomCourse?.title || "Featured Course");
     if (Array.isArray(allCourses) && allCourses.length > 0) {
       const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
@@ -71,8 +71,13 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
         color={colors.BLACK}
         text={"Start"}
         onPress={() => {
+          if (!randomModule?.moduleId) {
+            console.error("No moduleId found for the selected module.");
+            return;
+          }
           setClickCount((prev) => prev + 1);
           setSelectedModule(randomModule);
+
           router.push(`/learn/courses/modules/${randomModule?.moduleId}`);
         }}
       />

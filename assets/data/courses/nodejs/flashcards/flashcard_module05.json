@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod05",
+  "courseId": "nodejs",
+  "moduleId": "mod05",
+  "title": "Routing in Express",
+  "description": "Understanding routing in Express.js to handle client requests and define endpoints for your web application.",
+  "flashcards": [
+    {
+      "question": "What is routing in Express.js?",
+      "answer": "Routing refers to how an application’s endpoints (URIs) respond to client requests."
+    },
+    {
+      "question": "How do you define a route for a GET request in Express?",
+      "answer": "Using `app.get(path, callback)`, for example, `app.get('/', (req, res) => { ... })`."
+    },
+    {
+      "question": "Can you define routes for other HTTP methods besides GET?",
+      "answer": "Yes, Express supports routes for POST, PUT, DELETE, PATCH, and others using `app.post()`, `app.put()`, etc."
+    },
+    {
+      "question": "What is the purpose of route parameters in Express?",
+      "answer": "Route parameters are dynamic parts of a route URL that capture values, e.g., `/user/:id` captures the `id` value."
+    },
+    {
+      "question": "How do you access route parameters inside a route handler?",
+      "answer": "Using `req.params`, for example, `req.params.id` to get the value of `:id`."
+    },
+    {
+      "question": "What is the difference between `app.use()` and route methods like `app.get()`?",
+      "answer": "`app.use()` mounts middleware functions and can handle all HTTP methods, while `app.get()` handles specific HTTP GET requests."
+    },
+    {
+      "question": "How can you chain route handlers for the same path?",
+      "answer": "By providing multiple callback functions or using `app.route()` method."
+    },
+    {
+      "question": "What is the `next` function used for in route handlers?",
+      "answer": "`next` is used to pass control to the next middleware function or route handler."
+    },
+    {
+      "question": "How do you create modular routes in Express?",
+      "answer": "By using the Express Router (`express.Router()`), which allows grouping routes and exporting them as modules."
+    },
+    {
+      "question": "What happens if no route matches the client request?",
+      "answer": "Express returns a 404 Not Found response unless a custom handler is defined."
+    }
+  ]
+}

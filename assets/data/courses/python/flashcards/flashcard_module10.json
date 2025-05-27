@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod10",
+  "courseId": "python",
+  "moduleId": "mod10",
+  "title": "Introduction to Virtual Environments and pip",
+  "description": "Learn how to create and manage virtual environments and use pip for package management in Python projects.",
+  "flashcards": [
+    {
+      "question": "What is a virtual environment in Python?",
+      "answer": "An isolated environment to manage project-specific Python packages without affecting the global installation."
+    },
+    {
+      "question": "Why are virtual environments important?",
+      "answer": "They help avoid dependency conflicts between different Python projects."
+    },
+    {
+      "question": "How do you create a virtual environment?",
+      "answer": "By running `python -m venv env_name` in the terminal."
+    },
+    {
+      "question": "How do you activate a virtual environment on Windows?",
+      "answer": "Run `.\env_name\Scripts\activate` in the command prompt."
+    },
+    {
+      "question": "How do you activate a virtual environment on macOS/Linux?",
+      "answer": "Run `source env_name/bin/activate` in the terminal."
+    },
+    {
+      "question": "How do you deactivate a virtual environment?",
+      "answer": "Simply run the `deactivate` command."
+    },
+    {
+      "question": "What is pip?",
+      "answer": "Python’s package installer used to install and manage packages from the Python Package Index (PyPI)."
+    },
+    {
+      "question": "How do you install a package using pip?",
+      "answer": "Use `pip install package_name`."
+    },
+    {
+      "question": "How do you list installed packages using pip?",
+      "answer": "Use `pip list`."
+    },
+    {
+      "question": "How do you save your project’s dependencies to a file?",
+      "answer": "Run `pip freeze > requirements.txt`."
+    }
+  ]
+}

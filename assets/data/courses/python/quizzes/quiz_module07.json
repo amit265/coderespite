@@ -1,0 +1,86 @@
+{
+  "quizId": "qz07",
+  "courseId": "python",
+  "moduleId": "mod07",
+  "title": "File Handling and Exceptions",
+  "tags": ["python", "file handling", "exceptions", "errors", "try-except"],
+  "difficulty": "medium",
+  "description": "Understand how to work with files and handle exceptions in Python.",
+  "quiz": [
+    {
+      "question": "Which mode is used to open a file for writing, creating it if it doesn't exist?",
+      "options": ["'r'", "'w'", "'a'", "'x'"],
+      "correctAnswer": "'w'",
+      "explanation": "'w' mode opens a file for writing and creates it if it does not exist."
+    },
+    {
+      "question": "What does the 'a' mode do when opening a file?",
+      "options": [
+        "Reads the file",
+        "Appends data to the end of the file",
+        "Overwrites the file",
+        "Deletes the file"
+      ],
+      "correctAnswer": "Appends data to the end of the file",
+      "explanation": "'a' mode appends data to the end without deleting existing content."
+    },
+    {
+      "question": "How do you properly close a file after opening it?",
+      "options": ["file.close()", "close(file)", "file.end()", "exit(file)"],
+      "correctAnswer": "file.close()",
+      "explanation": "Use `file.close()` to properly close a file and free system resources."
+    },
+    {
+      "question": "Which statement is used to handle exceptions in Python?",
+      "options": ["try-except", "if-else", "for-while", "switch-case"],
+      "correctAnswer": "try-except",
+      "explanation": "try-except blocks are used to handle exceptions."
+    },
+    {
+      "question": "What exception is raised when a file is not found during open()?",
+      "options": [
+        "FileNotFoundError",
+        "IOError",
+        "ValueError",
+        "NameError"
+      ],
+      "correctAnswer": "FileNotFoundError",
+      "explanation": "FileNotFoundError is raised if the file does not exist in read mode."
+    },
+    {
+      "question": "Which keyword is used to execute code regardless of whether an exception occurs?",
+      "options": ["finally", "else", "except", "try"],
+      "correctAnswer": "finally",
+      "explanation": "The `finally` block always runs after try-except blocks."
+    },
+    {
+      "question": "How do you read the entire content of a file into a string?",
+      "options": ["file.read()", "file.readline()", "file.readlines()", "file.get()"],
+      "correctAnswer": "file.read()",
+      "explanation": "`read()` reads the entire file content as a single string."
+    },
+    {
+      "question": "What happens if you try to open a file that doesn’t exist with mode 'r'?",
+      "options": [
+        "The file is created",
+        "FileNotFoundError is raised",
+        "The file is opened empty",
+        "The file is overwritten"
+      ],
+      "correctAnswer": "FileNotFoundError is raised",
+      "explanation": "Mode 'r' requires the file to exist; otherwise, FileNotFoundError is raised."
+    },
+    {
+      "question": "Which method reads one line at a time from a file?",
+      "options": ["readline()", "read()", "readlines()", "line()"],
+      "correctAnswer": "readline()",
+      "explanation": "`readline()` reads a single line from the file."
+    },
+    {
+      "question": "How can you raise an exception manually in Python?",
+      "options": ["raise Exception('Error message')", "throw Exception", "error('message')", "except Exception"],
+      "correctAnswer": "raise Exception('Error message')",
+      "explanation": "The `raise` keyword is used to manually throw exceptions."
+    }
+  ]
+}

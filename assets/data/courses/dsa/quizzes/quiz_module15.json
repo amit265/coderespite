@@ -1,0 +1,121 @@
+{
+  "quizId": "qz15",
+  "courseId": "dsa",
+  "moduleId": "mod15",
+  "title": "Real-World Applications and System Design with Data Structures",
+  "tags": ["system design", "data structures", "applications", "scalability", "performance"],
+  "difficulty": "medium",
+  "description": "Understand how data structures are used in real-world systems and the principles behind designing scalable, efficient systems.",
+  "quiz": [
+    {
+      "question": "Which data structure is commonly used to implement a cache system with LRU (Least Recently Used) eviction?",
+      "options": [
+        "HashMap with Doubly Linked List",
+        "Stack",
+        "Queue",
+        "Binary Tree"
+      ],
+      "correctAnswer": "HashMap with Doubly Linked List",
+      "explanation": "LRU caches combine a HashMap for fast lookup and a doubly linked list to track usage order."
+    },
+    {
+      "question": "In system design, what is a key advantage of using a HashMap?",
+      "options": [
+        "Fast average O(1) lookup and insertion",
+        "Maintains sorted order",
+        "Minimal memory usage",
+        "Thread safety by default"
+      ],
+      "correctAnswer": "Fast average O(1) lookup and insertion",
+      "explanation": "HashMaps provide quick lookups and insertions in average constant time."
+    },
+    {
+      "question": "Which data structure is ideal for implementing a priority queue in large-scale systems?",
+      "options": [
+        "Heap",
+        "Linked List",
+        "Array",
+        "Graph"
+      ],
+      "correctAnswer": "Heap",
+      "explanation": "Heaps efficiently maintain the highest or lowest priority element at the top."
+    },
+    {
+      "question": "What system design principle involves breaking a system into smaller, manageable components?",
+      "options": [
+        "Modularity",
+        "Coupling",
+        "Redundancy",
+        "Monolith"
+      ],
+      "correctAnswer": "Modularity",
+      "explanation": "Modularity helps in managing complexity and scaling by dividing the system into components."
+    },
+    {
+      "question": "Which data structure is best suited for implementing undo functionality in applications?",
+      "options": [
+        "Stack",
+        "Queue",
+        "Graph",
+        "Trie"
+      ],
+      "correctAnswer": "Stack",
+      "explanation": "Stacks follow LIFO order, ideal for undo operations."
+    },
+    {
+      "question": "In distributed systems, which data structure can help efficiently distribute and locate data across nodes?",
+      "options": [
+        "Consistent Hashing",
+        "Binary Search Tree",
+        "Queue",
+        "Heap"
+      ],
+      "correctAnswer": "Consistent Hashing",
+      "explanation": "Consistent hashing distributes keys across nodes minimizing remapping during scaling."
+    },
+    {
+      "question": "What role do graphs often play in system design?",
+      "options": [
+        "Modeling relationships and networks",
+        "Sorting large datasets",
+        "Implementing caches",
+        "Managing sessions"
+      ],
+      "correctAnswer": "Modeling relationships and networks",
+      "explanation": "Graphs are used to represent and analyze complex networks like social networks or web links."
+    },
+    {
+      "question": "Which data structure is commonly used to implement messaging queues for asynchronous processing?",
+      "options": [
+        "Queue",
+        "Stack",
+        "Trie",
+        "Heap"
+      ],
+      "correctAnswer": "Queue",
+      "explanation": "Queues are used for FIFO message handling in asynchronous systems."
+    },
+    {
+      "question": "Why is it important to consider space complexity in system design?",
+      "options": [
+        "To ensure efficient use of memory and scalability",
+        "To speed up coding",
+        "To simplify user interface",
+        "To make the system slower"
+      ],
+      "correctAnswer": "To ensure efficient use of memory and scalability",
+      "explanation": "Efficient memory usage is critical for scalable and performant systems."
+    },
+    {
+      "question": "Which data structure would best help design a feature for finding the shortest path between two points in a navigation system?",
+      "options": [
+        "Graph",
+        "Stack",
+        "Array",
+        "Heap"
+      ],
+      "correctAnswer": "Graph",
+      "explanation": "Graphs represent networks where algorithms like Dijkstra’s find shortest paths."
+    }
+  ]
+}

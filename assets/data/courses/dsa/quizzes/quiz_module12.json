@@ -1,0 +1,121 @@
+{
+  "quizId": "qz12",
+  "courseId": "dsa",
+  "moduleId": "mod12",
+  "title": "Advanced Graph Algorithms and Applications",
+  "tags": ["graphs", "algorithms", "Dijkstra", "Prim", "Kruskal", "topological sort", "applications"],
+  "difficulty": "hard",
+  "description": "Explore advanced graph algorithms like shortest path, minimum spanning tree, and topological sorting along with their applications.",
+  "quiz": [
+    {
+      "question": "What problem does Dijkstra's algorithm solve?",
+      "options": [
+        "Shortest path from a single source in a weighted graph",
+        "Detecting cycles in a graph",
+        "Finding minimum spanning tree",
+        "Topological sorting"
+      ],
+      "correctAnswer": "Shortest path from a single source in a weighted graph",
+      "explanation": "Dijkstra’s algorithm finds the shortest path from one node to all others in graphs with non-negative weights."
+    },
+    {
+      "question": "Which data structure is commonly used in Dijkstra's algorithm for efficient extraction of the next closest node?",
+      "options": [
+        "Min-priority queue (min-heap)",
+        "Stack",
+        "Queue",
+        "Hash table"
+      ],
+      "correctAnswer": "Min-priority queue (min-heap)",
+      "explanation": "Min-heap efficiently fetches the vertex with the smallest tentative distance."
+    },
+    {
+      "question": "What is the main goal of Prim's algorithm?",
+      "options": [
+        "Find minimum spanning tree",
+        "Find shortest path",
+        "Detect cycles",
+        "Perform topological sorting"
+      ],
+      "correctAnswer": "Find minimum spanning tree",
+      "explanation": "Prim’s algorithm builds a minimum spanning tree by growing it from an initial vertex."
+    },
+    {
+      "question": "Which algorithm can be used to find a minimum spanning tree by sorting edges?",
+      "options": [
+        "Kruskal's algorithm",
+        "Dijkstra's algorithm",
+        "Bellman-Ford algorithm",
+        "Floyd-Warshall algorithm"
+      ],
+      "correctAnswer": "Kruskal's algorithm",
+      "explanation": "Kruskal’s algorithm sorts edges and adds them one by one avoiding cycles."
+    },
+    {
+      "question": "What is the time complexity of Kruskal's algorithm when using a good Union-Find data structure?",
+      "options": [
+        "O(E log E)",
+        "O(V^2)",
+        "O(V + E)",
+        "O(E^2)"
+      ],
+      "correctAnswer": "O(E log E)",
+      "explanation": "Sorting edges dominates the complexity, giving O(E log E)."
+    },
+    {
+      "question": "What is topological sorting used for?",
+      "options": [
+        "Ordering vertices in a directed acyclic graph (DAG)",
+        "Finding shortest path",
+        "Detecting cycles",
+        "Minimum spanning tree"
+      ],
+      "correctAnswer": "Ordering vertices in a directed acyclic graph (DAG)",
+      "explanation": "Topological sort arranges vertices linearly so that for every directed edge u -> v, u comes before v."
+    },
+    {
+      "question": "Which algorithm can handle graphs with negative weight edges to find shortest paths?",
+      "options": [
+        "Bellman-Ford algorithm",
+        "Dijkstra's algorithm",
+        "Prim's algorithm",
+        "Kruskal's algorithm"
+      ],
+      "correctAnswer": "Bellman-Ford algorithm",
+      "explanation": "Bellman-Ford works with negative edges and detects negative cycles."
+    },
+    {
+      "question": "Which of these applications can be solved using topological sorting?",
+      "options": [
+        "Task scheduling",
+        "Finding shortest paths",
+        "Minimum spanning tree construction",
+        "Network flow"
+      ],
+      "correctAnswer": "Task scheduling",
+      "explanation": "Topological sort is widely used to schedule tasks with dependencies."
+    },
+    {
+      "question": "Which algorithm is typically used to detect cycles in a directed graph?",
+      "options": [
+        "DFS with recursion stack",
+        "BFS",
+        "Prim's algorithm",
+        "Dijkstra's algorithm"
+      ],
+      "correctAnswer": "DFS with recursion stack",
+      "explanation": "Using DFS and tracking recursion stack detects cycles in directed graphs."
+    },
+    {
+      "question": "What kind of graph is required for a minimum spanning tree to exist?",
+      "options": [
+        "Connected undirected graph",
+        "Disconnected graph",
+        "Directed graph",
+        "Graph with cycles only"
+      ],
+      "correctAnswer": "Connected undirected graph",
+      "explanation": "MST algorithms need a connected undirected graph to connect all vertices."
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "quizId": "qz13",
+  "courseId": "dsa",
+  "moduleId": "mod13",
+  "title": "Dynamic Programming: Optimizing Overlapping Subproblems",
+  "tags": ["dynamic programming", "dp", "overlapping subproblems", "optimization", "memoization", "tabulation"],
+  "difficulty": "medium",
+  "description": "Understand the concept of dynamic programming to optimize problems with overlapping subproblems using memoization and tabulation.",
+  "quiz": [
+    {
+      "question": "What is the main idea behind dynamic programming?",
+      "options": [
+        "Divide problems into independent subproblems",
+        "Solve overlapping subproblems only once and store results",
+        "Use recursion without storing results",
+        "Brute force all possible solutions"
+      ],
+      "correctAnswer": "Solve overlapping subproblems only once and store results",
+      "explanation": "Dynamic programming stores solutions to overlapping subproblems to avoid redundant calculations."
+    },
+    {
+      "question": "Which of the following is NOT typically used in dynamic programming?",
+      "options": [
+        "Memoization",
+        "Tabulation",
+        "Greedy choice",
+        "Overlapping subproblems"
+      ],
+      "correctAnswer": "Greedy choice",
+      "explanation": "Greedy algorithms solve problems differently and do not necessarily use overlapping subproblems."
+    },
+    {
+      "question": "Memoization is a technique that involves:",
+      "options": [
+        "Storing results of function calls to avoid recomputation",
+        "Recursively calling functions without optimization",
+        "Building solutions from the bottom up",
+        "Sorting input data"
+      ],
+      "correctAnswer": "Storing results of function calls to avoid recomputation",
+      "explanation": "Memoization caches the results of expensive function calls."
+    },
+    {
+      "question": "What is tabulation in dynamic programming?",
+      "options": [
+        "Bottom-up approach filling a table iteratively",
+        "Top-down recursion with caching",
+        "Sorting the input before processing",
+        "Randomized search"
+      ],
+      "correctAnswer": "Bottom-up approach filling a table iteratively",
+      "explanation": "Tabulation solves problems by filling a DP table starting from the smallest subproblems."
+    },
+    {
+      "question": "Which of the following problems is a classic example solved by dynamic programming?",
+      "options": [
+        "Fibonacci sequence",
+        "Binary search",
+        "Quick sort",
+        "Depth-first search"
+      ],
+      "correctAnswer": "Fibonacci sequence",
+      "explanation": "Fibonacci numbers can be computed efficiently using DP to avoid exponential recursion."
+    },
+    {
+      "question": "In dynamic programming, what does the term 'optimal substructure' mean?",
+      "options": [
+        "An optimal solution can be constructed from optimal solutions of its subproblems",
+        "Subproblems are independent",
+        "Problems cannot be broken down",
+        "Solutions are always unique"
+      ],
+      "correctAnswer": "An optimal solution can be constructed from optimal solutions of its subproblems",
+      "explanation": "Optimal substructure allows DP to build solutions from sub-solutions."
+    },
+    {
+      "question": "Which of the following is a sign that a problem can be solved with dynamic programming?",
+      "options": [
+        "Overlapping subproblems",
+        "Random input",
+        "Non-recursive problem",
+        "Lack of structure"
+      ],
+      "correctAnswer": "Overlapping subproblems",
+      "explanation": "Overlapping subproblems indicate potential for DP optimization."
+    },
+    {
+      "question": "Which approach usually has better space efficiency?",
+      "options": [
+        "Tabulation (bottom-up)",
+        "Memoization (top-down)",
+        "Both use same space",
+        "Neither use extra space"
+      ],
+      "correctAnswer": "Tabulation (bottom-up)",
+      "explanation": "Tabulation can be optimized to use less space compared to recursion with memoization."
+    },
+    {
+      "question": "What does 'state' refer to in dynamic programming?",
+      "options": [
+        "A representation of subproblem parameters",
+        "The input size",
+        "The final answer",
+        "A sorting algorithm"
+      ],
+      "correctAnswer": "A representation of subproblem parameters",
+      "explanation": "State defines the parameters that uniquely identify subproblems."
+    },
+    {
+      "question": "Which problem is NOT typically solved using dynamic programming?",
+      "options": [
+        "Matrix chain multiplication",
+        "Knapsack problem",
+        "Merge sort",
+        "Longest common subsequence"
+      ],
+      "correctAnswer": "Merge sort",
+      "explanation": "Merge sort is a divide and conquer algorithm, not dynamic programming."
+    }
+  ]
+}

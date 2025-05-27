@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod06",
+  "courseId": "reactnative",
+  "moduleId": "mod06",
+  "title": "Navigation in React Native",
+  "description": "Learn how to navigate between screens using React Navigation library.",
+  "flashcards": [
+    {
+      "question": "What is React Navigation?",
+      "answer": "A popular library for managing screen navigation in React Native apps."
+    },
+    {
+      "question": "What are the main types of navigation in React Native?",
+      "answer": "Stack, Tab, and Drawer navigation."
+    },
+    {
+      "question": "What is Stack Navigation?",
+      "answer": "A navigation pattern where screens are stacked on top of each other, allowing push and pop."
+    },
+    {
+      "question": "How do you install React Navigation?",
+      "answer": "Using npm or yarn, plus installing dependencies like react-native-screens and react-native-safe-area-context."
+    },
+    {
+      "question": "How do you create a Stack Navigator?",
+      "answer": "By using `createStackNavigator` from `@react-navigation/stack`."
+    },
+    {
+      "question": "How do you navigate to another screen?",
+      "answer": "By calling `navigation.navigate('ScreenName')`."
+    },
+    {
+      "question": "What is the purpose of the `NavigationContainer`?",
+      "answer": "It manages navigation state and links the navigation tree to the app environment."
+    },
+    {
+      "question": "How do you pass parameters between screens?",
+      "answer": "By passing a second argument to `navigate`, e.g., `navigate('Screen', { param: value })`."
+    },
+    {
+      "question": "How do you access route parameters?",
+      "answer": "Via the `route.params` object inside the target screen component."
+    },
+    {
+      "question": "What is Tab Navigation?",
+      "answer": "A navigation pattern using bottom or top tabs to switch between screens."
+    }
+  ]
+}

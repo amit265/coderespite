@@ -1,0 +1,69 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod14",
+  "title": "Deploying Node.js Applications",
+  "description": "Learn how to deploy Node.js applications to production environments reliably and securely. This module covers deployment options, server setup, environment configuration, and best practices to ensure your app runs smoothly.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod14-lsn01",
+      "title": "Introduction to Deployment",
+      "type": "theory",
+      "content": "Understand what deployment means in the context of Node.js applications. Learn about different deployment environments, goals of deployment, and challenges developers face when moving from development to production."
+    },
+    {
+      "lessonId": "mod14-lsn02",
+      "title": "Preparing Your Node.js App for Deployment",
+      "type": "practice",
+      "content": "Learn essential steps to prepare your app for deployment including environment variable setup, dependency management, and optimizing the app for production."
+    },
+    {
+      "lessonId": "mod14-lsn03",
+      "title": "Choosing a Hosting Platform",
+      "type": "theory",
+      "content": "Explore popular hosting options for Node.js apps such as cloud platforms (AWS, Azure, Google Cloud), Platform-as-a-Service (Heroku, Vercel), and VPS providers. Understand their pros and cons."
+    },
+    {
+      "lessonId": "mod14-lsn04",
+      "title": "Deploying on a Virtual Private Server (VPS)",
+      "type": "practice",
+      "content": "Step-by-step guide on deploying a Node.js app on a VPS using SSH, setting up Node.js and NPM, and running your app with process managers like PM2."
+    },
+    {
+      "lessonId": "mod14-lsn05",
+      "title": "Using Process Managers (PM2, Forever)",
+      "type": "practice",
+      "content": "Learn how to keep your Node.js application running continuously using process managers like PM2 or Forever, including automatic restarts and monitoring."
+    },
+    {
+      "lessonId": "mod14-lsn06",
+      "title": "Configuring a Reverse Proxy with Nginx",
+      "type": "practice",
+      "content": "Understand how to use Nginx as a reverse proxy to handle incoming HTTP requests, improve security, enable HTTPS, and balance loads."
+    },
+    {
+      "lessonId": "mod14-lsn07",
+      "title": "Environment Variables and Configuration Management",
+      "type": "theory",
+      "content": "Learn best practices for managing sensitive information and configuration through environment variables using tools like dotenv and config files."
+    },
+    {
+      "lessonId": "mod14-lsn08",
+      "title": "Deploying on Cloud Platforms",
+      "type": "practice",
+      "content": "Step-by-step deployment on popular cloud providers like AWS Elastic Beanstalk, Google App Engine, and Microsoft Azure, including setting up databases and scaling."
+    },
+    {
+      "lessonId": "mod14-lsn09",
+      "title": "Using Docker for Containerized Deployment",
+      "type": "practice",
+      "content": "Introduction to containerizing your Node.js app using Docker. Learn how to write Dockerfiles, build images, and deploy containers to cloud or local servers."
+    },
+    {
+      "lessonId": "mod14-lsn10",
+      "title": "Security and Performance Best Practices in Deployment",
+      "type": "theory",
+      "content": "Explore security measures such as HTTPS, securing APIs, handling secrets safely, and optimizing performance with caching, compression, and monitoring tools."
+    }
+  ]
+}

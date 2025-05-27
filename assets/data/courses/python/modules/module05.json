@@ -1,0 +1,69 @@
+{
+  "courseId": "python",
+  "moduleId": "mod05",
+  "title": "Functions and Modules",
+  "description": "Understand how to write reusable blocks of code using functions, and organize your Python programs using modules.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod05-lsn01",
+      "title": "What is a Function?",
+      "type": "theory",
+      "content": "A function is a block of reusable code that performs a specific task. It helps organize code, avoid repetition, and improve readability."
+    },
+    {
+      "lessonId": "mod05-lsn02",
+      "title": "Defining and Calling a Function",
+      "type": "code",
+      "content": "```python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\n```"
+    },
+    {
+      "lessonId": "mod05-lsn03",
+      "title": "Function Parameters and Arguments",
+      "type": "code",
+      "content": "```python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")\n```"
+    },
+    {
+      "lessonId": "mod05-lsn04",
+      "title": "Return Statement",
+      "type": "code",
+      "content": "```python\ndef add(a, b):\n    return a + b\n\nresult = add(5, 3)\nprint(result)\n```"
+    },
+    {
+      "lessonId": "mod05-lsn05",
+      "title": "Default and Keyword Arguments",
+      "type": "code",
+      "content": "```python\ndef greet(name=\"Guest\"):\n    print(f\"Hello, {name}!\")\n\ngreet()\ngreet(name=\"Alice\")\n```"
+    },
+    {
+      "lessonId": "mod05-lsn06",
+      "title": "Variable-Length Arguments (*args, **kwargs)",
+      "type": "code",
+      "content": "```python\ndef show(*args, **kwargs):\n    print(\"args:\", args)\n    print(\"kwargs:\", kwargs)\n\nshow(1, 2, 3, name=\"Alice\", age=25)\n```"
+    },
+    {
+      "lessonId": "mod05-lsn07",
+      "title": "Scope and Lifetime of Variables",
+      "type": "theory",
+      "content": "Variables inside a function are local and exist only during the function call. Use `global` to access variables outside the function."
+    },
+    {
+      "lessonId": "mod05-lsn08",
+      "title": "Lambda Functions (Anonymous Functions)",
+      "type": "code",
+      "content": "```python\nsquare = lambda x: x * x\nprint(square(4))\n```"
+    },
+    {
+      "lessonId": "mod05-lsn09",
+      "title": "What are Modules?",
+      "type": "theory",
+      "content": "A module is a file containing Python code—functions, classes, or variables—that can be imported and reused in other programs."
+    },
+    {
+      "lessonId": "mod05-lsn10",
+      "title": "Creating and Importing Your Own Module",
+      "type": "code",
+      "content": "```python\n# math_utils.py\ndef add(a, b):\n    return a + b\n\n# main.py\nimport math_utils\nprint(math_utils.add(3, 4))\n```"
+    }
+  ]
+}

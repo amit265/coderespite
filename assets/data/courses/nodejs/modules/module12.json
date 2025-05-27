@@ -1,0 +1,69 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod12",
+  "title": "WebSockets and Real-time Communication",
+  "description": "Learn how to build real-time applications using WebSockets in Node.js. This module covers the fundamentals of WebSockets, setting up real-time servers, and implementing interactive features such as chat apps, live notifications, and collaborative tools.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod12-lsn01",
+      "title": "Introduction to Real-time Communication",
+      "type": "theory",
+      "content": "Understand the concept of real-time communication and how it differs from traditional request-response web communication. Learn why WebSockets are essential for building interactive and live applications."
+    },
+    {
+      "lessonId": "mod12-lsn02",
+      "title": "WebSocket Protocol Overview",
+      "type": "theory",
+      "content": "Explore the WebSocket protocol, including the handshake process, message framing, and how WebSockets maintain a persistent full-duplex connection between client and server."
+    },
+    {
+      "lessonId": "mod12-lsn03",
+      "title": "Setting Up a WebSocket Server with Node.js",
+      "type": "practice",
+      "content": "Learn to create a WebSocket server using popular Node.js libraries like 'ws'. Understand how to accept connections, send and receive messages, and manage client connections."
+    },
+    {
+      "lessonId": "mod12-lsn04",
+      "title": "Building a Simple Chat Application",
+      "type": "practice",
+      "content": "Implement a basic real-time chat app that allows multiple clients to join, send messages, and receive updates instantly using WebSockets."
+    },
+    {
+      "lessonId": "mod12-lsn05",
+      "title": "Handling Connection Events and Errors",
+      "type": "theory",
+      "content": "Learn about WebSocket events such as 'connection', 'message', 'close', and 'error'. Understand best practices for handling disconnections and errors gracefully."
+    },
+    {
+      "lessonId": "mod12-lsn06",
+      "title": "Broadcasting and Targeted Messaging",
+      "type": "practice",
+      "content": "Explore techniques for broadcasting messages to all connected clients or sending targeted messages to specific users or groups."
+    },
+    {
+      "lessonId": "mod12-lsn07",
+      "title": "Using Socket.IO for Enhanced Real-time Features",
+      "type": "practice",
+      "content": "Discover the Socket.IO library, which simplifies WebSocket implementation and provides fallbacks for older browsers. Build features like rooms, namespaces, and event-based communication."
+    },
+    {
+      "lessonId": "mod12-lsn08",
+      "title": "Integrating WebSockets with Express.js",
+      "type": "practice",
+      "content": "Learn how to integrate WebSocket servers with your existing Express.js applications to add real-time capabilities without disrupting your API routes."
+    },
+    {
+      "lessonId": "mod12-lsn09",
+      "title": "Security Considerations in Real-time Apps",
+      "type": "theory",
+      "content": "Understand common security challenges in real-time communication such as authentication, authorization, data validation, and protecting against attacks like cross-site scripting (XSS) and denial-of-service (DoS)."
+    },
+    {
+      "lessonId": "mod12-lsn10",
+      "title": "Scaling Real-time Applications",
+      "type": "theory",
+      "content": "Learn strategies for scaling WebSocket-based applications to handle large numbers of concurrent users, including using Redis for pub/sub messaging, load balancing, and horizontal scaling."
+    }
+  ]
+}

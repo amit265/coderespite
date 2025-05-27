@@ -1,0 +1,658 @@
+{
+  "javascript": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Getting Started with JavaScript"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "Variables & Data Types"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "Operators"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "Functions Basics"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Arrays and Objects (Intro)"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "Deep Dive: Functions"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Array Methods"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "DOM Manipulation"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Asynchronous JS"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Modules & Tooling"
+    },
+    {
+      "id": 11,
+      "level": "Advanced",
+      "title": "Event Loop and JS Engine"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "Debugging and Testing"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Advanced JavaScript Concepts"
+    },
+    {
+      "id": 14,
+      "level": "Intermediate",
+      "title": "Error Handling and Debugging"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Introduction to TypeScript"
+    },
+    {
+      "id": 16,
+      "level": "Advanced",
+      "title": "TypeScript Basic Types & Annotations"
+    },
+    {
+      "id": 17,
+      "level": "Beginner",
+      "title": "Functions and Interfaces in TypeScript"
+    },
+    {
+      "id": 18,
+      "level": "Beginner",
+      "title": "Classes and Inheritance with TypeScript"
+    },
+    {
+      "id": 19,
+      "level": "Intermediate",
+      "title": "Generics and Advanced Types"
+    },
+    {
+      "id": 20,
+      "level": "Intermediate",
+      "title": "Using TypeScript with React"
+    },
+    {
+      "id": 21,
+      "level": "Intermediate",
+      "title": "Setting up TypeScript in Node.js projects"
+    },
+    {
+      "id": 22,
+      "level": "Advanced",
+      "title": "TypeScript Tooling & Best Practices"
+    }
+  ],
+  "css": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to CSS"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "CSS Syntax, Selectors, and Application"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "Colors, Units, and Typography"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "The CSS Box Model"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Layout with Display and Positioning"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "Flexbox Layout"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Grid Layout"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Pseudo-classes and Pseudo-elements"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Responsive Design and Media Queries"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Transitions and Animations"
+    },
+    {
+      "id": 11,
+      "level": "Advanced",
+      "title": "Advanced Selectors and Combinators"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "CSS Variables (Custom Properties)"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Advanced Layout Techniques"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "Reusable and Scalable CSS (BEM & Utilities)"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Final Project: Build a Responsive Website"
+    }
+  ],
+  "html": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to HTML"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "Basic Tags and Page Structure"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "Text Formatting and Typography"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "Links and Navigation"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Images and Multimedia"
+    },
+    {
+      "id": 6,
+      "level": "Beginner",
+      "title": "Lists and Tables"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Forms and Input Elements"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Semantic HTML"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "HTML Attributes and Global Attributes"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "HTML5 Elements and APIs Overview"
+    },
+    {
+      "id": 11,
+      "level": "Intermediate",
+      "title": "Embedding Content"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "Forms: Validation and Accessibility"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Meta Tags and SEO Basics"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "HTML and JavaScript Integration"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Project: Build a Complete Web Page Using HTML"
+    }
+  ],
+  "react": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to React and Environment Setup"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "JSX, Components, and Props"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "State, Lifecycle, and Event Handling"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "Essential JavaScript (ES6+) for React"
+    },
+    {
+      "id": 5,
+      "level": "Intermediate",
+      "title": "React Hooks: useState, useEffect, useRef, useMemo"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "React Router and Navigation"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Forms and Form Management (Formik / React Hook Form)"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Fetching and Managing API Data (Axios, Fetch, React Query)"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Conditional Rendering and List Rendering"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Context API and Component Reusability"
+    },
+    {
+      "id": 11,
+      "level": "Advanced",
+      "title": "Custom Hooks and Code Organization"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "State Management with Redux Toolkit / Zustand"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Authentication and Protected Routes"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "Performance Optimization and Lazy Loading"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Testing and Deploying React Apps (RTL, Vercel/Netlify)"
+    }
+  ],
+
+  "node": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to Node.js"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "Setting Up Node.js Environment"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "Node.js Modules and Packages"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "Introduction to Express.js"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Routing in Express"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "Middleware in Express"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Working with RESTful APIs"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Handling Forms and Data"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Authentication and Authorization"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Working with Databases (MongoDB or SQL)"
+    },
+    {
+      "id": 11,
+      "level": "Intermediate",
+      "title": "Error Handling and Debugging"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "WebSockets and Real-time Communication"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Testing Node.js Applications"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "Deploying Node.js Applications"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Scaling and Performance Optimization"
+    }
+  ],
+  "python": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to Python"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "Setting Up Python Environment"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "Variables, Data Types, and Operators"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "Control Flow: Conditionals and Loops"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Functions and Modules"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "Data Structures: Lists, Tuples, and Dictionaries"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "File Handling and Exceptions"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Object-Oriented Programming in Python"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Working with Libraries and Packages"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Introduction to Virtual Environments and pip"
+    },
+    {
+      "id": 11,
+      "level": "Advanced",
+      "title": "Working with APIs and Web Requests"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "Introduction to Data Analysis with Pandas"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Introduction to Web Development with Flask/Django"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "Testing and Debugging Python Code"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Deploying Python Applications"
+    }
+  ],
+  "react_native": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to React Native"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "Environment Setup and Tooling"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "JSX, Components, and Props"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "State Management and Hooks"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Styling in React Native"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "Navigation in React Native"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Handling User Input and Forms"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Networking and API Integration"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Lists and ScrollViews"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Local Storage and AsyncStorage"
+    },
+    {
+      "id": 11,
+      "level": "Advanced",
+      "title": "Context API and Global State Management"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "Advanced Navigation and Deep Linking"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Native Modules and Platform APIs"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "Animations in React Native"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Deploying and Publishing Apps"
+    }
+  ],
+  "data_structures": [{
+      "id": 1,
+      "level": "Beginner",
+      "title": "Introduction to Data Structures and JavaScript Fundamentals"
+    },
+    {
+      "id": 2,
+      "level": "Beginner",
+      "title": "Mastering Arrays and Array Operations"
+    },
+    {
+      "id": 3,
+      "level": "Beginner",
+      "title": "String Manipulation and Pattern Matching"
+    },
+    {
+      "id": 4,
+      "level": "Beginner",
+      "title": "Hash Tables: Maps, Sets, and Object-Based Storage"
+    },
+    {
+      "id": 5,
+      "level": "Beginner",
+      "title": "Stacks and Queues: Managing Order"
+    },
+    {
+      "id": 6,
+      "level": "Intermediate",
+      "title": "Linked Lists: Singly and Doubly Connected Structures"
+    },
+    {
+      "id": 7,
+      "level": "Intermediate",
+      "title": "Recursion and Divide & Conquer Techniques"
+    },
+    {
+      "id": 8,
+      "level": "Intermediate",
+      "title": "Binary Trees: Structure, Traversal, and Use Cases"
+    },
+    {
+      "id": 9,
+      "level": "Intermediate",
+      "title": "Binary Search Trees: Efficient Searching and Sorting"
+    },
+    {
+      "id": 10,
+      "level": "Intermediate",
+      "title": "Heaps and Priority Queues"
+    },
+    {
+      "id": 11,
+      "level": "Advanced",
+      "title": "Graphs and Basic Traversal Algorithms"
+    },
+    {
+      "id": 12,
+      "level": "Advanced",
+      "title": "Advanced Graph Algorithms and Applications"
+    },
+    {
+      "id": 13,
+      "level": "Advanced",
+      "title": "Dynammic Programming: Optimizing Overlapping Subproblems"
+    },
+    {
+      "id": 14,
+      "level": "Advanced",
+      "title": "Tries and Text-Based Data Structures"
+    },
+    {
+      "id": 15,
+      "level": "Advanced",
+      "title": "Real-World Applications and System Design with Data Structures"
+    },
+    {
+      "id": 16,
+      "level": "Advanced",
+      "title": "Interview Preparation and DSA Problem Solving Patterns"
+    }, {
+      "id": 17,
+      "level": "Advanced",
+      "title": "Final Project: Building a Complex Application with DSA"
+
+    }
+
+
+  ]
+}

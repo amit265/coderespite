@@ -1,0 +1,121 @@
+{
+  "quizId": "qz08",
+  "courseId": "dsa",
+  "moduleId": "mod08",
+  "title": "Binary Trees: Structure, Traversal, and Use Cases",
+  "tags": ["binary trees", "tree traversal", "data structures", "dsa", "trees"],
+  "difficulty": "medium",
+  "description": "Learn about the structure of binary trees, different traversal techniques, and practical use cases.",
+  "quiz": [
+    {
+      "question": "What is a binary tree?",
+      "options": [
+        "A tree where each node has at most two children",
+        "A tree where each node has exactly three children",
+        "A linked list",
+        "A graph with cycles"
+      ],
+      "correctAnswer": "A tree where each node has at most two children",
+      "explanation": "In a binary tree, each node can have zero, one, or two children."
+    },
+    {
+      "question": "Which traversal method visits nodes in the order: Left, Root, Right?",
+      "options": [
+        "Inorder",
+        "Preorder",
+        "Postorder",
+        "Level order"
+      ],
+      "correctAnswer": "Inorder",
+      "explanation": "Inorder traversal processes left subtree, root, then right subtree."
+    },
+    {
+      "question": "What is the main difference between binary trees and binary search trees (BST)?",
+      "options": [
+        "BST has a specific ordering property where left child < parent < right child",
+        "Binary trees have more than two children",
+        "BST nodes can only have one child",
+        "Binary trees are always balanced"
+      ],
+      "correctAnswer": "BST has a specific ordering property where left child < parent < right child",
+      "explanation": "BSTs maintain an order that helps in efficient searching."
+    },
+    {
+      "question": "Which traversal visits the root node first?",
+      "options": [
+        "Preorder",
+        "Inorder",
+        "Postorder",
+        "Level order"
+      ],
+      "correctAnswer": "Preorder",
+      "explanation": "Preorder traversal visits root before left and right children."
+    },
+    {
+      "question": "What data structure is commonly used to implement level order traversal?",
+      "options": [
+        "Queue",
+        "Stack",
+        "Array",
+        "Linked list"
+      ],
+      "correctAnswer": "Queue",
+      "explanation": "Level order traversal uses a queue to process nodes level by level."
+    },
+    {
+      "question": "Which traversal method processes nodes in the order: Left, Right, Root?",
+      "options": [
+        "Postorder",
+        "Preorder",
+        "Inorder",
+        "Level order"
+      ],
+      "correctAnswer": "Postorder",
+      "explanation": "Postorder traversal visits children before the root node."
+    },
+    {
+      "question": "What is the height of a binary tree?",
+      "options": [
+        "The number of edges on the longest path from root to a leaf",
+        "The number of nodes in the tree",
+        "The number of leaf nodes",
+        "The depth of the root node"
+      ],
+      "correctAnswer": "The number of edges on the longest path from root to a leaf",
+      "explanation": "Height measures the longest downward path from root to leaf."
+    },
+    {
+      "question": "Which of the following is NOT a use case of binary trees?",
+      "options": [
+        "Expression parsing",
+        "Hierarchical data representation",
+        "Sorting arrays directly",
+        "Priority queues (via heaps)"
+      ],
+      "correctAnswer": "Sorting arrays directly",
+      "explanation": "Binary trees are not used for direct array sorting but for representing hierarchical structures and more."
+    },
+    {
+      "question": "In a binary search tree, where are values greater than the root located?",
+      "options": [
+        "In the right subtree",
+        "In the left subtree",
+        "At the root only",
+        "Anywhere in the tree"
+      ],
+      "correctAnswer": "In the right subtree",
+      "explanation": "BST property places larger values in the right subtree."
+    },
+    {
+      "question": "What traversal would you use to get the sorted order of elements in a BST?",
+      "options": [
+        "Inorder traversal",
+        "Preorder traversal",
+        "Postorder traversal",
+        "Level order traversal"
+      ],
+      "correctAnswer": "Inorder traversal",
+      "explanation": "Inorder traversal of a BST gives elements in ascending order."
+    }
+  ]
+}

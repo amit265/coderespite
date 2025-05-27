@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod02",
+  "courseId": "reactnative",
+  "moduleId": "mod02",
+  "title": "Environment Setup and Tooling",
+  "description": "How to set up your development environment and tools required for React Native development.",
+  "flashcards": [
+    {
+      "question": "What are the main tools needed to start React Native development?",
+      "answer": "Node.js, npm or yarn, React Native CLI or Expo CLI, and a code editor like VS Code."
+    },
+    {
+      "question": "What is Node.js used for in React Native development?",
+      "answer": "Node.js runs JavaScript code outside the browser and manages dependencies with npm or yarn."
+    },
+    {
+      "question": "What is Expo CLI?",
+      "answer": "Expo CLI is a toolchain built around React Native that helps start projects quickly without native setup."
+    },
+    {
+      "question": "Why might you choose React Native CLI over Expo CLI?",
+      "answer": "React Native CLI offers more control and supports native code integration, but requires more setup."
+    },
+    {
+      "question": "Which operating systems support React Native development?",
+      "answer": "Windows, macOS, and Linux support React Native development; macOS is required for iOS builds."
+    },
+    {
+      "question": "What IDE or code editor is commonly used for React Native?",
+      "answer": "Visual Studio Code (VS Code) is the most popular."
+    },
+    {
+      "question": "What is Metro Bundler?",
+      "answer": "Metro Bundler is the JavaScript bundler used by React Native to bundle your code and assets."
+    },
+    {
+      "question": "How do you start a new React Native project with Expo CLI?",
+      "answer": "Run `npx create-expo-app ProjectName` in the terminal."
+    },
+    {
+      "question": "What SDKs are needed for Android and iOS development?",
+      "answer": "Android SDK for Android and Xcode (which includes iOS SDK) for iOS."
+    },
+    {
+      "question": "How do you run your React Native app on a physical device?",
+      "answer": "Use Expo Go app for Expo projects or connect via USB and run through React Native CLI for native projects."
+    }
+  ]
+}

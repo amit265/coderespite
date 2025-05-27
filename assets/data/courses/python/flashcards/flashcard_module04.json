@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod04",
+  "courseId": "python",
+  "moduleId": "mod04",
+  "title": "Control Flow: Conditionals and Loops",
+  "description": "Learn how to control the flow of your Python program using conditionals and loops.",
+  "flashcards": [
+    {
+      "question": "What is a conditional statement?",
+      "answer": "A statement that executes code based on whether a condition is True or False."
+    },
+    {
+      "question": "What Python keyword is used to start a conditional block?",
+      "answer": "`if`"
+    },
+    {
+      "question": "How do you write an alternative condition if the `if` condition fails?",
+      "answer": "Use the `else` keyword."
+    },
+    {
+      "question": "What does `elif` stand for and when is it used?",
+      "answer": "`elif` stands for 'else if', used for additional conditions after an `if`."
+    },
+    {
+      "question": "What is a loop in programming?",
+      "answer": "A loop repeatedly executes a block of code as long as a condition is met."
+    },
+    {
+      "question": "What are the two main types of loops in Python?",
+      "answer": "`for` loops and `while` loops."
+    },
+    {
+      "question": "How do you loop through items in a list?",
+      "answer": "Using a `for` loop, e.g., `for item in list:`."
+    },
+    {
+      "question": "What does the `break` statement do in loops?",
+      "answer": "It exits the loop immediately."
+    },
+    {
+      "question": "What is the purpose of the `continue` statement?",
+      "answer": "It skips the current iteration and moves to the next one."
+    },
+    {
+      "question": "How do you write an infinite loop in Python?",
+      "answer": "`while True:` creates an infinite loop."
+    }
+  ]
+}

@@ -10,7 +10,7 @@ export default function Welcome({ userData }) {
   );
 
   return (
-    <View className="bg-white mx-4 p-6 mb-4 rounded-2xl shadow-md border border-gray-200">
+    <View className="bg-white mx-4 p-6 mb-4 rounded-2xl shadow-md border border-gray-200 mt-4">
      <View className="flex gap-2">
         <Text className="text-lg text-gray-800">
           Hi, {userData?.profile?.name || "user"} 👋

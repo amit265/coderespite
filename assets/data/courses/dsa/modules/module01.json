@@ -1,0 +1,75 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod01",
+  "title": "Introduction to Data Structures and JavaScript Fundamentals",
+  "description": "This module introduces students to the world of data structures and how they are used to organize, store, and manage data efficiently. The lessons cover fundamental programming concepts in JavaScript that are essential for implementing and understanding data structures. By the end of this module, students will gain a strong foundation in JavaScript syntax, variables, data types, conditionals, loops, and functions. They will also be introduced to core programming principles such as time and space complexity, memory management, and the role data structures play in software development, competitive programming, and system design.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod01-lsn01",
+      "title": "What Are Data Structures and Why Do They Matter?",
+      "type": "theory",
+      "content": "Data structures are specialized ways to store and organize data in computers so that we can perform operations on them efficiently. They are essential for writing optimal software, especially when dealing with large volumes of data or time-sensitive applications. Whether you're designing a mobile app, building a search engine, or preparing for coding interviews, understanding data structures is fundamental."
+    },
+    {
+      "lessonId": "mod01-lsn02",
+      "title": "How Data Structures Are Used in the Real World",
+      "type": "theory",
+      "content": "From autocomplete systems (Tries) to search ranking algorithms (Graphs), and from undo functionality (Stacks) to browser history (Queues), data structures power the functionality of almost every major software system today. Learning how they work will help you design better applications and solve problems more efficiently."
+    },
+    {
+      "lessonId": "mod01-lsn03",
+      "title": "Setting Up JavaScript for Data Structures",
+      "type": "code",
+      "content": "// Use Node.js or browser console for JavaScript coding\n// Option 1: Run in browser console\nconsole.log('Hello, DSA with JavaScript!');\n\n// Option 2: Use Node.js\n// Save this in app.js and run with `node app.js`\nconsole.log('Setup complete.');"
+    },
+    {
+      "lessonId": "mod01-lsn04",
+      "title": "JavaScript Data Types and Variables",
+      "type": "code",
+      "content": "// JavaScript primitive data types\nlet name = 'Alice';      // String\nlet age = 25;            // Number\nlet isStudent = true;    // Boolean\nlet score = null;        // Null\nlet x;                   // Undefined\nlet id = Symbol();       // Symbol\n\n// Object type\nlet user = {\n  name: 'Bob',\n  age: 30\n};"
+    },
+    {
+      "lessonId": "mod01-lsn05",
+      "title": "Conditionals and Loops in JavaScript",
+      "type": "code",
+      "content": "// Conditional statements\nlet score = 85;\nif (score >= 90) {\n  console.log('A grade');\n} else if (score >= 75) {\n  console.log('B grade');\n} else {\n  console.log('C grade');\n}\n\n// Loops\nfor (let i = 0; i < 5; i++) {\n  console.log('i =', i);\n}\n\nlet i = 0;\nwhile (i < 3) {\n  console.log('while i =', i);\n  i++;\n}"
+    },
+    {
+      "lessonId": "mod01-lsn06",
+      "title": "Functions in JavaScript: Declaration, Expression, and Arrow",
+      "type": "code",
+      "content": "// Function Declaration\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}\n\n// Function Expression\nconst greetExpr = function(name) {\n  return `Hi, ${name}!`;\n};\n\n// Arrow Function\nconst greetArrow = name => `Hey, ${name}!`;\n\nconsole.log(greet('Alice'));\nconsole.log(greetExpr('Bob'));\nconsole.log(greetArrow('Charlie'));"
+    },
+    {
+      "lessonId": "mod01-lsn07",
+      "title": "Understanding Time and Space Complexity (Big O Notation)",
+      "type": "theory",
+      "content": "Time complexity describes how the runtime of a function grows with the input size, while space complexity refers to how much memory it uses. Big O notation helps us express these in standard formats. Examples: \n- O(1): Constant time (e.g., accessing an element by index)\n- O(n): Linear time (e.g., looping through an array)\n- O(n²): Quadratic time (e.g., nested loops)"
+    },
+    {
+      "lessonId": "mod01-lsn08",
+      "title": "JavaScript Objects vs Arrays for Data Representation",
+      "type": "theory",
+      "content": "In JavaScript, arrays are ordered collections of values, and objects are collections of key-value pairs. Arrays are ideal for indexed data, whereas objects are great for key-based lookups. Understanding their differences helps in choosing the right data structure.\n\nExample:\n- Array: `[1, 2, 3]`\n- Object: `{ name: 'Alice', age: 30 }`"
+    },
+    {
+      "lessonId": "mod01-lsn09",
+      "title": "Call Stack, Memory Allocation, and How JavaScript Executes Code",
+      "type": "theory",
+      "content": "JavaScript uses a call stack to manage function calls. Each function call is pushed to the stack and popped once complete. JavaScript also manages memory automatically via garbage collection, but understanding how memory is allocated and released helps you write efficient code."
+    },
+    {
+      "lessonId": "mod01-lsn10",
+      "title": "Building Your First Simple Data Structure: A Manual Stack",
+      "type": "code",
+      "content": "// Simple Stack Implementation using Array\nclass Stack {\n  constructor() {\n    this.items = [];\n  }\n  push(item) {\n    this.items.push(item);\n  }\n  pop() {\n    return this.items.pop();\n  }\n  peek() {\n    return this.items[this.items.length - 1];\n  }\n  isEmpty() {\n    return this.items.length === 0;\n  }\n}\n\nconst stack = new Stack();\nstack.push(10);\nstack.push(20);\nconsole.log(stack.pop()); // 20"
+    },
+    {
+      "lessonId": "mod01-lsn11",
+      "title": "When to Use Which Data Structure?",
+      "type": "theory",
+      "content": "Choosing the right data structure depends on the problem you're solving:\n- Use arrays when you need ordered, indexable elements.\n- Use objects/maps for fast key-based lookup.\n- Use stacks for LIFO scenarios (undo, backtracking).\n- Use queues for FIFO operations (task scheduling).\nThis course will teach you how to make these decisions confidently."
+    }
+  ]
+}

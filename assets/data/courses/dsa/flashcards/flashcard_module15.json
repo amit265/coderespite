@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod15",
+  "courseId": "dsa",
+  "moduleId": "mod15",
+  "title": "Real-World Applications and System Design with Data Structures",
+  "description": "Explore how data structures are used in real-world systems and how to design efficient software using them.",
+  "flashcards": [
+    {
+      "question": "Why are data structures important in system design?",
+      "answer": "They organize and manage data efficiently, affecting the system's speed, scalability, and maintainability."
+    },
+    {
+      "question": "How is a Hash Table used in real-world applications?",
+      "answer": "For fast data retrieval, caching, and implementing dictionaries or maps."
+    },
+    {
+      "question": "What role do Trees play in databases?",
+      "answer": "Trees like B-Trees are used for indexing to speed up data retrieval."
+    },
+    {
+      "question": "What is a common use case for Graphs in systems?",
+      "answer": "Modeling networks such as social networks, transportation routes, and communication networks."
+    },
+    {
+      "question": "How do Queues apply to system design?",
+      "answer": "Queues are used in task scheduling, buffering, and managing requests in servers."
+    },
+    {
+      "question": "What data structure underlies a priority queue?",
+      "answer": "Heaps."
+    },
+    {
+      "question": "Explain the role of Linked Lists in memory management.",
+      "answer": "Linked lists can efficiently manage free memory blocks and implement stacks/queues."
+    },
+    {
+      "question": "How do Tries improve performance in search engines?",
+      "answer": "They support fast prefix searches, enabling autocomplete and spell checking."
+    },
+    {
+      "question": "What is the benefit of using Graph databases?",
+      "answer": "They efficiently store and query complex relationships."
+    },
+    {
+      "question": "How do data structures affect scalability?",
+      "answer": "Efficient data structures reduce time and space complexity, enabling systems to handle more data and users."
+    },
+    {
+      "question": "What data structure would you choose for implementing undo functionality?",
+      "answer": "Stack."
+    },
+    {
+      "question": "Why might a system use a combination of data structures?",
+      "answer": "To balance trade-offs in speed, memory, and functionality for complex requirements."
+    },
+    {
+      "question": "How are graphs used in recommendation systems?",
+      "answer": "To model user-item interactions and find connections or similarities."
+    },
+    {
+      "question": "What data structure is ideal for LRU cache implementation?",
+      "answer": "A combination of a Hash Map and a Doubly Linked List."
+    },
+    {
+      "question": "How does the choice of data structure impact latency?",
+      "answer": "Efficient structures reduce the time needed to access or modify data, lowering latency."
+    }
+  ]
+}

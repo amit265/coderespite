@@ -1,0 +1,45 @@
+{
+  "courseId": "nodejs",
+  "moduleId": "mod04",
+  "title": "Introduction to Express.js",
+  "description": "Get introduced to Express.js, a popular Node.js framework that simplifies building web servers and APIs with minimal setup and a clean, powerful API.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod04-lsn01",
+      "title": "What is Express.js?",
+      "type": "theory",
+      "content": "Express.js is a lightweight, flexible, and minimal web application framework built on top of Node.js. It provides a robust set of features for building web applications and APIs quickly and efficiently. Unlike Node.js alone, which provides basic HTTP server functionality, Express abstracts away the complexity of handling requests, routing, middleware, and responses, enabling developers to focus on writing clean, maintainable code."
+    },
+    {
+      "lessonId": "mod04-lsn02",
+      "title": "Why Use Express.js?",
+      "type": "theory",
+      "content": "Express.js is widely used because it streamlines server-side development in Node.js. It offers a simple API to handle routing, supports middleware for tasks like authentication and logging, integrates easily with databases, and has a huge community with many plugins and extensions. Using Express can drastically reduce the amount of code you write to build a server and makes your app more scalable and maintainable."
+    },
+    {
+      "lessonId": "mod04-lsn03",
+      "title": "Core Features of Express.js",
+      "type": "theory",
+      "content": "- **Routing:** Define endpoints (URLs) to respond to different HTTP requests.\n- **Middleware:** Functions that execute during the request-response cycle to modify requests or perform tasks.\n- **Template Engines:** Supports rendering dynamic HTML pages.\n- **Error Handling:** Simplifies catching and managing errors.\n- **Extensibility:** Easily integrates with other Node.js modules and third-party libraries."
+    },
+    {
+      "lessonId": "mod04-lsn04",
+      "title": "Installing and Setting Up Express.js",
+      "type": "practice",
+      "content": "Install Express.js using npm by running `npm install express`. Initialize a new Node.js project with `npm init` first if you haven't done so. Then, create a simple Express server by requiring the module, defining a port, and listening for incoming requests."
+    },
+    {
+      "lessonId": "mod04-lsn05",
+      "title": "Your First Express Application",
+      "type": "practice",
+      "content": "Create a basic Express app in a file named `app.js`:\n```js\nconst express = require('express');\nconst app = express();\nconst PORT = 3000;\n\napp.get('/', (req, res) => {\n  res.send('Hello from Express!');\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running at http://localhost:${PORT}`);\n});\n```\nRun the app with `node app.js` and visit `http://localhost:3000` in your browser to see the message."
+    },
+    {
+      "lessonId": "mod04-lsn06",
+      "title": "Understanding Request and Response Objects",
+      "type": "theory",
+      "content": "Express handlers receive two important objects: `req` (request) and `res` (response). The `req` object contains data about the client's HTTP request, including parameters, body, headers, and more. The `res` object is used to send a response back to the client, like sending HTML, JSON, or status codes. Mastering these objects is key to building dynamic web apps."
+    }
+  ]
+}

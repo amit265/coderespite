@@ -1,0 +1,69 @@
+{
+  "moduleId": "mod14",
+  "courseId": "javascript",
+
+  "title": "Error Handling and Debugging",
+  "description": "Learn how to identify, handle, and debug errors in JavaScript to create more reliable and maintainable code.",
+  "level": "Advanced",
+  "lessons": [{
+      "lessonId": "mod14-lsn01",
+      "title": "Introduction to Errors",
+      "type": "theory",
+      "content": "Errors are unexpected problems that occur during code execution. Understanding error types helps you write code that anticipates and handles failures gracefully."
+    },
+    {
+      "lessonId": "mod14-lsn02",
+      "title": "Common JavaScript Errors",
+      "type": "theory",
+      "content": "Typical JavaScript errors include SyntaxError, ReferenceError, TypeError, and RangeError. Each error type gives clues about the problem source."
+    },
+    {
+      "lessonId": "mod14-lsn03",
+      "title": "Using try-catch",
+      "type": "theory",
+      "content": "The `try-catch` block lets you run code that may fail and handle errors without stopping the whole program."
+    },
+    {
+      "lessonId": "mod14-lsn04",
+      "title": "Example: try-catch",
+      "type": "code",
+      "content": "try {\n  let result = riskyFunction();\n  console.log(result);\n} catch (error) {\n  console.error('An error occurred:', error.message);\n}"
+    },
+    {
+      "lessonId": "mod14-lsn05",
+      "title": "Throwing Custom Errors",
+      "type": "theory",
+      "content": "You can create and throw your own errors using `throw` to signal unexpected situations in your code."
+    },
+    {
+      "lessonId": "mod14-lsn06",
+      "title": "Example: throw Error",
+      "type": "code",
+      "content": "function checkAge(age) {\n  if (age < 18) {\n    throw new Error('You must be at least 18 years old');\n  }\n  return 'Access granted';\n}\n\ntry {\n  console.log(checkAge(15));\n} catch (e) {\n  console.error(e.message);\n}"
+    },
+    {
+      "lessonId": "mod14-lsn07",
+      "title": "Using finally Block",
+      "type": "theory",
+      "content": "The `finally` block runs code after try and catch, regardless of whether an error was thrown, useful for cleanup tasks."
+    },
+    {
+      "lessonId": "mod14-lsn08",
+      "title": "Example: try-catch-finally",
+      "type": "code",
+      "content": "try {\n  let data = fetchData();\n  console.log(data);\n} catch (error) {\n  console.error(error);\n} finally {\n  console.log('Operation complete');\n}"
+    },
+    {
+      "lessonId": "mod14-lsn09",
+      "title": "Debugging with Console",
+      "type": "theory",
+      "content": "Using `console.log`, `console.error`, and other console methods helps track variables and understand code flow during development."
+    },
+    {
+      "lessonId": "mod14-lsn10",
+      "title": "Browser DevTools and Debugger",
+      "type": "theory",
+      "content": "Modern browsers provide developer tools with debugging features like breakpoints, step execution, and inspecting variables to help find and fix issues."
+    }
+  ]
+}

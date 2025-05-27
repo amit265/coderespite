@@ -65,9 +65,9 @@ export default function Home() {
 
   return (
     <SafeScreen>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Header />
+      <Header />
 
+      <ScrollView showsVerticalScrollIndicator={false}>
         <WelcomeCard userData={userData} />
         <ContinueCard userData={userData} />
         <FeaturedLessonGrid

@@ -1,6 +1,6 @@
 export default {
     BACKGROUND: "#CBE7F7",
-    TEXT: "#5D4037",
+    TEXT: "#000000",
     SETTING_BUTTON: "#4F2E2D",
     WHITE: "#FFFFFF",
     BLACK: "#000000",

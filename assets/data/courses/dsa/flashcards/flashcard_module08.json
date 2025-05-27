@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod08",
+  "courseId": "dsa",
+  "moduleId": "mod08",
+  "title": "Binary Trees: Structure, Traversal, and Use Cases",
+  "description": "Understand binary tree structures, common traversal methods, and practical applications.",
+  "flashcards": [
+    {
+      "question": "What is a binary tree?",
+      "answer": "A tree data structure where each node has at most two children, called left and right."
+    },
+    {
+      "question": "What is the difference between a binary tree and a binary search tree?",
+      "answer": "A binary search tree (BST) maintains the property where left child nodes are less than the parent, and right child nodes are greater."
+    },
+    {
+      "question": "Name the three common ways to traverse a binary tree.",
+      "answer": "Preorder, Inorder, and Postorder traversal."
+    },
+    {
+      "question": "In Inorder traversal, what is the order of visiting nodes?",
+      "answer": "Left subtree → Root → Right subtree."
+    },
+    {
+      "question": "Which traversal of a BST returns nodes in sorted order?",
+      "answer": "Inorder traversal."
+    },
+    {
+      "question": "What is level-order traversal?",
+      "answer": "Visiting nodes level by level from top to bottom, left to right, usually implemented using a queue."
+    },
+    {
+      "question": "What data structure is commonly used to implement level-order traversal?",
+      "answer": "Queue."
+    },
+    {
+      "question": "What is the time complexity of traversing a binary tree?",
+      "answer": "O(n), where n is the number of nodes."
+    },
+    {
+      "question": "How is the height of a binary tree defined?",
+      "answer": "The length of the longest path from the root node down to the farthest leaf node."
+    },
+    {
+      "question": "What is a complete binary tree?",
+      "answer": "A binary tree where all levels are completely filled except possibly the last, which is filled from left to right."
+    },
+    {
+      "question": "What is the difference between a full binary tree and a perfect binary tree?",
+      "answer": "A full binary tree has every node with either 0 or 2 children; a perfect binary tree is full and all leaves are at the same level."
+    },
+    {
+      "question": "Why are binary trees useful in expression parsing?",
+      "answer": "They represent hierarchical expressions with operators as internal nodes and operands as leaves."
+    },
+    {
+      "question": "How can you represent a binary tree in JavaScript?",
+      "answer": "Using objects with properties: `{ value, left, right }`."
+    },
+    {
+      "question": "True or False: A binary tree can have cycles.",
+      "answer": "False. Trees are acyclic."
+    },
+    {
+      "question": "What is the main use case of a binary tree?",
+      "answer": "Hierarchical data representation, efficient searching, sorting, and expression parsing."
+    }
+  ]
+}

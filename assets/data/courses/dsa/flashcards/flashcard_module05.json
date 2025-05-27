@@ -1,0 +1,69 @@
+{
+  "id": "fc-mod05",
+  "courseId": "dsa",
+  "moduleId": "mod05",
+  "title": "Stacks and Queues: Managing Order",
+  "description": "Understand stacks and queues, their properties, and common use cases for managing ordered data.",
+  "flashcards": [
+    {
+      "question": "What is a stack?",
+      "answer": "A linear data structure that follows Last In, First Out (LIFO) principle."
+    },
+    {
+      "question": "Name two main operations of a stack.",
+      "answer": "`push()` to add and `pop()` to remove the top element."
+    },
+    {
+      "question": "What operation lets you see the top element of a stack without removing it?",
+      "answer": "`peek()` or `top()` operation."
+    },
+    {
+      "question": "How is a queue different from a stack?",
+      "answer": "A queue follows First In, First Out (FIFO) principle, unlike the LIFO of a stack."
+    },
+    {
+      "question": "What are the primary operations of a queue?",
+      "answer": "`enqueue()` to add at the rear, `dequeue()` to remove from the front."
+    },
+    {
+      "question": "Give one real-world example of a stack.",
+      "answer": "Undo functionality in text editors."
+    },
+    {
+      "question": "Give one real-world example of a queue.",
+      "answer": "People standing in line at a ticket counter."
+    },
+    {
+      "question": "Can you implement a stack using arrays in JavaScript?",
+      "answer": "Yes, using `push()` and `pop()` methods on arrays."
+    },
+    {
+      "question": "What is a circular queue?",
+      "answer": "A queue where the last position is connected back to the first position to utilize empty spaces."
+    },
+    {
+      "question": "True or False: In a queue, elements can be removed from both ends.",
+      "answer": "False. That’s a deque (double-ended queue)."
+    },
+    {
+      "question": "What’s the time complexity of push and pop operations in a stack implemented with arrays?",
+      "answer": "Both operations are O(1) on average."
+    },
+    {
+      "question": "How can you check if a stack is empty?",
+      "answer": "By checking if its size or length is zero."
+    },
+    {
+      "question": "What’s a use case for queues in programming?",
+      "answer": "Managing asynchronous tasks or processes like print queues."
+    },
+    {
+      "question": "What data structure would you use to implement recursive function calls?",
+      "answer": "A stack, because calls follow LIFO order."
+    },
+    {
+      "question": "How can you implement a queue in JavaScript using arrays?",
+      "answer": "Using `push()` to enqueue and `shift()` to dequeue."
+    }
+  ]
+}

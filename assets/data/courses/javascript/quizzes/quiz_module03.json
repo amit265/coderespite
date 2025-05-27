@@ -1,0 +1,121 @@
+{
+  "courseId": "javascript",
+  "quizId": "qz3",
+  "moduleId": "mod03",
+  "title": "Operators",
+  "tags": ["operators", "arithmetic", "logical", "comparison"],
+  "difficulty": "medium",
+  "description": "Understanding functions, parameters, return values, and scope.",
+  "quiz": [
+    {
+      "question": "What will be the output of `5 + '3'` in JavaScript?",
+      "correctAnswer": "53",
+      "explanation": "The number 5 is coerced to a string and concatenated with '3'.",
+      "options": [
+        "8",
+        "53",
+        "undefined",
+        "NaN"
+      ]
+    },
+    {
+      "question": "Which of the following is a logical AND operator in JavaScript?",
+      "correctAnswer": "&&",
+      "explanation": "`&&` checks if both conditions are true.",
+      "options": [
+        "||",
+        "&&",
+        "!",
+        "&"
+      ]
+    },
+    {
+      "question": "What will be the result of `10 % 3`?",
+      "correctAnswer": "1",
+      "explanation": "The `%` operator returns the remainder of division: 10 divided by 3 leaves a remainder of 1.",
+      "options": [
+        "3",
+        "0",
+        "1",
+        "10"
+      ]
+    },
+    {
+      "question": "Which operator is used to compare both value and type?",
+      "correctAnswer": "===",
+      "explanation": "`===` checks for both value and data type equality.",
+      "options": [
+        "==",
+        "=",
+        "===",
+        "!="
+      ]
+    },
+    {
+      "question": "What is the output of `true && false`?",
+      "correctAnswer": "false",
+      "explanation": "`true && false` evaluates to false because both operands must be true.",
+      "options": [
+        "true",
+        "false",
+        "undefined",
+        "null"
+      ]
+    },
+    {
+      "question": "Which operator returns true if either condition is true?",
+      "correctAnswer": "||",
+      "explanation": "`||` (logical OR) returns true if at least one operand is true.",
+      "options": [
+        "&&",
+        "||",
+        "!",
+        "&"
+      ]
+    },
+    {
+      "question": "What does the `!==` operator check?",
+      "correctAnswer": "Inequality of value and type",
+      "explanation": "`!==` checks if value or type is not equal.",
+      "options": [
+        "Equality only",
+        "Inequality of value only",
+        "Inequality of value and type",
+        "Logical OR"
+      ]
+    },
+    {
+      "question": "What will be the result of `'5' == 5`?",
+      "correctAnswer": "true",
+      "explanation": "`==` performs type coercion and compares value only.",
+      "options": [
+        "true",
+        "false",
+        "undefined",
+        "NaN"
+      ]
+    },
+    {
+      "question": "Which of these is the increment operator?",
+      "correctAnswer": "++",
+      "explanation": "`++` increases a numeric variable’s value by 1.",
+      "options": [
+        "++",
+        "--",
+        "**",
+        "+="
+      ]
+    },
+    {
+      "question": "What will be the value of `let x = 5; x += 3;`?",
+      "correctAnswer": "8",
+      "explanation": "`x += 3` is shorthand for `x = x + 3`.",
+      "options": [
+        "5",
+        "3",
+        "8",
+        "15"
+      ]
+    }
+  ]
+}

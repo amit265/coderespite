@@ -1,0 +1,121 @@
+{
+  "quizId": "qz-mod07",
+  "courseId": "reactnative",
+  "moduleId": "mod07",
+  "title": "Handling User Input and Forms",
+  "tags": ["forms", "user input", "react native", "text input", "validation"],
+  "difficulty": "medium",
+  "description": "Understanding how to handle user input, manage form state, and validate inputs in React Native.",
+  "quiz": [
+    {
+      "question": "Which React Native component is commonly used to accept text input from users?",
+      "options": [
+        "Text",
+        "TextInput",
+        "InputField",
+        "FormInput"
+      ],
+      "correctAnswer": "TextInput",
+      "explanation": "TextInput is the built-in component to accept text input in React Native."
+    },
+    {
+      "question": "How do you update the state when the user types into a TextInput?",
+      "options": [
+        "Using onChangeText prop",
+        "Using onInput prop",
+        "Using onSubmit prop",
+        "Using onTextChange prop"
+      ],
+      "correctAnswer": "Using onChangeText prop",
+      "explanation": "The onChangeText prop provides the text input value to update the component state."
+    },
+    {
+      "question": "Which hook is commonly used to manage form input state in functional components?",
+      "options": [
+        "useForm()",
+        "useInput()",
+        "useState()",
+        "useEffect()"
+      ],
+      "correctAnswer": "useState()",
+      "explanation": "useState hook is used to manage and update input state in React components."
+    },
+    {
+      "question": "How can you handle multiple input fields in a form effectively?",
+      "options": [
+        "Using a separate useState for each field",
+        "Using a single state object to store all field values",
+        "Using refs for all inputs",
+        "Using only uncontrolled components"
+      ],
+      "correctAnswer": "Using a single state object to store all field values",
+      "explanation": "Using a state object allows easier management and updates of multiple input fields."
+    },
+    {
+      "question": "What is the purpose of the 'keyboardType' prop in a TextInput?",
+      "options": [
+        "To specify the type of keyboard to display",
+        "To enable the keyboard automatically",
+        "To change the keyboard color",
+        "To disable keyboard input"
+      ],
+      "correctAnswer": "To specify the type of keyboard to display",
+      "explanation": "keyboardType controls which type of keyboard (numeric, email, default, etc.) appears."
+    },
+    {
+      "question": "Which prop helps secure sensitive text input like passwords?",
+      "options": [
+        "secureEntry",
+        "secureTextEntry",
+        "passwordField",
+        "secureInput"
+      ],
+      "correctAnswer": "secureTextEntry",
+      "explanation": "The secureTextEntry prop masks input text, suitable for passwords."
+    },
+    {
+      "question": "How do you clear the input field after submitting a form?",
+      "options": [
+        "Reset the input state to an empty string",
+        "Use input.clear() method",
+        "Use resetForm() method",
+        "Set input.value to null"
+      ],
+      "correctAnswer": "Reset the input state to an empty string",
+      "explanation": "Clearing the input state triggers the TextInput to display as empty."
+    },
+    {
+      "question": "What is form validation used for?",
+      "options": [
+        "To check if input meets certain criteria",
+        "To style the form",
+        "To handle input focus",
+        "To reset form inputs"
+      ],
+      "correctAnswer": "To check if input meets certain criteria",
+      "explanation": "Validation ensures the user input is correct before form submission."
+    },
+    {
+      "question": "Which package is popular for managing forms and validation in React Native?",
+      "options": [
+        "Formik",
+        "Redux",
+        "Axios",
+        "React Navigation"
+      ],
+      "correctAnswer": "Formik",
+      "explanation": "Formik is widely used to manage forms and validation logic in React Native."
+    },
+    {
+      "question": "What does 'controlled component' mean in the context of forms?",
+      "options": [
+        "An input whose value is controlled by React state",
+        "An input that manages its own state",
+        "An input disabled for editing",
+        "An input that automatically validates"
+      ],
+      "correctAnswer": "An input whose value is controlled by React state",
+      "explanation": "Controlled components rely on React state to set and update their values."
+    }
+  ]
+}

@@ -32,10 +32,9 @@ export default function FlashCards() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute flex justify-center items-center w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
+      <View className="absolute flex p-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
         <Text
           className="text-white text-xl font-nunito-semibold"
-          numberOfLines={1}
 
         >
           {item.title}

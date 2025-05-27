@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod10",
+  "courseId": "react",
+  "moduleId": "mod10",
+  "title": "Context API and Component Reusability",
+  "description": "Using React Context API for managing global state and designing reusable components.",
+  "flashcards": [
+    {
+      "question": "What problem does the Context API solve in React?",
+      "answer": "It provides a way to share data globally across the component tree without prop drilling."
+    },
+    {
+      "question": "What is prop drilling?",
+      "answer": "Passing props through multiple intermediate components that do not need them just to reach deeply nested components."
+    },
+    {
+      "question": "How do you create a Context in React?",
+      "answer": "Using React.createContext() function."
+    },
+    {
+      "question": "What are the two main parts of Context API?",
+      "answer": "Provider and Consumer."
+    },
+    {
+      "question": "What does the Provider component do?",
+      "answer": "It supplies the context value to all its descendant components."
+    },
+    {
+      "question": "How do you consume context in a functional component?",
+      "answer": "By using the useContext hook."
+    },
+    {
+      "question": "What is a reusable component?",
+      "answer": "A component designed to be used multiple times with different data or props."
+    },
+    {
+      "question": "Why is component reusability important?",
+      "answer": "It reduces code duplication and makes the codebase easier to maintain."
+    },
+    {
+      "question": "How can you make a React component reusable?",
+      "answer": "By making it accept props and avoid hardcoded values."
+    },
+    {
+      "question": "Can Context API replace state management libraries like Redux?",
+      "answer": "For small to medium apps, yes, but for complex apps, Redux or similar might be better."
+    }
+  ]
+}

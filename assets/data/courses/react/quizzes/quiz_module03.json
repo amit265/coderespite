@@ -1,0 +1,101 @@
+{
+  "quizId": "qz03",
+  "courseId": "react",
+  "moduleId": "mod03",
+  "title": "State, Lifecycle, and Event Handling",
+  "tags": ["react", "state", "lifecycle", "events", "hooks"],
+  "difficulty": "easy",
+  "description": "Covers how to manage component state, handle events, and understand lifecycle methods or effects in React.",
+  "quiz": [
+    {
+      "question": "What hook is used to add state in a functional React component?",
+      "options": ["useState", "useEffect", "useRef", "useContext"],
+      "correctAnswer": "useState",
+      "explanation": "`useState` allows you to add and manage local state in a functional component."
+    },
+    {
+      "question": "Which of the following correctly updates the state using `useState`?",
+      "options": [
+        "count = count + 1;",
+        "setCount(count + 1);",
+        "update(count + 1);",
+        "this.setState({ count: count + 1 });"
+      ],
+      "correctAnswer": "setCount(count + 1);",
+      "explanation": "You must use the setter function returned by `useState` to update state."
+    },
+    {
+      "question": "In class components, where should you initialize state?",
+      "options": [
+        "Inside `render()`",
+        "Inside a global variable",
+        "Inside the constructor",
+        "Outside the component"
+      ],
+      "correctAnswer": "Inside the constructor",
+      "explanation": "In class components, state is typically initialized inside the constructor."
+    },
+    {
+      "question": "Which lifecycle method is called after a component is rendered for the first time?",
+      "options": ["componentDidMount", "componentWillMount", "componentDidUpdate", "componentWillUpdate"],
+      "correctAnswer": "componentDidMount",
+      "explanation": "`componentDidMount` is invoked once after the initial render."
+    },
+    {
+      "question": "Which hook is used to perform side effects in functional components?",
+      "options": ["useRef", "useMemo", "useState", "useEffect"],
+      "correctAnswer": "useEffect",
+      "explanation": "`useEffect` is the hook used to handle side effects such as fetching data or subscribing to events."
+    },
+    {
+      "question": "Which attribute is used to handle click events in React?",
+      "options": ["onClick", "onclick", "click", "onTap"],
+      "correctAnswer": "onClick",
+      "explanation": "`onClick` is the correct attribute name in JSX to handle click events."
+    },
+    {
+      "question": "How do you prevent default form submission in an event handler?",
+      "options": [
+        "event.stop();",
+        "preventDefault();",
+        "event.preventDefault();",
+        "return false;"
+      ],
+      "correctAnswer": "event.preventDefault();",
+      "explanation": "Calling `event.preventDefault()` stops the form from submitting and reloading the page."
+    },
+    {
+      "question": "What will `useEffect(() => { console.log('Hello'); }, []);` do?",
+      "options": [
+        "Log 'Hello' every time the component re-renders",
+        "Log 'Hello' once when the component mounts",
+        "Log 'Hello' when the state changes",
+        "Throw an error"
+      ],
+      "correctAnswer": "Log 'Hello' once when the component mounts",
+      "explanation": "An empty dependency array means the effect runs only once after the initial render."
+    },
+    {
+      "question": "Which is true about state in React?",
+      "options": [
+        "State can be directly modified",
+        "State updates are asynchronous",
+        "State is only used in class components",
+        "State never changes"
+      ],
+      "correctAnswer": "State updates are asynchronous",
+      "explanation": "State updates may be batched and are not guaranteed to reflect immediately after calling the setter."
+    },
+    {
+      "question": "Which method is used to update state in a React class component?",
+      "options": [
+        "setState()",
+        "updateState()",
+        "modifyState()",
+        "changeState()"
+      ],
+      "correctAnswer": "setState()",
+      "explanation": "`setState()` is the method used to update the state in class-based components."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod17",
+  "title": "Final Project: Building a Complex Application with DSA",
+  "description": "This final module integrates everything you’ve learned in this course. You'll design and build a complex, real-world JavaScript application that leverages multiple data structures and algorithms. The project will challenge your understanding of concepts such as trees, graphs, hash tables, recursion, dynamic programming, and problem-solving patterns. You'll plan the architecture, implement core functionalities, optimize for performance, and ensure your code is clean, maintainable, and well-documented. This hands-on project simulates real software development scenarios and prepares you for advanced coding challenges in professional environments.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod17-lsn01",
+      "title": "Project Overview and Requirements Analysis",
+      "type": "theory",
+      "content": "Understand the project scope, goals, and deliverables. Learn how to analyze requirements, identify key features, and plan your development approach. Discuss how to break down a large problem into manageable submodules."
+    },
+    {
+      "lessonId": "mod17-lsn02",
+      "title": "Designing the Application Architecture",
+      "type": "theory",
+      "content": "Learn to architect your application by selecting appropriate data structures for different components, designing interfaces, and deciding on algorithmic strategies to ensure scalability and performance."
+    },
+    {
+      "lessonId": "mod17-lsn03",
+      "title": "Implementing Core Data Structures",
+      "type": "code",
+      "content": "Write reusable implementations of necessary data structures such as linked lists, trees, heaps, graphs, and hash tables in JavaScript. Ensure modularity and correctness."
+    },
+    {
+      "lessonId": "mod17-lsn04",
+      "title": "Building Key Functional Components",
+      "type": "code",
+      "content": "Implement major features of the application using your data structures and algorithms knowledge. Example: building a search feature with tries, implementing pathfinding with graph algorithms, or scheduling with priority queues."
+    },
+    {
+      "lessonId": "mod17-lsn05",
+      "title": "Optimizing Performance and Scalability",
+      "type": "theory",
+      "content": "Analyze bottlenecks and optimize your algorithms for time and space complexity. Discuss trade-offs and best practices for writing efficient JavaScript code."
+    },
+    {
+      "lessonId": "mod17-lsn06",
+      "title": "Testing, Debugging, and Documentation",
+      "type": "theory",
+      "content": "Learn how to write comprehensive tests for your application modules, debug effectively, and document your code for maintainability and collaboration."
+    },
+    {
+      "lessonId": "mod17-lsn07",
+      "title": "Deployment and Presentation",
+      "type": "theory",
+      "content": "Explore options for deploying your project, sharing your work on platforms like GitHub, and presenting your project in interviews or portfolios."
+    },
+    {
+      "lessonId": "mod17-lsn08",
+      "title": "Project Walkthrough and Code Review",
+      "type": "code",
+      "content": "Walk through the complete project codebase with explanations on design decisions, algorithm choices, and implementation details."
+    },
+    {
+      "lessonId": "mod17-lsn09",
+      "title": "Extending the Application and Next Steps",
+      "type": "theory",
+      "content": "Discuss potential enhancements, additional features, and advanced topics you can explore beyond this project to continue your learning journey."
+    }
+  ]
+}

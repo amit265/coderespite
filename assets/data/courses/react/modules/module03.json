@@ -1,0 +1,69 @@
+{
+  "courseId": "react",
+  "moduleId": "mod03",
+  "title": "State, Lifecycle, and Event Handling",
+  "description": "Understand how to manage local component state, respond to user events, and use lifecycle methods for better control over component behavior.",
+  "level": "Beginner",
+  "lessons": [
+    {
+      "lessonId": "mod03-lsn01",
+      "title": "What is State in React?",
+      "type": "theory",
+      "content": "State is a built-in object used to track data that changes over time. When state updates, the component re-renders to reflect those changes."
+    },
+    {
+      "lessonId": "mod03-lsn02",
+      "title": "Using useState Hook",
+      "type": "code",
+      "content": "```jsx\nimport { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;\n}\n```"
+    },
+    {
+      "lessonId": "mod03-lsn03",
+      "title": "Handling Events in React",
+      "type": "code",
+      "content": "```jsx\nfunction ClickHandler() {\n  const handleClick = () => alert('Button clicked!');\n\n  return <button onClick={handleClick}>Click Me</button>;\n}\n```"
+    },
+    {
+      "lessonId": "mod03-lsn04",
+      "title": "Synthetic Events in React",
+      "type": "theory",
+      "content": "React wraps native events in SyntheticEvent, providing cross-browser compatibility and consistent behavior."
+    },
+    {
+      "lessonId": "mod03-lsn05",
+      "title": "Controlled Components and Forms",
+      "type": "code",
+      "content": "```jsx\nfunction Form() {\n  const [name, setName] = useState('');\n\n  return (\n    <form>\n      <input value={name} onChange={e => setName(e.target.value)} />\n      <p>Hello, {name}</p>\n    </form>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod03-lsn06",
+      "title": "Introduction to Lifecycle Methods",
+      "type": "theory",
+      "content": "React lifecycle methods let you run code at specific stages: when a component mounts, updates, or unmounts."
+    },
+    {
+      "lessonId": "mod03-lsn07",
+      "title": "Using useEffect for Lifecycle Behavior",
+      "type": "code",
+      "content": "```jsx\nimport { useEffect } from 'react';\n\nuseEffect(() => {\n  console.log('Component mounted');\n  return () => console.log('Component unmounted');\n}, []);\n```"
+    },
+    {
+      "lessonId": "mod03-lsn08",
+      "title": "Cleanup Functions in useEffect",
+      "type": "theory",
+      "content": "Cleanup functions run when the component unmounts or before the effect runs again, useful for timers, subscriptions, etc."
+    },
+    {
+      "lessonId": "mod03-lsn09",
+      "title": "useEffect with Dependencies",
+      "type": "code",
+      "content": "```jsx\nuseEffect(() => {\n  document.title = `Clicked ${count} times`;\n}, [count]);\n```"
+    },
+    {
+      "lessonId": "mod03-lsn10",
+      "title": "State vs Props",
+      "type": "theory",
+      "content": "Props are read-only and passed from parent to child. State is local and managed within the component. Props make components reusable; state makes them interactive."
+    }
+  ]
+}

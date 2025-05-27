@@ -4,11 +4,10 @@ export const courseIcons = {
   js: require("../assets/images/courses/js.png"),
   react: require("../assets/images/courses/react.png"),
   py: require("../assets/images/courses/py.png"),
-  node: require("../assets/images/flashcards/py.png"),
-  rn: require("../assets/images/flashcards/py.png"),
-  dsa: require("../assets/images/flashcards/py.png"),
+  node: require("../assets/images/courses/node.png"),
+  rn: require("../assets/images/courses/rn.png"),
+  dsa: require("../assets/images/courses/dsa.png"),
 
-  // Add other mappings
 };
 
 export const flashcardIcons = {
@@ -17,9 +16,9 @@ export const flashcardIcons = {
   js: require("../assets/images/flashcards/js.png"),
   react: require("../assets/images/flashcards/react.png"),
   py: require("../assets/images/flashcards/py.png"),
-  node: require("../assets/images/flashcards/py.png"),
-  rn: require("../assets/images/flashcards/py.png"),
-  dsa: require("../assets/images/flashcards/py.png"),
+  node: require("../assets/images/flashcards/node.png"),
+  rn: require("../assets/images/flashcards/rn.png"),
+  dsa: require("../assets/images/flashcards/dsa.png"),
 
   // Add other mappings
 };

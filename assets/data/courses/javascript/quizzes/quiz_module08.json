@@ -1,0 +1,87 @@
+{
+  "quizId": "qz8",
+  "courseId": "javascript",
+
+  "moduleId": "mod08",
+  "title": "DOM Manipulation",
+  "tags": ["DOM", "selectors", "HTML", "JavaScript"],
+  "difficulty": "medium",
+  "description": "Interacting with the Document Object Model using JavaScript.",
+  "quiz": [
+    {
+      "question": "What does DOM stand for in JavaScript?",
+      "options": ["Document Object Model", "Data Object Manager", "Dynamic Output Model", "Document Order Model"],
+      "correctAnswer": "Document Object Model",
+      "explanation": "DOM stands for Document Object Model, which represents the structure of an HTML document."
+    },
+    {
+      "question": "Which method is used to select an element by its ID?",
+      "options": ["querySelector()", "getElementById()", "getElementsByClassName()", "getElement()"],
+      "correctAnswer": "getElementById()",
+      "explanation": "`getElementById()` returns the element that has the ID attribute with the specified value."
+    },
+    {
+      "question": "What does `document.querySelector('.btn')` select?",
+      "options": [
+        "All elements with class 'btn'",
+        "The first element with class 'btn'",
+        "An element with ID 'btn'",
+        "Nothing, it's invalid"
+      ],
+      "correctAnswer": "The first element with class 'btn'",
+      "explanation": "`querySelector()` returns the first matching element, in this case, one with class 'btn'."
+    },
+    {
+      "question": "Which method adds a new HTML element to the DOM?",
+      "options": ["appendChild()", "createElement()", "setAttribute()", "querySelector()"],
+      "correctAnswer": "appendChild()",
+      "explanation": "`appendChild()` inserts a node as the last child of a parent node."
+    },
+    {
+      "question": "Which method is used to create a new DOM element?",
+      "options": ["createNode()", "createElement()", "newElement()", "makeNode()"],
+      "correctAnswer": "createElement()",
+      "explanation": "`createElement()` creates an Element Node with the specified tag name."
+    },
+    {
+      "question": "How do you change the text inside a paragraph with JavaScript?",
+      "options": [
+        "element.text = 'new text'",
+        "element.value = 'new text'",
+        "element.innerText = 'new text'",
+        "element.input = 'new text'"
+      ],
+      "correctAnswer": "element.innerText = 'new text'",
+      "explanation": "`innerText` sets or returns the text content of the specified node."
+    },
+    {
+      "question": "How do you remove an element from the DOM?",
+      "options": ["removeChild()", "delete()", "popElement()", "cutNode()"],
+      "correctAnswer": "removeChild()",
+      "explanation": "To remove an element, you call `removeChild()` on the parent element."
+    },
+    {
+      "question": "Which property is used to change an element's CSS style directly?",
+      "options": ["element.style", "element.css", "element.stylesheet", "element.class"],
+      "correctAnswer": "element.style",
+      "explanation": "`element.style` allows you to change the inline CSS of a DOM element."
+    },
+    {
+      "question": "What does `classList.add('active')` do?",
+      "options": [
+        "Adds a new element with class 'active'",
+        "Changes element tag to 'active'",
+        "Adds the class 'active' to the element",
+        "Removes all other classes"
+      ],
+      "correctAnswer": "Adds the class 'active' to the element",
+      "explanation": "`classList.add()` is used to add one or more classes to an element."
+    },
+    {
+      "question": "Which method is used to attach a click event listener?",
+      "options": ["addEvent()", "addEventListener()", "onClick()", "attachEvent()"],
+      "correctAnswer": "addEventListener()",
+      "explanation": "`addEventListener()` is used to set up a function that will be called when the specified event is delivered to the target."
+    }
+  ]
+}

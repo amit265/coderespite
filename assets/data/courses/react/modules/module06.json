@@ -1,0 +1,69 @@
+{
+  "courseId": "react",
+  "moduleId": "mod06",
+  "title": "React Router and Navigation",
+  "description": "Learn how to create multi-page React applications with routing and navigation using React Router v6.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod06-lsn01",
+      "title": "Introduction to React Router",
+      "type": "theory",
+      "content": "React Router enables navigation between different components, simulating multi-page apps within a single-page application."
+    },
+    {
+      "lessonId": "mod06-lsn02",
+      "title": "Installing and Setting Up React Router",
+      "type": "code",
+      "content": "```bash\nnpm install react-router-dom@6\n```\nBasic setup with BrowserRouter wrapping your app."
+    },
+    {
+      "lessonId": "mod06-lsn03",
+      "title": "Defining Routes",
+      "type": "code",
+      "content": "```jsx\nimport { BrowserRouter, Routes, Route } from 'react-router-dom';\n\nfunction App() {\n  return (\n    <BrowserRouter>\n      <Routes>\n        <Route path=\"/\" element={<Home />} />\n        <Route path=\"/about\" element={<About />} />\n      </Routes>\n    </BrowserRouter>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod06-lsn04",
+      "title": "Using Link and NavLink for Navigation",
+      "type": "code",
+      "content": "```jsx\nimport { Link, NavLink } from 'react-router-dom';\n\nfunction Navbar() {\n  return (\n    <nav>\n      <Link to=\"/\">Home</Link>\n      <NavLink to=\"/about\" activeClassName=\"active\">About</NavLink>\n    </nav>\n  );\n}\n```"
+    },
+    {
+      "lessonId": "mod06-lsn05",
+      "title": "Route Parameters and Dynamic Routing",
+      "type": "code",
+      "content": "```jsx\n<Route path=\"/user/:id\" element={<User />} />\n\nfunction User() {\n  const { id } = useParams();\n  return <h2>User ID: {id}</h2>;\n}\n```"
+    },
+    {
+      "lessonId": "mod06-lsn06",
+      "title": "Nested Routes",
+      "type": "code",
+      "content": "```jsx\n<Route path=\"dashboard\" element={<Dashboard />}> \n  <Route path=\"profile\" element={<Profile />} />\n  <Route path=\"settings\" element={<Settings />} />\n</Route>\n```"
+    },
+    {
+      "lessonId": "mod06-lsn07",
+      "title": "Redirecting and Navigating Programmatically",
+      "type": "code",
+      "content": "```jsx\nimport { useNavigate } from 'react-router-dom';\n\nfunction Login() {\n  const navigate = useNavigate();\n  const handleSubmit = () => {\n    // login logic\n    navigate('/dashboard');\n  };\n  return <button onClick={handleSubmit}>Login</button>;\n}\n```"
+    },
+    {
+      "lessonId": "mod06-lsn08",
+      "title": "Handling 404 Not Found Pages",
+      "type": "code",
+      "content": "```jsx\n<Route path=\"*\" element={<NotFound />} />\n```"
+    },
+    {
+      "lessonId": "mod06-lsn09",
+      "title": "Navigation Guards and Prompting Before Leave",
+      "type": "theory",
+      "content": "React Router v6 doesn’t have built-in navigation guards but you can use custom hooks or libraries to prompt users before navigating away."
+    },
+    {
+      "lessonId": "mod06-lsn10",
+      "title": "Summary and Best Practices",
+      "type": "theory",
+      "content": "- Use BrowserRouter for web apps\n- Define clear route hierarchy\n- Use NavLink for active styling\n- Handle unknown routes gracefully\n- Avoid excessive nesting for readability"
+    }
+  ]
+}

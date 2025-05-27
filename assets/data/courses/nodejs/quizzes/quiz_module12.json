@@ -1,0 +1,121 @@
+{
+  "quizId": "qz12",
+  "courseId": "nodejs",
+  "moduleId": "mod12",
+  "title": "WebSockets and Real-time Communication",
+  "tags": ["nodejs", "websockets", "real-time", "communication", "socket.io"],
+  "difficulty": "advanced",
+  "description": "Understanding WebSockets and how to implement real-time communication in Node.js applications.",
+  "quiz": [
+    {
+      "question": "What protocol do WebSockets use for communication?",
+      "options": [
+        "TCP",
+        "HTTP",
+        "UDP",
+        "FTP"
+      ],
+      "correctAnswer": "TCP",
+      "explanation": "WebSockets use TCP for establishing a persistent connection."
+    },
+    {
+      "question": "Which Node.js library is commonly used for WebSocket implementation?",
+      "options": [
+        "socket.io",
+        "express",
+        "mongoose",
+        "lodash"
+      ],
+      "correctAnswer": "socket.io",
+      "explanation": "`socket.io` simplifies WebSocket usage and fallback options in Node.js."
+    },
+    {
+      "question": "Which method is used to listen for a WebSocket connection event in socket.io?",
+      "options": [
+        "io.on('connection', callback)",
+        "socket.emit('connection')",
+        "io.connect()",
+        "socket.on('connect')"
+      ],
+      "correctAnswer": "io.on('connection', callback)",
+      "explanation": "The `connection` event is used to detect when a client connects."
+    },
+    {
+      "question": "What is the main advantage of WebSockets over HTTP polling?",
+      "options": [
+        "Lower latency and real-time bidirectional communication",
+        "Less secure",
+        "Slower data transfer",
+        "One-way communication only"
+      ],
+      "correctAnswer": "Lower latency and real-time bidirectional communication",
+      "explanation": "WebSockets maintain an open connection allowing immediate data exchange."
+    },
+    {
+      "question": "In WebSocket communication, what is a 'handshake'?",
+      "options": [
+        "Initial HTTP request upgrading the connection to WebSocket",
+        "Data packet",
+        "Closing the connection",
+        "Authentication token"
+      ],
+      "correctAnswer": "Initial HTTP request upgrading the connection to WebSocket",
+      "explanation": "The handshake upgrades an HTTP connection to a WebSocket connection."
+    },
+    {
+      "question": "Which event in socket.io is used to handle incoming messages?",
+      "options": [
+        "socket.on('message')",
+        "io.emit('message')",
+        "socket.send()",
+        "io.receive()"
+      ],
+      "correctAnswer": "socket.on('message')",
+      "explanation": "The `message` event is used to listen for messages from clients."
+    },
+    {
+      "question": "Can WebSockets work over HTTPS?",
+      "options": [
+        "Yes, using the WSS protocol",
+        "No, only HTTP",
+        "Yes, using FTP",
+        "Only in local environments"
+      ],
+      "correctAnswer": "Yes, using the WSS protocol",
+      "explanation": "WebSocket Secure (WSS) works over HTTPS for secure communication."
+    },
+    {
+      "question": "What is the role of the 'emit' function in socket.io?",
+      "options": [
+        "To send messages/events to clients or servers",
+        "To close the connection",
+        "To create a new socket",
+        "To authenticate users"
+      ],
+      "correctAnswer": "To send messages/events to clients or servers",
+      "explanation": "`emit` is used to send custom events or data across sockets."
+    },
+    {
+      "question": "Which port is the default for WebSocket connections?",
+      "options": [
+        "80",
+        "443",
+        "8080",
+        "3000"
+      ],
+      "correctAnswer": "80",
+      "explanation": "Port 80 is the default for unsecured WebSocket (ws) connections, while 443 is used for secure (wss)."
+    },
+    {
+      "question": "What type of communication do WebSockets support?",
+      "options": [
+        "Full-duplex (bidirectional)",
+        "Simplex (one-way)",
+        "Half-duplex",
+        "Broadcast only"
+      ],
+      "correctAnswer": "Full-duplex (bidirectional)",
+      "explanation": "WebSockets allow both client and server to send messages independently at any time."
+    }
+  ]
+}

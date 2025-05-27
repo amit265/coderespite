@@ -1,0 +1,120 @@
+{
+  "quizId": "qz4",
+  "courseId": "javascript",
+  "moduleId": "mod04",
+  "title": "Functions Basics",
+  "tags": ["functions", "basics", "parameters", "return"],
+  "difficulty": "medium",
+  "description": "Learn how to control the flow of your program with loops and conditionals.",
+  "quiz": [{
+      "question": "What keyword is used to define a function in JavaScript?",
+      "correctAnswer": "function",
+      "explanation": "JavaScript functions are declared using the `function` keyword.",
+      "options": [
+        "func",
+        "function",
+        "def",
+        "method"
+      ]
+    },
+    {
+      "question": "What does a function return if no return statement is provided?",
+      "correctAnswer": "undefined",
+      "explanation": "If a return statement is not used, the function returns `undefined` by default.",
+      "options": [
+        "null",
+        "0",
+        "undefined",
+        "false"
+      ]
+    },
+    {
+      "question": "What is the term for values passed into a function?",
+      "correctAnswer": "Arguments",
+      "explanation": "Values passed to a function when calling it are called arguments.",
+      "options": [
+        "Variables",
+        "Parameters",
+        "Arguments",
+        "Properties"
+      ]
+    },
+    {
+      "question": "What is the term for the names listed in the function definition?",
+      "correctAnswer": "Parameters",
+      "explanation": "Parameters are placeholders defined in a function’s declaration.",
+      "options": [
+        "Arguments",
+        "Returns",
+        "Parameters",
+        "Inputs"
+      ]
+    },
+    {
+      "question": "What is the output of: `function greet(){ return 'Hi'; } console.log(greet());`",
+      "correctAnswer": "Hi",
+      "explanation": "The function `greet` returns the string 'Hi', which is logged.",
+      "options": [
+        "undefined",
+        "greet",
+        "Hi",
+        "null"
+      ]
+    },
+    {
+      "question": "How do you call a function named `myFunc`?",
+      "correctAnswer": "myFunc()",
+      "explanation": "Functions are called using parentheses: `myFunc()`.",
+      "options": [
+        "call myFunc",
+        "myFunc",
+        "run(myFunc)",
+        "myFunc()"
+      ]
+    },
+    {
+      "question": "Which keyword is used to send a value back from a function?",
+      "correctAnswer": "return",
+      "explanation": "The `return` keyword is used to output a value from a function.",
+      "options": [
+        "give",
+        "return",
+        "output",
+        "yield"
+      ]
+    },
+    {
+      "question": "What is a function without a name called?",
+      "correctAnswer": "Anonymous function",
+      "explanation": "A function without a name is called an anonymous function.",
+      "options": [
+        "Void function",
+        "Null function",
+        "Anonymous function",
+        "Callback function"
+      ]
+    },
+    {
+      "question": "Which of the following is a valid arrow function?",
+      "correctAnswer": "() => 5",
+      "explanation": "Arrow functions are written using `=>` and can return values directly.",
+      "options": [
+        "function => 5",
+        "return => 5",
+        "() => 5",
+        "() <= 5"
+      ]
+    },
+    {
+      "question": "What will be the output of `console.log(typeof function(){});`?",
+      "correctAnswer": "function",
+      "explanation": "`typeof` on a function returns 'function' in JavaScript.",
+      "options": [
+        "object",
+        "function",
+        "undefined",
+        "string"
+      ]
+    }
+  ]
+}

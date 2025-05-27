@@ -1,0 +1,116 @@
+{
+  "quizId": "qz07",
+  "courseId": "react",
+  "moduleId": "mod07",
+  "title": "Forms and Form Management (Formik / React Hook Form)",
+  "tags": ["react", "forms", "formik", "react-hook-form", "form-handling", "validation"],
+  "difficulty": "medium",
+  "description": "Test your understanding of form handling and validation using Formik and React Hook Form in React.",
+  "quiz": [
+    {
+      "question": "Which of the following libraries is known for minimal re-rendering and better performance in forms?",
+      "options": [
+        "Formik",
+        "React Hook Form",
+        "Redux Form",
+        "Final Form"
+      ],
+      "correctAnswer": "React Hook Form",
+      "explanation": "React Hook Form is designed for better performance with minimal re-renders."
+    },
+    {
+      "question": "In Formik, which prop is used to handle form submission?",
+      "options": ["onSubmit", "handleSubmit", "submitForm", "submitHandler"],
+      "correctAnswer": "onSubmit",
+      "explanation": "Formik uses the `onSubmit` prop to define the form submission logic."
+    },
+    {
+      "question": "Which hook is used to handle forms in React Hook Form?",
+      "options": [
+        "useForm",
+        "useFormik",
+        "useHookForm",
+        "useFormHandler"
+      ],
+      "correctAnswer": "useForm",
+      "explanation": "`useForm` is the primary hook provided by React Hook Form to manage form state and handlers."
+    },
+    {
+      "question": "How do you register an input field with React Hook Form?",
+      "options": [
+        "registerInput()",
+        "useInput()",
+        "ref={register}",
+        "...register('fieldName')"
+      ],
+      "correctAnswer": "...register('fieldName')",
+      "explanation": "In React Hook Form, fields are registered using the spread operator with `register()`."
+    },
+    {
+      "question": "Which Formik component automatically connects form fields to Formik state?",
+      "options": [
+        "Field",
+        "Input",
+        "FormField",
+        "FormikField"
+      ],
+      "correctAnswer": "Field",
+      "explanation": "The `Field` component in Formik binds inputs to the form state."
+    },
+    {
+      "question": "What is the purpose of the `handleChange` function in Formik?",
+      "options": [
+        "To reset the form",
+        "To update the form errors",
+        "To update field values on change",
+        "To submit the form"
+      ],
+      "correctAnswer": "To update field values on change",
+      "explanation": "`handleChange` updates Formik's internal state when input fields change."
+    },
+    {
+      "question": "How do you perform validation in React Hook Form?",
+      "options": [
+        "Using the validate prop",
+        "Using Yup only",
+        "With built-in validation rules and resolvers",
+        "Validation is not supported"
+      ],
+      "correctAnswer": "With built-in validation rules and resolvers",
+      "explanation": "React Hook Form supports built-in validations and schema-based validation using resolvers like Yup."
+    },
+    {
+      "question": "Which package is commonly used for schema validation with Formik?",
+      "options": [
+        "Zod",
+        "Ajv",
+        "Yup",
+        "Joi"
+      ],
+      "correctAnswer": "Yup",
+      "explanation": "Yup is a popular schema validation library often used with Formik."
+    },
+    {
+      "question": "What method is used to trigger a form reset in React Hook Form?",
+      "options": [
+        "resetForm()",
+        "clearForm()",
+        "reset()",
+        "resetFields()"
+      ],
+      "correctAnswer": "reset()",
+      "explanation": "`reset()` resets the form state in React Hook Form."
+    },
+    {
+      "question": "Which library allows for uncontrolled inputs by default?",
+      "options": [
+        "Formik",
+        "React Hook Form",
+        "Redux Form",
+        "None of the above"
+      ],
+      "correctAnswer": "React Hook Form",
+      "explanation": "React Hook Form promotes the use of uncontrolled inputs for better performance."
+    }
+  ]
+}

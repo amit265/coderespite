@@ -1,0 +1,112 @@
+{
+  "quizId": "qz14",
+  "moduleId": "mod14",
+  "courseId": "javascript",
+
+  "title": "Error Handling",
+  "tags": ["try-catch", "throw", "error object", "custom errors", "finally"],
+  "difficulty": "medium",
+  "description": "Using try-catch blocks to handle errors gracefully.",
+  "quiz": [
+    {
+      "question": "What is the main purpose of a try-catch block in JavaScript?",
+      "options": [
+        "To loop over an array",
+        "To execute code conditionally",
+        "To handle exceptions or errors gracefully",
+        "To define new functions"
+      ],
+      "correctAnswer": "To handle exceptions or errors gracefully",
+      "explanation": "The try-catch block is used to catch and handle runtime errors without stopping program execution."
+    },
+    {
+      "question": "Which block is executed regardless of whether an error occurred or not?",
+      "options": ["try", "catch", "finally", "throw"],
+      "correctAnswer": "finally",
+      "explanation": "The `finally` block always executes after the try-catch, whether there was an error or not."
+    },
+    {
+      "question": "What keyword is used to manually trigger an error?",
+      "options": ["raise", "throw", "error", "panic"],
+      "correctAnswer": "throw",
+      "explanation": "`throw` is used to manually throw an error in JavaScript."
+    },
+    {
+      "question": "What is caught inside the `catch` block?",
+      "options": [
+        "Any returned value",
+        "Only syntax errors",
+        "Any exception thrown in the try block",
+        "Variables from try block"
+      ],
+      "correctAnswer": "Any exception thrown in the try block",
+      "explanation": "Only errors thrown in the try block will be caught by the catch block."
+    },
+    {
+      "question": "How do you access the error object in a catch block?",
+      "options": [
+        "catch(error)",
+        "error.catch()",
+        "try.catch()",
+        "error => catch"
+      ],
+      "correctAnswer": "catch(error)",
+      "explanation": "The `catch` block can accept a parameter which is the error object."
+    },
+    {
+      "question": "What is a common use case for custom errors?",
+      "options": [
+        "To write shorter code",
+        "To simulate delays",
+        "To provide meaningful error messages",
+        "To create loops"
+      ],
+      "correctAnswer": "To provide meaningful error messages",
+      "explanation": "Custom errors help describe specific problems more clearly than generic errors."
+    },
+    {
+      "question": "What happens if an error occurs inside a catch block?",
+      "options": [
+        "It’s silently ignored",
+        "It’s handled automatically",
+        "It throws a new error",
+        "It stops execution unless another try-catch handles it"
+      ],
+      "correctAnswer": "It stops execution unless another try-catch handles it",
+      "explanation": "If an error occurs in the catch block, it must be caught by another try-catch."
+    },
+    {
+      "question": "Which statement correctly throws a custom error?",
+      "options": [
+        "`throw new Error('Something went wrong')`",
+        "`error('Something went wrong')`",
+        "`throw Error('Something went wrong')`",
+        "`new throw Error('Something went wrong')`"
+      ],
+      "correctAnswer": "`throw new Error('Something went wrong')`",
+      "explanation": "This is the standard way to throw a custom error in JavaScript."
+    },
+    {
+      "question": "Which of the following types of errors are **not** caught by try-catch?",
+      "options": [
+        "Reference errors",
+        "Runtime errors",
+        "Syntax errors",
+        "Custom thrown errors"
+      ],
+      "correctAnswer": "Syntax errors",
+      "explanation": "Syntax errors are caught at parse time, so try-catch cannot catch them."
+    },
+    {
+      "question": "Why is it good practice to log errors or send them to a server?",
+      "options": [
+        "To increase performance",
+        "To track and debug issues in production",
+        "To block the user from reloading",
+        "To improve SEO"
+      ],
+      "correctAnswer": "To track and debug issues in production",
+      "explanation": "Logging or reporting errors helps in identifying and fixing issues in production apps."
+    }
+  ]
+}

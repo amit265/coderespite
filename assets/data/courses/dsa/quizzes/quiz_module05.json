@@ -1,0 +1,96 @@
+{
+  "quizId": "qz05",
+  "courseId": "dsa",
+  "moduleId": "mod05",
+  "title": "Stacks and Queues: Managing Order",
+  "tags": ["stack", "queue", "data structures", "order", "LIFO", "FIFO"],
+  "difficulty": "easy",
+  "description": "Understanding the concepts, operations, and use cases of stacks and queues.",
+  "quiz": [
+    {
+      "question": "What is a stack data structure?",
+      "options": [
+        "A collection that follows Last In First Out (LIFO) order",
+        "A collection that follows First In First Out (FIFO) order",
+        "A type of linked list",
+        "A tree structure"
+      ],
+      "correctAnswer": "A collection that follows Last In First Out (LIFO) order",
+      "explanation": "Stacks operate on LIFO principle, where the last element added is the first removed."
+    },
+    {
+      "question": "What are the main operations performed on a stack?",
+      "options": ["push and pop", "enqueue and dequeue", "insert and delete", "add and remove"],
+      "correctAnswer": "push and pop",
+      "explanation": "Push adds an element, pop removes the top element in a stack."
+    },
+    {
+      "question": "Which data structure follows First In First Out (FIFO) order?",
+      "options": ["Stack", "Queue", "Array", "Tree"],
+      "correctAnswer": "Queue",
+      "explanation": "Queues operate on FIFO principle where the first element added is the first removed."
+    },
+    {
+      "question": "What is the operation used to add an element to a queue?",
+      "options": ["enqueue", "push", "pop", "insert"],
+      "correctAnswer": "enqueue",
+      "explanation": "Enqueue adds an element to the back of the queue."
+    },
+    {
+      "question": "What is the operation used to remove an element from a queue?",
+      "options": ["dequeue", "pop", "push", "remove"],
+      "correctAnswer": "dequeue",
+      "explanation": "Dequeue removes the front element from the queue."
+    },
+    {
+      "question": "Which of the following is NOT a common use of stacks?",
+      "options": [
+        "Undo functionality in editors",
+        "Backtracking algorithms",
+        "Managing function calls (call stack)",
+        "Processing network packets"
+      ],
+      "correctAnswer": "Processing network packets",
+      "explanation": "Network packets are usually processed using queues, not stacks."
+    },
+    {
+      "question": "Which scenario is best suited for a queue?",
+      "options": [
+        "Browser history navigation",
+        "Printer job scheduling",
+        "Recursive function calls",
+        "Reversing a string"
+      ],
+      "correctAnswer": "Printer job scheduling",
+      "explanation": "Queues manage tasks in order of arrival, like print jobs."
+    },
+    {
+      "question": "What will be the state of the stack after push(1), push(2), pop(), push(3)?",
+      "options": [
+        "[1, 2, 3]",
+        "[1, 3]",
+        "[2, 3]",
+        "[3]"
+      ],
+      "correctAnswer": "[1, 3]",
+      "explanation": "After pop(), 2 is removed; stack has 1 and then 3 pushed."
+    },
+    {
+      "question": "What is a circular queue?",
+      "options": [
+        "A queue where the last position is connected back to the first position",
+        "A queue that stores elements in a circular linked list",
+        "A queue with fixed size",
+        "A queue implemented using stacks"
+      ],
+      "correctAnswer": "A queue where the last position is connected back to the first position",
+      "explanation": "Circular queue efficiently uses storage by connecting rear to front."
+    },
+    {
+      "question": "Which data structure is used in Depth-First Search (DFS)?",
+      "options": ["Queue", "Stack", "Hash Table", "Binary Tree"],
+      "correctAnswer": "Stack",
+      "explanation": "DFS uses a stack (explicit or call stack) to explore nodes deeply."
+    }
+  ]
+}

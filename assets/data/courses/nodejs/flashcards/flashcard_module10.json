@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod10",
+  "courseId": "nodejs",
+  "moduleId": "mod10",
+  "title": "Working with Databases (MongoDB or SQL)",
+  "description": "Learn how to integrate databases with Node.js applications using MongoDB and SQL, perform CRUD operations, and manage data effectively.",
+  "flashcards": [
+    {
+      "question": "What is a database in the context of web development?",
+      "answer": "A database is a system that stores, organizes, and manages data for applications to access and manipulate."
+    },
+    {
+      "question": "What are the main types of databases used with Node.js?",
+      "answer": "The two main types are NoSQL databases like MongoDB and relational SQL databases like MySQL or PostgreSQL."
+    },
+    {
+      "question": "What is MongoDB?",
+      "answer": "MongoDB is a NoSQL, document-oriented database that stores data in JSON-like BSON format, allowing flexible schema design."
+    },
+    {
+      "question": "What is SQL?",
+      "answer": "SQL (Structured Query Language) is a language used to interact with relational databases, which store data in tables with predefined schemas."
+    },
+    {
+      "question": "How do you connect a Node.js app to a MongoDB database?",
+      "answer": "By using libraries like Mongoose or the official MongoDB Node.js driver to establish a connection and perform operations."
+    },
+    {
+      "question": "What are CRUD operations?",
+      "answer": "CRUD stands for Create, Read, Update, and Delete — the four basic operations to manage data in a database."
+    },
+    {
+      "question": "How do you perform a basic SELECT query in SQL?",
+      "answer": "Using the syntax: SELECT * FROM table_name WHERE condition;"
+    },
+    {
+      "question": "What is an ORM and name one popular ORM for Node.js?",
+      "answer": "ORM stands for Object-Relational Mapping, which helps map database tables to objects. Sequelize is a popular ORM for Node.js."
+    },
+    {
+      "question": "Why use environment variables to store database credentials?",
+      "answer": "To keep sensitive information like usernames and passwords secure and separate from code."
+    },
+    {
+      "question": "What are indexes in databases?",
+      "answer": "Indexes improve the speed of data retrieval operations by providing quick access paths to data."
+    }
+  ]
+}

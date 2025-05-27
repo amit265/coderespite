@@ -1,0 +1,63 @@
+{
+  "courseId": "dsa",
+  "moduleId": "mod07",
+  "title": "Recursion and Divide & Conquer Techniques",
+  "description": "This module dives deep into recursion—a foundational concept in computer science where a function calls itself to solve smaller instances of a problem. Learners will understand the anatomy of recursive functions, the importance of base and recursive cases, and how to mentally trace recursive calls using the call stack. We'll then progress to divide and conquer, a powerful paradigm that solves problems by breaking them into subproblems, solving each recursively, and combining the results. Classic problems like binary search, merge sort, and quick sort are explored in detail with real JavaScript implementations. The module focuses on mastering problem-solving skills, writing optimized code, and understanding recursion behind the scenes.",
+  "level": "Intermediate",
+  "lessons": [
+    {
+      "lessonId": "mod07-lsn01",
+      "title": "Understanding Recursion: Concept and Use Cases",
+      "type": "theory",
+      "content": "Recursion is when a function solves a problem by calling itself with a smaller subproblem. It consists of:\n\n1. **Base Case** – A condition to stop recursion.\n2. **Recursive Case** – A call to itself with a reduced problem.\n\nExample Problems:\n- Factorial of a number\n- Fibonacci sequence\n- Tree/graph traversal\n- Backtracking (e.g., maze, N-Queens)\n\n**Call Stack** is key to understanding recursion: Each function call gets stacked until a base case is reached, and then the stack unwinds.\n\nAdvantages:\n- Elegant and compact code\n- Natural fit for problems that have self-similar structure\n\nDisadvantages:\n- Can lead to stack overflow\n- Usually slower and more memory intensive than iteration unless optimized with memoization or tail recursion"
+    },
+    {
+      "lessonId": "mod07-lsn02",
+      "title": "Writing Basic Recursive Functions in JavaScript",
+      "type": "code",
+      "content": "Let’s see basic recursion examples:\n\n**Factorial**\n```js\nfunction factorial(n) {\n  if (n === 0) return 1; // base case\n  return n * factorial(n - 1); // recursive case\n}\n\nconsole.log(factorial(5)); // 120\n```\n\n**Fibonacci (naive approach)**\n```js\nfunction fib(n) {\n  if (n <= 1) return n;\n  return fib(n - 1) + fib(n - 2);\n}\n\nconsole.log(fib(6)); // 8\n```"
+    },
+    {
+      "lessonId": "mod07-lsn03",
+      "title": "Recursive Patterns: Head vs Tail Recursion",
+      "type": "theory",
+      "content": "**Head Recursion**: Recursive call happens **before** processing.\n\n```js\nfunction countdown(n) {\n  if (n === 0) return;\n  countdown(n - 1);\n  console.log(n);\n}\n```\n\n**Tail Recursion**: Recursive call is the **last statement**.\n\n```js\nfunction countdown(n) {\n  if (n === 0) return;\n  console.log(n);\n  countdown(n - 1);\n}\n```\n\nTail recursion can be optimized in some languages (not JavaScript yet) by compilers to avoid stack overflow.\n\nAlways make sure recursive calls converge to the base case to avoid infinite loops."
+    },
+    {
+      "lessonId": "mod07-lsn04",
+      "title": "Recursive Tree Traversals (Preorder, Inorder, Postorder)",
+      "type": "code",
+      "content": "Binary trees are perfect for recursion because each subtree is a smaller instance of the tree.\n\n```js\nclass TreeNode {\n  constructor(val) {\n    this.val = val;\n    this.left = null;\n    this.right = null;\n  }\n}\n\nfunction inorder(node) {\n  if (!node) return;\n  inorder(node.left);\n  console.log(node.val);\n  inorder(node.right);\n}\n\nfunction preorder(node) {\n  if (!node) return;\n  console.log(node.val);\n  preorder(node.left);\n  preorder(node.right);\n}\n\nfunction postorder(node) {\n  if (!node) return;\n  postorder(node.left);\n  postorder(node.right);\n  console.log(node.val);\n}\n```"
+    },
+    {
+      "lessonId": "mod07-lsn05",
+      "title": "Divide and Conquer: Core Idea and Benefits",
+      "type": "theory",
+      "content": "The **Divide and Conquer** strategy works by breaking down a problem into smaller subproblems of the same type, solving them recursively, and then combining the results.\n\nSteps:\n1. **Divide** – Split the problem into subproblems\n2. **Conquer** – Recursively solve subproblems\n3. **Combine** – Merge the sub-solutions\n\nAdvantages:\n- Often reduces time complexity\n- Efficient use of recursion\n- Natural fit for sorting and searching problems\n\nReal-world Examples:\n- Merge Sort\n- Quick Sort\n- Binary Search\n- Karatsuba Multiplication\n- Closest Pair of Points"
+    },
+    {
+      "lessonId": "mod07-lsn06",
+      "title": "Implementing Binary Search (Recursive and Iterative)",
+      "type": "code",
+      "content": "**Recursive Binary Search**\n```js\nfunction binarySearch(arr, target, low = 0, high = arr.length - 1) {\n  if (low > high) return -1;\n  const mid = Math.floor((low + high) / 2);\n\n  if (arr[mid] === target) return mid;\n  if (arr[mid] > target) return binarySearch(arr, target, low, mid - 1);\n  return binarySearch(arr, target, mid + 1, high);\n}\n\nconsole.log(binarySearch([1, 3, 5, 7, 9], 5)); // 2\n```\n\n**Iterative Binary Search**\n```js\nfunction binarySearchIterative(arr, target) {\n  let low = 0, high = arr.length - 1;\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n  return -1;\n}\n```"
+    },
+    {
+      "lessonId": "mod07-lsn07",
+      "title": "Merge Sort: Sorting with Recursion",
+      "type": "code",
+      "content": "```js\nfunction mergeSort(arr) {\n  if (arr.length <= 1) return arr;\n\n  const mid = Math.floor(arr.length / 2);\n  const left = mergeSort(arr.slice(0, mid));\n  const right = mergeSort(arr.slice(mid));\n\n  return merge(left, right);\n}\n\nfunction merge(left, right) {\n  let result = [], i = 0, j = 0;\n  while (i < left.length && j < right.length) {\n    if (left[i] < right[j]) {\n      result.push(left[i++]);\n    } else {\n      result.push(right[j++]);\n    }\n  }\n  return result.concat(left.slice(i)).concat(right.slice(j));\n}\n\nconsole.log(mergeSort([3, 1, 4, 2])); // [1, 2, 3, 4]\n```"
+    },
+    {
+      "lessonId": "mod07-lsn08",
+      "title": "Quick Sort: Divide and Conquer with Partitioning",
+      "type": "code",
+      "content": "```js\nfunction quickSort(arr) {\n  if (arr.length <= 1) return arr;\n\n  const pivot = arr[arr.length - 1];\n  const left = [], right = [];\n\n  for (let i = 0; i < arr.length - 1; i++) {\n    if (arr[i] < pivot) left.push(arr[i]);\n    else right.push(arr[i]);\n  }\n\n  return [...quickSort(left), pivot, ...quickSort(right)];\n}\n\nconsole.log(quickSort([4, 2, 7, 1, 3])); // [1, 2, 3, 4, 7]\n```"
+    },
+    {
+      "lessonId": "mod07-lsn09",
+      "title": "Optimizing Recursive Solutions: Memoization and Time Complexity",
+      "type": "theory",
+      "content": "Recursive solutions can be expensive if they repeat work. **Memoization** helps by storing already-computed results.\n\n**Example: Optimized Fibonacci**\n```js\nfunction fib(n, memo = {}) {\n  if (n <= 1) return n;\n  if (memo[n]) return memo[n];\n  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);\n  return memo[n];\n}\n```\n\n**Time Complexity Analysis**:\n- Naive recursion (Fibonacci): O(2^n)\n- Memoized recursion: O(n)\n- Merge Sort: O(n log n)\n- Quick Sort (avg): O(n log n), worst-case O(n^2)\n- Binary Search: O(log n)"
+    }
+  ]
+}

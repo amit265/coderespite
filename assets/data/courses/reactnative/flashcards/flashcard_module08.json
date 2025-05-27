@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod08",
+  "courseId": "reactnative",
+  "moduleId": "mod08",
+  "title": "Networking and API Integration",
+  "description": "Learn how to fetch and send data to APIs, handle responses, and manage asynchronous network requests in React Native.",
+  "flashcards": [
+    {
+      "question": "Which JavaScript function is commonly used for making network requests?",
+      "answer": "`fetch()`."
+    },
+    {
+      "question": "What does the `fetch()` function return?",
+      "answer": "A Promise that resolves to a Response object."
+    },
+    {
+      "question": "How do you convert a fetch response to JSON?",
+      "answer": "By calling `response.json()` which returns a Promise."
+    },
+    {
+      "question": "How can you handle errors in fetch calls?",
+      "answer": "By using `.catch()` to catch network or parsing errors."
+    },
+    {
+      "question": "What React hook is commonly used to load data on component mount?",
+      "answer": "`useEffect`."
+    },
+    {
+      "question": "How do you perform a POST request with fetch?",
+      "answer": "By passing an options object with method: 'POST', headers, and body (stringified JSON)."
+    },
+    {
+      "question": "Name a popular library for API calls in React Native other than fetch.",
+      "answer": "`Axios`."
+    },
+    {
+      "question": "Why should you handle loading states during API calls?",
+      "answer": "To provide feedback to the user while data is being fetched."
+    },
+    {
+      "question": "How do you cancel ongoing fetch requests?",
+      "answer": "Using an `AbortController` signal."
+    },
+    {
+      "question": "What is JSON?",
+      "answer": "JavaScript Object Notation, a lightweight data interchange format."
+    }
+  ]
+}

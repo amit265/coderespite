@@ -1,0 +1,69 @@
+{
+  "courseId": "react",
+  "moduleId": "mod13",
+  "title": "Authentication and Protected Routes",
+  "description": "Learn how to implement user authentication and protect routes in React applications to secure content and manage user sessions.",
+  "level": "Advanced",
+  "lessons": [
+    {
+      "lessonId": "mod13-lsn01",
+      "title": "Introduction to Authentication",
+      "type": "theory",
+      "content": "Authentication verifies user identity, allowing secure access to specific parts of an app based on login status."
+    },
+    {
+      "lessonId": "mod13-lsn02",
+      "title": "Understanding JWT (JSON Web Tokens)",
+      "type": "theory",
+      "content": "JWTs are compact tokens used to securely transmit user identity information between client and server."
+    },
+    {
+      "lessonId": "mod13-lsn03",
+      "title": "Setting Up Authentication Backend (Overview)",
+      "type": "theory",
+      "content": "Authentication requires a backend API that supports login, signup, token issuance, and validation (e.g., using Node.js/Express)."
+    },
+    {
+      "lessonId": "mod13-lsn04",
+      "title": "Login Form and Authentication Flow",
+      "type": "code",
+      "content": "```jsx\n// Example login handler\nasync function handleLogin(credentials) {\n  const response = await fetch('/api/login', {\n    method: 'POST',\n    body: JSON.stringify(credentials),\n    headers: { 'Content-Type': 'application/json' },\n  });\n  const data = await response.json();\n  if(data.token) {\n    localStorage.setItem('token', data.token);\n  }\n}\n```"
+    },
+    {
+      "lessonId": "mod13-lsn05",
+      "title": "Storing Tokens Securely",
+      "type": "theory",
+      "content": "Tokens can be stored in localStorage or cookies. Consider security risks and prefer HttpOnly cookies for sensitive applications."
+    },
+    {
+      "lessonId": "mod13-lsn06",
+      "title": "Creating a Private Route Component",
+      "type": "code",
+      "content": "```jsx\nimport { Navigate } from 'react-router-dom';\n\nfunction PrivateRoute({ children }) {\n  const token = localStorage.getItem('token');\n  return token ? children : <Navigate to=\"/login\" />;\n}\n```"
+    },
+    {
+      "lessonId": "mod13-lsn07",
+      "title": "Protecting Routes with React Router",
+      "type": "code",
+      "content": "```jsx\n// Usage in Routes\n<Routes>\n  <Route path=\"/dashboard\" element={<PrivateRoute><Dashboard /></PrivateRoute>} />\n  <Route path=\"/login\" element={<Login />} />\n</Routes>\n```"
+    },
+    {
+      "lessonId": "mod13-lsn08",
+      "title": "Implementing Logout Functionality",
+      "type": "code",
+      "content": "```jsx\nfunction handleLogout() {\n  localStorage.removeItem('token');\n  // redirect or update state accordingly\n}\n```"
+    },
+    {
+      "lessonId": "mod13-lsn09",
+      "title": "Handling Token Expiry and Refresh",
+      "type": "theory",
+      "content": "Tokens may expire; implement refresh token flows or prompt users to re-login to maintain secure sessions."
+    },
+    {
+      "lessonId": "mod13-lsn10",
+      "title": "Third-Party Authentication (OAuth, Firebase)",
+      "type": "theory",
+      "content": "Many apps use OAuth providers (Google, Facebook) or services like Firebase Authentication to simplify login and secure user management."
+    }
+  ]
+}

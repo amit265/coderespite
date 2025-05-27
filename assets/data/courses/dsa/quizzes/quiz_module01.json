@@ -1,0 +1,91 @@
+{
+  "quizId": "qz01",
+  "courseId": "dsa",
+  "moduleId": "mod01",
+  "title": "Introduction to Data Structures and JavaScript Fundamentals",
+  "tags": ["data structures", "javascript", "basics", "fundamentals"],
+  "difficulty": "easy",
+  "description": "Basic concepts of data structures and foundational JavaScript knowledge.",
+  "quiz": [
+    {
+      "question": "What is a data structure?",
+      "options": [
+        "A way to store and organize data",
+        "A programming language",
+        "A type of database",
+        "A user interface design"
+      ],
+      "correctAnswer": "A way to store and organize data",
+      "explanation": "Data structures are ways to organize and store data efficiently."
+    },
+    {
+      "question": "Which of the following is NOT a primitive data type in JavaScript?",
+      "options": ["String", "Number", "Array", "Boolean"],
+      "correctAnswer": "Array",
+      "explanation": "Arrays are objects, not primitive data types in JavaScript."
+    },
+    {
+      "question": "Which keyword is used to declare a variable in JavaScript?",
+      "options": ["var", "let", "const", "All of the above"],
+      "correctAnswer": "All of the above",
+      "explanation": "`var`, `let`, and `const` are all used to declare variables in JavaScript."
+    },
+    {
+      "question": "What does the term 'mutable' mean in the context of data types?",
+      "options": [
+        "Can be changed after creation",
+        "Cannot be changed after creation",
+        "Is a primitive type",
+        "Is a number"
+      ],
+      "correctAnswer": "Can be changed after creation",
+      "explanation": "Mutable means the data can be modified after it's created."
+    },
+    {
+      "question": "Which JavaScript data structure allows storing multiple values in a single variable?",
+      "options": ["Object", "Array", "String", "Number"],
+      "correctAnswer": "Array",
+      "explanation": "Arrays can store multiple values under one variable."
+    },
+    {
+      "question": "How do you create an empty array in JavaScript?",
+      "options": [
+        "var arr = [];",
+        "var arr = ();",
+        "var arr = {};",
+        "var arr = '';"
+      ],
+      "correctAnswer": "var arr = [];",
+      "explanation": "Square brackets `[]` denote an empty array."
+    },
+    {
+      "question": "Which method adds an element to the end of a JavaScript array?",
+      "options": ["push()", "pop()", "shift()", "unshift()"],
+      "correctAnswer": "push()",
+      "explanation": "`push()` adds elements at the end of an array."
+    },
+    {
+      "question": "What does 'JavaScript is a dynamically typed language' mean?",
+      "options": [
+        "Variable types are checked at compile-time",
+        "You don’t have to declare variable types explicitly",
+        "Variables can only hold numbers",
+        "JavaScript is compiled"
+      ],
+      "correctAnswer": "You don’t have to declare variable types explicitly",
+      "explanation": "In JavaScript, types are determined at runtime and don’t need explicit declaration."
+    },
+    {
+      "question": "What will be the output of `typeof null` in JavaScript?",
+      "options": ["null", "object", "undefined", "boolean"],
+      "correctAnswer": "object",
+      "explanation": "Due to a historical bug, `typeof null` returns `object`."
+    },
+    {
+      "question": "Which of these is a correct way to comment a single line in JavaScript?",
+      "options": ["// This is a comment", "<!-- comment -->", "/* comment */", "# comment"],
+      "correctAnswer": "// This is a comment",
+      "explanation": "Double slashes `//` are used for single-line comments in JavaScript."
+    }
+  ]
+}

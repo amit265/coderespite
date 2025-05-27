@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod04",
+  "courseId": "react",
+  "moduleId": "mod04",
+  "title": "Essential JavaScript (ES6+) for React",
+  "description": "Key modern JavaScript features used in React development including ES6+ syntax and concepts.",
+  "flashcards": [
+    {
+      "question": "What is ES6?",
+      "answer": "ES6, or ECMAScript 2015, is a major update to JavaScript introducing new syntax and features."
+    },
+    {
+      "question": "What are arrow functions and why are they useful in React?",
+      "answer": "Arrow functions provide a shorter syntax and lexically bind 'this', avoiding common issues in callbacks."
+    },
+    {
+      "question": "What is destructuring in JavaScript?",
+      "answer": "A syntax to unpack values from arrays or properties from objects into distinct variables."
+    },
+    {
+      "question": "How do default parameters work in ES6 functions?",
+      "answer": "They allow you to set default values for function parameters if no argument is passed."
+    },
+    {
+      "question": "What are template literals?",
+      "answer": "Strings enclosed in backticks (`) that can include embedded expressions using ${}."
+    },
+    {
+      "question": "What is the spread operator (...) and how is it used?",
+      "answer": "It allows an iterable such as an array or object to be expanded in places like function calls or array literals."
+    },
+    {
+      "question": "What are modules in ES6?",
+      "answer": "A way to organize code by exporting and importing variables, functions, or classes between files."
+    },
+    {
+      "question": "How does 'let' differ from 'var'?",
+      "answer": "'let' has block scope while 'var' has function scope, making 'let' safer to use in modern JS."
+    },
+    {
+      "question": "What are promises and why are they important?",
+      "answer": "Objects representing eventual completion or failure of asynchronous operations, crucial for handling async data."
+    },
+    {
+      "question": "What is the difference between '==' and '===' in JavaScript?",
+      "answer": "'==' compares values with type coercion, while '===' compares both value and type strictly."
+    }
+  ]
+}

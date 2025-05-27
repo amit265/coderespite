@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod04",
+  "courseId": "nodejs",
+  "moduleId": "mod04",
+  "title": "Introduction to Express.js",
+  "description": "Basics of Express.js, its features, and how it simplifies building web applications on top of Node.js.",
+  "flashcards": [
+    {
+      "question": "What is Express.js?",
+      "answer": "Express.js is a fast, minimal, and flexible Node.js web application framework that provides robust features for building web and mobile applications."
+    },
+    {
+      "question": "Why use Express.js with Node.js?",
+      "answer": "Express simplifies the process of writing server-side code by providing helpful abstractions and tools for routing, middleware, and handling requests."
+    },
+    {
+      "question": "How do you install Express.js in a Node.js project?",
+      "answer": "By running `npm install express` in your project directory."
+    },
+    {
+      "question": "How do you create a basic Express server?",
+      "answer": "Import Express, create an app instance, define routes, and listen on a port. Example:\n```js\nconst express = require('express');\nconst app = express();\napp.get('/', (req, res) => res.send('Hello World!'));\napp.listen(3000);\n```"
+    },
+    {
+      "question": "What is middleware in Express.js?",
+      "answer": "Middleware are functions that have access to the request and response objects and can modify them or end the request-response cycle."
+    },
+    {
+      "question": "How do you define a route in Express?",
+      "answer": "Using app.METHOD(PATH, HANDLER), e.g., `app.get('/home', (req, res) => { ... });`."
+    },
+    {
+      "question": "What does `res.send()` do?",
+      "answer": "`res.send()` sends the HTTP response back to the client."
+    },
+    {
+      "question": "Can Express.js handle different HTTP methods?",
+      "answer": "Yes, Express supports methods like GET, POST, PUT, DELETE, PATCH, etc."
+    },
+    {
+      "question": "How does Express.js improve upon the native Node.js HTTP module?",
+      "answer": "It provides a simpler API for routing, middleware support, and handling requests and responses."
+    },
+    {
+      "question": "Is Express.js suitable for building APIs?",
+      "answer": "Yes, Express is widely used to build RESTful APIs due to its flexibility and minimalistic nature."
+    }
+  ]
+}

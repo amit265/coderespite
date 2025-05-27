@@ -1,0 +1,49 @@
+{
+  "id": "fc-mod13",
+  "courseId": "python",
+  "moduleId": "mod13",
+  "title": "Introduction to Web Development with Flask/Django",
+  "description": "Get started with web development using Python frameworks Flask and Django for building web applications.",
+  "flashcards": [
+    {
+      "question": "What is Flask?",
+      "answer": "A lightweight Python web framework used to build simple and flexible web applications."
+    },
+    {
+      "question": "What is Django?",
+      "answer": "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
+    },
+    {
+      "question": "Which pattern do Flask and Django use for web development?",
+      "answer": "The Model-View-Controller (MVC) or Model-View-Template (MVT) architecture."
+    },
+    {
+      "question": "How do you install Flask?",
+      "answer": "Using pip: `pip install flask`."
+    },
+    {
+      "question": "How do you create a basic Flask app?",
+      "answer": "By importing Flask, creating an app instance, and defining routes."
+    },
+    {
+      "question": "What is a route in Flask or Django?",
+      "answer": "A URL pattern that maps to a function or view that returns a response."
+    },
+    {
+      "question": "How do Django models help in web development?",
+      "answer": "They define the data structure and manage database operations."
+    },
+    {
+      "question": "What is the Django admin panel?",
+      "answer": "A built-in interface to manage app data and users without coding."
+    },
+    {
+      "question": "How do you run a Django development server?",
+      "answer": "By running the command `python manage.py runserver`."
+    },
+    {
+      "question": "Why choose Flask over Django?",
+      "answer": "Flask is simpler and more flexible, good for small to medium apps; Django is more feature-rich and suited for larger projects."
+    }
+  ]
+}
