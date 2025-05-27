@@ -24,18 +24,18 @@ export default function ContinueCard({ userData }) {
 
   return (
     <View className="bg-white mx-4 mb-4 p-6 rounded-2xl shadow-md border border-gray-200">
-      <Text className="text-xl text-black mb-4" style={{ fontFamily: "nunito-semibold" }}>
+      <Text className="text-xl text-black mb-4" style={{ fontFamily: "nunito-bold" }}>
         🐾 Pawgress Tracker
       </Text>
 
       <View className="space-y-2 mb-4">
-        <Text className="text-base font-nunito text-gray-700">
+        <Text className="text-base font-nunito text-gray-600">
           🧶 Level: <Text className="font-medium">{level.title}</Text>
         </Text>
-        <Text className="text-base font-nunito text-gray-700">
+        <Text className="text-base font-nunito text-gray-600">
           📊 Progress: <Text className="font-medium">{progress}%</Text>
         </Text>
-        <Text className="text-base font-nunito text-gray-700">
+        <Text className="text-base font-nunito text-gray-600">
           🔓 Next Title: <Text className="font-medium">{nextLevel.title}</Text>
         </Text>
       </View>
@@ -45,8 +45,8 @@ export default function ContinueCard({ userData }) {
       </View>
 
       <View className="bg-yellow-100 p-4 rounded-xl font-nunito">
-        <Text className="text-sm text-gray-800">{level.description}</Text>
-        <Text className="text-sm mt-2 text-gray-700 font-nunito">
+        <Text className="text-sm text-gray-600 font-nunito text-justify">{level.description}</Text>
+        <Text className="text-sm mt-2 text-gray-700 font-nunito text-justify">
           👉 {100 - progress}% more to become a {nextLevel.title}🐱
         </Text>
       </View>

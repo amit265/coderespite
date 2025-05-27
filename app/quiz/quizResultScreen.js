@@ -93,9 +93,9 @@ export default function QuizResultScreen() {
       <TouchableOpacity
         key={index}
         style={{
-          padding: 15,
+          padding: 20,
           borderWidth: 1,
-          marginHorizontal: 30,
+          marginHorizontal: 5,
           marginTop: 5,
           borderRadius: 15,
           backgroundColor: quizItem?.isCorrect
@@ -125,6 +125,8 @@ export default function QuizResultScreen() {
             fontFamily: "nunito",
             fontSize: 15,
             color: colors.PRIMARY,
+            marginTop: 5,
+
           }}
         >
           {!quizItem?.isCorrect ? "Correct Answer" : "Answer"}:{" "}
@@ -136,6 +138,8 @@ export default function QuizResultScreen() {
               fontFamily: "nunito",
               fontSize: 16,
               color: colors.GRAY,
+              textAlign: "justify",
+              marginTop: 5,
             }}
           >
             {quizItem?.explanation}
@@ -224,8 +228,8 @@ export default function QuizResultScreen() {
                 </Pressable>
                 <Text
                   style={{
-                    fontFamily: "quicksand-bold",
-                    fontSize: 28,
+                    fontFamily: "nunito-bold",
+                    fontSize: 20,
                     color: colors.BLACK,
                   }}
                 >
@@ -254,6 +258,7 @@ export default function QuizResultScreen() {
                       style={{
                         fontFamily: "nunito",
                         color: colors.GRAY,
+                        textAlign: "center",
                         fontSize: 17,
                       }}
                     >

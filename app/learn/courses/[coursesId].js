@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
 import {
@@ -30,7 +30,7 @@ export default function CourseId() {
       ? course?.modules
       : course?.modules.filter((course) => course.level === courseSelected);
   console.log("click count form course", clickCount);
-  
+
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
@@ -54,10 +54,12 @@ export default function CourseId() {
           <ActivityIndicator color="black" size={36} />
         </View>
       )}
-      <View style={{ width: 100, height: 100 }}>
+      <View style={{ width: 120, height: 120 }}>
         <Image
-          source={courseIcons[selectedCourse?.icon]||
-            require("../../../assets/default-icon.png")}
+          source={
+            courseIcons[selectedCourse?.icon] ||
+            require("../../../assets/default-icon.png")
+          }
           style={{
             width: "100%",
             height: "100%",
@@ -67,7 +69,7 @@ export default function CourseId() {
         ></Image>
       </View>
       <View className="flex-1 justify-center">
-        <Text className="text-base font-nunito-bold text-black mb-1">
+        <Text className="text-base font-nunito-bold text-black mb-1" numberOfLines={3}>
           {item.title}
         </Text>
         {/* <Text className="text-gray-700 text-sm">{item.description}</Text> */}
@@ -75,9 +77,12 @@ export default function CourseId() {
           <Text className="text-sm text-gray-500 font-nunito">
             Level: {item.level}
           </Text>
-          <Text className="text-xs text-gray-500 font-nunito">
-            {item.lessons?.length || 0} Lessons
-          </Text>
+          <View className="flex flex-row items-center gap-1 mt-1">
+            <AntDesign name="book" size={16} color="gray" />
+            <Text className="text-xs text-gray-500 font-nunito">
+              {item.lessons?.length || 0} Lessons
+            </Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -89,9 +94,12 @@ export default function CourseId() {
     <SafeScreen>
       <View className="flex flex-row gap-4 px-2">
         <Pressable onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={35} color="black" />
+          <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
-        <Text className="text-2xl font-nunito-semibold mb-4 text-gray-800 text-center">
+        <Text
+          className="text-2xl font-nunito-bold mb-4 text-black text-center"
+          numberOfLines={1}
+        >
           {selectedCourse?.title}
         </Text>
       </View>

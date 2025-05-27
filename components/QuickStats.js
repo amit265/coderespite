@@ -28,17 +28,17 @@ export default function QuickStats({ userData }) {
                 className="rounded-2xl py-4 px-4 items-center flex flex-row w-full gap-4"
                 style={{ backgroundColor: colors.WHITE }}
               >
-                <Text className="text-sm font-nunito-bold text-gray-800">
+                <Text className="text-sm font-nunito text-gray-800" numberOfLines={1}>
                   {courseName}:
                 </Text>
                 <Text className="text-sm text-gray-600">
-                  {courseData?.[key]?.length || 0} {unit}
+                  {courseData?.[key]?.length || 0}
                 </Text>
               </View>
             ))}
           </View>
         ) : (
-          <Text className="text-sm text-gray-500">0 {unit}</Text>
+          <Text className="text-sm text-gray-500">0</Text>
         )}
       </View>
     );
@@ -50,7 +50,7 @@ export default function QuickStats({ userData }) {
         className="border-b border-gray-800 mb-3"
         style={{ borderStyle: "dotted", paddingBottom: 20 }}
       >
-        <Text className="text-base font-nunito-bold">📊 Quick Stats:</Text>
+        <Text className="text-xl text-black font-nunito-bold">📊 Quick Stats:</Text>
       </View>
 
       <TouchableOpacity
@@ -80,7 +80,7 @@ export default function QuickStats({ userData }) {
                     className="rounded-2xl py-4 px-4 items-center flex flex-row w-full gap-4"
                     style={{ backgroundColor: colors.WHITE }}
                   >
-                    <Text className="text-sm font-nunito-bold text-gray-800">
+                    <Text className="text-sm font-nunito text-gray-800">
                       {courseName}
                     </Text>
                   </View>

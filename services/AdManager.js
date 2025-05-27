@@ -43,6 +43,7 @@ let appOpenAd;
 
 const AdManager = () => {
   const { adConfig, clickCount } = useContext(adConfigContext);
+  console.log("adconfig", adConfig);
   
   let interstitialJustShown = false;
   const appPauseCount = useRef(0); // ✅ Track app pause count

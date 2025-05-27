@@ -115,10 +115,8 @@ export default function Quiz() {
           )}
         </View>
         <View className="w-full">
-          <Text className="text-lg font-nunito-bold text-gray-800">
-            {item?.title?.length > 30
-              ? item?.title.slice(0, 30) + "..."
-              : item?.title}
+          <Text className="text-lg font-nunito-bold text-black" numberOfLines={2}>
+            {item?.title}
           </Text>
 
           <Text className="text-sm font-nunito-semibold text-gray-500 mt-1">
@@ -153,7 +151,7 @@ export default function Quiz() {
 
   return (
     <SafeScreen>
-      <Text className="text-2xl font-nunito-bold mb-6 text-gray-800 text-center">
+      <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
         Quiz
       </Text>
 
@@ -186,7 +184,7 @@ export default function Quiz() {
         <View className="relative mr-2 rounded-xl border border-gray-300 w-4/5">
           <TextInput
             className="flex-1 bg-white rounded-xl font-nunito text-black w-full"
-            placeholder="Search..."
+            placeholder="Search"
             placeholderTextColor={colors.GRAY}
             value={searchText}
             onChangeText={setSearchText}

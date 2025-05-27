@@ -16,7 +16,7 @@ export default function Profile() {
   console.log("userData from profile", userData);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const show = true;
+  const show = false;
   // const data = [
   //   { count: 3, date: "2025-05-14" },
   //   { count: 5, date: "2025-05-15" },
@@ -44,8 +44,8 @@ export default function Profile() {
   return (
     <SafeScreen>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="p-4">
-          <Text className="text-center font-quicksand-bold text-2xl">
+        <View>
+          <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
             Profile
           </Text>
         </View>

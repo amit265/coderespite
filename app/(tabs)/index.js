@@ -34,12 +34,13 @@ export default function Home() {
     if (levelLoading) return;
     const currentLevel = userData?.level?.currentLevel;
     if (!currentLevel) return;
+ 
 
     // If already shown for this level, don't show again
     if (lastShownLevel === currentLevel) return;
 
     // Show modal only if level increased
-    if (lastShownLevel === null || currentLevel > lastShownLevel) {
+    if (currentLevel > lastShownLevel) {
       setShowLevelModal(true);
       updateLastShownLevel(currentLevel);
     }

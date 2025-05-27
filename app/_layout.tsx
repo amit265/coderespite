@@ -46,7 +46,7 @@ export default function RootLayout() {
   const [selectedModule, setSelectedModule] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState([]);
   const [attemptedQuizData, setAttemptedQuizData] = useState([]);
-  const [lastShownLevel, setLastShownLevel] = useState(null);
+  const [lastShownLevel, setLastShownLevel] = useState(1);
   const [levelLoading, setLevelLoading] = useState(true);
 
 
@@ -62,6 +62,8 @@ export default function RootLayout() {
     const loadLevel = async () => {
       try {
         const storedLevel = await AsyncStorage.getItem("lastShownLevel");
+        console.log("Loaded lastShownLevel from AsyncStorage:", storedLevel, lastShownLevel);
+
         if (storedLevel !== null) {
           setLastShownLevel(parseInt(storedLevel));
         }

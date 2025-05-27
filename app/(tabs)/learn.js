@@ -36,9 +36,9 @@ export default function Learn() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute flex p-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
+      <View className="absolute flex p-2 pl-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
         <Text
-          className="text-white text-xl font-nunito-semibold"
+          className="text-white text-lg font-nunito"
         >
           {item.title}
         </Text>
@@ -48,7 +48,7 @@ export default function Learn() {
 
   return (
     <SafeScreen>
-      <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center py-4">
+      <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
         Courses
       </Text>
 

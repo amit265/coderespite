@@ -55,11 +55,11 @@ export default function Settings() {
 
   return (
     <SafeScreen>
-      <View className="relative w-full items-center justify-center p-4">
+      <View className="relative w-full items-center justify-center">
         {/* Back Arrow - Positioned on the left */}
         <Pressable
           onPress={() => router.back()}
-          className="absolute left-4 top-4"
+          className="absolute justify-center items-center left-4"
         >
           <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>

@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
@@ -84,26 +84,31 @@ export default function ModuleId() {
   return (
     <SafeScreen>
       <View
-        className="flex flex-row gap-2 py-4 px-2"
+        className="flex flex-row gap-2 py-2 px-2"
         style={{ backgroundColor: colors.BACKGROUND }}
       >
         <Pressable onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={25} color="black" />
+          <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
-        <Text className="text-xl font-quicksand-bold mb-2 text-gray-900">
+        <Text
+          className="text-2xl font-nunito-bold mb-2 text-black"
+          numberOfLines={1}
+        >
           {selectedCourse?.title} Module
         </Text>
       </View>
 
       <ScrollView
-        className="flex px-6"
+        className="flex"
         style={{ backgroundColor: colors.BACKGROUND }}
       >
         <View className="flex flex-row gap-4 p-4">
           <View style={{ width: 150, height: 150 }}>
             <Image
-              source={courseIcons[selectedCourse?.icon]||
-                require("../../../../assets/default-icon.png")}
+              source={
+                courseIcons[selectedCourse?.icon] ||
+                require("../../../../assets/default-icon.png")
+              }
               style={{
                 width: "100%",
                 height: "100%",
@@ -113,20 +118,26 @@ export default function ModuleId() {
             />
           </View>
           <View className="flex-1 gap-2 justify-center">
-            <Text className="text-gray-700 text-lg font-nunito-semibold">
+            <Text
+              className="text-black text-lg font-nunito-bold"
+              numberOfLines={3}
+            >
               {selectedModule?.title}
             </Text>
-            <Text className="text-sm font-nunito-semibold text-gray-700">
+            <Text className="text-sm font-nunito text-gray-700">
               Level: {selectedModule?.level}
             </Text>
-            <Text className="text-sm font-nunito-semibold text-gray-700">
-              📘 {selectedModule?.lessons?.length} Lessons
-            </Text>
+            <View className="flex flex-row items-center gap-1 mt-1">
+              <AntDesign name="book" size={16} color="gray" />
+              <Text className="text-sm font-nunito text-gray-700">
+                {selectedModule?.lessons?.length} Lessons
+              </Text>
+            </View>
           </View>
         </View>
 
         <View className="p-4">
-          <Text className="text-base font-nunito-semibold text-gray-700">
+          <Text className="text-sm font-nunito text-gray-700 text-justify">
             {selectedModule?.description}
           </Text>
         </View>
@@ -142,27 +153,32 @@ export default function ModuleId() {
                 activeOpacity={0.9}
               >
                 <View className="py-4 border border-gray-300 rounded-lg bg-gray-50">
-                  <View className="flex flex-row justify-between items-center mb-2">
-                    <Text className="text-base font-nunito-semibold text-gray-800 px-2">
+                  <View className="flex flex-row justify-between items-center">
+                    <Text
+                      className="text-base font-nunito text-black px-6 py-2"
+                      style={{ paddingRight: 40 }}
+                    >
                       {index + 1}. {lesson.title}
                     </Text>
-                    <Ionicons
-                      name={isExpanded ? "chevron-up" : "chevron-down"}
-                      size={24}
-                      color="black"
-                    />
+                    <View className="absolute right-4 justify-center items-center">
+                      <Ionicons
+                        name={isExpanded ? "chevron-up" : "chevron-down"}
+                        size={24}
+                        color="black"
+                      />
+                    </View>
                   </View>
 
                   {isExpanded && (
                     <>
                       {lesson.type === "theory" && (
-                        <Text className="text-gray-700 font-nunito px-2">
+                        <Text className="text-gray-600 font-nunito px-6 text-justify text-sm">
                           {lesson.content}
                         </Text>
                       )}
                       {lesson.type === "code" && (
-                        <View className="bg-gray-900 rounded p-3 mt-2">
-                          <Text className="text-green-400 font-nunito px-2">
+                        <View className="bg-gray-900 rounded mt-2">
+                          <Text className="text-green-400 font-nunito px-6 py-3 text-sm">
                             {lesson.content}
                           </Text>
                         </View>
@@ -180,14 +196,14 @@ export default function ModuleId() {
             className="px-6 py-4 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
             style={{ marginBottom: 150 }}
           >
-            <Text className="text-xl font-nunito-bold text-gray-800 mb-3">
+            <Text className="text-xl font-nunito-bold text-black mb-3">
               {feedback.title}
             </Text>
 
-            <Text className="text-base text-gray-600 mb-6">
+            <Text className="text-base text-gray-600 mb-6 font-nunito">
               {feedback.message}
               {feedback.highlight ? (
-                <Text className="text-green-600 font-nunito-semibold">
+                <Text className="text-green-600 font-nunito">
                   {feedback.highlight}
                 </Text>
               ) : null}
@@ -196,15 +212,18 @@ export default function ModuleId() {
 
             {moduleQuizStatus && (
               <View>
-                <Text>Your last score: {moduleQuizStatus?.score}</Text>
+                <Text className="text-base text-gray-600 mb-6 font-nunito">
+                  Your last score: {moduleQuizStatus?.score}
+                </Text>
               </View>
             )}
 
             <Button
               text={moduleQuizStatus ? "Retake Quiz" : "Start Quiz"}
               onPress={() => {
-                setClickCount(prev => prev + 1)
-                router.push(`/quiz/courses/${selectedQuizId}`)}}
+                setClickCount((prev) => prev + 1);
+                router.push(`/quiz/courses/${selectedQuizId}`);
+              }}
             />
           </View>
         )}

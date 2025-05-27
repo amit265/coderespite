@@ -155,7 +155,7 @@ export default function FlashCardItem({
           const isFav = isFavorite(currentQuestion);
 
           return (
-            <View className="mt-12 mx-auto">
+            <View className="mt-8 mx-auto">
               <FlipCard
                 style={{
                   width: screenWidth * 0.78,
@@ -192,7 +192,7 @@ export default function FlashCardItem({
                     >
                       <Ionicons
                         name={isFav ? "heart" : "heart-outline"}
-                        size={30}
+                        size={24}
                         color={isFav ? colors.ERROR : colors.PRIMARY}
                       />
                     </Pressable>
@@ -200,14 +200,14 @@ export default function FlashCardItem({
 
                   {item?.title && (
                     <View className="absolute border border-gray-300 top-2 p-2 rounded-lg">
-                      <Text className="text-center font-nunito-semibold">
+                      <Text className="text-center font-nunito" numberOfLines={1}>
                         {item?.title}
                       </Text>
                     </View>
                   )}
 
                   <View>
-                    <Text className="text-lg font-nunito-bold text-center text-gray-800">
+                    <Text className="text-lg font-nunito text-center text-gray-800">
                       {item?.question}
                     </Text>
                   </View>
@@ -218,7 +218,7 @@ export default function FlashCardItem({
                   className="flex-1 rounded-2xl justify-center items-center px-4"
                   style={{ backgroundColor: colors.PRIMARY }}
                 >
-                  <Text className="text-white text-xl text-center font-nunito-bold py-2">
+                  <Text className="text-white text-lg text-center font-nunito py-2">
                     {item?.answer}
                   </Text>
                 </View>

@@ -13,7 +13,7 @@ export default function QuickActionGrid() {
   const router = useRouter();
   return (
     <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4 ">
-      <Text className="text-lg font-nunito-semibold mb-4">🔀 Quick Actions</Text>
+      <Text className="text-xl font-nunito-bold mb-4">🔀 Quick Actions</Text>
       <View className="flex-row flex-wrap justify-between">
         {actions.map((action, index) => (
           <Pressable
@@ -23,8 +23,8 @@ export default function QuickActionGrid() {
               router.push(`(tabs)/${action.tab}`);
             }}
           >
-            <Text className="text-3xl mb-2">{action.icon}</Text>
-            <Text className="text-base font-nunito text-gray-800">
+            <Text className="text-3xl mb-2 font-nunito">{action.icon}</Text>
+            <Text className="text-base font-nunito text-gray-600">
               {action.label}
             </Text>
           </Pressable>

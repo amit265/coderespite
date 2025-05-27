@@ -19,7 +19,7 @@ export default function FlashCards() {
         router.push(`/flashcards/courses/${item?.id}`);
       }}
       className="mb-6 rounded-3xl overflow-hidden"
-      style={{ width: 160, height: 160 }}
+      style={{ width: 160, height: 160, position: "relative" }}
       activeOpacity={0.85}
     >
       <Image
@@ -32,9 +32,9 @@ export default function FlashCards() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute flex p-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+      <View className="absolute flex p-2 pl-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
         <Text
-          className="text-white text-xl font-nunito-semibold"
+          className="text-white text-lg font-nunito"
 
         >
           {item.title}
@@ -45,7 +45,7 @@ export default function FlashCards() {
 
   return (
     <SafeScreen>
-      <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center py-4">
+      <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
         FlashCards
       </Text>
 

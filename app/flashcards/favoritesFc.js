@@ -10,32 +10,27 @@ export default function Index() {
   const router = useRouter();
   return (
     <SafeScreen>
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          flexDirection: "row",
-          gap: 20,
-          paddingLeft: 20,
-          paddingBottom: 10
-        }}
-      >
-        <Pressable onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={30} color="black" />
-        </Pressable>
-        <Text
-          style={{
-            fontFamily: "nunito-bold",
-            fontSize: 24,
-            color: colors.BLACK,
-            textAlign: "center",
-          }}
-        >
-          Flash Cards
-
-        </Text>
-      </View>
+    <View className="relative w-full items-center justify-center pb-4">
+            {/* Back Arrow - Positioned on the left */}
+            <Pressable
+              onPress={() => router.back()}
+              className="absolute justify-center items-center left-4"
+            >
+              <Ionicons name="arrow-back" size={30} color="black" />
+            </Pressable>
+    
+            {/* Title - Centered */}
+            <Text
+              style={{
+                fontSize: 25,
+                fontFamily: "quicksand-bold",
+                color: colors.TEXT,
+                textAlign: "center",
+              }}
+            >
+              Favorite Flashcards
+            </Text>
+          </View>
       <Favorites />
        {/* Bottom Banner Ad */}
             <View

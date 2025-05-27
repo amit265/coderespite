@@ -55,25 +55,25 @@ export default function Header() {
       <View className="flex-1 items-center justify-center">
         <View className="flex-row items-center">
           <Text
-            className="text-2xl"
+            className="text-3xl"
             style={{ fontFamily: "quicksand-bold", color: colors.PRIMARY }}
           >
             {"<"}
           </Text>
           <Text
-            className="text-2xl"
+            className="text-3xl"
             style={{ fontFamily: "quicksand-bold", color: colors.ERROR }}
           >
             CODE
           </Text>
           <Text
-            className="text-2xl"
+            className="text-3xl"
             style={{ fontFamily: "quicksand-bold", color: colors.TEXT }}
           >
             RESPITE
           </Text>
           <Text
-            className="text-2xl"
+            className="text-3xl"
             style={{
               fontFamily: "quicksand-bold",
               color: blink ? colors.ERROR : "transparent",
@@ -82,14 +82,14 @@ export default function Header() {
             /
           </Text>
           <Text
-            className="text-2xl"
+            className="text-3xl"
             style={{ fontFamily: "quicksand-bold", color: colors.PRIMARY }}
           >
             {">"}
           </Text>
         </View>
         <Text
-          className="text-sm text-center mt-1"
+          className="text-base text-center mt-1"
           style={{ color: colors.TEXT, fontFamily: "quicksand-bold" }}
         >
           REFRESH YOUR TECH SKILLS
@@ -127,7 +127,7 @@ export default function Header() {
           >
             <View
               className="py-4 px-6 rounded-2xl shadow-lg border border-gray-300"
-              style={{ backgroundColor: colors.BACKGROUND }}
+              style={{ backgroundColor: colors.WHITE }}
             >
               {[
                 {

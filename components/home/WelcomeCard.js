@@ -12,10 +12,10 @@ export default function Welcome({ userData }) {
   return (
     <View className="bg-white mx-4 p-6 mb-4 rounded-2xl shadow-md border border-gray-200 mt-4">
      <View className="flex gap-2">
-        <Text className="text-lg text-gray-800">
+        <Text className="text-xl text-black font-nunito-bold">
           Hi, {userData?.profile?.name || "user"} 👋
         </Text>
-        <Text className="text-base text-gray-600">{randomMessage}</Text>
+        <Text className="text-base text-gray-600 font-nunito">{randomMessage}</Text>
       </View>
     </View>
   );

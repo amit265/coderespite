@@ -28,25 +28,21 @@ export default function QuizHistory() {
 
   return (
     <SafeScreen>
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          flexDirection: "row",
-          gap: 20,
-          paddingLeft: 20,
-          paddingBottom: 10,
-        }}
-      >
-        <Pressable onPress={() => router.back()}>
+      <View className="relative w-full items-center justify-center pb-4">
+        {/* Back Arrow - Positioned on the left */}
+        <Pressable
+          onPress={() => router.back()}
+          className="absolute justify-center items-center left-4"
+        >
           <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
-        <Text
+
+        {/* Title - Centered */}
+        <Text 
           style={{
+            fontSize: 25,
             fontFamily: "nunito-bold",
-            fontSize: 24,
-            color: colors.BLACK,
+            color: colors.TEXT,
             textAlign: "center",
           }}
         >
@@ -70,21 +66,21 @@ export default function QuizHistory() {
           </View>
         )}
       </View>
-       {/* Bottom Banner Ad */}
-            <View
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                alignItems: "center",
-                justifyContent: "center",
-                paddingBottom: 4,
-                backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-              }}
-            >
-              <BannerAdComponent />
-            </View>
+      {/* Bottom Banner Ad */}
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 4,
+          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
+        }}
+      >
+        <BannerAdComponent />
+      </View>
     </SafeScreen>
   );
 }

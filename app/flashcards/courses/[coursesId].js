@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useMemo } from "react";
 import {
@@ -62,13 +62,17 @@ export default function CourseId() {
         ></Image>
       </View>
       <View className="flex-1 justify-center">
-        <Text className="text-xl font-nunito-bold text-black mb-1">
+        <Text className="text-lg font-nunito-bold text-black mb-1">
           {item.title}
         </Text>
         <View className="flex-col justify-between">
-          <Text className="text-xs text-gray-500 font-nunito">
+          <View className = "flex flex-row items-center gap-2">
+          <MaterialCommunityIcons name="cards-outline" size={20} color="gray" />
+          <Text className="text-sm text-gray-500 font-nunito">
             {item?.flashcards?.length || 0} cards
           </Text>
+          </View>
+        
         </View>
       </View>
     </TouchableOpacity>
@@ -78,10 +82,10 @@ export default function CourseId() {
     <SafeScreen>
       <View className="flex flex-row gap-4 px-2 justify-between">
         <Pressable onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={35} color="black" />
+          <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
-        <Text className="text-2xl font-quicksand-bold mb-6 text-gray-800 text-center">
-          {selectedCourse?.title} FlashCards
+        <Text className="text-2xl font-nunito-bold mb-6 text-gray-800 text-center" numberOfLines={1}>
+          {selectedCourse?.title} 
         </Text>
         <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
           <Ionicons

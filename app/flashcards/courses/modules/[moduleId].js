@@ -22,7 +22,7 @@ export default function ModuleId() {
   if (!selectedModule) {
     return (
       <View className="flex-1 justify-center items-center p-4">
-        <Text className="text-red-600 text-lg">Module not found.</Text>
+        <Text className="text-red-600 text-lg font-nunito">Module not found.</Text>
       </View>
     );
   }
@@ -37,7 +37,7 @@ export default function ModuleId() {
 
           <View className="flex-1 mx-4 items-center">
             <Text
-              className="text-black font-quicksand-bold text-xl text-center"
+              className="text-black font-nunito-bold text-xl text-center"
               numberOfLines={1}
             >
               {selectedModule?.title}

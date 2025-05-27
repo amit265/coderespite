@@ -198,7 +198,7 @@ export default function QuizId() {
           }}
         >
           <Pressable onPress={goBack}>
-            <Ionicons name="arrow-back" size={24} color="black" />
+            <Ionicons name="arrow-back" size={30} color="black" />
           </Pressable>
 
           <Text

@@ -13,7 +13,7 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
 
   // console.log("allcourses", allCourses);
 
-  console.log("randomCourseId", randomModule);
+  // console.log("randomCourseId", randomModule);
 
   const defaultModule = {
     title: "Introduction to JavaScript",
@@ -57,18 +57,18 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
 
   return (
     <TouchableOpacity className="bg-white rounded-xl shadow-md mx-4 mb-4 p-6">
-      <Text className="text-xl font-nunito-bold text-gray-800 mb-2">
+      <Text className="text-xl font-nunito-bold text-black mb-2">
         📚 Featured Lesson
       </Text>
-      <Text className="text-lg font-nunito-bold text-gray-800 mb-2">
+      <Text className="text-lg font-nunito-bold text-gray-600 mb-2">
         🔷 {courseName}
       </Text>
       <Text className="text-base text-gray-600 font-nunito">
         🎯 {randomModule.title}
       </Text>
       <Button
-        backgroundColor={colors.BACKGROUND}
-        color={colors.BLACK}
+        backgroundColor={colors.PRIMARY}
+        color={colors.WHITE}
         text={"Start"}
         onPress={() => {
           if (!randomModule?.moduleId) {

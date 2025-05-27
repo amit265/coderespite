@@ -13,7 +13,6 @@ export default function QuizHistoryCard({ quizData }) {
   );
 
   const renderQuizData = ({ item }) => {
-    console.log("item from flatlist", item);
 
     return (
       <TouchableOpacity
@@ -31,8 +30,10 @@ export default function QuizHistoryCard({ quizData }) {
         <View className="flex flex-row gap-2 bg-white p-4 rounded-lg shadow">
           <View style={{ width: 100, height: 100 }}>
             <Image
-              source={courseIcons[item?.quizIcon]||
-                require("../assets/default-icon.png")}
+              source={
+                courseIcons[item?.quizIcon] ||
+                require("../assets/default-icon.png")
+              }
               style={{
                 width: "100%",
                 height: "100%",
@@ -46,7 +47,7 @@ export default function QuizHistoryCard({ quizData }) {
                     name="checksquare"
                     size={24}
                     color={item?.quizResultPercentage > 0 ? "green" : "red"}
-                  />
+                  />aa
                  
                 </View>
               </View> */}
