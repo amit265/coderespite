@@ -49,20 +49,19 @@ export default function RootLayout() {
   const [lastShownLevel, setLastShownLevel] = useState(1);
   const [levelLoading, setLevelLoading] = useState(true);
 
-
+  const [selectedLesson, setSelectedLesson] = useState(null);
 
   const adConfigValue = useMemo(() => ({ adConfig, setAdConfig, clickCount, setClickCount }), [clickCount, setClickCount, adConfig])
   const favoritesValue = useMemo(() => ({ favorites, setFavorites }), [favorites])
 
 
-  const allCoursesValue = useMemo(() => ({ allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
+  const allCoursesValue = useMemo(() => ({ selectedLesson, setSelectedLesson, allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [selectedLesson, update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
   const userDetailsValue = useMemo(() => ({ userData, setUserDataState }), [userData])
 
   useEffect(() => {
     const loadLevel = async () => {
       try {
         const storedLevel = await AsyncStorage.getItem("lastShownLevel");
-        console.log("Loaded lastShownLevel from AsyncStorage:", storedLevel, lastShownLevel);
 
         if (storedLevel !== null) {
           setLastShownLevel(parseInt(storedLevel));
@@ -91,7 +90,6 @@ export default function RootLayout() {
   useEffect(() => {
     const load = async () => {
       const data = await getUserData();
-      console.log("data from first layout", data);
 
       setUserDataState(data);
       setLoading(false);

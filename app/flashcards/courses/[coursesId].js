@@ -18,32 +18,31 @@ import { BannerAdComponent } from "../../../services/AdManager";
 export default function CourseId() {
   const { coursesId } = useLocalSearchParams();
   const { setClickCount } = useContext(adConfigContext);
-  const { allCourses, selectedCourse, setSelectedModule } =
+  const { allCourses } =
     useContext(allCoursesContext);
   const router = useRouter();
+
   const course = useMemo(
     () => allCourses.find((item) => item?.id === coursesId),
     [allCourses, coursesId]
   );
-  const courseTitle = course?.title;
-  console.log("courses", courseTitle);
+
+  console.log("Selected Course:", course?.flashcards);
+  
 
   // pathname: "/quizExplainer/",
   // params: {
   //   questionParams: JSON.stringify(quizItem),
   // },
-  console.log("Navigating to module with courseTitle:", courseTitle);
 
   const renderModuleItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
         setClickCount(prev => prev + 1)
-        setSelectedModule(item);
         router.push({
-          pathname: `/flashcards/courses/modules/[moduleId]`,
+          pathname: `/flashcards/courses/modules/${item?.id}`,
           params: {
-            moduleId: item.moduleId,
-            courseTitle: courseTitle,
+            courseId: item?.courseId,
           },
         });
       }}
@@ -51,7 +50,7 @@ export default function CourseId() {
     >
       <View style={{ width: 100, height: 100 }}>
         <Image
-          source={flashcardIcons[selectedCourse?.icon]||
+          source={flashcardIcons[course?.icon]||
             require("../../../assets/default-icon.png")}
           style={{
             width: "100%",
@@ -85,7 +84,7 @@ export default function CourseId() {
           <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
         <Text className="text-2xl font-nunito-bold mb-6 text-gray-800 text-center" numberOfLines={1}>
-          {selectedCourse?.title} 
+          {course?.title} 
         </Text>
         <Pressable onPress={() => router.push("/flashcards/favoritesFc")}>
           <Ionicons

@@ -53,7 +53,7 @@ export const getAllCoursesWithSubcollections = async () => {
         // flashcards, // Add if fetched
       });
     }
-    console.log("from firestore allCourses", allCourses);
+    // console.log("from firestore allCourses", allCourses);
 
     await AsyncStorage.setItem("@allCourses_data", JSON.stringify(allCourses));
 

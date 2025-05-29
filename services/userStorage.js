@@ -27,7 +27,7 @@ const defaultUserData = {
 export const getUserData = async () => {
   try {
     const data = await AsyncStorage.getItem(STORAGE_KEY);
-    console.log("data from getUserdate", data);
+    // console.log("data from getUserdate", data);
 
     return data ? JSON.parse(data) : defaultUserData;
   } catch (error) {
@@ -112,7 +112,7 @@ export const logAllAsyncStorage = async () => {
 
     console.log("📦 AsyncStorage Contents:");
     items.forEach(([key, value]) => {
-      console.log(`🗝️ ${key}:`, JSON.parse(value));
+      // console.log(`🗝️ ${key}:`, JSON.parse(value));
     });
   } catch (e) {
     console.error("Failed to log AsyncStorage:", e);

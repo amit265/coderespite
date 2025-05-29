@@ -43,7 +43,7 @@ let appOpenAd;
 
 const AdManager = () => {
   const { adConfig, clickCount } = useContext(adConfigContext);
-  console.log("adconfig", adConfig);
+  // console.log("adconfig", adConfig);
   
   let interstitialJustShown = false;
   const appPauseCount = useRef(0); // ✅ Track app pause count
@@ -55,7 +55,7 @@ const AdManager = () => {
         // ✅ Increment pause count
         appPauseCount.current += 1;
 
-        console.log(`App Resume Count: ${appPauseCount.current}`);
+        // console.log(`App Resume Count: ${appPauseCount.current}`);
 
         // ✅ Show AppOpenAd every second pause
         if (
@@ -82,7 +82,7 @@ const AdManager = () => {
       adConfig?.interstitialFrequency &&
       clickCount % adConfig?.interstitialFrequency === 0
     ) {
-      console.log("Showing interstitial ad at clickCount", clickCount);
+      // console.log("Showing interstitial ad at clickCount", clickCount);
       showInterstitialAd(adConfig);
     }
   }, [clickCount, adConfig]);
@@ -97,7 +97,7 @@ const AdManager = () => {
   const loadAds = (config) => {
     if (isRewardedAdLoading) return;
 
-    console.log("Loading Ads with config:", config);
+    // console.log("Loading Ads with config:", config);
 
     isRewardedAdLoading = true;
     setTimeout(() => (isRewardedAdLoading = false), 5000);

@@ -10,7 +10,7 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
   const [courseName, setCourseName] = useState("");
   const router = useRouter();
   const { setClickCount } = useContext(adConfigContext);
-
+  const [loading, setLoading] = useState(false);
   // console.log("allcourses", allCourses);
 
   // console.log("randomCourseId", randomModule);
@@ -25,10 +25,10 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
 
     const randomCourseId =
       allCourseId[Math.floor(Math.random() * allCourseId.length)];
-    // console.log("randomCourseId", randomCourseId);
+    console.log("randomCourseId", randomCourseId);
     const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
-    // console.log("randomCourse", randomCourse);
-    setCourseName(randomCourse?.title || "Featured Course");
+    console.log("randomCourse", randomCourse);
+    setCourseName(randomCourse?.title || "");
     if (Array.isArray(allCourses) && allCourses.length > 0) {
       const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
 
@@ -51,7 +51,9 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
       console.log("No valid courses found, using default.");
       setRandomModule(defaultModule);
     }
-  }, [allCourses]);
+  }, []);
+
+  console.log("randomModule", randomModule);
 
   if (!randomModule) return null;
 
@@ -69,16 +71,20 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
       <Button
         backgroundColor={colors.PRIMARY}
         color={colors.WHITE}
+        loading={loading}
         text={"Start"}
         onPress={() => {
+          setLoading(true);
           if (!randomModule?.moduleId) {
             console.error("No moduleId found for the selected module.");
             return;
           }
           setClickCount((prev) => prev + 1);
-          setSelectedModule(randomModule);
-
-          router.push(`/learn/courses/modules/${randomModule?.moduleId}`);
+          router.push({
+            pathname: `/learn/courses/modules/${randomModule.id}`,
+            params: { courseId: randomModule.courseId },
+          });
+          setLoading(false);
         }}
       />
     </TouchableOpacity>

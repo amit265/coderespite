@@ -249,3 +249,46 @@ export const getQuizFeedback = (score) => {
 };
 
 
+export const lessons = {
+  title: "JavaScript Modules",
+  type: "theory", // or "code", if you're showing code examples only
+  content: [
+    {
+      type: "heading",
+      text: "JavaScript Modules – Explained in Detail",
+    },
+    {
+      type: "paragraph",
+      text: "In JavaScript, a module is a reusable piece of code that is exported from one file and imported into another. Modules help you organize code into smaller, manageable, and independent units, improving maintainability and scalability."
+    },
+    {
+      type: "heading",
+      text: "Key Concepts:",
+    },
+    {
+      type: "list",
+      items: [
+        "**Exporting:** You can export variables, functions, or classes using named or default export.",
+        "**Importing:** Use `import` to bring functionality into another file.",
+        "**Benefits:** Avoids global pollution, modularity, lazy loading, etc.",
+        "**Browser Support:** Use `<script type='module'>` and run from a server.",
+      ]
+    },
+    {
+      type: "code",
+      text: `// Named Export
+export const greet = () => "Hello";
+
+// Default Export
+export default function sayHi() { return "Hi"; }
+
+// Import
+import { greet } from "./utils.js";
+import sayHi from "./utils.js";`
+    },
+    {
+      type: "paragraph",
+      text: "Modules are core to modern JavaScript development, especially in frameworks like React, Vue, and Node.js.",
+    }
+  ]
+};

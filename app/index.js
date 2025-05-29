@@ -21,8 +21,7 @@ export default function Index() {
   const [showSplash, setShowSplash] = useState(true);
   const { setAdConfig } = useContext(adConfigContext);
   const [loading, setLoading] = useState(true);
-  const { setAllCourses, update } =
-    useContext(allCoursesContext);
+  const { setAllCourses, update } = useContext(allCoursesContext);
   const { userData, updateUser } = useContext(userDetailsContext);
 
   const loadData = async () => {
@@ -84,8 +83,6 @@ export default function Index() {
     };
   }, []);
 
-
-
   useEffect(() => {
     let unsubscribe;
 
@@ -118,7 +115,6 @@ export default function Index() {
     return <SplashScreenComponent />;
   }
 
-  // console.log("allCourses from context", allCourses);
 
   return (
     <SafeScreen>
@@ -126,25 +122,6 @@ export default function Index() {
         <View className="flex-1 flex-col gap-10">
           <Image source={require("../assets/images/visual-picture.png")} />
 
-          {!loading && (
-            <View
-              style={{
-                position: "absolute",
-                top: height / 2 + 170, // Half of screen - half of Lottie height
-                left: width / 2 - 55, // Half of screen - half of Lottie width
-              }}
-            >
-              <LottieView
-                source={require("../assets/cat.json")}
-                autoPlay
-                loop
-                style={{
-                  height: 100,
-                  width: 100,
-                }}
-              />
-            </View>
-          )}
           {!loading && (
             <View
               style={{
@@ -167,15 +144,28 @@ export default function Index() {
           )}
         </View>
       </View>
-      <View className="h-1/3">
+      <View className="flex flex-col h-1/3 -mt-12">
         <Text className="text-black text-2xl font-quicksand-bold text-center mt-2">
           Welcome to CodeRespite!
         </Text>
         <Text className="text-gray-800 text-base font-quicksand text-center mt-2 mx-8">
           Learn to code with your favorite Meowgrammer! 🐾
         </Text>
+
         {!loading && (
-          <View className="rounded-lg mt-12 mx-auto">
+          <View className="rounded-lg mx-auto flex flex-col justify-center items-center -mt-14">
+            <LottieView
+              source={require("../assets/cat.json")}
+              autoPlay
+              loop
+              style={{
+                height: 100,
+                width: 100,
+                backgroundColor: "Red",
+                marginBottom: -15,
+              }}
+            />
+
             <Button
               text={"Let's Start!"}
               onPress={() => {

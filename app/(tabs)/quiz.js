@@ -40,11 +40,7 @@ export default function Quiz() {
 
   const [attemptedQuizzes, setAttemptedQuizzes] = useState([]);
 
-  const getjscoursetitle = allCourses
-    .filter((a) => a.id === "javascript")[0]
-    ?.modules.map((m) => m.title);
 
-  console.log("getjscoursetitle", getjscoursetitle);
 
   useEffect(() => {
     const progress = userData?.progress;

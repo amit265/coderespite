@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, Touchable, TouchableOpacity, View } from "react-native";
 
 const actions = [
   { icon: "📘", label: "Learn", bg: "bg-blue-100", tab: "learn" },
@@ -16,7 +16,7 @@ export default function QuickActionGrid() {
       <Text className="text-xl font-nunito-bold mb-4">🔀 Quick Actions</Text>
       <View className="flex-row flex-wrap justify-between">
         {actions.map((action, index) => (
-          <Pressable
+          <TouchableOpacity
             key={index}
             className={`w-[48%] h-28 mb-4 ${action.bg} rounded-xl p-4 shadow-sm`}
             onPress={() => {
@@ -27,7 +27,7 @@ export default function QuickActionGrid() {
             <Text className="text-base font-nunito text-gray-600">
               {action.label}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         ))}
       </View>
     </View>

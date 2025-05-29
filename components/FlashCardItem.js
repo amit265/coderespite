@@ -20,16 +20,14 @@ export default function FlashCardItem({
 
   const handleFlashcardViewed = async (item) => {
     if (favorite) return;
- 
+
     const currentProgress = userData?.progress?.[courseTitle] || {};
     const previousViewed = currentProgress.flashcardsViewed || [];
     const alreadyViewed = previousViewed.some(
       (fc) => fc?.question === item?.question
     );
-  
-    if (alreadyViewed) return; // ✅ Skip if already viewed
-  
 
+    if (alreadyViewed) return; // ✅ Skip if already viewed
 
     const now = new Date();
     const viewedDate = now.toISOString().split("T")[0];
@@ -55,7 +53,6 @@ export default function FlashCardItem({
     });
 
     await gainXP(2);
-
   };
 
   const handleFlashcardLoved = async (item) => {
@@ -94,7 +91,6 @@ export default function FlashCardItem({
     const currentProgress = userData?.progress?.[courseTitle] || {};
     const previousLoved = currentProgress.flashcardsLoved || [];
 
-
     const normalize = (str) =>
       String(str || "")
         .trim()
@@ -103,7 +99,7 @@ export default function FlashCardItem({
     const updatedLoved = previousLoved.filter(
       (fc) => normalize(fc?.question) !== normalize(question)
     );
-   
+
     await updateCourse(courseTitle, {
       flashcardsLoved: updatedLoved,
     });
@@ -149,7 +145,6 @@ export default function FlashCardItem({
         keyExtractor={(item) => item.question}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 180 }}
-
         renderItem={({ item }) => {
           const currentQuestion = item.question;
           const isFav = isFavorite(currentQuestion);
@@ -200,7 +195,10 @@ export default function FlashCardItem({
 
                   {item?.title && (
                     <View className="absolute border border-gray-300 top-2 p-2 rounded-lg">
-                      <Text className="text-center font-nunito" numberOfLines={1}>
+                      <Text
+                        className="text-center font-nunito"
+                        numberOfLines={1}
+                      >
                         {item?.title}
                       </Text>
                     </View>

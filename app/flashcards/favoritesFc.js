@@ -23,7 +23,7 @@ export default function Index() {
             <Text
               style={{
                 fontSize: 25,
-                fontFamily: "quicksand-bold",
+                fontFamily: "nunito-bold",
                 color: colors.TEXT,
                 textAlign: "center",
               }}

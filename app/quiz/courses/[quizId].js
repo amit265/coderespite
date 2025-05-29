@@ -34,7 +34,7 @@ export default function QuizId() {
   const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
   // const { setShowConfetti } = useContext(showConfettiContext);
-  const { selectedCourse, selectedQuiz, selectedModule } =
+  const { selectedCourse, selectedQuiz } =
     useContext(allCoursesContext);
   const { setClickCount } = useContext(adConfigContext);
   const courseTitle = selectedCourse?.title;

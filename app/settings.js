@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import colors from "../constants/colors";
-import { BannerAdComponent, NativeAdComponent } from "../services/AdManager";
+import { BannerAdComponent } from "../services/AdManager";
 
 export default function Settings() {
   const router = useRouter();

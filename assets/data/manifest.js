@@ -63,9 +63,6 @@ export const courseFiles = {
   //       filename: "module15.json",
   //       module: require("../../assets/data/courses/nodejs/modules/module15.json"),
   //     },
-    
-   
-     
   //   ],
   //   flashcards: [
   //     {
@@ -128,8 +125,6 @@ export const courseFiles = {
   //       filename: "flashcard_module15.json",
   //       module: require("../../assets/data/courses/nodejs/flashcards/flashcard_module15.json"),
   //     },
-    
-  
   //   ],
   //   quizzes: [
   //     {
@@ -192,8 +187,6 @@ export const courseFiles = {
   //       filename: "quiz_module15.json",
   //       module: require("../../assets/data/courses/nodejs/quizzes/quiz_module15.json"),
   //     },
-   
-    
   //   ],
   // },
 };

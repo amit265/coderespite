@@ -49,7 +49,7 @@ const uploadCourseData = async (courseId) => {
       }
 
       const json = file.module; // ✅ Directly use the required JSON
-      console.log("logging", json);
+      // console.log("logging", json);
 
       if (!json) {
         console.warn(`Failed to read ${file.filename} for course ${courseId}`);
@@ -57,10 +57,10 @@ const uploadCourseData = async (courseId) => {
       }
 
       const docId = file.filename.replace(".json", "");
-      console.log("docid", docId, courseId, json);
+      // console.log("docid", docId, courseId, json);
 
       await setDoc(doc(db, "courses", courseId, type, docId), json);
-      console.log(`✅ Uploaded courses/${courseId}/${type}/${docId}`);
+      // console.log(`✅ Uploaded courses/${courseId}/${type}/${docId}`);
     }
   }
 };

@@ -1,5 +1,10 @@
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import {
+  AntDesign,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Image,
@@ -21,22 +26,51 @@ import {
 import { BannerAdComponent } from "../../../../services/AdManager";
 
 export default function ModuleId() {
-  const { selectedCourse, selectedModule, setSelectedQuiz } =
+  const { courseId, moduleId } = useLocalSearchParams();
+  console.log("moduleId", moduleId);
+  console.log("courseId", courseId);
+  const [selectedCourse, setSelectedCourse] = useState([]);
+  const [selectedModule, setSelectedModule] = useState([]);
+  const [selectedQuizId, setSelectedQuizId] = useState([]);
+  const { allCourses, setSelectedQuiz, setSelectedLesson } =
     useContext(allCoursesContext);
   const { userData } = useContext(userDetailsContext);
   const [expandedLessons, setExpandedLessons] = useState({});
   const [moduleQuizStatus, setModuleQuizStatus] = useState(null);
   const [feedback, setFeedback] = useState(null);
   const router = useRouter();
-  const selectedQuizId = `quiz_${selectedModule?.id}`;
   const { setClickCount } = useContext(adConfigContext);
+  const [showModal, setShowModal] = useState(false);
+  // const [selectedLesson, setSelectedLesson] = useState(null);
+
   useEffect(() => {
-    const selectedQuizType = Array.isArray(selectedCourse?.quizzes)
-      ? selectedCourse.quizzes.find((a) => a.id === selectedQuizId)
-      : null;
+    // Find the selected
+    //  course based on courseId
+    const selectedCourse = allCourses.find((course) => course.id === courseId);
+    setSelectedCourse(selectedCourse);
 
-    setSelectedQuiz(selectedQuizType);
+    // Find the selected module based on moduleId
+    const selectedModule = selectedCourse?.modules?.find(
+      (module) => module.id === moduleId
+    );
+    setSelectedModule(selectedModule);
 
+    // If no module is found, set selectedModule to null
+    const selectedQuizId = `quiz_${selectedModule?.id}`;
+    setSelectedQuizId(selectedQuizId);
+  }, [courseId, moduleId, allCourses]);
+
+  useEffect(() => {
+    if (selectedCourse && selectedQuizId) {
+      const selectedQuiz = selectedCourse?.quizzes?.find(
+        (quiz) => quiz.id === selectedQuizId
+      );
+      setSelectedQuiz(selectedQuiz);
+      console.log("selectedQuiz", selectedQuiz);
+    }
+  }, [selectedCourse, selectedQuizId, setSelectedQuiz]);
+
+  useEffect(() => {
     const progress = userData?.progress;
     const allAttemptedQuizzes = Object.values(progress || {}).flatMap(
       (course) => course.attemptedQuizzes || []
@@ -51,30 +85,34 @@ export default function ModuleId() {
     );
 
     setModuleQuizStatus(filterModule);
-  }, [
-    selectedCourse,
-    selectedModule,
-    userData,
-    selectedQuizId,
-    setSelectedQuiz,
-  ]);
+  }, [selectedCourse, selectedModule, userData, selectedQuizId]);
+
+  console.log("moduleQuizStatus", moduleQuizStatus);
+  // Generate feedback based on the module quiz status
+  // This will run whenever moduleQuizStatus changes
 
   useEffect(() => {
     const feedback = getQuizFeedback(moduleQuizStatus?.score);
     setFeedback(feedback);
   }, [moduleQuizStatus]);
 
-  const toggleLesson = (lessonId) => {
-    setExpandedLessons((prev) => ({
-      ...prev,
-      [lessonId]: !prev[lessonId],
-    }));
+  console.log("feedack, feed", feedback);
+
+  const toggleLesson = (lesson) => {
+    // setShowModal(true);
+    setSelectedLesson(lesson);
+
+    router.push("/learn/courses/modules/lesson");
+    // setExpandedLessons((prev) => ({
+    //   ...prev,
+    //   [lessonId]: !prev[lessonId],
+    // }));
   };
 
-  if (!selectedModule) {
+  if (!selectedCourse || !selectedModule) {
     return (
       <View className="flex-1 justify-center items-center p-4">
-        <Text className="text-red-600 text-lg font-nunito-semibold">
+        <Text className="text-red-600 text-lg font-nunito">
           Module not found.
         </Text>
       </View>
@@ -116,6 +154,17 @@ export default function ModuleId() {
                 borderRadius: 20,
               }}
             />
+            {moduleQuizStatus && (
+              <View className="absolute top-2 right-2 bg-green-500 rounded-full p-1">
+                <MaterialCommunityIcons
+                  name="checkbox-marked-circle"
+                  size={24}
+                  color={
+                    moduleQuizStatus?.score > 70 ? "#AAFF00" : "transparent"
+                  }
+                />
+              </View>
+            )}
           </View>
           <View className="flex-1 gap-2 justify-center">
             <Text
@@ -127,11 +176,27 @@ export default function ModuleId() {
             <Text className="text-sm font-nunito text-gray-700">
               Level: {selectedModule?.level}
             </Text>
-            <View className="flex flex-row items-center gap-1 mt-1">
-              <AntDesign name="book" size={16} color="gray" />
-              <Text className="text-sm font-nunito text-gray-700">
-                {selectedModule?.lessons?.length} Lessons
-              </Text>
+            <View className="flex flex-row justify-between items-center gap-1 mt-1">
+              <View className="flex flex-row items-center gap-1">
+                <AntDesign name="book" size={16} color="gray" />
+                <Text className="text-sm font-nunito text-gray-700">
+                  {selectedModule?.lessons?.length} Lessons
+                </Text>
+              </View>
+              {moduleQuizStatus && (
+                <View className="flex flex-row items-end gap-2">
+                  <FontAwesome
+                    name={moduleQuizStatus?.score > 70 ? "star" : "star-o"}
+                    size={16}
+                    color={
+                      moduleQuizStatus?.score > 70 ? "#AAFF00" : "#FF0000"
+                    }
+                  />
+                  <Text className="text-sm font-nunito text-gray-700">
+                    {moduleQuizStatus?.score}%
+                  </Text>
+                </View>
+              )}  
             </View>
           </View>
         </View>
@@ -149,7 +214,7 @@ export default function ModuleId() {
               <TouchableOpacity
                 key={lesson.lessonId}
                 className="mb-4"
-                onPress={() => toggleLesson(lesson.lessonId)}
+                onPress={() => toggleLesson(lesson)}
                 activeOpacity={0.9}
               >
                 <View className="py-4 border border-gray-300 rounded-lg bg-gray-50">
@@ -189,12 +254,18 @@ export default function ModuleId() {
               </TouchableOpacity>
             );
           })}
+
+          {/* <ContentModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            lesson={selectedLesson}
+          /> */}
         </View>
 
         {feedback && (
           <View
             className="px-6 py-4 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
-            style={{ marginBottom: 150 }}
+            style={{ marginBottom: 120 }}
           >
             <Text className="text-xl font-nunito-bold text-black mb-3">
               {feedback.title}
@@ -219,7 +290,7 @@ export default function ModuleId() {
             )}
 
             <Button
-              text={moduleQuizStatus ? "Retake Quiz" : "Start Quiz"}
+              text={moduleQuizStatus ? "Retake Test" : "Start Test"}
               onPress={() => {
                 setClickCount((prev) => prev + 1);
                 router.push(`/quiz/courses/${selectedQuizId}`);
@@ -228,6 +299,7 @@ export default function ModuleId() {
           </View>
         )}
       </ScrollView>
+
       <View
         style={{
           position: "absolute",
