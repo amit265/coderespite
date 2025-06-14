@@ -6,7 +6,6 @@ import FlashCardItem from "../../../../components/FlashCardItem";
 import SafeScreen from "../../../../components/SafeScreen";
 import colors from "../../../../constants/colors";
 import { allCoursesContext } from "../../../../context/context";
-import { BannerAdComponent } from "../../../../services/AdManager";
 export default function ModuleId() {
   const { moduleId, courseId } = useLocalSearchParams();
   const [selectedModule, setSelectedModule] = useState([]);
@@ -44,7 +43,6 @@ export default function ModuleId() {
 
   return (
     <SafeScreen>
-      <View>
         <View className="flex-row items-center justify-between px-4 py-2">
           <Pressable onPress={() => router.back()}>
             <Ionicons name="arrow-back" size={30} color="black" />
@@ -69,21 +67,7 @@ export default function ModuleId() {
           title={selectedModule?.title}
           courseTitle={courseTitle}
         />
-      </View>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-        }}
-      >
-        <BannerAdComponent />
-      </View>
+  
     </SafeScreen>
   );
 }

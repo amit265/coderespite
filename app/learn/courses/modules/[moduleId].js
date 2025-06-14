@@ -23,7 +23,6 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../../context/context";
-import { BannerAdComponent } from "../../../../services/AdManager";
 
 export default function ModuleId() {
   const { courseId, moduleId } = useLocalSearchParams();
@@ -139,6 +138,7 @@ export default function ModuleId() {
       <ScrollView
         className="flex"
         style={{ backgroundColor: colors.BACKGROUND }}
+        showsVerticalScrollIndicator={false}
       >
         <View className="flex flex-row gap-4 p-4">
           <View style={{ width: 150, height: 150 }}>
@@ -225,13 +225,13 @@ export default function ModuleId() {
                     >
                       {index + 1}. {lesson.title}
                     </Text>
-                    <View className="absolute right-4 justify-center items-center">
+                    {/* <View className="absolute right-4 justify-center items-center">
                       <Ionicons
                         name={isExpanded ? "chevron-up" : "chevron-down"}
                         size={24}
                         color="black"
                       />
-                    </View>
+                    </View> */}
                   </View>
 
                   {isExpanded && (
@@ -300,20 +300,7 @@ export default function ModuleId() {
         )}
       </ScrollView>
 
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-        }}
-      >
-        <BannerAdComponent />
-      </View>
+  
     </SafeScreen>
   );
 }

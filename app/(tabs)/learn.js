@@ -36,12 +36,11 @@ export default function Learn() {
           borderRadius: 20,
         }}
       />
-      <View className="absolute flex p-2 pl-4 w-full h-full rounded-3xl" style={{backgroundColor: "rgba(0, 0, 0, 0.3)"}}>
-        <Text
-          className="text-white text-lg font-nunito"
-        >
-          {item.title}
-        </Text>
+      <View
+        className="absolute flex p-2 pl-4 w-full h-full rounded-3xl"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+      >
+        <Text className="text-white text-lg font-nunito">{item.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -59,7 +58,7 @@ export default function Learn() {
         showsVerticalScrollIndicator={false}
         numColumns={2}
         contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 8 }}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        columnWrapperStyle={{ justifyContent: "space-evenly" }}
       />
     </SafeScreen>
   );

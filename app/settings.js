@@ -7,7 +7,6 @@ import {
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-  Alert,
   Linking,
   Pressable,
   Share,
@@ -17,7 +16,6 @@ import {
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import colors from "../constants/colors";
-import { BannerAdComponent } from "../services/AdManager";
 
 export default function Settings() {
   const router = useRouter();
@@ -32,7 +30,7 @@ export default function Settings() {
       subject
     )}&body=${encodeURIComponent(body)}`;
     Linking.openURL(url).catch((err) =>
-      Alert.alert("Error", "Could not open email client.")
+      window.alert("Error: Could not open email client.")
     );
   };
 
@@ -205,21 +203,6 @@ export default function Settings() {
       </View>
 
       {/* Bottom Banner Ad */}
-
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-        }}
-      >
-        <BannerAdComponent />
-      </View>
     </SafeScreen>
   );
 }

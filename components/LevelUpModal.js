@@ -1,4 +1,3 @@
-import LottieView from "lottie-react-native";
 import React, { useEffect, useState } from "react";
 import { Modal, Text, View } from "react-native";
 import { levels } from "../constants/constants";
@@ -11,7 +10,6 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
   const [showConfetti, setShowConfetti] = useState(true);
 
   useEffect(() => {
-    
     const newLevel =
       levels.find((lvl) => lvl.id === currentLevel) ||
       levels[levels.length - 1];
@@ -39,7 +37,7 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
         {/* Confetti */}
         {showConfetti && (
           <View className="absolute top-0 left-0 right-0 bottom-0 justify-center items-center z-50">
-            <LottieView
+            <Lottie
               source={require("../assets/fun.json")}
               autoPlay
               loop={false}

@@ -9,14 +9,14 @@ import Button from "../../components/shared/Button";
 import UserCard from "../../components/UserCard";
 import { userDetailsContext } from "../../context/context";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
-import { uploadAllData, uploadData } from "../../services/uploadData";
+import { uploadAllData } from "../../services/uploadData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
 export default function Profile() {
   const { userData } = useContext(userDetailsContext);
   console.log("userData from profile", userData);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const show = true;
+  const show = userData?.profile?.name === "amit265" ? true : false;
   // const data = [
   //   { count: 3, date: "2025-05-14" },
   //   { count: 5, date: "2025-05-15" },
@@ -24,10 +24,10 @@ export default function Profile() {
   // ];
   useEffect(() => {
     const username = userData?.profile?.name;
-    if (username === "user") {
+    if (username === "user" || !username) {
       setShowModal(true);
     }
-  }, []);
+  }, [userData?.profile?.name]);
 
   const data = useMemo(() => generateLastNDaysData(60), []); // 13 weeks x 7 days
   // console.log("data", data);
@@ -119,7 +119,9 @@ export default function Profile() {
           >
             <View
               style={{
-                width: "90%",
+                maxWidth: "100%",
+                width: 600,
+
                 backgroundColor: "white",
                 borderRadius: 10,
                 padding: 20,

@@ -22,7 +22,6 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
-import { BannerAdComponent } from "../../../services/AdManager";
 
 export default function CourseId() {
   const { coursesId } = useLocalSearchParams();
@@ -201,20 +200,7 @@ export default function CourseId() {
         contentContainerStyle={{ paddingBottom: 120 }}
       />
 
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND,
-        }}
-      >
-        <BannerAdComponent />
-      </View>
+ 
     </SafeScreen>
   );
 }

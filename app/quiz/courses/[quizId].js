@@ -6,8 +6,6 @@ import * as Progress from "react-native-progress";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   ActivityIndicator,
-  Alert,
-  Dimensions,
   Pressable,
   ScrollView,
   Text,
@@ -22,7 +20,6 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
-import { BannerAdComponent } from "../../../services/AdManager";
 export default function QuizId() {
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
@@ -34,8 +31,7 @@ export default function QuizId() {
   const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
   // const { setShowConfetti } = useContext(showConfettiContext);
-  const { selectedCourse, selectedQuiz } =
-    useContext(allCoursesContext);
+  const { selectedCourse, selectedQuiz } = useContext(allCoursesContext);
   const { setClickCount } = useContext(adConfigContext);
   const courseTitle = selectedCourse?.title;
   const courseId = selectedCourse?.id;
@@ -45,13 +41,15 @@ export default function QuizId() {
   const quizIcon = selectedCourse?.icon;
   const hasGainedXP = useRef(false);
 
+  console.log("selectedCourse", selectedCourse); // is it undefined?
+  console.log("courseTitle", courseTitle);
+
   useEffect(() => {
     if (quiz[currentPage]?.options) {
       setShuffledOptions(
         [...quiz[currentPage].options].sort(() => Math.random() - 0.5)
       );
     }
- 
   }, [currentPage, quiz]);
 
   const getProgress = (currentPage) => {
@@ -84,18 +82,12 @@ export default function QuizId() {
   };
 
   const goBack = () => {
-    Alert.alert(
-      "Confirm Exit",
-      "Are you sure you want to go back? You will lose your progress.",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "OK",
-          style: "destructive",
-          onPress: () => router.back(),
-        },
-      ]
+    const confirmed = window.confirm(
+      "Are you sure you want to go back? You will lose your progress."
     );
+    if (confirmed) {
+      router.back();
+    }
   };
 
   const onQuizFinish = async () => {
@@ -226,8 +218,9 @@ export default function QuizId() {
         <View style={{ marginTop: 10, alignSelf: "center" }}>
           <Progress.Bar
             progress={getProgress(currentPage)}
-            width={Dimensions.get("window").width * 0.85}
             color={colors.PRIMARY}
+            width={600}
+            maxWidth="100%"
             height={8}
           />
         </View>
@@ -242,7 +235,7 @@ export default function QuizId() {
             marginTop: 20,
           }}
         >
-          <ScrollView showsVerticalScrollIndicator={false} style={{}}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text
               style={{
                 fontFamily: "nunito-bold",
@@ -258,7 +251,7 @@ export default function QuizId() {
                 onPress={() => {
                   setSelectedOption(index);
                   setSelectOption(true);
-                  onOptionSelect(item); 
+                  onOptionSelect(item);
                 }}
                 style={{
                   padding: 16,
@@ -309,20 +302,6 @@ export default function QuizId() {
             )}
           </View>
         </View>
-      </View>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-        }}
-      >
-        <BannerAdComponent />
       </View>
     </SafeScreen>
   );

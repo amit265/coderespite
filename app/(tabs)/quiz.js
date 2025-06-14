@@ -90,7 +90,7 @@ export default function Quiz() {
       >
         <View
           className="w-full h-40 rounded-2xl overflow-hidden mb-4"
-          style={{ position: "relative", height: 200 }}
+          style={{ position: "relative", height: 300 }}
         >
           <Image
             source={
@@ -153,12 +153,11 @@ export default function Quiz() {
 
       <View className="flex-row items-center px-2 mb-4 flex gap-2">
         {/* Course Dropdown */}
-        <View className="flex-1 px-2 bg-white text-black rounded-xl border border-gray-300 w-2/5">
+        <View className="flex-1 p-2 bg-white text-black rounded-xl border border-gray-300 w-2/5">
           <Picker
             selectedValue={selectCourse}
             onValueChange={(value) => setSelectCourse(value)}
-            style={{ color: "#333", fontFamily: "Nunito-Bold" }}
-            dropdownIconColor="#666"
+            style={{ color: "#000", fontFamily: "Nunito-Bold", backgroundColor: "#fff", paddingHorizontal: 10 }}
           >
             <Picker.Item
               label="All"
@@ -177,9 +176,9 @@ export default function Quiz() {
         </View>
 
         {/* Search Box */}
-        <View className="relative mr-2 rounded-xl border border-gray-300 w-4/5">
+        <View className="relative  mr-2 rounded-xl border border-gray-300 w-4/5">
           <TextInput
-            className="flex-1 bg-white rounded-xl font-nunito text-black w-full"
+            className="flex-1 p-2 bg-white rounded-xl font-nunito text-black w-full"
             placeholder="Search"
             placeholderTextColor={colors.GRAY}
             value={searchText}

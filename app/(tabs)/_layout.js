@@ -4,10 +4,11 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import SafeScreen from "../../components/SafeScreen";
 
 export default function TabsLayout() {
   return (
-    
+    <SafeScreen>
     <Tabs
       screenOptions={({ route }) => ({
         headerShown: false,
@@ -53,5 +54,6 @@ export default function TabsLayout() {
       <Tabs.Screen name="quiz" options={{ title: "Quiz" }} />
       <Tabs.Screen name="profile" options={{ title: "Profile" }} />
     </Tabs>
+    </SafeScreen>
   );
 }

@@ -6,7 +6,6 @@ import ContentPage from "../../../../components/ContentPage";
 import SafeScreen from "../../../../components/SafeScreen";
 import colors from "../../../../constants/colors";
 import { allCoursesContext } from "../../../../context/context";
-import { BannerAdComponent } from "../../../../services/AdManager";
 export default function Lesson() {
   const { selectedLesson, selectedQuiz } = useContext(allCoursesContext);
   const router = useRouter();
@@ -41,21 +40,7 @@ export default function Lesson() {
       </View>
 
       <ContentPage selectedLesson={selectedLesson} />
-      {/* Bottom Banner Ad */}
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-        }}
-      >
-        <BannerAdComponent />
-      </View>
+   
     </SafeScreen>
   );
 }

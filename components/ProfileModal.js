@@ -1,7 +1,5 @@
-import { useRouter } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
-  BackHandler,
   Image,
   ScrollView,
   Text,
@@ -19,10 +17,7 @@ const ProfileModal = ({ setShowModal }) => {
 
   const [error, setError] = useState("");
 
-  const [username, setUsername] = useState(userData?.profile.name);
-  const router = useRouter();
-
-  
+  const [username, setUsername] = useState(userData?.profile?.name);
 
   const handleUsernameChange = (text) => {
     const trimmed = text.trim();
@@ -68,7 +63,10 @@ const ProfileModal = ({ setShowModal }) => {
   };
 
   return (
-    <View className="items-center mt-4">
+    <View
+      className="items-center mt-4"
+      style={{ maxWidth: "100%", width: 600 }}
+    >
       <View className="p-4 pb-8">
         <Text className="text-xl font-nunito-bold text-center mb-6">
           Let’s set up your profile ✨
@@ -76,17 +74,21 @@ const ProfileModal = ({ setShowModal }) => {
       </View>
       <Image
         source={selectedImage.source}
-        style={{ width: 120, height: 120, borderRadius: 60, marginBottom: 12 }}
+        style={{
+          width: 120,
+          height: 120,
+          borderRadius: 60,
+          marginBottom: 12,
+        }}
       />
 
-      <Text className="text-lg font-nunito mb-2">
-        Select an Avatar:
-      </Text>
+      <Text className="text-lg font-nunito mb-2">Select an Avatar:</Text>
 
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 10 }}
+        style={{ width: 600, maxWidth: "100%" }}
       >
         {availableImages.map((img, index) => (
           <TouchableOpacity

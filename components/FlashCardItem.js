@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext } from "react";
-import { Dimensions, FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import FlipCard from "react-native-flip-card";
 import colors from "../constants/colors";
 import { favoritesContext, userDetailsContext } from "../context/context";
@@ -11,7 +11,6 @@ export default function FlashCardItem({
   courseTitle,
   favorite,
 }) {
-  const screenWidth = Dimensions.get("screen").width;
   const { favorites, setFavorites } = useContext(favoritesContext);
   const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const isFavorite = (question) => {
@@ -139,7 +138,7 @@ export default function FlashCardItem({
   };
 
   return (
-    <View>
+    <View style={{ flex: 1, height: "100%" }}>
       <FlatList
         data={flashcards}
         keyExtractor={(item) => item.question}
@@ -150,13 +149,15 @@ export default function FlashCardItem({
           const isFav = isFavorite(currentQuestion);
 
           return (
-            <View className="mt-8 mx-auto">
+            <View className="mt-8 mx-auto" style={{ height: 500 }}>
               <FlipCard
                 style={{
-                  width: screenWidth * 0.78,
-                  height: 200,
+                  width: 400,
+                  maxWidth: "100%", // ✅ limits max width to simulate mobile
                   borderRadius: 20,
-                  marginHorizontal: screenWidth * 0.05,
+                  margin: "0 auto", // ✅ horizontally centers on web
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.15)", // ✅ gives subtle depth
+                  backgroundColor: "white", // ✅ to prevent see-through on web
                 }}
                 friction={12}
                 perspective={1500}

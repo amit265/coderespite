@@ -1,9 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen, useRouter } from "expo-router";
 import { doc, onSnapshot } from "firebase/firestore";
-import LottieView from "lottie-react-native";
+import Lottie from "lottie-react";
 import React, { useContext, useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+
+import catAnimation from "../assets/cat.json";
+import loadingAnimation from "../assets/loading.json";
+import pawAnimation from "../assets/paw.json";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
@@ -115,7 +119,6 @@ export default function Index() {
     return <SplashScreenComponent />;
   }
 
-
   return (
     <SafeScreen>
       <View className="h-2/3">
@@ -127,11 +130,11 @@ export default function Index() {
               style={{
                 position: "absolute",
                 top: height / 2 + 250, // Half of screen - half of Lottie height
-                left: width / 2 - 175, // Half of screen - half of Lottie width
+                left: width / 2 - 740, // Half of screen - half of Lottie width
               }}
             >
-              <LottieView
-                source={require("../assets/paw.json")}
+              <Lottie
+                animationData={pawAnimation}
                 autoPlay
                 loop
                 style={{
@@ -154,14 +157,13 @@ export default function Index() {
 
         {!loading && (
           <View className="rounded-lg mx-auto flex flex-col justify-center items-center -mt-14">
-            <LottieView
-              source={require("../assets/cat.json")}
+            <Lottie
+              animationData={catAnimation}
               autoPlay
               loop
               style={{
                 height: 100,
                 width: 100,
-                backgroundColor: "Red",
                 marginBottom: -15,
               }}
             />
@@ -189,8 +191,8 @@ export default function Index() {
             right: -50,
           }}
         >
-          <LottieView
-            source={require("../assets/loading.json")}
+          <Lottie
+            animationData={loadingAnimation}
             autoPlay
             loop
             style={{

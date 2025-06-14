@@ -49,9 +49,7 @@ export default function Header() {
   };
 
   return (
-    <View
-      className="flex-row justify-between items-center border-b border-gray-400 px-4 pb-4 relative"
-    >
+    <View className="flex-row justify-between items-center border-b border-gray-400 px-4 pb-4 relative">
       <View className="flex-1 items-center justify-center">
         <View className="flex-row items-center">
           <Text
@@ -98,10 +96,10 @@ export default function Header() {
 
       {!menuVisible && (
         <TouchableOpacity
-          onPress={() => setMenuVisible(true)}
+          onPress={() => router.push("/settings")}
           className="absolute right-4 top-1/2 -translate-y-1/2 z-50"
         >
-          <Entypo name="dots-three-vertical" size={24} color="black" />
+          <Feather name="settings" size={24} color="black" />
         </TouchableOpacity>
       )}
 
@@ -111,17 +109,15 @@ export default function Header() {
         visible={menuVisible}
         onRequestClose={() => setMenuVisible(false)}
       >
-        <View className="flex-1">
+        <View className="flex-1 justify-center items-center bg-black bg-opacity-50">
           {/* Top-right toggle button inside Modal */}
           <TouchableOpacity
             onPress={() => setMenuVisible(false)}
-            className="absolute right-6 top-9 z-50"
-          >
-            <Entypo name="cross" size={30} color="black" />
-          </TouchableOpacity>
+            className="z-50"
+          ></TouchableOpacity>
 
           <TouchableOpacity
-            className="flex-1 p-4 justify-start pt-20 items-end"
+            className="flex-1 p-4 pt-20 items-center"
             activeOpacity={1}
             onPressOut={() => setMenuVisible(false)}
           >
@@ -129,6 +125,13 @@ export default function Header() {
               className="py-4 px-6 rounded-2xl shadow-lg border border-gray-300"
               style={{ backgroundColor: colors.WHITE }}
             >
+              <Entypo
+                name="cross"
+                size={30}
+                color="red"
+                className="border-gray-300 absolute right-1 -top-1 p-1"
+              />
+
               {[
                 {
                   label: "Profile",

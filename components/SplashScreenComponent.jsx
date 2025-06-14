@@ -1,16 +1,17 @@
-import LottieView from "lottie-react-native";
 import React from "react";
-import { Dimensions, StatusBar, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import colors from "../constants/colors";
+import Lottie from "lottie-react";
+import mainScene from "../assets/MainScene.json";
 const { width, height } = Dimensions.get("window");
 
 const SplashScreenComponent = () => {
   return (
     <View style={styles.container}>
-      <LottieView
-        source={require("../assets/MainScene.json")}
+      <Lottie
+        animationData={mainScene}
         autoPlay
-        loop = {false}
+        loop={false}
         style={styles.animation}
       />
     </View>

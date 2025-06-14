@@ -7,6 +7,8 @@ import { adConfigContext } from "../context/context";
 
 export default function QuizHistoryCard({ quizData }) {
   const router = useRouter();
+  console.log("quizdata", quizData);
+  
   const { setClickCount } = useContext(adConfigContext);
   const sortQuizData = quizData.sort(
     (a, b) => b?.attemptedDate - a?.attemptedDate
@@ -16,7 +18,7 @@ export default function QuizHistoryCard({ quizData }) {
 
     return (
       <TouchableOpacity
-        className="mb-4 shadow shadow-black"
+        className="mb-4"
         onPress={() => {
           setClickCount((prev) => prev + 1);
           router.replace({
@@ -27,7 +29,7 @@ export default function QuizHistoryCard({ quizData }) {
           });
         }}
       >
-        <View className="flex flex-row gap-2 bg-white p-4 rounded-lg shadow">
+        <View className="flex flex-row gap-2 bg-white p-4 rounded-lg">
           <View style={{ width: 100, height: 100 }}>
             <Image
               source={

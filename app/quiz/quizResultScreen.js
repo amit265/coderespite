@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import LottieView from "lottie-react-native";
+import Lottie from "lottie-react";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -12,11 +12,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import funAnimation from "../../assets/fun.json";
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
 import { allCoursesContext, userDetailsContext } from "../../context/context";
-
 export default function QuizResultScreen() {
   const { quizIdParam } = useLocalSearchParams();
   const { setSelectedCourse, setSelectedQuiz, allCourses } =
@@ -126,7 +126,6 @@ export default function QuizResultScreen() {
             fontSize: 15,
             color: colors.PRIMARY,
             marginTop: 5,
-
           }}
         >
           {!quizItem?.isCorrect ? "Correct Answer" : "Answer"}:{" "}
@@ -188,18 +187,20 @@ export default function QuizResultScreen() {
               alignItems: "center",
             }}
           >
-            <LottieView
-              source={require("../../assets/fun.json")}
+            <Lottie
+              animationData={funAnimation}
               autoPlay
-              loop={false} // Run only once
-              onAnimationFinish={() => {
-                setShowConfetti(false);
-              }} // Hide after finishing
+              loop={false} // ✅ Run only once
+              onComplete={() => setShowConfetti(false)} // ✅ Web-compatible callback
               style={{
                 width: "100%",
                 height: "100%",
-                transform: [{ translateY: -100 }],
-              }} // Covers the whole screen
+                transform: "translateY(-100px)", // ✅ Web CSS
+                position: "absolute", // Optional: to float above content
+                top: 0,
+                left: 0,
+                pointerEvents: "none", // Optional: allows clicks to pass through
+              }}
             />
           </View>
         )}
@@ -220,6 +221,7 @@ export default function QuizResultScreen() {
           data={quizResult ? Object.entries(quizResult) : []}
           renderItem={renderItem}
           style={{ paddingBottom: 20 }}
+          showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <View>
               <View className="flex flex-row items-center gap-2">

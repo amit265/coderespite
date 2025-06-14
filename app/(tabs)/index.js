@@ -25,16 +25,16 @@ export default function Home() {
 
   useEffect(() => {
     const username = userData?.profile?.name;
-    if (username === "user") {
+    
+    if (username === "user" || !username) {
       setShowModal(true);
     }
-  }, []);
+  }, [userData?.profile?.name]);
 
   useEffect(() => {
     if (levelLoading) return;
     const currentLevel = userData?.level?.currentLevel;
     if (!currentLevel) return;
- 
 
     // If already shown for this level, don't show again
     if (lastShownLevel === currentLevel) return;
@@ -95,12 +95,13 @@ export default function Home() {
           }}
         >
           <View
-            style={{
-              width: "90%",
-              backgroundColor: "white",
-              borderRadius: 10,
-              padding: 20,
-            }}
+              style={{
+                maxWidth: "100%",
+                width: 600,
+                backgroundColor: "white",
+                borderRadius: 10,
+                padding: 20,
+              }}
           >
             <ProfileModal setShowModal={setShowModal} />
           </View>

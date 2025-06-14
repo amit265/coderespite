@@ -56,7 +56,7 @@ export default function FlashCards() {
         showsVerticalScrollIndicator={false}
         numColumns={2}
         contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 8 }}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        columnWrapperStyle={{ justifyContent: "space-evenly" }}
       />
     </SafeScreen>
   );

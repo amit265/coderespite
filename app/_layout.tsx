@@ -6,12 +6,10 @@ import { Stack } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { StatusBar, Text, View } from 'react-native';
-import MobileAds from "react-native-google-mobile-ads";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ErrorFallback from "../components/ErrorFallback";
 import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, userDetailsContext } from "../context/context";
-import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
 
@@ -100,10 +98,14 @@ export default function RootLayout() {
 
   // Update AsyncStorage + context state
   const updateUser = async (updateFn) => {
-    const updated = updateFn({ ...userData });
+    const updated = typeof updateFn === 'function'
+      ? updateFn({ ...userData })
+      : { ...userData };
+
     await setUserData(updated);
     setUserDataState(updated);
-  };
+  }
+
 
   // Expose helper methods
   const value = {
@@ -194,20 +196,6 @@ export default function RootLayout() {
 
   }, [checkConnection]);
 
-  // ✅ Use useEffect for side effects (initialize mobile ads)
-  useEffect(() => {
-    MobileAds()
-      .initialize()
-      .then(adapterStatuses => {
-        console.log('Mobile Ads Initialized');
-      })
-      .catch(error => {
-        console.error("Mobile Ads Init Error:", error);
-      });
-
-
-
-  }, [checkConnection]); // Only runs once
 
 
 
@@ -244,7 +232,6 @@ export default function RootLayout() {
                 <favoritesContext.Provider value={favoritesValue}>
                   <allCoursesContext.Provider value={allCoursesValue}>
                     <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
-                    <AdManager />
                     <Stack screenOptions={{ headerShown: false }} />
                   </allCoursesContext.Provider>
                 </favoritesContext.Provider>
