@@ -27,7 +27,7 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
       allCourseId[Math.floor(Math.random() * allCourseId.length)];
     console.log("randomCourseId", randomCourseId);
     const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
-    console.log("randomCourse", randomCourse);
+    // console.log("randomCourse", randomCourse);
     setCourseName(randomCourse?.title || "");
     if (Array.isArray(allCourses) && allCourses.length > 0) {
       const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
@@ -53,7 +53,6 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
     }
   }, []);
 
-  console.log("randomModule", randomModule);
 
   if (!randomModule) return null;
 

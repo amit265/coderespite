@@ -9,7 +9,7 @@ import Button from "../../components/shared/Button";
 import UserCard from "../../components/UserCard";
 import { userDetailsContext } from "../../context/context";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
-import { uploadAllData, uploadData } from "../../services/uploadData";
+import { uploadAllData } from "../../services/uploadData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
 export default function Profile() {
   const { userData } = useContext(userDetailsContext);
@@ -23,16 +23,17 @@ export default function Profile() {
 
   // ];
   useEffect(() => {
-    const username = userData?.profile?.name;
-    if (username === "user") {
+    const username = userData?.profile?.name ?? ""; // fallback to empty string if undefined or null
+
+    if (username === "user" || username === "") {
       setShowModal(true);
     }
-  }, []);
+  }, [userData]); // add dependency if userData is coming from async source
 
-  const data = useMemo(() => generateLastNDaysData(60), []); // 13 weeks x 7 days
+  // const data = useMemo(() => generateLastNDaysData(60), []); // 13 weeks x 7 days
   // console.log("data", data);
-  const totalCount = data.reduce((sum, item) => sum + item.count, 0);
-  console.log("totalCount", totalCount);
+  // const totalCount = data.reduce((sum, item) => sum + item.count, 0);
+  // console.log("totalCount", totalCount);
   // const addUser = async () => {
   //   const userdetails = await AsyncStorage.getItem(
   //     "user",

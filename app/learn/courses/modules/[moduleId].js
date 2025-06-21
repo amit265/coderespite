@@ -66,7 +66,7 @@ export default function ModuleId() {
         (quiz) => quiz.id === selectedQuizId
       );
       setSelectedQuiz(selectedQuiz);
-      console.log("selectedQuiz", selectedQuiz);
+      // console.log("selectedQuiz", selectedQuiz);
     }
   }, [selectedCourse, selectedQuizId, setSelectedQuiz]);
 

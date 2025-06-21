@@ -23,12 +23,14 @@ export default function Home() {
   const { lastShownLevel, updateLastShownLevel, levelLoading } =
     useContext(LevelContext);
 
-  useEffect(() => {
-    const username = userData?.profile?.name;
-    if (username === "user") {
-      setShowModal(true);
-    }
-  }, []);
+    useEffect(() => {
+      const username = userData?.profile?.name ?? ""; // fallback to empty string if undefined or null
+    
+      if (username === "user" || username === "") {
+        setShowModal(true);
+      }
+    }, [userData]); // add dependency if userData is coming from async source
+    
 
   useEffect(() => {
     if (levelLoading) return;

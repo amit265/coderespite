@@ -27,7 +27,7 @@ export default function CourseId() {
     [allCourses, coursesId]
   );
 
-  console.log("Selected Course:", course?.flashcards);
+  // console.log("Selected Course:", course?.flashcards);
   
 
   // pathname: "/quizExplainer/",

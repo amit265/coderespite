@@ -10,7 +10,7 @@ import { BannerAdComponent } from "../../../../services/AdManager";
 export default function Lesson() {
   const { selectedLesson, selectedQuiz } = useContext(allCoursesContext);
   const router = useRouter();
-  console.log("selectedquiz", selectedQuiz);
+  // console.log("selectedquiz", selectedQuiz);
 
   return (
     <SafeScreen>
