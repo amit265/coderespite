@@ -16,6 +16,7 @@ import {
   TaglineView,
   TestIds,
 } from "react-native-google-mobile-ads";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { adConfigContext } from "../context/context";
 
 // ✅ Helper to get ad unit IDs based on test mode
@@ -44,7 +45,7 @@ let appOpenAd;
 const AdManager = () => {
   const { adConfig, clickCount } = useContext(adConfigContext);
   // console.log("adconfig", adConfig);
-  
+
   let interstitialJustShown = false;
   const appPauseCount = useRef(0); // ✅ Track app pause count
 
@@ -148,6 +149,8 @@ export const showInterstitialAd = (adConfig) => {
 
 // ✅ Banner Ad Component
 export const BannerAdComponent = () => {
+  const insets = useSafeAreaInsets();
+
   const { adConfig } = useContext(adConfigContext);
 
   const [isAdLoaded, setIsAdLoaded] = useState(false);
@@ -159,6 +162,7 @@ export const BannerAdComponent = () => {
       style={{
         opacity: isAdLoaded ? 1 : 0,
         height: isAdLoaded ? undefined : 0,
+        paddingBottom: insets.bottom,
       }}
     >
       <BannerAd

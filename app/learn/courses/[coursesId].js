@@ -63,7 +63,9 @@ export default function CourseId() {
       (quiz) => quiz?.moduleId === item?.id
     );
 
-    const courseIcon = courseIcons[selectedCourse?.icon] ?? require("../../../assets/default-icon.png");
+    const courseIcon =
+      courseIcons[selectedCourse?.icon] ??
+      require("../../../assets/default-icon.png");
 
     return (
       <TouchableOpacity
@@ -161,12 +163,22 @@ export default function CourseId() {
 
   return (
     <SafeScreen>
-      <View className="flex flex-row gap-4 px-2 items-center">
+      <View
+        className="flex flex-row w-full justify-start px-2 mb-4"
+        style={{ backgroundColor: colors.BACKGROUND, gap: 8 }}
+      >
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
         <Text
-          className="text-2xl font-nunito-bold text-black text-center flex-1"
+          style={{
+            fontFamily: "nunito-bold",
+            color: colors.TEXT,
+            textAlign: "left",
+            flex: 1,
+            fontSize: 20,
+          }}
+          className="text-lg"
           numberOfLines={1}
         >
           {selectedCourse?.title}

@@ -1,10 +1,11 @@
 import React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import colors from "../constants/colors"
+import { StyleSheet, View } from "react-native";
+import colors from "../constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function SafeScreen({ children }) {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
       <View style={styles.container}>{children}</View>
     </SafeAreaView>
   );
@@ -15,8 +16,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.BACKGROUND,
     paddingTop: 16,
-    paddingHorizontal: 8
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    paddingHorizontal: 8,
   },
   container: {
     flex: 1,

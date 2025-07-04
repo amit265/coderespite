@@ -40,7 +40,7 @@ export default function QuizHistory() {
         {/* Title - Centered */}
         <Text 
           style={{
-            fontSize: 25,
+            fontSize: 20,
             fontFamily: "nunito-bold",
             color: colors.TEXT,
             textAlign: "center",

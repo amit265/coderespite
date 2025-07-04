@@ -3,7 +3,6 @@ import { ScrollView, View } from "react-native";
 import Markdown from "react-native-markdown-display";
 
 export default function ContentPage({ selectedLesson }) {
-  console.log("selectedlesson", selectedLesson);
 
   const lesson = {
     title: "What is JavaScript?",
@@ -84,12 +83,12 @@ JavaScript is the foundation of modern web apps, and mastering it opens the door
             },
             heading1: {
               color: "#16a34a",
-              fontSize: 22,
+              fontSize: 18,
               fontFamily: "nunito-bold",
             },
             heading2: {
               color: "#16a34a",
-              fontSize: 18,
+              fontSize: 16,
               fontFamily: "nunito-bold",
               marginTop: 10,
             },

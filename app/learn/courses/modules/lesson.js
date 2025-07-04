@@ -11,6 +11,7 @@ export default function Lesson() {
   const { selectedLesson, selectedQuiz } = useContext(allCoursesContext);
   const router = useRouter();
   // console.log("selectedquiz", selectedQuiz);
+  // console.log("selectedLesson", selectedLesson);
 
   return (
     <SafeScreen>
@@ -32,13 +33,16 @@ export default function Lesson() {
             fontFamily: "nunito-bold",
             color: colors.TEXT,
             textAlign: "left",
+            flex: 1,
+            fontSize: 20,
           }}
-          numberOfLines={1}
           className="text-lg"
+          numberOfLines={1}
         >
           {selectedLesson?.title || "Lesson Title"}
         </Text>
       </View>
+      {/* Content Page */}
 
       <ContentPage selectedLesson={selectedLesson} />
       {/* Bottom Banner Ad */}

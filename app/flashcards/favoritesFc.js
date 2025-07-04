@@ -10,7 +10,7 @@ export default function Index() {
   const router = useRouter();
   return (
     <SafeScreen>
-    <View className="relative w-full items-center justify-center pb-4">
+    <View className="relative w-full items-center justify-center">
             {/* Back Arrow - Positioned on the left */}
             <Pressable
               onPress={() => router.back()}
@@ -22,7 +22,7 @@ export default function Index() {
             {/* Title - Centered */}
             <Text
               style={{
-                fontSize: 25,
+                fontSize: 20,
                 fontFamily: "nunito-bold",
                 color: colors.TEXT,
                 textAlign: "center",

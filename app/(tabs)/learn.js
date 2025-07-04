@@ -58,8 +58,7 @@ export default function Learn() {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         numColumns={2}
-        contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 8 }}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        columnWrapperStyle={{ justifyContent: "space-evenly" }}
       />
     </SafeScreen>
   );

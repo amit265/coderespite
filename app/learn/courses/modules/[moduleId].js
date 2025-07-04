@@ -122,14 +122,21 @@ export default function ModuleId() {
   return (
     <SafeScreen>
       <View
-        className="flex flex-row gap-2 py-2 px-2"
-        style={{ backgroundColor: colors.BACKGROUND }}
+        className="flex flex-row w-full justify-start px-2 mb-4"
+        style={{ backgroundColor: colors.BACKGROUND, gap: 8 }}
       >
         <Pressable onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={30} color="black" />
         </Pressable>
         <Text
-          className="text-2xl font-nunito-bold mb-2 text-black"
+          style={{
+            fontFamily: "nunito-bold",
+            color: colors.TEXT,
+            textAlign: "left",
+            flex: 1,
+            fontSize: 20,
+          }}
+          className="text-lg"
           numberOfLines={1}
         >
           {selectedCourse?.title} Module
@@ -138,6 +145,7 @@ export default function ModuleId() {
 
       <ScrollView
         className="flex"
+        showsVerticalScrollIndicator={false}
         style={{ backgroundColor: colors.BACKGROUND }}
       >
         <View className="flex flex-row gap-4 p-4">
@@ -188,15 +196,13 @@ export default function ModuleId() {
                   <FontAwesome
                     name={moduleQuizStatus?.score > 70 ? "star" : "star-o"}
                     size={16}
-                    color={
-                      moduleQuizStatus?.score > 70 ? "#AAFF00" : "#FF0000"
-                    }
+                    color={moduleQuizStatus?.score > 70 ? "#AAFF00" : "#FF0000"}
                   />
                   <Text className="text-sm font-nunito text-gray-700">
                     {moduleQuizStatus?.score}%
                   </Text>
                 </View>
-              )}  
+              )}
             </View>
           </View>
         </View>
@@ -209,62 +215,33 @@ export default function ModuleId() {
 
         <View style={{ marginBottom: 60 }}>
           {selectedModule?.lessons?.map((lesson, index) => {
-            const isExpanded = expandedLessons[lesson.lessonId];
             return (
               <TouchableOpacity
                 key={lesson.lessonId}
-                className="mb-4"
+                className="mb-4 px-4"
                 onPress={() => toggleLesson(lesson)}
-                activeOpacity={0.9}
+                activeOpacity={0.6}
               >
                 <View className="py-4 border border-gray-300 rounded-lg bg-gray-50">
                   <View className="flex flex-row justify-between items-center">
                     <Text
                       className="text-base font-nunito text-black px-6 py-2"
-                      style={{ paddingRight: 40 }}
+                      style={{ flex: 1 }}
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
                     >
                       {index + 1}. {lesson.title}
                     </Text>
-                    <View className="absolute right-4 justify-center items-center">
-                      <Ionicons
-                        name={isExpanded ? "chevron-up" : "chevron-down"}
-                        size={24}
-                        color="black"
-                      />
-                    </View>
                   </View>
-
-                  {isExpanded && (
-                    <>
-                      {lesson.type === "theory" && (
-                        <Text className="text-gray-600 font-nunito px-6 text-justify text-sm">
-                          {lesson.content}
-                        </Text>
-                      )}
-                      {lesson.type === "code" && (
-                        <View className="bg-gray-900 rounded mt-2">
-                          <Text className="text-green-400 font-nunito px-6 py-3 text-sm">
-                            {lesson.content}
-                          </Text>
-                        </View>
-                      )}
-                    </>
-                  )}
                 </View>
               </TouchableOpacity>
             );
           })}
-
-          {/* <ContentModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            lesson={selectedLesson}
-          /> */}
         </View>
 
         {feedback && (
           <View
-            className="px-6 py-4 bg-white p-6 rounded-2xl shadow-md border border-gray-200"
+            className="bg-white p-6 mx-4 rounded-2xl shadow-md border border-gray-200"
             style={{ marginBottom: 120 }}
           >
             <Text className="text-xl font-nunito-bold text-black mb-3">

@@ -16,6 +16,7 @@ import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
 import { allCoursesContext, userDetailsContext } from "../../context/context";
+import { BannerAdComponent } from "../../services/AdManager";
 
 export default function QuizResultScreen() {
   const { quizIdParam } = useLocalSearchParams();
@@ -126,7 +127,6 @@ export default function QuizResultScreen() {
             fontSize: 15,
             color: colors.PRIMARY,
             marginTop: 5,
-
           }}
         >
           {!quizItem?.isCorrect ? "Correct Answer" : "Answer"}:{" "}
@@ -237,7 +237,9 @@ export default function QuizResultScreen() {
                 </Text>
               </View>
               {quizData?.result ? (
-                <View style={{ width: "100%", padding: 35 }}>
+                <View style={{ width: "100%", padding: 20 }}>
+                
+
                   <View
                     style={{
                       backgroundColor: colors.WHITE,
@@ -299,7 +301,7 @@ export default function QuizResultScreen() {
                     <Text
                       style={{
                         fontFamily: "nunito-bold",
-                        fontSize: 25,
+                        fontSize: 20,
                         color: colors.BLACK,
                         textAlign: "center",
                       }}
@@ -319,9 +321,12 @@ export default function QuizResultScreen() {
           }
           contentContainerStyle={{ paddingBottom: 20 }}
         />
-        <View
-          style={{ alignItems: "center", backgroundColor: colors.BACKGROUND }}
-        ></View>
+      </View>
+
+      {/* Bottom Banner Ad */}
+
+      <View>
+        <BannerAdComponent />
       </View>
     </SafeScreen>
   );

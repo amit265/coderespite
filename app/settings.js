@@ -21,7 +21,6 @@ import { BannerAdComponent } from "../services/AdManager";
 
 export default function Settings() {
   const router = useRouter();
-
   const handleContactUs = () => {
     console.log("contact us called");
 
