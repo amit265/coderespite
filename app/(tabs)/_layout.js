@@ -26,7 +26,8 @@ export default function TabsLayout() {
 
             height: 60,
             elevation: 5,
-            margin: 10
+            marginHorizontal: 10,
+            marginBottom: 10,
           },
 
           tabBarInactiveTintColor: "#6c757d",
