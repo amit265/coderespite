@@ -2,7 +2,7 @@
   "expo": {
     "name": "CodeRespite: Refresh your Tech Skills",
     "slug": "coderespite",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "coderespite",
@@ -18,7 +18,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.mindcraftlearning.coderespite",
-      "versionCode": 6
+      "versionCode": 7
 
     },
     "web": {

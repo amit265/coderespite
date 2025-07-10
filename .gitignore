@@ -84,3 +84,8 @@ Thumbs.db
 *.aab
 *.apk
 build/
+
+
+.vercel
+
+

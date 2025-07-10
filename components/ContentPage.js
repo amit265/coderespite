@@ -1,8 +1,17 @@
-import React from "react";
-import { ScrollView, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { Animated, ScrollView, View } from "react-native";
 import Markdown from "react-native-markdown-display";
 
 export default function ContentPage({ selectedLesson }) {
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const [contentHeight, setContentHeight] = useState(1);
+  const [scrollViewHeight, setScrollViewHeight] = useState(1);
+
+  const safeScrollProgress =
+  contentHeight > scrollViewHeight
+    ? Animated.divide(scrollY, contentHeight - scrollViewHeight)
+    : new Animated.Value(0);
+
 
   const lesson = {
     title: "What is JavaScript?",
@@ -68,10 +77,34 @@ JavaScript is the foundation of modern web apps, and mastering it opens the door
   };
 
   return (
-    <View className="flex-1 px-4 rounded-lg relative">
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 120 }}
+    <View className="flex-1 rounded-lg relative">
+      {/* 🔵 Scroll progress bar at top */}
+      <Animated.View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: 4,
+          width: safeScrollProgress.interpolate({
+            inputRange: [0, 1],
+            outputRange: ["0%", "100%"],
+            extrapolate: "clamp",
+          }),
+          backgroundColor: "#16a34a",
+          zIndex: 10,
+        }}
+      />
+
+<ScrollView
+        contentContainerStyle={{ paddingBottom: 120, paddingHorizontal: 16, paddingTop: 10 }}
         showsVerticalScrollIndicator={false}
+        onContentSizeChange={(w, h) => setContentHeight(h)}
+        onLayout={(e) => setScrollViewHeight(e.nativeEvent.layout.height)}
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false }
+        )}
       >
         <Markdown
           style={{
