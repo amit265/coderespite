@@ -16,7 +16,7 @@ export default function Profile() {
   console.log("userData from profile", userData);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const show = false;
+  const show = true;
   // const data = [
   //   { count: 3, date: "2025-05-14" },
   //   { count: 5, date: "2025-05-15" },
