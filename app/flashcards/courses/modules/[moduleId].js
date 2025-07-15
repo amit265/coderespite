@@ -44,8 +44,8 @@ export default function ModuleId() {
 
   return (
     <SafeScreen>
-      <View>
-        <View className="flex-row items-center justify-between px-4 py-2">
+      <View style={{ flex: 1 }}>
+        <View className="flex-row items-center justify-between px-4 py-2 ">
           <Pressable onPress={() => router.back()}>
             <Ionicons name="arrow-back" size={30} color="black" />
           </Pressable>
