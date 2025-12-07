@@ -56,7 +56,6 @@ export default function RootLayout() {
 
 
   const allCoursesValue = useMemo(() => ({ selectedLesson, setSelectedLesson, allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [selectedLesson, update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
-  const userDetailsValue = useMemo(() => ({ userData, setUserDataState }), [userData])
 
   useEffect(() => {
     const loadLevel = async () => {
