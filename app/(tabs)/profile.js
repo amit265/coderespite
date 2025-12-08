@@ -8,7 +8,6 @@ import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import UserCard from "../../components/UserCard";
 import { userDetailsContext } from "../../context/context";
-import { generateLastNDaysData } from "../../services/generateLastNDaysData";
 import { uploadAllData } from "../../services/uploadData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
 export default function Profile() {
