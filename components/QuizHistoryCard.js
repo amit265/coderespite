@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { courseIcons } from "../constants/constants";
 import { adConfigContext } from "../context/context";
+import { timeLapse } from "../services/currentTime";
 
 export default function QuizHistoryCard({ quizData }) {
   const router = useRouter();
@@ -56,7 +57,7 @@ export default function QuizHistoryCard({ quizData }) {
               {item?.quizTitle}
             </Text>
             <Text style={styles.attemptedDate}>
-              {item?.attemptedDate}
+              {timeLapse(item?.attemptedDate)}
             </Text>
             <View style={styles.courseTag}>
               <Text style={styles.courseText}>{item?.courseTitle}</Text>
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 8,
     marginTop: 6,
+    alignSelf: "flex-start",
   },
   courseText: {
     fontSize: 13,

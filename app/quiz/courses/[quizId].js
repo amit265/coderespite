@@ -110,7 +110,9 @@ export default function QuizId() {
       // await gainXP(quizResultPercentage * 20);
 
       const now = new Date();
-      const attemptedDate = now.toISOString().split("T")[0];
+      const attemptedDate = now.toISOString();
+      console.log("Attempted Date:", attemptedDate);
+      console.log("Quiz now date:", now);
 
       const newAttempt = {
         quizId,
