@@ -1,4 +1,4 @@
-const { getDefaultConfig } = require("@expo/metro-config");
+const { getDefaultConfig } = require("expo/metro-config"); // ✅ Correct way
 const { withNativeWind } = require("nativewind/metro");
 
 // Extend Expo's default config
