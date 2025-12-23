@@ -1,19 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import * as Progress from "react-native-progress";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   ActivityIndicator,
   Alert,
+  Animated,
   Dimensions,
+  Easing,
   Pressable,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import PageTransition from "../../../components/PageTransition";
 import SafeScreen from "../../../components/SafeScreen";
 import Button from "../../../components/shared/Button";
 import colors from "../../../constants/colors";
@@ -23,40 +26,98 @@ import {
   userDetailsContext,
 } from "../../../context/context";
 import { BannerAdComponent } from "../../../services/AdManager";
+
+const { width } = Dimensions.get("window");
+
+// --- Animated Option Component ---
+const AnimatedOption = ({ item, index, isSelected, onSelect }) => {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    if (isSelected) {
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 0.95,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [isSelected]);
+
+  return (
+    <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+      <TouchableOpacity
+        onPress={onSelect}
+        activeOpacity={0.8}
+        style={{
+          padding: 16,
+          borderWidth: isSelected ? 2 : 1,
+          borderRadius: 15,
+          marginTop: 12,
+          backgroundColor: isSelected ? colors.PRIMARY : "white",
+          borderColor: isSelected ? colors.PRIMARY : "#E5E7EB",
+          shadowColor: isSelected ? colors.PRIMARY : "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: isSelected ? 0.3 : 0.05,
+          shadowRadius: 3,
+          elevation: isSelected ? 4 : 1,
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: isSelected ? "nunito-bold" : "nunito",
+            fontSize: 16,
+            color: isSelected ? colors.WHITE : colors.BLACK,
+          }}
+        >
+          {item}
+        </Text>
+      </TouchableOpacity>
+    </Animated.View>
+  );
+};
+
 export default function QuizId() {
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState(null);
   const [selectOption, setSelectOption] = useState(false);
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState({});
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
-  // const { setShowConfetti } = useContext(showConfettiContext);
-  const { selectedCourse, selectedQuiz } =
-    useContext(allCoursesContext);
+
+  const { selectedCourse, selectedQuiz } = useContext(allCoursesContext);
   const { setClickCount } = useContext(adConfigContext);
+
   const courseTitle = selectedCourse?.title;
   const courseId = selectedCourse?.id;
   const quizTitle = selectedQuiz?.title;
-  const moduleId = quizId.replace("quiz_", ""); // "module01"
+  const moduleId = quizId.replace("quiz_", "");
   const quiz = selectedQuiz?.quiz;
   const quizIcon = selectedCourse?.icon;
   const hasGainedXP = useRef(false);
 
+  // Animation Ref for the Question Card Slide
+  const slideAnim = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
-    if (quiz[currentPage]?.options) {
+    if (quiz && quiz[currentPage]?.options) {
       setShuffledOptions(
         [...quiz[currentPage].options].sort(() => Math.random() - 0.5)
       );
     }
- 
   }, [currentPage, quiz]);
 
   const getProgress = (currentPage) => {
-    const precentage = currentPage / quiz?.length;
-    return precentage;
+    return (currentPage + 1) / (quiz?.length || 1);
   };
 
   const onOptionSelect = (selectedChoice) => {
@@ -74,13 +135,36 @@ export default function QuizId() {
 
   const calculateQuizPercent = () => {
     if (!quiz || !result) return 0;
-
     const correctAnswers = Object.values(result).filter(
       (q) => q.isCorrect
     ).length;
-    const totalQuestions = quiz.length;
+    return ((correctAnswers / quiz.length) * 100).toFixed(0);
+  };
 
-    return ((correctAnswers / totalQuestions) * 100).toFixed(0);
+  const handleNextQuestion = () => {
+    // 1. Slide OUT to Left
+    Animated.timing(slideAnim, {
+      toValue: -width,
+      duration: 300,
+      useNativeDriver: true,
+      easing: Easing.ease,
+    }).start(() => {
+      // 2. Update State (Hidden)
+      setCurrentPage((prev) => prev + 1);
+      setSelectedOption(null);
+      setSelectOption(false);
+
+      // 3. Reset Position to Right (Instant)
+      slideAnim.setValue(width);
+
+      // 4. Slide IN from Right
+      Animated.spring(slideAnim, {
+        toValue: 0,
+        friction: 8,
+        tension: 40,
+        useNativeDriver: true,
+      }).start();
+    });
   };
 
   const goBack = () => {
@@ -89,30 +173,21 @@ export default function QuizId() {
       "Are you sure you want to go back? You will lose your progress.",
       [
         { text: "Cancel", style: "cancel" },
-        {
-          text: "OK",
-          style: "destructive",
-          onPress: () => router.back(),
-        },
+        { text: "OK", style: "destructive", onPress: () => router.back() },
       ]
     );
   };
 
   const onQuizFinish = async () => {
-    if (hasGainedXP.current) return; // prevent double execution
+    if (hasGainedXP.current) return;
     hasGainedXP.current = true;
     try {
       setLoading(true);
-
       const quizResultPercentage = calculateQuizPercent();
-      console.log("qainxp called from quiz");
 
-      // await gainXP(quizResultPercentage * 20);
-
+      // ... (Rest of your save logic remains identical) ...
       const now = new Date();
       const attemptedDate = now.toISOString();
-      console.log("Attempted Date:", attemptedDate);
-      console.log("Quiz now date:", now);
 
       const newAttempt = {
         quizId,
@@ -125,35 +200,28 @@ export default function QuizId() {
       };
 
       let attemptsArray = [];
-
-      // Get existing attempts
       const storedAttempts = await AsyncStorage.getItem("@attemptedQuiz_data");
       const parsed = storedAttempts ? JSON.parse(storedAttempts) : null;
 
       if (Array.isArray(parsed)) {
         attemptsArray = parsed;
       } else if (parsed) {
-        attemptsArray = [parsed]; // wrap old single object into array
+        attemptsArray = [parsed];
       }
 
-      // 🔒 Remove any previous entry with same quizId
       attemptsArray = attemptsArray.filter(
         (attempt) =>
           !(attempt.quizId === quizId && attempt.courseTitle === courseTitle)
       );
 
       attemptsArray.push(newAttempt);
-
-      // Save updated array
       await AsyncStorage.setItem(
         "@attemptedQuiz_data",
         JSON.stringify(attemptsArray)
       );
 
-      // 🔥 Update user progress with quiz details
       const currentProgress = userData?.progress?.[courseTitle] || {};
       const previousAttempts = currentProgress?.attemptedQuizzes || [];
-
       const filtered = previousAttempts.filter((q) => q.id !== quizId);
 
       const detailedQuizData = {
@@ -168,13 +236,10 @@ export default function QuizId() {
       await updateCourse(courseTitle, {
         attemptedQuizzes: [...filtered, detailedQuizData],
       });
-      // Navigate
 
       router.replace({
         pathname: "/quiz/quizResultScreen",
-        params: {
-          quizIdParam: JSON.stringify(newAttempt),
-        },
+        params: { quizIdParam: JSON.stringify(newAttempt) },
       });
     } catch (error) {
       console.error("Error saving quiz result:", error);
@@ -184,148 +249,169 @@ export default function QuizId() {
   };
 
   if (!quiz) {
-    return <ActivityIndicator size="large" color={colors.WHITE} />;
+    return (
+      <SafeScreen>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color={colors.PRIMARY} />
+        </View>
+      </SafeScreen>
+    );
   }
 
   return (
-    <SafeScreen>
-      <View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-          }}
-        >
-          <Pressable onPress={goBack}>
-            <Ionicons name="arrow-back" size={30} color="black" />
-          </Pressable>
-
-          <Text
+    <PageTransition>
+      <SafeScreen>
+        <View style={{ flex: 1 }}>
+          {/* Top Bar */}
+          <View
             style={{
-              fontFamily: "nunito-bold",
-              fontSize: 16,
-              color: colors.BLACK,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingHorizontal: 16,
+              marginBottom: 10,
             }}
           >
-            {currentPage + 1} / {quiz?.length}
-          </Text>
-        </View>
+            <Pressable onPress={goBack} hitSlop={10}>
+              <Ionicons name="close" size={30} color="black" />
+            </Pressable>
 
-        <Text
-          style={{
-            textAlign: "center",
-            fontFamily: "nunito",
-            fontSize: 18,
-            padding: 10,
-            color: colors.BLACK,
-          }}
-        >
-          {quizTitle}
-        </Text>
-        <View style={{ marginTop: 10, alignSelf: "center" }}>
-          <Progress.Bar
-            progress={getProgress(currentPage)}
-            width={Dimensions.get("window").width * 0.85}
-            color={colors.PRIMARY}
-            height={8}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: colors.WHITE,
-            elevation: 1,
-            borderRadius: 20,
-            flexGrow: 1,
-            paddingHorizontal: 25,
-            paddingVertical: 20,
-            marginTop: 20,
-          }}
-        >
-          <ScrollView showsVerticalScrollIndicator={false} style={{}}>
+            {/* Progress Bar in center */}
+            <View style={{ flex: 1, marginHorizontal: 16 }}>
+              <Progress.Bar
+                progress={getProgress(currentPage)}
+                width={null} // auto width
+                color={colors.PRIMARY}
+                unfilledColor="#E5E7EB"
+                borderWidth={0}
+                height={8}
+                borderRadius={4}
+                style={{ width: "100%" }}
+              />
+            </View>
+
             <Text
               style={{
                 fontFamily: "nunito-bold",
                 fontSize: 16,
-                textAlign: "center",
+                color: colors.GRAY,
               }}
             >
-              {quiz[currentPage]?.question}
+              {currentPage + 1}/{quiz?.length}
             </Text>
-            {shuffledOptions.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  setSelectedOption(index);
-                  setSelectOption(true);
-                  onOptionSelect(item); 
-                }}
-                style={{
-                  padding: 16,
-                  borderWidth: 1,
-                  borderRadius: 15,
-                  marginTop: 6,
-                  backgroundColor:
-                    selectedOption === index ? colors.PRIMARY : null,
+          </View>
 
-                  borderColor: selectedOption === index ? colors.GREEN : null,
-                }}
-              >
+          {/* Question Title (Fixed) */}
+          <Text
+            style={{
+              textAlign: "center",
+              fontFamily: "nunito-bold",
+              fontSize: 14,
+              color: "#9CA3AF",
+              marginBottom: 10,
+            }}
+          >
+            {quizTitle}
+          </Text>
+
+          {/* Animated Question Card */}
+          <Animated.View
+            style={{
+              flex: 1,
+              transform: [{ translateX: slideAnim }], // Binds the slide animation
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: colors.WHITE,
+                borderRadius: 24,
+                flex: 1,
+                marginHorizontal: 16,
+                padding: 24,
+                // Soft Shadow
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.05,
+                shadowRadius: 10,
+                elevation: 4,
+              }}
+            >
+              <ScrollView showsVerticalScrollIndicator={false}>
                 <Text
                   style={{
-                    fontFamily: "nunito",
-                    fontSize: 14,
-                    color: selectedOption === index ? colors.WHITE : null,
+                    fontFamily: "nunito-bold",
+                    fontSize: 20,
+                    textAlign: "left",
+                    marginBottom: 24,
+                    lineHeight: 28,
                   }}
                 >
-                  {item}
+                  {quiz[currentPage]?.question}
                 </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-          <View>
-            {quiz?.length - 1 > currentPage ? (
-              <Button
-                text="Next"
-                onPress={() => {
-                  setCurrentPage(currentPage + 1);
-                  setSelectedOption(null);
-                  setSelectOption(false);
-                }}
-                disable={!selectOption}
-                variant={selectOption ? "active" : "inactive"}
-              />
-            ) : (
-              <Button
-                text="Finish"
-                onPress={() => {
-                  onQuizFinish();
-                  setClickCount((prev) => prev + 1);
-                }}
-                loading={loading}
-                disable={!selectOption}
-                variant={selectOption ? "active" : "inactive"}
-              />
-            )}
-          </View>
+
+                {shuffledOptions.map((item, index) => (
+                  <AnimatedOption
+                    key={`${currentPage}-${index}`} // Force re-render on page change to reset animations
+                    item={item}
+                    index={index}
+                    isSelected={selectedOption === index}
+                    onSelect={() => {
+                      setSelectedOption(index);
+                      setSelectOption(true);
+                      onOptionSelect(item);
+                    }}
+                  />
+                ))}
+
+                <View
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    paddingHorizontal: 5,
+                    bottom: -100,
+                  }}
+                >
+                  {quiz?.length - 1 > currentPage ? (
+                    <Button
+                      text="Next Question"
+                      onPress={handleNextQuestion}
+                      disable={!selectOption}
+                      variant={selectOption ? "active" : "inactive"}
+                    />
+                  ) : (
+                    <Button
+                      text="Submit Quiz"
+                      onPress={() => {
+                        setClickCount((prev) => prev + 1);
+                        onQuizFinish();
+                      }}
+                      loading={loading}
+                      disable={!selectOption}
+                      variant={selectOption ? "active" : "inactive"}
+                      backgroundColor={colors.SUCCESS} // Green for finish
+                    />
+                  )}
+                </View>
+              </ScrollView>
+            </View>
+          </Animated.View>
         </View>
-      </View>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 4,
-          backgroundColor: colors.BACKGROUND, // Optional: to avoid transparency glitches
-        }}
-      >
-        <BannerAdComponent />
-      </View>
-    </SafeScreen>
+
+        {/* Bottom Banner Ad */}
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}
+        >
+          <BannerAdComponent />
+        </View>
+      </SafeScreen>
+    </PageTransition>
   );
 }

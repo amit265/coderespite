@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { BackHandler, Modal, ScrollView, View } from "react-native";
+import { useContext, useEffect, useState, useRef } from "react";
+import { BackHandler, Modal, ScrollView, View, Animated } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
@@ -7,6 +7,7 @@ import Header from "../../components/home/Header";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
 import LevelUpModal from "../../components/LevelUpModal";
+import PageTransition from "../../components/PageTransition";
 import ProfileModal from "../../components/ProfileModal";
 import SafeScreen from "../../components/SafeScreen";
 import {
@@ -14,6 +15,42 @@ import {
   LevelContext,
   userDetailsContext,
 } from "../../context/context";
+
+// --- Helper Component for Staggered Animation ---
+const FadeInSection = ({ children, delay = 0 }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(30)).current; // Starts 30px lower
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 600,
+        delay: delay,
+        useNativeDriver: true,
+      }),
+      Animated.spring(slideAnim, {
+        toValue: 0,
+        friction: 8,
+        tension: 40,
+        delay: delay,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
+
+  return (
+    <Animated.View
+      style={{
+        opacity: fadeAnim,
+        transform: [{ translateY: slideAnim }],
+        marginBottom: 10, // Adds consistent spacing between sections
+      }}
+    >
+      {children}
+    </Animated.View>
+  );
+};
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -23,25 +60,21 @@ export default function Home() {
   const { lastShownLevel, updateLastShownLevel, levelLoading } =
     useContext(LevelContext);
 
-    useEffect(() => {
-      const username = userData?.profile?.name ?? ""; // fallback to empty string if undefined or null
-    
-      if (username === "user" || username === "") {
-        setShowModal(true);
-      }
-    }, [userData]); // add dependency if userData is coming from async source
-    
+  useEffect(() => {
+    const username = userData?.profile?.name ?? "";
+
+    if (username === "user" || username === "") {
+      setShowModal(true);
+    }
+  }, [userData]);
 
   useEffect(() => {
     if (levelLoading) return;
     const currentLevel = userData?.level?.currentLevel;
     if (!currentLevel) return;
- 
 
-    // If already shown for this level, don't show again
     if (lastShownLevel === currentLevel) return;
 
-    // Show modal only if level increased
     if (currentLevel > lastShownLevel) {
       setShowLevelModal(true);
       updateLastShownLevel(currentLevel);
@@ -58,7 +91,6 @@ export default function Home() {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
       () => {
-        // Block back press when modal is open
         return true;
       }
     );
@@ -67,52 +99,75 @@ export default function Home() {
   }, [showModal]);
 
   return (
-    <SafeScreen>
-      <Header />
+    <PageTransition>
+      <SafeScreen>
+        {/* Header usually stays fixed or animates first */}
+        <FadeInSection delay={0}>
+          <Header />
+        </FadeInSection>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <WelcomeCard userData={userData} />
-        <ContinueCard userData={userData} />
-        <FeaturedLessonGrid
-          allCourses={allCourses}
-          setSelectedModule={setSelectedModule}
-        />
+        <ScrollView 
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 120 }} // Space for the floating tabs
+        >
+          <FadeInSection delay={100}>
+            <WelcomeCard userData={userData} />
+          </FadeInSection>
 
-        {/* <ProgressSummary /> */}
-        <QuickActionGrid />
-        <DailyTip />
-      </ScrollView>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => {}}
-      >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)",
-          }}
+          <FadeInSection delay={200}>
+            <ContinueCard userData={userData} />
+          </FadeInSection>
+
+          <FadeInSection delay={300}>
+            <FeaturedLessonGrid
+              allCourses={allCourses}
+              setSelectedModule={setSelectedModule}
+            />
+          </FadeInSection>
+
+          <FadeInSection delay={400}>
+            <QuickActionGrid />
+          </FadeInSection>
+
+          <FadeInSection delay={500}>
+            <DailyTip />
+          </FadeInSection>
+        </ScrollView>
+
+        {/* Modals sit on top, no animation wrapper needed */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showModal}
+          onRequestClose={() => {}}
         >
           <View
             style={{
-              width: "90%",
-              backgroundColor: "white",
-              borderRadius: 10,
-              padding: 20,
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "rgba(0,0,0,0.5)",
             }}
           >
-            <ProfileModal setShowModal={setShowModal} />
+            <View
+              style={{
+                width: "90%",
+                backgroundColor: "white",
+                borderRadius: 10,
+                padding: 20,
+              }}
+            >
+              <ProfileModal setShowModal={setShowModal} />
+            </View>
           </View>
-        </View>
-      </Modal>
-      <LevelUpModal
-        visible={showLevelModal}
-        onClose={handleCloseModal}
-        currentLevel={userData?.level?.currentLevel || 1}
-      />
-    </SafeScreen>
+        </Modal>
+        
+        <LevelUpModal
+          visible={showLevelModal}
+          onClose={handleCloseModal}
+          currentLevel={userData?.level?.currentLevel || 1}
+        />
+      </SafeScreen>
+    </PageTransition>
   );
 }
