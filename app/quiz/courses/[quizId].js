@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Alert,
   Animated,
+  BackHandler,
   Dimensions,
   Easing,
   Pressable,
@@ -27,7 +28,7 @@ import {
 } from "../../../context/context";
 import { BannerAdComponent } from "../../../services/AdManager";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 // --- Animated Option Component ---
 const AnimatedOption = ({ item, index, isSelected, onSelect }) => {
@@ -72,7 +73,7 @@ const AnimatedOption = ({ item, index, isSelected, onSelect }) => {
         <Text
           style={{
             fontFamily: isSelected ? "nunito-bold" : "nunito",
-            fontSize: 16,
+            fontSize: 12,
             color: isSelected ? colors.WHITE : colors.BLACK,
           }}
         >
@@ -107,6 +108,20 @@ export default function QuizId() {
 
   // Animation Ref for the Question Card Slide
   const slideAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const backAction = () => {
+      goBack(); // Trigger your custom alert
+      return true; // Return true to prevent default behavior (exiting)
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   useEffect(() => {
     if (quiz && quiz[currentPage]?.options) {
@@ -323,26 +338,27 @@ export default function QuizId() {
               transform: [{ translateX: slideAnim }], // Binds the slide animation
             }}
           >
-            <View
-              style={{
-                backgroundColor: colors.WHITE,
-                borderRadius: 24,
-                flex: 1,
-                marginHorizontal: 16,
-                padding: 24,
-                // Soft Shadow
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.05,
-                shadowRadius: 10,
-                elevation: 4,
-              }}
-            >
-              <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View
+                style={{
+                  backgroundColor: colors.WHITE,
+                  borderRadius: 24,
+                  flex: 1,
+                  marginHorizontal: 16,
+                  padding: 24,
+                  // Soft Shadow
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.05,
+                  shadowRadius: 10,
+                  elevation: 4,
+                  maxHeight: height * 0.65,
+                }}
+              >
                 <Text
                   style={{
                     fontFamily: "nunito-bold",
-                    fontSize: 20,
+                    fontSize: 16,
                     textAlign: "left",
                     marginBottom: 24,
                     lineHeight: 28,
@@ -351,19 +367,21 @@ export default function QuizId() {
                   {quiz[currentPage]?.question}
                 </Text>
 
-                {shuffledOptions.map((item, index) => (
-                  <AnimatedOption
-                    key={`${currentPage}-${index}`} // Force re-render on page change to reset animations
-                    item={item}
-                    index={index}
-                    isSelected={selectedOption === index}
-                    onSelect={() => {
-                      setSelectedOption(index);
-                      setSelectOption(true);
-                      onOptionSelect(item);
-                    }}
-                  />
-                ))}
+                <ScrollView>
+                  {shuffledOptions.map((item, index) => (
+                    <AnimatedOption
+                      key={`${currentPage}-${index}`} // Force re-render on page change to reset animations
+                      item={item}
+                      index={index}
+                      isSelected={selectedOption === index}
+                      onSelect={() => {
+                        setSelectedOption(index);
+                        setSelectOption(true);
+                        onOptionSelect(item);
+                      }}
+                    />
+                  ))}
+                </ScrollView>
 
                 <View
                   style={{
@@ -371,7 +389,7 @@ export default function QuizId() {
                     left: 0,
                     right: 0,
                     paddingHorizontal: 5,
-                    bottom: -100,
+                    bottom: -80,
                   }}
                 >
                   {quiz?.length - 1 > currentPage ? (
@@ -395,8 +413,8 @@ export default function QuizId() {
                     />
                   )}
                 </View>
-              </ScrollView>
-            </View>
+              </View>
+            </ScrollView>
           </Animated.View>
         </View>
 

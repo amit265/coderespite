@@ -84,12 +84,15 @@ const AnimatedResultItem = ({ children, index }) => {
 };
 
 export default function QuizResultScreen() {
-  const { quizIdParam } = useLocalSearchParams();
+  const { quizIdParam, history } = useLocalSearchParams();
   const { setSelectedCourse, setSelectedQuiz, allCourses } =
     useContext(allCoursesContext);
   const { gainXP } = useContext(userDetailsContext);
 
-  const quizData = quizIdParam ? JSON.parse(quizIdParam) : null;
+  const quizData = useMemo(() => {
+    return quizIdParam ? JSON.parse(quizIdParam) : null;
+  }, [quizIdParam]);
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -109,11 +112,12 @@ export default function QuizResultScreen() {
     } else {
       setLoading(false);
       // Only show confetti if score is good (> 60%)
-      if (getPercMarks > 60) {
+      const isHistory = history === "true" || history === true;
+      if (getPercMarks >= 60 && !isHistory) {
         setTimeout(() => setShowConfetti(true), 500);
       }
     }
-  }, [quizData]);
+  }, [quizData, history]);
 
   const { correctAns, totalQuestion } = useMemo(() => {
     if (!quizData?.result) return { correctAns: 0, totalQuestion: 0 };

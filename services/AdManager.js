@@ -64,7 +64,7 @@ const AdManager = () => {
           adConfig.showAppOpenAds &&
           appOpenAd?.loaded
         ) {
-          console.log("Showing App Open Ad");
+          // console.log("Showing App Open Ad");
           appOpenAd.show();
         }
       }

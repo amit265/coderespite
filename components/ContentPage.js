@@ -13,69 +13,6 @@ export default function ContentPage({ selectedLesson }) {
     : new Animated.Value(0);
 
 
-  const lesson = {
-    title: "What is JavaScript?",
-    content: `# What is JavaScript?
-
-JavaScript is a versatile, high-level programming language primarily used to add interactivity and logic to web pages. It runs on the client side in web browsers, allowing you to build dynamic user interfaces, handle events, validate forms, and more. JavaScript is **interpreted**, **loosely typed**, and **event-driven**.
-
-## Why Learn JavaScript?
-
-- Runs in all modern web browsers
-- Essential for frontend development (alongside HTML & CSS)
-- Powers major frameworks like React, Angular, and Vue
-- Enables both frontend and backend (Node.js) development
-
-## Basic Example
-
-Let's start with a simple script that prints a greeting to the console:
-
-\`\`\`javascript
-// Basic greeting
-console.log("Hello, JavaScript!");
-\`\`\`
-
-## Intermediate Example
-
-Here's a function to check if a number is prime:
-
-\`\`\`javascript
-function isPrime(num) {
-  if (num <= 1) return false;
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) return false;
-  }
-  return true;
-}
-
-console.log(isPrime(7)); // true
-console.log(isPrime(10)); // false
-\`\`\`
-
-## Advanced Example
-
-This example fetches data from an API and displays the result using async/await:
-
-\`\`\`javascript
-async function fetchUserData() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const users = await response.json();
-    users.forEach(user => {
-      console.log(\`\${user.name} - \${user.email}\`);
-    });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-fetchUserData();
-\`\`\`
-
-JavaScript is the foundation of modern web apps, and mastering it opens the door to advanced technologies like React, Node.js, and beyond.
-`,
-  };
-
   return (
     <View className="flex-1 rounded-lg relative">
       {/* 🔵 Scroll progress bar at top */}

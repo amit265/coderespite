@@ -33,6 +33,7 @@ export default function QuizHistoryCard({ quizData }) {
             pathname: "/quiz/quizResultScreen",
             params: {
               quizIdParam: JSON.stringify(item),
+              history: true
             },
           });
         }}

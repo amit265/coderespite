@@ -43,7 +43,7 @@ export default function Settings() {
       });
 
       if (result.action === Share.sharedAction) {
-        console.log("App shared!");
+        // console.log("App shared!");
       } else if (result.action === Share.dismissedAction) {
         console.log("Share dismissed.");
       }

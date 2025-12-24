@@ -39,9 +39,9 @@ export default function Header() {
       });
 
       if (result.action === Share.sharedAction) {
-        console.log("App shared!");
+        // console.log("App shared!");
       } else if (result.action === Share.dismissedAction) {
-        console.log("Share dismissed.");
+        // console.log("Share dismissed.");
       }
     } catch (error) {
       console.log(error.message);

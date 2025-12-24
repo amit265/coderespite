@@ -1,8 +1,8 @@
 
 export const timeLapse = (pastDate) => {
   const now = new Date();
-  console.log("Now:", now);
-  console.log("Past Date:", pastDate);  
+  // console.log("Now:", now);
+  // console.log("Past Date:", pastDate);  
 
   const past = new Date(pastDate);
   const diffInMs = now - past;
