@@ -200,7 +200,6 @@ export default function QuizId() {
       setLoading(true);
       const quizResultPercentage = calculateQuizPercent();
 
-      // ... (Rest of your save logic remains identical) ...
       const now = new Date();
       const attemptedDate = now.toISOString();
 
