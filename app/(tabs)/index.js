@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState, useRef } from "react";
-import { BackHandler, Modal, ScrollView, View, Animated } from "react-native";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Animated, BackHandler, Modal, ScrollView, View } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
@@ -15,6 +15,7 @@ import {
   LevelContext,
   userDetailsContext,
 } from "../../context/context";
+import { getAllCoursesWithSubcollections } from "../../services/getAllCoursesWithSubcollections";
 
 // --- Helper Component for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -61,10 +62,23 @@ export default function Home() {
     useContext(LevelContext);
 
   useEffect(() => {
-    const username = userData?.profile?.name ?? "";
+    async function fetchCourses() {
+      if (allCourses.length > 0) return;
+      await getAllCoursesWithSubcollections();
+    }
+    fetchCourses();
+  }, [allCourses.length]);
+
+  useEffect(() => {
+    if (!userData) return;
+    // Use optional chaining and trim to handle whitespace
+    const username = userData?.profile?.name?.trim() ?? "";
 
     if (username === "user" || username === "") {
       setShowModal(true);
+    } else {
+      // Optional: Hide the modal if the username becomes valid
+      setShowModal(false);
     }
   }, [userData]);
 
@@ -106,7 +120,7 @@ export default function Home() {
           <Header />
         </FadeInSection>
 
-        <ScrollView 
+        <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 120 }} // Space for the floating tabs
         >
@@ -161,7 +175,7 @@ export default function Home() {
             </View>
           </View>
         </Modal>
-        
+
         <LevelUpModal
           visible={showLevelModal}
           onClose={handleCloseModal}

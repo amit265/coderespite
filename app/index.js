@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen, useRouter } from "expo-router";
 import { doc, onSnapshot } from "firebase/firestore";
 import LottieView from "lottie-react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
@@ -111,10 +111,17 @@ export default function Index() {
     };
   }, []);
 
+  useEffect(() => {
+    const username = userData?.profile?.name ?? "";
+
+    if (username !== "user" && username !== "") {
+      router.replace("(tabs)");
+    }
+  }, [router, userData?.profile?.name]);
+
   if (showSplash) {
     return <SplashScreenComponent />;
   }
-
 
   return (
     <SafeScreen>

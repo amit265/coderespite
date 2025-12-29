@@ -22,7 +22,6 @@ import { BannerAdComponent } from "../services/AdManager";
 export default function Settings() {
   const router = useRouter();
   const handleContactUs = () => {
-    console.log("contact us called");
 
     const email = "mindcraftlearning97@gmail.com";
     const subject = "Support Request for CodeRespite";
