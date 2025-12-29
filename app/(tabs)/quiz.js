@@ -284,7 +284,6 @@ export default function Quiz() {
         </Text>
 
         <View className="flex-row items-center px-2 mb-4 flex gap-2">
-          {/* Course Dropdown */}
           <View className="flex-1 px-2 bg-white text-black rounded-xl border border-gray-300 w-2/5">
             <Picker
               selectedValue={selectCourse}
