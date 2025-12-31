@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Animated, BackHandler, Modal, ScrollView, View } from "react-native";
+import { Animated, BackHandler, Modal, View } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
@@ -15,7 +15,8 @@ import {
   LevelContext,
   userDetailsContext,
 } from "../../context/context";
-import { getAllCoursesWithSubcollections } from "../../services/getAllCoursesWithSubcollections";
+import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
+import RefreshWrapper from "../../components/shared/RefreshWrapper"; // 👈 Import Wrapper
 
 // --- Helper Component for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -55,19 +56,16 @@ const FadeInSection = ({ children, delay = 0 }) => {
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
+  const [showLevelModal, setShowLevelModal] = useState(false);
+
+  // Contexts
   const { userData } = useContext(userDetailsContext);
   const { allCourses, setSelectedModule } = useContext(allCoursesContext);
-  const [showLevelModal, setShowLevelModal] = useState(false);
   const { lastShownLevel, updateLastShownLevel, levelLoading } =
     useContext(LevelContext);
 
-  useEffect(() => {
-    async function fetchCourses() {
-      if (allCourses.length > 0) return;
-      await getAllCoursesWithSubcollections();
-    }
-    fetchCourses();
-  }, [allCourses.length]);
+  // ✨ New Global Refresh Logic
+  const { refreshData, refreshing } = useGlobalRefresh();
 
   useEffect(() => {
     if (!userData) return;
@@ -95,10 +93,6 @@ export default function Home() {
     }
   }, [userData?.level?.currentLevel]);
 
-  const handleCloseModal = () => {
-    setShowLevelModal(false);
-  };
-
   useEffect(() => {
     if (!showModal) return;
 
@@ -112,6 +106,10 @@ export default function Home() {
     return () => backHandler.remove();
   }, [showModal]);
 
+  const handleCloseModal = () => {
+    setShowLevelModal(false);
+  };
+
   return (
     <PageTransition>
       <SafeScreen>
@@ -120,9 +118,11 @@ export default function Home() {
           <Header />
         </FadeInSection>
 
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 120 }} // Space for the floating tabs
+        <RefreshWrapper
+          refreshing={refreshing}
+          onRefresh={refreshData}
+          // Note: contentContainerStyle prop is passed down to the internal ScrollView
+          contentContainerStyle={{ paddingBottom: 160 }}
         >
           <FadeInSection delay={100}>
             <WelcomeCard userData={userData} />
@@ -146,7 +146,7 @@ export default function Home() {
           <FadeInSection delay={500}>
             <DailyTip />
           </FadeInSection>
-        </ScrollView>
+        </RefreshWrapper>
 
         {/* Modals sit on top, no animation wrapper needed */}
         <Modal
