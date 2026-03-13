@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Text, View, Animated, Pressable, Easing } from "react-native";
 import colors from "../../constants/colors";
+import { Emoji } from "../../constants/constants";
 import { adConfigContext } from "../../context/context";
 import Button from "../shared/Button";
 
@@ -127,25 +128,24 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
            {/* Animated Icon */}
-          <Animated.Text 
+          <Animated.View 
             style={{ 
-              fontSize: 24, 
               marginRight: 8, 
-              transform: [{ scale: pulseAnim }] 
+              transform: [{ scale: pulseAnim }],
             }}
           >
-            📚
-          </Animated.Text>
+            <Emoji style={{ fontSize: 24 }}>📚</Emoji>
+          </Animated.View>
           <Text className="text-xl font-nunito-bold text-black">
              Featured Lesson
           </Text>
         </View>
 
         <Text className="text-lg font-nunito-bold text-gray-600 mb-2">
-          🔷 {courseName}
+          <Emoji>🔷</Emoji> {courseName}
         </Text>
         <Text className="text-base text-gray-600 font-nunito mb-6">
-          🎯 {randomModule.title}
+          <Emoji>🎯</Emoji> {randomModule.title}
         </Text>
 
         {/* We disable pointer events on the button so the Pressable parent handles the click.

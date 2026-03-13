@@ -1,7 +1,7 @@
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 
 export const STORE_LINK = Platform.select({
-  ios: "https://apps.apple.com/app/id6382903780",
+  ios: "https://apps.apple.com/app/id6382903780", // Replace with your actual iOS App ID if different
   android: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
 });
 
@@ -9,6 +9,12 @@ export const SHARE_MESSAGE = Platform.select({
   ios: "Check out this amazing app on the App Store!\n\n" + STORE_LINK,
   android: "Check out this amazing app on the Play Store!\n\n" + STORE_LINK,
 });
+
+export const Emoji = ({ children, style }) => (
+  <Text style={[{ fontFamily: Platform.OS === 'ios' ? 'System' : undefined }, style]}>
+    {children}
+  </Text>
+);
 
 export const courseIcons = {
   html: require("../assets/images/courses/html.png"),

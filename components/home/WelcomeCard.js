@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { Text, View } from "react-native";
-import { WELCOME_MESSAGES } from "../../constants/constants";
-import ProgressBar from "./ProgressBar";
+import { WELCOME_MESSAGES, Emoji } from "../../constants/constants";
 
 export default function Welcome({ userData }) {
   const randomMessage = useMemo(
@@ -13,7 +12,7 @@ export default function Welcome({ userData }) {
     <View className="bg-white mx-4 p-6 mb-4 rounded-2xl shadow-md border border-gray-200 mt-4">
      <View className="flex gap-2">
         <Text className="text-xl text-black font-nunito-bold">
-          Hi, {userData?.profile?.name || "user"} 👋
+          Hi, {userData?.profile?.name || "user"} <Emoji>👋</Emoji>
         </Text>
         <Text className="text-base text-gray-600 font-nunito">{randomMessage}</Text>
       </View>

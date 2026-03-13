@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import dailyTip from "../../assets/data/dailyTip.json";
+import { Emoji } from "../../constants/constants";
 import { shuffle } from "../../services/shuffleArray";
 
 export default function DailyTip() {
@@ -34,7 +35,7 @@ export default function DailyTip() {
   return (
     <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4">
       <Text className="text-xl font-nunito-bold text-black mb-2">
-        💡 Tip of The Day
+        <Emoji>💡</Emoji> Tip of The Day
       </Text>
       <Text className="text-base text-gray-600 font-nunito">“{randomTip}”</Text>
     </View>

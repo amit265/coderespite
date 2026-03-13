@@ -381,39 +381,37 @@ export default function QuizId() {
                     />
                   ))}
                 </ScrollView>
-
-                <View
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    right: 0,
-                    paddingHorizontal: 5,
-                    bottom: -80,
-                  }}
-                >
-                  {quiz?.length - 1 > currentPage ? (
-                    <Button
-                      text="Next Question"
-                      onPress={handleNextQuestion}
-                      disable={!selectOption}
-                      variant={selectOption ? "active" : "inactive"}
-                    />
-                  ) : (
-                    <Button
-                      text="Submit Quiz"
-                      onPress={() => {
-                        setClickCount((prev) => prev + 1);
-                        onQuizFinish();
-                      }}
-                      loading={loading}
-                      disable={!selectOption}
-                      variant={selectOption ? "active" : "inactive"}
-                      backgroundColor={colors.SUCCESS} // Green for finish
-                    />
-                  )}
-                </View>
               </View>
             </ScrollView>
+
+            <View
+              style={{
+                paddingHorizontal: 21,
+                paddingBottom: 20,
+                backgroundColor: 'transparent',
+              }}
+            >
+              {quiz?.length - 1 > currentPage ? (
+                <Button
+                  text="Next Question"
+                  onPress={handleNextQuestion}
+                  disable={!selectOption}
+                  variant={selectOption ? "active" : "inactive"}
+                />
+              ) : (
+                <Button
+                  text="Submit Quiz"
+                  onPress={() => {
+                    setClickCount((prev) => prev + 1);
+                    onQuizFinish();
+                  }}
+                  loading={loading}
+                  disable={!selectOption}
+                  variant={selectOption ? "active" : "inactive"}
+                  backgroundColor={colors.SUCCESS} // Green for finish
+                />
+              )}
+            </View>
           </Animated.View>
         </View>
 

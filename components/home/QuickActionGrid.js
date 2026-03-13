@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { Pressable, Text, View, Animated } from "react-native";
+import { Emoji } from "../../constants/constants";
 
 const actions = [
   { icon: "📘", label: "Learn", bg: "bg-blue-100", tab: "learn" },
@@ -70,7 +71,7 @@ const ActionButton = ({ action, index, onPress }) => {
             elevation: 5,
           }}
         >
-          <Text className="text-3xl mb-2 font-nunito">{action.icon}</Text>
+          <Emoji style={{ fontSize: 30, marginBottom: 8 }}>{action.icon}</Emoji>
           <Text className="text-base font-nunito text-gray-600 font-bold">
             {action.label}
           </Text>
@@ -92,7 +93,7 @@ export default function QuickActionGrid() {
 
   return (
     <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4">
-      <Text className="text-xl font-nunito-bold mb-4">🔀 Quick Actions</Text>
+      <Text className="text-xl font-nunito-bold mb-4"><Emoji>🔀</Emoji> Quick Actions</Text>
       
       <View className="flex-row flex-wrap justify-between">
         {actions.map((action, index) => (
