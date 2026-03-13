@@ -3,9 +3,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack } from 'expo-router';
+import * as TrackingTransparency from 'expo-tracking-transparency';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { StatusBar, Text, View } from 'react-native';
+import { Platform, StatusBar, Text, View } from 'react-native';
 import MobileAds from "react-native-google-mobile-ads";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -193,20 +194,26 @@ export default function RootLayout() {
 
   }, [checkConnection]);
 
-  // ✅ Use useEffect for side effects (initialize mobile ads)
+  // ✅ Initialize Mobile Ads with ATT request on iOS
   useEffect(() => {
-    MobileAds()
-      .initialize()
-      .then(adapterStatuses => {
-        console.log('Mobile Ads Initialized');
-      })
-      .catch(error => {
-        console.error("Mobile Ads Init Error:", error);
-      });
+    (async () => {
+      if (Platform.OS === 'ios') {
+        const { status } = await TrackingTransparency.requestTrackingPermissionsAsync();
+        if (status === 'granted') {
+          console.log('Tracking permission granted!');
+        }
+      }
 
-
-
-  }, [checkConnection]); // Only runs once
+      MobileAds()
+        .initialize()
+        .then(adapterStatuses => {
+          console.log('Mobile Ads Initialized');
+        })
+        .catch(error => {
+          console.error("Mobile Ads Init Error:", error);
+        });
+    })();
+  }, []);
 
 
 

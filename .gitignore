@@ -85,6 +85,9 @@ Thumbs.db
 *.apk
 build/
 
+android
+ios
+
 
 .vercel
 

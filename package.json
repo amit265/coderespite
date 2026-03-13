@@ -32,6 +32,7 @@
     "expo-status-bar": "~2.2.3",
     "expo-symbols": "~0.4.5",
     "expo-system-ui": "~5.0.11",
+    "expo-tracking-transparency": "~5.2.4",
     "expo-web-browser": "~14.2.0",
     "firebase": "^11.8.0",
     "lottie-react-native": "7.2.2",

@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import colors from "../constants/colors";
+import { SHARE_MESSAGE, STORE_LINK } from "../constants/constants";
 import { BannerAdComponent } from "../services/AdManager";
 
 export default function Settings() {
@@ -37,8 +38,7 @@ export default function Settings() {
   const handleShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          "Check out this amazing app on the Play Store!\n\nhttps://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
+        message: SHARE_MESSAGE,
       });
 
       if (result.action === Share.sharedAction) {
@@ -183,9 +183,7 @@ export default function Settings() {
               gap: 20,
             }}
             onPress={() =>
-              Linking.openURL(
-                "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite"
-              )
+              Linking.openURL(STORE_LINK)
             }
           >
             <MaterialIcons name="reviews" size={24} color="#000000" />

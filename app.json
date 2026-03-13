@@ -9,7 +9,14 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.destyastudio.coderespite",
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to let you upload a profile picture.",
+        "NSCameraUsageDescription": "This app needs access to your camera to let you take a profile picture.",
+        "NSMicrophoneUsageDescription": "This app needs access to your microphone if you record videos."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -41,7 +48,26 @@
         "react-native-google-mobile-ads",
         {
           "androidAppId": "ca-app-pub-7433519007687449~1317833947",
-          "iosAppId": ""
+          "iosAppId": "ca-app-pub-7433519007687449~2791886380",
+          "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+          "skAdNetworkItems": [
+            "cstr6suwn9.skadnetwork",
+            "4fzdc2evr5.skadnetwork",
+            "4pfyvq9l8r.skadnetwork",
+            "2fnua5tdw4.skadnetwork",
+            "ydx93a7ass.skadnetwork",
+            "5a6flpkh64.skadnetwork",
+            "p78axxw29g.skadnetwork",
+            "v72qych5uu.skadnetwork",
+            "ludvb6z3bs.skadnetwork",
+            "cp8zw746q7.skadnetwork",
+            "3sh42y64q3.skadnetwork",
+            "c6k4g5qg8m.skadnetwork",
+            "s39g8k73mm.skadnetwork",
+            "3qy4746246.skadnetwork",
+            "3rd42ekr43.skadnetwork",
+            "3qcr597p9d.skadnetwork"
+          ]
         }
       ],
       [
@@ -57,7 +83,8 @@
           }
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-tracking-transparency"
     ],
     "experiments": {
       "typedRoutes": true

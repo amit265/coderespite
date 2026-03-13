@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import colors from "../../constants/colors";
+import { SHARE_MESSAGE, STORE_LINK } from "../../constants/constants";
 
 export default function Header() {
   const router = useRouter();
@@ -34,8 +35,7 @@ export default function Header() {
   const handleShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          "Check out this amazing app on the Play Store!\n\nhttps://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
+        message: SHARE_MESSAGE,
       });
 
       if (result.action === Share.sharedAction) {
@@ -144,9 +144,7 @@ export default function Header() {
                   label: "Review",
                   icon: "star",
                   action: () =>
-                    Linking.openURL(
-                      "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite"
-                    ),
+                    Linking.openURL(STORE_LINK),
                 },
                 {
                   label: "Settings",

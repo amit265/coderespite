@@ -10,6 +10,8 @@ import {
   Animated,
   Easing,
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { availableImages } from "../constants/constants";
 import { userDetailsContext } from "../context/context";
@@ -141,92 +143,103 @@ const ProfileModal = ({ setShowModal }) => {
   };
 
   return (
-    <View className="items-center mt-4 w-full">
-      
-      {/* 1. Title - First to appear */}
-      <FadeInView delay={0} style={{ padding: 16, paddingBottom: 32 }}>
-        <Text className="text-xl font-nunito-bold text-center mb-6">
-          Let’s set up your profile ✨
-        </Text>
-      </FadeInView>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ width: '100%' }}
+    >
+      <ScrollView 
+        contentContainerStyle={{ alignItems: 'center' }} 
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View className="items-center mt-4 w-full">
+          
+          {/* 1. Title - First to appear */}
+          <FadeInView delay={0} style={{ padding: 16, paddingBottom: 32 }}>
+            <Text className="text-xl font-nunito-bold text-center mb-6">
+              Let’s set up your profile ✨
+            </Text>
+          </FadeInView>
 
-      {/* 2. Big Avatar - Second to appear */}
-      <FadeInView delay={100} style={{ alignItems: 'center' }}>
-        <Animated.Image
-          source={selectedImage.source}
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            marginBottom: 12,
-            transform: [{ scale: avatarScaleAnim }], // Apply Pop Animation
-          }}
-        />
-        <Text className="text-lg font-nunito mb-2">Select an Avatar:</Text>
-      </FadeInView>
-
-      {/* 3. Avatar List - Third to appear */}
-      <FadeInView delay={200} style={{ height: 80 }}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 10 }}
-        >
-          {availableImages.map((img, index) => (
-            <TouchableOpacity
-              key={index}
-              activeOpacity={0.7}
-              onPress={() => setSelectedImage(img)}
-              style={{ marginHorizontal: 6 }}
-            >
-              <Image
-                source={img.source}
-                style={{
-                  width: 70,
-                  height: 70,
-                  borderRadius: 35,
-                  borderWidth: selectedImage.name === img.name ? 3 : 0, // Thicker border for clarity
-                  borderColor: selectedImage.name === img.name ? "#4F46E5" : "transparent",
-                }}
-              />
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </FadeInView>
-
-      {/* 4. Input Field - Fourth to appear */}
-      <FadeInView delay={300} style={{ width: '100%', marginTop: 30, marginBottom: 24 }}>
-        <Animated.View style={{ transform: [{ translateX: shakeAnim }] }}>
-            <Text className="text-base font-nunito mb-2">Username</Text>
-            <TextInput
-            value={username}
-            onChangeText={handleUsernameChange}
-            maxLength={15}
-            placeholder="Enter your name"
-            placeholderTextColor="#9CA3AF"
-            style={{
-                borderWidth: 1,
-                borderColor: error ? '#EF4444' : '#D1D5DB', // Red border on error
-                borderRadius: 8,
-                paddingHorizontal: 16,
-                paddingVertical: 10,
-                backgroundColor: 'white',
-                fontFamily: 'Nunito-Regular',
-                color: 'black'
-            }}
+          {/* 2. Big Avatar - Second to appear */}
+          <FadeInView delay={100} style={{ alignItems: 'center' }}>
+            <Animated.Image
+              source={selectedImage.source}
+              style={{
+                width: 120,
+                height: 120,
+                borderRadius: 60,
+                marginBottom: 12,
+                transform: [{ scale: avatarScaleAnim }], // Apply Pop Animation
+              }}
             />
-            {error ? (
-            <Text className="text-red-500 text-sm mt-2 font-nunito">{error}</Text>
-            ) : null}
-        </Animated.View>
-      </FadeInView>
+            <Text className="text-lg font-nunito mb-2">Select an Avatar:</Text>
+          </FadeInView>
 
-      {/* 5. Save Button - Last to appear */}
-      <FadeInView delay={400} style={{ width: '100%' }}>
-        <Button text={"Continue"} onPress={saveData} />
-      </FadeInView>
-      
-    </View>
+          {/* 3. Avatar List - Third to appear */}
+          <FadeInView delay={200} style={{ height: 80 }}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingHorizontal: 10 }}
+            >
+              {availableImages.map((img, index) => (
+                <TouchableOpacity
+                  key={index}
+                  activeOpacity={0.7}
+                  onPress={() => setSelectedImage(img)}
+                  style={{ marginHorizontal: 6 }}
+                >
+                  <Image
+                    source={img.source}
+                    style={{
+                      width: 70,
+                      height: 70,
+                      borderRadius: 35,
+                      borderWidth: selectedImage.name === img.name ? 3 : 0, // Thicker border for clarity
+                      borderColor: selectedImage.name === img.name ? "#4F46E5" : "transparent",
+                    }}
+                  />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </FadeInView>
+
+          {/* 4. Input Field - Fourth to appear */}
+          <FadeInView delay={300} style={{ width: '100%', marginTop: 30, marginBottom: 24 }}>
+            <Animated.View style={{ transform: [{ translateX: shakeAnim }] }}>
+                <Text className="text-base font-nunito mb-2">Username</Text>
+                <TextInput
+                value={username}
+                onChangeText={handleUsernameChange}
+                maxLength={15}
+                placeholder="Enter your name"
+                placeholderTextColor="#9CA3AF"
+                style={{
+                    borderWidth: 1,
+                    borderColor: error ? '#EF4444' : '#D1D5DB', // Red border on error
+                    borderRadius: 8,
+                    paddingHorizontal: 16,
+                    paddingVertical: 10,
+                    backgroundColor: 'white',
+                    fontFamily: 'Nunito-Regular',
+                    color: 'black'
+                }}
+                />
+                {error ? (
+                <Text className="text-red-500 text-sm mt-2 font-nunito">{error}</Text>
+                ) : null}
+            </Animated.View>
+          </FadeInView>
+
+          {/* 5. Save Button - Last to appear */}
+          <FadeInView delay={400} style={{ width: '100%' }}>
+            <Button text={"Continue"} onPress={saveData} />
+          </FadeInView>
+          
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
