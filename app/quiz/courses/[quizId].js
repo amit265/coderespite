@@ -330,16 +330,15 @@ export default function QuizId() {
             {quizTitle}
           </Text>
 
-          {/* Animated Question Card Wrapper */}
-          <Animated.View
-            style={{
-              flex: 1,
-              transform: [{ translateX: slideAnim }], // Binds the slide animation
-            }}
+          {/* Animated Question Card */}
+          <ScrollView 
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
           >
-            <ScrollView 
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
+            <Animated.View
+              style={{
+                transform: [{ translateX: slideAnim }], // Binds the slide animation
+              }}
             >
               <View
                 style={{
@@ -389,7 +388,6 @@ export default function QuizId() {
                 style={{
                   paddingHorizontal: 21,
                   paddingBottom: 20,
-                  marginTop: 'auto', // Pushes buttons to bottom of flex content if space allows
                 }}
               >
                 {quiz?.length - 1 > currentPage ? (
@@ -413,8 +411,8 @@ export default function QuizId() {
                   />
                 )}
               </View>
-            </ScrollView>
-          </Animated.View>
+            </Animated.View>
+          </ScrollView>
         </View>
 
         {/* Bottom Banner Ad */}

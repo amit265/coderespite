@@ -14,7 +14,7 @@ export const Emoji = ({ children, style }) => (
   <Text 
     style={[
       { 
-        fontFamily: Platform.OS === 'ios' ? 'Apple Color Emoji' : undefined,
+        fontFamily: Platform.OS === 'ios' ? 'System' : undefined,
         fontWeight: 'normal' 
       }, 
       style

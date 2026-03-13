@@ -1,10 +1,12 @@
 import { useRouter } from "expo-router";
 import { useContext, useEffect, useRef } from "react";
-import { FlatList, Image, Text, View, Animated, Pressable } from "react-native";
+import { Image, Text, View, Animated, Pressable } from "react-native";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
+import RefreshWrapper from "../../components/shared/RefreshWrapper";
 import { flashcardIcons } from "../../constants/constants";
 import { adConfigContext, allCoursesContext } from "../../context/context";
+import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 
 // --- Animated Card Component ---
 const AnimatedCard = ({ item, index, onPress }) => {
@@ -118,6 +120,7 @@ export default function FlashCards() {
   const router = useRouter();
   const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
   const { setClickCount } = useContext(adConfigContext);
+  const { refreshData, globalRefreshing } = useGlobalRefresh();
 
   const handleCardPress = (item) => {
     // We add a tiny delay to allow the "bounce" animation to be seen before navigating
@@ -128,14 +131,6 @@ export default function FlashCards() {
     }, 150);
   };
 
-  const renderModuleItem = ({ item, index }) => (
-    <AnimatedCard 
-      item={item} 
-      index={index} 
-      onPress={() => handleCardPress(item)} 
-    />
-  );
-
   return (
     <PageTransition>
       <SafeScreen>
@@ -143,15 +138,34 @@ export default function FlashCards() {
           FlashCards
         </Text>
 
-        <FlatList
-          data={allCourses}
-          renderItem={renderModuleItem}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-evenly" }}
-          contentContainerStyle={{ paddingBottom: 100 }} // Extra padding for bottom tabs
-        />
+        <RefreshWrapper
+          onRefresh={refreshData}
+          refreshing={globalRefreshing}
+        >
+          {allCourses?.length === 0 ? (
+            <View className="flex-1 justify-center items-center py-20">
+              <Text className="text-gray-500 font-nunito-bold">Pull down to load flashcards</Text>
+            </View>
+          ) : (
+            <View 
+              style={{ 
+                flexDirection: 'row', 
+                flexWrap: 'wrap', 
+                justifyContent: 'space-evenly',
+                paddingTop: 10
+              }}
+            >
+              {allCourses.map((item, index) => (
+                <AnimatedCard
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  onPress={() => handleCardPress(item)}
+                />
+              ))}
+            </View>
+          )}
+        </RefreshWrapper>
       </SafeScreen>
     </PageTransition>
   );

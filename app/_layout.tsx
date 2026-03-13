@@ -15,6 +15,7 @@ import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, use
 import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
+import { useAppInitialization } from "../hooks/useAppInitialization";
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -57,6 +58,9 @@ export default function RootLayout() {
 
 
   const allCoursesValue = useMemo(() => ({ selectedLesson, setSelectedLesson, allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [selectedLesson, update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
+
+  // Restore App Initialization Logic
+  const { isReady } = useAppInitialization();
 
   useEffect(() => {
     const loadLevel = async () => {

@@ -1,10 +1,12 @@
 import { useRouter } from "expo-router";
 import { useContext, useEffect, useRef } from "react";
-import { FlatList, Image, Text, View, Animated, Pressable } from "react-native";
+import { Image, Text, View, Animated, Pressable } from "react-native";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
+import RefreshWrapper from "../../components/shared/RefreshWrapper";
 import { courseIcons } from "../../constants/constants";
 import { adConfigContext, allCoursesContext } from "../../context/context";
+import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 
 // --- New Animated Card Component ---
 const AnimatedLearnCard = ({ item, index, onPress }) => {
@@ -122,14 +124,8 @@ const AnimatedLearnCard = ({ item, index, onPress }) => {
 export default function Learn() {
   const router = useRouter();
   const { setClickCount } = useContext(adConfigContext);
-  const { allCourses, setSelectedCourse, setUpdate } =
-    useContext(allCoursesContext);
-
-  useEffect(() => {
-    if (allCourses?.length === 0) {
-      setUpdate((prev) => !prev);
-    }
-  }, [allCourses]);
+  const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
+  const { refreshData, globalRefreshing } = useGlobalRefresh();
 
   const handleCardPress = (item) => {
     // Add delay so user sees the bounce animation
@@ -140,14 +136,6 @@ export default function Learn() {
     }, 150);
   };
 
-  const renderModuleItem = ({ item, index }) => (
-    <AnimatedLearnCard
-      item={item}
-      index={index}
-      onPress={() => handleCardPress(item)}
-    />
-  );
-
   return (
     <PageTransition>
       <SafeScreen>
@@ -155,16 +143,34 @@ export default function Learn() {
           Courses
         </Text>
 
-        <FlatList
-          data={allCourses}
-          renderItem={renderModuleItem}
-          keyExtractor={(item) => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-evenly" }}
-          // Important: Add padding at bottom so last items don't hide behind tab bar
-          contentContainerStyle={{ paddingBottom: 100 }}
-        />
+        <RefreshWrapper
+          onRefresh={refreshData}
+          refreshing={globalRefreshing}
+        >
+          {allCourses?.length === 0 ? (
+            <View className="flex-1 justify-center items-center py-20">
+              <Text className="text-gray-500 font-nunito-bold">Pull down to load courses</Text>
+            </View>
+          ) : (
+            <View 
+              style={{ 
+                flexDirection: 'row', 
+                flexWrap: 'wrap', 
+                justifyContent: 'space-evenly',
+                paddingTop: 10
+              }}
+            >
+              {allCourses.map((item, index) => (
+                <AnimatedLearnCard
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  onPress={() => handleCardPress(item)}
+                />
+              ))}
+            </View>
+          )}
+        </RefreshWrapper>
       </SafeScreen>
     </PageTransition>
   );
