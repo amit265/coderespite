@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { AppState, Platform, View } from "react-native";
+import { AppState, Platform, View, StyleSheet } from "react-native";
 import {
   AdEventType,
   AdvertiserView,
@@ -18,6 +18,7 @@ import {
 } from "react-native-google-mobile-ads";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { adConfigContext } from "../context/context";
+import colors from "../constants/colors";
 
 // ✅ Helper to get ad unit IDs based on platform and test mode
 const getAdUnitId = (type, testAds) => {
@@ -151,21 +152,36 @@ export const showInterstitialAd = (adConfig) => {
   }
 };
 
-export const BannerAdComponent = () => {
+export const BannerAdComponent = ({ fixed = false }) => {
   const insets = useSafeAreaInsets();
   const { adConfig } = useContext(adConfigContext);
   const [isAdLoaded, setIsAdLoaded] = useState(false);
 
   if (!adConfig.showBannerAds) return null;
 
+  const containerStyle = [
+    {
+      opacity: isAdLoaded ? 1 : 0,
+      height: isAdLoaded ? undefined : 0,
+      backgroundColor: colors.BACKGROUND || "#fff",
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    fixed && {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      paddingBottom: insets.bottom,
+      zIndex: 1000,
+    },
+    !fixed && {
+        paddingBottom: insets.bottom > 0 ? insets.bottom : 10
+    }
+  ];
+
   return (
-    <View
-      style={{
-        opacity: isAdLoaded ? 1 : 0,
-        height: isAdLoaded ? undefined : 0,
-        paddingBottom: insets.bottom,
-      }}
-    >
+    <View style={containerStyle}>
       <BannerAd
         unitId={getAdUnitId("banner", adConfig.testAds)}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}

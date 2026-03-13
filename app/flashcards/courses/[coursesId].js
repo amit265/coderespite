@@ -1,41 +1,41 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useContext, useMemo, useRef, useEffect } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
+  ActivityIndicator,
+  Animated,
   FlatList,
-  Image,
   Pressable,
   Text,
+  TouchableOpacity,
   View,
-  Animated,
 } from "react-native";
+import PageTransition from "../../../components/PageTransition";
 import SafeScreen from "../../../components/SafeScreen";
 import colors from "../../../constants/colors";
-import { flashcardIcons } from "../../../constants/constants";
-import { adConfigContext, allCoursesContext } from "../../../context/context";
+import {
+  adConfigContext,
+  allCoursesContext,
+  userDetailsContext,
+} from "../../../context/context";
 import { BannerAdComponent } from "../../../services/AdManager";
-import PageTransition from "../../../components/PageTransition";
 
-// --- Animated Flashcard Module Card ---
-const AnimatedFlashcardModuleCard = ({ item, index, onPress, iconSource }) => {
-  // 1. Entrance Animations
+// --- Animated Module Item Component ---
+const AnimatedModuleItem = ({ item, index, onPress }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(50)).current;
-  
-  // 2. Press Animation
-  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const slideAnim = useRef(new Animated.Value(30)).current;
 
   useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 400,
-        delay: index * 100, // Stagger effect
+        duration: 500,
+        delay: index * 100,
         useNativeDriver: true,
       }),
       Animated.spring(slideAnim, {
         toValue: 0,
-        friction: 6,
+        friction: 8,
         tension: 40,
         delay: index * 100,
         useNativeDriver: true,
@@ -43,171 +43,111 @@ const AnimatedFlashcardModuleCard = ({ item, index, onPress, iconSource }) => {
     ]).start();
   }, [index]);
 
-  const handlePressIn = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 0.96,
-      useNativeDriver: true,
-      speed: 20,
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 1,
-      friction: 4,
-      tension: 40,
-      useNativeDriver: true,
-    }).start();
-  };
-
   return (
     <Animated.View
       style={{
         opacity: fadeAnim,
-        transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
+        transform: [{ translateY: slideAnim }],
       }}
     >
-      <Pressable
+      <TouchableOpacity
         onPress={onPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        style={{
-          backgroundColor: 'white',
-          borderRadius: 16, // rounded-xl
-          padding: 16,      // p-4
-          marginBottom: 16, // mb-4
-          flexDirection: 'row',
-          gap: 16,
-          // Shadows
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 3,
-        }}
+        activeOpacity={0.7}
+        className="flex-row items-center bg-white p-5 rounded-2xl mb-4 shadow-sm border border-gray-100"
       >
-        <View style={{ width: 100, height: 100 }}>
-          <Image
-            source={iconSource}
-            style={{
-              width: "100%",
-              height: "100%",
-              resizeMode: "cover",
-              borderRadius: 16, // rounded-2xl
-            }}
-          />
+        <View className="w-12 h-12 rounded-full items-center justify-center mr-4 bg-yellow-50">
+          <Ionicons name="copy" size={28} color="#F59E0B" />
         </View>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text 
-            className="text-lg font-nunito-bold text-black mb-1"
-            numberOfLines={2}
-          >
+
+        <View className="flex-1">
+          <Text className="text-lg font-nunito-bold text-gray-800">
             {item.title}
           </Text>
-          <View style={{ flexDirection: 'column', justifyContent: 'space-between' }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-              <MaterialCommunityIcons name="cards-outline" size={20} color="gray" />
-              <Text className="text-sm text-gray-500 font-nunito">
-                {item?.flashcards?.length || 0} cards
-              </Text>
-            </View>
-          </View>
+          <Text className="text-sm font-nunito text-gray-500">
+            Learn with flashcards
+          </Text>
         </View>
-        {/* Optional Chevron for affordance */}
-        <View style={{ justifyContent: 'center' }}>
-             <Ionicons name="chevron-forward" size={20} color="#D1D5DB" />
-        </View>
-      </Pressable>
+
+        <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
+      </TouchableOpacity>
     </Animated.View>
   );
 };
 
-export default function CourseId() {
+export default function FlashcardModules() {
   const { coursesId } = useLocalSearchParams();
-  const { setClickCount } = useContext(adConfigContext);
-  const { allCourses } = useContext(allCoursesContext);
   const router = useRouter();
+  const { allCourses, setSelectedCourse, setSelectedModule } =
+    useContext(allCoursesContext);
+  const { setClickCount } = useContext(adConfigContext);
 
-  const course = useMemo(
-    () => allCourses.find((item) => item?.id === coursesId),
-    [allCourses, coursesId]
-  );
+  const course = useMemo(() => {
+    return allCourses.find((c) => c.id === coursesId);
+  }, [allCourses, coursesId]);
 
-  const renderModuleItem = ({ item, index }) => {
-    const iconSource = flashcardIcons[course?.icon] || require("../../../assets/default-icon.png");
-
-    return (
-      <AnimatedFlashcardModuleCard
-        item={item}
-        index={index}
-        iconSource={iconSource}
-        onPress={() => {
-          // Animation Delay
-          setTimeout(() => {
-            setClickCount((prev) => prev + 1);
-            router.push({
-              pathname: `/flashcards/courses/modules/${item?.id}`,
-              params: {
-                courseId: item?.courseId,
-              },
-            });
-          }, 150);
-        }}
-      />
-    );
+  const handleModulePress = (module) => {
+    setSelectedCourse(course);
+    setSelectedModule(module);
+    setClickCount((prev) => prev + 1);
+    router.push(`/flashcards/courses/modules/${module.id}`);
   };
+
+  if (!course) {
+    return (
+      <SafeScreen>
+        <ActivityIndicator size="large" color={colors.PRIMARY} />
+      </SafeScreen>
+    );
+  }
 
   return (
     <PageTransition>
       <SafeScreen>
-        {/* Header */}
-        <View className="flex flex-row gap-4 px-2 justify-between items-center mb-4">
-          <Pressable onPress={() => router.back()} hitSlop={10}>
-            <Ionicons name="arrow-back" size={30} color="black" />
-          </Pressable>
-          
-          <Text 
-            className="text-2xl font-nunito-bold text-gray-800 text-center flex-1" 
-            numberOfLines={1}
-          >
-            {course?.title || "Flashcards"}
-          </Text>
+        <View className="flex-1 px-4">
+          {/* Header */}
+          <View className="flex-row items-center mb-6 mt-2">
+            <Pressable
+              onPress={() => router.back()}
+              hitSlop={15}
+              className="p-2 -ml-2"
+            >
+              <Ionicons name="arrow-back" size={28} color="black" />
+            </Pressable>
+            <View className="flex-1 ml-2">
+              <Text className="text-2xl font-nunito-bold text-gray-900">
+                {course.title} Flashcards
+              </Text>
+              <Text className="text-sm font-nunito text-gray-500">
+                {course.modules?.length || 0} Modules available
+              </Text>
+            </View>
+          </View>
 
-          <Pressable onPress={() => router.push("/flashcards/favoritesFc")} hitSlop={10}>
-            <Ionicons
-              name="heart"
-              size={32}
-              color="red"
-              style={{ paddingRight: 10 }}
-            />
-          </Pressable>
+          {/* Module List */}
+          <FlatList
+            data={course.modules}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item, index }) => (
+              <AnimatedModuleItem
+                item={item}
+                index={index}
+                onPress={() => handleModulePress(item)}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 100 }}
+            ListEmptyComponent={
+              <View className="items-center justify-center py-20">
+                <Text className="text-gray-400 font-nunito">
+                  No modules found for this course.
+                </Text>
+              </View>
+            }
+          />
         </View>
-
-        {/* Content */}
-        <FlatList
-          data={course?.flashcards}
-          renderItem={renderModuleItem}
-          keyExtractor={(item) => item.moduleId || item.id}
-          showsVerticalScrollIndicator={false}
-          // Increase bottom padding to accommodate Ad
-          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 100 }}
-        />
 
         {/* Bottom Banner Ad */}
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingBottom: 4,
-            backgroundColor: colors.BACKGROUND,
-          }}
-        >
-          <BannerAdComponent />
-        </View>
+        <BannerAdComponent fixed={true} />
       </SafeScreen>
     </PageTransition>
   );

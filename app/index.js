@@ -5,6 +5,7 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
+import { Emoji } from "../constants/constants";
 import { useAppInitialization } from "../hooks/useAppInitialization";
 import { useGlobalRefresh } from "../hooks/useGlobalRefresh";
 
@@ -15,8 +16,8 @@ export default function Index() {
   const { isReady, showCustomSplash } = useAppInitialization();
   const { refreshData, refreshing } = useGlobalRefresh();
 
-  console.log("App Initialization Ready:", isReady);
-  console.log("Global Refreshing:", refreshing);
+  // console.log("App Initialization Ready:", isReady);
+  // console.log("Global Refreshing:", refreshing);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +33,7 @@ export default function Index() {
         router.replace("(tabs)");
       }, 500); // 0.5 second delay
     }
-  }, []);
+  }, [isReady]);
 
   if (showCustomSplash) {
     return <SplashScreenComponent />;
@@ -71,7 +72,7 @@ export default function Index() {
           Welcome to CodeRespite!
         </Text>
         <Text className="text-gray-800 text-base font-quicksand text-center mt-2 mx-8">
-          Learn to code with your favorite Meowgrammer! 🐾
+          Learn to code with your favorite Meowgrammer! <Emoji>🐾</Emoji>
         </Text>
 
         {!isReady && (

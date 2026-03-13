@@ -1,383 +1,294 @@
-import {
-  AntDesign,
-  FontAwesome,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
-  Image,
+  ActivityIndicator,
+  Animated,
+  Dimensions,
   Pressable,
   ScrollView,
+  StyleSheet,
   Text,
+  TouchableOpacity,
   View,
-  Animated,
-  Easing,
 } from "react-native";
+import PageTransition from "../../../../components/PageTransition";
 import SafeScreen from "../../../../components/SafeScreen";
 import Button from "../../../../components/shared/Button";
 import colors from "../../../../constants/colors";
-import { courseIcons, getQuizFeedback } from "../../../../constants/constants";
 import {
   adConfigContext,
   allCoursesContext,
   userDetailsContext,
 } from "../../../../context/context";
 import { BannerAdComponent } from "../../../../services/AdManager";
-import PageTransition from "../../../../components/PageTransition";
 
-// --- Animated Lesson Item Component ---
-const AnimatedLessonItem = ({ lesson, index, onPress }) => {
-  // 1. Entrance Animations
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(50)).current;
-  
-  // 2. Press Interaction Animation
-  const scaleAnim = useRef(new Animated.Value(1)).current;
+const { width } = Dimensions.get("window");
 
-  useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 500,
-        delay: index * 100, // Stagger effect
-        useNativeDriver: true,
-      }),
-      Animated.spring(slideAnim, {
-        toValue: 0,
-        friction: 7,
-        tension: 40,
-        delay: index * 100,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [index]);
-
-  const handlePressIn = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 0.96,
-      useNativeDriver: true,
-      speed: 20,
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 1,
-      friction: 4,
-      tension: 40,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  return (
-    <Animated.View
-      style={{
-        opacity: fadeAnim,
-        transform: [{ translateY: slideAnim }, { scale: scaleAnim }],
-        marginBottom: 16,
-      }}
-    >
-      <Pressable
-        onPress={onPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        style={{ paddingHorizontal: 16 }}
-      >
-        <View 
-          className="py-4 border border-gray-300 rounded-lg bg-gray-50"
-          style={{
-             // Add subtle shadow
-             shadowColor: "#000",
-             shadowOffset: { width: 0, height: 2 },
-             shadowOpacity: 0.05,
-             shadowRadius: 3,
-             elevation: 2,
-             backgroundColor: '#F9FAFB' // gray-50
-          }}
-        >
-          <View className="flex flex-row justify-between items-center">
-            <Text
-              className="text-base font-nunito text-black px-6 py-2"
-              style={{ flex: 1 }}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              {index + 1}. {lesson.title}
-            </Text>
-            {/* Optional: Add a small chevron icon to indicate clickability */}
-            <View style={{ paddingRight: 16 }}>
-                 <AntDesign name="right" size={16} color="#9CA3AF" />
-            </View>
-          </View>
-        </View>
-      </Pressable>
-    </Animated.View>
-  );
-};
-
-// --- Helper for Section Entrance ---
-const FadeInSection = ({ children, delay = 0 }) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 600,
-      delay: delay,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
-  return (
-    <Animated.View style={{ opacity: fadeAnim }}>
-      {children}
-    </Animated.View>
-  );
-};
-
-export default function ModuleId() {
-  const { courseId, moduleId } = useLocalSearchParams();
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [selectedModule, setSelectedModule] = useState(null);
-  const [selectedQuizId, setSelectedQuizId] = useState(null);
-  const { allCourses, setSelectedQuiz, setSelectedLesson } = useContext(allCoursesContext);
-  const { userData } = useContext(userDetailsContext);
-  const [moduleQuizStatus, setModuleQuizStatus] = useState(null);
-  const [feedback, setFeedback] = useState(null);
+export default function ModuleDetail() {
+  const { moduleId } = useLocalSearchParams();
   const router = useRouter();
+  const { allCourses, setSelectedLesson, selectedModule } =
+    useContext(allCoursesContext);
+  const { userData } = useContext(userDetailsContext);
   const { setClickCount } = useContext(adConfigContext);
 
-  useEffect(() => {
-    const sCourse = allCourses.find((course) => course.id === courseId);
-    setSelectedCourse(sCourse);
+  const [loading, setLoading] = useState(true);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
-    const sModule = sCourse?.modules?.find((module) => module.id === moduleId);
-    setSelectedModule(sModule);
-
-    const sQuizId = `quiz_${sModule?.id}`;
-    setSelectedQuizId(sQuizId);
-  }, [courseId, moduleId, allCourses]);
+  // Find the current module from context or params
+  const module = selectedModule;
 
   useEffect(() => {
-    if (selectedCourse && selectedQuizId) {
-      const selectedQuiz = selectedCourse?.quizzes?.find(
-        (quiz) => quiz.id === selectedQuizId
-      );
-      setSelectedQuiz(selectedQuiz);
+    if (module) {
+      setLoading(false);
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }).start();
     }
-  }, [selectedCourse, selectedQuizId, setSelectedQuiz]);
+  }, [module]);
 
-  useEffect(() => {
-    const progress = userData?.progress;
-    const allAttemptedQuizzes = Object.values(progress || {}).flatMap(
-      (course) => course.attemptedQuizzes || []
-    );
-
-    const filterCourse = allAttemptedQuizzes.filter(
-      (a) => a.courseId === selectedCourse?.id
-    );
-
-    const filterModule = filterCourse.find(
-      (a) => a.moduleId === selectedModule?.id
-    );
-
-    setModuleQuizStatus(filterModule);
-  }, [selectedCourse, selectedModule, userData, selectedQuizId]);
-
-  useEffect(() => {
-    const feedbackData = getQuizFeedback(moduleQuizStatus?.score);
-    setFeedback(feedbackData);
-  }, [moduleQuizStatus]);
-
-  const toggleLesson = (lesson) => {
-    // Add small delay for the press animation
-    setTimeout(() => {
-        setSelectedLesson(lesson);
-        router.push("/learn/courses/modules/lesson");
-    }, 150);
-  };
-
-  if (!selectedCourse || !selectedModule) {
+  if (loading || !module) {
     return (
-      <View className="flex-1 justify-center items-center p-4">
-        <Text className="text-red-600 text-lg font-nunito">
-          Module not found.
-        </Text>
-      </View>
+      <SafeScreen>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={colors.PRIMARY} />
+        </View>
+      </SafeScreen>
     );
   }
+
+  const handleLessonPress = (lesson) => {
+    setSelectedLesson(lesson);
+    setClickCount((prev) => prev + 1);
+    router.push({
+      pathname: "/learn/courses/modules/lesson",
+      params: { moduleId },
+    });
+  };
+
+  const handleQuizPress = () => {
+    setClickCount((prev) => prev + 1);
+    router.push(`/quiz/courses/quiz_${moduleId}`);
+  };
 
   return (
     <PageTransition>
       <SafeScreen>
-        {/* Header */}
-        <View
-          className="flex flex-row w-full justify-start px-2 mb-4"
-          style={{ backgroundColor: colors.BACKGROUND, gap: 8 }}
-        >
-          <Pressable onPress={() => router.back()}>
-            <Ionicons name="arrow-back" size={30} color="black" />
-          </Pressable>
-          <Text
-            style={{
-              fontFamily: "nunito-bold",
-              color: colors.TEXT,
-              textAlign: "left",
-              flex: 1,
-              fontSize: 20,
-            }}
-            numberOfLines={1}
-          >
-            {selectedCourse?.title} Module
-          </Text>
-        </View>
-
-        <ScrollView
-          className="flex"
-          showsVerticalScrollIndicator={false}
-          style={{ backgroundColor: colors.BACKGROUND }}
-        >
-          {/* Top Info Section */}
-          <FadeInSection delay={0}>
-            <View className="flex flex-row gap-4 p-4">
-              <View style={{ width: 150, height: 150 }}>
-                <Image
-                  source={
-                    courseIcons[selectedCourse?.icon] ||
-                    require("../../../../assets/default-icon.png")
-                  }
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    resizeMode: "cover",
-                    borderRadius: 20,
-                  }}
-                />
-                {moduleQuizStatus && (
-                  <View className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-sm">
-                    <MaterialCommunityIcons
-                      name="checkbox-marked-circle"
-                      size={24}
-                      color={
-                        moduleQuizStatus?.score > 70 ? "#AAFF00" : "transparent"
-                      }
-                    />
-                  </View>
-                )}
-              </View>
-              <View className="flex-1 gap-2 justify-center">
-                <Text
-                  className="text-black text-lg font-nunito-bold"
-                  numberOfLines={3}
-                >
-                  {selectedModule?.title}
-                </Text>
-                <Text className="text-sm font-nunito text-gray-700">
-                  Level: {selectedModule?.level}
-                </Text>
-                <View className="flex flex-row justify-between items-center gap-1 mt-1">
-                  <View className="flex flex-row items-center gap-1">
-                    <AntDesign name="book" size={16} color="gray" />
-                    <Text className="text-sm font-nunito text-gray-700">
-                      {selectedModule?.lessons?.length} Lessons
-                    </Text>
-                  </View>
-                  {moduleQuizStatus && (
-                    <View className="flex flex-row items-end gap-2">
-                      <FontAwesome
-                        name={moduleQuizStatus?.score > 70 ? "star" : "star-o"}
-                        size={16}
-                        color={moduleQuizStatus?.score > 70 ? "#AAFF00" : "#FF0000"}
-                      />
-                      <Text className="text-sm font-nunito text-gray-700">
-                        {moduleQuizStatus?.score}%
-                      </Text>
-                    </View>
-                  )}
-                </View>
-              </View>
-            </View>
-          </FadeInSection>
-
-          {/* Description */}
-          <FadeInSection delay={100}>
-            <View className="p-4">
-              <Text className="text-sm font-nunito text-gray-700 text-justify leading-5">
-                {selectedModule?.description}
-              </Text>
-            </View>
-          </FadeInSection>
-
-          {/* Lessons List - Staggered */}
-          <View style={{ marginBottom: 40, marginTop: 10 }}>
-            {selectedModule?.lessons?.map((lesson, index) => (
-              <AnimatedLessonItem 
-                key={lesson.lessonId}
-                lesson={lesson}
-                index={index}
-                onPress={() => toggleLesson(lesson)}
-              />
-            ))}
+        <View style={styles.container}>
+          {/* Header */}
+          <View style={styles.header}>
+            <Pressable
+              onPress={() => router.back()}
+              hitSlop={15}
+              style={styles.backButton}
+            >
+              <Ionicons name="arrow-back" size={28} color="black" />
+            </Pressable>
+            <Text style={styles.headerTitle} numberOfLines={1}>
+              {module.title}
+            </Text>
           </View>
 
-          {/* Feedback Section - Last to appear */}
-          {feedback && (
-            <FadeInSection delay={500}>
-              <View
-                className="bg-white p-6 mx-4 rounded-2xl shadow-md border border-gray-200"
-                style={{ marginBottom: 120 }}
-              >
-                <Text className="text-xl font-nunito-bold text-black mb-3">
-                  {feedback.title}
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scrollContent}
+          >
+            <Animated.View style={{ opacity: fadeAnim }}>
+              {/* Module Description */}
+              <View style={styles.card}>
+                <Text style={styles.sectionTitle}>Overview</Text>
+                <Text style={styles.description}>
+                  Dive into the core concepts of {module.title}. This module
+                  covers essential topics to help you master the subject.
                 </Text>
+              </View>
 
-                <Text className="text-base text-gray-600 mb-6 font-nunito">
-                  {feedback.message}
-                  {feedback.highlight ? (
-                    <Text className="text-green-600 font-nunito">
-                      {" " + feedback.highlight}
-                    </Text>
-                  ) : null}
-                  {" " + feedback.emoji}
-                </Text>
-
-                {moduleQuizStatus && (
-                  <View>
-                    <Text className="text-base text-gray-600 mb-6 font-nunito">
-                      Your last score: {moduleQuizStatus?.score}
+              {/* Lessons List */}
+              <Text style={styles.sectionHeader}>Lessons</Text>
+              {module.lessons?.map((lesson, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleLessonPress(lesson)}
+                  style={styles.lessonItem}
+                  activeOpacity={0.7}
+                >
+                  <View style={styles.lessonIconContainer}>
+                    <Ionicons
+                      name="book-outline"
+                      size={24}
+                      color={colors.PRIMARY}
+                    />
+                  </View>
+                  <View style={styles.lessonInfo}>
+                    <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                    <Text style={styles.lessonType}>
+                      {lesson.type === "theory" ? "Theory" : "Code Snippets"}
                     </Text>
                   </View>
-                )}
+                  <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
+                </TouchableOpacity>
+              ))}
 
+              {/* Quiz Section */}
+              <View style={styles.quizSection}>
+                <View style={styles.quizCard}>
+                  <View style={styles.quizIconBg}>
+                    <Ionicons name="help-circle" size={32} color="#8B5CF6" />
+                  </View>
+                  <View style={styles.quizContent}>
+                    <Text style={styles.quizTitle}>Ready for a Quiz?</Text>
+                    <Text style={styles.quizSubtitle}>
+                      Test your knowledge and earn XP!
+                    </Text>
+                  </View>
+                </View>
                 <Button
-                  text={moduleQuizStatus ? "Retake Test" : "Start Test"}
-                  onPress={() => {
-                    setClickCount((prev) => prev + 1);
-                    router.push(`/quiz/courses/${selectedQuizId}`);
-                  }}
+                  text="Start Quiz"
+                  onPress={handleQuizPress}
+                  backgroundColor={colors.SECONDARY || "#8B5CF6"}
                 />
               </View>
-            </FadeInSection>
-          )}
-        </ScrollView>
-
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingBottom: 4,
-            backgroundColor: colors.BACKGROUND,
-          }}
-        >
-          <BannerAdComponent />
+            </Animated.View>
+          </ScrollView>
         </View>
+
+        {/* Bottom Banner Ad */}
+        <BannerAdComponent fixed={true} />
       </SafeScreen>
     </PageTransition>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+    marginTop: 8,
+  },
+  backButton: {
+    padding: 8,
+    marginLeft: -8,
+  },
+  headerTitle: {
+    flex: 1,
+    fontSize: 22,
+    fontFamily: "nunito-bold",
+    marginLeft: 8,
+    color: "#1F2937",
+  },
+  scrollContent: {
+    paddingBottom: 100,
+  },
+  card: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontFamily: "nunito-bold",
+    color: "#1F2937",
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 15,
+    fontFamily: "nunito",
+    color: "#4B5563",
+    lineHeight: 22,
+  },
+  sectionHeader: {
+    fontSize: 18,
+    fontFamily: "nunito-bold",
+    color: "#1F2937",
+    marginBottom: 16,
+  },
+  lessonItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#F3F4F6",
+  },
+  lessonIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  lessonInfo: {
+    flex: 1,
+  },
+  lessonTitle: {
+    fontSize: 16,
+    fontFamily: "nunito-bold",
+    color: "#1F2937",
+  },
+  lessonType: {
+    fontSize: 13,
+    fontFamily: "nunito",
+    color: "#6B7280",
+    marginTop: 2,
+  },
+  quizSection: {
+    marginTop: 12,
+    marginBottom: 20,
+  },
+  quizCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F5F3FF",
+    padding: 20,
+    borderRadius: 20,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#DDD6FE",
+  },
+  quizIconBg: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  quizContent: {
+    flex: 1,
+  },
+  quizTitle: {
+    fontSize: 18,
+    fontFamily: "nunito-bold",
+    color: "#5B21B6",
+  },
+  quizSubtitle: {
+    fontSize: 14,
+    fontFamily: "nunito",
+    color: "#7C3AED",
+    marginTop: 2,
+  },
+});

@@ -388,7 +388,7 @@ export default function QuizId() {
               style={{
                 paddingHorizontal: 21,
                 paddingBottom: 20,
-                backgroundColor: 'transparent',
+                backgroundColor: "transparent",
               }}
             >
               {quiz?.length - 1 > currentPage ? (
@@ -416,16 +416,7 @@ export default function QuizId() {
         </View>
 
         {/* Bottom Banner Ad */}
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-          }}
-        >
-          <BannerAdComponent />
-        </View>
+        <BannerAdComponent fixed={true} />
       </SafeScreen>
     </PageTransition>
   );

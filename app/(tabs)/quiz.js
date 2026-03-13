@@ -15,6 +15,7 @@ import {
   TextInput,
   View,
   Animated,
+  Platform,
 } from "react-native";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
@@ -283,12 +284,27 @@ export default function Quiz() {
           Quiz
         </Text>
 
-        <View className="flex-row items-center px-2 mb-4 flex gap-2">
-          <View className="flex-1 px-2 bg-white text-black rounded-xl border border-gray-300 w-2/5">
+        <View className="flex-row items-center px-4 mb-4" style={{ gap: 10 }}>
+          {/* Picker Container */}
+          <View 
+            className="bg-white rounded-xl border border-gray-300 overflow-hidden" 
+            style={{ 
+                flex: 1, 
+                height: 50, 
+                justifyContent: 'center',
+                maxWidth: '40%' 
+            }}
+          >
             <Picker
               selectedValue={selectCourse}
               onValueChange={(value) => setSelectCourse(value)}
-              style={{ color: "#333", fontFamily: "Nunito-Bold" }}
+              style={{ 
+                color: "#333", 
+                fontFamily: "Nunito-Bold",
+                height: Platform.OS === 'ios' ? 150 : 50,
+                width: '100%',
+              }}
+              itemStyle={{ fontSize: 14, height: 150 }}
               dropdownIconColor="#666"
             >
               <Picker.Item
@@ -308,24 +324,27 @@ export default function Quiz() {
           </View>
 
           {/* Search Box */}
-          <View className="relative mr-2 rounded-xl border border-gray-300 w-4/5">
+          <View 
+            className="relative rounded-xl border border-gray-300"
+            style={{ flex: 2, height: 50 }}
+          >
             <TextInput
               className="flex-1 bg-white rounded-xl font-nunito text-black w-full"
               placeholder="Search"
               placeholderTextColor={colors.GRAY}
               value={searchText}
               onChangeText={setSearchText}
-              style={{ textAlign: "left", paddingLeft: 50, height: 50 }}
+              style={{ textAlign: "left", paddingLeft: 45, paddingRight: 40, height: '100%' }}
             />
             {searchText !== "" && (
               <Pressable
-                className="absolute right-2 z-10 p-2 h-full flex items-center justify-center"
+                className="absolute right-0 z-10 p-3 h-full flex items-center justify-center"
                 onPress={() => setSearchText("")}
               >
                 <Entypo name="cross" size={20} color="black" />
               </Pressable>
             )}
-            <View className="absolute left-2 z-10 p-2 h-full flex items-center justify-center">
+            <View className="absolute left-0 z-10 p-3 h-full flex items-center justify-center">
               <AntDesign name="search1" size={20} color="black" />
             </View>
           </View>

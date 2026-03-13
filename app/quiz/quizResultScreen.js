@@ -412,9 +412,7 @@ export default function QuizResultScreen() {
           />
         </View>
 
-        <View>
-          <BannerAdComponent />
-        </View>
+        <BannerAdComponent fixed={true} />
       </SafeScreen>
     </PageTransition>
   );
