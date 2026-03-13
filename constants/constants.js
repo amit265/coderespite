@@ -11,7 +11,15 @@ export const SHARE_MESSAGE = Platform.select({
 });
 
 export const Emoji = ({ children, style }) => (
-  <Text style={[{ fontFamily: Platform.OS === 'ios' ? 'System' : undefined }, style]}>
+  <Text 
+    style={[
+      { 
+        fontFamily: Platform.OS === 'ios' ? 'Apple Color Emoji' : undefined,
+        fontWeight: 'normal' 
+      }, 
+      style
+    ]}
+  >
     {children}
   </Text>
 );

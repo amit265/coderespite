@@ -2,6 +2,7 @@ import { Entypo } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import colors from "../constants/colors";
+import { Emoji } from "../constants/constants";
 
 export default function QuickStats({ userData }) {
   const progress = userData?.progress || {};
@@ -50,7 +51,7 @@ export default function QuickStats({ userData }) {
         className="border-b border-gray-800 mb-3"
         style={{ borderStyle: "dotted", paddingBottom: 20 }}
       >
-        <Text className="text-xl text-black font-nunito-bold">📊 Quick Stats:</Text>
+        <Text className="text-xl text-black font-nunito-bold"><Emoji>📊</Emoji> Quick Stats:</Text>
       </View>
 
       <TouchableOpacity
@@ -61,7 +62,7 @@ export default function QuickStats({ userData }) {
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
             <Text className="text-base font-nunito-bold">
-              📚 Courses Enrolled:
+              <Emoji>📚</Emoji> Courses Enrolled:
             </Text>
             <Text className="text-base font-nunito">
               {" "}
@@ -100,7 +101,7 @@ export default function QuickStats({ userData }) {
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
             <Text className="text-base font-nunito-bold">
-              💙 Favorite Flashcards:
+              <Emoji>💙</Emoji> Favorite Flashcards:
             </Text>
             <Text className="text-base font-nunito">
               {Object.keys(progress).reduce(
@@ -128,7 +129,7 @@ export default function QuickStats({ userData }) {
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
             <Text className="text-base font-nunito-bold">
-              🧠 Viewed Flashcards:
+              <Emoji>🧠</Emoji> Viewed Flashcards:
             </Text>
             <Text className="text-base font-nunito">
               {Object.keys(progress).reduce(
@@ -152,7 +153,7 @@ export default function QuickStats({ userData }) {
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
             <Text className="text-base font-nunito-bold">
-              🧪 Quizzes Completed:
+              <Emoji>🧪</Emoji> Quizzes Completed:
             </Text>
             <Text className="text-base font-nunito">
               {Object.keys(progress).reduce(

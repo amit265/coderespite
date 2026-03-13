@@ -172,11 +172,10 @@ export const BannerAdComponent = ({ fixed = false }) => {
       bottom: 0,
       left: 0,
       right: 0,
-      paddingBottom: insets.bottom,
+      // Removed insets.bottom because it is usually inside a SafeAreaView or SafeScreen
+      // If it is truly "fixed" to the screen bottom, it should be outside SafeScreen.
+      // But currently it's used inside SafeScreen which already adds padding.
       zIndex: 1000,
-    },
-    !fixed && {
-        paddingBottom: insets.bottom > 0 ? insets.bottom : 10
     }
   ];
 

@@ -330,19 +330,21 @@ export default function QuizId() {
             {quizTitle}
           </Text>
 
-          {/* Animated Question Card */}
+          {/* Animated Question Card Wrapper */}
           <Animated.View
             style={{
               flex: 1,
               transform: [{ translateX: slideAnim }], // Binds the slide animation
             }}
           >
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView 
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
+            >
               <View
                 style={{
                   backgroundColor: colors.WHITE,
                   borderRadius: 24,
-                  flex: 1,
                   marginHorizontal: 16,
                   padding: 24,
                   // Soft Shadow
@@ -351,7 +353,7 @@ export default function QuizId() {
                   shadowOpacity: 0.05,
                   shadowRadius: 10,
                   elevation: 4,
-                  maxHeight: height * 0.65,
+                  marginBottom: 20,
                 }}
               >
                 <Text
@@ -366,7 +368,7 @@ export default function QuizId() {
                   {quiz[currentPage]?.question}
                 </Text>
 
-                <ScrollView>
+                <View>
                   {shuffledOptions.map((item, index) => (
                     <AnimatedOption
                       key={`${currentPage}-${index}`} // Force re-render on page change to reset animations
@@ -380,38 +382,38 @@ export default function QuizId() {
                       }}
                     />
                   ))}
-                </ScrollView>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  paddingHorizontal: 21,
+                  paddingBottom: 20,
+                  marginTop: 'auto', // Pushes buttons to bottom of flex content if space allows
+                }}
+              >
+                {quiz?.length - 1 > currentPage ? (
+                  <Button
+                    text="Next Question"
+                    onPress={handleNextQuestion}
+                    disable={!selectOption}
+                    variant={selectOption ? "active" : "inactive"}
+                  />
+                ) : (
+                  <Button
+                    text="Submit Quiz"
+                    onPress={() => {
+                      setClickCount((prev) => prev + 1);
+                      onQuizFinish();
+                    }}
+                    loading={loading}
+                    disable={!selectOption}
+                    variant={selectOption ? "active" : "inactive"}
+                    backgroundColor={colors.SUCCESS} // Green for finish
+                  />
+                )}
               </View>
             </ScrollView>
-
-            <View
-              style={{
-                paddingHorizontal: 21,
-                paddingBottom: 20,
-                backgroundColor: "transparent",
-              }}
-            >
-              {quiz?.length - 1 > currentPage ? (
-                <Button
-                  text="Next Question"
-                  onPress={handleNextQuestion}
-                  disable={!selectOption}
-                  variant={selectOption ? "active" : "inactive"}
-                />
-              ) : (
-                <Button
-                  text="Submit Quiz"
-                  onPress={() => {
-                    setClickCount((prev) => prev + 1);
-                    onQuizFinish();
-                  }}
-                  loading={loading}
-                  disable={!selectOption}
-                  variant={selectOption ? "active" : "inactive"}
-                  backgroundColor={colors.SUCCESS} // Green for finish
-                />
-              )}
-            </View>
           </Animated.View>
         </View>
 
