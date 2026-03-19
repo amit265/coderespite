@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, Stack } from "expo-router";
 import { useContext, useEffect, useRef, useState } from "react";
 import * as Progress from "react-native-progress";
 
@@ -276,6 +276,7 @@ export default function QuizId() {
 
   return (
     <PageTransition>
+      <Stack.Screen options={{ gestureEnabled: false }} />
       <SafeScreen>
         <View style={{ flex: 1 }}>
           {/* Top Bar */}

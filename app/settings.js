@@ -14,8 +14,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
+import MoreApps from "../components/MoreApps";
 import colors from "../constants/colors";
 import { SHARE_MESSAGE, STORE_LINK } from "../constants/constants";
 import { BannerAdComponent } from "../services/AdManager";
@@ -75,133 +77,93 @@ export default function Settings() {
         </Text>
       </View>
 
-      <View
-        style={{
-          width: "90%",
-          backgroundColor: "white",
-          borderRadius: 60,
-          padding: 20,
-          height: "70%",
-          marginTop: 50,
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 100 }}
       >
-        {/* Number of Spins */}
-
-        {/* Footer links */}
         <View
           style={{
-            flexDirection: "column",
-            justifyContent: "space-around",
-            marginTop: 10,
-            alignItems: "center",
-            marginHorizontal: 20,
-            paddingTop: 20,
-            padding: 10,
-            gap: 20,
+            width: "90%",
+            backgroundColor: "white",
+            borderRadius: 40,
+            padding: 20,
+            marginTop: 30,
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
-          <TouchableOpacity
+          {/* Footer links */}
+          <View
             style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              marginTop: 10,
               alignItems: "center",
+              marginHorizontal: 10,
+              padding: 10,
               gap: 20,
             }}
-            onPress={handleShare}
           >
-            <AntDesign name="sharealt" size={24} color="#000000" />
-            <Text
-              style={{
-                color: "#000000",
-                fontFamily: "nunito",
-                fontSize: 18,
-              }}
+            <TouchableOpacity
+              style={styles.settingItem}
+              onPress={handleShare}
             >
-              Share
-            </Text>
-          </TouchableOpacity>
+              <AntDesign name="sharealt" size={24} color="#000000" />
+              <Text style={styles.settingText}>Share</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              gap: 20,
-            }}
-            onPress={handleContactUs}
-          >
-            <FontAwesome name="send" size={24} color="#000000" />
-            <Text
-              style={{
-                color: "#000000",
-                fontFamily: "nunito",
-                fontSize: 18,
-              }}
+            <TouchableOpacity
+              style={styles.settingItem}
+              onPress={handleContactUs}
             >
-              Contact Us
-            </Text>
-          </TouchableOpacity>
+              <FontAwesome name="send" size={24} color="#000000" />
+              <Text style={styles.settingText}>Contact Us</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              gap: 20,
-            }}
-            onPress={() =>
-              Linking.openURL("https://mindcraftlearning.github.io/coderespite")
-            }
-          >
-            <MaterialIcons name="privacy-tip" size={24} color="#000000" />
-            <Text
-              style={{
-                color: "#000000",
-                fontFamily: "nunito",
-                fontSize: 18,
-              }}
+            <TouchableOpacity
+              style={styles.settingItem}
+              onPress={() =>
+                Linking.openURL("https://mindcraftlearning.github.io/coderespite")
+              }
             >
-              Privacy Policy
-            </Text>
-          </TouchableOpacity>
+              <MaterialIcons name="privacy-tip" size={24} color="#000000" />
+              <Text style={styles.settingText}>Privacy Policy</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              gap: 20,
-            }}
-            onPress={() =>
-              Linking.openURL(STORE_LINK)
-            }
-          >
-            <MaterialIcons name="reviews" size={24} color="#000000" />
-            <Text
-              style={{
-                color: "#000000",
-                fontFamily: "nunito",
-                fontSize: 18,
-              }}
+            <TouchableOpacity
+              style={styles.settingItem}
+              onPress={() =>
+                Linking.openURL(STORE_LINK)
+              }
             >
-              Rate and reviews
-            </Text>
-          </TouchableOpacity>
+              <MaterialIcons name="reviews" size={24} color="#000000" />
+              <Text style={styles.settingText}>Rate and reviews</Text>
+            </TouchableOpacity>
+
+            {/* More Apps Section */}
+            <MoreApps />
+          </View>
         </View>
-      </View>
+      </ScrollView>
 
       {/* Bottom Banner Ad */}
       <BannerAdComponent fixed={true} />
     </SafeScreen>
   );
 }
+
+const styles = {
+  settingItem: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    gap: 20,
+  },
+  settingText: {
+    color: "#000000",
+    fontFamily: "nunito",
+    fontSize: 18,
+  }
+};

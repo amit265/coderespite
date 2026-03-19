@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { Emoji } from '../constants/constants';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.errorText}>Something went wrong 😢</Text>
+      <Text style={styles.errorText}>Something went wrong <Emoji>😢</Emoji></Text>
       <Text style={styles.message}>{error.message}</Text>
       <Button title="Try Again" onPress={resetErrorBoundary} />
     </View>

@@ -13,7 +13,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { availableImages } from "../constants/constants";
+import { availableImages, Emoji } from "../constants/constants";
 import { userDetailsContext } from "../context/context";
 import Button from "./shared/Button";
 
@@ -157,7 +157,7 @@ const ProfileModal = ({ setShowModal }) => {
           {/* 1. Title - First to appear */}
           <FadeInView delay={0} style={{ padding: 16, paddingBottom: 32 }}>
             <Text className="text-xl font-nunito-bold text-center mb-6">
-              Let’s set up your profile ✨
+              Let’s set up your profile <Emoji>✨</Emoji>
             </Text>
           </FadeInView>
 

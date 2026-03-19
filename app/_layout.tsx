@@ -16,6 +16,7 @@ import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
 import { useAppInitialization } from "../hooks/useAppInitialization";
+import { Emoji } from "../constants/constants";
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -224,7 +225,7 @@ export default function RootLayout() {
   if (!isConnected) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffcccc' }}>
-        <Text style={{ color: '#ff0000', fontSize: 18, fontFamily: 'nunito-bold' }}>No Internet Connection 😢</Text>
+        <Text style={{ color: '#ff0000', fontSize: 18, fontFamily: 'nunito-bold' }}>No Internet Connection <Emoji>😢</Emoji></Text>
       </View>
     );
   }

@@ -14,7 +14,7 @@ export default function Welcome({ userData }) {
         <Text className="text-xl text-black font-nunito-bold">
           Hi, {userData?.profile?.name || "user"} <Emoji>👋</Emoji>
         </Text>
-        <Text className="text-base text-gray-600 font-nunito">{randomMessage}</Text>
+        <Emoji style={{ fontSize: 16, color: '#4B5563', fontFamily: 'nunito' }}>{randomMessage}</Emoji>
       </View>
     </View>
   );

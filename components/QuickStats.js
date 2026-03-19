@@ -116,7 +116,7 @@ export default function QuickStats({ userData }) {
 
         {hideSections.flashcardsLoved &&
           renderStatBlock(
-            "💙 Favorite Flashcards:",
+            <Emoji>💙</Emoji> + " Favorite Flashcards:",
             "flashcardsLoved",
             "cards"
           )}
@@ -143,7 +143,7 @@ export default function QuickStats({ userData }) {
         </View>
 
         {hideSections.flashcardsViewed &&
-          renderStatBlock("🧠 Viewed Flashcards:", "flashcardsViewed", "cards")}
+          renderStatBlock(<Emoji>🧠</Emoji> + " Viewed Flashcards:", "flashcardsViewed", "cards")}
       </TouchableOpacity>
       <TouchableOpacity
         className="py-4 px-4 rounded-lg"
@@ -168,7 +168,7 @@ export default function QuickStats({ userData }) {
 
         {hideSections.attemptedQuizzes &&
           renderStatBlock(
-            "🧪 Quizzes Completed:",
+            <Emoji>🧪</Emoji> + " Quizzes Completed:",
             "attemptedQuizzes",
             "quizzes"
           )}

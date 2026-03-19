@@ -287,12 +287,13 @@ export default function Quiz() {
         <View className="flex-row items-center px-4 mb-4" style={{ gap: 10 }}>
           {/* Picker Container */}
           <View 
-            className="bg-white rounded-xl border border-gray-300 overflow-hidden" 
+            className="bg-white rounded-xl border border-gray-300" 
             style={{ 
                 flex: 1, 
-                height: 50, 
+                height: Platform.OS === 'ios' ? undefined : 50, 
                 justifyContent: 'center',
-                maxWidth: '40%' 
+                maxWidth: '40%',
+                overflow: Platform.OS === 'ios' ? 'visible' : 'hidden'
             }}
           >
             <Picker
@@ -301,10 +302,10 @@ export default function Quiz() {
               style={{ 
                 color: "#333", 
                 fontFamily: "Nunito-Bold",
-                height: Platform.OS === 'ios' ? 150 : 50,
+                height: Platform.OS === 'ios' ? 50 : 50, // Keep height 50 but allow visible overflow for the modal-like behavior or fixed height
                 width: '100%',
               }}
-              itemStyle={{ fontSize: 14, height: 150 }}
+              itemStyle={{ fontSize: 14, height: 50 }} // Adjusted itemStyle height
               dropdownIconColor="#666"
             >
               <Picker.Item

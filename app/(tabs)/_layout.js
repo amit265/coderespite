@@ -6,6 +6,7 @@ import {
 import { Tabs } from "expo-router";
 import { useEffect, useRef } from "react";
 import { View, Animated, StyleSheet, Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "../../constants/colors";
 
 // --- Custom Animated Icon Component ---
@@ -72,6 +73,8 @@ const TabIcon = ({ focused, icon, color, size }) => {
 };
 
 export default function TabsLayout() {
+  const insets = useSafeAreaInsets();
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.BACKGROUND }}>
       <Tabs
@@ -83,7 +86,7 @@ export default function TabsLayout() {
 
           tabBarStyle: {
             position: "absolute", // Ensures it floats over content
-            bottom: 10,
+            bottom: Platform.OS === "ios" ? insets.bottom || 10 : 10,
             left: 10,
             right: 10,
             height: 65,

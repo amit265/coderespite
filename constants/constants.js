@@ -15,7 +15,7 @@ export const Emoji = ({ children, style }) => (
     style={[
       { 
         fontFamily: Platform.OS === 'ios' ? 'System' : undefined,
-        fontWeight: 'normal' 
+        fontWeight: 'normal',
       }, 
       style
     ]}
