@@ -11,7 +11,8 @@ export const useAppInitialization = () => {
   const [isReady, setIsReady] = useState(false);
   const [showCustomSplash, setShowCustomSplash] = useState(true);
   const { refreshData, refreshing } = useGlobalRefresh();
-  const { setAdConfig } = useContext(adConfigContext);
+  const adConfigValue = useContext(adConfigContext);
+  const setAdConfig = adConfigValue?.setAdConfig;
 
   // 1. Initialization Logic
   useEffect(() => {
@@ -21,19 +22,21 @@ export const useAppInitialization = () => {
 
     const initialize = async () => {
       // A. Start Ad Config Listener
-      try {
-        unsubscribeAdConfig = onSnapshot(
-          doc(db, "config", "adSettings"),
-          (docSnapshot) => {
-            // Only update state if mounted
-            if (isMounted && docSnapshot.exists()) {
-              setAdConfig(docSnapshot.data());
-            }
-          },
-          (error) => console.log("Ad Config Error:", error)
-        );
-      } catch (error) {
-        console.log("Snapshot setup error", error);
+      if (setAdConfig) {
+        try {
+          unsubscribeAdConfig = onSnapshot(
+            doc(db, "config", "adSettings"),
+            (docSnapshot) => {
+              // Only update state if mounted
+              if (isMounted && docSnapshot.exists()) {
+                setAdConfig(docSnapshot.data());
+              }
+            },
+            (error) => console.log("Ad Config Error:", error)
+          );
+        } catch (error) {
+          console.log("Snapshot setup error", error);
+        }
       }
 
       try {
@@ -69,7 +72,7 @@ export const useAppInitialization = () => {
         unsubscribeAdConfig(); // Unsubscribe safely
       }
     };
-  }, []); 
+  }, [setAdConfig]); 
 
   // 2. Custom Splash Timer
   useEffect(() => {

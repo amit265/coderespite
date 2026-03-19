@@ -5,14 +5,22 @@ import { getAllCoursesWithSubcollections } from "../services/getAllCoursesWithSu
 
 export const useGlobalRefresh = () => {
   const [globalRefreshing, setGlobalRefreshing] = useState(false);
-  const { setAllCourses } = useContext(allCoursesContext);
-  const { updateUser } = useContext(userDetailsContext);
+  const allCourses = useContext(allCoursesContext);
+  const userDetails = useContext(userDetailsContext);
+
+  const setAllCourses = allCourses?.setAllCourses;
+  const updateUser = userDetails?.updateUser;
 
   /**
    * Refreshes data.
    * @param {boolean} shouldFetchRemote - If true, fetches from API after loading cache. If false, stops after loading cache.
    */
   const refreshData = useCallback(async (shouldFetchRemote = true) => {
+    if (!setAllCourses || !updateUser) {
+      console.warn("Refresh data called before context was available.");
+      return;
+    }
+    
     setGlobalRefreshing(true);
     try {
       console.log("🔄 Global Refresh Triggered...");
