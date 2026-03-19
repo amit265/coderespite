@@ -60,9 +60,6 @@ export default function RootLayout() {
 
   const allCoursesValue = useMemo(() => ({ selectedLesson, setSelectedLesson, allCourses, setAllCourses, selectedCourse, setSelectedCourse, selectedModule, setSelectedModule, selectedQuiz, setSelectedQuiz, attemptedQuizData, setAttemptedQuizData, setUpdate, update }), [selectedLesson, update, allCourses, selectedCourse, selectedModule, selectedQuiz, attemptedQuizData])
 
-  // Restore App Initialization Logic
-  const { isReady } = useAppInitialization();
-
   useEffect(() => {
     const loadLevel = async () => {
       try {
