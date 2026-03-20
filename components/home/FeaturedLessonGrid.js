@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Text, View, Animated, Pressable, Easing } from "react-native";
 import colors from "../../constants/colors";
-import { Emoji } from "../../constants/constants";
+import { Emoji, EmojiText } from "../../constants/constants";
 import { adConfigContext } from "../../context/context";
 import Button from "../shared/Button";
 

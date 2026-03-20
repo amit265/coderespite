@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState, useMemo } from "react";
 import { Pressable, View } from "react-native";
 import FlashCardItem from "../../../../components/FlashCardItem";
 import PageTransition from "../../../../components/PageTransition";

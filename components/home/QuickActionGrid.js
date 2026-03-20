@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { Pressable, Text, View, Animated } from "react-native";
-import { Emoji } from "../../constants/constants";
+import { Emoji, EmojiText } from "../../constants/constants";
 
 const actions = [
   { icon: "📘", label: "Learn", bg: "bg-blue-100", tab: "learn" },
