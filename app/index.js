@@ -13,20 +13,13 @@ export default function Index() {
   const router = useRouter();
 
   const { isReady, showCustomSplash } = useAppInitialization();
-  const { refreshData, refreshing } = useGlobalRefresh();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await refreshData(false);
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     if (isReady) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         router.replace("(tabs)");
       }, 500);
+      return () => clearTimeout(timer);
     }
   }, [isReady]);
 

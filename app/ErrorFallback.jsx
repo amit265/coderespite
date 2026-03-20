@@ -11,7 +11,6 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
     </View>
   );
 };
-...
 
 const styles = StyleSheet.create({
   container: {

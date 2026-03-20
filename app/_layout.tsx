@@ -2,7 +2,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
-import { Stack } from 'expo-router';
+import { Stack, SplashScreen } from 'expo-router';
 import * as TrackingTransparency from 'expo-tracking-transparency';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -17,6 +17,9 @@ import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
 import { useAppInitialization } from "../hooks/useAppInitialization";
 import { Emoji, EmojiText } from "../constants/constants";
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -101,10 +104,15 @@ export default function RootLayout() {
 
 
   // Update AsyncStorage + context state
-  const updateUser = async (updateFn) => {
-    const updated = updateFn({ ...userData });
-    await setUserData(updated);
-    setUserDataState(updated);
+  const updateUser = async (updateOrValue) => {
+    setUserDataState((prevData) => {
+      const updated = typeof updateOrValue === 'function' ? updateOrValue({ ...prevData }) : updateOrValue;
+      
+      // Sync with AsyncStorage
+      setUserData(updated).catch(err => console.error("Failed to sync user data:", err));
+      
+      return updated;
+    });
   };
 
   // Expose helper methods
@@ -219,7 +227,14 @@ export default function RootLayout() {
 
 
 
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
   if (!isConnected) {
+    SplashScreen.hideAsync();
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffcccc' }}>
         <EmojiText style={{ color: '#ff0000', fontSize: 18, fontFamily: 'nunito-bold' }}>No Internet Connection 😢</EmojiText>

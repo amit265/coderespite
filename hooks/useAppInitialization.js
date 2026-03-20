@@ -40,9 +40,12 @@ export const useAppInitialization = () => {
       }
 
       try {
-        // B. Load Global Data
-        await refreshData();
+        // B. Load Global Data (Prioritize cache for faster startup)
+        await refreshData(false);
         
+        // Background fetch for fresh data if connected
+        refreshData(true).catch(e => console.log("Background Refresh Error:", e));
+
         // C. Check Navigation
         const storedUser = await AsyncStorage.getItem("@user_data");
         if (storedUser && isMounted) {

@@ -4,61 +4,51 @@ import { db } from "./firebaseConfig";
 
 
 export const getAllCoursesWithSubcollections = async () => {
-  
   try {
     // Step 1: Fetch all courses
     const coursesSnapshot = await getDocs(collection(db, "courses"));
-    const allCourses = [];
-    console.log("log all data from upload");
     
-    for (const courseDoc of coursesSnapshot.docs) {
+    // Step 2: Fetch subcollections for all courses in parallel
+    const allCourses = await Promise.all(coursesSnapshot.docs.map(async (courseDoc) => {
       const courseId = courseDoc.id;
       const courseData = courseDoc.data();
-      // console.log("courseData", courseData);
 
-      // Step 2: Fetch subcollections (e.g., modules)
-      const modulesSnapshot = await getDocs(
-        collection(db, "courses", courseId, "modules")
-      );
+      // Fetch subcollections in parallel for each course
+      const [modulesSnapshot, flashcardsSnapshot, quizzesSnapshot] = await Promise.all([
+        getDocs(collection(db, "courses", courseId, "modules")),
+        getDocs(collection(db, "courses", courseId, "flashcards")),
+        getDocs(collection(db, "courses", courseId, "quizzes"))
+      ]);
+
       const modules = modulesSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      // console.log("modules", modules);
 
-      // You can repeat for flashcards or quizzes if needed:
-      const flashcardsSnapshot = await getDocs(
-        collection(db, "courses", courseId, "flashcards")
-      );
       const flashcards = flashcardsSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      const quizzesSnapshot = await getDocs(
-        collection(db, "courses", courseId, "quizzes")
-      );
       const quizzes = quizzesSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      // Combine everything
-      allCourses.push({
+      return {
         id: courseId,
         ...courseData,
         modules,
         flashcards,
         quizzes,
-        // flashcards, // Add if fetched
-      });
-    }
-    // console.log("from firestore allCourses", allCourses);
+      };
+    }));
 
     await AsyncStorage.setItem("@allCourses_data", JSON.stringify(allCourses));
 
     return allCourses;
   } catch (error) {
     console.error("Error fetching courses and subcollections:", error);
+    return [];
   }
 };
