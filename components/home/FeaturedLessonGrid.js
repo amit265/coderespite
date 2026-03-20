@@ -127,28 +127,21 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
-           {/* Animated Icon */}
+           {/* Animated Icon Wrapper */}
           <Animated.View 
             style={{ 
               marginRight: 8, 
               transform: [{ scale: pulseAnim }],
             }}
           >
-            <Emoji style={{ fontSize: 24 }}>📚</Emoji>
+            <EmojiText style={{ fontSize: 24, fontFamily: 'nunito-bold', color: 'black' }}>
+               📚 Featured Lesson
+            </EmojiText>
           </Animated.View>
-          <Text className="text-xl font-nunito-bold text-black">
-             Featured Lesson
-          </Text>
         </View>
 
-        <View className="flex-row items-center mb-2 gap-2">
-          <Emoji style={{ fontSize: 18 }}>🔷</Emoji>
-          <Text className="text-lg font-nunito-bold text-gray-600">{courseName}</Text>
-        </View>
-        <View className="flex-row items-center mb-6 gap-2">
-          <Emoji style={{ fontSize: 16 }}>🎯</Emoji>
-          <Text className="text-base text-gray-600 font-nunito">{randomModule.title}</Text>
-        </View>
+        <EmojiText className="text-lg font-nunito-bold text-gray-600 mb-2">🔷 {courseName}</EmojiText>
+        <EmojiText className="text-base text-gray-600 font-nunito mb-6">🎯 {randomModule.title}</EmojiText>
 
         {/* We disable pointer events on the button so the Pressable parent handles the click.
            This prevents "double click" issues and makes the whole card interactive.

@@ -35,8 +35,7 @@ export default function DailyTip() {
   return (
     <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4">
       <View className="flex-row items-center mb-2 gap-2">
-        <Emoji style={{ fontSize: 20 }}>💡</Emoji>
-        <Text className="text-xl font-nunito-bold text-black">Tip of The Day</Text>
+        <EmojiText className="text-xl font-nunito-bold text-black">💡 Tip of The Day</EmojiText>
       </View>
       <EmojiText style={{ fontSize: 16, color: '#4B5563', fontFamily: 'nunito' }}>“{randomTip}”</EmojiText>
     </View>

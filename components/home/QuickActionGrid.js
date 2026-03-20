@@ -94,8 +94,7 @@ export default function QuickActionGrid() {
   return (
     <View className="bg-white p-6 rounded-xl shadow-md mx-4 mb-4">
       <View className="flex-row items-center mb-4 gap-2">
-        <Emoji style={{ fontSize: 20 }}>🔀</Emoji>
-        <Text className="text-xl font-nunito-bold">Quick Actions</Text>
+        <EmojiText className="text-xl font-nunito-bold">🔀 Quick Actions</EmojiText>
       </View>
       
       <View className="flex-row flex-wrap justify-between">
