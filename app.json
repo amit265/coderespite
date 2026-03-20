@@ -14,9 +14,6 @@
       "icon": "./assets/iosIcon.png",
       "infoPlist": {
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
-        "NSPhotoLibraryUsageDescription": "This app requires access to the photo library for profile picture selection.",
-        "NSCameraUsageDescription": "This app requires access to the camera to take profile pictures.",
-        "NSMicrophoneUsageDescription": "This app requires access to the microphone for recording audio if needed by third-party libraries.",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
