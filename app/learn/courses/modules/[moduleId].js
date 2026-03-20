@@ -28,7 +28,7 @@ const { width } = Dimensions.get("window");
 export default function ModuleDetail() {
   const { moduleId } = useLocalSearchParams();
   const router = useRouter();
-  const { allCourses, setSelectedLesson, selectedModule } =
+  const { allCourses, setSelectedLesson, selectedModule, setSelectedModule, setSelectedQuiz, selectedCourse } =
     useContext(allCoursesContext);
   const { userData } = useContext(userDetailsContext);
   const { setClickCount } = useContext(adConfigContext);
@@ -36,12 +36,26 @@ export default function ModuleDetail() {
   const [loading, setLoading] = useState(true);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Find the current module from context or params
-  const module = selectedModule;
+  // Find the current module from context or find it in allCourses as a fallback
+  const module = useMemo(() => {
+    if (selectedModule && selectedModule.id === moduleId) return selectedModule;
+    
+    // Fallback search
+    for (const course of allCourses) {
+      const found = course.modules?.find(m => m.id === moduleId);
+      if (found) return found;
+    }
+    return null;
+  }, [selectedModule, moduleId, allCourses]);
 
   useEffect(() => {
     if (module) {
       setLoading(false);
+      // If we found it via fallback, sync it to context
+      if (!selectedModule || selectedModule.id !== module.id) {
+        setSelectedModule(module);
+      }
+      
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 600,
@@ -70,6 +84,7 @@ export default function ModuleDetail() {
   };
 
   const handleQuizPress = () => {
+    setSelectedQuiz(module); // module now has the .quiz array from merge
     setClickCount((prev) => prev + 1);
     router.push(`/quiz/courses/quiz_${moduleId}`);
   };

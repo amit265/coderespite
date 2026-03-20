@@ -47,7 +47,7 @@ export default function LessonScreen() {
             contentContainerStyle={{ paddingBottom: 100 }}
           >
             <View className="px-4">
-              <ContentPage lesson={selectedLesson} />
+              <ContentPage selectedLesson={selectedLesson} />
             </View>
           </ScrollView>
         </View>

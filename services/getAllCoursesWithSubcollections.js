@@ -20,27 +20,29 @@ export const getAllCoursesWithSubcollections = async () => {
         getDocs(collection(db, "courses", courseId, "quizzes"))
       ]);
 
-      const modules = modulesSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const modules = modulesSnapshot.docs.map((doc) => {
+        const data = doc.data();
+        const moduleId = doc.id;
+        
+        // Find associated flashcards and quiz for this module
+        // Filename pattern is flashcard_module01.json, quiz_module01.json
+        const associatedFlashcards = flashcardsSnapshot.docs.find(f => f.id === `flashcard_${moduleId}`)?.data()?.flashcards || [];
+        const associatedQuiz = quizzesSnapshot.docs.find(q => q.id === `quiz_${moduleId}`)?.data()?.quiz || [];
 
-      const flashcards = flashcardsSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      const quizzes = quizzesSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+        return {
+          id: moduleId,
+          ...data,
+          flashcards: associatedFlashcards,
+          quiz: associatedQuiz,
+        };
+      });
 
       return {
         id: courseId,
         ...courseData,
         modules,
-        flashcards,
-        quizzes,
+        flashcards: flashcardsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })),
+        quizzes: quizzesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })),
       };
     }));
 

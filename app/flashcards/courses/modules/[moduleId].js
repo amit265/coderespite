@@ -11,19 +11,36 @@ import { BannerAdComponent } from "../../../../services/AdManager";
 export default function FlashcardList() {
   const { moduleId } = useLocalSearchParams();
   const router = useRouter();
-  const { selectedModule } = useContext(allCoursesContext);
+  const { allCourses, selectedModule, setSelectedModule } = useContext(allCoursesContext);
 
-  if (!selectedModule) {
+  const module = useMemo(() => {
+    if (selectedModule && selectedModule.id === moduleId) return selectedModule;
+    
+    // Fallback search
+    for (const course of allCourses) {
+      const found = course.modules?.find(m => m.id === moduleId);
+      if (found) return found;
+    }
+    return null;
+  }, [selectedModule, moduleId, allCourses]);
+
+  useEffect(() => {
+    if (module && (!selectedModule || selectedModule.id !== module.id)) {
+        setSelectedModule(module);
+    }
+  }, [module]);
+
+  if (!module) {
     return (
       <SafeScreen>
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          {/* You can add a loading spinner or error message here */}
+           <ActivityIndicator size="large" color={colors.PRIMARY} />
         </View>
       </SafeScreen>
     );
   }
 
-  const flashcards = selectedModule.flashcards || [];
+  const flashcards = module.flashcards || [];
 
   return (
     <PageTransition>
