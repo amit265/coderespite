@@ -1,3 +1,4 @@
+import React from "react";
 import { Platform, Text } from "react-native";
 
 export const STORE_LINK = Platform.select({
@@ -20,7 +21,8 @@ export const Emoji = ({ children, style }) => {
       style={[
         safeStyle,
         { 
-          fontFamily: Platform.OS === 'ios' ? 'System' : undefined,
+          // 'Apple Color Emoji' is the specific font for emojis on iOS
+          fontFamily: Platform.OS === 'ios' ? 'Apple Color Emoji' : undefined,
           fontWeight: 'normal',
         }
       ]}
@@ -35,25 +37,58 @@ export const Emoji = ({ children, style }) => {
  * This ensures emojis render correctly on iOS even when the parent has a custom font.
  */
 export const EmojiText = ({ children, style, ...props }) => {
-  if (typeof children !== 'string') {
-    return <Text style={style} {...props}>{children}</Text>;
-  }
+  const emojiRegex = /[\u{1f300}-\u{1f5ff}\u{1f600}-\u{1f64f}\u{1f680}-\u{1f6ff}\u{1f700}-\u{1f77f}\u{1f780}-\u{1f7ff}\u{1f900}-\u{1f9ff}\u{1f1e6}-\u{1f1ff}\u{2600}-\u{26ff}\u{2700}-\u{27bf}\u{fe00}-\u{fe0f}\u{1f004}-\u{1f0cf}\u{1f170}-\u{1f251}]/gu;
 
-  // Improved regex to match a wider range of emojis, including variation selectors and skin tones
-  // Using Unicode property escapes (supported in modern Hermes/React Native)
-  const emojiRegex = /(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|[\u{1F1E6}-\u{1F1FF}]{2})/gu;
-  
-  const parts = children.split(emojiRegex);
-  
+  const processChildren = (node) => {
+    if (typeof node === 'string') {
+      const parts = [];
+      let lastIndex = 0;
+      let match;
+
+      // Reset regex lastIndex since it has the 'g' flag
+      emojiRegex.lastIndex = 0;
+
+      while ((match = emojiRegex.exec(node)) !== null) {
+        if (match.index > lastIndex) {
+          parts.push(node.substring(lastIndex, match.index));
+        }
+        parts.push(
+          <Emoji key={`${match.index}-${match[0]}`} style={style}>
+            {match[0]}
+          </Emoji>
+        );
+        lastIndex = emojiRegex.lastIndex;
+      }
+
+      if (lastIndex < node.length) {
+        parts.push(node.substring(lastIndex));
+      }
+      return parts.length > 0 ? parts : node;
+    }
+
+    if (React.isValidElement(node)) {
+      // If it's a Text element, we might want to process its children too
+      // but for simplicity and to avoid infinite recursion if we accidentally 
+      // pass EmojiText to itself, we'll just process its children if it has any.
+      if (node.props && node.props.children) {
+        return React.cloneElement(node, {
+          ...node.props,
+          children: React.Children.map(node.props.children, processChildren),
+        });
+      }
+      return node;
+    }
+
+    if (Array.isArray(node)) {
+      return node.map(processChildren);
+    }
+
+    return node;
+  };
+
   return (
     <Text style={style} {...props}>
-      {parts.map((part, index) => {
-        // We use match instead of test because test with /g maintains state
-        if (part && part.match(emojiRegex)) {
-          return <Emoji key={index} style={style}>{part}</Emoji>;
-        }
-        return part;
-      })}
+      {React.Children.map(children, processChildren)}
     </Text>
   );
 };

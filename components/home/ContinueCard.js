@@ -45,7 +45,7 @@ export default function ContinueCard({ userData }) {
       </View>
 
       <View className="bg-yellow-100 p-4 rounded-xl font-nunito">
-        <Text className="text-sm text-gray-600 font-nunito text-justify">{level.description}</Text>
+        <EmojiText className="text-sm text-gray-700 font-nunito text-justify">{level.description}</EmojiText>
         <EmojiText className="text-sm mt-2 text-gray-700 font-nunito text-justify">
           👉 {100 - progress}% more to become a {nextLevel.title} 🐱
         </EmojiText>
