@@ -1,7 +1,7 @@
 import { Platform, Text } from "react-native";
 
 export const STORE_LINK = Platform.select({
-  ios: "https://apps.apple.com/app/id6382903780", // Replace with your actual iOS App ID if different
+  ios: "https://apps.apple.com/app/id6760843431", // Replace with your actual iOS App ID if different
   android: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
 });
 
@@ -10,19 +10,53 @@ export const SHARE_MESSAGE = Platform.select({
   android: "Check out this amazing app on the Play Store!\n\n" + STORE_LINK,
 });
 
-export const Emoji = ({ children, style }) => (
-  <Text 
-    style={[
-      { 
-        fontFamily: Platform.OS === 'ios' ? 'System' : undefined,
-        fontWeight: 'normal',
-      }, 
-      style
-    ]}
-  >
-    {children}
-  </Text>
-);
+export const Emoji = ({ children, style }) => {
+  // Filter out fontFamily from incoming style to prevent overriding the system font on iOS
+  const flattenedStyle = style ? (Array.isArray(style) ? Object.assign({}, ...style) : style) : {};
+  const { fontFamily, fontWeight, ...safeStyle } = flattenedStyle;
+
+  return (
+    <Text 
+      style={[
+        safeStyle,
+        { 
+          fontFamily: Platform.OS === 'ios' ? 'System' : undefined,
+          fontWeight: 'normal',
+        }
+      ]}
+    >
+      {children}
+    </Text>
+  );
+};
+
+/**
+ * A component that renders text and automatically wraps emojis in the Emoji component.
+ * This ensures emojis render correctly on iOS even when the parent has a custom font.
+ */
+export const EmojiText = ({ children, style, ...props }) => {
+  if (typeof children !== 'string') {
+    return <Text style={style} {...props}>{children}</Text>;
+  }
+
+  // Improved regex to match a wider range of emojis, including variation selectors and skin tones
+  // Using Unicode property escapes (supported in modern Hermes/React Native)
+  const emojiRegex = /(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|[\u{1F1E6}-\u{1F1FF}]{2})/gu;
+  
+  const parts = children.split(emojiRegex);
+  
+  return (
+    <Text style={style} {...props}>
+      {parts.map((part, index) => {
+        // We use match instead of test because test with /g maintains state
+        if (part && part.match(emojiRegex)) {
+          return <Emoji key={index} style={style}>{part}</Emoji>;
+        }
+        return part;
+      })}
+    </Text>
+  );
+};
 
 export const courseIcons = {
   html: require("../assets/images/courses/html.png"),

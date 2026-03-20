@@ -1,7 +1,7 @@
 import LottieView from "lottie-react-native";
 import React, { useEffect, useState, useRef } from "react";
 import { Modal, Text, View, Animated, Easing } from "react-native";
-import { levels, Emoji } from "../constants/constants";
+import { levels, Emoji, EmojiText } from "../constants/constants";
 import ProgressBar from "./home/ProgressBar";
 import Button from "./shared/Button";
 import colors from "../constants/colors";
@@ -113,9 +113,9 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
         >
           {/* Staggered Content */}
           <StaggeredView delay={100}>
-             <Text className="text-3xl font-bold text-green-600 mb-2 text-center">
-               <Emoji>🎉</Emoji> Congrats!
-             </Text>
+             <EmojiText className="text-3xl font-bold text-green-600 mb-2 text-center">
+               🎉 Congrats!
+             </EmojiText>
           </StaggeredView>
 
           <StaggeredView delay={200}>
@@ -145,9 +145,9 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
           <StaggeredView delay={500}>
              <View className="w-full mb-6">
                <ProgressBar />
-               <Text className="italic text-center text-gray-500 text-xs mt-2">
-                 <Emoji>🌟</Emoji> Keep going! Each step sharpens your mind.
-               </Text>
+               <EmojiText className="italic text-center text-gray-500 text-xs mt-2">
+                 🌟 Keep going! Each step sharpens your mind.
+               </EmojiText>
              </View>
           </StaggeredView>
 
@@ -161,9 +161,9 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
                </View>
              ) : (
                <View className="w-full mb-6 items-center">
-                 <Text className="text-sm text-gray-600 italic">
-                   <Emoji>🏁</Emoji> You&apos;ve reached the final level!
-                 </Text>
+                 <EmojiText className="text-sm text-gray-600 italic">
+                   🏁 You&apos;ve reached the final level!
+                 </EmojiText>
                </View>
              )}
           </StaggeredView>

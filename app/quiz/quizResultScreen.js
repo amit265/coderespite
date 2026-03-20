@@ -16,7 +16,7 @@ import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
-import { Emoji } from "../../constants/constants";
+import { Emoji, EmojiText } from "../../constants/constants";
 import { allCoursesContext, userDetailsContext } from "../../context/context";
 import { BannerAdComponent } from "../../services/AdManager";
 
@@ -199,7 +199,7 @@ export default function QuizResultScreen() {
                 borderRadius: 10,
               }}
             >
-              <Text
+              <EmojiText
                 style={{
                   fontFamily: "nunito",
                   fontSize: 14,
@@ -207,8 +207,8 @@ export default function QuizResultScreen() {
                   textAlign: "justify",
                 }}
               >
-                <Emoji>💡</Emoji> {quizItem?.explanation}
-              </Text>
+                💡 {quizItem?.explanation}
+              </EmojiText>
             </View>
           )}
         </View>

@@ -7,6 +7,7 @@ import FlashCardItem from "./FlashCardItem";
 import Button from "./shared/Button";
 import PageTransition from "../components/PageTransition";
 import SafeScreen from "../components/SafeScreen"
+import { EmojiText } from "../constants/constants";
 
 // --- Helper for Empty State Animation ---
 const FadeInView = ({ children, delay = 0 }) => {
@@ -78,10 +79,10 @@ export default function Favorites() {
       <PageTransition>
         <SafeScreen>
           <View className="flex-1 justify-center items-center">
-            
+
             {/* Animated Icon or Text */}
             <FadeInView delay={0}>
-              <Text style={{ fontSize: 60, marginBottom: 20 }}>💔</Text> 
+              <EmojiText style={{ fontSize: 60, marginBottom: 20 }}>💔</EmojiText> 
               <Text className="text-2xl text-center font-nunito-bold text-gray-800 mb-2">
                 No favorites yet
               </Text>

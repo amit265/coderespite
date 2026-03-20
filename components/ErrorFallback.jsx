@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Emoji } from "../constants/constants";
+import { Emoji, EmojiText } from "../constants/constants";
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.errorTitle}>Oops! <Emoji>😢</Emoji></Text>
+      <EmojiText style={styles.errorTitle}>Oops! 😢</EmojiText>
       <Text style={styles.errorText}>Something went wrong</Text>
       <Text style={styles.errorMessage}>{error.message}</Text>
       <TouchableOpacity style={styles.button} onPress={resetErrorBoundary}>

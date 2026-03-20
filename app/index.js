@@ -5,7 +5,7 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
-import { Emoji } from "../constants/constants";
+import { Emoji, EmojiText } from "../constants/constants";
 import { useAppInitialization } from "../hooks/useAppInitialization";
 import { useGlobalRefresh } from "../hooks/useGlobalRefresh";
 
@@ -69,9 +69,9 @@ export default function Index() {
         <Text className="text-black text-2xl font-quicksand-bold text-center">
           Welcome to CodeRespite!
         </Text>
-        <Text className="text-gray-800 text-base font-quicksand text-center mt-2">
-          Learn to code with your favorite Meowgrammer! <Emoji>🐾</Emoji>
-        </Text>
+        <EmojiText className="text-gray-800 text-base font-quicksand text-center mt-2">
+          Learn to code with your favorite Meowgrammer! 🐾
+        </EmojiText>
 
         {!isReady && (
           <View className="items-center mt-4">

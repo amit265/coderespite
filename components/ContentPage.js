@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
-import { Animated, ScrollView, View } from "react-native";
+import { Animated, ScrollView, View, Text } from "react-native";
 import Markdown from "react-native-markdown-display";
+import { EmojiText } from "../constants/constants";
 
 export default function ContentPage({ selectedLesson }) {
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -11,7 +12,6 @@ export default function ContentPage({ selectedLesson }) {
   contentHeight > scrollViewHeight
     ? Animated.divide(scrollY, contentHeight - scrollViewHeight)
     : new Animated.Value(0);
-
 
   return (
     <View className="flex-1 rounded-lg relative">
@@ -44,6 +44,15 @@ export default function ContentPage({ selectedLesson }) {
         )}
       >
         <Markdown
+          rules={{
+            text: (node, children, parent, styles) => {
+              return (
+                <EmojiText key={node.key} style={styles.body}>
+                  {node.content}
+                </EmojiText>
+              );
+            },
+          }}
           style={{
             body: {
               color: "#374151",

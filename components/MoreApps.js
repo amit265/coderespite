@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { getMoreApps } from "../services/moreAppsService";
 import colors from "../constants/colors";
-import { Emoji } from "../constants/constants";
+import { Emoji, EmojiText } from "../constants/constants";
 
 export default function MoreApps() {
   const [apps, setApps] = useState([]);
@@ -49,9 +49,9 @@ export default function MoreApps() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        <Emoji>🚀</Emoji> More by Developer
-      </Text>
+      <EmojiText style={styles.title}>
+        🚀 More by Developer
+      </EmojiText>
       {apps.map((app, index) => (
         <TouchableOpacity
           key={index}

@@ -2,7 +2,7 @@ import { Entypo } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import colors from "../constants/colors";
-import { Emoji } from "../constants/constants";
+import { Emoji, EmojiText } from "../constants/constants";
 
 export default function QuickStats({ userData }) {
   const progress = userData?.progress || {};
@@ -16,11 +16,9 @@ export default function QuickStats({ userData }) {
   const toggleHide = (key) => {
     setHideSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
-  const renderStatBlock = (title, key, unit = "items") => {
+  const renderStatBlock = (emoji, title, key, unit = "items") => {
     return (
       <View className="mb-4">
-        {/* <Text className="text-base font-nunito-bold mb-2">{title} </Text> */}
-
         {hasProgress ? (
           <View className="flex flex-col flex-wrap gap-2 items-center justify-center mt-4">
             {Object.entries(progress).map(([courseName, courseData]) => (
@@ -48,10 +46,10 @@ export default function QuickStats({ userData }) {
   return (
     <View className="flex flex-col gap-4 mt-4 p-4 bg-white rounded-xl">
       <View
-        className="border-b border-gray-800 mb-3"
+        className="border-b border-gray-800 mb-3 flex-row items-center gap-2"
         style={{ borderStyle: "dotted", paddingBottom: 20 }}
       >
-        <Text className="text-xl text-black font-nunito-bold"><Emoji>📊</Emoji> Quick Stats:</Text>
+        <EmojiText style={{ fontSize: 20 }}>📊 Quick Stats:</EmojiText>
       </View>
 
       <TouchableOpacity
@@ -61,13 +59,7 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <Text className="text-base font-nunito-bold">
-              <Emoji>📚</Emoji> Courses Enrolled:
-            </Text>
-            <Text className="text-base font-nunito">
-              {" "}
-              {Object.keys(progress).length || 0}
-            </Text>
+            <EmojiText style={{ fontSize: 18 }}>📚 Courses Enrolled: {Object.keys(progress).length || 0}</EmojiText>
           </View>
           <Entypo name="arrow-with-circle-down" size={24} color="black" />
         </View>
@@ -100,23 +92,19 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <Text className="text-base font-nunito-bold">
-              <Emoji>💙</Emoji> Favorite Flashcards:
-            </Text>
-            <Text className="text-base font-nunito">
-              {Object.keys(progress).reduce(
+            <EmojiText style={{ fontSize: 18 }}>💙 Favorite Flashcards: {Object.keys(progress).reduce(
                 (total, course) =>
                   total + (progress[course]?.flashcardsLoved?.length || 0),
                 0
-              ) || 0}
-            </Text>
+              ) || 0}</EmojiText>
           </View>
           <Entypo name="arrow-with-circle-down" size={24} color="black" />
         </View>
 
         {hideSections.flashcardsLoved &&
           renderStatBlock(
-            <Emoji>💙</Emoji> + " Favorite Flashcards:",
+            "💙",
+            "Favorite Flashcards:",
             "flashcardsLoved",
             "cards"
           )}
@@ -128,22 +116,17 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <Text className="text-base font-nunito-bold">
-              <Emoji>🧠</Emoji> Viewed Flashcards:
-            </Text>
-            <Text className="text-base font-nunito">
-              {Object.keys(progress).reduce(
+            <EmojiText style={{ fontSize: 18 }}>🧠 Viewed Flashcards: {Object.keys(progress).reduce(
                 (total, course) =>
                   total + (progress[course]?.flashcardsViewed?.length || 0),
                 0
-              ) || 0}
-            </Text>
+              ) || 0}</EmojiText>
           </View>
           <Entypo name="arrow-with-circle-down" size={24} color="black" />
         </View>
 
         {hideSections.flashcardsViewed &&
-          renderStatBlock(<Emoji>🧠</Emoji> + " Viewed Flashcards:", "flashcardsViewed", "cards")}
+          renderStatBlock("🧠", "Viewed Flashcards:", "flashcardsViewed", "cards")}
       </TouchableOpacity>
       <TouchableOpacity
         className="py-4 px-4 rounded-lg"
@@ -152,23 +135,19 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <Text className="text-base font-nunito-bold">
-              <Emoji>🧪</Emoji> Quizzes Completed:
-            </Text>
-            <Text className="text-base font-nunito">
-              {Object.keys(progress).reduce(
+            <EmojiText style={{ fontSize: 18 }}>🧪 Quizzes Completed: {Object.keys(progress).reduce(
                 (total, course) =>
                   total + (progress[course]?.attemptedQuizzes?.length || 0),
                 0
-              ) || 0}
-            </Text>
+              ) || 0}</EmojiText>
           </View>
           <Entypo name="arrow-with-circle-down" size={24} color="black" />
         </View>
 
         {hideSections.attemptedQuizzes &&
           renderStatBlock(
-            <Emoji>🧪</Emoji> + " Quizzes Completed:",
+            "🧪",
+            "Quizzes Completed:",
             "attemptedQuizzes",
             "quizzes"
           )}
