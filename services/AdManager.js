@@ -58,15 +58,29 @@ const AdManager = () => {
   useEffect(() => {
     if (!adsReady || !adConfig?.showAds) return;
 
+    console.log("[Ads] App state listener active", {
+      appOpenAdFrequency: adConfig?.appOpenAdFrequency,
+      showAppOpenAds: adConfig?.showAppOpenAds,
+    });
+
     const subscription = AppState.addEventListener("change", (nextAppState) => {
+      console.log("[Ads] App state changed", nextAppState);
+
       if (nextAppState === "active" && !interstitialJustShown.current) {
         appPauseCount.current += 1;
+        console.log("[Ads] App open trigger check", {
+          appPauseCount: appPauseCount.current,
+          appOpenAdFrequency: adConfig?.appOpenAdFrequency,
+          showAppOpenAds: adConfig?.showAppOpenAds,
+          appOpenLoaded: appOpenAd?.loaded,
+        });
 
         if (
           appPauseCount.current % adConfig?.appOpenAdFrequency === 0 &&
           adConfig.showAppOpenAds &&
           appOpenAd?.loaded
         ) {
+          console.log("[Ads] Showing app open ad");
           appOpenAd.show();
         }
       }
@@ -78,6 +92,12 @@ const AdManager = () => {
 
   useEffect(() => {
     if (!adsReady || !adConfig?.showAds) return;
+
+    console.log("[Ads] Interstitial trigger check", {
+      clickCount,
+      interstitialFrequency: adConfig?.interstitialFrequency,
+      showInterstitialAds: adConfig?.showInterstitialAds,
+    });
 
     if (
       clickCount > 0 &&
@@ -105,18 +125,56 @@ const AdManager = () => {
       getAdUnitId("appOpen"),
     );
 
+    console.log("[Ads] Creating ad requests", {
+      interstitialUnitId: getAdUnitId("interstitial"),
+      appOpenUnitId: getAdUnitId("appOpen"),
+      showAds: config?.showAds,
+      showInterstitialAds: config?.showInterstitialAds,
+      showAppOpenAds: config?.showAppOpenAds,
+    });
+
+    interstitialAd.addAdEventListener(AdEventType.LOADED, () => {
+      console.log("[Ads] Interstitial loaded");
+    });
+
+    interstitialAd.addAdEventListener(AdEventType.OPENED, () => {
+      console.log("[Ads] Interstitial opened");
+    });
+
     interstitialAd.addAdEventListener(AdEventType.CLOSED, () => {
+      console.log("[Ads] Interstitial closed, reloading");
       interstitialJustShown.current = true;
       interstitialAd.load();
     });
 
+    interstitialAd.addAdEventListener(AdEventType.ERROR, (error) => {
+      console.error("[Ads] Interstitial error", error);
+    });
+
+    appOpenAd.addAdEventListener(AdEventType.LOADED, () => {
+      console.log("[Ads] App open ad loaded");
+    });
+
+    appOpenAd.addAdEventListener(AdEventType.OPENED, () => {
+      console.log("[Ads] App open ad opened");
+    });
+
     interstitialAd.load();
+    console.log("[Ads] Interstitial load requested");
 
     appOpenAd.addAdEventListener(AdEventType.CLOSED, () =>
-      setTimeout(() => appOpenAd.load(), 3000),
+      setTimeout(() => {
+        console.log("[Ads] App open ad closed, reloading");
+        appOpenAd.load();
+      }, 3000),
     );
 
+    appOpenAd.addAdEventListener(AdEventType.ERROR, (error) => {
+      console.error("[Ads] App open ad error", error);
+    });
+
     appOpenAd.load();
+    console.log("[Ads] App open ad load requested");
   }, [interstitialJustShown]);
 
   useEffect(() => {
@@ -130,9 +188,11 @@ const AdManager = () => {
 
 export const showInterstitialAd = (adConfig) => {
   if (interstitialAd?.loaded && adConfig.showAds && adConfig.showInterstitialAds) {
+    console.log("[Ads] showInterstitialAd invoked: showing interstitial");
     interstitialAd.show();
     interstitialAd.load();
   } else {
+    console.log("[Ads] showInterstitialAd invoked: interstitial not ready, loading");
     interstitialAd?.load();
   }
 };
@@ -167,7 +227,10 @@ export const BannerAdComponent = ({ fixed = false }) => {
       <BannerAd
         unitId={getAdUnitId("banner")}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-        onAdLoaded={() => setIsAdLoaded(true)}
+        onAdLoaded={() => {
+          console.log("[Ads] Banner ad loaded");
+          setIsAdLoaded(true);
+        }}
         onAdFailedToLoad={(error) => console.error("Banner Ad Error:", error)}
       />
     </View>
@@ -194,6 +257,7 @@ export const NativeAdComponent = () => {
         shadowOpacity: 0.1,
         shadowRadius: 4,
       }}
+      onAdLoaded={() => console.log("[Ads] Native ad loaded")}
       onAdFailedToLoad={(err) => console.error("Native Ad Load Error", err)}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>

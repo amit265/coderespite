@@ -223,16 +223,21 @@ export default function RootLayout() {
 
     const prepareAds = async () => {
       try {
+        console.log("[Ads] Mobile Ads initialization started");
+
         if (Platform.OS === "ios") {
+          console.log("[Ads] Requesting iOS tracking permission");
           await TrackingTransparency.getTrackingPermissionsAsync();
           await TrackingTransparency.requestTrackingPermissionsAsync();
         }
 
         await MobileAds().initialize();
+        console.log("[Ads] Mobile Ads initialized successfully");
       } catch (error) {
         console.error("Mobile Ads Init Error:", error);
       } finally {
         if (isMounted) {
+          console.log("[Ads] Ads marked ready");
           setAdsReady(true);
         }
       }
