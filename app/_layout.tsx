@@ -6,7 +6,7 @@ import { Stack, SplashScreen } from 'expo-router';
 import * as TrackingTransparency from 'expo-tracking-transparency';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Platform, StatusBar, Text, View } from 'react-native';
+import { AppState, Platform, StatusBar, Text, View } from 'react-native';
 import MobileAds from "react-native-google-mobile-ads";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -208,6 +208,12 @@ export default function RootLayout() {
   useEffect(() => {
     (async () => {
       if (Platform.OS === 'ios') {
+        // Wait for fonts to load first (which hides the splash screen)
+        if (!fontsLoaded && !fontError) return;
+
+        // Small delay to ensure the splash screen transition is complete
+        await new Promise(resolve => setTimeout(resolve, 800));
+
         const { status } = await TrackingTransparency.requestTrackingPermissionsAsync();
         if (status === 'granted') {
           console.log('Tracking permission granted!');
@@ -223,7 +229,7 @@ export default function RootLayout() {
           console.error("Mobile Ads Init Error:", error);
         });
     })();
-  }, []);
+  }, [fontsLoaded, fontError]);
 
 
 
