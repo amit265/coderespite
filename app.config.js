@@ -1,3 +1,26 @@
+const TEST_ADMOB_APP_IDS = {
+  android: "ca-app-pub-3940256099942544~3347511713",
+  ios: "ca-app-pub-3940256099942544~1458002511",
+};
+
+const isProductionBuild =
+  process.env.EAS_BUILD_PROFILE === "production" ||
+  process.env.NODE_ENV === "production";
+
+const androidAppId =
+  process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID ||
+  (!isProductionBuild ? TEST_ADMOB_APP_IDS.android : undefined);
+
+const iosAppId =
+  process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID ||
+  (!isProductionBuild ? TEST_ADMOB_APP_IDS.ios : undefined);
+
+if (isProductionBuild && (!androidAppId || !iosAppId)) {
+  throw new Error(
+    "Missing AdMob app IDs for production build. Set EXPO_PUBLIC_ADMOB_ANDROID_APP_ID and EXPO_PUBLIC_ADMOB_IOS_APP_ID.",
+  );
+}
+
 module.exports = {
   expo: {
     name: "CodeRespite: Refresh skills",
@@ -48,8 +71,8 @@ module.exports = {
       [
         "react-native-google-mobile-ads",
         {
-          androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID,
-          iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID,
+          androidAppId,
+          iosAppId,
           userTrackingUsageDescription:
             "This identifier will be used to deliver personalized ads to you.",
           skAdNetworkItems: [
@@ -93,6 +116,13 @@ module.exports = {
     },
     extra: {
       router: {},
+      admob: {
+        androidAppId,
+        iosAppId,
+        usingTestAppIds:
+          !process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID ||
+          !process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID,
+      },
       eas: {
         projectId: "45e5a71a-6a35-4ad2-9a84-243ad0a992a9",
       },
