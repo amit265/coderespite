@@ -3,14 +3,16 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { Text, View, Animated, Pressable, Easing } from "react-native";
 import colors from "../../constants/colors";
 import { Emoji, EmojiText } from "../../constants/constants";
-import { adConfigContext } from "../../context/context";
+import { adConfigContext, allCoursesContext } from "../../context/context";
 import Button from "../shared/Button";
 
 export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
   const [randomModule, setRandomModule] = useState(null);
+  const [randomCourse, setRandomCourse] = useState(null);
   const [courseName, setCourseName] = useState("");
   const router = useRouter();
   const { setClickCount } = useContext(adConfigContext);
+  const { setSelectedCourse } = useContext(allCoursesContext);
   const [loading, setLoading] = useState(false);
 
   // 1. Animation Refs
@@ -33,6 +35,7 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
     const randomCourseId = allCourseId[Math.floor(Math.random() * allCourseId.length)];
     const randomCourse = allCourses.find((a) => a?.id === randomCourseId);
 
+    setRandomCourse(randomCourse || null);
     setCourseName(randomCourse?.title || "");
 
     if (randomCourse && Array.isArray(randomCourse.modules) && randomCourse.modules.length > 0) {
@@ -77,10 +80,16 @@ export default function FeaturedLessonGrid({ allCourses, setSelectedModule }) {
     setLoading(true);
     // Tiny delay to show the "press" animation
     setTimeout(() => {
+      if (randomCourse) {
+        setSelectedCourse(randomCourse);
+      }
+      if (randomModule) {
+        setSelectedModule(randomModule);
+      }
       setClickCount((prev) => prev + 1);
       router.push({
         pathname: `/learn/courses/modules/${randomModule.id}`,
-        params: { courseId: randomModule.courseId },
+        params: { courseId: randomCourse?.id },
       });
       setLoading(false);
     }, 150);

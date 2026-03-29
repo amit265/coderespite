@@ -138,7 +138,7 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
 
           <StaggeredView delay={400}>
              <Text className="text-sm text-gray-600 mb-6 text-center leading-relaxed px-4">
-               "{levelData.description || "You're making great progress. Keep going!"}"
+               {levelData.description || "You're making great progress. Keep going!"}
              </Text>
           </StaggeredView>
 

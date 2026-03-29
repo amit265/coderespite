@@ -5,7 +5,7 @@ import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
 import RefreshWrapper from "../../components/shared/RefreshWrapper";
 import { courseIcons } from "../../constants/constants";
-import { adConfigContext, allCoursesContext } from "../../context/context";
+import { adConfigContext, allCoursesContext, userDetailsContext } from "../../context/context";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 
 // --- New Animated Card Component ---
@@ -125,6 +125,7 @@ export default function Learn() {
   const router = useRouter();
   const { setClickCount } = useContext(adConfigContext);
   const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
+  const { updateCourse } = useContext(userDetailsContext);
   const { refreshData, globalRefreshing } = useGlobalRefresh();
 
   const handleCardPress = (item) => {
@@ -132,6 +133,7 @@ export default function Learn() {
     setTimeout(() => {
       setClickCount((prev) => prev + 1);
       setSelectedCourse(item);
+      updateCourse(item?.title, {});
       router.push(`/learn/courses/${item?.id}`);
     }, 150);
   };

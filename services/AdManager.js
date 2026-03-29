@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { AppState, Platform, View, StyleSheet } from "react-native";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { AppState, Platform, View } from "react-native";
 import {
   AdEventType,
   AdvertiserView,
@@ -20,45 +20,38 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { adConfigContext } from "../context/context";
 import colors from "../constants/colors";
 
+const adUnits = {
+  banner: {
+    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_BANNER_ID,
+    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_BANNER_ID,
+  },
+  interstitial: {
+    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_INTERSTITIAL_ID,
+    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_INTERSTITIAL_ID,
+  },
+  appOpen: {
+    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_OPEN_ID,
+    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_OPEN_ID,
+  },
+  nativeAdvanced: {
+    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_NATIVE_ID,
+    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_NATIVE_ID,
+  },
+};
+
 // ✅ Helper to get ad unit IDs based on platform and test mode
 const getAdUnitId = (type, testAds) => {
-  const adUnitIds = {
-    banner: {
-      android: testAds
-        ? TestIds.ADAPTIVE_BANNER
-        : "ca-app-pub-7433519007687449/9531365889",
-      ios: testAds
-        ? TestIds.ADAPTIVE_BANNER
-        : "ca-app-pub-7433519007687449/5570092969",
-    },
-    interstitial: {
-      android: testAds
-        ? TestIds.INTERSTITIAL
-        : "ca-app-pub-7433519007687449/7195403622",
-      ios: testAds
-        ? TestIds.INTERSTITIAL
-        : "ca-app-pub-7433519007687449/7733221875",
-    },
-    appOpen: {
-      android: testAds
-        ? TestIds.APP_OPEN
-        : "ca-app-pub-7433519007687449/6961042869",
-      ios: testAds
-        ? TestIds.APP_OPEN
-        : "ca-app-pub-7433519007687449/1274315229",
-    },
-    nativeAdvanced: {
-      android: testAds
-        ? TestIds.NATIVE
-        : "ca-app-pub-7433519007687449/3505013580",
-      ios: testAds ? TestIds.NATIVE : "ca-app-pub-7433519007687449/8227570532",
-    },
+  const testIds = {
+    banner: TestIds.ADAPTIVE_BANNER,
+    interstitial: TestIds.INTERSTITIAL,
+    appOpen: TestIds.APP_OPEN,
+    nativeAdvanced: TestIds.NATIVE,
   };
 
   return Platform.select({
-    ios: adUnitIds[type].ios,
-    android: adUnitIds[type].android,
-    default: adUnitIds[type].android,
+    ios: testAds ? testIds[type] : adUnits[type].ios,
+    android: testAds ? testIds[type] : adUnits[type].android,
+    default: testAds ? testIds[type] : adUnits[type].android,
   });
 };
 
@@ -67,14 +60,15 @@ let interstitialAd;
 let appOpenAd;
 
 const AdManager = () => {
-  const { adConfig, clickCount } = useContext(adConfigContext);
-
-  let interstitialJustShown = false;
+  const { adConfig, clickCount, adsReady } = useContext(adConfigContext);
+  const interstitialJustShown = useRef(false);
   const appPauseCount = useRef(0);
 
   useEffect(() => {
+    if (!adsReady || !adConfig?.showAds) return;
+
     const subscription = AppState.addEventListener("change", (nextAppState) => {
-      if (nextAppState === "active" && !interstitialJustShown) {
+      if (nextAppState === "active" && !interstitialJustShown.current) {
         appPauseCount.current += 1;
 
         if (
@@ -85,13 +79,15 @@ const AdManager = () => {
           appOpenAd.show();
         }
       }
-      interstitialJustShown = false;
+      interstitialJustShown.current = false;
     });
 
     return () => subscription.remove();
-  }, [adConfig]);
+  }, [adConfig, adsReady]);
 
   useEffect(() => {
+    if (!adsReady || !adConfig?.showAds) return;
+
     if (
       clickCount > 0 &&
       adConfig?.showInterstitialAds &&
@@ -100,18 +96,16 @@ const AdManager = () => {
     ) {
       showInterstitialAd(adConfig);
     }
-  }, [clickCount, adConfig]);
+  }, [clickCount, adConfig, adsReady]);
 
-  useEffect(() => {
-    loadAds(adConfig);
-  }, [adConfig]);
+  const isLoadingAds = useRef(false);
+  const loadAds = useCallback((config) => {
+    if (isLoadingAds.current) return;
 
-  let isRewardedAdLoading = false;
-  const loadAds = (config) => {
-    if (isRewardedAdLoading) return;
-
-    isRewardedAdLoading = true;
-    setTimeout(() => (isRewardedAdLoading = false), 5000);
+    isLoadingAds.current = true;
+    setTimeout(() => {
+      isLoadingAds.current = false;
+    }, 5000);
 
     interstitialAd = InterstitialAd.createForAdRequest(
       getAdUnitId("interstitial", config.testAds),
@@ -120,31 +114,31 @@ const AdManager = () => {
       getAdUnitId("appOpen", config.testAds),
     );
 
-    interstitialAd.addAdEventListener(AdEventType.LOADED, () =>
-      console.log("Interstitial Ad Loaded!"),
-    );
     interstitialAd.addAdEventListener(AdEventType.CLOSED, () => {
-      interstitialJustShown = true;
+      interstitialJustShown.current = true;
       interstitialAd.load();
     });
 
     interstitialAd.load();
 
-    appOpenAd.addAdEventListener(AdEventType.LOADED, () =>
-      console.log("App Open Ad Loaded!"),
-    );
     appOpenAd.addAdEventListener(AdEventType.CLOSED, () =>
       setTimeout(() => appOpenAd.load(), 3000),
     );
 
     appOpenAd.load();
-  };
+  }, [interstitialJustShown]);
+
+  useEffect(() => {
+    if (!adsReady || !adConfig?.showAds) return;
+
+    loadAds(adConfig);
+  }, [adConfig, adsReady, loadAds]);
 
   return null;
 };
 
 export const showInterstitialAd = (adConfig) => {
-  if (interstitialAd?.loaded && adConfig.showInterstitialAds) {
+  if (interstitialAd?.loaded && adConfig.showAds && adConfig.showInterstitialAds) {
     interstitialAd.show();
     interstitialAd.load();
   } else {
@@ -153,11 +147,11 @@ export const showInterstitialAd = (adConfig) => {
 };
 
 export const BannerAdComponent = ({ fixed = false }) => {
-  const insets = useSafeAreaInsets();
-  const { adConfig } = useContext(adConfigContext);
+  const { adConfig, adsReady } = useContext(adConfigContext);
   const [isAdLoaded, setIsAdLoaded] = useState(false);
+  const insets = useSafeAreaInsets();
 
-  if (!adConfig.showBannerAds) return null;
+  if (!adsReady || !adConfig.showAds || !adConfig.showBannerAds) return null;
 
   const containerStyle = [
     {
@@ -169,12 +163,10 @@ export const BannerAdComponent = ({ fixed = false }) => {
     },
     fixed && {
       position: 'absolute',
-      bottom: 0,
+      bottom: insets.bottom,
       left: 0,
       right: 0,
-      // Removed insets.bottom because it is usually inside a SafeAreaView or SafeScreen
-      // If it is truly "fixed" to the screen bottom, it should be outside SafeScreen.
-      // But currently it's used inside SafeScreen which already adds padding.
+      paddingBottom: insets.bottom > 0 ? 4 : 0,
       zIndex: 1000,
     }
   ];
@@ -192,9 +184,9 @@ export const BannerAdComponent = ({ fixed = false }) => {
 };
 
 export const NativeAdComponent = () => {
-  const { adConfig } = useContext(adConfigContext);
+  const { adConfig, adsReady } = useContext(adConfigContext);
 
-  if (!adConfig.showNativeAds) return null;
+  if (!adsReady || !adConfig.showAds || !adConfig.showNativeAds) return null;
 
   return (
     <NativeAdView
@@ -211,8 +203,7 @@ export const NativeAdComponent = () => {
         shadowOpacity: 0.1,
         shadowRadius: 4,
       }}
-      onAdLoaded={() => console.log("Native Ad Loaded")}
-      onAdFailedToLoad={(err) => console.log("Native Ad Load Error", err)}
+      onAdFailedToLoad={(err) => console.error("Native Ad Load Error", err)}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <IconView style={{ width: 60, height: 60, borderRadius: 10 }} />

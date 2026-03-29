@@ -87,7 +87,7 @@ export default function CourseModules() {
   const router = useRouter();
   const { allCourses, setSelectedCourse, setSelectedModule } =
     useContext(allCoursesContext);
-  const { userData } = useContext(userDetailsContext);
+  const { userData, updateCourse } = useContext(userDetailsContext);
   const { setClickCount } = useContext(adConfigContext);
 
   const course = useMemo(() => {
@@ -102,6 +102,13 @@ export default function CourseModules() {
     const attempt = attemptedQuizzes.find((q) => q.id === quizId);
     return attempt && attempt.score >= 60;
   };
+
+  useEffect(() => {
+    if (!course?.title) return;
+    if (userData?.progress?.[course.title]) return;
+
+    updateCourse(course.title, {});
+  }, [course, updateCourse, userData]);
 
   const handleModulePress = (module) => {
     setSelectedCourse(course);

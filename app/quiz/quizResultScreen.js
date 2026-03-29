@@ -16,7 +16,7 @@ import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
-import { Emoji, EmojiText } from "../../constants/constants";
+import { EmojiText } from "../../constants/constants";
 import { allCoursesContext, userDetailsContext } from "../../context/context";
 import { BannerAdComponent } from "../../services/AdManager";
 
@@ -98,7 +98,7 @@ export default function QuizResultScreen() {
   const [loading, setLoading] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
-  const getPercMarks = quizData?.quizResultPercentage || 0;
+  const getPercMarks = Number(quizData?.quizResultPercentage ?? 0);
   const quizResult = quizData?.result || {};
 
   useEffect(() => {
@@ -145,6 +145,10 @@ export default function QuizResultScreen() {
 
   const renderItem = ({ item, index }) => {
     const quizItem = item[1];
+    const userAnswer = quizItem?.userChoice ?? "Not answered";
+    const correctAnswer = quizItem?.correctAns ?? "Not available";
+    const questionText = quizItem?.question ?? "Question unavailable";
+
     return (
       <AnimatedResultItem index={index}>
         <View
@@ -163,7 +167,7 @@ export default function QuizResultScreen() {
           <Text
             style={{ fontFamily: "nunito-bold", fontSize: 16, marginBottom: 8 }}
           >
-            {quizItem?.question}
+            {questionText}
           </Text>
 
           {!quizItem?.isCorrect && (
@@ -174,7 +178,7 @@ export default function QuizResultScreen() {
                 color: colors.ERROR,
               }}
             >
-              Your Answer: {quizItem?.userChoice}
+              Your Answer: {userAnswer}
             </Text>
           )}
 
@@ -187,7 +191,7 @@ export default function QuizResultScreen() {
             }}
           >
             {!quizItem?.isCorrect ? "Correct Answer" : "Answer"}:{" "}
-            {quizItem?.correctAns}
+            {correctAnswer}
           </Text>
 
           {quizItem?.explanation && (

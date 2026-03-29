@@ -79,11 +79,19 @@ export default function FlashcardModules() {
   const router = useRouter();
   const { allCourses, setSelectedCourse, setSelectedModule } =
     useContext(allCoursesContext);
+  const { userData, updateCourse } = useContext(userDetailsContext);
   const { setClickCount } = useContext(adConfigContext);
 
   const course = useMemo(() => {
     return allCourses.find((c) => c.id === coursesId);
   }, [allCourses, coursesId]);
+
+  useEffect(() => {
+    if (!course?.title) return;
+    if (userData?.progress?.[course.title]) return;
+
+    updateCourse(course.title, {});
+  }, [course, updateCourse, userData]);
 
   const handleModulePress = (module) => {
     setSelectedCourse(course);

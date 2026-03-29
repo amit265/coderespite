@@ -5,7 +5,7 @@ import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
 import RefreshWrapper from "../../components/shared/RefreshWrapper";
 import { flashcardIcons } from "../../constants/constants";
-import { adConfigContext, allCoursesContext } from "../../context/context";
+import { adConfigContext, allCoursesContext, userDetailsContext } from "../../context/context";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 
 // --- Animated Card Component ---
@@ -120,12 +120,14 @@ export default function FlashCards() {
   const router = useRouter();
   const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
   const { setClickCount } = useContext(adConfigContext);
+  const { updateCourse } = useContext(userDetailsContext);
   const { refreshData, globalRefreshing } = useGlobalRefresh();
 
   const handleCardPress = (item) => {
     // We add a tiny delay to allow the "bounce" animation to be seen before navigating
     setTimeout(() => {
         setSelectedCourse(item);
+        updateCourse(item?.title, {});
         setClickCount((prev) => prev + 1);
         router.push(`/flashcards/courses/${item?.id}`);
     }, 150);

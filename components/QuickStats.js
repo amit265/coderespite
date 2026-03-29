@@ -1,27 +1,55 @@
 import { Entypo } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import colors from "../constants/colors";
-import { Emoji, EmojiText } from "../constants/constants";
+import { EmojiText } from "../constants/constants";
+import { allCoursesContext } from "../context/context";
 
 export default function QuickStats({ userData }) {
-  const progress = userData?.progress || {};
-  const hasProgress = Object.keys(progress).length > 0;
+  const progress = useMemo(() => userData?.progress || {}, [userData]);
+  const { allCourses } = useContext(allCoursesContext);
+  const validCourseTitles = useMemo(
+    () =>
+      new Set(
+        (allCourses || [])
+          .map((course) => course?.title)
+          .filter((title) => typeof title === "string" && title.trim())
+      ),
+    [allCourses]
+  );
+  const progressEntries = useMemo(
+    () =>
+      Object.entries(progress).filter(
+        ([courseName, courseData]) =>
+          validCourseTitles.has(courseName) &&
+          courseData &&
+          typeof courseData === "object"
+      ),
+    [progress, validCourseTitles]
+  );
+  const hasProgress = progressEntries.length > 0;
   const [hideSections, setHideSections] = useState({
     flashcardsLoved: false,
     flashcardsViewed: false,
     attemptedQuizzes: false,
     coursesEnrolled: false,
   });
+
   const toggleHide = (key) => {
     setHideSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
+
+  const getStatCount = (courseData, key) => {
+    const statValue = courseData?.[key];
+    return Array.isArray(statValue) ? statValue.length : 0;
+  };
+
   const renderStatBlock = (emoji, title, key, unit = "items") => {
     return (
       <View className="mb-4">
         {hasProgress ? (
           <View className="flex flex-col flex-wrap gap-2 items-center justify-center mt-4">
-            {Object.entries(progress).map(([courseName, courseData]) => (
+            {progressEntries.map(([courseName, courseData]) => (
               <View
                 key={courseName}
                 className="rounded-2xl py-4 px-4 items-center flex flex-row w-full gap-4"
@@ -31,7 +59,7 @@ export default function QuickStats({ userData }) {
                   {courseName}:
                 </Text>
                 <Text className="text-sm text-gray-600">
-                  {courseData?.[key]?.length || 0}
+                  {getStatCount(courseData, key)}
                 </Text>
               </View>
             ))}
@@ -49,7 +77,7 @@ export default function QuickStats({ userData }) {
         className="border-b border-gray-800 mb-3 flex-row items-center gap-2"
         style={{ borderStyle: "dotted", paddingBottom: 20 }}
       >
-        <EmojiText style={{ fontSize: 20 }}>📊 Quick Stats:</EmojiText>
+        <EmojiText style={{ fontSize: 20 }}>📊 Learning Overview</EmojiText>
       </View>
 
       <TouchableOpacity
@@ -59,7 +87,7 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>📚 Courses Enrolled: {Object.keys(progress).length || 0}</EmojiText>
+            <EmojiText style={{ fontSize: 18 }}>📚 Courses Enrolled: {progressEntries.length || 0}</EmojiText>
           </View>
           <Entypo name="arrow-with-circle-down" size={24} color="black" />
         </View>
@@ -67,7 +95,7 @@ export default function QuickStats({ userData }) {
           <View>
             {hasProgress ? (
               <View className="flex flex-col flex-wrap gap-2 items-center justify-center mt-4">
-                {Object.entries(progress).map(([courseName, courseData]) => (
+                {progressEntries.map(([courseName]) => (
                   <View
                     key={courseName}
                     className="rounded-2xl py-4 px-4 items-center flex flex-row w-full gap-4"
@@ -92,9 +120,9 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>💙 Favorite Flashcards: {Object.keys(progress).reduce(
+            <EmojiText style={{ fontSize: 18 }}>💙 Favorite Flashcards: {progressEntries.reduce(
                 (total, course) =>
-                  total + (progress[course]?.flashcardsLoved?.length || 0),
+                  total + getStatCount(course[1], "flashcardsLoved"),
                 0
               ) || 0}</EmojiText>
           </View>
@@ -116,9 +144,9 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>🧠 Viewed Flashcards: {Object.keys(progress).reduce(
+            <EmojiText style={{ fontSize: 18 }}>🧠 Viewed Flashcards: {progressEntries.reduce(
                 (total, course) =>
-                  total + (progress[course]?.flashcardsViewed?.length || 0),
+                  total + getStatCount(course[1], "flashcardsViewed"),
                 0
               ) || 0}</EmojiText>
           </View>
@@ -135,9 +163,9 @@ export default function QuickStats({ userData }) {
       >
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>🧪 Quizzes Completed: {Object.keys(progress).reduce(
+            <EmojiText style={{ fontSize: 18 }}>🧪 Quizzes Completed: {progressEntries.reduce(
                 (total, course) =>
-                  total + (progress[course]?.attemptedQuizzes?.length || 0),
+                  total + getStatCount(course[1], "attemptedQuizzes"),
                 0
               ) || 0}</EmojiText>
           </View>

@@ -5,75 +5,49 @@ import {
 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useEffect, useRef } from "react";
-import { View, Animated, StyleSheet, Platform } from "react-native";
+import { Animated, Platform, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "../../constants/colors";
 
 // --- Custom Animated Icon Component ---
-const TabIcon = ({ focused, icon, color, size }) => {
+const TabIcon = ({ focused, icon, tabBarHeight }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
-  const translateAnim = useRef(new Animated.Value(0)).current;
-  const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (focused) {
-      // Animation when active: Scale up, move up, fade in dot
-      Animated.parallel([
-        Animated.spring(scaleAnim, {
-          toValue: 1.2,
-          friction: 6,
-          useNativeDriver: true,
-        }),
-        Animated.spring(translateAnim, {
-          toValue: -5, // Moves icon slightly up
-          friction: 6,
-          useNativeDriver: true,
-        }),
-        Animated.timing(opacityAnim, {
-          toValue: 1,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-      ]).start();
+      Animated.spring(scaleAnim, {
+        toValue: 1.15,
+        friction: 6,
+        useNativeDriver: true,
+      }).start();
     } else {
-      // Animation when inactive: Reset to normal
-      Animated.parallel([
-        Animated.spring(scaleAnim, {
-          toValue: 1,
-          friction: 6,
-          useNativeDriver: true,
-        }),
-        Animated.spring(translateAnim, {
-          toValue: 0,
-          friction: 6,
-          useNativeDriver: true,
-        }),
-        Animated.timing(opacityAnim, {
-          toValue: 0,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-      ]).start();
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        friction: 6,
+        useNativeDriver: true,
+      }).start();
     }
   }, [focused]);
 
   return (
-    <View style={styles.iconContainer}>
-      <Animated.View
-        style={{
-          transform: [{ scale: scaleAnim }, { translateY: translateAnim }],
-        }}
-      >
-        {icon}
-      </Animated.View>
-      {/* The floating dot indicator */}
-      <Animated.View style={[styles.activeDot, { opacity: opacityAnim, backgroundColor: color }]} />
-    </View>
+    <Animated.View
+      style={{
+        width: "100%",
+        height: tabBarHeight,
+        alignItems: "center",
+        justifyContent: "center",
+        transform: [{ scale: scaleAnim }],
+      }}
+    >
+      {icon}
+    </Animated.View>
   );
 };
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const tabBarBottom = insets.bottom + (Platform.OS === "ios" ? 10 : 12);
+  const tabBarHeight = 64;
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.BACKGROUND }}>
@@ -85,25 +59,32 @@ export default function TabsLayout() {
           tabBarShowLabel: false,
 
           tabBarStyle: {
-            position: "absolute", // Ensures it floats over content
-            bottom: Platform.OS === "ios" ? insets.bottom || 10 : 10,
+            position: "absolute",
+            bottom: tabBarBottom,
             left: 10,
             right: 10,
-            height: 65,
+            height: tabBarHeight,
+            paddingTop: 0,
+            paddingBottom: 0,
             borderRadius: 20,
             backgroundColor: "white",
-            borderTopWidth: 0, // Remove default top border
-            
-            // Shadows for iOS
+            borderTopWidth: 0,
             shadowColor: "#000",
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.1,
             shadowRadius: 10,
             marginHorizontal: 10,
-            // Shadows for Android
             elevation: 5,
-            
-            paddingTop: 15, // Reset padding to center icons
+          },
+          tabBarIconStyle: {
+            marginTop: 15
+          },
+          tabBarItemStyle: {
+            height: tabBarHeight,
+            paddingTop: 0,
+            paddingBottom: 0,
+            alignItems: "center",
+            justifyContent: "center",
           },
 
           tabBarIcon: ({ color, size, focused }) => {
@@ -149,8 +130,7 @@ export default function TabsLayout() {
               <TabIcon
                 focused={focused}
                 icon={iconComponent}
-                color={color}
-                size={size}
+                tabBarHeight={tabBarHeight}
               />
             );
           },
@@ -167,19 +147,3 @@ export default function TabsLayout() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
-    width: 50, // Ensure touch target is large enough
-  },
-  activeDot: {
-    position: "absolute",
-    bottom: 8, // Positioned near the bottom of the tab bar
-    width: 5,
-    height: 5,
-    borderRadius: 2.5,
-  },
-});

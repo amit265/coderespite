@@ -1,12 +1,17 @@
 // app/_layout.tsx
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack, SplashScreen } from 'expo-router';
 import * as TrackingTransparency from 'expo-tracking-transparency';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { AppState, Platform, StatusBar, Text, View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import MobileAds from "react-native-google-mobile-ads";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -15,8 +20,7 @@ import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, use
 import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
-import { useAppInitialization } from "../hooks/useAppInitialization";
-import { Emoji, EmojiText } from "../constants/constants";
+import { EmojiText } from "../constants/constants";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,6 +33,9 @@ export default function RootLayout() {
     "quicksand": require("../assets/fonts/Quicksand-Regular.ttf"),
     "quicksand-semiBold": require("../assets/fonts/Quicksand-SemiBold.ttf"),
     "quicksand-bold": require("../assets/fonts/Quicksand-Bold.ttf"),
+    ...AntDesign.font,
+    ...Ionicons.font,
+    ...MaterialCommunityIcons.font,
   });
 
   const [adConfig, setAdConfig] = useState({
@@ -41,6 +48,7 @@ export default function RootLayout() {
     interstitialFrequency: 10,
     appOpenAdFrequency: 10
   });
+  const [adsReady, setAdsReady] = useState(false);
   const [userData, setUserDataState] = useState(null);
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
@@ -57,7 +65,10 @@ export default function RootLayout() {
 
   const [selectedLesson, setSelectedLesson] = useState(null);
 
-  const adConfigValue = useMemo(() => ({ adConfig, setAdConfig, clickCount, setClickCount }), [clickCount, setClickCount, adConfig])
+  const adConfigValue = useMemo(
+    () => ({ adConfig, setAdConfig, clickCount, setClickCount, adsReady }),
+    [clickCount, adConfig, adsReady]
+  )
   const favoritesValue = useMemo(() => ({ favorites, setFavorites }), [favorites])
 
 
@@ -204,31 +215,34 @@ export default function RootLayout() {
 
   }, [checkConnection]);
 
-  // ✅ Initialize Mobile Ads with ATT request on iOS
+  // Ask for ATT on iOS before initializing ads, then enable ad loading.
   useEffect(() => {
-    (async () => {
-      if (Platform.OS === 'ios') {
-        // Wait for fonts to load first (which hides the splash screen)
-        if (!fontsLoaded && !fontError) return;
+    if (!fontsLoaded && !fontError) return;
 
-        // Small delay to ensure the splash screen transition is complete
-        await new Promise(resolve => setTimeout(resolve, 800));
+    let isMounted = true;
 
-        const { status } = await TrackingTransparency.requestTrackingPermissionsAsync();
-        if (status === 'granted') {
-          console.log('Tracking permission granted!');
+    const prepareAds = async () => {
+      try {
+        if (Platform.OS === "ios") {
+          await TrackingTransparency.getTrackingPermissionsAsync();
+          await TrackingTransparency.requestTrackingPermissionsAsync();
+        }
+
+        await MobileAds().initialize();
+      } catch (error) {
+        console.error("Mobile Ads Init Error:", error);
+      } finally {
+        if (isMounted) {
+          setAdsReady(true);
         }
       }
+    };
 
-      MobileAds()
-        .initialize()
-        .then(adapterStatuses => {
-          console.log('Mobile Ads Initialized');
-        })
-        .catch(error => {
-          console.error("Mobile Ads Init Error:", error);
-        });
-    })();
+    prepareAds();
+
+    return () => {
+      isMounted = false;
+    };
   }, [fontsLoaded, fontError]);
 
 
@@ -259,8 +273,8 @@ export default function RootLayout() {
     <ErrorBoundary
       FallbackComponent={ErrorFallback}
       onError={(error, info) => {
-        console.log('Global Error:', error);
-        console.log('Component Stack:', info.componentStack);
+        console.error('Global Error:', error);
+        console.error('Component Stack:', info.componentStack);
         // Log the error to an external service like Sentry or Firebase
       }}
     >

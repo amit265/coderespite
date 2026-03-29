@@ -5,7 +5,7 @@ import colors from "../constants/colors";
 
 export default function SafeScreen({ children }) {
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right", "bottom"]}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
       <View style={styles.container}>{children}</View>
     </SafeAreaView>
   );

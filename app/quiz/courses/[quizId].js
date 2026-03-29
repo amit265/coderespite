@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter, Stack } from "expo-router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import * as Progress from "react-native-progress";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -95,19 +95,49 @@ export default function QuizId() {
   const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
 
-  const { selectedCourse, selectedQuiz } = useContext(allCoursesContext);
+  const { allCourses, selectedCourse, selectedQuiz, setSelectedCourse, setSelectedQuiz } =
+    useContext(allCoursesContext);
   const { setClickCount } = useContext(adConfigContext);
 
-  const courseTitle = selectedCourse?.title;
-  const courseId = selectedCourse?.id;
-  const quizTitle = selectedQuiz?.title;
   const moduleId = quizId.replace("quiz_", "");
-  const quiz = selectedQuiz?.quiz;
-  const quizIcon = selectedCourse?.icon;
   const hasGainedXP = useRef(false);
+
+  const resolvedCourse = useMemo(() => {
+    if (selectedCourse?.quizzes?.some((item) => item.id === quizId)) {
+      return selectedCourse;
+    }
+
+    return allCourses.find((course) =>
+      course.quizzes?.some((item) => item.id === quizId)
+    );
+  }, [allCourses, quizId, selectedCourse]);
+
+  const resolvedQuiz = useMemo(() => {
+    if (selectedQuiz?.id === quizId) {
+      return selectedQuiz;
+    }
+
+    return resolvedCourse?.quizzes?.find((item) => item.id === quizId) || null;
+  }, [quizId, resolvedCourse, selectedQuiz]);
+
+  const courseTitle = resolvedCourse?.title;
+  const courseId = resolvedCourse?.id;
+  const quizTitle = resolvedQuiz?.title;
+  const quiz = resolvedQuiz?.quiz;
+  const quizIcon = resolvedCourse?.icon;
 
   // Animation Ref for the Question Card Slide
   const slideAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (resolvedCourse && resolvedCourse.id !== selectedCourse?.id) {
+      setSelectedCourse(resolvedCourse);
+    }
+
+    if (resolvedQuiz && resolvedQuiz.id !== selectedQuiz?.id) {
+      setSelectedQuiz(resolvedQuiz);
+    }
+  }, [resolvedCourse, resolvedQuiz, selectedCourse, selectedQuiz, setSelectedCourse, setSelectedQuiz]);
 
   useEffect(() => {
     const backAction = () => {
