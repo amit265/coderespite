@@ -44,7 +44,7 @@ export default function RootLayout() {
     showAppOpenAds: true,
     showNativeAds: true,
     showBannerAds: true,
-    testAds: true,
+    testAds: false,
     interstitialFrequency: 10,
     appOpenAdFrequency: 10
   });

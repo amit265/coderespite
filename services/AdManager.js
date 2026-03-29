@@ -14,7 +14,6 @@ import {
   NativeAdView,
   StarRatingView,
   TaglineView,
-  TestIds,
 } from "react-native-google-mobile-ads";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { adConfigContext } from "../context/context";
@@ -22,36 +21,28 @@ import colors from "../constants/colors";
 
 const adUnits = {
   banner: {
-    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_BANNER_ID,
-    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_BANNER_ID,
+    android: "ca-app-pub-7433519007687449/9531365889",
+    ios: "ca-app-pub-7433519007687449/5570092969",
   },
   interstitial: {
-    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_INTERSTITIAL_ID,
-    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_INTERSTITIAL_ID,
+    android: "ca-app-pub-7433519007687449/7195403622",
+    ios: "ca-app-pub-7433519007687449/7733221875",
   },
   appOpen: {
-    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_OPEN_ID,
-    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_OPEN_ID,
+    android: "ca-app-pub-7433519007687449/6961042869",
+    ios: "ca-app-pub-7433519007687449/1274315229",
   },
   nativeAdvanced: {
-    android: process.env.EXPO_PUBLIC_ADMOB_ANDROID_NATIVE_ID,
-    ios: process.env.EXPO_PUBLIC_ADMOB_IOS_NATIVE_ID,
+    android: "ca-app-pub-7433519007687449/3505013580",
+    ios: "ca-app-pub-7433519007687449/8227570532",
   },
 };
 
-// ✅ Helper to get ad unit IDs based on platform and test mode
-const getAdUnitId = (type, testAds) => {
-  const testIds = {
-    banner: TestIds.ADAPTIVE_BANNER,
-    interstitial: TestIds.INTERSTITIAL,
-    appOpen: TestIds.APP_OPEN,
-    nativeAdvanced: TestIds.NATIVE,
-  };
-
+const getAdUnitId = (type) => {
   return Platform.select({
-    ios: testAds ? testIds[type] : adUnits[type].ios,
-    android: testAds ? testIds[type] : adUnits[type].android,
-    default: testAds ? testIds[type] : adUnits[type].android,
+    ios: adUnits[type].ios,
+    android: adUnits[type].android,
+    default: adUnits[type].android,
   });
 };
 
@@ -108,10 +99,10 @@ const AdManager = () => {
     }, 5000);
 
     interstitialAd = InterstitialAd.createForAdRequest(
-      getAdUnitId("interstitial", config.testAds),
+      getAdUnitId("interstitial"),
     );
     appOpenAd = AppOpenAd.createForAdRequest(
-      getAdUnitId("appOpen", config.testAds),
+      getAdUnitId("appOpen"),
     );
 
     interstitialAd.addAdEventListener(AdEventType.CLOSED, () => {
@@ -174,7 +165,7 @@ export const BannerAdComponent = ({ fixed = false }) => {
   return (
     <View style={containerStyle}>
       <BannerAd
-        unitId={getAdUnitId("banner", adConfig.testAds)}
+        unitId={getAdUnitId("banner")}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
         onAdLoaded={() => setIsAdLoaded(true)}
         onAdFailedToLoad={(error) => console.error("Banner Ad Error:", error)}
@@ -190,7 +181,7 @@ export const NativeAdComponent = () => {
 
   return (
     <NativeAdView
-      adUnitID={getAdUnitId("nativeAdvanced", adConfig?.testAds)}
+      adUnitID={getAdUnitId("nativeAdvanced")}
       style={{
         width: "100%",
         padding: 15,
