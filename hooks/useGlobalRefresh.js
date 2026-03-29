@@ -47,15 +47,22 @@ export const useGlobalRefresh = () => {
       // 2. OR if we found NO data in the cache (First install)
       if (shouldFetchRemote || !hasCache) {
         console.log("🌍 Fetching fresh data from Firebase...");
-        
-        const freshData = await getAllCoursesWithSubcollections();
-        
-        // Update Context with the fresh data
-        setAllCourses(freshData);
-        
-        // Save fresh data to Cache
-        await AsyncStorage.setItem("@allCourses_data", JSON.stringify(freshData));
-        console.log("✅ Remote Fetch Complete");
+
+        try {
+          const freshData = await getAllCoursesWithSubcollections();
+
+          setAllCourses(freshData);
+          await AsyncStorage.setItem("@allCourses_data", JSON.stringify(freshData));
+          console.log("✅ Remote Fetch Complete");
+        } catch (error) {
+          console.error("❌ Remote fetch failed:", error);
+
+          if (!hasCache) {
+            throw error;
+          }
+
+          console.log("📦 Keeping cached course data after remote fetch failure.");
+        }
       } else {
         console.log("⏭️ Skipping remote fetch (Using Cache Only)");
       }

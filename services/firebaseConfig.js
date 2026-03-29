@@ -13,8 +13,21 @@ const firebaseConfig = {
   measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
+const missingFirebaseConfigKeys = Object.entries(firebaseConfig)
+  .filter(([, value]) => !value)
+  .map(([key]) => key);
+
+export const isFirebaseConfigured = missingFirebaseConfigKeys.length === 0;
+
+if (!isFirebaseConfigured) {
+  console.error(
+    "Firebase config is missing required EXPO_PUBLIC values:",
+    missingFirebaseConfigKeys
+  );
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export {db}
+export { db };

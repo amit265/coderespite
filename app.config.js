@@ -1,8 +1,3 @@
-const ADMOB_APP_IDS = {
-  android: "ca-app-pub-7433519007687449~1317833947",
-  ios: "ca-app-pub-7433519007687449~2791886380",
-};
-
 module.exports = {
   expo: {
     name: "CodeRespite: Refresh skills",
@@ -53,8 +48,8 @@ module.exports = {
       [
         "react-native-google-mobile-ads",
         {
-          androidAppId: ADMOB_APP_IDS.android,
-          iosAppId: ADMOB_APP_IDS.ios,
+          androidAppId: "ca-app-pub-7433519007687449~1317833947",
+          iosAppId: "ca-app-pub-7433519007687449~2791886380",
           userTrackingUsageDescription:
             "This identifier will be used to deliver personalized ads to you.",
           skAdNetworkItems: [
@@ -99,8 +94,8 @@ module.exports = {
     extra: {
       router: {},
       admob: {
-        androidAppId: ADMOB_APP_IDS.android,
-        iosAppId: ADMOB_APP_IDS.ios,
+        androidAppId: "ca-app-pub-7433519007687449~1317833947",
+        iosAppId: "ca-app-pub-7433519007687449~2791886380",
       },
       eas: {
         projectId: "45e5a71a-6a35-4ad2-9a84-243ad0a992a9",

@@ -1,13 +1,12 @@
 import { useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import { useEffect } from "react";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Image, Platform, StyleSheet, Text, View } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import SplashScreenComponent from "../components/SplashScreenComponent";
-import { Emoji, EmojiText } from "../constants/constants";
+import { EmojiText } from "../constants/constants";
 import { useAppInitialization } from "../hooks/useAppInitialization";
-import { useGlobalRefresh } from "../hooks/useGlobalRefresh";
 
 export default function Index() {
   const router = useRouter();
@@ -29,36 +28,28 @@ export default function Index() {
 
   return (
     <SafeScreen>
-      <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+      <View
+        style={{
+          flex: Platform.OS === "ios" ? 1.55 : 1.75,
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: Platform.OS === "ios" ? 8 : 0,
+        }}
+      >
         <Image 
           source={require("../assets/images/visual-picture.png")} 
-          style={{ width: '100%', height: '80%', resizeMode: 'contain' }}
+          style={{ width: "100%", height: "78%", resizeMode: "contain" }}
         />
-
-        {!isReady && (
-          <View
-            style={{
-              position: "absolute",
-              bottom: 0,
-              right: 20,
-              zIndex: 10,
-            }}
-          >
-            <LottieView
-              source={require("../assets/paw.json")}
-              autoPlay
-              loop
-              style={{
-                height: 120,
-                width: 120,
-                transform: [{ rotate: "45deg" }],
-              }}
-            />
-          </View>
-        )}
       </View>
 
-      <View style={{ flex: 1, paddingHorizontal: 20, justifyContent: 'center' }}>
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 20,
+          justifyContent: "flex-start",
+          paddingTop: Platform.OS === "ios" ? 4 : 0,
+        }}
+      >
         <Text className="text-black text-2xl font-quicksand-bold text-center">
           Welcome to CodeRespite!
         </Text>
@@ -67,7 +58,7 @@ export default function Index() {
         </EmojiText>
 
         {!isReady && (
-          <View className="items-center mt-4">
+          <View className="items-center mt-3">
             <LottieView
               source={require("../assets/cat.json")}
               autoPlay
