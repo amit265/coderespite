@@ -2,7 +2,7 @@ module.exports = {
   expo: {
     name: "CodeRespite: Refresh skills",
     slug: "coderespite",
-    version: "1.1.3",
+    version: "1.1.4",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: "coderespite",
@@ -12,6 +12,7 @@ module.exports = {
       supportsTablet: true,
       bundleIdentifier: "com.destyastudio.coderespite",
       icon: "./assets/iosIcon.png",
+      "buildNumber": "1",
       infoPlist: {
         NSUserTrackingUsageDescription:
           "This identifier will be used to deliver personalized ads to you.",

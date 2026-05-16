@@ -1,7 +1,7 @@
 
   {
   "cli": {
-    "appVersionSource": "local"
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -24,9 +24,12 @@
     },
     "production": {
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "app-bundle",
+                "autoIncrement": true
       },
       "ios": {
+                "autoIncrement": true,
+
         "distribution": "store"
       }
     }
@@ -34,6 +37,7 @@
   "submit": {
     "production": {
       "ios": {
+
         "appleId": "dev@destyastudio.com",
         "ascAppId": "6760843431"
       }

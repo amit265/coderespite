@@ -82,6 +82,7 @@ Thumbs.db
 
 # Ignore build artifacts
 *.aab
+*.ipa
 *.apk
 build/
 
