@@ -12,7 +12,7 @@ module.exports = {
       supportsTablet: true,
       bundleIdentifier: "com.destyastudio.coderespite",
       icon: "./assets/iosIcon.png",
-      "buildNumber": "1",
+      "buildNumber": "2",
       infoPlist: {
         NSUserTrackingUsageDescription:
           "This identifier will be used to deliver personalized ads to you.",
