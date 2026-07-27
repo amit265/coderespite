@@ -296,62 +296,15 @@ export default function RootLayout() {
                         style={{
                           flex: 1,
                           backgroundColor: "#0C1D59",
-                          flexDirection: "row",
                           justifyContent: "center",
                           alignItems: "center",
-                          padding: 20,
-                          flexWrap: "wrap",
-                          gap: 40,
                         }}
                       >
-                        {/* Desktop Web Landing & Promotion Panel */}
-                        <View style={{ maxWidth: 400, padding: 20 }}>
-                          <Text style={{ fontSize: 36, color: "#fff", fontFamily: "quicksand-bold", marginBottom: 12 }}>
-                            CodeRespite 🐾
-                          </Text>
-                          <Text style={{ fontSize: 16, color: "#cbd5e1", fontFamily: "nunito", marginBottom: 24, lineHeight: 24 }}>
-                            Refresh your coding skills on the go! Master JavaScript, React Native, Python, Web Development, and prepare for tech interviews with interactive quizzes and flashcards.
-                          </Text>
-                          <Text style={{ fontSize: 14, color: "#fbbf24", fontFamily: "nunito-bold", marginBottom: 12 }}>
-                            📲 Available now for Android & iOS:
-                          </Text>
-                          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
-                            <TouchableOpacity
-                              onPress={() => Linking.openURL("https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite")}
-                              style={{
-                                backgroundColor: "#1e293b",
-                                paddingVertical: 10,
-                                paddingHorizontal: 16,
-                                borderRadius: 8,
-                                borderWidth: 1,
-                                borderColor: "#334155",
-                              }}
-                            >
-                              <Text style={{ color: "#fff", fontSize: 13, fontFamily: "nunito-bold" }}>Get it on Google Play</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => Linking.openURL("https://apps.apple.com/app/id6760843431")}
-                              style={{
-                                backgroundColor: "#1e293b",
-                                paddingVertical: 10,
-                                paddingHorizontal: 16,
-                                borderRadius: 8,
-                                borderWidth: 1,
-                                borderColor: "#334155",
-                              }}
-                            >
-                              <Text style={{ color: "#fff", fontSize: 13, fontFamily: "nunito-bold" }}>Download on App Store</Text>
-                            </TouchableOpacity>
-                          </View>
-                        </View>
-
-                        {/* Mobile Simulator Frame */}
                         <View
                           style={{
                             width: "100%",
                             maxWidth: 480,
-                            height: "90%",
-                            minHeight: 700,
+                            height: "95%",
                             maxHeight: 850,
                             borderRadius: 20,
                             overflow: "hidden",
