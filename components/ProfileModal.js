@@ -58,7 +58,7 @@ const ProfileModal = ({ setShowModal }) => {
   const [selectedImage, setSelectedImage] = useState(availableImages[0]);
   const { userData, updateUser } = useContext(userDetailsContext);
   const [error, setError] = useState("");
-  const [username, setUsername] = useState(userData?.profile.name);
+  const [username, setUsername] = useState(userData?.profile?.name || "");
   
   // Animation Refs
   const avatarScaleAnim = useRef(new Animated.Value(1)).current; // For the big avatar pop

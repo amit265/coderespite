@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter, Stack } from "expo-router";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import * as Progress from "react-native-progress";
+import * as Haptics from "expo-haptics";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -9,7 +10,7 @@ import {
   Alert,
   Animated,
   BackHandler,
-  Dimensions,
+  useWindowDimensions,
   Easing,
   Pressable,
   ScrollView,
@@ -28,7 +29,6 @@ import {
 } from "../../../context/context";
 import { BannerAdComponent } from "../../../services/AdManager";
 
-const { width, height } = Dimensions.get("window");
 
 // --- Animated Option Component ---
 const AnimatedOption = ({ item, index, isSelected, onSelect }) => {
@@ -85,6 +85,7 @@ const AnimatedOption = ({ item, index, isSelected, onSelect }) => {
 };
 
 export default function QuizId() {
+  const { width } = useWindowDimensions();
   const { quizId } = useLocalSearchParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -166,11 +167,19 @@ export default function QuizId() {
   };
 
   const onOptionSelect = (selectedChoice) => {
+    const isCorrect = quiz[currentPage]?.correctAnswer === selectedChoice;
+
+    if (isCorrect) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(() => {});
+    }
+
     setResult((prev) => ({
       ...prev,
       [currentPage]: {
         userChoice: selectedChoice,
-        isCorrect: quiz[currentPage]?.correctAnswer === selectedChoice,
+        isCorrect: isCorrect,
         question: quiz[currentPage]?.question,
         correctAns: quiz[currentPage]?.correctAnswer,
         explanation: quiz[currentPage]?.explanation || "",

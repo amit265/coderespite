@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, Animated, View } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, Animated, View, Platform } from "react-native";
+import * as Haptics from "expo-haptics";
 import colors from "../../constants/colors";
 
 export default function Button({
@@ -50,6 +51,11 @@ export default function Button({
     }).start();
   };
 
+  const handlePress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+    if (onPress) onPress();
+  };
+
   return (
     <Animated.View
       style={{
@@ -59,7 +65,7 @@ export default function Button({
       }}
     >
       <TouchableOpacity
-        onPress={onPress}
+        onPress={handlePress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         disabled={loading || isInactive}

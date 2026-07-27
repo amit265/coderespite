@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Platform,
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import MoreApps from "../components/MoreApps";
@@ -25,20 +26,23 @@ import { BannerAdComponent } from "../services/AdManager";
 export default function Settings() {
   const router = useRouter();
   const handleContactUs = () => {
-
-    const email = "mindcraftlearning97@gmail.com";
-    const subject = "Support Request for CodeRespite";
-    const body = "Hi, I need help with...";
-    const url = `mailto:${email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    Linking.openURL(url).catch((err) =>
-      Alert.alert("Error", "Could not open email client.")
+    Linking.openURL("https://destyastudio.com/products/code-respite/support").catch((err) =>
+      Alert.alert("Error", "Could not open support page.")
     );
   };
 
   const handleShare = async () => {
     try {
+      if (Platform.OS === 'web') {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(SHARE_MESSAGE);
+          Alert.alert("Link Copied! 📋", "The share message has been copied to your clipboard!");
+        } else {
+          Alert.alert("Share CodeRespite", SHARE_MESSAGE);
+        }
+        return;
+      }
+
       const result = await Share.share({
         message: SHARE_MESSAGE,
       });
@@ -123,7 +127,7 @@ export default function Settings() {
             <TouchableOpacity
               style={styles.settingItem}
               onPress={() =>
-                Linking.openURL("https://mindcraftlearning.github.io/coderespite")
+                Linking.openURL("https://destyastudio.com/products/code-respite/privacy")
               }
             >
               <MaterialIcons name="privacy-tip" size={24} color="#000000" />

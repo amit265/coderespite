@@ -1,6 +1,7 @@
 import LottieView from "lottie-react-native";
 import React, { useEffect, useState, useRef } from "react";
-import { Modal, Text, View, Animated, Easing } from "react-native";
+import { Modal, Text, View, Animated, Easing, Platform } from "react-native";
+import * as Haptics from "expo-haptics";
 import { levels, Emoji, EmojiText } from "../constants/constants";
 import ProgressBar from "./home/ProgressBar";
 import Button from "./shared/Button";
@@ -55,6 +56,7 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
     setNextLevel(upcomingLevel);
     
     if (visible) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
       setShowConfetti(true);
       // 1. Reset animations
       modalScaleAnim.setValue(0.8);
@@ -90,7 +92,14 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
     >
       <View
         className="flex-1 justify-center items-center px-4"
-        style={{ backgroundColor: "rgba(0,0,0,0.6)" }} // Slightly darker background for pop
+        style={{
+          backgroundColor: "rgba(0,0,0,0.6)",
+          width: "100%",
+          alignSelf: "center",
+          ...(Platform.OS === 'web' && {
+            maxWidth: 480,
+          }),
+        }}
       >
         {/* Confetti z-index lowered slightly so it doesn't block interaction if animation gets stuck */}
         {showConfetti && (

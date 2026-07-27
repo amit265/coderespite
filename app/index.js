@@ -15,14 +15,15 @@ export default function Index() {
 
   useEffect(() => {
     if (isReady) {
+      const delay = Platform.OS === 'web' ? 2500 : 500;
       const timer = setTimeout(() => {
         router.replace("(tabs)");
-      }, 500);
+      }, delay);
       return () => clearTimeout(timer);
     }
   }, [isReady]);
 
-  if (showCustomSplash) {
+  if (showCustomSplash || isReady) {
     return <SplashScreenComponent />;
   }
 
@@ -101,6 +102,19 @@ export default function Index() {
           />
         </View>
       )}
+      <Text
+        style={{
+          position: "absolute",
+          bottom: 25,
+          alignSelf: "center",
+          fontFamily: "monospace",
+          fontSize: 10,
+          color: "rgba(0, 0, 0, 0.4)",
+          letterSpacing: 1.5,
+        }}
+      >
+        ● built by destyastudio.
+      </Text>
     </SafeScreen>
   );
 }

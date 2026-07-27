@@ -42,10 +42,13 @@ Check for:
 * Restore purchases
 * No misleading paywalls
 
-### Ads
+### Ads & AdMob Compliance
 
-* Not deceptive
-* Not spammy
+* NSUserTrackingUsageDescription present in info.plist for personalized ads (ATT)
+* Externalized Ad Unit IDs (loaded from Environment Variables or Remote Config, never hardcoded)
+* Not deceptive (no fake close buttons or misleading overlays)
+* Correct layout integration (never overlapping critical controls or covering navigation elements)
+* Frequency caps enforced to avoid spamming full-screen App Open / Interstitial ads
 
 ---
 
@@ -78,6 +81,17 @@ Check for:
 * No placeholder UI
 * Clear first experience
 * No dead screens
+
+---
+
+## F. App Store Optimization (ASO) & Store Presence
+
+Check for:
+
+* Title length (≤ 30 characters) and Subtitle length (≤ 30 characters)
+* Targeted search keywords (100-character keyword field fully utilized)
+* Compelling promotional text and localization of store metadata for target markets
+* App Store screenshots showing core value propositions clearly (first 3 screenshots count most)
 
 ---
 
@@ -148,11 +162,13 @@ Check for:
 * Misleading claims
 * Minimum functionality issues
 
-### Ads Compliance
+### Ads & AdMob Compliance
 
-* Ads not deceptive
-* No accidental click traps
-* Ads not spammy on launch
+* Declare AD_ID permission in manifest and complete target audience declaration
+* Externalized Ad Unit IDs (loaded from Env variables, never hardcoded in package)
+* Correct layout integration (no overlap with interactive buttons or system navigation)
+* Accidental click prevention (clear margins around native / banner ads)
+* Frequency limits enforced for launch / interstitial ads to maintain a premium UX
 
 ### Subscription Compliance
 
@@ -203,6 +219,17 @@ Check for:
 * No crashes on fresh install
 * Clean onboarding
 * No broken screens
+
+---
+
+## F. App Store Optimization (ASO) & Store Presence
+
+Check for:
+
+* App Title (≤ 30 characters) and Short Description (≤ 80 characters)
+* Natural placement of core search keywords in the Full Description (target 2-3% keyword density)
+* Visual asset compliance (1024x500 Feature Graphic, icons, screenshots)
+* Localization of titles and descriptions for key regions to increase global reach
 
 ---
 

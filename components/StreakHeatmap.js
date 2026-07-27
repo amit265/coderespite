@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { Modal, Pressable, StyleSheet, Text, View, Platform } from "react-native";
 
 const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -110,6 +110,11 @@ const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
     backgroundColor: "transparent",
+    width: "100%",
+    alignSelf: "center",
+    ...(Platform.OS === 'web' && {
+      maxWidth: 480,
+    }),
   },
   tooltip: {
     position: "absolute",

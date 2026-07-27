@@ -4,11 +4,13 @@ import { Platform, Text } from "react-native";
 export const STORE_LINK = Platform.select({
   ios: "https://apps.apple.com/app/id6760843431", // Replace with your actual iOS App ID if different
   android: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
+  default: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
 });
 
 export const SHARE_MESSAGE = Platform.select({
   ios: "Check out this amazing app on the App Store!\n\n" + STORE_LINK,
   android: "Check out this amazing app on the Play Store!\n\n" + STORE_LINK,
+  default: "Check out this amazing app!\n\n" + STORE_LINK,
 });
 
 export const Emoji = ({ children, style }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -8,14 +8,18 @@ import {
   ActivityIndicator,
   StyleSheet,
   Platform,
+  Alert,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMoreApps } from "../services/moreAppsService";
 import colors from "../constants/colors";
 import { Emoji, EmojiText } from "../constants/constants";
+import { userDetailsContext } from "../context/context";
 
 export default function MoreApps() {
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { gainXP } = useContext(userDetailsContext);
 
   useEffect(() => {
     const fetchApps = async () => {
@@ -26,9 +30,27 @@ export default function MoreApps() {
     fetchApps();
   }, []);
 
-  const openApp = (app) => {
+  const openApp = async (app) => {
     const url = Platform.OS === 'ios' ? app.iosUrl : app.androidUrl;
     if (url) {
+      try {
+        const appSlug = app.androidUrl.split('/').pop() || "app";
+        const key = `ds_cross_promo_${appSlug}_clicked`;
+        const alreadyClicked = await AsyncStorage.getItem(key);
+        if (!alreadyClicked) {
+          await AsyncStorage.setItem(key, "true");
+          if (gainXP) {
+            await gainXP(50);
+            Alert.alert(
+              "Cross-Promotion Reward! 🎉",
+              `Thank you for checking out "${app.name}"! You have been rewarded with +50 XP!`
+            );
+          }
+        }
+      } catch (err) {
+        console.error("Failed to reward cross promotion XP:", err);
+      }
+
       Linking.openURL(url).catch((err) =>
         console.error("Couldn't load page", err)
       );
@@ -50,7 +72,7 @@ export default function MoreApps() {
   return (
     <View style={styles.container}>
       <EmojiText style={styles.title}>
-        🚀 More by Developer
+        🚀 More by Destya Studio
       </EmojiText>
       {apps.map((app, index) => (
         <TouchableOpacity

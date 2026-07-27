@@ -8,6 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform,
+  Alert,
 } from "react-native";
 import colors from "../../constants/colors";
 import { SHARE_MESSAGE, STORE_LINK } from "../../constants/constants";
@@ -34,6 +36,16 @@ export default function Header() {
 
   const handleShare = async () => {
     try {
+      if (Platform.OS === 'web') {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(SHARE_MESSAGE);
+          Alert.alert("Link Copied! 📋", "The share message has been copied to your clipboard!");
+        } else {
+          Alert.alert("Share CodeRespite", SHARE_MESSAGE);
+        }
+        return;
+      }
+
       const result = await Share.share({
         message: SHARE_MESSAGE,
       });
@@ -111,7 +123,16 @@ export default function Header() {
         visible={menuVisible}
         onRequestClose={() => setMenuVisible(false)}
       >
-        <View className="flex-1">
+        <View
+          className="flex-1"
+          style={{
+            width: "100%",
+            alignSelf: "center",
+            ...(Platform.OS === 'web' && {
+              maxWidth: 480,
+            }),
+          }}
+        >
           {/* Top-right toggle button inside Modal */}
           <TouchableOpacity
             onPress={() => setMenuVisible(false)}

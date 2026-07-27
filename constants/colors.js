@@ -8,17 +8,11 @@ export default {
     WARNING: "#FB8C00",
     INFO: "#00ACC1",
     SUCCESS: "#43A047",
-    PRIMARY: "#11426B",
-    BUTTON: "#FF3131",
+    PRIMARY: "#132F94",       // Deep Indigo (Brand Color)
+    DARK_SLATE: "#0C1D59",    // Dark Slate (Brand Color)
+    BUTTON: "#FFA500",        // Accent/CTA Neon Amber (Brand Color)
     LIGHT_RED: "#ffc8c4",
     LIGHT_GREEN: "#dbffdd",
     GREEN: "#00FF00",
     GRAY: "#858585",
-
-
-
-
- 
- 
- 
- }
+};

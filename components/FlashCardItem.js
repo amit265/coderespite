@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext, useEffect, useRef } from "react";
-import { Dimensions, FlatList, Pressable, Text, View, Animated, Easing } from "react-native";
+import { useWindowDimensions, FlatList, Pressable, Text, View, Animated, Easing } from "react-native";
+import * as Haptics from "expo-haptics";
 import FlipCard from "react-native-flip-card";
 import colors from "../constants/colors";
 import { favoritesContext, userDetailsContext } from "../context/context";
@@ -86,7 +87,8 @@ export default function FlashCardItem({
   courseTitle,
   favorite,
 }) {
-  const screenWidth = Dimensions.get("screen").width;
+  const { width } = useWindowDimensions();
+  const screenWidth = Math.min(width || 480, 480);
   const { favorites, setFavorites } = useContext(favoritesContext);
   const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
 
@@ -246,7 +248,10 @@ export default function FlashCardItem({
                 perspective={1500}
                 flipVertical
                 clickable
-                onFlipEnd={() => handleFlashcardViewed(item)}
+                onFlipEnd={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+                  handleFlashcardViewed(item);
+                }}
               >
                 {/* Front Side */}
                 <View 

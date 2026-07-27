@@ -1,9 +1,10 @@
 import { Entypo } from "@expo/vector-icons";
 import React, { useContext, useMemo, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, Share, Alert, Platform } from "react-native";
 import colors from "../constants/colors";
-import { EmojiText } from "../constants/constants";
+import { EmojiText, STORE_LINK } from "../constants/constants";
 import { allCoursesContext } from "../context/context";
+import Button from "./shared/Button";
 
 export default function QuickStats({ userData }) {
   const progress = useMemo(() => userData?.progress || {}, [userData]);
@@ -34,6 +35,47 @@ export default function QuickStats({ userData }) {
     attemptedQuizzes: false,
     coursesEnrolled: false,
   });
+
+  const handleShareProgress = async () => {
+    const totalEnrolled = progressEntries.length || 0;
+    const totalLoved = progressEntries.reduce(
+      (total, course) => total + getStatCount(course[1], "flashcardsLoved"),
+      0
+    ) || 0;
+    const totalViewed = progressEntries.reduce(
+      (total, course) => total + getStatCount(course[1], "flashcardsViewed"),
+      0
+    ) || 0;
+    const totalQuizzes = progressEntries.reduce(
+      (total, course) => total + getStatCount(course[1], "attemptedQuizzes"),
+      0
+    ) || 0;
+
+    const message = `📊 My CodeRespite Progress Update! 🐾\n\n` +
+      `📚 Enrolled Courses: ${totalEnrolled}\n` +
+      `🧠 Viewed Flashcards: ${totalViewed}\n` +
+      `💙 Favorite Flashcards: ${totalLoved}\n` +
+      `🧪 Quizzes Completed: ${totalQuizzes}\n\n` +
+      `Refresh your tech skills with me! Download the app: ${STORE_LINK}`;
+
+    try {
+      if (Platform.OS === 'web') {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(message);
+          Alert.alert("Progress Copied! 📋", "Your learning progress has been copied to the clipboard!");
+        } else {
+          Alert.alert("My Learning Progress", message);
+        }
+        return;
+      }
+
+      await Share.share({
+        message,
+      });
+    } catch (error) {
+      console.log("Share progress error:", error.message);
+    }
+  };
 
   const toggleHide = (key) => {
     setHideSections((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -180,6 +222,11 @@ export default function QuickStats({ userData }) {
             "quizzes"
           )}
       </TouchableOpacity>
+
+      <Button
+        text="Share My Progress 🚀"
+        onPress={handleShareProgress}
+      />
     </View>
   );
 }

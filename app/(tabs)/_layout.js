@@ -4,8 +4,8 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { useEffect, useRef } from "react";
-import { Animated, Platform, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Animated, Platform, View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "../../constants/colors";
 
@@ -48,6 +48,17 @@ export default function TabsLayout() {
   const insets = useSafeAreaInsets();
   const tabBarBottom = insets.bottom + (Platform.OS === "ios" ? 10 : 12);
   const tabBarHeight = 64;
+
+  const [isDownloadModalVisible, setIsDownloadModalVisible] = useState(false);
+
+  const webTabListener = {
+    tabPress: (e) => {
+      if (Platform.OS === "web") {
+        e.preventDefault(); // Stop tab switch
+        setIsDownloadModalVisible(true); // Open the Modal
+      }
+    },
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.BACKGROUND }}>
@@ -136,14 +147,109 @@ export default function TabsLayout() {
           },
         })}
       >
-        {/* Reordered slightly to keep Home (index) in the logical center if you prefer, 
-            but keeping your original order works too. */}
-        <Tabs.Screen name="learn" options={{ title: "Learn" }} />
-        <Tabs.Screen name="flashcards" options={{ title: "Flashcards" }} />
+        <Tabs.Screen name="learn" options={{ title: "Learn" }} listeners={webTabListener} />
+        <Tabs.Screen name="flashcards" options={{ title: "Flashcards" }} listeners={webTabListener} />
         <Tabs.Screen name="index" options={{ title: "Home" }} />
-        <Tabs.Screen name="quiz" options={{ title: "Quiz" }} />
-        <Tabs.Screen name="profile" options={{ title: "Profile" }} />
+        <Tabs.Screen name="quiz" options={{ title: "Quiz" }} listeners={webTabListener} />
+        <Tabs.Screen name="profile" options={{ title: "Profile" }} listeners={webTabListener} />
       </Tabs>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isDownloadModalVisible}
+        onRequestClose={() => setIsDownloadModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Unlock Full Experience! 🐾</Text>
+            <Text style={styles.modalBody}>
+              Get the native mobile app to access the complete learning curriculum, flashcards, quizzes, and tracking tools offline.
+            </Text>
+            <TouchableOpacity
+              style={styles.downloadButton}
+              onPress={() => {
+                setIsDownloadModalVisible(false);
+                const redirectUrl = "https://destyastudio.com/products/code-respite";
+                if (Platform.OS === 'web') {
+                  window.open(redirectUrl, "_blank");
+                }
+              }}
+            >
+              <Text style={styles.downloadButtonText}>Download App</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setIsDownloadModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>Maybe Later</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    alignSelf: "center",
+    ...(Platform.OS === 'web' && {
+      maxWidth: 480,
+    }),
+  },
+  modalContent: {
+    width: "85%",
+    maxWidth: 400,
+    backgroundColor: "#0C1D59",
+    borderRadius: 20,
+    padding: 24,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#132F94",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 10,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  modalBody: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.8)",
+    textAlign: "center",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+  downloadButton: {
+    width: "100%",
+    backgroundColor: "#FFA500",
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  downloadButtonText: {
+    color: "#0C1D59",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  closeButton: {
+    paddingVertical: 8,
+  },
+  closeButtonText: {
+    color: "rgba(255, 255, 255, 0.5)",
+    fontSize: 14,
+  },
+});

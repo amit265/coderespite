@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Animated, BackHandler, Modal, View } from "react-native";
+import { Animated, BackHandler, Modal, View, Platform } from "react-native";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
@@ -161,6 +161,11 @@ export default function Home() {
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "rgba(0,0,0,0.5)",
+              width: "100%",
+              alignSelf: "center",
+              ...(Platform.OS === 'web' && {
+                maxWidth: 480,
+              }),
             }}
           >
             <View

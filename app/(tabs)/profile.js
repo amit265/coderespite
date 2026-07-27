@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
-import { useContext, useEffect, useState, useRef } from "react";
-import { Modal, ScrollView, Text, View, Animated } from "react-native";
+import { useContext, useEffect, useState, useRef, useMemo } from "react";
+import { Modal, ScrollView, Text, View, Animated, Platform } from "react-native";
 import ProgressBar from "../../components/home/ProgressBar";
 import PageTransition from "../../components/PageTransition";
 import ProfileModal from "../../components/ProfileModal";
@@ -8,6 +8,8 @@ import QuickStats from "../../components/QuickStats";
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import UserCard from "../../components/UserCard";
+import StreakHeatmap from "../../components/StreakHeatmap";
+import { generateLastNDaysData } from "../../services/generateLastNDaysData";
 import { userDetailsContext } from "../../context/context";
 import { uploadAllData } from "../../services/uploadData";
 import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
@@ -54,6 +56,8 @@ export default function Profile() {
   const router = useRouter();
   const show = false; // Dev toggle
 
+  const heatmapData = useMemo(() => generateLastNDaysData(userData?.progress), [userData?.progress]);
+
   useEffect(() => {
     const username = userData?.profile?.name ?? ""; 
     if (username === "user" || username === "") {
@@ -88,6 +92,14 @@ export default function Profile() {
           <FadeInSection delay={200}>
             <View className="px-4 bg-white mx-4 rounded-lg mt-4 pb-4 shadow-sm">
               <ProgressBar />
+            </View>
+          </FadeInSection>
+
+          {/* Streak Heatmap */}
+          <FadeInSection delay={250}>
+            <View className="px-4 bg-white mx-4 rounded-lg mt-4 p-4 shadow-sm">
+              <Text style={{ fontSize: 16, fontFamily: "nunito-bold", marginBottom: 10, color: "#000" }}>🔥 Activity Streak</Text>
+              <StreakHeatmap data={heatmapData} />
             </View>
           </FadeInSection>
 
@@ -153,6 +165,11 @@ export default function Profile() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "rgba(0,0,0,0.5)",
+                width: "100%",
+                alignSelf: "center",
+                ...(Platform.OS === 'web' && {
+                  maxWidth: 480,
+                }),
               }}
             >
               <View

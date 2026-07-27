@@ -21,22 +21,23 @@ import colors from "../constants/colors";
 
 const adUnits = {
   banner: {
-    android: "ca-app-pub-7433519007687449/9531365889",
-    ios: "ca-app-pub-7433519007687449/5570092969",
+    android: process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/9531365889",
+    ios: process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS || "ca-app-pub-7433519007687449/5570092969",
   },
   interstitial: {
-    android: "ca-app-pub-7433519007687449/7195403622",
-    ios: "ca-app-pub-7433519007687449/7733221875",
+    android: process.env.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/7195403622",
+    ios: process.env.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS || "ca-app-pub-7433519007687449/7733221875",
   },
   appOpen: {
-    android: "ca-app-pub-7433519007687449/6961042869",
-    ios: "ca-app-pub-7433519007687449/1274315229",
+    android: process.env.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/6961042869",
+    ios: process.env.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS || "ca-app-pub-7433519007687449/1274315229",
   },
   nativeAdvanced: {
-    android: "ca-app-pub-7433519007687449/3505013580",
-    ios: "ca-app-pub-7433519007687449/8227570532",
+    android: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/3505013580",
+    ios: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS || "ca-app-pub-7433519007687449/8227570532",
   },
 };
+
 
 const getAdUnitId = (type) => {
   return Platform.select({

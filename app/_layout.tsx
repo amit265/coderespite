@@ -8,13 +8,13 @@ import {
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack, SplashScreen } from 'expo-router';
-import * as TrackingTransparency from 'expo-tracking-transparency';
+import { requestTrackingPermission } from "../services/trackingInit";
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Platform, StatusBar, View } from 'react-native';
-import MobileAds from "react-native-google-mobile-ads";
+import { Platform, StatusBar, View, Text, TouchableOpacity, Linking } from 'react-native';
+import { initializeMobileAds } from "../services/adInit";
 import { Provider as PaperProvider } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import ErrorFallback from "../components/ErrorFallback";
 import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, userDetailsContext } from "../context/context";
 import AdManager from "../services/AdManager";
@@ -226,12 +226,10 @@ export default function RootLayout() {
         console.log("[Ads] Mobile Ads initialization started");
 
         if (Platform.OS === "ios") {
-          console.log("[Ads] Requesting iOS tracking permission");
-          await TrackingTransparency.getTrackingPermissionsAsync();
-          await TrackingTransparency.requestTrackingPermissionsAsync();
+          await requestTrackingPermission();
         }
 
-        await MobileAds().initialize();
+        await initializeMobileAds();
         console.log("[Ads] Mobile Ads initialized successfully");
       } catch (error) {
         console.error("Mobile Ads Init Error:", error);
@@ -293,7 +291,87 @@ export default function RootLayout() {
                   <allCoursesContext.Provider value={allCoursesValue}>
                     <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
                     <AdManager />
-                    <Stack screenOptions={{ headerShown: false }} />
+                    {Platform.OS === "web" ? (
+                      <View
+                        style={{
+                          flex: 1,
+                          backgroundColor: "#0C1D59",
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          padding: 20,
+                          flexWrap: "wrap",
+                          gap: 40,
+                        }}
+                      >
+                        {/* Desktop Web Landing & Promotion Panel */}
+                        <View style={{ maxWidth: 400, padding: 20 }}>
+                          <Text style={{ fontSize: 36, color: "#fff", fontFamily: "quicksand-bold", marginBottom: 12 }}>
+                            CodeRespite 🐾
+                          </Text>
+                          <Text style={{ fontSize: 16, color: "#cbd5e1", fontFamily: "nunito", marginBottom: 24, lineHeight: 24 }}>
+                            Refresh your coding skills on the go! Master JavaScript, React Native, Python, Web Development, and prepare for tech interviews with interactive quizzes and flashcards.
+                          </Text>
+                          <Text style={{ fontSize: 14, color: "#fbbf24", fontFamily: "nunito-bold", marginBottom: 12 }}>
+                            📲 Available now for Android & iOS:
+                          </Text>
+                          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
+                            <TouchableOpacity
+                              onPress={() => Linking.openURL("https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite")}
+                              style={{
+                                backgroundColor: "#1e293b",
+                                paddingVertical: 10,
+                                paddingHorizontal: 16,
+                                borderRadius: 8,
+                                borderWidth: 1,
+                                borderColor: "#334155",
+                              }}
+                            >
+                              <Text style={{ color: "#fff", fontSize: 13, fontFamily: "nunito-bold" }}>Get it on Google Play</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              onPress={() => Linking.openURL("https://apps.apple.com/app/id6760843431")}
+                              style={{
+                                backgroundColor: "#1e293b",
+                                paddingVertical: 10,
+                                paddingHorizontal: 16,
+                                borderRadius: 8,
+                                borderWidth: 1,
+                                borderColor: "#334155",
+                              }}
+                            >
+                              <Text style={{ color: "#fff", fontSize: 13, fontFamily: "nunito-bold" }}>Download on App Store</Text>
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+
+                        {/* Mobile Simulator Frame */}
+                        <View
+                          style={{
+                            width: "100%",
+                            maxWidth: 480,
+                            height: "90%",
+                            minHeight: 700,
+                            maxHeight: 850,
+                            borderRadius: 20,
+                            overflow: "hidden",
+                            backgroundColor: "#132F94",
+                            shadowColor: "#000",
+                            shadowOpacity: 0.3,
+                            shadowRadius: 20,
+                            elevation: 10,
+                          }}
+                        >
+                          <SafeAreaView style={{ flex: 1 }}>
+                            <Stack screenOptions={{ headerShown: false }} />
+                          </SafeAreaView>
+                        </View>
+                      </View>
+                    ) : (
+                      <SafeAreaView style={{ flex: 1 }}>
+                        <Stack screenOptions={{ headerShown: false }} />
+                      </SafeAreaView>
+                    )}
                   </allCoursesContext.Provider>
                 </favoritesContext.Provider>
               </userDetailsContext.Provider>

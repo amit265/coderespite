@@ -1,6 +1,7 @@
 module.exports = {
   expo: {
     name: "CodeRespite: Refresh skills",
+    description: "Learn programming, coding interview preparation, web development, JavaScript quiz, HTML CSS flashcards, and tech skill refreshment.",
     slug: "coderespite",
     version: "1.1.4",
     orientation: "portrait",
@@ -26,7 +27,7 @@ module.exports = {
       },
       edgeToEdgeEnabled: true,
       package: "com.mindcraftlearning.coderespite",
-      versionCode: 12,
+      versionCode: 13,
       permissions: ["com.google.android.gms.permission.AD_ID"],
     },
     web: {
@@ -49,8 +50,8 @@ module.exports = {
       [
         "react-native-google-mobile-ads",
         {
-          androidAppId: "ca-app-pub-7433519007687449~1317833947",
-          iosAppId: "ca-app-pub-7433519007687449~2791886380",
+          androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID || "ca-app-pub-7433519007687449~1317833947",
+          iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID || "ca-app-pub-7433519007687449~2791886380",
           userTrackingUsageDescription:
             "This identifier will be used to deliver personalized ads to you.",
           skAdNetworkItems: [
@@ -77,8 +78,8 @@ module.exports = {
         "expo-build-properties",
         {
           android: {
-            compileSdkVersion: 35,
-            targetSdkVersion: 35,
+            compileSdkVersion: 36,
+            targetSdkVersion: 36,
             minSdkVersion: 24,
             enableProguardInReleaseBuilds: true,
             enableShrinkResourcesInReleaseBuilds: true,
@@ -95,8 +96,8 @@ module.exports = {
     extra: {
       router: {},
       admob: {
-        androidAppId: "ca-app-pub-7433519007687449~1317833947",
-        iosAppId: "ca-app-pub-7433519007687449~2791886380",
+        androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID || "ca-app-pub-7433519007687449~1317833947",
+        iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID || "ca-app-pub-7433519007687449~2791886380",
       },
       eas: {
         projectId: "45e5a71a-6a35-4ad2-9a84-243ad0a992a9",

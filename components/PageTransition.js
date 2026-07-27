@@ -22,8 +22,9 @@ export default function PageTransition({ children }) {
         }),
         Animated.spring(slideAnim, {
           toValue: 0,
-          friction: 18, // Bouncy but controlled
-          tension: 40,
+          stiffness: 120, // Snappy but soft
+          damping: 20,    // Controlled settling
+          mass: 0.8,      // Light feel
           useNativeDriver: true,
         }),
       ]).start();

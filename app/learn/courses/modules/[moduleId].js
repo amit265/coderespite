@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useRef, useState, useMemo } from "react";
 import {
   ActivityIndicator,
   Animated,
-  Dimensions,
+  useWindowDimensions,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -23,9 +23,8 @@ import {
 } from "../../../../context/context";
 import { BannerAdComponent } from "../../../../services/AdManager";
 
-const { width } = Dimensions.get("window");
-
 export default function ModuleDetail() {
+  const { width } = useWindowDimensions();
   const { moduleId } = useLocalSearchParams();
   const router = useRouter();
   const { allCourses, setSelectedLesson, selectedModule, setSelectedModule, setSelectedQuiz, selectedCourse } =
