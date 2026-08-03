@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import {
   ActivityIndicator,
   Animated,
@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import FlashCardItem from "../../../components/FlashCardItem";
 import PageTransition from "../../../components/PageTransition";
 import SafeScreen from "../../../components/SafeScreen";
 import colors from "../../../constants/colors";
@@ -18,7 +19,7 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
-import { BannerAdComponent } from "../../../services/AdManager";
+import { NativeAdComponent } from "../../../services/AdManager";
 
 // --- Animated Module Item Component ---
 const AnimatedModuleItem = ({ item, index, onPress }) => {
@@ -131,31 +132,46 @@ export default function FlashcardModules() {
             </View>
           </View>
 
-          {/* Module List */}
-          <FlatList
-            data={course.modules}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item, index }) => (
-              <AnimatedModuleItem
-                item={item}
-                index={index}
-                onPress={() => handleModulePress(item)}
+          {/* Conditional Rendering: AI Roadmap vs Standard Course */}
+          {course.id?.toString().startsWith("AI_ROADMAP_") ? (
+            <View style={{ flex: 1 }}>
+              <FlashCardItem
+                flashcards={course.flashcards || []}
+                title={course.title}
+                courseTitle={course.title}
               />
-            )}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 100 }}
-            ListEmptyComponent={
-              <View className="items-center justify-center py-20">
-                <Text className="text-gray-400 font-nunito">
-                  No modules found for this course.
-                </Text>
-              </View>
-            }
-          />
+            </View>
+          ) : (
+            <FlatList
+              data={course.modules}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item, index }) => (
+                <>
+                  <AnimatedModuleItem
+                    item={item}
+                    index={index}
+                    onPress={() => handleModulePress(item)}
+                  />
+                  {/* Inject Native Ad every 4 modules (index 3, 7, 11...) */}
+                  {index > 0 && (index + 1) % 4 === 0 && (
+                    <View style={{ marginVertical: 8 }}>
+                      <NativeAdComponent />
+                    </View>
+                  )}
+                </>
+              )}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: 100 }}
+              ListEmptyComponent={
+                <View className="items-center justify-center py-20">
+                  <Text className="text-gray-400 font-nunito">
+                    No modules found for this course.
+                  </Text>
+                </View>
+              }
+            />
+          )}
         </View>
-
-        {/* Bottom Banner Ad */}
-        <BannerAdComponent fixed={true} />
       </SafeScreen>
     </PageTransition>
   );

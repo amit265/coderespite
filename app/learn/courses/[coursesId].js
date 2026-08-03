@@ -9,7 +9,9 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
+import Markdown from "react-native-markdown-display";
 import PageTransition from "../../../components/PageTransition";
 import SafeScreen from "../../../components/SafeScreen";
 import colors from "../../../constants/colors";
@@ -18,7 +20,7 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
-import { BannerAdComponent } from "../../../services/AdManager";
+import { NativeAdComponent } from "../../../services/AdManager";
 
 // --- Animated Module Item Component ---
 const AnimatedModuleItem = ({ item, index, isCompleted, onPress }) => {
@@ -91,7 +93,16 @@ export default function CourseModules() {
   const { setClickCount } = useContext(adConfigContext);
 
   const course = useMemo(() => {
-    return allCourses.find((c) => c.id === coursesId);
+    const isInvalidId = !coursesId || coursesId === "undefined";
+    if (!isInvalidId) {
+      const found = allCourses.find((c) => c.id === coursesId);
+      if (found) return found;
+    }
+    // Fallback: first course if loaded
+    if (allCourses.length > 0) {
+      return allCourses[0];
+    }
+    return null;
   }, [allCourses, coursesId]);
 
   const progress = userData?.progress?.[course?.title] || {};
@@ -118,6 +129,25 @@ export default function CourseModules() {
   };
 
   if (!course) {
+    if (allCourses.length > 0) {
+      return (
+        <SafeScreen>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 24 }}>
+            <Ionicons name="alert-circle-outline" size={64} color={colors.ERROR} />
+            <Text style={{ fontSize: 22, fontFamily: "nunito-bold", color: "#1F2937", marginTop: 16, marginBottom: 8, textAlign: "center" }}>Course Not Found</Text>
+            <Text style={{ fontSize: 15, fontFamily: "nunito", color: "#6B7280", textAlign: "center", marginBottom: 24, lineHeight: 22 }}>
+              {"We couldn't resolve the requested course curriculum."}
+            </Text>
+            <TouchableOpacity
+              onPress={() => router.replace("/(tabs)/learn")}
+              style={{ backgroundColor: colors.PRIMARY, paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 }}
+            >
+              <Text style={{ color: "white", fontSize: 16, fontFamily: "nunito-bold" }}>Back to Courses</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeScreen>
+      );
+    }
     return (
       <SafeScreen>
         <ActivityIndicator size="large" color={colors.PRIMARY} />
@@ -148,17 +178,75 @@ export default function CourseModules() {
             </View>
           </View>
 
-          {/* Module List */}
-          <FlatList
+          {/* Conditional Rendering: AI Roadmap vs Standard Course */}
+          {course.id?.toString().startsWith("AI_ROADMAP_") ? (
+            <View style={{ flex: 1 }}>
+              <ScrollView 
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingBottom: 24 }}
+                style={{ flex: 1, backgroundColor: "white", borderRadius: 16, padding: 16, elevation: 2, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, marginBottom: 16 }}
+              >
+                <Markdown
+                  style={{
+                    body: { fontSize: 16, fontFamily: "nunito", color: "#374151", lineHeight: 24 },
+                    heading1: { fontSize: 24, fontFamily: "nunito-bold", color: "#111827", marginBottom: 12, marginTop: 16 },
+                    heading2: { fontSize: 20, fontFamily: "nunito-bold", color: "#1F2937", marginBottom: 10, marginTop: 14 },
+                    heading3: { fontSize: 18, fontFamily: "nunito-bold", color: "#374151", marginBottom: 8, marginTop: 12 },
+                    paragraph: { marginBottom: 12 },
+                    list_item: { marginBottom: 6 },
+                    code_block: { backgroundColor: "#F3F4F6", padding: 12, borderRadius: 8, fontFamily: "monospace", fontSize: 14 },
+                    code_inline: { backgroundColor: "#F3F4F6", paddingHorizontal: 4, paddingVertical: 2, borderRadius: 4, fontFamily: "monospace", fontSize: 14, color: "#EF4444" },
+                    link: { color: "#3B82F6", textDecorationLine: "underline" },
+                  }}
+                >
+                  {course.roadmapText || "Your AI syllabus is missing content. Please try generating it again."}
+                </Markdown>
+              </ScrollView>
+              
+              {/* Study Flashcards Button */}
+              <TouchableOpacity
+                onPress={() => {
+                  setClickCount((prev) => prev + 1);
+                  setSelectedCourse(course);
+                  router.push(`/flashcards/courses/${course.id}`);
+                }}
+                style={{
+                  backgroundColor: "#8B5CF6",
+                  paddingVertical: 16,
+                  borderRadius: 16,
+                  alignItems: "center",
+                  shadowColor: "#8B5CF6",
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 10,
+                  elevation: 5,
+                  marginBottom: 16,
+                }}
+              >
+                <Text style={{ color: "white", fontSize: 18, fontFamily: "nunito-bold" }}>
+                  Study Flashcards 🧠
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <FlatList
             data={course.modules}
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
-              <AnimatedModuleItem
-                item={item}
-                index={index}
-                isCompleted={isModuleCompleted(item.id)}
-                onPress={() => handleModulePress(item)}
-              />
+              <>
+                <AnimatedModuleItem
+                  item={item}
+                  index={index}
+                  isCompleted={isModuleCompleted(item.id)}
+                  onPress={() => handleModulePress(item)}
+                />
+                {/* Inject Native Ad every 4 modules (index 3, 7, 11...) */}
+                {index > 0 && (index + 1) % 4 === 0 && (
+                  <View style={{ marginVertical: 8 }}>
+                    <NativeAdComponent />
+                  </View>
+                )}
+              </>
             )}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 100 }}
@@ -169,11 +257,10 @@ export default function CourseModules() {
                 </Text>
               </View>
             }
+            ListFooterComponent={<NativeAdComponent />}
           />
+          )}
         </View>
-
-        {/* Bottom Banner Ad */}
-        <BannerAdComponent fixed={true} />
       </SafeScreen>
     </PageTransition>
   );

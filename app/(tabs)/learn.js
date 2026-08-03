@@ -1,15 +1,19 @@
 import { useRouter } from "expo-router";
-import { useContext, useEffect, useRef } from "react";
-import { Image, Text, View, Animated, Pressable } from "react-native";
+import React, { useContext, useEffect, useRef } from "react";
+import { Image, Text, View, Animated, Pressable, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
 import RefreshWrapper from "../../components/shared/RefreshWrapper";
 import { courseIcons } from "../../constants/constants";
 import { adConfigContext, allCoursesContext, userDetailsContext } from "../../context/context";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
+import { NativeAdComponent } from "../../services/AdManager";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 // --- New Animated Card Component ---
-const AnimatedLearnCard = ({ item, index, onPress }) => {
+const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
   // 1. Entrance Animations (Slide Up & Fade In)
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
@@ -115,6 +119,28 @@ const AnimatedLearnCard = ({ item, index, onPress }) => {
               {item.title}
             </Text>
           </View>
+          {item?.id?.toString().startsWith("AI_") && onDelete && (
+            <TouchableOpacity
+              onPress={(e) => {
+                e.stopPropagation();
+                onDelete(item);
+              }}
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                backgroundColor: "rgba(220, 38, 38, 0.9)", // red-600 with opacity
+                width: 32,
+                height: 32,
+                borderRadius: 16,
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 10,
+              }}
+            >
+              <Ionicons name="trash" size={16} color="white" />
+            </TouchableOpacity>
+          )}
         </Animated.View>
       </Pressable>
     </Animated.View>
@@ -138,6 +164,44 @@ export default function Learn() {
     }, 150);
   };
 
+  const handleDeleteCourse = (course) => {
+    Alert.alert(
+      "Delete Course",
+      `Are you sure you want to delete "${course.title}"? This cannot be undone.`,
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              const storedCustom = await AsyncStorage.getItem("@custom_ai_courses");
+              if (storedCustom) {
+                const customCourses = JSON.parse(storedCustom);
+                const updatedCourses = customCourses.filter(c => c.id !== course.id);
+                await AsyncStorage.setItem("@custom_ai_courses", JSON.stringify(updatedCourses));
+                
+                // Also clean up progress
+                const storedUser = await AsyncStorage.getItem("@user_data");
+                if (storedUser) {
+                  const userData = JSON.parse(storedUser);
+                  if (userData.progress && userData.progress[course.title]) {
+                    delete userData.progress[course.title];
+                    await AsyncStorage.setItem("@user_data", JSON.stringify(userData));
+                  }
+                }
+                
+                refreshData(false); // Refresh UI
+              }
+            } catch (err) {
+              console.error("Error deleting course", err);
+            }
+          }
+        }
+      ]
+    );
+  };
+
   return (
     <PageTransition>
       <SafeScreen>
@@ -149,27 +213,87 @@ export default function Learn() {
           onRefresh={refreshData}
           refreshing={globalRefreshing}
         >
+          <TouchableOpacity
+            onPress={() => router.push("/learn/aiRoadmap")}
+            style={{
+              backgroundColor: "#8B5CF6",
+              borderRadius: 20,
+              padding: 16,
+              marginHorizontal: 16,
+              marginBottom: 10,
+              marginTop: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              shadowColor: "#8B5CF6",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.2,
+              shadowRadius: 6,
+              elevation: 4,
+            }}
+          >
+            <View style={{ flex: 1, marginRight: 8 }}>
+              <Text style={{ color: "white", fontSize: 16, fontWeight: "bold", fontFamily: "nunito-bold", marginBottom: 4 }}>
+                ⚡️ AI Bespoke Roadmap
+              </Text>
+              <Text style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: 12, fontFamily: "nunito" }}>
+                Generate a custom study guide for any goal in 30 seconds!
+              </Text>
+            </View>
+            <Ionicons name="sparkles" size={24} color="white" />
+          </TouchableOpacity>
+
           {allCourses?.length === 0 ? (
             <View className="flex-1 justify-center items-center py-20">
               <Text className="text-gray-500 font-nunito-bold">Pull down to load courses</Text>
             </View>
           ) : (
-            <View 
-              style={{ 
-                flexDirection: 'row', 
-                flexWrap: 'wrap', 
-                justifyContent: 'space-evenly',
-                paddingTop: 10
-              }}
-            >
-              {allCourses.map((item, index) => (
-                <AnimatedLearnCard
-                  key={item.id}
-                  item={item}
-                  index={index}
-                  onPress={() => handleCardPress(item)}
-                />
-              ))}
+            <View style={{ paddingHorizontal: 16 }}>
+              {/* Default Courses Section */}
+              <View 
+                style={{ 
+                  flexDirection: 'row', 
+                  flexWrap: 'wrap', 
+                  justifyContent: 'space-between',
+                  paddingTop: 10
+                }}
+              >
+                {allCourses.filter(c => !c?.id?.toString().startsWith("AI_")).map((item, index) => (
+                  <AnimatedLearnCard
+                    key={item.id}
+                    item={item}
+                    index={index}
+                    onPress={() => handleCardPress(item)}
+                    onDelete={handleDeleteCourse}
+                  />
+                ))}
+              </View>
+
+              {/* AI Courses Section */}
+              {allCourses.some(c => c?.id?.toString().startsWith("AI_")) && (
+                <>
+                  <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginTop: 24, marginBottom: 16, color: "#1F2937" }}>
+                    Your Custom Roadmaps
+                  </Text>
+                  <View 
+                    style={{ 
+                      flexDirection: 'row', 
+                      flexWrap: 'wrap', 
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    {allCourses.filter(c => c?.id?.toString().startsWith("AI_")).map((item, index) => (
+                      <AnimatedLearnCard
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        onPress={() => handleCardPress(item)}
+                        onDelete={handleDeleteCourse}
+                      />
+                    ))}
+                  </View>
+                </>
+              )}
             </View>
           )}
         </RefreshWrapper>

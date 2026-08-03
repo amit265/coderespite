@@ -1,15 +1,20 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Animated, BackHandler, Modal, View, Platform } from "react-native";
+import { Animated, BackHandler, Modal, View, Platform, TouchableOpacity, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import ContinueCard from "../../components/home/ContinueCard";
 import DailyTip from "../../components/home/DailyTip";
 import FeaturedLessonGrid from "../../components/home/FeaturedLessonGrid";
 import Header from "../../components/home/Header";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
+import JumpBackInCard from "../../components/home/JumpBackInCard";
 import LevelUpModal from "../../components/LevelUpModal";
 import PageTransition from "../../components/PageTransition";
 import ProfileModal from "../../components/ProfileModal";
 import SafeScreen from "../../components/SafeScreen";
+import BadgeModal from "../../components/BadgeModal";
+import { checkNewBadges } from "../../services/badgeService";
 import {
   allCoursesContext,
   LevelContext,
@@ -17,6 +22,7 @@ import {
 } from "../../context/context";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import RefreshWrapper from "../../components/shared/RefreshWrapper"; // 👈 Import Wrapper
+import { NativeAdComponent } from "../../services/AdManager";
 
 // --- Helper Component for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -57,6 +63,8 @@ const FadeInSection = ({ children, delay = 0 }) => {
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [showLevelModal, setShowLevelModal] = useState(false);
+  const [newBadge, setNewBadge] = useState(null);
+  const [showBadgeModal, setShowBadgeModal] = useState(false);
 
   // Contexts
   const { userData } = useContext(userDetailsContext);
@@ -64,8 +72,22 @@ export default function Home() {
   const { lastShownLevel, updateLastShownLevel, levelLoading } =
     useContext(LevelContext);
 
+  const router = useRouter();
+
   // ✨ New Global Refresh Logic
   const { refreshData, refreshing } = useGlobalRefresh();
+
+  useEffect(() => {
+    const checkBadges = async () => {
+      if (!userData) return;
+      const unlocked = await checkNewBadges(userData);
+      if (unlocked) {
+        setNewBadge(unlocked);
+        setShowBadgeModal(true);
+      }
+    };
+    checkBadges();
+  }, [userData]);
 
   useEffect(() => {
     if (!userData) return;
@@ -128,8 +150,49 @@ export default function Home() {
             <WelcomeCard userData={userData} />
           </FadeInSection>
 
+          <FadeInSection delay={150}>
+            <JumpBackInCard />
+          </FadeInSection>
+
           <FadeInSection delay={200}>
             <ContinueCard userData={userData} />
+          </FadeInSection>
+
+          {/* Native Ad Component Injected Here */}
+          <FadeInSection delay={225}>
+            <View style={{ marginHorizontal: 16, marginTop: 16, marginBottom: 4 }}>
+              <NativeAdComponent />
+            </View>
+          </FadeInSection>
+
+          <FadeInSection delay={250}>
+            <TouchableOpacity
+              onPress={() => router.push("/chat")}
+              className="bg-white mx-4 mb-4 p-6 rounded-2xl shadow-md border border-gray-200 flex-row items-center"
+              style={{ gap: 14 }}
+            >
+              <View style={{
+                width: 52,
+                height: 52,
+                borderRadius: 26,
+                backgroundColor: "rgba(139, 92, 246, 0.2)",
+                alignItems: "center",
+                justifyContent: "center",
+                borderWidth: 1,
+                borderColor: "rgba(139, 92, 246, 0.4)",
+              }}>
+                <Text style={{ fontSize: 26 }}>🐾</Text>
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={{ color: "#1F2937", fontSize: 18, fontFamily: "nunito-bold", marginBottom: 3 }}>
+                  Ask Meowgrammer
+                </Text>
+                <Text style={{ color: "#4B5563", fontSize: 13, fontFamily: "nunito" }}>
+                  Your AI coding tutor is ready to help!
+                </Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="#9CA3AF" />
+            </TouchableOpacity>
           </FadeInSection>
 
           <FadeInSection delay={300}>
@@ -185,6 +248,12 @@ export default function Home() {
           visible={showLevelModal}
           onClose={handleCloseModal}
           currentLevel={userData?.level?.currentLevel || 1}
+        />
+
+        <BadgeModal
+          visible={showBadgeModal}
+          badge={newBadge}
+          onClose={() => setShowBadgeModal(false)}
         />
       </SafeScreen>
     </PageTransition>

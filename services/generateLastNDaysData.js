@@ -1,4 +1,4 @@
-export function generateLastNDaysData(progress = {}, n = 90) {
+export function generateLastNDaysData(progress = {}, activityLog = [], n = 90) {
   const data = [];
   const today = new Date();
 
@@ -34,6 +34,15 @@ export function generateLastNDaysData(progress = {}, n = 90) {
             activityCounts[quiz.date] = (activityCounts[quiz.date] || 0) + 1;
           }
         });
+      }
+    });
+  }
+
+  // 1.5. Aggregate new global activity log
+  if (Array.isArray(activityLog)) {
+    activityLog.forEach(dateStr => {
+      if (dateStr) {
+        activityCounts[dateStr] = (activityCounts[dateStr] || 0) + 1;
       }
     });
   }

@@ -2,6 +2,7 @@ import LottieView from "lottie-react-native";
 import React, { useEffect, useState, useRef } from "react";
 import { Modal, Text, View, Animated, Easing, Platform } from "react-native";
 import * as Haptics from "expo-haptics";
+import * as StoreReview from "expo-store-review";
 import { levels, Emoji, EmojiText } from "../constants/constants";
 import ProgressBar from "./home/ProgressBar";
 import Button from "./shared/Button";
@@ -81,6 +82,19 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
 
   }, [currentLevel, visible]);
 
+  const handleCloseAndReview = async () => {
+    onClose();
+    setTimeout(async () => {
+      try {
+        if (await StoreReview.hasAction()) {
+          await StoreReview.requestReview();
+        }
+      } catch (err) {
+        console.log("StoreReview error:", err);
+      }
+    }, 1000); // Wait for modal to disappear
+  };
+
   if (!levelData || !visible) return null;
 
   return (
@@ -88,7 +102,7 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
       transparent
       animationType="fade" // Changed from "slide" to "fade" for custom entrance
       visible={visible}
-      onRequestClose={onClose}
+      onRequestClose={handleCloseAndReview}
     >
       <View
         className="flex-1 justify-center items-center px-4"
@@ -178,7 +192,7 @@ export default function LevelUpModal({ visible, onClose, currentLevel }) {
           </StaggeredView>
 
           <StaggeredView delay={700} style={{ width: '100%' }}>
-             <Button text={"Continue"} backgroundColor={colors.PRIMARY || "green"} onPress={onClose} />
+             <Button text={"Continue"} backgroundColor={colors.PRIMARY || "green"} onPress={handleCloseAndReview} />
           </StaggeredView>
         </Animated.View>
       </View>

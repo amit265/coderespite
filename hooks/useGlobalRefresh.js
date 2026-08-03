@@ -25,6 +25,33 @@ export const useGlobalRefresh = () => {
     try {
       console.log("🔄 Global Refresh Triggered...");
 
+      // Helper to merge local & remote courses
+      const getMergedCourses = async (remoteCourses) => {
+        try {
+          const storedCustom = await AsyncStorage.getItem("@custom_ai_courses");
+          let customCourses = storedCustom ? JSON.parse(storedCustom) : [];
+          
+          // Fix for corrupted IDs: Ensure all custom courses start with AI_ROADMAP_
+          let needsSave = false;
+          customCourses = customCourses.map(c => {
+            if (!c.id?.toString().startsWith("AI_ROADMAP_")) {
+              needsSave = true;
+              return { ...c, id: `AI_ROADMAP_${c.id || Date.now()}` };
+            }
+            return c;
+          });
+          
+          if (needsSave) {
+            await AsyncStorage.setItem("@custom_ai_courses", JSON.stringify(customCourses));
+          }
+          
+          return [...(remoteCourses || []), ...customCourses];
+        } catch (e) {
+          console.error("Error loading custom AI courses", e);
+          return remoteCourses || [];
+        }
+      };
+
       // --- STEP 1: Always Load User from Local Storage ---
       const storedUser = await AsyncStorage.getItem("@user_data");
       if (storedUser) {
@@ -37,7 +64,9 @@ export const useGlobalRefresh = () => {
 
       if (storedCourses) {
         console.log("📦 Cache found. Updating UI immediately.");
-        setAllCourses(JSON.parse(storedCourses));
+        const cachedRemote = JSON.parse(storedCourses);
+        const merged = await getMergedCourses(cachedRemote);
+        setAllCourses(merged);
         hasCache = true;
       }
 
@@ -50,9 +79,10 @@ export const useGlobalRefresh = () => {
 
         try {
           const freshData = await getAllCoursesWithSubcollections();
-
-          setAllCourses(freshData);
           await AsyncStorage.setItem("@allCourses_data", JSON.stringify(freshData));
+
+          const merged = await getMergedCourses(freshData);
+          setAllCourses(merged);
           console.log("✅ Remote Fetch Complete");
         } catch (error) {
           console.error("❌ Remote fetch failed:", error);

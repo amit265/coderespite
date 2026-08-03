@@ -1,0 +1,9 @@
+{
+  "latestVersion": "1.1.6",
+  "whatsNew": [
+    "Added 'Ask Meowgrammer' floating AI coding tutor.",
+    "Introduced 'Jump Back In' dashboard tracking.",
+    "Implemented Native In-App Review prompts.",
+    "Optimized UI layout for cross-platform consistency."
+  ]
+}

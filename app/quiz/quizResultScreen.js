@@ -1,5 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import * as StoreReview from "expo-store-review";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import LottieView from "lottie-react-native";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -11,14 +13,19 @@ import {
   StyleSheet,
   Text,
   View,
+  Share,
+  TouchableOpacity,
+  Platform,
 } from "react-native";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
 import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
-import { EmojiText } from "../../constants/constants";
-import { allCoursesContext, userDetailsContext } from "../../context/context";
-import { BannerAdComponent } from "../../services/AdManager";
+import { EmojiText, DESTYA_SHARE_LINK } from "../../constants/constants";
+import { allCoursesContext, userDetailsContext, adConfigContext } from "../../context/context";
+import { BannerAdComponent, showInterstitialAd } from "../../services/AdManager";
+import { logAnalyticsEvent } from "../../services/analyticsService";
+import Markdown from "react-native-markdown-display";
 
 // --- Animated Score Card (Entrance) ---
 const AnimatedScoreCard = ({ children }) => {
@@ -89,6 +96,7 @@ export default function QuizResultScreen() {
   const { setSelectedCourse, setSelectedQuiz, allCourses } =
     useContext(allCoursesContext);
   const { gainXP } = useContext(userDetailsContext);
+  const { adConfig } = useContext(adConfigContext);
 
   const quizData = useMemo(() => {
     return quizIdParam ? JSON.parse(quizIdParam) : null;
@@ -105,7 +113,17 @@ export default function QuizResultScreen() {
     if (getPercMarks > 0) {
       gainXP(getPercMarks * 0.5);
     }
-  }, []);
+    if (quizData) {
+      logAnalyticsEvent("quiz_completed", {
+        quizId: quizData.quizId || "unknown",
+        courseTitle: quizData.courseTitle || "unknown",
+        quizTitle: quizData.quizTitle || "unknown",
+        score: getPercMarks,
+      });
+      // Show Interstitial ad as a natural break point after quiz completion
+      showInterstitialAd(adConfig);
+    }
+  }, [quizData]);
 
   useEffect(() => {
     if (!quizData) {
@@ -116,6 +134,21 @@ export default function QuizResultScreen() {
       const isHistory = history === "true" || history === true;
       if (getPercMarks >= 60 && !isHistory) {
         setTimeout(() => setShowConfetti(true), 500);
+      }
+
+      // If they scored 100%, check if we should prompt for a review
+      if (getPercMarks === 100 && !isHistory) {
+        setTimeout(async () => {
+          try {
+            const hasPrompted = await AsyncStorage.getItem("hasPromptedReview");
+            if (!hasPrompted && await StoreReview.hasAction()) {
+              await StoreReview.requestReview();
+              await AsyncStorage.setItem("hasPromptedReview", "true");
+            }
+          } catch (err) {
+            console.log("StoreReview error:", err);
+          }
+        }, 1500); // Wait a bit so it doesn't instantly interrupt confetti
       }
     }
   }, [quizData, history]);
@@ -130,6 +163,19 @@ export default function QuizResultScreen() {
       totalQuestion: Object.keys(quizData.result).length,
     };
   }, [quizData]);
+
+  const handleShareScore = async () => {
+    try {
+      const message = `I scored ${getPercMarks}% on "${quizData?.quizTitle || 'Quiz'}" in CodeRespite! Can you beat my score? 🐾\n\n${DESTYA_SHARE_LINK}`;
+      await Share.share({ message });
+      logAnalyticsEvent("score_shared", {
+        quizId: quizData?.quizId || "unknown",
+        score: getPercMarks
+      });
+    } catch (error) {
+      console.log("[QuizResult] Share failed:", error);
+    }
+  };
 
   const attemptAgain = () => {
     const currentCourse = allCourses.find(
@@ -203,18 +249,47 @@ export default function QuizResultScreen() {
                 borderRadius: 10,
               }}
             >
-              <EmojiText
-                style={{
-                  fontFamily: "nunito",
-                  fontSize: 14,
-                  color: "#4B5563",
-                  textAlign: "justify",
-                }}
-              >
-                💡 {quizItem?.explanation}
-              </EmojiText>
+              <Markdown style={markdownStyles}>
+                {`💡 ${quizItem?.explanation}`}
+              </Markdown>
             </View>
           )}
+
+          <TouchableOpacity
+            onPress={() => {
+              router.push({
+                pathname: "/quiz/detailedExplanation",
+                params: {
+                  question: questionText,
+                  userAnswer,
+                  correctAnswer,
+                  explanation: quizItem?.explanation || "No explanation provided.",
+                },
+              });
+            }}
+            style={{
+              marginTop: 12,
+              backgroundColor: colors.PRIMARY,
+              paddingVertical: 10,
+              paddingHorizontal: 16,
+              borderRadius: 12,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 6,
+            }}
+          >
+            <Ionicons name="information-circle-outline" size={18} color="white" />
+            <Text
+              style={{
+                color: "white",
+                fontFamily: "nunito-bold",
+                fontSize: 14,
+              }}
+            >
+              Detail View
+            </Text>
+          </TouchableOpacity>
         </View>
       </AnimatedResultItem>
     );
@@ -385,8 +460,9 @@ export default function QuizResultScreen() {
                     </AnimatedScoreCard>
 
                     {/* Buttons */}
-                    <View style={{ marginTop: 24 }}>
+                    <View style={{ marginTop: 24, gap: 10 }}>
                       <Button text={"Attempt Again"} onPress={attemptAgain} />
+                      <Button text={"Share Score 📤"} onPress={handleShareScore} />
                       <Button
                         text={"Back to Home"}
                         onPress={() => router.replace("/(tabs)")}
@@ -438,7 +514,34 @@ const styles = StyleSheet.create({
   },
   statValue: {
     fontFamily: "nunito-bold",
-    fontSize: 18,
-    color: "#111827",
+    fontSize: 22,
+    color: "#4F46E5",
+    marginTop: 4,
   },
 });
+
+// Markdown styles for brief explanations
+const markdownStyles = {
+  body: {
+    fontFamily: "nunito",
+    fontSize: 14,
+    color: "#4B5563",
+    lineHeight: 20,
+  },
+  paragraph: {
+    marginTop: 0,
+    marginBottom: 0,
+  },
+  strong: {
+    fontFamily: "nunito-bold",
+    color: "#1F2937",
+  },
+  code_inline: {
+    fontFamily: Platform.OS === "ios" ? "Courier New" : "monospace",
+    fontSize: 13,
+    backgroundColor: "#E5E7EB",
+    color: "#4B5563",
+    borderRadius: 4,
+    paddingHorizontal: 4,
+  },
+};

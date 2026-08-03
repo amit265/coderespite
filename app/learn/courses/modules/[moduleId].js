@@ -37,15 +37,27 @@ export default function ModuleDetail() {
 
   // Find the current module from context or find it in allCourses as a fallback
   const module = useMemo(() => {
-    if (selectedModule && selectedModule.id === moduleId) return selectedModule;
+    const isInvalidId = !moduleId || moduleId === "undefined";
     
-    // Fallback search
-    for (const course of allCourses) {
-      const found = course.modules?.find(m => m.id === moduleId);
-      if (found) return found;
+    if (!isInvalidId) {
+      if (selectedModule && selectedModule.id === moduleId) return selectedModule;
+      
+      // Fallback search
+      for (const course of allCourses) {
+        const found = course.modules?.find(m => m.id === moduleId);
+        if (found) return found;
+      }
+    }
+    
+    // Fallback to first module of selected course or first module overall
+    if (selectedCourse?.modules?.length > 0) {
+      return selectedCourse.modules[0];
+    }
+    if (allCourses.length > 0 && allCourses[0].modules?.length > 0) {
+      return allCourses[0].modules[0];
     }
     return null;
-  }, [selectedModule, moduleId, allCourses]);
+  }, [selectedModule, moduleId, allCourses, selectedCourse]);
 
   useEffect(() => {
     if (module) {
@@ -60,14 +72,37 @@ export default function ModuleDetail() {
         duration: 600,
         useNativeDriver: true,
       }).start();
+    } else if (allCourses.length > 0) {
+      // Stopped loading if courses are fetched but module is still unresolved
+      setLoading(false);
     }
-  }, [module]);
+  }, [module, allCourses]);
 
-  if (loading || !module) {
+  if (loading) {
     return (
       <SafeScreen>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={colors.PRIMARY} />
+        </View>
+      </SafeScreen>
+    );
+  }
+
+  if (!module) {
+    return (
+      <SafeScreen>
+        <View style={styles.errorContainer}>
+          <Ionicons name="alert-circle-outline" size={64} color={colors.ERROR} />
+          <Text style={styles.errorTitle}>Module Not Found</Text>
+          <Text style={styles.errorText}>
+            {"We couldn't load the requested course module. Please try again."}
+          </Text>
+          <TouchableOpacity
+            style={styles.backButtonLarge}
+            onPress={() => router.replace("/(tabs)/learn")}
+          >
+            <Text style={styles.backButtonText}>Back to Courses</Text>
+          </TouchableOpacity>
         </View>
       </SafeScreen>
     );
@@ -304,5 +339,38 @@ const styles = StyleSheet.create({
     fontFamily: "nunito",
     color: "#7C3AED",
     marginTop: 2,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  errorTitle: {
+    fontSize: 22,
+    fontFamily: "nunito-bold",
+    color: "#1F2937",
+    marginTop: 16,
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  errorText: {
+    fontSize: 15,
+    fontFamily: "nunito",
+    color: "#6B7280",
+    textAlign: "center",
+    marginBottom: 24,
+    lineHeight: 22,
+  },
+  backButtonLarge: {
+    backgroundColor: colors.PRIMARY || "#132F94",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+  },
+  backButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontFamily: "nunito-bold",
   },
 });

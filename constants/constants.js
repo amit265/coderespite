@@ -7,11 +7,9 @@ export const STORE_LINK = Platform.select({
   default: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
 });
 
-export const SHARE_MESSAGE = Platform.select({
-  ios: "Check out this amazing app on the App Store!\n\n" + STORE_LINK,
-  android: "Check out this amazing app on the Play Store!\n\n" + STORE_LINK,
-  default: "Check out this amazing app!\n\n" + STORE_LINK,
-});
+export const DESTYA_SHARE_LINK = "https://destyastudio.com/products/code-respite";
+
+export const SHARE_MESSAGE = "Check out this amazing app!\n\n" + DESTYA_SHARE_LINK;
 
 export const Emoji = ({ children, style }) => {
   // Filter out fontFamily from incoming style to prevent overriding the system font on iOS

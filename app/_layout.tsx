@@ -11,7 +11,7 @@ import { Stack, SplashScreen } from 'expo-router';
 import { requestTrackingPermission } from "../services/trackingInit";
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Platform, StatusBar, View, Text, TouchableOpacity, Linking } from 'react-native';
+import { Platform, StatusBar, View, Text, TouchableOpacity, Linking, useWindowDimensions } from 'react-native';
 import { initializeMobileAds } from "../services/adInit";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -21,6 +21,10 @@ import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
 import { EmojiText } from "../constants/constants";
+import { useDeepLinkHandler } from "../hooks/useDeepLinkHandler";
+import { useUpdateChecker } from "../hooks/useUpdateChecker";
+import { initNotifications } from "../services/notificationService";
+import UpdateModal from "../components/UpdateModal";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -64,6 +68,17 @@ export default function RootLayout() {
   const [levelLoading, setLevelLoading] = useState(true);
 
   const [selectedLesson, setSelectedLesson] = useState(null);
+
+  // Desty Studio guidelines hooks integration
+  useDeepLinkHandler();
+  const { updateAvailable, changelog, remoteVersion, setUpdateAvailable } = useUpdateChecker();
+
+  useEffect(() => {
+    initNotifications();
+  }, []);
+
+  const { width: windowWidth } = useWindowDimensions();
+  const isLargeScreen = Platform.OS === "web" && windowWidth > 850;
 
   const adConfigValue = useMemo(
     () => ({ adConfig, setAdConfig, clickCount, setClickCount, adsReady }),
@@ -188,6 +203,17 @@ export default function RootLayout() {
 
         return data;
       });
+    },
+
+    logActivity: async () => {
+      const today = new Date().toISOString().split("T")[0];
+      await updateUser((data) => {
+        if (!data.activityLog) {
+          data.activityLog = [];
+        }
+        data.activityLog.push(today);
+        return data;
+      });
     }
 
   };
@@ -291,39 +317,188 @@ export default function RootLayout() {
                   <allCoursesContext.Provider value={allCoursesValue}>
                     <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
                     <AdManager />
+                    <UpdateModal
+                      visible={updateAvailable}
+                      changelog={changelog}
+                      remoteVersion={remoteVersion}
+                      onClose={() => setUpdateAvailable(false)}
+                    />
                     {Platform.OS === "web" ? (
-                      <View
-                        style={{
-                          flex: 1,
-                          backgroundColor: "#0C1D59",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
+                      isLargeScreen ? (
                         <View
                           style={{
-                            width: "100%",
-                            maxWidth: 480,
-                            height: "95%",
-                            maxHeight: 850,
-                            borderRadius: 20,
-                            overflow: "hidden",
-                            backgroundColor: "#132F94",
-                            shadowColor: "#000",
-                            shadowOpacity: 0.3,
-                            shadowRadius: 20,
-                            elevation: 10,
+                            flex: 1,
+                            flexDirection: "row",
+                            backgroundColor: "#0C1D59",
                           }}
                         >
-                          <SafeAreaView style={{ flex: 1 }}>
-                            <Stack screenOptions={{ headerShown: false }} />
-                          </SafeAreaView>
+                          {/* Left: Promotional Side Panel */}
+                          <View
+                            style={{
+                              flex: 1,
+                              padding: 40,
+                              justifyContent: "center",
+                              alignItems: "flex-start",
+                              maxWidth: 500,
+                              borderRightWidth: 1,
+                              borderRightColor: "#132F94",
+                            }}
+                          >
+                            <Text
+                              style={{
+                                color: "#FFA500",
+                                fontSize: 32,
+                                fontWeight: "bold",
+                                fontFamily: "nunito-bold",
+                                marginBottom: 16,
+                              }}
+                            >
+                              CodeRespite 🐾
+                            </Text>
+                            <Text
+                              style={{
+                                color: "#FFFFFF",
+                                fontSize: 16,
+                                fontFamily: "nunito-semiBold",
+                                marginBottom: 24,
+                                lineHeight: 24,
+                              }}
+                            >
+                              Refresh Your Tech Skills - Learn programming, coding interview preparation, and key tech concepts with interactive quizzes and flashcards!
+                            </Text>
+
+                            <Text
+                              style={{
+                                color: "#FFA500",
+                                fontSize: 16,
+                                fontWeight: "bold",
+                                fontFamily: "nunito-bold",
+                                marginBottom: 12,
+                              }}
+                            >
+                              Key Benefits:
+                            </Text>
+                            <View style={{ gap: 10, marginBottom: 30 }}>
+                              {[
+                                "Learn coding concepts with your favorite Meowgrammer! 🐾",
+                                "Practice HTML, CSS, JavaScript, React, and Git.",
+                                "Unlock custom tests with our built-in Groq AI Quiz Generator! 🤖",
+                                "Build a daily streak, earn XP, and level up! 🏆",
+                                "Complete history logs to review and master previous mistakes.",
+                              ].map((bullet, idx) => (
+                                <View key={idx} style={{ flexDirection: "row", alignItems: "flex-start" }}>
+                                  <Text style={{ color: "#FFA500", marginRight: 8, marginTop: 4 }}>●</Text>
+                                  <Text style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, fontFamily: "nunito", lineHeight: 18 }}>
+                                    {bullet}
+                                  </Text>
+                                </View>
+                              ))}
+                            </View>
+
+                            <Text
+                              style={{
+                                color: "rgba(255,255,255,0.5)",
+                                fontSize: 12,
+                                fontFamily: "monospace",
+                                marginBottom: 12,
+                              }}
+                            >
+                              Get CodeRespite on your mobile device:
+                            </Text>
+                            <View style={{ flexDirection: "row", gap: 6 }}>
+                              <TouchableOpacity
+                                onPress={() => Linking.openURL("https://destyastudio.com/products/code-respite")}
+                                style={{
+                                  backgroundColor: "#132F94",
+                                  borderRadius: 10,
+                                  paddingVertical: 10,
+                                  paddingHorizontal: 16,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  gap: 8,
+                                }}
+                              >
+                                <Ionicons name="logo-android" size={18} color="white" />
+                                <Text style={{ color: "white", fontSize: 13, fontWeight: "bold", fontFamily: "nunito-bold" }}>
+                                  Google Play
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() => Linking.openURL("https://destyastudio.com/products/code-respite")}
+                                style={{
+                                  backgroundColor: "#132F94",
+                                  borderRadius: 10,
+                                  paddingVertical: 10,
+                                  paddingHorizontal: 16,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  gap: 8,
+                                }}
+                              >
+                                <Ionicons name="logo-apple" size={18} color="white" />
+                                <Text style={{ color: "white", fontSize: 13, fontWeight: "bold", fontFamily: "nunito-bold" }}>
+                                  App Store
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </View>
+                                             {/* Right: Centered Mobile Simulator */}
+                          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                            <View
+                              style={{
+                                width: "100%",
+                                maxWidth: 480,
+                                height: "95%",
+                                maxHeight: 850,
+                                borderRadius: 20,
+                                overflow: "hidden",
+                                backgroundColor: "#132F94",
+                                shadowColor: "#000",
+                                shadowOpacity: 0.3,
+                                shadowRadius: 20,
+                                elevation: 10,
+                              }}
+                            >
+                              <View style={{ flex: 1 }}>
+                                <Stack screenOptions={{ headerShown: false }} />
+                              </View>
+                            </View>
+                          </View>
                         </View>
-                      </View>
+                      ) : (
+                        <View
+                          style={{
+                            flex: 1,
+                            backgroundColor: "#0C1D59",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <View
+                            style={{
+                              width: "100%",
+                              maxWidth: 480,
+                              height: "95%",
+                              maxHeight: 850,
+                              borderRadius: 20,
+                              overflow: "hidden",
+                              backgroundColor: "#132F94",
+                              shadowColor: "#000",
+                              shadowOpacity: 0.3,
+                              shadowRadius: 20,
+                              elevation: 10,
+                            }}
+                          >
+                            <View style={{ flex: 1 }}>
+                              <Stack screenOptions={{ headerShown: false }} />
+                            </View>
+                          </View>
+                        </View>
+                      )
                     ) : (
-                      <SafeAreaView style={{ flex: 1 }}>
+                      <View style={{ flex: 1 }}>
                         <Stack screenOptions={{ headerShown: false }} />
-                      </SafeAreaView>
+                      </View>
                     )}
                   </allCoursesContext.Provider>
                 </favoritesContext.Provider>

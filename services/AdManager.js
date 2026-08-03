@@ -2,18 +2,10 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from "rea
 import { AppState, Platform, View } from "react-native";
 import {
   AdEventType,
-  AdvertiserView,
   AppOpenAd,
   BannerAd,
   BannerAdSize,
-  CallToActionView,
-  HeadlineView,
-  IconView,
   InterstitialAd,
-  MediaView,
-  NativeAdView,
-  StarRatingView,
-  TaglineView,
 } from "react-native-google-mobile-ads";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { adConfigContext } from "../context/context";
@@ -199,6 +191,7 @@ export const showInterstitialAd = (adConfig) => {
 };
 
 export const BannerAdComponent = ({ fixed = false }) => {
+  if (!adConfigContext || !adConfigContext.Provider) return null;
   const { adConfig, adsReady } = useContext(adConfigContext);
   const [isAdLoaded, setIsAdLoaded] = useState(false);
   const insets = useSafeAreaInsets();
@@ -239,52 +232,49 @@ export const BannerAdComponent = ({ fixed = false }) => {
 };
 
 export const NativeAdComponent = () => {
-  const { adConfig, adsReady } = useContext(adConfigContext);
+  if (!adConfigContext || !adConfigContext.Provider) {
+    return null;
+  }
+  
+  let contextValues;
+  try {
+    contextValues = useContext(adConfigContext);
+    console.log("[Ads] useContext succeeded!", !!contextValues);
+  } catch (e) {
+    console.log("[Ads] useContext FAILED:", e.message);
+    throw e;
+  }
+  
+  const { adConfig, adsReady } = contextValues;
 
-  if (!adsReady || !adConfig.showAds || !adConfig.showNativeAds) return null;
+  if (!adsReady || !adConfig?.showAds || !adConfig?.showNativeAds) return null;
 
+  console.log("[Ads] NativeAdView type:", typeof NativeAdView);
+  console.log("[Ads] Rendering NativeAdView...");
   return (
-    <NativeAdView
-      adUnitID={getAdUnitId("nativeAdvanced")}
-      style={{
-        width: "100%",
-        padding: 15,
-        borderRadius: 10,
-        backgroundColor: "#fff",
-        elevation: 2,
-        // iOS Shadows
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-      }}
-      onAdLoaded={() => console.log("[Ads] Native ad loaded")}
-      onAdFailedToLoad={(err) => console.error("Native Ad Load Error", err)}
-    >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <IconView style={{ width: 60, height: 60, borderRadius: 10 }} />
-        <View style={{ flex: 1, marginLeft: 10 }}>
-          <HeadlineView style={{ fontSize: 16, fontWeight: "bold" }} />
-          <TaglineView style={{ fontSize: 14, color: "gray" }} />
-          <AdvertiserView style={{ fontSize: 12, color: "gray" }} />
-          <StarRatingView style={{ marginTop: 4 }} />
-        </View>
-      </View>
-      <MediaView style={{ width: "100%", height: 180, marginVertical: 10 }} />
-      <CallToActionView
-        style={{
-          backgroundColor: "#4285F4",
-          paddingVertical: 10,
-          borderRadius: 8,
-          alignItems: "center",
+    <View style={{
+      width: "100%",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 10,
+      backgroundColor: "#fff",
+      borderRadius: 10,
+      elevation: 2,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+    }}>
+      <BannerAd
+        unitId={getAdUnitId("banner")} // using banner unit id for the fallback
+        size={BannerAdSize.MEDIUM_RECTANGLE}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
         }}
-        textStyle={{
-          color: "white",
-          fontWeight: "bold",
-          fontSize: 16,
-        }}
+        onAdLoaded={() => console.log("[Ads] Inline Ad loaded")}
+        onAdFailedToLoad={(error) => console.error("Inline Ad Error:", error)}
       />
-    </NativeAdView>
+    </View>
   );
 };
 

@@ -3,7 +3,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { Animated, Platform, View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -45,6 +45,7 @@ const TabIcon = ({ focused, icon, tabBarHeight }) => {
 };
 
 export default function TabsLayout() {
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const tabBarBottom = insets.bottom + (Platform.OS === "ios" ? 10 : 12);
   const tabBarHeight = 64;
@@ -153,6 +154,31 @@ export default function TabsLayout() {
         <Tabs.Screen name="quiz" options={{ title: "Quiz" }} listeners={webTabListener} />
         <Tabs.Screen name="profile" options={{ title: "Profile" }} listeners={webTabListener} />
       </Tabs>
+
+      {/* Floating Action Button (FAB) for Ask Meowgrammer Chat */}
+      <TouchableOpacity
+        onPress={() => router.push("/chat")}
+        activeOpacity={0.8}
+        style={{
+          position: "absolute",
+          bottom: tabBarBottom + tabBarHeight + 20, // Positioned safely above the tab bar
+          right: 20,
+          backgroundColor: "#8B5CF6", // matching the AI color theme
+          width: 56,
+          height: 56,
+          borderRadius: 28,
+          justifyContent: "center",
+          alignItems: "center",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 6,
+          elevation: 8,
+          zIndex: 999, // Ensure it floats above everything
+        }}
+      >
+        <Ionicons name="chatbubbles" size={28} color="white" />
+      </TouchableOpacity>
 
       <Modal
         animationType="fade"

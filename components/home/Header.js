@@ -63,6 +63,7 @@ export default function Header() {
   return (
     <View
       className="flex-row justify-between items-center border-b border-gray-400 px-4 pb-4 relative"
+      style={{ paddingTop: Platform.OS === "web" ? 16 : 0 }}
     >
       <View className="flex-1 items-center justify-center">
         <View className="flex-row items-center">

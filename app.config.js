@@ -1,9 +1,10 @@
 module.exports = {
   expo: {
-    name: "CodeRespite: Refresh skills",
-    description: "Learn programming, coding interview preparation, web development, JavaScript quiz, HTML CSS flashcards, and tech skill refreshment.",
+    name: "CodeRespite",
+    description:
+      "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
-    version: "1.1.4",
+    version: "1.1.6",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: "coderespite",
@@ -13,7 +14,7 @@ module.exports = {
       supportsTablet: true,
       bundleIdentifier: "com.destyastudio.coderespite",
       icon: "./assets/iosIcon.png",
-      "buildNumber": "2",
+      buildNumber: "3",
       infoPlist: {
         NSUserTrackingUsageDescription:
           "This identifier will be used to deliver personalized ads to you.",
@@ -27,8 +28,28 @@ module.exports = {
       },
       edgeToEdgeEnabled: true,
       package: "com.mindcraftlearning.coderespite",
-      versionCode: 13,
+      versionCode: 22,
+      googleServicesFile: "./google-services.json",
       permissions: ["com.google.android.gms.permission.AD_ID"],
+      intentFilters: [
+        {
+          action: "VIEW",
+          autoVerify: true,
+          data: [
+            {
+              scheme: "https",
+              host: "destyastudio.com",
+              pathPrefix: "/code-respite",
+            },
+            {
+              scheme: "https",
+              host: "destyastudio.com",
+              pathPrefix: "/products/code-respite",
+            },
+          ],
+          category: ["BROWSABLE", "DEFAULT"],
+        },
+      ],
     },
     web: {
       bundler: "metro",
@@ -37,6 +58,8 @@ module.exports = {
     },
     plugins: [
       "expo-router",
+      "@react-native-firebase/app",
+      "@react-native-firebase/analytics",
       [
         "expo-splash-screen",
         {
@@ -50,8 +73,12 @@ module.exports = {
       [
         "react-native-google-mobile-ads",
         {
-          androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID || "ca-app-pub-7433519007687449~1317833947",
-          iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID || "ca-app-pub-7433519007687449~2791886380",
+          androidAppId:
+            process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID ||
+            "ca-app-pub-7433519007687449~1317833947",
+          iosAppId:
+            process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID ||
+            "ca-app-pub-7433519007687449~2791886380",
           userTrackingUsageDescription:
             "This identifier will be used to deliver personalized ads to you.",
           skAdNetworkItems: [
@@ -96,8 +123,12 @@ module.exports = {
     extra: {
       router: {},
       admob: {
-        androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID || "ca-app-pub-7433519007687449~1317833947",
-        iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID || "ca-app-pub-7433519007687449~2791886380",
+        androidAppId:
+          process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID ||
+          "ca-app-pub-7433519007687449~1317833947",
+        iosAppId:
+          process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID ||
+          "ca-app-pub-7433519007687449~2791886380",
       },
       eas: {
         projectId: "45e5a71a-6a35-4ad2-9a84-243ad0a992a9",

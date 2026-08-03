@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Pressable, StyleSheet, Text, View, Platform } from "react-native";
+import { Modal, Pressable, StyleSheet, Text, View, Platform, ScrollView } from "react-native";
 
 const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -32,7 +32,12 @@ export default function StreakHeatmap({ data }) {
       </View>
 
       {/* Heatmap grid */}
-      <View style={styles.grid}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.scrollView}
+        contentContainerStyle={styles.grid}
+      >
         {weeks.map((week, colIdx) => (
           <View key={colIdx} style={styles.weekColumn}>
             {week.map((day, rowIdx) => (
@@ -57,7 +62,7 @@ export default function StreakHeatmap({ data }) {
             ))}
           </View>
         ))}
-      </View>
+      </ScrollView>
 
       {/* Tooltip modal */}
       <Modal
@@ -126,5 +131,8 @@ const styles = StyleSheet.create({
   tooltipText: {
     color: "#fff",
     fontSize: 12,
+  },
+  scrollView: {
+    flex: 1,
   },
 });

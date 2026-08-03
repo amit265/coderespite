@@ -56,7 +56,7 @@ export default function Profile() {
   const router = useRouter();
   const show = false; // Dev toggle
 
-  const heatmapData = useMemo(() => generateLastNDaysData(userData?.progress), [userData?.progress]);
+  const heatmapData = useMemo(() => generateLastNDaysData(userData?.progress, userData?.activityLog), [userData?.progress, userData?.activityLog]);
 
   useEffect(() => {
     const username = userData?.profile?.name ?? ""; 

@@ -22,6 +22,7 @@ import MoreApps from "../components/MoreApps";
 import colors from "../constants/colors";
 import { SHARE_MESSAGE, STORE_LINK } from "../constants/constants";
 import { BannerAdComponent } from "../services/AdManager";
+import { logAnalyticsEvent } from "../services/analyticsService";
 
 export default function Settings() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function Settings() {
         } else {
           Alert.alert("Share CodeRespite", SHARE_MESSAGE);
         }
+        logAnalyticsEvent("invite_sent", { platform: "web" });
         return;
       }
 
@@ -48,7 +50,7 @@ export default function Settings() {
       });
 
       if (result.action === Share.sharedAction) {
-        // console.log("App shared!");
+        logAnalyticsEvent("invite_sent", { platform: Platform.OS });
       } else if (result.action === Share.dismissedAction) {
         console.log("Share dismissed.");
       }
@@ -114,6 +116,14 @@ export default function Settings() {
             >
               <AntDesign name="sharealt" size={24} color="#000000" />
               <Text style={styles.settingText}>Share</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.settingItem}
+              onPress={() => router.push("/settings/aiSetup")}
+            >
+              <Ionicons name="sparkles-outline" size={24} color="#000000" />
+              <Text style={styles.settingText}>AI Configuration Guide</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

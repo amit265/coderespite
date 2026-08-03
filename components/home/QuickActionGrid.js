@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
-import { Pressable, Text, View, Animated } from "react-native";
+import { Pressable, Text, View, Animated, Platform } from "react-native";
 import { Emoji, EmojiText } from "../../constants/constants";
 
 const actions = [
@@ -85,6 +85,8 @@ export default function QuickActionGrid() {
   const router = useRouter();
 
   const handlePress = (tab) => {
+    if (Platform.OS === "web") return;
+
     // Small delay to allow the bounce animation to play before switching screens
     setTimeout(() => {
       router.push(`(tabs)/${tab}`);

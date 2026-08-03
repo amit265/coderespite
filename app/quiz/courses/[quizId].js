@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useLocalSearchParams, useRouter, Stack } from "expo-router";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useLocalSearchParams, useRouter, Stack, useFocusEffect } from "expo-router";
+import React, { useContext, useEffect, useMemo, useRef, useState, useCallback } from "react";
 import * as Progress from "react-native-progress";
 import * as Haptics from "expo-haptics";
 
@@ -93,7 +93,7 @@ export default function QuizId() {
   const [result, setResult] = useState({});
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const { updateCourse, userData, gainXP } = useContext(userDetailsContext);
+  const { updateCourse, userData, gainXP, logActivity } = useContext(userDetailsContext);
   const [shuffledOptions, setShuffledOptions] = useState([]);
 
   const { allCourses, selectedCourse, selectedQuiz, setSelectedCourse, setSelectedQuiz } =
@@ -104,21 +104,41 @@ export default function QuizId() {
   const hasGainedXP = useRef(false);
 
   const resolvedCourse = useMemo(() => {
-    if (selectedCourse?.quizzes?.some((item) => item.id === quizId)) {
-      return selectedCourse;
+    const isInvalidId = !quizId || quizId === "undefined";
+    if (!isInvalidId) {
+      if (selectedCourse?.quizzes?.some((item) => item.id === quizId)) {
+        return selectedCourse;
+      }
+
+      const found = allCourses.find((course) =>
+        course.quizzes?.some((item) => item.id === quizId)
+      );
+      if (found) return found;
     }
 
-    return allCourses.find((course) =>
-      course.quizzes?.some((item) => item.id === quizId)
-    );
+    // Fallback: selected course or first course
+    if (selectedCourse) return selectedCourse;
+    if (allCourses.length > 0) return allCourses[0];
+    return null;
   }, [allCourses, quizId, selectedCourse]);
 
   const resolvedQuiz = useMemo(() => {
-    if (selectedQuiz?.id === quizId) {
-      return selectedQuiz;
+    if (!resolvedCourse) return null;
+    const isInvalidId = !quizId || quizId === "undefined";
+    if (!isInvalidId) {
+      if (selectedQuiz?.id === quizId) {
+        return selectedQuiz;
+      }
+
+      const found = resolvedCourse.quizzes?.find((item) => item.id === quizId);
+      if (found) return found;
     }
 
-    return resolvedCourse?.quizzes?.find((item) => item.id === quizId) || null;
+    // Fallback: first quiz of resolved course
+    if (resolvedCourse.quizzes?.length > 0) {
+      return resolvedCourse.quizzes[0];
+    }
+    return null;
   }, [quizId, resolvedCourse, selectedQuiz]);
 
   const courseTitle = resolvedCourse?.title;
@@ -140,19 +160,21 @@ export default function QuizId() {
     }
   }, [resolvedCourse, resolvedQuiz, selectedCourse, selectedQuiz, setSelectedCourse, setSelectedQuiz]);
 
-  useEffect(() => {
-    const backAction = () => {
-      goBack(); // Trigger your custom alert
-      return true; // Return true to prevent default behavior (exiting)
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const backAction = () => {
+        goBack(); // Trigger your custom alert
+        return true; // Return true to prevent default behavior (exiting)
+      };
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
 
-    return () => backHandler.remove();
-  }, []);
+      return () => backHandler.remove();
+    }, [resolvedQuiz])
+  );
 
   useEffect(() => {
     if (quiz && quiz[currentPage]?.options) {
@@ -290,6 +312,10 @@ export default function QuizId() {
         attemptedQuizzes: [...filtered, detailedQuizData],
       });
 
+      if (logActivity) {
+        await logActivity();
+      }
+
       router.replace({
         pathname: "/quiz/quizResultScreen",
         params: { quizIdParam: JSON.stringify(newAttempt) },
@@ -302,6 +328,25 @@ export default function QuizId() {
   };
 
   if (!quiz) {
+    if (allCourses.length > 0) {
+      return (
+        <SafeScreen>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 24 }}>
+            <Ionicons name="alert-circle-outline" size={64} color={colors.ERROR} />
+            <Text style={{ fontSize: 22, fontFamily: "nunito-bold", color: "#1F2937", marginTop: 16, marginBottom: 8, textAlign: "center" }}>Quiz Not Found</Text>
+            <Text style={{ fontSize: 15, fontFamily: "nunito", color: "#6B7280", textAlign: "center", marginBottom: 24, lineHeight: 22 }}>
+              {"We couldn't resolve the requested practice quiz."}
+            </Text>
+            <TouchableOpacity
+              onPress={() => router.replace("/(tabs)/quiz")}
+              style={{ backgroundColor: colors.PRIMARY, paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 }}
+            >
+              <Text style={{ color: "white", fontSize: 16, fontFamily: "nunito-bold" }}>Back to Quizzes</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeScreen>
+      );
+    }
     return (
       <SafeScreen>
         <View

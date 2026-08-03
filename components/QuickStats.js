@@ -2,7 +2,7 @@ import { Entypo } from "@expo/vector-icons";
 import React, { useContext, useMemo, useState } from "react";
 import { Text, TouchableOpacity, View, Share, Alert, Platform } from "react-native";
 import colors from "../constants/colors";
-import { EmojiText, STORE_LINK } from "../constants/constants";
+import { EmojiText, DESTYA_SHARE_LINK } from "../constants/constants";
 import { allCoursesContext } from "../context/context";
 import Button from "./shared/Button";
 
@@ -56,7 +56,7 @@ export default function QuickStats({ userData }) {
       `🧠 Viewed Flashcards: ${totalViewed}\n` +
       `💙 Favorite Flashcards: ${totalLoved}\n` +
       `🧪 Quizzes Completed: ${totalQuizzes}\n\n` +
-      `Refresh your tech skills with me! Download the app: ${STORE_LINK}`;
+      `Refresh your tech skills with me! Download the app: ${DESTYA_SHARE_LINK}`;
 
     try {
       if (Platform.OS === 'web') {

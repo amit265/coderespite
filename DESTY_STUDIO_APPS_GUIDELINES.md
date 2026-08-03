@@ -255,11 +255,13 @@ To ensure that Desty Studio apps remain updateable and compliant on Google Play:
 To maximize organic discoverability and increase App Store and Google Play conversions across all Desty Studio apps, adhere to the following metadata and store presence rules:
 
 ### A. Metadata Constraints & Search Terms
+
 - **App Title:** Keep titles short and impact-driven (≤ 30 characters on both platforms) containing the brand name and one primary search term (e.g. `CodeRespite: Refresh skills` or `Trivia Quest AI: Fun Quiz`).
 - **Short Description / Subtitle:** Limit to ≤ 30 characters on iOS App Store and ≤ 80 characters on Google Play Store. Highlight the unique selling proposition (USP).
 - **Keyword Density:** Maintain a natural 2% to 3% keyword density in the App Store full description. Avoid keyword stuffing.
 
 ### B. Promotional Landing Pages (Web Previews)
+
 - **Visuals:** On wide desktop screens, configure a side promotion panel adjacent to the portrait Web Simulator.
 - **Content:** The panel must feature:
   - Clear app title and descriptive text detailing core features.
@@ -267,3 +269,140 @@ To maximize organic discoverability and increase App Store and Google Play conve
   - App Store and Google Play redirection buttons (using standard links) to guide desktop visitors to mobile installations.
 - **Example Layout (`app/_layout.tsx`):** Use a `flexDirection: "row"` container on Web builds that wraps to `column` on small viewport screens to present side-by-side promotional badges and mockups.
 
+---
+
+## 9. Deep Linking (Android App Links)
+
+To maximize viral growth, all Destya Studio apps should support seamless deep linking.
+
+- **Configuration (`app.json`):** Use `intentFilters` with `"autoVerify": true`.
+  ```json
+  "intentFilters": [
+    {
+      "action": "VIEW",
+      "autoVerify": true,
+      "data": [
+        { "scheme": "https", "host": "destyastudio.com", "pathPrefix": "/spinny" }
+      ],
+      "category": ["BROWSABLE", "DEFAULT"]
+    }
+  ]
+  ```
+- **Verification:** Ensure `destyastudio.com/.well-known/assetlinks.json` includes the app's package name and SHA-256 fingerprint.
+- **Handling in App:** Implement a `useDeepLinkHandler` hook that listens to both `Linking.getInitialURL()` (cold start) and `Linking.addEventListener('url')` (foreground) to extract URL parameters and update the app state.
+
+---
+
+## 10. In-App Update System (GitHub Hosted)
+
+To bypass store review times and ensure users update to the latest features, use a GitHub-hosted update checker.
+
+- **Remote Manifest:** Host a `version.json` file in the GitHub repo root containing `latestVersion` and a `whatsNew` array.
+- **Update Hook:** Create a `useUpdateChecker.js` hook that fetches the raw `version.json` on app cold start (using `cache: 'no-store'`).
+- **Trigger:** If the remote version is greater than `Constants.expoConfig.version`, display an `UpdateModal` showing what's new. Use `AsyncStorage` to ensure the modal only shows once per JS session.
+
+---
+
+## 11. Groq AI Integration (Free & Unlimited)
+
+Instead of relying on costly backend OpenAI services, utilize Groq Cloud API directly on the client for instant generation.
+
+- **Model Selection:** Default to `llama-3.3-70b-versatile` via `https://api.groq.com/openai/v1/chat/completions` for extreme speed.
+- **In-App API Key Configuration:** Since the apps are free, include a setup guide asking users to enter their own Groq API key for unlimited generations. Save this key securely in `AsyncStorage`.
+- **Fallback Engine:** Always provide hardcoded JSON templates as offline fallbacks so the feature functions smoothly even without an internet connection or an API key.
+
+---
+
+## 12. App Store & Google Play AI Compliance Policies
+
+To prevent app rejections under Apple's User Generated Content (UGC) safety policies (Guideline 1.2) and Google Play's Generative AI requirements, all AI-enabled features must implement the following safeguards:
+
+### A. Safety Prompts & Input Moderation
+- **Rule:** Configure the system prompt to explicitly reject inappropriate, harmful, sexual, hateful, or violent user inputs.
+- **Implementation:** Instruct the LLM to output a standardized error format (e.g. `[{"error": "Inappropriate topic..."}]`) if it detects violation, and handle it gracefully in the UI.
+
+### B. AI Content Disclaimers
+- **Rule:** Display a visible warning label near all AI-generated content blocks to alert users about model hallucinations.
+- **Sample Text:** `"⚠️ AI responses are generated dynamically and may contain errors. Please verify critical facts."`
+
+### C. Output Reporting & Flagging
+- **Rule:** Provide an immediate mechanism for users to report or flag offensive/incorrect AI output.
+- **Implementation:** Add a "Report output" button or flag icon adjacent to AI responses that registers a flag event and notifies the user.
+
+---
+
+## 13. Ad Placement & Monetization Strategy
+
+To balance effective monetization with a premium user experience, follow these guidelines for integrating `react-native-google-mobile-ads`:
+
+### A. Native Advanced Ads
+- **Effectiveness:** Native Ads are the highest performing format because they blend seamlessly into the app's UI.
+- **Placement:** Insert Native Ads into vertical scrolling feeds, grids, or directly below primary content blocks (e.g., between standard content cards on the Home tab). 
+- **Styling:** Style the native ad container to match the padding, border radius, and shadow of adjacent standard UI cards. Ensure it includes the mandatory "Ad" attribution badge.
+
+### B. Interstitial & App Open Ads
+- **Effectiveness:** High CPM, but can be highly disruptive.
+- **App Open Placement:** Trigger App Open ads *only* during cold starts or when the app is resumed from the background after a significant delay (e.g., > 1 hour), never on brief multitasking swaps.
+- **Interstitial Placement:** Trigger these *only* at natural transition points. Examples: completing a level, finishing a quiz, or navigating between major, disconnected sections. Avoid showing them back-to-back.
+
+### C. Banner Ads
+- **Effectiveness:** Low CPM, but consistent impressions.
+- **Placement:** Anchor banner ads to the absolute bottom of the screen above the tab bar, or top of non-intrusive screens. Never place them near interactive buttons where accidental clicks can occur, as this violates policy.
+
+---
+
+## 14. Purposeful AI Integration
+
+AI features (via Groq/Llama) should enhance the app experience, not overwhelm it. Avoid "AI for the sake of AI".
+
+### A. When to Use AI
+- **Generative Content Extension:** Use AI to generate infinite variations of core content (e.g., custom quizzes, personalized learning roadmaps, dynamic trivia questions).
+- **Interactive Assistance:** Use AI as a contextual helper (e.g., a "Tutor" chatbot, explanation generator for incorrect answers).
+
+### B. When to Avoid AI
+- **Core Navigation:** Do not replace standard UI navigation with a conversational interface if buttons are faster.
+- **Static Content:** Do not use AI to generate static text that could easily be hardcoded or retrieved from a database (e.g., privacy policies, standard app instructions).
+
+### C. UI Integration
+- **Opt-In Experience:** AI generation can be unpredictable. Make AI features distinct and opt-in. Keep standard, deterministic content available by default.
+- **Visual Separation:** Clearly delineate AI-generated content (e.g., using a subtle gradient background or a "Sparkles" icon) so users understand it was dynamically created.
+
+---
+
+## 15. In-App Review & ASO Optimization
+
+To organically boost ASO rankings across Desty Studio apps, rely on the native `expo-store-review` package rather than expecting users to manually visit the App Store.
+
+### A. The Core Principle: Ask at Peak Satisfaction
+- **Rule:** Never interrupt a user's flow to ask for a review randomly.
+- **Implementation:** Trigger the review prompt immediately *after* a high-dopamine event, such as:
+  - Closing a "Level Up" modal.
+  - Getting a 100% perfect score on a quiz.
+  - Earning a rare badge or achievement.
+
+### B. How to Integrate
+1. **Install:** Run `npx expo install expo-store-review`.
+2. **Safe Triggering:** Native review modules crash in standard Expo Go or unsupported environments if not handled safely. Always wrap the trigger in a safe async block.
+3. **Anti-Spam Checks:** Use `AsyncStorage` to ensure you only ask the user once per milestone (e.g. they shouldn't be asked every time they get a perfect score).
+
+### C. Standard Boilerplate Logic
+Use this template for triggering a review safely:
+```javascript
+import * as StoreReview from "expo-store-review";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const triggerStoreReview = async (storageKey = "hasPromptedReview") => {
+  try {
+    const hasPrompted = await AsyncStorage.getItem(storageKey);
+    // 1. Check if we haven't spammed them
+    // 2. Safely check if the native Action exists (prevents Expo Go crashes)
+    if (!hasPrompted && await StoreReview.hasAction()) {
+      await StoreReview.requestReview();
+      await AsyncStorage.setItem(storageKey, "true");
+    }
+  } catch (err) {
+    console.log("[StoreReview] Failed to trigger:", err);
+  }
+};
+```
+*Note: The native UI will only appear in a production build or Custom Dev Client, but `StoreReview.hasAction()` ensures development environments degrade gracefully.*
