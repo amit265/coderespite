@@ -1,8 +1,8 @@
 import { AntDesign } from "@expo/vector-icons";
+import { FlashList } from "@shopify/flash-list";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import {
-  FlatList,
   Image,
   Text,
   TouchableOpacity,
@@ -87,7 +87,8 @@ export default function QuizHistoryCard({ quizData }) {
   };
 
   return (
-    <FlatList
+    <FlashList
+      estimatedItemSize={80}
       data={sortedQuizData}
       renderItem={renderQuizData}
       keyExtractor={(_, index) => index.toString()}

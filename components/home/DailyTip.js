@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../../services/storage";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import dailyTip from "../../assets/data/dailyTip.json";

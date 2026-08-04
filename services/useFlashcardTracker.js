@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "./storage";
 import { favoritesContext, userDetailsContext } from "../context/context";
 
 export default function useFlashcardTracker(courseTitle) {

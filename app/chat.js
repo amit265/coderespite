@@ -9,13 +9,13 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  FlatList,
   Pressable,
   Share,
 } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../services/storage";
 import { Ionicons } from "@expo/vector-icons";
 import Markdown from "react-native-markdown-display";
 import colors from "../constants/colors";
@@ -385,7 +385,8 @@ When a user asks about a topic that is covered by one of these courses, proactiv
       </View>
 
       {/* Messages — flex:1 so it fills available space and input stays at bottom */}
-      <FlatList
+      <FlashList
+        estimatedItemSize={100}
         ref={flatListRef}
         data={displayMessages}
         keyExtractor={(item) => item.id}

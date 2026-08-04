@@ -14,7 +14,7 @@ import {
   Platform,
 } from "react-native";
 import { useRouter, useFocusEffect } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../../services/storage";
 import { Ionicons } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import * as Haptics from "expo-haptics";

@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "./storage";
 
 const STORAGE_KEY = "@user_data";
 

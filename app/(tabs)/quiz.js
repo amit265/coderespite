@@ -7,8 +7,8 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { FlashList } from "@shopify/flash-list";
 import {
-  FlatList,
   Image,
   Pressable,
   Text,
@@ -398,7 +398,8 @@ export default function Quiz() {
             No quizzes available.
           </Text>
         ) : (
-          <FlatList
+          <FlashList
+            estimatedItemSize={120}
             data={filteredQuizzes}
             keyExtractor={(item) => item.id.toString() + item.title}
             renderItem={renderItem}

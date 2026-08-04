@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react"; // Import useRef
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../services/storage";
 import { SplashScreen, useRouter } from "expo-router";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../services/firebaseConfig";

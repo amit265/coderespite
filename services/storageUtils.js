@@ -1,5 +1,5 @@
 // utils/storageUtils.js
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "./storage";
 import { getAllCoursesWithSubcollections } from "../services/getAllCoursesWithSubcollections";
 
 export const saveUserData = async (userData) => {

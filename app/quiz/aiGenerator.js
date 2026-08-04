@@ -11,7 +11,7 @@ import {
   Pressable,
 } from "react-native";
 import { useRouter, useFocusEffect } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../../services/storage";
 import { Ionicons } from "@expo/vector-icons";
 import SafeScreen from "../../components/SafeScreen";
 import PageTransition from "../../components/PageTransition";

@@ -1,7 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../services/storage";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useWindowDimensions, FlatList, Pressable, Text, View, Animated, Easing, StyleSheet } from "react-native";
+import { useWindowDimensions, Pressable, Text, View, StyleSheet } from "react-native";
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, withSpring, withSequence, withDelay, interpolate } from 'react-native-reanimated';
+import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
 import colors from "../constants/colors";
 import { favoritesContext, userDetailsContext, allCoursesContext } from "../context/context";
@@ -9,34 +11,28 @@ import { registerFlashcardInSRS, removeFlashcardFromSRS } from "../services/srsS
 
 // --- 1. Animated Heart Component ---
 const AnimatedHeart = ({ isFav, onPress }) => {
-  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const scaleAnim = useSharedValue(1);
 
   const handlePress = () => {
-    // Run the "Pop" animation
-    Animated.sequence([
-      Animated.timing(scaleAnim, {
-        toValue: 1.3, // Scale up
-        duration: 100,
-        useNativeDriver: true,
-        easing: Easing.ease,
-      }),
-      Animated.spring(scaleAnim, {
-        toValue: 1, // Bounce back
-        friction: 4,
-        useNativeDriver: true,
-      }),
-    ]).start();
-
-    // Trigger the actual logic
+    scaleAnim.value = withSequence(
+      withTiming(1.3, { duration: 100 }),
+      withSpring(1, { damping: 4, stiffness: 100 })
+    );
     onPress();
   };
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scaleAnim.value }]
+    };
+  });
+
   return (
     <Pressable onPress={handlePress} hitSlop={15}>
-      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+      <Animated.View style={animatedStyle}>
         <Ionicons
           name={isFav ? "heart" : "heart-outline"}
-          size={28} // Slightly larger for better tap target
+          size={28}
           color={isFav ? colors.ERROR : colors.PRIMARY}
         />
       </Animated.View>
@@ -46,36 +42,25 @@ const AnimatedHeart = ({ isFav, onPress }) => {
 
 // --- 2. Animated Card Wrapper (Entrance) ---
 const AnimatedCardContainer = ({ children, index }) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(50)).current;
+  const fadeAnim = useSharedValue(0);
+  const slideAnim = useSharedValue(50);
 
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 500,
-        delay: index * 100, // Stagger based on index
-        useNativeDriver: true,
-      }),
-      Animated.spring(slideAnim, {
-        toValue: 0,
-        friction: 7,
-        tension: 40,
-        delay: index * 100,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    fadeAnim.value = withDelay(index * 100, withTiming(1, { duration: 500 }));
+    slideAnim.value = withDelay(index * 100, withSpring(0, { damping: 7, stiffness: 40 }));
   }, [index]);
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: fadeAnim.value,
+      transform: [{ translateY: slideAnim.value }],
+      marginTop: 32,
+      alignItems: 'center',
+    };
+  });
+
   return (
-    <Animated.View
-      style={{
-        opacity: fadeAnim,
-        transform: [{ translateY: slideAnim }],
-        marginTop: 32, // mt-8 equivalent
-        alignItems: 'center',
-      }}
-    >
+    <Animated.View style={animatedStyle}>
       {children}
     </Animated.View>
   );
@@ -83,36 +68,35 @@ const AnimatedCardContainer = ({ children, index }) => {
 
 // Custom animated cross-platform FlipCard
 const FlipCardComponent = ({ children, isFlipped, onPress, style }) => {
-  const animatedValue = useRef(new Animated.Value(0)).current;
+  const animatedValue = useSharedValue(0);
 
   useEffect(() => {
-    const toValue = isFlipped ? 180 : 0;
-    Animated.spring(animatedValue, {
-      toValue,
-      friction: 8,
-      tension: 15,
-      useNativeDriver: true,
-    }).start();
+    animatedValue.value = withSpring(isFlipped ? 180 : 0, {
+      damping: 8,
+      stiffness: 15,
+    });
   }, [isFlipped]);
 
-  const frontInterpolate = animatedValue.interpolate({
-    inputRange: [0, 180],
-    outputRange: ["0deg", "180deg"],
+  const frontStyle = useAnimatedStyle(() => {
+    const rotateY = interpolate(animatedValue.value, [0, 180], [0, 180]) + "deg";
+    const opacity = interpolate(animatedValue.value, [89, 90], [1, 0]);
+    return {
+      transform: [{ rotateY }],
+      opacity,
+      backfaceVisibility: "hidden",
+      zIndex: isFlipped ? 0 : 1,
+    };
   });
 
-  const backInterpolate = animatedValue.interpolate({
-    inputRange: [0, 180],
-    outputRange: ["180deg", "360deg"],
-  });
-
-  const frontOpacity = animatedValue.interpolate({
-    inputRange: [89, 90],
-    outputRange: [1, 0],
-  });
-
-  const backOpacity = animatedValue.interpolate({
-    inputRange: [89, 90],
-    outputRange: [0, 1],
+  const backStyle = useAnimatedStyle(() => {
+    const rotateY = interpolate(animatedValue.value, [0, 180], [180, 360]) + "deg";
+    const opacity = interpolate(animatedValue.value, [89, 90], [0, 1]);
+    return {
+      transform: [{ rotateY }],
+      opacity,
+      backfaceVisibility: "hidden",
+      zIndex: isFlipped ? 1 : 0,
+    };
   });
 
   const [frontView, backView] = React.Children.toArray(children);
@@ -120,32 +104,12 @@ const FlipCardComponent = ({ children, isFlipped, onPress, style }) => {
   return (
     <Pressable onPress={onPress} style={style}>
       {/* Front Card */}
-      <Animated.View
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            transform: [{ rotateY: frontInterpolate }],
-            opacity: frontOpacity,
-            backfaceVisibility: "hidden",
-            zIndex: isFlipped ? 0 : 1,
-          },
-        ]}
-      >
+      <Animated.View style={[StyleSheet.absoluteFillObject, frontStyle]}>
         {frontView}
       </Animated.View>
 
       {/* Back Card */}
-      <Animated.View
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            transform: [{ rotateY: backInterpolate }],
-            opacity: backOpacity,
-            backfaceVisibility: "hidden",
-            zIndex: isFlipped ? 1 : 0,
-          },
-        ]}
-      >
+      <Animated.View style={[StyleSheet.absoluteFillObject, backStyle]}>
         {backView}
       </Animated.View>
     </Pressable>
@@ -412,7 +376,8 @@ export default function FlashCardItem({
 
   return (
     <View style={{ flex: 1 }}>
-      <FlatList
+      <FlashList
+        estimatedItemSize={300}
         data={flashcards}
         keyExtractor={(item) => item.question}
         showsVerticalScrollIndicator={false}

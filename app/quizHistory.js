@@ -1,5 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../services/storage";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState, useRef } from "react";
 import { Pressable, Text, View, Animated } from "react-native";

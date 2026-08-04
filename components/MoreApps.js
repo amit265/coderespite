@@ -10,7 +10,7 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../services/storage";
 import { getMoreApps } from "../services/moreAppsService";
 import colors from "../constants/colors";
 import { Emoji, EmojiText } from "../constants/constants";

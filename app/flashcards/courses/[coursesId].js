@@ -1,10 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
+import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useContext, useEffect, useMemo, useRef } from "react";
 import {
   ActivityIndicator,
   Animated,
-  FlatList,
   Pressable,
   Text,
   TouchableOpacity,
@@ -142,7 +142,8 @@ export default function FlashcardModules() {
               />
             </View>
           ) : (
-            <FlatList
+            <FlashList
+              estimatedItemSize={150}
               data={course.modules}
               keyExtractor={(item) => item.id}
               renderItem={({ item, index }) => (

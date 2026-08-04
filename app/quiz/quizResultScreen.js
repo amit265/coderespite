@@ -1,13 +1,13 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as StoreReview from "expo-store-review";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../../services/storage";
 import LottieView from "lottie-react-native";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Animated,
-  FlatList,
   Image,
   Pressable,
   StyleSheet,
@@ -337,7 +337,8 @@ export default function QuizResultScreen() {
             </View>
           )}
 
-          <FlatList
+          <FlashList
+            estimatedItemSize={100}
             data={quizResult ? Object.entries(quizResult) : []}
             renderItem={renderItem}
             style={{ paddingBottom: 20 }}

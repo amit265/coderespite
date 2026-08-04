@@ -1,10 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
+import { FlashList } from "@shopify/flash-list";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Animated,
-  FlatList,
   Pressable,
   Text,
   TouchableOpacity,
@@ -229,7 +229,8 @@ export default function CourseModules() {
               </TouchableOpacity>
             </View>
           ) : (
-            <FlatList
+            <FlashList
+              estimatedItemSize={120}
             data={course.modules}
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (

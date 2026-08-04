@@ -442,3 +442,57 @@ For rapid deployment of JavaScript and asset changes without requiring users to 
 
 ### C. Combining with GitHub Hosted Checker
 If you make a native change requiring a store update, do NOT use EAS Update. Instead, bump the `"version"` in `app.config.js`, update the remote `version.json` (as described in Section 10), and submit a new binary to the stores. The custom modal will then prompt users to manually update their app.
+
+---
+
+## 18. High-Performance Storage (MMKV & SecureStore)
+
+To ensure the fastest possible synchronous read/writes and secure storage of sensitive keys, we utilize a combination of MMKV and Expo Secure Store.
+
+### A. React Native MMKV
+- **Usage:** Replace all instances of `AsyncStorage` with `react-native-mmkv` for non-sensitive data (e.g., user preferences, cached JSON, game state).
+- **Implementation:** Create a drop-in wrapper (e.g., `services/storage.js`) that mimics the `AsyncStorage` API but uses MMKV under the hood, allowing for a seamless migration.
+
+### B. Expo Secure Store
+- **Usage:** Use `expo-secure-store` exclusively for sensitive credentials (e.g., Groq API Keys, Authentication Tokens).
+- **Security:** This ensures data is encrypted and stored in the iOS Keychain or Android Keystore, preventing unauthorized access on rooted/jailbroken devices.
+
+---
+
+## 19. High-Performance Lists (FlashList)
+
+To guarantee smooth 60fps/120fps scrolling on both high-end and low-end devices, avoid using React Native's standard `FlatList` for long data arrays.
+
+- **Library:** `@shopify/flash-list`
+- **Implementation:** Replace `<FlatList>` with `<FlashList>`.
+- **Requirement:** You **must** provide an accurate `estimatedItemSize` prop to `FlashList` to ensure the native view recycling engine calculates layout bounds correctly before rendering.
+
+---
+
+## 20. Advanced UI Animations (Reanimated)
+
+React Native's legacy `Animated` API runs on the JS thread by default (unless `useNativeDriver: true` is provided, which is limited). To unlock complex, buttery-smooth animations that run entirely on the UI thread, we use React Native Reanimated.
+
+- **Library:** `react-native-reanimated` (v3+)
+- **Concepts:** Replace `Animated.Value` with `useSharedValue()`. Replace standard inline styles with `useAnimatedStyle()`. Use `withSpring()` and `withTiming()` worklets to drive the shared values.
+- **Performance:** This eliminates JS thread bottlenecks during heavy renders, ensuring UI animations (like card flips, swipes, and pop-ins) remain fluid.
+
+---
+
+## 21. Server State & Cache Management (React Query)
+
+Avoid using scattered `useState` and `useEffect` hooks combined with manual `AsyncStorage` cache checks for remote data fetching.
+
+- **Library:** `@tanstack/react-query`
+- **Implementation:** Wrap the application in a `<QueryClientProvider>`. Replace custom fetch logic with the `useQuery` hook.
+- **Benefits:** React Query automatically handles caching, deduping simultaneous requests, background refetching on window focus, and stale-time management, drastically reducing boilerplate code and race conditions.
+
+---
+
+## 22. Crash Reporting & Observability (Sentry)
+
+To gain full visibility into production crashes, unhandled promise rejections, and performance bottlenecks, we integrate Sentry.
+
+- **Library:** `@sentry/react-native`
+- **Implementation:** Initialize Sentry at the very top of the app's entry point (`app/_layout.tsx`) using `Sentry.init()`. Wrap the root component in `Sentry.wrap()`.
+- **Action:** Ensure the Expo plugin `@sentry/react-native/expo` is added to `app.config.js` to automatically upload source maps during the EAS build process.

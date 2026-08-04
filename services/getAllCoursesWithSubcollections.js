@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebaseConfig";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "./storage";
 
 const CACHE_KEY = "@cached_courses_data";
 

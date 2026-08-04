@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../services/storage";
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useRef } from "react";
 import { Text, View, Animated } from "react-native";

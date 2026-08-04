@@ -1,5 +1,7 @@
-// app/_layout.tsx
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { isRunningInExpoGo } from "expo";
+import * as Sentry from '@sentry/react-native';
+import AsyncStorage from "../services/storage";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   AntDesign,
   Ionicons,
@@ -21,13 +23,25 @@ import AdManager from "../services/AdManager";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
 import { EmojiText } from "../constants/constants";
-import { useDeepLinkHandler } from "../hooks/useDeepLinkHandler";
 import { useUpdateChecker } from "../hooks/useUpdateChecker";
 import { initNotifications } from "../services/notificationService";
 import UpdateModal from "../components/UpdateModal";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient();
+
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN || "",
+  enableInExpoDevelopment: true,
+  debug: false,
+  integrations: [
+    Sentry.expoRouterIntegration({
+      enableTimeToInitialDisplay: !isRunningInExpoGo(),
+    }),
+  ],
+});
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -70,7 +84,6 @@ export default function RootLayout() {
   const [selectedLesson, setSelectedLesson] = useState(null);
 
   // Desty Studio guidelines hooks integration
-  useDeepLinkHandler();
   const { updateAvailable, changelog, remoteVersion, setUpdateAvailable } = useUpdateChecker();
 
   useEffect(() => {
@@ -309,6 +322,7 @@ export default function RootLayout() {
       }}
     >
       <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
         <adConfigContext.Provider value={adConfigValue}>
           <PaperProvider>
             <LevelContext.Provider value={{ levelLoading, lastShownLevel, setLastShownLevel, updateLastShownLevel }}>
@@ -507,6 +521,7 @@ export default function RootLayout() {
             </LevelContext.Provider>
           </PaperProvider>
         </adConfigContext.Provider>
+        </QueryClientProvider>
 
       </SafeAreaProvider>
     </ErrorBoundary>

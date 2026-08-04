@@ -63,6 +63,7 @@ module.exports = {
       favicon: "./assets/images/favicon.png",
     },
     plugins: [
+      "expo-secure-store",
       "expo-router",
       "@react-native-firebase/app",
       "@react-native-firebase/analytics",
@@ -123,6 +124,13 @@ module.exports = {
       ],
       "expo-web-browser",
       "expo-tracking-transparency",
+      [
+        "@sentry/react-native/expo",
+        {
+          organization: process.env.EXPO_PUBLIC_SENTRY_ORG || "destya-studio",
+          project: process.env.EXPO_PUBLIC_SENTRY_PROJECT || "coderespite",
+        },
+      ]
     ],
     experiments: {
       typedRoutes: true,

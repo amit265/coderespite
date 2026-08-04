@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useMemo, useRef, useState, useCallback } 
 import * as Progress from "react-native-progress";
 import * as Haptics from "expo-haptics";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../../../services/storage";
 import {
   ActivityIndicator,
   Alert,

@@ -1,11 +1,11 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 export const getUserGroqApiKey = async () => {
-  return await AsyncStorage.getItem("ds_groq_api_key");
+  return await SecureStore.getItemAsync("ds_groq_api_key");
 };
 
 export const getGroqApiKey = async () => {
-  const userKey = await AsyncStorage.getItem("ds_groq_api_key");
+  const userKey = await SecureStore.getItemAsync("ds_groq_api_key");
   if (userKey && userKey.trim() !== "") {
     return userKey.trim();
   }
@@ -14,9 +14,9 @@ export const getGroqApiKey = async () => {
 
 export const saveGroqApiKey = async (key) => {
   if (key) {
-    await AsyncStorage.setItem("ds_groq_api_key", key.trim());
+    await SecureStore.setItemAsync("ds_groq_api_key", key.trim());
   } else {
-    await AsyncStorage.removeItem("ds_groq_api_key");
+    await SecureStore.deleteItemAsync("ds_groq_api_key");
   }
 };
 

@@ -9,7 +9,7 @@ import { flashcardIcons } from "../../constants/constants";
 import { adConfigContext, allCoursesContext, userDetailsContext } from "../../context/context";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import { NativeAdComponent } from "../../services/AdManager";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "../../services/storage";
 import { Alert } from "react-native";
 
 // --- Animated Card Component ---
