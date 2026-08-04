@@ -4,12 +4,18 @@ module.exports = {
     description:
       "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
-    version: "1.1.6",
+    version: "1.1.7",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: "coderespite",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
+    updates: {
+      url: "https://u.expo.dev/45e5a71a-6a35-4ad2-9a84-243ad0a992a9"
+    },
+    runtimeVersion: {
+      policy: "appVersion"
+    },
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.destyastudio.coderespite",
@@ -108,9 +114,10 @@ module.exports = {
             compileSdkVersion: 36,
             targetSdkVersion: 36,
             minSdkVersion: 24,
-            enableProguardInReleaseBuilds: true,
-            enableShrinkResourcesInReleaseBuilds: true,
+            enableProguardInReleaseBuilds: false,
+            enableShrinkResourcesInReleaseBuilds: false,
             enableHermes: true,
+            extraProguardRules: "-keep class expo.modules.** { *; }",
           },
         },
       ],

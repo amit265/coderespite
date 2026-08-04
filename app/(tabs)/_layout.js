@@ -73,8 +73,9 @@ export default function TabsLayout() {
           tabBarStyle: {
             position: "absolute",
             bottom: tabBarBottom,
-            left: 10,
-            right: 10,
+            alignSelf: "center",
+            width: "95%",
+            maxWidth: 400,
             height: tabBarHeight,
             paddingTop: 0,
             paddingBottom: 0,
@@ -85,7 +86,6 @@ export default function TabsLayout() {
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.1,
             shadowRadius: 10,
-            marginHorizontal: 10,
             elevation: 5,
           },
           tabBarIconStyle: {

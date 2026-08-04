@@ -246,13 +246,17 @@ export const NativeAdComponent = () => {
   }
   
   const { adConfig, adsReady } = contextValues;
+  const [isAdLoaded, setIsAdLoaded] = useState(false);
 
   if (!adsReady || !adConfig?.showAds || !adConfig?.showNativeAds) return null;
 
   console.log("[Ads] NativeAdView type:", typeof NativeAdView);
   console.log("[Ads] Rendering NativeAdView...");
   return (
-    <View style={{
+    <View style={[{
+      opacity: isAdLoaded ? 1 : 0,
+      height: isAdLoaded ? undefined : 0,
+    }, isAdLoaded && {
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
@@ -264,14 +268,17 @@ export const NativeAdComponent = () => {
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
-    }}>
+    }]}>
       <BannerAd
         unitId={getAdUnitId("banner")} // using banner unit id for the fallback
         size={BannerAdSize.MEDIUM_RECTANGLE}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
         }}
-        onAdLoaded={() => console.log("[Ads] Inline Ad loaded")}
+        onAdLoaded={() => {
+          console.log("[Ads] Inline Ad loaded");
+          setIsAdLoaded(true);
+        }}
         onAdFailedToLoad={(error) => console.error("Inline Ad Error:", error)}
       />
     </View>

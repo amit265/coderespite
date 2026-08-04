@@ -349,6 +349,10 @@ To balance effective monetization with a premium user experience, follow these g
 - **Effectiveness:** Low CPM, but consistent impressions.
 - **Placement:** Anchor banner ads to the absolute bottom of the screen above the tab bar, or top of non-intrusive screens. Never place them near interactive buttons where accidental clicks can occur, as this violates policy.
 
+### D. Ad Layout & Spacing (Native & Banner)
+- **Constraint:** Ad components (both Native and Banner) must only occupy screen space if they successfully load.
+- **Implementation:** Track the ad loading state (`isAdLoaded`) and apply styling conditionally so the container has `opacity: 0` and `height: 0` (or returns `null`) until the ad successfully loads, ensuring no empty padding or background color remains visible on the screen.
+
 ---
 
 ## 14. Purposeful AI Integration
@@ -406,3 +410,35 @@ const triggerStoreReview = async (storageKey = "hasPromptedReview") => {
 };
 ```
 *Note: The native UI will only appear in a production build or Custom Dev Client, but `StoreReview.hasAction()` ensures development environments degrade gracefully.*
+
+---
+
+## 16. Data Refresh & State Management
+
+To ensure users always have access to the latest content (e.g., dynamically updated Firebase configurations, new questions, or fresh courses) without needing to restart the app:
+
+### A. Pull-to-Refresh Implementation
+- **Behavior:** Implement standard "Pull-to-Refresh" functionality using React Native's `RefreshControl` component on all main scrollable screens (like `FlatList` or `ScrollView`).
+- **Data Sync:** When triggered, the `onRefresh` handler must explicitly re-fetch remote data (such as querying Firestore or fetching a remote JSON manifest) and update the local context or state immediately.
+- **Platform Constraint:** Note that native pull-to-refresh physics and interactions are strictly designed for **Native Mobile environments (iOS and Android)**. On the Web version, this gesture is typically not supported natively by browsers, so web builds will rely on normal component mounting logic or manual reload buttons. Ensure the `RefreshControl` is implemented but understand it will primarily act as a mobile-exclusive feature.
+
+---
+
+## 17. Over-the-Air (OTA) Updates via EAS Update
+
+For rapid deployment of JavaScript and asset changes without requiring users to download a new binary from the App Store or Google Play, all Desty Studio apps use **EAS Update**.
+
+### A. How it Works
+- **Mechanism:** Expo Application Services (EAS) hosts your new JavaScript bundle. When users open the app, the `expo-updates` client checks for a new version, downloads it in the background, and applies it upon the next cold start.
+- **Constraints:** You can *only* use EAS Update for changes to JavaScript (React components, hooks, styles) and local assets (images, fonts). If you add new native modules (like a new package requiring `pod install` or Android build changes), you **must** build a new binary and submit it to the stores.
+
+### B. Publishing an EAS Update
+1. Test your app thoroughly using a local build (`npx expo start -c`).
+2. Run the update command in your terminal targeting the specific branch (usually `production` or `preview`):
+   ```bash
+   eas update --branch production --message "Describe your fixes or features"
+   ```
+3. The CLI will bundle the app and upload it. The update is instantly available to any user on that branch.
+
+### C. Combining with GitHub Hosted Checker
+If you make a native change requiring a store update, do NOT use EAS Update. Instead, bump the `"version"` in `app.config.js`, update the remote `version.json` (as described in Section 10), and submit a new binary to the stores. The custom modal will then prompt users to manually update their app.

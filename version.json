@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.1.6",
+  "latestVersion": "1.1.7",
   "whatsNew": [
-    "Added 'Ask Meowgrammer' floating AI coding tutor.",
-    "Introduced 'Jump Back In' dashboard tracking.",
-    "Implemented Native In-App Review prompts.",
-    "Optimized UI layout for cross-platform consistency."
+    "Improved tablet layout with a focused, centered view.",
+    "Fixed missing banner ads on AI Course flashcards.",
+    "Ads now smoothly hide when disconnected, fixing blank spaces.",
+    "Added pull-to-refresh to fetch latest content easily."
   ]
 }

@@ -79,6 +79,7 @@ export default function RootLayout() {
 
   const { width: windowWidth } = useWindowDimensions();
   const isLargeScreen = Platform.OS === "web" && windowWidth > 850;
+  const isTablet = Platform.OS !== "web" && windowWidth >= 768;
 
   const adConfigValue = useMemo(
     () => ({ adConfig, setAdConfig, clickCount, setClickCount, adsReady }),
@@ -323,7 +324,7 @@ export default function RootLayout() {
                       remoteVersion={remoteVersion}
                       onClose={() => setUpdateAvailable(false)}
                     />
-                    {Platform.OS === "web" ? (
+                    {(Platform.OS === "web" || isTablet) ? (
                       isLargeScreen ? (
                         <View
                           style={{
@@ -460,7 +461,7 @@ export default function RootLayout() {
                               }}
                             >
                               <View style={{ flex: 1 }}>
-                                <Stack screenOptions={{ headerShown: false }} />
+                                <Stack screenOptions={{ headerShown: false, gestureEnabled: true, fullScreenGestureEnabled: true }} />
                               </View>
                             </View>
                           </View>
@@ -490,14 +491,14 @@ export default function RootLayout() {
                             }}
                           >
                             <View style={{ flex: 1 }}>
-                              <Stack screenOptions={{ headerShown: false }} />
+                              <Stack screenOptions={{ headerShown: false, gestureEnabled: true, fullScreenGestureEnabled: true }} />
                             </View>
                           </View>
                         </View>
                       )
                     ) : (
                       <View style={{ flex: 1 }}>
-                        <Stack screenOptions={{ headerShown: false }} />
+                        <Stack screenOptions={{ headerShown: false, gestureEnabled: true, fullScreenGestureEnabled: true }} />
                       </View>
                     )}
                   </allCoursesContext.Provider>
