@@ -36,11 +36,6 @@ Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN || "",
   enableInExpoDevelopment: true,
   debug: false,
-  integrations: [
-    Sentry.expoRouterIntegration({
-      enableTimeToInitialDisplay: !isRunningInExpoGo(),
-    }),
-  ],
 });
 
 export default function RootLayout() {
@@ -72,6 +67,20 @@ export default function RootLayout() {
   const [update, setUpdate] = useState(false);
   const [isConnected, setIsConnected] = useState(true);
   const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const loadFavorites = async () => {
+      try {
+        const stored = await AsyncStorage.getItem("favorites");
+        if (stored) {
+          setFavorites(JSON.parse(stored));
+        }
+      } catch (err) {
+        console.error("Failed to load favorites", err);
+      }
+    };
+    loadFavorites();
+  }, []);
   const [clickCount, setClickCount] = useState(1);
   const [allCourses, setAllCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState([]);

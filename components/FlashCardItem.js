@@ -379,6 +379,7 @@ export default function FlashCardItem({
       <FlashList
         estimatedItemSize={300}
         data={flashcards}
+        extraData={favorites}
         keyExtractor={(item) => item.question}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 180 }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -18,12 +18,14 @@ import PageTransition from "../../components/PageTransition";
 import colors from "../../constants/colors";
 import { generateRoadmapWithGroq, getGroqApiKey } from "../../services/groqService";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
+import { allCoursesContext } from "../../context/context";
 
 export default function AIRoadmap() {
   const router = useRouter();
   const [goal, setGoal] = useState("");
   const [loading, setLoading] = useState(false);
   const { refreshData } = useGlobalRefresh();
+  const { allCourses, setAllCourses } = useContext(allCoursesContext);
 
   const handleGenerate = async () => {
     const cleanGoal = goal.trim();
@@ -59,8 +61,10 @@ export default function AIRoadmap() {
         };
         await AsyncStorage.setItem("@user_data", JSON.stringify(userData));
 
-        // Trigger local cache reload to refresh allCourses Context
-        await refreshData(false);
+        // Append to the React Query cache / React Context manually to bypass cache delays
+        if (setAllCourses) {
+          setAllCourses(prev => [...(prev || []), generatedCourse]);
+        }
 
         // Redirect straight to the course modules overview list
         router.push(`/learn/courses/${generatedCourse.id}`);

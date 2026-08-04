@@ -1,25 +1,24 @@
-import { MMKV } from "react-native-mmkv";
+import AsyncStorageModule from '@react-native-async-storage/async-storage';
 
-// Centralized MMKV instance
-export const storage = new MMKV();
-
-// Async Wrapper to act as a drop-in replacement for AsyncStorage
+// Async Wrapper that perfectly mimics our old implementation
 export const AsyncStorage = {
   getItem: async (key) => {
-    const value = storage.getString(key);
-    return value !== undefined ? value : null;
+    return await AsyncStorageModule.getItem(key);
   },
   setItem: async (key, value) => {
-    storage.set(key, value);
+    await AsyncStorageModule.setItem(key, value);
   },
   removeItem: async (key) => {
-    storage.delete(key);
+    await AsyncStorageModule.removeItem(key);
   },
   clear: async () => {
-    storage.clearAll();
+    await AsyncStorageModule.clear();
   },
   getAllKeys: async () => {
-    return storage.getAllKeys();
+    return await AsyncStorageModule.getAllKeys();
+  },
+  multiGet: async (keys) => {
+    return await AsyncStorageModule.multiGet(keys);
   },
 };
 

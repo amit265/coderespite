@@ -231,9 +231,10 @@ export default function CourseModules() {
           ) : (
             <FlashList
               estimatedItemSize={120}
-            data={course.modules}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item, index }) => (
+              data={course.modules}
+              extraData={userData}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item, index }) => (
               <>
                 <AnimatedModuleItem
                   item={item}

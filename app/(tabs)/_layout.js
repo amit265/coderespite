@@ -5,7 +5,7 @@ import {
 } from "@expo/vector-icons";
 import { Tabs, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Animated, Platform, View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
+import { Animated, Platform, View, Text, TouchableOpacity, Modal, StyleSheet, useWindowDimensions, Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "../../constants/colors";
 
@@ -50,6 +50,10 @@ export default function TabsLayout() {
   const tabBarBottom = insets.bottom + (Platform.OS === "ios" ? 10 : 12);
   const tabBarHeight = 64;
 
+  const { width } = useWindowDimensions();
+  const tabBarWidth = Math.min(width * 0.95, 400);
+  const tabBarLeft = (width - tabBarWidth) / 2;
+
   const [isDownloadModalVisible, setIsDownloadModalVisible] = useState(false);
 
   const webTabListener = {
@@ -70,16 +74,16 @@ export default function TabsLayout() {
           tabBarInactiveTintColor: "#6c757d",
           tabBarShowLabel: false,
 
-          tabBarStyle: {
-            position: "absolute",
-            bottom: tabBarBottom,
-            alignSelf: "center",
-            width: "95%",
-            maxWidth: 400,
-            height: tabBarHeight,
-            paddingTop: 0,
-            paddingBottom: 0,
-            borderRadius: 20,
+            tabBarStyle: {
+              position: "absolute",
+              bottom: tabBarBottom,
+              left: 16,
+              right: 16,
+              marginHorizontal: 16,
+              height: tabBarHeight,
+              paddingTop: 0,
+              paddingBottom: 0,
+              borderRadius: 20,
             backgroundColor: "white",
             borderTopWidth: 0,
             shadowColor: "#000",

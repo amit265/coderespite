@@ -11,8 +11,8 @@ import {
   Platform,
   Pressable,
   Share,
+  FlatList,
 } from "react-native";
-import { FlashList } from "@shopify/flash-list";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AsyncStorage from "../services/storage";
@@ -385,8 +385,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
       </View>
 
       {/* Messages — flex:1 so it fills available space and input stays at bottom */}
-      <FlashList
-        estimatedItemSize={100}
+      <FlatList
         ref={flatListRef}
         data={displayMessages}
         keyExtractor={(item) => item.id}

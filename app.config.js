@@ -26,6 +26,7 @@ module.exports = {
           "This identifier will be used to deliver personalized ads to you.",
         ITSAppUsesNonExemptEncryption: false,
       },
+      googleServicesFile: "./GoogleService-Info.plist",
     },
     android: {
       adaptiveIcon: {
@@ -34,7 +35,7 @@ module.exports = {
       },
       edgeToEdgeEnabled: true,
       package: "com.mindcraftlearning.coderespite",
-      versionCode: 22,
+      versionCode: 25,
       googleServicesFile: "./google-services.json",
       permissions: ["com.google.android.gms.permission.AD_ID"],
       intentFilters: [
@@ -115,8 +116,8 @@ module.exports = {
             compileSdkVersion: 36,
             targetSdkVersion: 36,
             minSdkVersion: 24,
-            enableProguardInReleaseBuilds: false,
-            enableShrinkResourcesInReleaseBuilds: false,
+            enableProguardInReleaseBuilds: true,
+            enableShrinkResourcesInReleaseBuilds: true,
             enableHermes: true,
             extraProguardRules: "-keep class expo.modules.** { *; }",
           },
