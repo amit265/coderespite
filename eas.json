@@ -5,6 +5,7 @@
   },
   "build": {
     "development": {
+      "channel": "development",
       "distribution": "internal",
       "android": {
         "buildType": "apk"
@@ -14,6 +15,7 @@
       }
     },
     "preview": {
+      "channel": "preview",
       "distribution": "internal",
       "android": {
         "buildType": "apk"
@@ -23,6 +25,7 @@
       }
     },
     "production": {
+      "channel": "production",
       "env": {
         "SENTRY_DISABLE_AUTO_UPLOAD": "true"
       },

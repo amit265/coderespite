@@ -431,6 +431,7 @@ For rapid deployment of JavaScript and asset changes without requiring users to 
 ### A. How it Works
 - **Mechanism:** Expo Application Services (EAS) hosts your new JavaScript bundle. When users open the app, the `expo-updates` client checks for a new version, downloads it in the background, and applies it upon the next cold start.
 - **Constraints:** You can *only* use EAS Update for changes to JavaScript (React components, hooks, styles) and local assets (images, fonts). If you add new native modules (like a new package requiring `pod install` or Android build changes), you **must** build a new binary and submit it to the stores.
+- **CRITICAL REQUIREMENT:** You must explicitly define the `"channel"` property for every build profile in `eas.json` (e.g., `"channel": "production"` under the production profile). If this is missing when you build the `.aab`/`.apk`, the native app will NOT be linked to a channel and will permanently be incapable of receiving OTA updates.
 
 ### B. Publishing an EAS Update
 1. Test your app thoroughly using a local build (`npx expo start -c`).
