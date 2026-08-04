@@ -347,7 +347,7 @@ export default function RootLayout() {
                       remoteVersion={remoteVersion}
                       onClose={() => setUpdateAvailable(false)}
                     />
-                    {(Platform.OS === "web" || isTablet) ? (
+                    {Platform.OS === "web" ? (
                       isLargeScreen ? (
                         <View
                           style={{

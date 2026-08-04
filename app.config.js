@@ -57,6 +57,7 @@ module.exports = {
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
+      softwareKeyboardLayoutMode: "resize",
     },
     web: {
       bundler: "metro",
