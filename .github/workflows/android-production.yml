@@ -27,6 +27,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Android AAB
+      - name: Restore Android signing keystore
+        run: |
+          echo "${{ secrets.MYAPP_UPLOAD_KEYSTORE_BASE64 }}" | base64 --decode > android/upload-keystore.jks
+
+      - name: Configure Android signing
+        run: |
+          mkdir -p ~/.gradle
+          cat >> ~/.gradle/gradle.properties <<EOF
+          MYAPP_UPLOAD_STORE_FILE=${{ github.workspace }}/android/upload-keystore.jks
+          MYAPP_UPLOAD_STORE_PASSWORD=${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_ALIAS=${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+          MYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+          EOF
+      
+      - name: Build Android App Bundle
         working-directory: android
         run: ./gradlew app:bundleRelease
