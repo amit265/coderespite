@@ -13,29 +13,25 @@ jobs:
       MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
       MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
 
-      # Disable Sentry source-map upload for now.
-      # We will configure this separately after the AAB build works.
-      SENTRY_DISABLE_AUTO_UPLOAD: "true"
-
     steps:
-      # ---------------------------------------------------------
+      # --------------------------------------------------
       # 1. Checkout
-      # ---------------------------------------------------------
+      # --------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---------------------------------------------------------
-      # 2. Node
-      # ---------------------------------------------------------
+      # --------------------------------------------------
+      # 2. Node.js
+      # --------------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      # ---------------------------------------------------------
+      # --------------------------------------------------
       # 3. Java
-      # ---------------------------------------------------------
+      # --------------------------------------------------
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -43,109 +39,119 @@ jobs:
           java-version: 17
           cache: gradle
 
-      # ---------------------------------------------------------
+      # --------------------------------------------------
       # 4. Install dependencies
-      # ---------------------------------------------------------
+      # --------------------------------------------------
       - name: Install dependencies
         run: npm ci
 
-      # ---------------------------------------------------------
-      # 5. Restore production Android keystore
-      # ---------------------------------------------------------
+      # --------------------------------------------------
+      # 5. Recreate .env from GitHub Secrets
+      # --------------------------------------------------
+      - name: Create build environment
+        env:
+          EXPO_PUBLIC_ADMOB_ANDROID_APP_ID: ${{ secrets.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID }}
+          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID }}
+          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS }}
+          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID }}
+          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS }}
+          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID }}
+          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS }}
+          EXPO_PUBLIC_ADMOB_IOS_APP_ID: ${{ secrets.EXPO_PUBLIC_ADMOB_IOS_APP_ID }}
+          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID }}
+          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS }}
+
+          EXPO_PUBLIC_FIREBASE_API_KEY: ${{ secrets.EXPO_PUBLIC_FIREBASE_API_KEY }}
+          EXPO_PUBLIC_FIREBASE_APP_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_APP_ID }}
+          EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID }}
+          EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+          EXPO_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_PROJECT_ID }}
+          EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+
+          EXPO_PUBLIC_GROQ_API_KEY: ${{ secrets.EXPO_PUBLIC_GROQ_API_KEY }}
+
+          EXPO_PUBLIC_SENTRY_DSN: ${{ secrets.EXPO_PUBLIC_SENTRY_DSN }}
+          EXPO_PUBLIC_SENTRY_ORG: ${{ secrets.EXPO_PUBLIC_SENTRY_ORG }}
+          EXPO_PUBLIC_SENTRY_PROJECT: ${{ secrets.EXPO_PUBLIC_SENTRY_PROJECT }}
+
+          SENTRY_DISABLE_AUTO_UPLOAD: ${{ secrets.SENTRY_DISABLE_AUTO_UPLOAD }}
+
+        run: |
+          cat > .env <<EOF
+          EXPO_PUBLIC_ADMOB_ANDROID_APP_ID=$EXPO_PUBLIC_ADMOB_ANDROID_APP_ID
+          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID
+          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS
+          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID
+          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS
+          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID
+          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS
+          EXPO_PUBLIC_ADMOB_IOS_APP_ID=$EXPO_PUBLIC_ADMOB_IOS_APP_ID
+          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID
+          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS
+
+          EXPO_PUBLIC_FIREBASE_API_KEY=$EXPO_PUBLIC_FIREBASE_API_KEY
+          EXPO_PUBLIC_FIREBASE_APP_ID=$EXPO_PUBLIC_FIREBASE_APP_ID
+          EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=$EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN
+          EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID=$EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
+          EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=$EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+          EXPO_PUBLIC_FIREBASE_PROJECT_ID=$EXPO_PUBLIC_FIREBASE_PROJECT_ID
+          EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=$EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET
+
+          EXPO_PUBLIC_GROQ_API_KEY=$EXPO_PUBLIC_GROQ_API_KEY
+
+          EXPO_PUBLIC_SENTRY_DSN=$EXPO_PUBLIC_SENTRY_DSN
+          EXPO_PUBLIC_SENTRY_ORG=$EXPO_PUBLIC_SENTRY_ORG
+          EXPO_PUBLIC_SENTRY_PROJECT=$EXPO_PUBLIC_SENTRY_PROJECT
+
+          SENTRY_DISABLE_AUTO_UPLOAD=$SENTRY_DISABLE_AUTO_UPLOAD
+          EOF
+
+          echo ".env created for GitHub build."
+          echo "Environment variable count:"
+          grep -c '^[A-Za-z_][A-Za-z0-9_]*=' .env
+
+      # --------------------------------------------------
+      # 6. Restore Android signing keystore
+      # --------------------------------------------------
       - name: Restore Android signing keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.MYAPP_UPLOAD_KEYSTORE_BASE64 }}
         run: |
-          set -e
-
-          echo "Restoring Android production keystore..."
-
-          mkdir -p "$(dirname "$MYAPP_UPLOAD_STORE_FILE")"
-
           echo "$KEYSTORE_BASE64" | base64 --decode > "$MYAPP_UPLOAD_STORE_FILE"
 
           echo "Keystore restored:"
           ls -lh "$MYAPP_UPLOAD_STORE_FILE"
 
-      # ---------------------------------------------------------
-      # 6. Validate signing credentials BEFORE Gradle build
-      # ---------------------------------------------------------
-      - name: Validate Android signing credentials
+      # --------------------------------------------------
+      # 7. Verify keystore
+      # --------------------------------------------------
+      - name: Verify Android signing keystore
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
         run: |
-          set -e
-
-          echo "=========================================="
-          echo "Android Signing Validation"
-          echo "=========================================="
-
-          echo ""
-          echo "Keystore:"
-          ls -lh "$MYAPP_UPLOAD_STORE_FILE"
-
-          echo ""
-          echo "Checking required environment variables..."
-
-          test -n "$MYAPP_UPLOAD_STORE_FILE"
-          test -n "$MYAPP_UPLOAD_STORE_PASSWORD"
-          test -n "$MYAPP_UPLOAD_KEY_ALIAS"
-          test -n "$MYAPP_UPLOAD_KEY_PASSWORD"
-
-          echo "Required variables are present."
-
-          echo ""
-          echo "Inspecting keystore..."
-
           keytool -list \
             -keystore "$MYAPP_UPLOAD_STORE_FILE" \
-            -storepass "$MYAPP_UPLOAD_STORE_PASSWORD"
+            -storepass "$KEYSTORE_PASSWORD" \
+            -alias "$KEY_ALIAS" \
+            > /dev/null
 
-          echo ""
-          echo "Checking expected alias..."
+          echo "Android signing keystore verified."
 
-          keytool -list \
-            -keystore "$MYAPP_UPLOAD_STORE_FILE" \
-            -storepass "$MYAPP_UPLOAD_STORE_PASSWORD" \
-            -alias "$MYAPP_UPLOAD_KEY_ALIAS"
-
-          echo ""
-          echo "=========================================="
-          echo "Android signing credentials are VALID"
-          echo "=========================================="
-
-      # ---------------------------------------------------------
-      # 7. Build Android App Bundle
-      # ---------------------------------------------------------
+      # --------------------------------------------------
+      # 8. Build AAB
+      # --------------------------------------------------
       - name: Build Android App Bundle
         working-directory: android
-        run: |
-          ./gradlew app:bundleRelease --no-daemon
+        run: ./gradlew app:bundleRelease --no-daemon
 
-      # ---------------------------------------------------------
-      # 8. Verify generated AAB
-      # ---------------------------------------------------------
-      - name: Verify Android App Bundle
-        run: |
-          set -e
-
-          echo "Generated AAB files:"
-
-          find android/app/build/outputs/bundle/release \
-            -type f \
-            -name "*.aab" \
-            -exec ls -lh {} \;
-
-          test -n "$(find android/app/build/outputs/bundle/release -type f -name '*.aab')"
-
-          echo ""
-          echo "Android App Bundle generated successfully."
-
-      # ---------------------------------------------------------
-      # 9. Upload AAB to GitHub Actions artifact
-      # ---------------------------------------------------------
-      - name: Upload AAB
+      # --------------------------------------------------
+      # 9. Upload AAB as GitHub artifact
+      # --------------------------------------------------
+      - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coderespite-android-production
+          name: coderespite-android-release
           path: android/app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
-          retention-days: 14
