@@ -13,6 +13,7 @@ jobs:
       MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
       MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
       SENTRY_DISABLE_AUTO_UPLOAD: "true"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,28 +54,63 @@ jobs:
           test -f "$MYAPP_UPLOAD_STORE_FILE"
 
           echo "Checking store password..."
-          test -n "$MYAPP_UPLOAD_STORE_PASSWORD"
+          if [ -z "$MYAPP_UPLOAD_STORE_PASSWORD" ]; then
+            echo "ERROR: Store password is missing"
+            exit 1
+          fi
 
           echo "Checking key alias..."
-          test -n "$MYAPP_UPLOAD_KEY_ALIAS"
+          if [ -z "$MYAPP_UPLOAD_KEY_ALIAS" ]; then
+            echo "ERROR: Key alias is missing"
+            exit 1
+          fi
 
           echo "Checking key password..."
-          test -n "$MYAPP_UPLOAD_KEY_PASSWORD"
+          if [ -z "$MYAPP_UPLOAD_KEY_PASSWORD" ]; then
+            echo "ERROR: Key password is missing"
+            exit 1
+          fi
 
           echo "All signing variables are present."
           echo "Keystore file exists."
 
-      - name: Verify Gradle signing
-        working-directory: android
-        run: ./gradlew signingReport
+      - name: Inspect Android keystore
+        run: |
+          echo "Inspecting keystore..."
 
-      - name: Build Android App Bundle
-        working-directory: android
-        run: ./gradlew app:bundleRelease
+          keytool -list \
+            -keystore "$MYAPP_UPLOAD_STORE_FILE" \
+            -storepass "$MYAPP_UPLOAD_STORE_PASSWORD"
 
-      - name: Upload AAB
-        uses: actions/upload-artifact@v4
-        with:
-          name: coderespite-android-release
-          path: android/app/build/outputs/bundle/release/*.aab
-          if-no-files-found: error
+      - name: Verify release signing key
+        run: |
+          echo "Verifying release signing key..."
+
+          keytool -list \
+            -v \
+            -keystore "$MYAPP_UPLOAD_STORE_FILE" \
+            -storepass "$MYAPP_UPLOAD_STORE_PASSWORD" \
+            -alias "$MYAPP_UPLOAD_KEY_ALIAS" \
+            > /tmp/key-info.txt
+
+          echo "Release signing key successfully opened."
+          echo "Alias exists."
+          echo "Keystore validation passed."
+
+      - name: Verify key password
+        run: |
+          echo "Verifying private key password..."
+
+          keytool -importkeystore \
+            -srckeystore "$MYAPP_UPLOAD_STORE_FILE" \
+            -srcstoretype JKS \
+            -srcstorepass "$MYAPP_UPLOAD_STORE_PASSWORD" \
+            -srcalias "$MYAPP_UPLOAD_KEY_ALIAS" \
+            -srckeypass "$MYAPP_UPLOAD_KEY_PASSWORD" \
+            -destkeystore /tmp/key-password-test.p12 \
+            -deststoretype PKCS12 \
+            -deststorepass "temporary-test-password" \
+            -destkeypass "temporary-test-password" \
+            -noprompt
+
+          echo "Private key password is valid."
