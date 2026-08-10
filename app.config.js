@@ -4,7 +4,7 @@ module.exports = {
     description:
       "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
-    version: "1.1.8",
+    version: "1.1.9",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: "coderespite",
@@ -20,7 +20,7 @@ module.exports = {
       supportsTablet: true,
       bundleIdentifier: "com.destyastudio.coderespite",
       icon: "./assets/iosIcon.png",
-      buildNumber: "3",
+      buildNumber: "4",
       infoPlist: {
         NSUserTrackingUsageDescription:
           "This identifier will be used to deliver personalized ads to you.",
@@ -35,7 +35,7 @@ module.exports = {
       },
       edgeToEdgeEnabled: true,
       package: "com.mindcraftlearning.coderespite",
-      versionCode: 26,
+      versionCode: 27,
       googleServicesFile: "./google-services.json",
       permissions: ["com.google.android.gms.permission.AD_ID"],
       intentFilters: [
