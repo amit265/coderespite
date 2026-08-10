@@ -12,18 +12,30 @@ jobs:
       MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
       MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
       MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+
+      # Disable Sentry source-map upload for now.
+      # We will configure this separately after the AAB build works.
       SENTRY_DISABLE_AUTO_UPLOAD: "true"
 
     steps:
+      # ---------------------------------------------------------
+      # 1. Checkout
+      # ---------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ---------------------------------------------------------
+      # 2. Node
+      # ---------------------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
+      # ---------------------------------------------------------
+      # 3. Java
+      # ---------------------------------------------------------
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -31,86 +43,109 @@ jobs:
           java-version: 17
           cache: gradle
 
+      # ---------------------------------------------------------
+      # 4. Install dependencies
+      # ---------------------------------------------------------
       - name: Install dependencies
         run: npm ci
 
+      # ---------------------------------------------------------
+      # 5. Restore production Android keystore
+      # ---------------------------------------------------------
       - name: Restore Android signing keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.MYAPP_UPLOAD_KEYSTORE_BASE64 }}
         run: |
+          set -e
+
+          echo "Restoring Android production keystore..."
+
+          mkdir -p "$(dirname "$MYAPP_UPLOAD_STORE_FILE")"
+
           echo "$KEYSTORE_BASE64" | base64 --decode > "$MYAPP_UPLOAD_STORE_FILE"
 
           echo "Keystore restored:"
           ls -lh "$MYAPP_UPLOAD_STORE_FILE"
 
-      - name: Verify signing configuration
+      # ---------------------------------------------------------
+      # 6. Validate signing credentials BEFORE Gradle build
+      # ---------------------------------------------------------
+      - name: Validate Android signing credentials
         run: |
-          echo "Checking Android signing configuration..."
+          set -e
 
-          echo "Keystore path:"
-          echo "$MYAPP_UPLOAD_STORE_FILE"
+          echo "=========================================="
+          echo "Android Signing Validation"
+          echo "=========================================="
 
-          echo "Checking keystore file..."
-          test -f "$MYAPP_UPLOAD_STORE_FILE"
+          echo ""
+          echo "Keystore:"
+          ls -lh "$MYAPP_UPLOAD_STORE_FILE"
 
-          echo "Checking store password..."
-          if [ -z "$MYAPP_UPLOAD_STORE_PASSWORD" ]; then
-            echo "ERROR: Store password is missing"
-            exit 1
-          fi
+          echo ""
+          echo "Checking required environment variables..."
 
-          echo "Checking key alias..."
-          if [ -z "$MYAPP_UPLOAD_KEY_ALIAS" ]; then
-            echo "ERROR: Key alias is missing"
-            exit 1
-          fi
+          test -n "$MYAPP_UPLOAD_STORE_FILE"
+          test -n "$MYAPP_UPLOAD_STORE_PASSWORD"
+          test -n "$MYAPP_UPLOAD_KEY_ALIAS"
+          test -n "$MYAPP_UPLOAD_KEY_PASSWORD"
 
-          echo "Checking key password..."
-          if [ -z "$MYAPP_UPLOAD_KEY_PASSWORD" ]; then
-            echo "ERROR: Key password is missing"
-            exit 1
-          fi
+          echo "Required variables are present."
 
-          echo "All signing variables are present."
-          echo "Keystore file exists."
-
-      - name: Inspect Android keystore
-        run: |
+          echo ""
           echo "Inspecting keystore..."
 
           keytool -list \
             -keystore "$MYAPP_UPLOAD_STORE_FILE" \
             -storepass "$MYAPP_UPLOAD_STORE_PASSWORD"
 
-      - name: Verify release signing key
-        run: |
-          echo "Verifying release signing key..."
+          echo ""
+          echo "Checking expected alias..."
 
           keytool -list \
-            -v \
             -keystore "$MYAPP_UPLOAD_STORE_FILE" \
             -storepass "$MYAPP_UPLOAD_STORE_PASSWORD" \
-            -alias "$MYAPP_UPLOAD_KEY_ALIAS" \
-            > /tmp/key-info.txt
+            -alias "$MYAPP_UPLOAD_KEY_ALIAS"
 
-          echo "Release signing key successfully opened."
-          echo "Alias exists."
-          echo "Keystore validation passed."
+          echo ""
+          echo "=========================================="
+          echo "Android signing credentials are VALID"
+          echo "=========================================="
 
-      - name: Verify key password
+      # ---------------------------------------------------------
+      # 7. Build Android App Bundle
+      # ---------------------------------------------------------
+      - name: Build Android App Bundle
+        working-directory: android
         run: |
-          echo "Verifying private key password..."
+          ./gradlew app:bundleRelease --no-daemon
 
-          keytool -importkeystore \
-            -srckeystore "$MYAPP_UPLOAD_STORE_FILE" \
-            -srcstoretype JKS \
-            -srcstorepass "$MYAPP_UPLOAD_STORE_PASSWORD" \
-            -srcalias "$MYAPP_UPLOAD_KEY_ALIAS" \
-            -srckeypass "$MYAPP_UPLOAD_KEY_PASSWORD" \
-            -destkeystore /tmp/key-password-test.p12 \
-            -deststoretype PKCS12 \
-            -deststorepass "temporary-test-password" \
-            -destkeypass "temporary-test-password" \
-            -noprompt
+      # ---------------------------------------------------------
+      # 8. Verify generated AAB
+      # ---------------------------------------------------------
+      - name: Verify Android App Bundle
+        run: |
+          set -e
 
-          echo "Private key password is valid."
+          echo "Generated AAB files:"
+
+          find android/app/build/outputs/bundle/release \
+            -type f \
+            -name "*.aab" \
+            -exec ls -lh {} \;
+
+          test -n "$(find android/app/build/outputs/bundle/release -type f -name '*.aab')"
+
+          echo ""
+          echo "Android App Bundle generated successfully."
+
+      # ---------------------------------------------------------
+      # 9. Upload AAB to GitHub Actions artifact
+      # ---------------------------------------------------------
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: coderespite-android-production
+          path: android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+          retention-days: 14
