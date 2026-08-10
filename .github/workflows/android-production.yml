@@ -12,6 +12,8 @@ jobs:
       MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
       MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
       MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+      SENTRY_DISABLE_AUTO_UPLOAD: "false"
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     steps:
       # --------------------------------------------------
@@ -75,7 +77,8 @@ jobs:
           EXPO_PUBLIC_SENTRY_ORG: ${{ secrets.EXPO_PUBLIC_SENTRY_ORG }}
           EXPO_PUBLIC_SENTRY_PROJECT: ${{ secrets.EXPO_PUBLIC_SENTRY_PROJECT }}
 
-          SENTRY_DISABLE_AUTO_UPLOAD: ${{ secrets.SENTRY_DISABLE_AUTO_UPLOAD }}
+          SENTRY_DISABLE_AUTO_UPLOAD: "false"
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
         run: |
           cat > .env <<EOF
@@ -105,6 +108,7 @@ jobs:
           EXPO_PUBLIC_SENTRY_PROJECT=$EXPO_PUBLIC_SENTRY_PROJECT
 
           SENTRY_DISABLE_AUTO_UPLOAD=$SENTRY_DISABLE_AUTO_UPLOAD
+          SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
           EOF
 
           echo ".env created for GitHub build."
