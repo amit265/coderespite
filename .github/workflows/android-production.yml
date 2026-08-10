@@ -7,6 +7,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
+      MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+      MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+      MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,67 +37,40 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.MYAPP_UPLOAD_KEYSTORE_BASE64 }}
         run: |
-          echo "$KEYSTORE_BASE64" | base64 --decode > "$GITHUB_WORKSPACE/android/upload-keystore.jks"
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$MYAPP_UPLOAD_STORE_FILE"
 
           echo "Keystore restored:"
-          ls -lh "$GITHUB_WORKSPACE/android/upload-keystore.jks"
+          ls -lh "$MYAPP_UPLOAD_STORE_FILE"
 
-      - name: Verify signing environment
-        env:
-          MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
-          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+      - name: Verify signing configuration
         run: |
+          echo "Checking Android signing configuration..."
+
           echo "Keystore path:"
           echo "$MYAPP_UPLOAD_STORE_FILE"
 
-          echo "Keystore exists:"
+          echo "Checking keystore file..."
           test -f "$MYAPP_UPLOAD_STORE_FILE"
 
-          echo "Store password:"
-          if [ -n "$MYAPP_UPLOAD_STORE_PASSWORD" ]; then
-            echo "SET"
-          else
-            echo "MISSING"
-            exit 1
-          fi
+          echo "Checking store password..."
+          test -n "$MYAPP_UPLOAD_STORE_PASSWORD"
 
-          echo "Key alias:"
-          if [ -n "$MYAPP_UPLOAD_KEY_ALIAS" ]; then
-            echo "SET"
-          else
-            echo "MISSING"
-            exit 1
-          fi
+          echo "Checking key alias..."
+          test -n "$MYAPP_UPLOAD_KEY_ALIAS"
 
-          echo "Key password:"
-          if [ -n "$MYAPP_UPLOAD_KEY_PASSWORD" ]; then
-            echo "SET"
-          else
-            echo "MISSING"
-            exit 1
-          fi
+          echo "Checking key password..."
+          test -n "$MYAPP_UPLOAD_KEY_PASSWORD"
+
+          echo "All signing variables are present."
+          echo "Keystore file exists."
 
       - name: Verify Gradle signing
         working-directory: android
-        env:
-          MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
-          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
-        run: |
-          ./gradlew signingReport
+        run: ./gradlew signingReport
 
       - name: Build Android App Bundle
         working-directory: android
-        env:
-          MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
-          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
-        run: |
-          ./gradlew app:bundleRelease
+        run: ./gradlew app:bundleRelease
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4
