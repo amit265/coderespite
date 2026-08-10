@@ -36,49 +36,62 @@ jobs:
           echo "Keystore restored:"
           ls -lh "$GITHUB_WORKSPACE/android/upload-keystore.jks"
 
-      - name: Configure Android signing
+      - name: Verify signing environment
         env:
-          STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+          MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
+          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
         run: |
-          mkdir -p "$HOME/.gradle"
+          echo "Keystore path:"
+          echo "$MYAPP_UPLOAD_STORE_FILE"
 
-          cat > "$HOME/.gradle/gradle.properties" <<EOF
-          MYAPP_UPLOAD_STORE_FILE=$GITHUB_WORKSPACE/android/upload-keystore.jks
-          MYAPP_UPLOAD_STORE_PASSWORD=$STORE_PASSWORD
-          MYAPP_UPLOAD_KEY_ALIAS=$KEY_ALIAS
-          MYAPP_UPLOAD_KEY_PASSWORD=$KEY_PASSWORD
-          EOF
+          echo "Keystore exists:"
+          test -f "$MYAPP_UPLOAD_STORE_FILE"
 
-          echo "Gradle signing configuration created."
-          grep '^MYAPP_UPLOAD_STORE_FILE=' "$HOME/.gradle/gradle.properties"
+          echo "Store password:"
+          if [ -n "$MYAPP_UPLOAD_STORE_PASSWORD" ]; then
+            echo "SET"
+          else
+            echo "MISSING"
+            exit 1
+          fi
 
-      - name: Verify signing configuration
+          echo "Key alias:"
+          if [ -n "$MYAPP_UPLOAD_KEY_ALIAS" ]; then
+            echo "SET"
+          else
+            echo "MISSING"
+            exit 1
+          fi
+
+          echo "Key password:"
+          if [ -n "$MYAPP_UPLOAD_KEY_PASSWORD" ]; then
+            echo "SET"
+          else
+            echo "MISSING"
+            exit 1
+          fi
+
+      - name: Verify Gradle signing
         working-directory: android
         env:
-          STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+          MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
+          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
         run: |
-          ./gradlew signingReport \
-            -PMYAPP_UPLOAD_STORE_FILE="$GITHUB_WORKSPACE/android/upload-keystore.jks" \
-            -PMYAPP_UPLOAD_STORE_PASSWORD="$STORE_PASSWORD" \
-            -PMYAPP_UPLOAD_KEY_ALIAS="$KEY_ALIAS" \
-            -PMYAPP_UPLOAD_KEY_PASSWORD="$KEY_PASSWORD"
+          ./gradlew signingReport
 
       - name: Build Android App Bundle
         working-directory: android
         env:
-          STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+          MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
+          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
         run: |
-          ./gradlew app:bundleRelease \
-            -PMYAPP_UPLOAD_STORE_FILE="$GITHUB_WORKSPACE/android/upload-keystore.jks" \
-            -PMYAPP_UPLOAD_STORE_PASSWORD="$STORE_PASSWORD" \
-            -PMYAPP_UPLOAD_KEY_ALIAS="$KEY_ALIAS" \
-            -PMYAPP_UPLOAD_KEY_PASSWORD="$KEY_PASSWORD"
+          ./gradlew app:bundleRelease
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4
