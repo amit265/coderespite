@@ -86,8 +86,15 @@ Thumbs.db
 *.apk
 build/
 
-android
-ios
+
+
+
+
+# Android signing credentials
+credentials.json
+*.keystore
+*.jks
+
 
 
 .vercel
