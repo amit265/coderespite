@@ -15,6 +15,19 @@ const withFmtCxxFix = (config) => {
     if target.name == 'fmt'
       target.build_configurations.each do |config|
         config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+        
+        # Override any explicit compiler standard flags (like -std=c++20)
+        cxx_flags = config.build_settings['OTHER_CPLUSPLUSFLAGS']
+        if cxx_flags.is_a?(String)
+          config.build_settings['OTHER_CPLUSPLUSFLAGS'] = cxx_flags.gsub(/-std=[^\\s]+/, '-std=c++17')
+        elsif cxx_flags.is_a?(Array)
+          config.build_settings['OTHER_CPLUSPLUSFLAGS'] = cxx_flags.map { |f| f.start_with?('-std=') ? '-std=c++17' : f }
+        else
+          config.build_settings['OTHER_CPLUSPLUSFLAGS'] = ['$(inherited)', '-std=c++17']
+        end
+
+        # Disable constexpr/consteval features in the fmt library preprocessor
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = (config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] || ['$(inherited)']) + ['FMT_USE_CONSTEXPR=0']
       end
     end
   end
