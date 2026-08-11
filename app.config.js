@@ -1,10 +1,12 @@
+const packageJson = require("./package.json");
+
 module.exports = {
   expo: {
     name: "CodeRespite",
     description:
       "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
-    version: "1.2.0",
+    version: packageJson.version,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: "coderespite",
