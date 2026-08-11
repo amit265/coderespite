@@ -99,3 +99,7 @@ credentials.json
 .vercel
 
 
+/android
+android
+/ios
+ios

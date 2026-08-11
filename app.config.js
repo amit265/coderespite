@@ -4,7 +4,7 @@ module.exports = {
     description:
       "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
-    version: "1.1.9",
+    version: "1.2.0",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: "coderespite",
@@ -35,7 +35,7 @@ module.exports = {
       },
       edgeToEdgeEnabled: true,
       package: "com.mindcraftlearning.coderespite",
-      versionCode: 27,
+      versionCode: 28,
       googleServicesFile: "./google-services.json",
       permissions: ["com.google.android.gms.permission.AD_ID"],
       intentFilters: [
