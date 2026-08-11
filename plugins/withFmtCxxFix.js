@@ -20,17 +20,13 @@ const withFmtCxxFix = (config) => {
   end
 `;
 
-      // Find react_native_post_install and append the targetFix
-      if (podfileContent.includes("react_native_post_install")) {
-        podfileContent = podfileContent.replace(
-          /react_native_post_install\(installer,[\s\S]*?\)/,
-          (match) => `${match}\n${targetFix}`
-        );
-      } else if (podfileContent.includes("post_install do |installer|")) {
+      if (podfileContent.includes("post_install do |installer|")) {
         podfileContent = podfileContent.replace(
           "post_install do |installer|",
           `post_install do |installer|\n${targetFix}`
         );
+      } else {
+        console.warn("[withFmtCxxFix] Could not find post_install block in Podfile!");
       }
 
       fs.writeFileSync(podfilePath, podfileContent, "utf8");
