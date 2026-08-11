@@ -124,6 +124,9 @@ module.exports = {
             enableHermes: true,
             extraProguardRules: "-keep class expo.modules.** { *; }",
           },
+          ios: {
+            useFrameworks: "static"
+          }
         },
       ],
       "expo-web-browser",
