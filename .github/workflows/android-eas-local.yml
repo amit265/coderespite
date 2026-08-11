@@ -37,7 +37,7 @@ jobs:
       # --------------------------------------------------
       - name: Build Android with EAS
         run: |
-          npx eas build \
+          npx eas-cli build \
             --platform android \
             --profile production \
             --local \
