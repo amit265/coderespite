@@ -165,3 +165,12 @@ jobs:
           name: coderespite-android-release
           path: android/app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
+
+      - name: Upload to Google Play Internal Testing
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.mindcraftlearning.coderespite
+          releaseFiles: android/app/build/outputs/bundle/release/*.aab
+          track: internal
+          status: completed
