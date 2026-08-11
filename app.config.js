@@ -137,7 +137,8 @@ module.exports = {
           organization: process.env.EXPO_PUBLIC_SENTRY_ORG || "destya-studio",
           project: process.env.EXPO_PUBLIC_SENTRY_PROJECT || "coderespite",
         },
-      ]
+      ],
+      "./plugins/withFmtCxxFix"
     ],
     experiments: {
       typedRoutes: true,
