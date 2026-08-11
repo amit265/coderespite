@@ -42,8 +42,18 @@ jobs:
             --profile production \
             --local \
             --non-interactive \
-            --auto-submit \
             --output ./coderespite-ios.ipa
+
+      # --------------------------------------------------
+      # 4.5. Submit iOS IPA to App Store Connect
+      # --------------------------------------------------
+      - name: Submit iOS IPA
+        run: |
+          npx eas-cli submit \
+            --platform ios \
+            --profile production \
+            --path ./coderespite-ios.ipa \
+            --non-interactive
 
       # --------------------------------------------------
       # 5. Upload IPA as GitHub artifact
