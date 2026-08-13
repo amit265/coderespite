@@ -8,24 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MYAPP_UPLOAD_STORE_FILE: ${{ github.workspace }}/android/upload-keystore.jks
-      MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-      MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-      MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
-      SENTRY_DISABLE_AUTO_UPLOAD: "false"
-      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      SENTRY_ORG: "destya-studio"
-      SENTRY_PROJECT: "coderespite"
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
     steps:
       # --------------------------------------------------
-      # 1. Checkout
+      # 1. Checkout repository
       # --------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
       # --------------------------------------------------
-      # 2. Node.js
+      # 2. Setup Node.js
       # --------------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,143 +27,41 @@ jobs:
           cache: npm
 
       # --------------------------------------------------
-      # 3. Java
-      # --------------------------------------------------
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
-
-      # --------------------------------------------------
-      # 4. Install dependencies
+      # 3. Install dependencies
       # --------------------------------------------------
       - name: Install dependencies
         run: npm ci
 
       # --------------------------------------------------
-      # 5. Recreate .env from GitHub Secrets
+      # 4. Build using EAS locally on GitHub runner
       # --------------------------------------------------
-      - name: Create build environment
-        env:
-          EXPO_PUBLIC_ADMOB_ANDROID_APP_ID: ${{ secrets.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID }}
-          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID }}
-          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS }}
-          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID }}
-          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS }}
-          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID }}
-          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS }}
-          EXPO_PUBLIC_ADMOB_IOS_APP_ID: ${{ secrets.EXPO_PUBLIC_ADMOB_IOS_APP_ID }}
-          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID: ${{ secrets.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID }}
-          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS: ${{ secrets.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS }}
-
-          EXPO_PUBLIC_FIREBASE_API_KEY: ${{ secrets.EXPO_PUBLIC_FIREBASE_API_KEY }}
-          EXPO_PUBLIC_FIREBASE_APP_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_APP_ID }}
-          EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN }}
-          EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID }}
-          EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
-          EXPO_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.EXPO_PUBLIC_FIREBASE_PROJECT_ID }}
-          EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET }}
-
-          EXPO_PUBLIC_GROQ_API_KEY: ${{ secrets.EXPO_PUBLIC_GROQ_API_KEY }}
-
-          EXPO_PUBLIC_SENTRY_DSN: ${{ secrets.EXPO_PUBLIC_SENTRY_DSN }}
-          EXPO_PUBLIC_SENTRY_ORG: "destya-studio"
-          EXPO_PUBLIC_SENTRY_PROJECT: "coderespite"
-
-          SENTRY_DISABLE_AUTO_UPLOAD: "false"
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: "destya-studio"
-          SENTRY_PROJECT: "coderespite"
-
+      - name: Build Android with EAS
         run: |
-          cat > .env <<EOF
-          EXPO_PUBLIC_ADMOB_ANDROID_APP_ID=$EXPO_PUBLIC_ADMOB_ANDROID_APP_ID
-          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID
-          EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS
-          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID
-          EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS
-          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID
-          EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS
-          EXPO_PUBLIC_ADMOB_IOS_APP_ID=$EXPO_PUBLIC_ADMOB_IOS_APP_ID
-          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID=$EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID
-          EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS=$EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS
-
-          EXPO_PUBLIC_FIREBASE_API_KEY=$EXPO_PUBLIC_FIREBASE_API_KEY
-          EXPO_PUBLIC_FIREBASE_APP_ID=$EXPO_PUBLIC_FIREBASE_APP_ID
-          EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=$EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN
-          EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID=$EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
-          EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=$EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-          EXPO_PUBLIC_FIREBASE_PROJECT_ID=$EXPO_PUBLIC_FIREBASE_PROJECT_ID
-          EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=$EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET
-
-          EXPO_PUBLIC_GROQ_API_KEY=$EXPO_PUBLIC_GROQ_API_KEY
-
-          EXPO_PUBLIC_SENTRY_DSN=$EXPO_PUBLIC_SENTRY_DSN
-          EXPO_PUBLIC_SENTRY_ORG=$EXPO_PUBLIC_SENTRY_ORG
-          EXPO_PUBLIC_SENTRY_PROJECT=$EXPO_PUBLIC_SENTRY_PROJECT
-
-          SENTRY_DISABLE_AUTO_UPLOAD=$SENTRY_DISABLE_AUTO_UPLOAD
-          SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
-          SENTRY_ORG=$SENTRY_ORG
-          SENTRY_PROJECT=$SENTRY_PROJECT
-          EOF
-
-          echo ".env created for GitHub build."
-          echo "Environment variable count:"
-          grep -c '^[A-Za-z_][A-Za-z0-9_]*=' .env
+          npx eas-cli build \
+            --platform android \
+            --profile production \
+            --local \
+            --non-interactive \
+            --output ./coderespite-android.aab
 
       # --------------------------------------------------
-      # 6. Restore Android signing keystore
-      # --------------------------------------------------
-      - name: Restore Android signing keystore
-        env:
-          KEYSTORE_BASE64: ${{ secrets.MYAPP_UPLOAD_KEYSTORE_BASE64 }}
-        run: |
-          echo "$KEYSTORE_BASE64" | base64 --decode > "$MYAPP_UPLOAD_STORE_FILE"
-
-          echo "Keystore restored:"
-          ls -lh "$MYAPP_UPLOAD_STORE_FILE"
-
-      # --------------------------------------------------
-      # 7. Verify keystore
-      # --------------------------------------------------
-      - name: Verify Android signing keystore
-        env:
-          KEYSTORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-        run: |
-          keytool -list \
-            -keystore "$MYAPP_UPLOAD_STORE_FILE" \
-            -storepass "$KEYSTORE_PASSWORD" \
-            -alias "$KEY_ALIAS" \
-            > /dev/null
-
-          echo "Android signing keystore verified."
-
-      # --------------------------------------------------
-      # 8. Build AAB
-      # --------------------------------------------------
-      - name: Build Android App Bundle
-        working-directory: android
-        run: ./gradlew app:bundleRelease --no-daemon
-
-      # --------------------------------------------------
-      # 9. Upload AAB as GitHub artifact
+      # 5. Upload AAB to GitHub
       # --------------------------------------------------
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coderespite-android-release
-          path: android/app/build/outputs/bundle/release/*.aab
+          name: coderespite-android-production
+          path: coderespite-android.aab
           if-no-files-found: error
 
+      # --------------------------------------------------
+      # 6. Upload to Google Play Internal Testing
+      # --------------------------------------------------
       - name: Upload to Google Play Internal Testing
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.mindcraftlearning.coderespite
-          releaseFiles: android/app/build/outputs/bundle/release/*.aab
+          releaseFiles: ./coderespite-android.aab
           track: internal
           status: completed
