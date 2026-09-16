@@ -1,5 +1,17 @@
 import * as SecureStore from "expo-secure-store";
 
+// 5-tier model fallback chain — same as destya-fitness-app
+// Tries each model in order; only fails after all 5 are exhausted.
+const GROQ_MODELS = [
+  "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
+  "qwen/qwen3.8-27b",
+  "qwen/qwen3.6-27b",
+  "groq/compound",
+];
+
+const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
+
 export const getUserGroqApiKey = async () => {
   return await SecureStore.getItemAsync("ds_groq_api_key");
 };
@@ -198,9 +210,7 @@ export const generateQuizWithGroq = async (topic, apiKey) => {
     return OFFLINE_FALLBACKS.javascript;
   }
 
-  try {
-    console.log(`[GroqService] Calling Groq API for topic: ${topic}`);
-    const systemPrompt = `You are a helpful AI coding assistant. Generate exactly 5 multiple choice questions for a quiz on the topic: "${topic}".
+  const systemPrompt = `You are a helpful AI coding assistant. Generate exactly 5 multiple choice questions for a quiz on the topic: "${topic}".
 CRITICAL SAFETY & COMPLIANCE RULES:
 1. If the requested topic "${topic}" is inappropriate, offensive, hateful, sexual, contains violence, or is completely unrelated to programming, coding, web development, databases, software engineering, or computer science, you MUST reject it.
 2. To reject it, output a JSON array containing exactly one object with this format: [{"error": "Inappropriate or unrelated topic. Please request a programming-related topic."}].
@@ -212,58 +222,61 @@ CRITICAL SAFETY & COMPLIANCE RULES:
 
 Ensure the json is properly structured and output ONLY the JSON code block, without markdown formatting like \`\`\`json or standard chat introduction/outroduction.`;
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: "You output only valid raw JSON arrays." },
-          { role: "user", content: systemPrompt }
-        ],
-        temperature: 0.2
-      })
-    });
+  console.log(`[GroqService] Calling Groq API for topic: ${topic}`);
+  let lastError = null;
 
-    if (!response.ok) {
-      throw new Error(`API returned error status: ${response.status}`);
-    }
+  for (const model of GROQ_MODELS) {
+    try {
+      const response = await fetch(GROQ_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: "You output only valid raw JSON arrays." },
+            { role: "user", content: systemPrompt }
+          ],
+          temperature: 0.2
+        })
+      });
 
-    const result = await response.json();
-    let rawJson = result.choices[0]?.message?.content?.trim();
-
-    // Remove markdown code block framing if the LLM adds it anyway
-    if (rawJson.startsWith("```json")) {
-      rawJson = rawJson.replace(/^```json\s*/, "").replace(/\s*```$/, "");
-    } else if (rawJson.startsWith("```")) {
-      rawJson = rawJson.replace(/^```\s*/, "").replace(/\s*```$/, "");
-    }
-
-    // Aggressively sanitize invalid escape sequences that break JSON.parse
-    // This removes any backslash that isn't followed by a valid JSON escape character
-    rawJson = rawJson.replace(/\\(?!["\\/bfnrt])/g, "");
-
-    const quizData = JSON.parse(rawJson);
-    if (Array.isArray(quizData) && quizData.length > 0) {
-      if (quizData[0]?.error) {
-        throw new Error(quizData[0].error);
+      if (!response.ok) {
+        throw new Error(`API returned error status: ${response.status}`);
       }
-      return quizData;
+
+      const result = await response.json();
+      let rawJson = result.choices[0]?.message?.content?.trim();
+
+      // Remove markdown code block framing if the LLM adds it anyway
+      if (rawJson.startsWith("```json")) {
+        rawJson = rawJson.replace(/^```json\s*/, "").replace(/\s*```$/, "");
+      } else if (rawJson.startsWith("```")) {
+        rawJson = rawJson.replace(/^```\s*/, "").replace(/\s*```$/, "");
+      }
+
+      // Aggressively sanitize invalid escape sequences that break JSON.parse
+      rawJson = rawJson.replace(/\\(?!["\\/bfnrt])/g, "");
+
+      const quizData = JSON.parse(rawJson);
+      if (Array.isArray(quizData) && quizData.length > 0) {
+        if (quizData[0]?.error) {
+          throw new Error(quizData[0].error);
+        }
+        return quizData;
+      }
+      throw new Error("Invalid response format received from Groq");
+    } catch (error) {
+      console.warn(`[GroqService] Quiz generation failed with model "${model}", trying next... Error:`, error.message || error);
+      lastError = error;
     }
-    throw new Error("Invalid response format received from Groq");
-  } catch (error) {
-    console.warn("[GroqService] Generation failed:", error);
-    throw error;
-    // Find closest fallback
-    if (OFFLINE_FALLBACKS[cleanTopic]) {
-      return OFFLINE_FALLBACKS[cleanTopic];
-    }
-    // Default fallback
-    return OFFLINE_FALLBACKS.javascript;
   }
+
+  // All models exhausted
+  console.warn("[GroqService] All models failed for quiz generation.");
+  throw lastError;
 };
 
 export const getDetailedExplanationWithGroq = async (question, userAnswer, correctAnswer, apiKey) => {
@@ -271,39 +284,48 @@ export const getDetailedExplanationWithGroq = async (question, userAnswer, corre
     return "Please enter a valid Groq API Key in AI Generator settings to fetch AI explanations.";
   }
 
-  try {
-    const prompt = `Question: ${question}
+  const prompt = `Question: ${question}
 User's Answer: ${userAnswer}
 Correct Answer: ${correctAnswer}
 
 Please provide a detailed, educational explanation of why the correct answer is right and why the user's answer is incorrect (if the user's answer is different from the correct answer). Keep it engaging, and explain any underlying coding principles clearly. Explain in 2-3 clear paragraphs.`;
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: "You are a helpful AI programming coach. Provide direct, informative, educational responses in clear markdown." },
-          { role: "user", content: prompt }
-        ],
-        temperature: 0.3
-      })
-    });
+  let lastError = null;
 
-    if (!response.ok) {
-      throw new Error(`API returned error status: ${response.status}`);
+  for (const model of GROQ_MODELS) {
+    try {
+      const response = await fetch(GROQ_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: "You are a helpful AI programming coach. Provide direct, informative, educational responses in clear markdown." },
+            { role: "user", content: prompt }
+          ],
+          temperature: 0.3
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API returned error status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      const content = result.choices[0]?.message?.content?.trim();
+      if (content) return content;
+      throw new Error("Empty response from model: " + model);
+    } catch (error) {
+      console.warn(`[GroqService] Explanation failed with model "${model}", trying next... Error:`, error.message || error);
+      lastError = error;
     }
-
-    const result = await response.json();
-    return result.choices[0]?.message?.content?.trim() || "Failed to fetch detailed explanation.";
-  } catch (error) {
-    console.error("[GroqService] Detailed explanation failed:", error);
-    return `Failed to fetch detailed explanation: ${error.message}. Please verify your API key and connection.`;
   }
+
+  console.error("[GroqService] All models failed for explanation.");
+  return `Failed to fetch detailed explanation: ${lastError?.message}. Please verify your API key and connection.`;
 };
 
 export const generateRoadmapWithGroq = async (goal, apiKey) => {
@@ -334,53 +356,59 @@ Icon must be one of: "javascript", "react_native", "html", "css", "git", or "def
 Ensure the output is 100% valid JSON. Do NOT escape markdown characters (like \\* or \\_). Only use standard JSON escapes.
 CRITICAL: Do NOT output raw/literal newlines inside JSON string values! All newlines inside your markdown text MUST be explicitly escaped as \\n.`;
 
-  try {
-    console.log(`[GroqService] Generating AI Roadmap for goal: ${goal}`);
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: "You output only valid raw JSON objects." },
-          { role: "user", content: systemPrompt }
-        ],
-        temperature: 0.3
-      })
-    });
+  console.log(`[GroqService] Generating AI Roadmap for goal: ${goal}`);
+  let lastError = null;
 
-    if (!response.ok) {
-      throw new Error(`API returned error status: ${response.status}`);
+  for (const model of GROQ_MODELS) {
+    try {
+      const response = await fetch(GROQ_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: "You output only valid raw JSON objects." },
+            { role: "user", content: systemPrompt }
+          ],
+          temperature: 0.3
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API returned error status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      let text = result.choices[0]?.message?.content?.trim() || "";
+
+      if (text.startsWith("```json")) {
+        text = text.replace("```json", "").replace("```", "").trim();
+      } else if (text.startsWith("```")) {
+        text = text.replace("```", "").replace("```", "").trim();
+      }
+
+      // Aggressively sanitize invalid escape sequences that break JSON.parse
+      text = text.replace(/\\(?!["\\/bfnrt])/g, "");
+
+      const roadmapData = JSON.parse(text);
+      if (roadmapData.error) {
+        throw new Error(roadmapData.error);
+      }
+
+      // Force the ID to ensure it always matches our UI routing and separation logic
+      // LLMs often hallucinate or change IDs despite strict prompt instructions.
+      roadmapData.id = `AI_ROADMAP_${timestamp}`;
+
+      return roadmapData;
+    } catch (error) {
+      console.warn(`[GroqService] Roadmap generation failed with model "${model}", trying next... Error:`, error.message || error);
+      lastError = error;
     }
-
-    const result = await response.json();
-    let text = result.choices[0]?.message?.content?.trim() || "";
-
-    if (text.startsWith("```json")) {
-      text = text.replace("```json", "").replace("```", "").trim();
-    } else if (text.startsWith("```")) {
-      text = text.replace("```", "").replace("```", "").trim();
-    }
-
-    // Aggressively sanitize invalid escape sequences that break JSON.parse
-    // This removes any backslash that isn't followed by a valid JSON escape character
-    text = text.replace(/\\(?!["\\/bfnrt])/g, "");
-
-    const roadmapData = JSON.parse(text);
-    if (roadmapData.error) {
-      throw new Error(roadmapData.error);
-    }
-    
-    // Force the ID to ensure it always matches our UI routing and separation logic
-    // LLMs often hallucinate or change IDs despite strict prompt instructions.
-    roadmapData.id = `AI_ROADMAP_${timestamp}`;
-
-    return roadmapData;
-  } catch (error) {
-    console.error("[GroqService] Roadmap generation failed:", error);
-    throw error;
   }
+
+  console.error("[GroqService] All models failed for roadmap generation.");
+  throw lastError;
 };

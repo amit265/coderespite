@@ -20,6 +20,16 @@ import { Ionicons } from "@expo/vector-icons";
 import Markdown from "react-native-markdown-display";
 import colors from "../constants/colors";
 import { getGroqApiKey } from "../services/groqService";
+
+// 5-tier model fallback chain — same as destya-fitness-app
+const GROQ_MODELS = [
+  "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
+  "qwen/qwen3.8-27b",
+  "qwen/qwen3.6-27b",
+  "groq/compound",
+];
+const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
 import { allCoursesContext } from "../context/context";
 
 // Cross-platform clipboard helper
@@ -174,25 +184,40 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         })),
       ];
 
-      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: apiMessages,
-          temperature: 0.7,
-        }),
-      });
+      let replyContent = null;
+      let lastError = null;
 
-      if (!response.ok) throw new Error("Failed response from Groq API");
+      for (const model of GROQ_MODELS) {
+        try {
+          const response = await fetch(GROQ_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              model,
+              messages: apiMessages,
+              temperature: 0.7,
+            }),
+          });
 
-      const data = await response.json();
-      const replyContent =
-        data.choices[0]?.message?.content?.trim() ||
-        "Meow... I got distracted by a laser pointer! 🐾 Please try again.";
+          if (!response.ok) throw new Error(`HTTP ${response.status} from model ${model}`);
+
+          const data = await response.json();
+          const content = data.choices[0]?.message?.content?.trim();
+          if (content) {
+            replyContent = content;
+            break; // success — stop trying fallbacks
+          }
+          throw new Error("Empty response from model: " + model);
+        } catch (err) {
+          console.warn(`[Chat] Model "${model}" failed, trying next... Error:`, err.message || err);
+          lastError = err;
+        }
+      }
+
+      if (!replyContent) throw lastError || new Error("All models failed");
 
       const assistantMsg = {
         id: `assistant_${Date.now()}`,
