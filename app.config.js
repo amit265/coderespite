@@ -12,6 +12,11 @@ module.exports = {
     scheme: "coderespite",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
+    splash: {
+      image: "./assets/images/splashScreen.png",
+      resizeMode: "contain",
+      backgroundColor: "#CBE7F7"
+    },
     updates: {
       url: "https://u.expo.dev/45e5a71a-6a35-4ad2-9a84-243ad0a992a9"
     },
