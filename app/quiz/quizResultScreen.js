@@ -23,7 +23,7 @@ import Button from "../../components/shared/Button";
 import colors from "../../constants/colors";
 import { EmojiText, DESTYA_SHARE_LINK } from "../../constants/constants";
 import { allCoursesContext, userDetailsContext, adConfigContext } from "../../context/context";
-import { BannerAdComponent, showInterstitialAd } from "../../services/AdManager";
+import { showInterstitialAd } from "../../services/AdManager";
 import { logAnalyticsEvent } from "../../services/analyticsService";
 import Markdown from "react-native-markdown-display";
 import ViewShot from "react-native-view-shot";
@@ -349,7 +349,7 @@ export default function QuizResultScreen() {
           />
         </View>
 
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

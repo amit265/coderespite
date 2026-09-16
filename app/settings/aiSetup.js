@@ -15,6 +15,7 @@ import SafeScreen from "../../components/SafeScreen";
 import PageTransition from "../../components/PageTransition";
 import colors from "../../constants/colors";
 import { getUserGroqApiKey, saveGroqApiKey } from "../../services/groqService";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 export default function AISetupGuide() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function AISetupGuide() {
 
   const handleOpenConsole = () => {
     Linking.openURL("https://console.groq.com/keys").catch((err) =>
-      Alert.alert("Error", "Could not open Groq Console page.")
+      CustomAlert.alert("Error", "Could not open Groq Console page.")
     );
   };
 

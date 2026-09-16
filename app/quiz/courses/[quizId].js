@@ -27,7 +27,8 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
-import { BannerAdComponent } from "../../../services/AdManager";
+
+import { CustomAlert } from "../../../components/shared/GlobalAlert";
 
 
 // --- Animated Option Component ---
@@ -244,7 +245,7 @@ export default function QuizId() {
   };
 
   const goBack = () => {
-    Alert.alert(
+    CustomAlert.alert(
       "Confirm Exit",
       "Are you sure you want to go back? You will lose your progress.",
       [
@@ -501,7 +502,7 @@ export default function QuizId() {
         </View>
 
         {/* Bottom Banner Ad */}
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

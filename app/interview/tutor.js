@@ -15,11 +15,16 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import AsyncStorage from "../services/storage";
+import AsyncStorage from "../../services/storage";
 import { Ionicons } from "@expo/vector-icons";
 import Markdown from "react-native-markdown-display";
-import colors from "../constants/colors";
-import { getGroqApiKey } from "../services/groqService";
+import colors from "../../constants/colors";
+import { getGroqApiKey } from "../../services/groqService";
+import { allCoursesContext, userDetailsContext, aiCreditsContext } from "../../context/context";
+import { deductAiCredit } from "../../services/aiCreditsService";
+import AiCreditsModal from "../../components/AiCreditsModal";
+import PageTransition from "../../components/PageTransition";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 // 5-tier model fallback chain — same as destya-fitness-app
 const GROQ_MODELS = [
@@ -30,8 +35,6 @@ const GROQ_MODELS = [
   "groq/compound",
 ];
 const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
-import { allCoursesContext, userDetailsContext } from "../context/context";
-import { incrementAIChatCount } from "../services/userStorage";
 
 // Cross-platform clipboard helper
 // - Web: uses navigator.clipboard (no native module needed)
@@ -65,6 +68,9 @@ export default function MeowgrammerChat() {
   const [loading, setLoading] = useState(false);
   const [copiedId, setCopiedId] = useState(null); // tracks which message was just copied
   const flatListRef = useRef(null);
+
+  const { credits, refreshCredits } = useContext(aiCreditsContext);
+  const [showCreditsModal, setShowCreditsModal] = useState(false);
 
   // ─── Build dynamic system prompt from app courses ──────────────────────────
   const buildSystemPrompt = useCallback(() => {
@@ -157,16 +163,12 @@ When a user asks about a topic that is covered by one of these courses, proactiv
     if (!text) return;
 
     // Check Freemium Limits
-    const isPro = userData?.profile?.isPro;
-    const today = new Date().toISOString().split("T")[0];
-    const chatsUsed = userData?.profile?.lastChatDate === today ? (userData?.profile?.aiChatsUsedToday || 0) : 0;
-    
-    if (!isPro && chatsUsed >= 10) {
-      router.push("/paywall");
+    const ok = await deductAiCredit();
+    if (!ok) {
+      setShowCreditsModal(true);
       return;
     }
-
-    await incrementAIChatCount();
+    if (refreshCredits) await refreshCredits();
 
     const userMsg = {
       id: `user_${Date.now()}`,
@@ -247,7 +249,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
       applyPage(finalAll, finalStart);
       saveChatHistory(finalAll);
     } catch (error) {
-      Alert.alert(
+      CustomAlert.alert(
         "Chat Connection Issue",
         "Meowgrammer could not connect. Please verify your connection or set up a free Groq API Key in Settings.",
         [
@@ -262,7 +264,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
 
   // ─── Clear history ─────────────────────────────────────────────────────────
   const handleClear = () => {
-    Alert.alert(
+    CustomAlert.alert(
       "Clear Chat History",
       "Are you sure you want to delete all messages?",
       [
@@ -295,13 +297,13 @@ When a user asks about a topic that is covered by one of these courses, proactiv
       setCopiedId(id);
       setTimeout(() => setCopiedId(null), 2000);
     } catch (e) {
-      Alert.alert("Copy failed", "Could not copy to clipboard.");
+      CustomAlert.alert("Copy failed", "Could not copy to clipboard.");
     }
   }, []);
 
   // ─── Report handler ────────────────────────────────────────────────────────
   const handleReport = useCallback((id) => {
-    Alert.alert(
+    CustomAlert.alert(
       "Report Response",
       "Why are you reporting this response?",
       [
@@ -316,7 +318,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
   const submitReport = (id, reason) => {
     // TODO: send report to backend / Firestore
     console.log("[Report] messageId:", id, "reason:", reason);
-    Alert.alert(
+    CustomAlert.alert(
       "Thank you 🐾",
       "Your report has been submitted. We review all reports to keep Meowgrammer safe and accurate."
     );
@@ -405,8 +407,9 @@ When a user asks about a topic that is covered by one of these courses, proactiv
   };
 
   return (
-    // KeyboardAvoidingView must be the outermost layout element
-    // so it can measure and shift the entire UI when the keyboard opens.
+    <>
+    <AiCreditsModal visible={showCreditsModal} onClose={() => setShowCreditsModal(false)} onCreditsAdded={refreshCredits} />
+    <PageTransition>
     <KeyboardAvoidingView
       style={[styles.root, { paddingTop: insets.top }]}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -417,10 +420,16 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         <Pressable onPress={() => router.back()} hitSlop={15} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={26} color="#1F2937" />
         </Pressable>
-        <Text style={styles.headerTitle}>🐾 Ask Meowgrammer</Text>
-        <Pressable onPress={handleClear} hitSlop={15} style={styles.clearButton}>
-          <Ionicons name="trash-outline" size={22} color="#EF4444" />
-        </Pressable>
+        <Text style={styles.headerTitle}>🐾 Q&A Tutor</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: '#F5F3FF', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20 }}>
+            <Ionicons name="flash" size={12} color="#8B5CF6" />
+            <Text style={{ fontFamily: 'nunito-bold', fontSize: 13, color: '#8B5CF6' }}>{credits}</Text>
+          </View>
+          <Pressable onPress={handleClear} hitSlop={15} style={styles.clearButton}>
+            <Ionicons name="trash-outline" size={22} color="#EF4444" />
+          </Pressable>
+        </View>
       </View>
 
       {/* Messages — flex:1 so it fills available space and input stays at bottom */}
@@ -505,6 +514,8 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         </Text>
       </View>
     </KeyboardAvoidingView>
+    </PageTransition>
+    </>
   );
 }
 

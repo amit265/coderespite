@@ -1,209 +1,288 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, Alert, SafeAreaView } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { getOfferings, purchasePackage, restorePurchases } from '../services/purchasesService';
+import { showRewardedAd } from '../services/AdManager';
+import { activateAdFree, getAdFreeRemainingMs } from '../services/adFreeService';
+import { addCreditsFromAd } from '../services/aiCreditsService';
+import { aiCreditsContext } from '../context/context';
 import PageTransition from '../components/PageTransition';
+import SafeScreen from '../components/SafeScreen';
 
-export default function Paywall() {
+export default function AdFreeScreen() {
   const router = useRouter();
-  const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [purchasing, setPurchasing] = useState(false);
+  const { credits, refreshCredits } = useContext(aiCreditsContext);
+  const [loading, setLoading] = useState(false);
+  const [remainingMs, setRemainingMs] = useState(0);
 
+  // Poll remaining time every second
   useEffect(() => {
-    const fetchOfferings = async () => {
-      const packs = await getOfferings();
-      setPackages(packs);
-      setLoading(false);
+    const checkTimer = async () => {
+      const ms = await getAdFreeRemainingMs();
+      setRemainingMs(ms);
     };
-    fetchOfferings();
+    checkTimer();
+    const interval = setInterval(checkTimer, 1000);
+    return () => clearInterval(interval);
   }, []);
 
-  const handlePurchase = async (pack) => {
-    setPurchasing(true);
-    const success = await purchasePackage(pack);
-    setPurchasing(false);
-    if (success) {
-      Alert.alert("Success!", "Welcome to CodeRespite Pro! 🎉", [
-        { text: "Awesome", onPress: () => router.back() }
-      ]);
-    }
+  const formatTime = (ms) => {
+    if (ms <= 0) return null;
+    const totalSeconds = Math.ceil(ms / 1000);
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const handleRestore = async () => {
-    setPurchasing(true);
-    const success = await restorePurchases();
-    setPurchasing(false);
-    if (success) {
-      Alert.alert("Restored", "Your purchases have been restored.", [
-        { text: "OK", onPress: () => router.back() }
-      ]);
-    } else {
-      Alert.alert("Failed", "Could not restore purchases or no active subscriptions found.");
-    }
+  const handleWatchAd = () => {
+    setLoading(true);
+    showRewardedAd(
+      async () => {
+        // Reward earned: give ad-free time AND +3 AI credits
+        await activateAdFree();
+        await addCreditsFromAd();
+        await refreshCredits();
+        const ms = await getAdFreeRemainingMs();
+        setRemainingMs(ms);
+        setLoading(false);
+      },
+      () => {
+        // Ad closed without reward
+        setLoading(false);
+      }
+    );
   };
+
+  const timeLeft = formatTime(remainingMs);
+  const isActive = remainingMs > 0;
 
   return (
     <PageTransition>
-      <SafeAreaView style={styles.container}>
+      <SafeScreen>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.closeBtn}>
-            <Ionicons name="close" size={28} color="#4B5563" />
+          <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+            <Ionicons name="arrow-back" size={24} color="#132F94" />
           </TouchableOpacity>
+          <Text style={styles.headerTitle}>Go Ad-Free</Text>
+          <View style={{ width: 24 }} />
         </View>
 
-        <View style={styles.content}>
-          <Text style={styles.title}>CodeRespite <Text style={styles.proText}>Pro</Text></Text>
-          <Text style={styles.subtitle}>Unlock your full coding potential</Text>
-
-          <View style={styles.benefits}>
-            <Benefit icon="rocket" text="Ad-free experience" />
-            <Benefit icon="chatbubbles" text="Unlimited AI Chat with Meowgrammer" />
-            <Benefit icon="snow" text="Unlimited Streak Freezes" />
-            <Benefit icon="shield-checkmark" text="Exclusive Pro Badge" />
-          </View>
-
-          <View style={styles.packagesContainer}>
-            {loading ? (
-              <ActivityIndicator size="large" color="#8B5CF6" />
-            ) : packages.length === 0 ? (
-              <Text style={styles.noPackagesText}>No subscriptions available right now.</Text>
+        <View style={styles.container}>
+          {/* Status Card */}
+          <View style={[styles.statusCard, isActive && styles.statusCardActive]}>
+            <Ionicons
+              name={isActive ? "shield-checkmark" : "shield-outline"}
+              size={56}
+              color={isActive ? "#10B981" : "#D1D5DB"}
+            />
+            {isActive ? (
+              <>
+                <Text style={styles.activeTitle}>Ad-Free Active! 🎉</Text>
+                <Text style={styles.timerText}>{timeLeft} remaining</Text>
+                <Text style={styles.statusSubtitle}>
+                  Enjoy an uninterrupted experience. All ads are paused.
+                </Text>
+              </>
             ) : (
-              packages.map((pack) => (
-                <TouchableOpacity
-                  key={pack.identifier}
-                  style={styles.packageCard}
-                  onPress={() => handlePurchase(pack)}
-                  disabled={purchasing}
-                >
-                  <View style={styles.packageInfo}>
-                    <Text style={styles.packageTitle}>{pack.product.title}</Text>
-                    <Text style={styles.packageDesc}>{pack.product.description}</Text>
-                  </View>
-                  <Text style={styles.packagePrice}>{pack.product.priceString}</Text>
-                </TouchableOpacity>
-              ))
+              <>
+                <Text style={styles.inactiveTitle}>No Active Session</Text>
+                <Text style={styles.statusSubtitle}>
+                  Watch a short ad to enjoy 15 minutes of uninterrupted learning!
+                </Text>
+              </>
             )}
           </View>
 
-          {purchasing && <ActivityIndicator size="small" color="#8B5CF6" style={{ marginTop: 20 }} />}
+          {/* Benefits */}
+          <View style={styles.benefitsCard}>
+            <Text style={styles.benefitsTitle}>What you get:</Text>
+            <Benefit icon="ban" text="No interstitial ads for 15 minutes" />
+            <Benefit icon="phone-portrait-outline" text="No app-open ads when switching apps" />
+            <Benefit icon="sparkles" text="+3 AI Credits (bonus!)" />
+          </View>
 
-          <TouchableOpacity onPress={handleRestore} style={styles.restoreBtn} disabled={purchasing}>
-            <Text style={styles.restoreText}>Restore Purchases</Text>
+          {/* Current Credits */}
+          <View style={styles.creditsRow}>
+            <Ionicons name="flash" size={18} color="#8B5CF6" />
+            <Text style={styles.creditsText}>
+              AI Credits: <Text style={styles.creditsCount}>{credits}</Text> / 10
+            </Text>
+          </View>
+
+          {/* CTA */}
+          <TouchableOpacity
+            style={[styles.watchAdBtn, isActive && styles.watchAdBtnDisabled]}
+            onPress={handleWatchAd}
+            disabled={loading || isActive}
+          >
+            {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <>
+                <Ionicons name="play-circle" size={22} color="white" />
+                <Text style={styles.watchAdText}>
+                  {isActive ? 'Session Already Active' : 'Watch Ad — Get 15 Min Free'}
+                </Text>
+              </>
+            )}
           </TouchableOpacity>
+
+          <Text style={styles.note}>
+            A short rewarded video ad will play. You must watch it to completion to earn the reward.
+          </Text>
         </View>
-      </SafeAreaView>
+      </SafeScreen>
     </PageTransition>
   );
 }
 
 const Benefit = ({ icon, text }) => (
   <View style={styles.benefitRow}>
-    <Ionicons name={icon} size={24} color="#10B981" />
+    <Ionicons name={icon} size={20} color="#10B981" />
     <Text style={styles.benefitText}>{text}</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 15,
+    backgroundColor: '#CBE7F7',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0,0,0,0.1)',
+  },
+  backBtn: { padding: 5 },
+  headerTitle: {
+    fontSize: 18,
+    fontFamily: 'quicksand-bold',
+    color: '#132F94',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FF',
-  },
-  header: {
-    padding: 16,
-    alignItems: 'flex-end',
-  },
-  closeBtn: {
-    padding: 8,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 24,
+    padding: 20,
     alignItems: 'center',
   },
-  title: {
-    fontSize: 32,
-    fontFamily: 'nunito-bold',
-    color: '#1F2937',
+  statusCard: {
+    backgroundColor: '#F9FAFB',
+    borderRadius: 24,
+    padding: 28,
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 16,
+    borderWidth: 2,
+    borderColor: '#E5E7EB',
+  },
+  statusCardActive: {
+    backgroundColor: '#ECFDF5',
+    borderColor: '#10B981',
+  },
+  activeTitle: {
+    fontSize: 22,
+    fontFamily: 'quicksand-bold',
+    color: '#10B981',
+    marginTop: 12,
+    marginBottom: 4,
+  },
+  timerText: {
+    fontSize: 36,
+    fontFamily: 'quicksand-bold',
+    color: '#065F46',
     marginBottom: 8,
   },
-  proText: {
-    color: '#8B5CF6',
+  inactiveTitle: {
+    fontSize: 20,
+    fontFamily: 'quicksand-bold',
+    color: '#6B7280',
+    marginTop: 12,
+    marginBottom: 8,
   },
-  subtitle: {
-    fontSize: 16,
+  statusSubtitle: {
+    fontSize: 14,
     fontFamily: 'nunito',
     color: '#6B7280',
-    marginBottom: 32,
     textAlign: 'center',
+    lineHeight: 20,
   },
-  benefits: {
+  benefitsCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 20,
     width: '100%',
-    marginBottom: 40,
-    gap: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    gap: 12,
+  },
+  benefitsTitle: {
+    fontSize: 16,
+    fontFamily: 'quicksand-bold',
+    color: '#1F2937',
+    marginBottom: 4,
   },
   benefitRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 10,
   },
   benefitText: {
-    fontSize: 16,
-    fontFamily: 'nunito-semiBold',
-    color: '#374151',
+    fontSize: 14,
+    fontFamily: 'nunito',
+    color: '#4B5563',
   },
-  packagesContainer: {
-    width: '100%',
-    gap: 16,
-  },
-  packageCard: {
+  creditsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#DDD6FE',
-    shadowColor: '#8B5CF6',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
+    gap: 6,
+    backgroundColor: '#F5F3FF',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginBottom: 20,
   },
-  packageInfo: {
-    flex: 1,
-  },
-  packageTitle: {
-    fontSize: 18,
-    fontFamily: 'nunito-bold',
-    color: '#1F2937',
-    marginBottom: 4,
-  },
-  packageDesc: {
-    fontSize: 13,
+  creditsText: {
     fontFamily: 'nunito',
-    color: '#6B7280',
+    fontSize: 14,
+    color: '#4B5563',
   },
-  packagePrice: {
-    fontSize: 20,
+  creditsCount: {
     fontFamily: 'nunito-bold',
     color: '#8B5CF6',
   },
-  noPackagesText: {
-    textAlign: 'center',
-    color: '#9CA3AF',
+  watchAdBtn: {
+    backgroundColor: '#132F94',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 20,
+    width: '100%',
+    marginBottom: 12,
+    shadowColor: '#132F94',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  watchAdBtnDisabled: {
+    backgroundColor: '#9CA3AF',
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  watchAdText: {
+    color: 'white',
+    fontFamily: 'quicksand-bold',
+    fontSize: 16,
+  },
+  note: {
+    fontSize: 12,
     fontFamily: 'nunito',
-  },
-  restoreBtn: {
-    marginTop: 24,
-    padding: 12,
-  },
-  restoreText: {
     color: '#9CA3AF',
-    fontFamily: 'nunito-semiBold',
-    fontSize: 14,
-    textDecorationLine: 'underline',
+    textAlign: 'center',
+    lineHeight: 18,
+    paddingHorizontal: 16,
   },
 });

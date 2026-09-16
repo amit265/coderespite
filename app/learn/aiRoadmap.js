@@ -18,21 +18,34 @@ import PageTransition from "../../components/PageTransition";
 import colors from "../../constants/colors";
 import { generateRoadmapWithGroq, getGroqApiKey } from "../../services/groqService";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
-import { allCoursesContext } from "../../context/context";
+import { allCoursesContext, aiCreditsContext } from "../../context/context";
+import { deductAiCredit } from "../../services/aiCreditsService";
+import AiCreditsModal from "../../components/AiCreditsModal";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 export default function AIRoadmap() {
   const router = useRouter();
   const [goal, setGoal] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showCreditsModal, setShowCreditsModal] = useState(false);
   const { refreshData } = useGlobalRefresh();
   const { allCourses, setAllCourses } = useContext(allCoursesContext);
+  const { credits, refreshCredits } = useContext(aiCreditsContext);
 
   const handleGenerate = async () => {
     const cleanGoal = goal.trim();
     if (!cleanGoal) {
-      Alert.alert("Goal Required", "Please enter what you want to learn.");
+      CustomAlert.alert("Goal Required", "Please enter what you want to learn.");
       return;
     }
+
+    // Check AI credits before generating
+    const success = await deductAiCredit();
+    if (!success) {
+      setShowCreditsModal(true);
+      return;
+    }
+    await refreshCredits();
 
     setLoading(true);
     try {
@@ -72,7 +85,7 @@ export default function AIRoadmap() {
         throw new Error("Invalid roadmap structure generated");
       }
     } catch (error) {
-      Alert.alert(
+      CustomAlert.alert(
         "Roadmap Generation Issue",
         "We encountered an issue generating your custom roadmap. Please verify or update your key in the AI Configuration Guide under Settings.",
         [
@@ -90,13 +103,19 @@ export default function AIRoadmap() {
   };
 
   return (
-    <PageTransition>
-      <SafeScreen>
-        <View style={styles.container}>
-          {/* Header */}
-          <View style={styles.header}>
-            <Pressable onPress={() => router.back()} style={styles.backButton} hitSlop={15}>
-              <Ionicons name="arrow-back" size={28} color="black" />
+    <>
+      <AiCreditsModal
+        visible={showCreditsModal}
+        onClose={() => setShowCreditsModal(false)}
+        onCreditsAdded={refreshCredits}
+      />
+      <PageTransition>
+        <SafeScreen>
+          <View style={styles.container}>
+            {/* Header */}
+            <View style={styles.header}>
+              <Pressable onPress={() => router.back()} style={styles.backButton} hitSlop={15}>
+                <Ionicons name="arrow-back" size={28} color="black" />
             </Pressable>
             <Text style={styles.headerTitle}>⚡️ AI Custom Roadmap</Text>
             <View style={{ width: 28 }} />
@@ -167,6 +186,7 @@ export default function AIRoadmap() {
         </View>
       </SafeScreen>
     </PageTransition>
+  </>
   );
 }
 

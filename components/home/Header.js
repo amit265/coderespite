@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import colors from "../../constants/colors";
 import { SHARE_MESSAGE, STORE_LINK } from "../../constants/constants";
+import { CustomAlert } from "../shared/GlobalAlert";
 
 export default function Header() {
   const router = useRouter();
@@ -39,9 +40,9 @@ export default function Header() {
       if (Platform.OS === 'web') {
         if (navigator.clipboard) {
           await navigator.clipboard.writeText(SHARE_MESSAGE);
-          Alert.alert("Link Copied! 📋", "The share message has been copied to your clipboard!");
+          CustomAlert.alert("Link Copied! 📋", "The share message has been copied to your clipboard!");
         } else {
-          Alert.alert("Share CodeRespite", SHARE_MESSAGE);
+          CustomAlert.alert("Share CodeRespite", SHARE_MESSAGE);
         }
         return;
       }

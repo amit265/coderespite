@@ -1,232 +1,68 @@
-import { Entypo } from "@expo/vector-icons";
-import React, { useContext, useMemo, useState } from "react";
-import { Text, TouchableOpacity, View, Share, Alert, Platform } from "react-native";
-import colors from "../constants/colors";
-import { EmojiText, DESTYA_SHARE_LINK } from "../constants/constants";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useContext } from "react";
+import { Text, View } from "react-native";
 import { allCoursesContext } from "../context/context";
-import Button from "./shared/Button";
 
 export default function QuickStats({ userData }) {
-  const progress = useMemo(() => userData?.progress || {}, [userData]);
+  const progress = userData?.progress || {};
   const { allCourses } = useContext(allCoursesContext);
-  const validCourseTitles = useMemo(
-    () =>
-      new Set(
-        (allCourses || [])
-          .map((course) => course?.title)
-          .filter((title) => typeof title === "string" && title.trim())
-      ),
-    [allCourses]
+
+  const progressEntries = Object.entries(progress).filter(
+    ([courseName, courseData]) => courseData && typeof courseData === "object"
   );
-  const progressEntries = useMemo(
-    () =>
-      Object.entries(progress).filter(
-        ([courseName, courseData]) =>
-          validCourseTitles.has(courseName) &&
-          courseData &&
-          typeof courseData === "object"
-      ),
-    [progress, validCourseTitles]
-  );
-  const hasProgress = progressEntries.length > 0;
-  const [hideSections, setHideSections] = useState({
-    flashcardsLoved: false,
-    flashcardsViewed: false,
-    attemptedQuizzes: false,
-    coursesEnrolled: false,
-  });
 
-  const handleShareProgress = async () => {
-    const totalEnrolled = progressEntries.length || 0;
-    const totalLoved = progressEntries.reduce(
-      (total, course) => total + getStatCount(course[1], "flashcardsLoved"),
-      0
-    ) || 0;
-    const totalViewed = progressEntries.reduce(
-      (total, course) => total + getStatCount(course[1], "flashcardsViewed"),
-      0
-    ) || 0;
-    const totalQuizzes = progressEntries.reduce(
-      (total, course) => total + getStatCount(course[1], "attemptedQuizzes"),
-      0
-    ) || 0;
-
-    const message = `📊 My CodeRespite Progress Update! 🐾\n\n` +
-      `📚 Enrolled Courses: ${totalEnrolled}\n` +
-      `🧠 Viewed Flashcards: ${totalViewed}\n` +
-      `💙 Favorite Flashcards: ${totalLoved}\n` +
-      `🧪 Quizzes Completed: ${totalQuizzes}\n\n` +
-      `Refresh your tech skills with me! Download the app: ${DESTYA_SHARE_LINK}`;
-
-    try {
-      if (Platform.OS === 'web') {
-        if (navigator.clipboard) {
-          await navigator.clipboard.writeText(message);
-          Alert.alert("Progress Copied! 📋", "Your learning progress has been copied to the clipboard!");
-        } else {
-          Alert.alert("My Learning Progress", message);
-        }
-        return;
-      }
-
-      await Share.share({
-        message,
-      });
-    } catch (error) {
-      console.log("Share progress error:", error.message);
-    }
+  const getStatCount = (courseData, statKey) => {
+    return courseData[statKey]?.length || 0;
   };
 
-  const toggleHide = (key) => {
-    setHideSections((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
+  const totalEnrolled = progressEntries.length || 0;
+  const totalLoved = progressEntries.reduce((total, course) => total + getStatCount(course[1], "flashcardsLoved"), 0);
+  const totalViewed = progressEntries.reduce((total, course) => total + getStatCount(course[1], "flashcardsViewed"), 0);
+  const totalQuizzes = progressEntries.reduce((total, course) => total + getStatCount(course[1], "attemptedQuizzes"), 0);
 
-  const getStatCount = (courseData, key) => {
-    const statValue = courseData?.[key];
-    return Array.isArray(statValue) ? statValue.length : 0;
-  };
-
-  const renderStatBlock = (emoji, title, key, unit = "items") => {
-    return (
-      <View className="mb-4">
-        {hasProgress ? (
-          <View className="flex flex-col flex-wrap gap-2 items-center justify-center mt-4">
-            {progressEntries.map(([courseName, courseData]) => (
-              <View
-                key={courseName}
-                className="rounded-2xl py-4 px-4 items-center flex flex-row w-full gap-4"
-                style={{ backgroundColor: colors.WHITE }}
-              >
-                <Text className="text-sm font-nunito text-gray-800" numberOfLines={1}>
-                  {courseName}:
-                </Text>
-                <Text className="text-sm text-gray-600">
-                  {getStatCount(courseData, key)}
-                </Text>
-              </View>
-            ))}
-          </View>
-        ) : (
-          <Text className="text-sm text-gray-500">0</Text>
-        )}
-      </View>
-    );
-  };
+  const stats = [
+    { label: "Enrolled Courses", value: totalEnrolled, icon: "library", color: "#3B82F6", bg: "#EFF6FF" },
+    { label: "Quizzes Taken", value: totalQuizzes, icon: "flask", color: "#10B981", bg: "#ECFDF5" },
+    { label: "Cards Viewed", value: totalViewed, icon: "albums", color: "#8B5CF6", bg: "#F5F3FF" },
+    { label: "Favorite Cards", value: totalLoved, icon: "star", color: "#F59E0B", bg: "#FFFBEB" },
+  ];
 
   return (
-    <View className="flex flex-col gap-4 mt-4 p-4 bg-white rounded-xl">
-      <View
-        className="border-b border-gray-800 mb-3 flex-row items-center gap-2"
-        style={{ borderStyle: "dotted", paddingBottom: 20 }}
-      >
-        <EmojiText style={{ fontSize: 20 }}>📊 Learning Overview</EmojiText>
+    <View style={{ marginBottom: 16 }}>
+      <Text style={{ fontFamily: 'quicksand-bold', fontSize: 16, color: '#1F2937', marginBottom: 12, marginLeft: 4 }}>
+        📊 Quick Stats
+      </Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
+        {stats.map((s, i) => (
+          <View key={i} style={{
+            width: '48%',
+            backgroundColor: 'white',
+            borderRadius: 16,
+            padding: 16,
+            borderWidth: 1,
+            borderColor: '#F3F4F6',
+            shadowColor: s.color,
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.05,
+            shadowRadius: 4,
+            elevation: 1,
+          }}>
+            <View style={{
+              width: 38, height: 38, borderRadius: 12,
+              backgroundColor: s.bg, alignItems: 'center', justifyContent: 'center',
+              marginBottom: 12
+            }}>
+              <Ionicons name={s.icon} size={20} color={s.color} />
+            </View>
+            <Text style={{ fontFamily: 'quicksand-bold', fontSize: 22, color: '#1F2937', marginBottom: 2 }}>
+              {s.value}
+            </Text>
+            <Text style={{ fontFamily: 'nunito-bold', fontSize: 12, color: '#6B7280' }}>
+              {s.label}
+            </Text>
+          </View>
+        ))}
       </View>
-
-      <TouchableOpacity
-        className="py-4 px-4 rounded-lg"
-        style={{ backgroundColor: colors.BACKGROUND }}
-        onPress={() => toggleHide("coursesEnrolled")}
-      >
-        <View className="flex flex-row items-center justify-between">
-          <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>📚 Courses Enrolled: {progressEntries.length || 0}</EmojiText>
-          </View>
-          <Entypo name="arrow-with-circle-down" size={24} color="black" />
-        </View>
-        {hideSections.coursesEnrolled && (
-          <View>
-            {hasProgress ? (
-              <View className="flex flex-col flex-wrap gap-2 items-center justify-center mt-4">
-                {progressEntries.map(([courseName]) => (
-                  <View
-                    key={courseName}
-                    className="rounded-2xl py-4 px-4 items-center flex flex-row w-full gap-4"
-                    style={{ backgroundColor: colors.WHITE }}
-                  >
-                    <Text className="text-sm font-nunito text-gray-800">
-                      {courseName}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-            ) : (
-              <Text className="text-sm text-gray-500"> </Text>
-            )}
-          </View>
-        )}
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="py-4 px-4 rounded-lg"
-        style={{ backgroundColor: colors.BACKGROUND }}
-        onPress={() => toggleHide("flashcardsLoved")}
-      >
-        <View className="flex flex-row items-center justify-between">
-          <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>💙 Favorite Flashcards: {progressEntries.reduce(
-                (total, course) =>
-                  total + getStatCount(course[1], "flashcardsLoved"),
-                0
-              ) || 0}</EmojiText>
-          </View>
-          <Entypo name="arrow-with-circle-down" size={24} color="black" />
-        </View>
-
-        {hideSections.flashcardsLoved &&
-          renderStatBlock(
-            "💙",
-            "Favorite Flashcards:",
-            "flashcardsLoved",
-            "cards"
-          )}
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="py-4 px-4 rounded-lg"
-        style={{ backgroundColor: colors.BACKGROUND }}
-        onPress={() => toggleHide("flashcardsViewed")}
-      >
-        <View className="flex flex-row items-center justify-between">
-          <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>🧠 Viewed Flashcards: {progressEntries.reduce(
-                (total, course) =>
-                  total + getStatCount(course[1], "flashcardsViewed"),
-                0
-              ) || 0}</EmojiText>
-          </View>
-          <Entypo name="arrow-with-circle-down" size={24} color="black" />
-        </View>
-
-        {hideSections.flashcardsViewed &&
-          renderStatBlock("🧠", "Viewed Flashcards:", "flashcardsViewed", "cards")}
-      </TouchableOpacity>
-      <TouchableOpacity
-        className="py-4 px-4 rounded-lg"
-        style={{ backgroundColor: colors.BACKGROUND }}
-        onPress={() => toggleHide("attemptedQuizzes")}
-      >
-        <View className="flex flex-row items-center justify-between">
-          <View className="flex flex-row items-center gap-2">
-            <EmojiText style={{ fontSize: 18 }}>🧪 Quizzes Completed: {progressEntries.reduce(
-                (total, course) =>
-                  total + getStatCount(course[1], "attemptedQuizzes"),
-                0
-              ) || 0}</EmojiText>
-          </View>
-          <Entypo name="arrow-with-circle-down" size={24} color="black" />
-        </View>
-
-        {hideSections.attemptedQuizzes &&
-          renderStatBlock(
-            "🧪",
-            "Quizzes Completed:",
-            "attemptedQuizzes",
-            "quizzes"
-          )}
-      </TouchableOpacity>
-
-      <Button
-        text="Share My Progress 🚀"
-        onPress={handleShareProgress}
-      />
     </View>
   );
 }

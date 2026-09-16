@@ -7,3 +7,4 @@ export const questionDataContext = createContext();
 export const allCoursesContext = createContext();
 export const userDetailsContext = createContext();
 export const LevelContext = createContext();
+export const aiCreditsContext = createContext();

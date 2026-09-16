@@ -22,6 +22,7 @@ import SafeScreen from "../../components/SafeScreen";
 import PageTransition from "../../components/PageTransition";
 import colors from "../../constants/colors";
 import { userDetailsContext } from "../../context/context";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 // --- Animated Option Component ---
 const AnimatedOption = ({ item, isSelected, isChecked, isCorrectOption, onSelect }) => {
@@ -102,7 +103,7 @@ export default function AIQuizScreen() {
           setQuestions(parsed.quiz || []);
           setIsDailyChallenge(parsed.isDailyChallenge || false);
         } else {
-          Alert.alert("Error", "No quiz template found.");
+          CustomAlert.alert("Error", "No quiz template found.");
           router.back();
         }
       } catch (err) {
@@ -136,7 +137,7 @@ export default function AIQuizScreen() {
   );
 
   const goBack = () => {
-    Alert.alert(
+    CustomAlert.alert(
       "Confirm Exit",
       "Are you sure you want to exit the quiz? Your current progress will be lost.",
       [

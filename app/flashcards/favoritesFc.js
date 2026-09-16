@@ -5,7 +5,7 @@ import { Pressable, View, Text } from "react-native";
 import Favorites from "../../components/Favorites";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
-import { BannerAdComponent } from "../../services/AdManager";
+
 
 export default function FavoritesFc() {
   const router = useRouter();
@@ -57,7 +57,7 @@ export default function FavoritesFc() {
           </View>
         </View>
 
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

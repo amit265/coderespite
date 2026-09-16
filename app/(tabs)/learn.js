@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useRef } from "react";
-import { Image, Text, View, Animated, Pressable, TouchableOpacity } from "react-native";
+import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
@@ -10,7 +10,7 @@ import { adConfigContext, allCoursesContext, userDetailsContext } from "../../co
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import { NativeAdComponent } from "../../services/AdManager";
 import AsyncStorage from "../../services/storage";
-import { Alert } from "react-native";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 // --- New Animated Card Component ---
 const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
@@ -165,7 +165,7 @@ export default function Learn() {
   };
 
   const handleDeleteCourse = (course) => {
-    Alert.alert(
+    CustomAlert.alert(
       "Delete Course",
       `Are you sure you want to delete "${course.title}"? This cannot be undone.`,
       [
@@ -264,7 +264,7 @@ export default function Learn() {
                     onPress={() => {
                       const { setEnrolledPath } = require('../../services/userStorage');
                       setEnrolledPath(path.id);
-                      Alert.alert("Enrolled!", `You are now enrolled in the ${path.title} path.`);
+                      CustomAlert.alert("Enrolled!", `You are now enrolled in the ${path.title} path.`);
                       // Find first course in path
                       const firstCourse = allCourses.find(c => c.id === path.courses[0]);
                       if (firstCourse) {

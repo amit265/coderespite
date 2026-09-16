@@ -7,27 +7,30 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import * as Linking from "expo-linking";
+import GlobalAlertComponent, { globalAlertRef } from "../components/shared/GlobalAlert";
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack, SplashScreen } from 'expo-router';
 import { requestTrackingPermission } from "../services/trackingInit";
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Platform, StatusBar, View, Text, TouchableOpacity, Linking, useWindowDimensions } from 'react-native';
+import { Platform, StatusBar, View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import analytics from '@react-native-firebase/analytics';
 import { initializeMobileAds } from "../services/adInit";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import ErrorFallback from "../components/ErrorFallback";
-import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, userDetailsContext } from "../context/context";
-import AdManager from "../services/AdManager";
+import { adConfigContext, allCoursesContext, favoritesContext, LevelContext, userDetailsContext, aiCreditsContext } from "../context/context";
+import AdManager, { useRewardedAdLoader, GlobalSmartBanner } from "../services/AdManager";
+import { getAdFreeRemainingMs } from "../services/adFreeService";
 import { getUserData, setUserData } from "../services/userStorage";
 import './global.css';
 import { EmojiText } from "../constants/constants";
 import { useUpdateChecker } from "../hooks/useUpdateChecker";
 import { initNotifications } from "../services/notificationService";
 import UpdateModal from "../components/UpdateModal";
-import { initPurchases } from "../services/purchasesService";
+import { getAiCredits } from "../services/aiCreditsService";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -67,7 +70,50 @@ export default function RootLayout() {
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
   const [isConnected, setIsConnected] = useState(true);
+  const [clickCount, setClickCount] = useState(1);
+
+  const { isLoaded: isRewardedLoaded, isEarnedReward, load: loadRewarded, show: showRewarded } = useRewardedAdLoader();
+  const [onAdRewardSuccess, setOnAdRewardSuccess] = useState(null);
+
+  useEffect(() => {
+    if (!isRewardedLoaded) {
+      loadRewarded();
+    }
+  }, [isRewardedLoaded, loadRewarded]);
+
+  useEffect(() => {
+    if (isEarnedReward && onAdRewardSuccess) {
+      onAdRewardSuccess();
+      setOnAdRewardSuccess(null);
+    }
+  }, [isEarnedReward, onAdRewardSuccess]);
+
+  const [isAdFreeSessionActive, setIsAdFreeSessionActive] = useState(false);
+
+  useEffect(() => {
+    const checkAdFree = async () => {
+      const ms = await getAdFreeRemainingMs();
+      setIsAdFreeSessionActive(ms > 0);
+    };
+    checkAdFree();
+    const interval = setInterval(checkAdFree, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const showRewardedAd = useCallback((onSuccess) => {
+    if (isRewardedLoaded) {
+      setOnAdRewardSuccess(() => onSuccess);
+      showRewarded();
+    } else {
+      import('../components/shared/GlobalAlert').then(({ CustomAlert }) => {
+        CustomAlert.alert("Ad loading", "The rewarded video is still loading. Please try again in a few seconds.");
+      });
+      loadRewarded();
+    }
+  }, [isRewardedLoaded, showRewarded, loadRewarded]);
+
   const [favorites, setFavorites] = useState([]);
+  const [aiCredits, setAiCredits] = useState(5);
 
   useEffect(() => {
     const loadFavorites = async () => {
@@ -82,7 +128,6 @@ export default function RootLayout() {
     };
     loadFavorites();
   }, []);
-  const [clickCount, setClickCount] = useState(1);
   const [allCourses, setAllCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState([]);
   const [selectedModule, setSelectedModule] = useState([]);
@@ -98,7 +143,6 @@ export default function RootLayout() {
 
   useEffect(() => {
     initNotifications();
-    initPurchases();
   }, []);
 
   const { width: windowWidth } = useWindowDimensions();
@@ -106,8 +150,8 @@ export default function RootLayout() {
   const isTablet = Platform.OS !== "web" && windowWidth >= 768;
 
   const adConfigValue = useMemo(
-    () => ({ adConfig, setAdConfig, clickCount, setClickCount, adsReady }),
-    [clickCount, adConfig, adsReady]
+    () => ({ adConfig, setAdConfig, clickCount, setClickCount, adsReady, isRewardedLoaded, showRewardedAd, isAdFreeSessionActive }),
+    [clickCount, adConfig, adsReady, isRewardedLoaded, showRewardedAd, isAdFreeSessionActive]
   )
   const favoritesValue = useMemo(() => ({ favorites, setFavorites }), [favorites])
 
@@ -160,18 +204,20 @@ export default function RootLayout() {
     load();
   }, [update]);
 
+  // Load AI credits on startup
   useEffect(() => {
-    if (userData?.profile?.isPro) {
-      setAdConfig(prev => ({
-        ...prev,
-        showAds: false,
-        showInterstitialAds: false,
-        showAppOpenAds: false,
-        showNativeAds: false,
-        showBannerAds: false,
-      }));
-    }
-  }, [userData?.profile?.isPro]);
+    getAiCredits().then(setAiCredits);
+  }, []);
+
+  const refreshCredits = async () => {
+    const c = await getAiCredits();
+    setAiCredits(c);
+  };
+
+  const aiCreditsValue = useMemo(
+    () => ({ credits: aiCredits, setCredits: setAiCredits, refreshCredits }),
+    [aiCredits]
+  );
 
 
   // Update AsyncStorage + context state
@@ -357,12 +403,13 @@ export default function RootLayout() {
         <adConfigContext.Provider value={adConfigValue}>
           <PaperProvider>
             <LevelContext.Provider value={{ levelLoading, lastShownLevel, setLastShownLevel, updateLastShownLevel }}>
-
-              <userDetailsContext.Provider value={value}>
-                <favoritesContext.Provider value={favoritesValue}>
-                  <allCoursesContext.Provider value={allCoursesValue}>
+              <aiCreditsContext.Provider value={aiCreditsValue}>
+                <userDetailsContext.Provider value={value}>
+                  <favoritesContext.Provider value={favoritesValue}>
+                    <allCoursesContext.Provider value={allCoursesValue}>
                     <StatusBar backgroundColor="#CBE7F7" barStyle="dark-content" hidden={false} />
                     <AdManager />
+                    <GlobalAlertComponent ref={globalAlertRef} />
                     <UpdateModal
                       visible={updateAvailable}
                       changelog={changelog}
@@ -508,6 +555,7 @@ export default function RootLayout() {
                               <View style={{ flex: 1 }}>
                                 <Stack screenOptions={{ headerShown: false, gestureEnabled: true, fullScreenGestureEnabled: true }} />
                               </View>
+                              <GlobalSmartBanner />
                             </View>
                           </View>
                         </View>
@@ -538,17 +586,20 @@ export default function RootLayout() {
                             <View style={{ flex: 1 }}>
                               <Stack screenOptions={{ headerShown: false, gestureEnabled: true, fullScreenGestureEnabled: true }} />
                             </View>
+                            <GlobalSmartBanner />
                           </View>
                         </View>
                       )
                     ) : (
                       <View style={{ flex: 1 }}>
                         <Stack screenOptions={{ headerShown: false, gestureEnabled: true, fullScreenGestureEnabled: true }} />
+                        <GlobalSmartBanner />
                       </View>
                     )}
-                  </allCoursesContext.Provider>
-                </favoritesContext.Provider>
-              </userDetailsContext.Provider>
+                    </allCoursesContext.Provider>
+                  </favoritesContext.Provider>
+                </userDetailsContext.Provider>
+              </aiCreditsContext.Provider>
             </LevelContext.Provider>
           </PaperProvider>
         </adConfigContext.Provider>

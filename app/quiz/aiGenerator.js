@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,18 +17,32 @@ import SafeScreen from "../../components/SafeScreen";
 import PageTransition from "../../components/PageTransition";
 import colors from "../../constants/colors";
 import { generateQuizWithGroq, getGroqApiKey } from "../../services/groqService";
+import { deductAiCredit } from "../../services/aiCreditsService";
+import { aiCreditsContext } from "../../context/context";
+import AiCreditsModal from "../../components/AiCreditsModal";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 export default function AIGenerator() {
   const router = useRouter();
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showCreditsModal, setShowCreditsModal] = useState(false);
+  const { credits, refreshCredits } = useContext(aiCreditsContext);
 
   const handleGenerate = async () => {
     const cleanTopic = topic.trim();
     if (!cleanTopic) {
-      Alert.alert("Topic Required", "Please enter a topic or select one below.");
+      CustomAlert.alert("Topic Required", "Please enter a topic or select one below.");
       return;
     }
+
+    // Check AI credits before generating
+    const success = await deductAiCredit();
+    if (!success) {
+      setShowCreditsModal(true);
+      return;
+    }
+    await refreshCredits();
 
     setLoading(true);
     try {
@@ -47,7 +61,7 @@ export default function AIGenerator() {
         throw new Error("Empty quiz generated");
       }
     } catch (error) {
-      Alert.alert(
+      CustomAlert.alert(
         "AI Generation Issue",
         "We encountered an issue with the Groq API key or network. Please verify or update your key in the AI Configuration Guide under Settings.",
         [
@@ -65,12 +79,18 @@ export default function AIGenerator() {
   };
 
   return (
-    <PageTransition>
-      <SafeScreen>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Pressable onPress={() => router.back()} style={styles.backButton}>
-              <Ionicons name="arrow-back" size={28} color="black" />
+    <>
+      <AiCreditsModal
+        visible={showCreditsModal}
+        onClose={() => setShowCreditsModal(false)}
+        onCreditsAdded={refreshCredits}
+      />
+      <PageTransition>
+        <SafeScreen>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <Pressable onPress={() => router.back()} style={styles.backButton}>
+                <Ionicons name="arrow-back" size={28} color="black" />
             </Pressable>
             <Text style={styles.headerTitle}>🤖 AI Quiz Generator</Text>
             <View style={{ width: 28 }} />
@@ -111,9 +131,17 @@ export default function AIGenerator() {
                 <Text style={styles.loadingText}>Meowgrammer is compiling your quiz... 🐾</Text>
               </View>
             ) : (
-              <TouchableOpacity style={styles.generateBtn} onPress={handleGenerate}>
-                <Text style={styles.generateBtnText}>Generate Custom Quiz 🚀</Text>
-              </TouchableOpacity>
+              <View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginBottom: 8 }}>
+                  <Ionicons name="flash" size={14} color="#8B5CF6" />
+                  <Text style={{ fontFamily: 'nunito', fontSize: 13, color: '#6B7280' }}>
+                    {'AI Credits: '}<Text style={{ fontFamily: 'nunito-bold', color: '#8B5CF6' }}>{credits}</Text>{' / 10'}
+                  </Text>
+                </View>
+                <TouchableOpacity style={styles.generateBtn} onPress={handleGenerate}>
+                  <Text style={styles.generateBtnText}>Generate Custom Quiz 🚀</Text>
+                </TouchableOpacity>
+              </View>
             )}
 
             <View style={[styles.card, { backgroundColor: "#FFFBEB", borderColor: "#FDE68A", borderWidth: 1, marginTop: 24, padding: 16 }]}>
@@ -131,6 +159,7 @@ export default function AIGenerator() {
         </View>
       </SafeScreen>
     </PageTransition>
+  </>
   );
 }
 

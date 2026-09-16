@@ -7,7 +7,7 @@ import PageTransition from "../../../../components/PageTransition";
 import SafeScreen from "../../../../components/SafeScreen";
 import colors from "../../../../constants/colors";
 import { allCoursesContext } from "../../../../context/context";
-import { BannerAdComponent } from "../../../../services/AdManager";
+
 
 export default function FlashcardList() {
   const { moduleId } = useLocalSearchParams();
@@ -126,7 +126,7 @@ export default function FlashcardList() {
           </View>
         </View>
 
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

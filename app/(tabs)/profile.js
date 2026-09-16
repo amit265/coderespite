@@ -1,19 +1,18 @@
 import { useRouter } from "expo-router";
 import { useContext, useEffect, useState, useRef, useMemo } from "react";
-import { Modal, ScrollView, Text, View, Animated, Platform, TouchableOpacity } from "react-native";
+import { Modal, ScrollView, Text, View, Animated, Platform, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import ProgressBar from "../../components/home/ProgressBar";
 import PageTransition from "../../components/PageTransition";
 import ProfileModal from "../../components/ProfileModal";
 import QuickStats from "../../components/QuickStats";
 import SafeScreen from "../../components/SafeScreen";
-import Button from "../../components/shared/Button";
 import UserCard from "../../components/UserCard";
 import StreakHeatmap from "../../components/StreakHeatmap";
+import PowerUps from "../../components/PowerUps";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
-import { userDetailsContext } from "../../context/context";
-import { uploadAllData } from "../../services/uploadData";
-import { clearAllData, logAllAsyncStorage } from "../../services/userStorage";
-
+import { userDetailsContext, aiCreditsContext } from "../../context/context";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 // --- Helper for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -51,11 +50,10 @@ const FadeInSection = ({ children, delay = 0 }) => {
 };
 
 export default function Profile() {
-  const { userData } = useContext(userDetailsContext);
+  const { userData, updateUser } = useContext(userDetailsContext);
+  const { credits: aiCredits, setCredits: setAiCredits, refreshCredits } = useContext(aiCreditsContext);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const show = false; // Dev toggle
-
   const heatmapData = useMemo(() => generateLastNDaysData(userData?.progress, userData?.activityLog), [userData?.progress, userData?.activityLog]);
 
   useEffect(() => {
@@ -72,12 +70,16 @@ export default function Profile() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 120 }} // Added padding for floating tabs
         >
-          {/* 1. Title */}
+          {/* 1. Title & Settings */}
           <FadeInSection delay={0}>
-            <View>
-              <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 6 }}>
+              <View style={{ width: 32 }} />
+              <Text className="text-2xl font-quicksand-bold text-black text-center">
                 Profile
               </Text>
+              <TouchableOpacity onPress={() => router.push('/settings')} hitSlop={15}>
+                <Ionicons name="settings-sharp" size={26} color="#6B7280" />
+              </TouchableOpacity>
             </View>
           </FadeInSection>
 
@@ -108,44 +110,13 @@ export default function Profile() {
                 </View>
               </View>
               <StreakHeatmap data={heatmapData} />
-              
-              <TouchableOpacity
-                onPress={() => {
-                  const { showRewardedAd } = require("../../services/AdManager");
-                  const { addStreakFreeze } = require("../../services/userStorage");
-                  const { Alert } = require("react-native");
-                  
-                  // Optional: Show loading state here if we wanted
-                  showRewardedAd(
-                    async () => {
-                      await addStreakFreeze(1);
-                      if (updateUser) {
-                        updateUser(prev => {
-                          if (!prev.streak) prev.streak = { currentStreak: 0, freezes: 0 };
-                          prev.streak.freezes = (prev.streak.freezes || 0) + 1;
-                          return { ...prev };
-                        });
-                      }
-                      Alert.alert("Reward Earned! ❄️", "You've earned 1 Streak Freeze! This will automatically protect your streak if you miss a day.");
-                    },
-                    () => {}
-                  );
-                }}
-                style={{
-                  marginTop: 16,
-                  backgroundColor: "#EFF6FF",
-                  padding: 12,
-                  borderRadius: 12,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderWidth: 1,
-                  borderColor: "#BFDBFE"
-                }}
-              >
-                <Text style={{ fontSize: 16, marginRight: 8 }}>📺</Text>
-                <Text style={{ fontFamily: "nunito-bold", color: "#1D4ED8" }}>Watch Ad to Earn a Freeze ❄️</Text>
-              </TouchableOpacity>
+            </View>
+          </FadeInSection>
+
+          {/* AI Credits & Power Ups */}
+          <FadeInSection delay={280}>
+            <View className="px-4 mt-2">
+              <PowerUps credits={aiCredits} refreshCredits={refreshCredits} />
             </View>
           </FadeInSection>
 
@@ -156,55 +127,35 @@ export default function Profile() {
             </View>
           </FadeInSection>
 
-          {/* Dev Tools (Conditionally Rendered) */}
-          {show && (
-            <View>
-              <FadeInSection delay={400}>
-                <View className="px-4">
-                  <Button text={"Clear all data"} type onPress={clearAllData} />
-                </View>
-              </FadeInSection>
-              <FadeInSection delay={450}>
-                 <View className="px-4">
-                  <Button text={"log all data"} type onPress={logAllAsyncStorage} />
-                </View>
-              </FadeInSection>
-               <FadeInSection delay={500}>
-                <View className="px-4">
-                  <Button text={"upload all data"} type onPress={uploadAllData} />
-                </View>
-              </FadeInSection>
-            </View>
-          )}
-
-          {/* 5. Action Buttons */}
+          {/* 5. Action Menu */}
           <FadeInSection delay={350}>
-            <View className="px-4 mt-2">
-              <Button
-                text={"Badges & Achievements 🏆"}
-                type
-                onPress={() => router.push("/badges")}
-              />
-            </View>
-          </FadeInSection>
+            <View style={styles.menuContainer}>
+              <Text style={styles.menuTitle}>Learning & Achievements</Text>
+              <View style={styles.menuCard}>
+                <TouchableOpacity style={styles.menuItem} onPress={() => router.push("/badges")} activeOpacity={0.7}>
+                  <View style={[styles.menuIconWrap, { backgroundColor: '#FEF3C7' }]}>
+                    <Ionicons name="trophy" size={20} color="#F59E0B" />
+                  </View>
+                  <Text style={styles.menuItemText}>Badges & Achievements</Text>
+                  <Ionicons name="chevron-forward" size={20} color="#D1D5DB" />
+                </TouchableOpacity>
 
-          <FadeInSection delay={400}>
-            <View className="px-4 mt-4">
-              <Button
-                text={"Quiz History"}
-                type
-                onPress={() => router.push("/quizHistory")}
-              />
-            </View>
-          </FadeInSection>
+                <TouchableOpacity style={styles.menuItem} onPress={() => router.push("/quizHistory")} activeOpacity={0.7}>
+                  <View style={[styles.menuIconWrap, { backgroundColor: '#E0E7FF' }]}>
+                    <Ionicons name="list" size={20} color="#6366F1" />
+                  </View>
+                  <Text style={styles.menuItemText}>Quiz History</Text>
+                  <Ionicons name="chevron-forward" size={20} color="#D1D5DB" />
+                </TouchableOpacity>
 
-          <FadeInSection delay={500}>
-            <View className="px-4" style={{ marginBottom: 20 }}>
-              <Button
-                text={"Favorite FlashCards"}
-                type
-                onPress={() => router.push("/flashcards/favoritesFc")}
-              />
+                <TouchableOpacity style={[styles.menuItem, { borderBottomWidth: 0 }]} onPress={() => router.push("/flashcards/favoritesFc")} activeOpacity={0.7}>
+                  <View style={[styles.menuIconWrap, { backgroundColor: '#FCE7F3' }]}>
+                    <Ionicons name="star" size={20} color="#EC4899" />
+                  </View>
+                  <Text style={styles.menuItemText}>Favorite Flashcards</Text>
+                  <Ionicons name="chevron-forward" size={20} color="#D1D5DB" />
+                </TouchableOpacity>
+              </View>
             </View>
           </FadeInSection>
 
@@ -245,3 +196,53 @@ export default function Profile() {
     </PageTransition>
   );
 }
+
+const styles = StyleSheet.create({
+  menuContainer: {
+    paddingHorizontal: 16,
+    marginTop: 8,
+    marginBottom: 20,
+  },
+  menuTitle: {
+    fontFamily: 'quicksand-bold',
+    fontSize: 14,
+    color: '#6B7280',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 8,
+    marginLeft: 4
+  },
+  menuCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#F3F4F6',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 4,
+    elevation: 1,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#F3F4F6',
+  },
+  menuIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 14,
+  },
+  menuItemText: {
+    flex: 1,
+    fontFamily: 'nunito-bold',
+    fontSize: 16,
+    color: '#374151',
+  }
+});

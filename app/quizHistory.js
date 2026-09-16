@@ -7,7 +7,7 @@ import QuizHistoryCard from "../components/QuizHistoryCard";
 import SafeScreen from "../components/SafeScreen";
 import Button from "../components/shared/Button";
 import colors from "../constants/colors";
-import { BannerAdComponent } from "../services/AdManager";
+
 import PageTransition from "../components/PageTransition";
 
 // --- Helper for Content Entrance ---
@@ -138,7 +138,7 @@ export default function QuizHistory() {
         </View>
 
         {/* Bottom Banner Ad */}
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

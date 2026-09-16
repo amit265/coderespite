@@ -111,24 +111,12 @@ export default function TabsLayout() {
               case "index":
                 iconComponent = <AntDesign name="home" size={24} color={color} />;
                 break;
-              case "learn":
+              case "courses":
                 iconComponent = <AntDesign name="book" size={24} color={color} />;
                 break;
-              case "flashcards":
-                iconComponent = (
-                  <MaterialCommunityIcons
-                    name="cards-outline"
-                    size={26}
-                    color={color}
-                  />
-                );
+              case "practice":
+                iconComponent = <Ionicons name="code-slash" size={26} color={color} />;
                 break;
-              case "quiz":
-                iconComponent = (
-                  <AntDesign name="questioncircleo" size={24} color={color} />
-                );
-                break;
-
               case "profile":
                 iconComponent = (
                   <Ionicons
@@ -153,63 +141,17 @@ export default function TabsLayout() {
           },
         })}
       >
-        <Tabs.Screen name="learn" options={{ title: "Learn" }} listeners={webTabListener} />
-        <Tabs.Screen name="flashcards" options={{ title: "Flashcards" }} listeners={webTabListener} />
         <Tabs.Screen name="index" options={{ title: "Home" }} />
-
-        <Tabs.Screen name="quiz" options={{ title: "Quiz" }} listeners={webTabListener} />
+        <Tabs.Screen name="courses" options={{ title: "Courses" }} listeners={webTabListener} />
+        <Tabs.Screen name="practice" options={{ title: "Practice" }} listeners={webTabListener} />
         <Tabs.Screen name="profile" options={{ title: "Profile" }} listeners={webTabListener} />
+        
+        {/* Hidden legacy tabs (still route-able but hidden from tab bar) */}
+        <Tabs.Screen name="learn" options={{ href: null }} />
+        <Tabs.Screen name="flashcards" options={{ href: null }} />
+        <Tabs.Screen name="quiz" options={{ href: null }} />
       </Tabs>
 
-      {/* Floating Action Button (FAB) for Ask Meowgrammer Chat */}
-      <TouchableOpacity
-        onPress={() => router.push("/chat")}
-        activeOpacity={0.8}
-        style={{
-          position: "absolute",
-          bottom: tabBarBottom + tabBarHeight + 20, // Positioned safely above the tab bar
-          right: 20,
-          backgroundColor: "#8B5CF6", // matching the AI color theme
-          width: 56,
-          height: 56,
-          borderRadius: 28,
-          justifyContent: "center",
-          alignItems: "center",
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.3,
-          shadowRadius: 6,
-          elevation: 8,
-          zIndex: 999, // Ensure it floats above everything
-        }}
-      >
-        <Ionicons name="chatbubbles" size={28} color="white" />
-      </TouchableOpacity>
-
-      {/* Floating Action Button (FAB) for Code Playground */}
-      <TouchableOpacity
-        onPress={() => router.push("/playground")}
-        activeOpacity={0.8}
-        style={{
-          position: "absolute",
-          bottom: tabBarBottom + tabBarHeight + 20,
-          left: 20,
-          backgroundColor: "#28a745",
-          width: 56,
-          height: 56,
-          borderRadius: 28,
-          justifyContent: "center",
-          alignItems: "center",
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.3,
-          shadowRadius: 6,
-          elevation: 8,
-          zIndex: 999,
-        }}
-      >
-        <Ionicons name="code-slash" size={28} color="white" />
-      </TouchableOpacity>
 
       <Modal
         animationType="fade"

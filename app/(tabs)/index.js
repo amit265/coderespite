@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Animated, BackHandler, Modal, View, Platform, TouchableOpacity, Text } from "react-native";
+import { Animated, BackHandler, Modal, View, Platform, TouchableOpacity, Text, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import ContinueCard from "../../components/home/ContinueCard";
@@ -20,10 +20,14 @@ import {
   allCoursesContext,
   LevelContext,
   userDetailsContext,
+  aiCreditsContext,
 } from "../../context/context";
 import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import RefreshWrapper from "../../components/shared/RefreshWrapper"; // 👈 Import Wrapper
-import { NativeAdComponent } from "../../services/AdManager";
+import { NativeAdComponent, showRewardedAd } from "../../services/AdManager";
+import { getAdFreeRemainingMs, activateAdFree } from "../../services/adFreeService";
+import PowerUps from "../../components/PowerUps";
+import { addCreditsFromAd } from "../../services/aiCreditsService";
 
 // --- Helper Component for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -72,6 +76,11 @@ export default function Home() {
   const { allCourses, setSelectedModule } = useContext(allCoursesContext);
   const { lastShownLevel, updateLastShownLevel, levelLoading } =
     useContext(LevelContext);
+  const { credits: aiCredits, refreshCredits } = useContext(aiCreditsContext);
+
+  const refreshCreditsFromHome = async () => {
+    if (refreshCredits) await refreshCredits();
+  };
 
   const router = useRouter();
 
@@ -173,7 +182,7 @@ export default function Home() {
 
           <FadeInSection delay={250}>
             <TouchableOpacity
-              onPress={() => router.push("/chat")}
+              onPress={() => router.push("/interview")}
               className="bg-white mx-4 mb-4 p-6 rounded-2xl shadow-md border border-gray-200 flex-row items-center"
               style={{ gap: 14 }}
             >
@@ -181,24 +190,29 @@ export default function Home() {
                 width: 52,
                 height: 52,
                 borderRadius: 26,
-                backgroundColor: "rgba(139, 92, 246, 0.2)",
+                backgroundColor: "rgba(19, 47, 148, 0.1)",
                 alignItems: "center",
                 justifyContent: "center",
                 borderWidth: 1,
-                borderColor: "rgba(139, 92, 246, 0.4)",
+                borderColor: "rgba(19, 47, 148, 0.3)",
               }}>
-                <Text style={{ fontSize: 26 }}>🐾</Text>
+                <Text style={{ fontSize: 26 }}>🎤</Text>
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={{ color: "#1F2937", fontSize: 18, fontFamily: "nunito-bold", marginBottom: 3 }}>
-                  Ask Meowgrammer
+                  Interview Practice AI
                 </Text>
                 <Text style={{ color: "#4B5563", fontSize: 13, fontFamily: "nunito" }}>
-                  Your AI coding tutor is ready to help!
+                  Mock interviews and Q&A with Meowgrammer.
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={24} color="#9CA3AF" />
             </TouchableOpacity>
+          </FadeInSection>
+
+          {/* Ad-Free Banner */}
+          <FadeInSection delay={280}>
+            <PowerUps credits={aiCredits} refreshCredits={refreshCreditsFromHome} />
           </FadeInSection>
 
           <FadeInSection delay={300}>
@@ -265,3 +279,4 @@ export default function Home() {
     </PageTransition>
   );
 }
+

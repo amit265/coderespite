@@ -8,40 +8,68 @@ import {
   InterstitialAd,
   RewardedAd,
   RewardedAdEventType,
+  useRewardedAd,
 } from "react-native-google-mobile-ads";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSegments } from "expo-router";
 import { adConfigContext } from "../context/context";
 import colors from "../constants/colors";
 
 const adUnits = {
   banner: {
-    android: process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/9531365889",
-    ios: process.env.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS || "ca-app-pub-7433519007687449/5570092969",
+    android: "ca-app-pub-7433519007687449/9531365889",
+    ios: "ca-app-pub-7433519007687449/5570092969",
   },
   interstitial: {
-    android: process.env.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/7195403622",
-    ios: process.env.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS || "ca-app-pub-7433519007687449/7733221875",
+    android: "ca-app-pub-7433519007687449/7195403622",
+    ios: "ca-app-pub-7433519007687449/7733221875",
   },
   appOpen: {
-    android: process.env.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/6961042869",
-    ios: process.env.EXPO_PUBLIC_ADMOB_APP_OPEN_UNIT_ID_IOS || "ca-app-pub-7433519007687449/1274315229",
+    android: "ca-app-pub-7433519007687449/6961042869",
+    ios: "ca-app-pub-7433519007687449/1274315229",
   },
   nativeAdvanced: {
-    android: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/3505013580",
-    ios: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS || "ca-app-pub-7433519007687449/8227570532",
+    android: "ca-app-pub-7433519007687449/3505013580",
+    ios: "ca-app-pub-7433519007687449/8227570532",
   },
   rewarded: {
-    android: process.env.EXPO_PUBLIC_ADMOB_REWARDED_UNIT_ID_ANDROID || "ca-app-pub-3940256099942544/5224354917", // Test id
-    ios: process.env.EXPO_PUBLIC_ADMOB_REWARDED_UNIT_ID_IOS || "ca-app-pub-3940256099942544/1712485313", // Test id
+    android: "ca-app-pub-7433519007687449/1432138727",
+    ios: "ca-app-pub-7433519007687449/2375528619",
   },
 };
 
 
+const testAdUnits = {
+  banner: {
+    android: "ca-app-pub-3940256099942544/6300978111",
+    ios: "ca-app-pub-3940256099942544/2934735716",
+  },
+  interstitial: {
+    android: "ca-app-pub-3940256099942544/1033173712",
+    ios: "ca-app-pub-3940256099942544/4411468910",
+  },
+  appOpen: {
+    android: "ca-app-pub-3940256099942544/9257395921",
+    ios: "ca-app-pub-3940256099942544/5575463023",
+  },
+  nativeAdvanced: {
+    android: "ca-app-pub-3940256099942544/2247696110",
+    ios: "ca-app-pub-3940256099942544/3986624511",
+  },
+  rewarded: {
+    android: "ca-app-pub-3940256099942544/5224354917",
+    ios: "ca-app-pub-3940256099942544/1712485313",
+  },
+};
+
 const getAdUnitId = (type) => {
+  const isDev = __DEV__;
+  const targetUnits = isDev ? testAdUnits : adUnits;
+  
   return Platform.select({
-    ios: adUnits[type].ios,
-    android: adUnits[type].android,
-    default: adUnits[type].android,
+    ios: targetUnits[type].ios,
+    android: targetUnits[type].android,
+    default: targetUnits[type].android,
   });
 };
 
@@ -50,29 +78,24 @@ let interstitialAd;
 let appOpenAd;
 
 const AdManager = () => {
-  const { adConfig, clickCount, adsReady } = useContext(adConfigContext);
+  const { adConfig, clickCount, adsReady, isAdFreeSessionActive } = useContext(adConfigContext);
   const interstitialJustShown = useRef(false);
   const appPauseCount = useRef(0);
 
   useEffect(() => {
     if (!adsReady || !adConfig?.showAds) return;
 
-    console.log("[Ads] App state listener active", {
-      appOpenAdFrequency: adConfig?.appOpenAdFrequency,
-      showAppOpenAds: adConfig?.showAppOpenAds,
-    });
+    console.log("[Ads] App state listener active");
 
     const subscription = AppState.addEventListener("change", (nextAppState) => {
-      console.log("[Ads] App state changed", nextAppState);
-
       if (nextAppState === "active" && !interstitialJustShown.current) {
         appPauseCount.current += 1;
-        console.log("[Ads] App open trigger check", {
-          appPauseCount: appPauseCount.current,
-          appOpenAdFrequency: adConfig?.appOpenAdFrequency,
-          showAppOpenAds: adConfig?.showAppOpenAds,
-          appOpenLoaded: appOpenAd?.loaded,
-        });
+
+        if (isAdFreeSessionActive) {
+          console.log("[Ads] Ad-free session active — skipping app open ad.");
+          interstitialJustShown.current = false;
+          return;
+        }
 
         if (
           appPauseCount.current % adConfig?.appOpenAdFrequency === 0 &&
@@ -87,16 +110,10 @@ const AdManager = () => {
     });
 
     return () => subscription.remove();
-  }, [adConfig, adsReady]);
+  }, [adConfig, adsReady, isAdFreeSessionActive]);
 
   useEffect(() => {
     if (!adsReady || !adConfig?.showAds) return;
-
-    console.log("[Ads] Interstitial trigger check", {
-      clickCount,
-      interstitialFrequency: adConfig?.interstitialFrequency,
-      showInterstitialAds: adConfig?.showInterstitialAds,
-    });
 
     if (
       clickCount > 0 &&
@@ -104,83 +121,47 @@ const AdManager = () => {
       adConfig?.interstitialFrequency &&
       clickCount % adConfig?.interstitialFrequency === 0
     ) {
+      if (isAdFreeSessionActive) {
+        console.log("[Ads] Ad-free session active — skipping interstitial.");
+        return;
+      }
       showInterstitialAd(adConfig);
     }
-  }, [clickCount, adConfig, adsReady]);
-
-  const isLoadingAds = useRef(false);
-  const loadAds = useCallback((config) => {
-    if (isLoadingAds.current) return;
-
-    isLoadingAds.current = true;
-    setTimeout(() => {
-      isLoadingAds.current = false;
-    }, 5000);
-
-    interstitialAd = InterstitialAd.createForAdRequest(
-      getAdUnitId("interstitial"),
-    );
-    appOpenAd = AppOpenAd.createForAdRequest(
-      getAdUnitId("appOpen"),
-    );
-
-    console.log("[Ads] Creating ad requests", {
-      interstitialUnitId: getAdUnitId("interstitial"),
-      appOpenUnitId: getAdUnitId("appOpen"),
-      showAds: config?.showAds,
-      showInterstitialAds: config?.showInterstitialAds,
-      showAppOpenAds: config?.showAppOpenAds,
-    });
-
-    interstitialAd.addAdEventListener(AdEventType.LOADED, () => {
-      console.log("[Ads] Interstitial loaded");
-    });
-
-    interstitialAd.addAdEventListener(AdEventType.OPENED, () => {
-      console.log("[Ads] Interstitial opened");
-    });
-
-    interstitialAd.addAdEventListener(AdEventType.CLOSED, () => {
-      console.log("[Ads] Interstitial closed, reloading");
-      interstitialJustShown.current = true;
-      interstitialAd.load();
-    });
-
-    interstitialAd.addAdEventListener(AdEventType.ERROR, (error) => {
-      console.error("[Ads] Interstitial error", error);
-    });
-
-    appOpenAd.addAdEventListener(AdEventType.LOADED, () => {
-      console.log("[Ads] App open ad loaded");
-    });
-
-    appOpenAd.addAdEventListener(AdEventType.OPENED, () => {
-      console.log("[Ads] App open ad opened");
-    });
-
-    interstitialAd.load();
-    console.log("[Ads] Interstitial load requested");
-
-    appOpenAd.addAdEventListener(AdEventType.CLOSED, () =>
-      setTimeout(() => {
-        console.log("[Ads] App open ad closed, reloading");
-        appOpenAd.load();
-      }, 3000),
-    );
-
-    appOpenAd.addAdEventListener(AdEventType.ERROR, (error) => {
-      console.error("[Ads] App open ad error", error);
-    });
-
-    appOpenAd.load();
-    console.log("[Ads] App open ad load requested");
-  }, [interstitialJustShown]);
+  }, [clickCount, adConfig, adsReady, isAdFreeSessionActive]);
 
   useEffect(() => {
     if (!adsReady || !adConfig?.showAds) return;
 
-    loadAds(adConfig);
-  }, [adConfig, adsReady, loadAds]);
+    interstitialAd = InterstitialAd.createForAdRequest(getAdUnitId("interstitial"));
+    appOpenAd = AppOpenAd.createForAdRequest(getAdUnitId("appOpen"));
+
+    const unsubI1 = interstitialAd.addAdEventListener(AdEventType.LOADED, () => console.log("[Ads] Interstitial loaded"));
+    const unsubI2 = interstitialAd.addAdEventListener(AdEventType.OPENED, () => console.log("[Ads] Interstitial opened"));
+    const unsubI3 = interstitialAd.addAdEventListener(AdEventType.CLOSED, () => {
+      console.log("[Ads] Interstitial closed, reloading");
+      interstitialJustShown.current = true;
+      interstitialAd.load();
+    });
+    const unsubI4 = interstitialAd.addAdEventListener(AdEventType.ERROR, (error) => console.error("[Ads] Interstitial error", error));
+
+    const unsubA1 = appOpenAd.addAdEventListener(AdEventType.LOADED, () => console.log("[Ads] App open ad loaded"));
+    const unsubA2 = appOpenAd.addAdEventListener(AdEventType.OPENED, () => console.log("[Ads] App open ad opened"));
+    const unsubA3 = appOpenAd.addAdEventListener(AdEventType.CLOSED, () => {
+      setTimeout(() => {
+        console.log("[Ads] App open ad closed, reloading");
+        appOpenAd.load();
+      }, 3000);
+    });
+    const unsubA4 = appOpenAd.addAdEventListener(AdEventType.ERROR, (error) => console.error("[Ads] App open ad error", error));
+
+    interstitialAd.load();
+    appOpenAd.load();
+
+    return () => {
+      unsubI1(); unsubI2(); unsubI3(); unsubI4();
+      unsubA1(); unsubA2(); unsubA3(); unsubA4();
+    };
+  }, [adConfig?.showAds, adsReady]);
 
   return null;
 };
@@ -189,7 +170,6 @@ export const showInterstitialAd = (adConfig) => {
   if (interstitialAd?.loaded && adConfig.showAds && adConfig.showInterstitialAds) {
     console.log("[Ads] showInterstitialAd invoked: showing interstitial");
     interstitialAd.show();
-    interstitialAd.load();
   } else {
     console.log("[Ads] showInterstitialAd invoked: interstitial not ready, loading");
     interstitialAd?.load();
@@ -220,13 +200,20 @@ export const showRewardedAd = (onEarnedReward, onClosed) => {
   rewarded.load();
 };
 
+export const useRewardedAdLoader = () => {
+  const unitId = getAdUnitId("rewarded");
+  return useRewardedAd(unitId, {
+    requestNonPersonalizedAdsOnly: true,
+  });
+};
+
 export const BannerAdComponent = ({ fixed = false }) => {
   if (!adConfigContext || !adConfigContext.Provider) return null;
-  const { adConfig, adsReady } = useContext(adConfigContext);
+  const { adConfig, adsReady, isAdFreeSessionActive } = useContext(adConfigContext);
   const [isAdLoaded, setIsAdLoaded] = useState(false);
   const insets = useSafeAreaInsets();
 
-  if (!adsReady || !adConfig.showAds || !adConfig.showBannerAds) return null;
+  if (!adsReady || !adConfig.showAds || !adConfig.showBannerAds || isAdFreeSessionActive) return null;
 
   const containerStyle = [
     {
@@ -257,6 +244,21 @@ export const BannerAdComponent = ({ fixed = false }) => {
         }}
         onAdFailedToLoad={(error) => console.error("Banner Ad Error:", error)}
       />
+    </View>
+  );
+};
+
+export const GlobalSmartBanner = () => {
+  const segments = useSegments();
+  
+  const mainTabs = ["index", "courses", "practice", "profile"];
+  const isMainTab = segments.length > 0 && segments[0] === "(tabs)" && mainTabs.includes(segments[1] || "index");
+  
+  if (isMainTab) return null;
+
+  return (
+    <View style={{ width: '100%' }}>
+      <BannerAdComponent fixed={false} />
     </View>
   );
 };

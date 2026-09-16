@@ -6,6 +6,7 @@ import { EmojiText } from '../constants/constants';
 import { updateUserData } from '../services/userStorage';
 import analytics from '@react-native-firebase/analytics';
 import LottieView from 'lottie-react-native';
+import { CustomAlert } from "../components/shared/GlobalAlert";
 
 const GOALS = [
   { id: 'web', label: 'Web Development', icon: '🌐' },
@@ -36,9 +37,9 @@ export default function Onboarding() {
   });
 
   const nextStep = () => {
-    if (step === 1 && !selections.goal) return Alert.alert('Wait!', 'Please select a goal.');
-    if (step === 2 && !selections.experience) return Alert.alert('Wait!', 'Please select your experience level.');
-    if (step === 3 && !selections.time) return Alert.alert('Wait!', 'Please select a daily goal.');
+    if (step === 1 && !selections.goal) return CustomAlert.alert('Wait!', 'Please select a goal.');
+    if (step === 2 && !selections.experience) return CustomAlert.alert('Wait!', 'Please select your experience level.');
+    if (step === 3 && !selections.time) return CustomAlert.alert('Wait!', 'Please select a daily goal.');
     
     if (step < 4) {
       setStep(step + 1);
@@ -67,7 +68,7 @@ export default function Onboarding() {
   const renderStep1 = () => (
     <View className="flex-1 w-full justify-center">
       <EmojiText className="text-3xl font-quicksand-bold text-center mb-8 text-[#0C1D59]">
-        What's your goal? 🎯
+        What&apos;s your goal? 🎯
       </EmojiText>
       <View className="gap-4">
         {GOALS.map(item => (
@@ -163,10 +164,10 @@ export default function Onboarding() {
         style={{ height: 200, width: 200, marginBottom: 20 }}
       />
       <EmojiText className="text-3xl font-quicksand-bold text-center mb-4 text-[#0C1D59]">
-        You're all set! 🚀
+        You&apos;re all set! 🚀
       </EmojiText>
       <Text className="text-lg font-nunito text-center text-gray-600 px-6">
-        We've personalized CodeRespite based on your goals. Let's start building your coding streak!
+        We&apos;ve personalized CodeRespite based on your goals. Let&apos;s start building your coding streak!
       </Text>
     </View>
   );

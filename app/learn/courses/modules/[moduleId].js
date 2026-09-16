@@ -21,7 +21,7 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../../context/context";
-import { BannerAdComponent } from "../../../../services/AdManager";
+
 
 export default function ModuleDetail() {
   const { width } = useWindowDimensions();
@@ -205,7 +205,7 @@ export default function ModuleDetail() {
         </View>
 
         {/* Bottom Banner Ad */}
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

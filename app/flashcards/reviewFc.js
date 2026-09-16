@@ -154,7 +154,7 @@ export default function SRSReviewScreen() {
         <SafeScreen>
           <View style={styles.emptyContainer}>
             <EmojiText style={{ fontSize: 60, marginBottom: 20 }}>🎉</EmojiText>
-            <Text style={styles.emptyTitle}>You're all caught up!</Text>
+            <Text style={styles.emptyTitle}>You&apos;re all caught up!</Text>
             <Text style={styles.emptySub}>
               No flashcards are currently due for review. Keep learning new courses to grow your spaced-repetition deck!
             </Text>

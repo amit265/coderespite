@@ -1,43 +1,48 @@
-import LottieView from "lottie-react-native";
 import React from "react";
-import { useWindowDimensions, StatusBar, StyleSheet, View, Text, Platform } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../constants/colors";
 
 const SplashScreenComponent = () => {
-  const { width, height } = useWindowDimensions();
-  const animWidth = Platform.OS === 'web' ? Math.min(width || 480, 480) : (width || 400);
-  const animHeight = Platform.OS === 'web' ? Math.min(height || 850, 850) : (height || 800);
-
   return (
-    <View style={styles.container}>
-      <LottieView
-        source={require("../assets/MainScene.json")}
-        autoPlay
-        loop={true}
-        style={[styles.animation, { width: animWidth, height: animHeight }]}
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          source={require("../assets/images/splashScreen.png")}
+          style={styles.image}
+          resizeMode="contain"
+        />
+      </View>
       <Text style={styles.brandingText}>● built by destyastudio.</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.BACKGROUND || "#fff",
+    backgroundColor: colors.BACKGROUND || "#CBE7F7",
     justifyContent: "center",
     alignItems: "center",
   },
-  animation: {
-    // Width and height will be set dynamically in render
+  imageContainer: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: 200,
+    height: 200,
   },
   brandingText: {
     position: "absolute",
-    bottom: 50,
+    bottom: 40,
     fontFamily: "monospace",
-    fontSize: 10,
-    color: "rgba(12, 29, 89, 0.5)",
+    fontSize: 11,
+    color: "rgba(12, 29, 89, 0.6)",
     letterSpacing: 1.5,
+    textAlign: "center",
   },
 });
 

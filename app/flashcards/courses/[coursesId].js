@@ -19,7 +19,7 @@ import {
   allCoursesContext,
   userDetailsContext,
 } from "../../../context/context";
-import { NativeAdComponent, BannerAdComponent } from "../../../services/AdManager";
+import { NativeAdComponent, } from "../../../services/AdManager";
 
 // --- Animated Module Item Component ---
 const AnimatedModuleItem = ({ item, index, onPress }) => {
@@ -173,7 +173,7 @@ export default function FlashcardModules() {
             />
           )}
         </View>
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );

@@ -13,6 +13,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/colors";
 import { EmojiText } from "../constants/constants";
+import { CustomAlert } from "./shared/GlobalAlert";
 
 export default function BadgeModal({ visible, onClose, badge }) {
   const scaleAnim = useRef(new Animated.Value(0.3)).current;
@@ -50,9 +51,9 @@ export default function BadgeModal({ visible, onClose, badge }) {
       if (Platform.OS === 'web') {
         if (navigator.clipboard) {
           await navigator.clipboard.writeText(badge.message);
-          Alert.alert("Achievement Copied! 📋", "Your coding achievement message is copied to clipboard!");
+          CustomAlert.alert("Achievement Copied! 📋", "Your coding achievement message is copied to clipboard!");
         } else {
-          Alert.alert("My Coding Achievement", badge.message);
+          CustomAlert.alert("My Coding Achievement", badge.message);
         }
         return;
       }

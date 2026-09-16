@@ -10,31 +10,22 @@ export default function UserCard({ userData, setShowModal }) {
 
   return (
     <View style={styles.card}>
-      <View style={styles.content}>
-        <View>
+      <Pressable onPress={() => setShowModal(true)} style={styles.content}>
+        <View style={styles.avatarWrap}>
           <Image
             source={getAvatarImage(profile?.avatar)}
             style={styles.avatar}
           />
-        </View>
-        <View style={styles.info}>
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Username: </Text>
-            <Text style={styles.value}>{profile?.name || "user"}</Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Level: </Text>
-            <Text style={styles.value}>{levelTitle}</Text>
+          <View style={styles.editBadge}>
+            <Feather name="edit-3" size={14} color="white" />
           </View>
         </View>
-
-        <Pressable
-          style={styles.editButton}
-          onPress={() => setShowModal(true)}
-        >
-          <Feather name="edit-3" size={24} color="black" />
-        </Pressable>
-      </View>
+        
+        <Text style={styles.name}>{profile?.name || "user"}</Text>
+        <View style={styles.levelBadge}>
+          <Text style={styles.levelText}>{levelTitle}</Text>
+        </View>
+      </Pressable>
     </View>
   );
 }
@@ -54,40 +45,49 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   content: {
-    flexDirection: "row",
-    gap: 20,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "white",
-    borderRadius: 12,
+    borderRadius: 16,
     position: 'relative'
   },
+  avatarWrap: {
+    position: 'relative',
+    marginBottom: 12,
+  },
   avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 3,
+    borderColor: '#F3F4F6'
   },
-  info: {
-    justifyContent: "center",
-    flex: 1,
+  editBadge: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: '#8B5CF6',
+    width: 28, height: 28, borderRadius: 14,
+    alignItems: 'center', justifyContent: 'center',
+    borderWidth: 2, borderColor: 'white'
   },
-  infoRow: {
-    flexDirection: "column",
-    alignItems: "start",
-    marginBottom: 4,
+  name: {
+    fontFamily: 'quicksand-bold',
+    fontSize: 22,
+    color: '#1F2937',
+    marginBottom: 6,
   },
-  label: {
+  levelBadge: {
+    backgroundColor: '#F5F3FF',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#EDE9FE'
+  },
+  levelText: {
+    fontFamily: 'nunito-bold',
     fontSize: 14,
-    fontFamily: "nunito-bold",
-    color: "#6b7280",
-  },
-  value: {
-    fontSize: 16,
-    fontFamily: "nunito",
-    color: "#1f2937",
-  },
-  editButton: {
-    position: "absolute",
-    right: -10,
-    top: -10,
-    padding: 12,
+    color: '#7C3AED',
   }
 });

@@ -48,7 +48,7 @@ export default function BadgesScreen() {
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
           <Text style={styles.subtitle}>
-            You've unlocked {unlockedIds.length} out of {allBadges.length} badges!
+            You&apos;ve unlocked {unlockedIds.length} out of {allBadges.length} badges!
           </Text>
           
           <View style={styles.grid}>

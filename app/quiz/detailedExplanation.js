@@ -17,6 +17,7 @@ import colors from "../../constants/colors";
 import { getGroqApiKey, getDetailedExplanationWithGroq } from "../../services/groqService";
 import { EmojiText } from "../../constants/constants";
 import Markdown from "react-native-markdown-display";
+import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 export default function DetailedExplanation() {
   const { question, userAnswer, correctAnswer, explanation } = useLocalSearchParams();
@@ -48,7 +49,7 @@ export default function DetailedExplanation() {
       );
       setAiExplanation(result);
     } catch (error) {
-      Alert.alert(
+      CustomAlert.alert(
         "AI Explanation Issue",
         "We encountered an issue fetching the AI explanation. Please check your network or configure your own free Groq API Key in Settings.",
         [
@@ -192,7 +193,7 @@ export default function DetailedExplanation() {
                     ⚠️ AI responses are generated dynamically and may contain errors. Please verify critical coding facts.
                   </Text>
                   <TouchableOpacity 
-                    onPress={() => Alert.alert("Report AI Content", "Thank you! This output has been flagged for manual review and tuning.")}
+                    onPress={() => CustomAlert.alert("Report AI Content", "Thank you! This output has been flagged for manual review and tuning.")}
                     style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
                   >
                     <Ionicons name="flag-outline" size={14} color="#D97706" />

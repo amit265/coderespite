@@ -11,24 +11,22 @@ import {
   Alert,
 } from "react-native";
 import AsyncStorage from "../services/storage";
-import { getMoreApps } from "../services/moreAppsService";
+import appData from "../assets/data/appData.json";
 import colors from "../constants/colors";
 import { Emoji, EmojiText } from "../constants/constants";
 import { userDetailsContext } from "../context/context";
+import { CustomAlert } from "./shared/GlobalAlert";
 
 export default function MoreApps() {
-  const [apps, setApps] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { gainXP } = useContext(userDetailsContext);
 
-  useEffect(() => {
-    const fetchApps = async () => {
-      const data = await getMoreApps();
-      setApps(data);
-      setLoading(false);
-    };
-    fetchApps();
-  }, []);
+  const apps = appData.filter(app => {
+    if (!app.show) return false;
+    if (Platform.OS === 'ios' && !app.isAvailableOnIOS) return false;
+    return true;
+  });
+
+  if (apps.length === 0) return null;
 
   const openApp = async (app) => {
     const url = Platform.OS === 'ios' ? app.iosUrl : app.androidUrl;
@@ -41,7 +39,7 @@ export default function MoreApps() {
           await AsyncStorage.setItem(key, "true");
           if (gainXP) {
             await gainXP(50);
-            Alert.alert(
+            CustomAlert.alert(
               "Cross-Promotion Reward! 🎉",
               `Thank you for checking out "${app.name}"! You have been rewarded with +50 XP!`
             );
@@ -57,22 +55,11 @@ export default function MoreApps() {
     }
   };
 
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="small" color={colors.PRIMARY} />
-      </View>
-    );
-  }
-
-  if (apps.length === 0) {
-    return null;
-  }
-
   return (
     <View style={styles.container}>
       <EmojiText style={styles.title}>
-        🚀 More by Destya Studio
+        <Text style={styles.titleHighlight}>More by </Text>
+        Destya Studio {Emoji.SPARKLES}
       </EmojiText>
       {apps.map((app, index) => (
         <TouchableOpacity

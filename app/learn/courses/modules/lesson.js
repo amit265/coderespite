@@ -6,7 +6,7 @@ import ContentPage from "../../../../components/ContentPage";
 import PageTransition from "../../../../components/PageTransition";
 import SafeScreen from "../../../../components/SafeScreen";
 import { allCoursesContext } from "../../../../context/context";
-import { BannerAdComponent } from "../../../../services/AdManager";
+
 
 export default function LessonScreen() {
   const router = useRouter();
@@ -53,7 +53,7 @@ export default function LessonScreen() {
         </View>
 
         {/* Bottom Banner Ad */}
-        <BannerAdComponent fixed={true} />
+        
       </SafeScreen>
     </PageTransition>
   );
