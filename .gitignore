@@ -104,4 +104,5 @@ credentials.json
 /android
 android
 /ios
-iosgoogle-services-key.json
+ios
+google-services-key.json
