@@ -6,6 +6,8 @@ import {
   BannerAd,
   BannerAdSize,
   InterstitialAd,
+  RewardedAd,
+  RewardedAdEventType,
 } from "react-native-google-mobile-ads";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { adConfigContext } from "../context/context";
@@ -27,6 +29,10 @@ const adUnits = {
   nativeAdvanced: {
     android: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID || "ca-app-pub-7433519007687449/3505013580",
     ios: process.env.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS || "ca-app-pub-7433519007687449/8227570532",
+  },
+  rewarded: {
+    android: process.env.EXPO_PUBLIC_ADMOB_REWARDED_UNIT_ID_ANDROID || "ca-app-pub-3940256099942544/5224354917", // Test id
+    ios: process.env.EXPO_PUBLIC_ADMOB_REWARDED_UNIT_ID_IOS || "ca-app-pub-3940256099942544/1712485313", // Test id
   },
 };
 
@@ -188,6 +194,30 @@ export const showInterstitialAd = (adConfig) => {
     console.log("[Ads] showInterstitialAd invoked: interstitial not ready, loading");
     interstitialAd?.load();
   }
+};
+
+export const showRewardedAd = (onEarnedReward, onClosed) => {
+  const rewarded = RewardedAd.createForAdRequest(getAdUnitId("rewarded"));
+
+  const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+    rewarded.show();
+  });
+
+  const unsubscribeEarned = rewarded.addAdEventListener(
+    RewardedAdEventType.EARNED_REWARD,
+    reward => {
+      if (onEarnedReward) onEarnedReward(reward);
+    },
+  );
+
+  const unsubscribeClosed = rewarded.addAdEventListener(AdEventType.CLOSED, () => {
+    if (onClosed) onClosed();
+    unsubscribeLoaded();
+    unsubscribeEarned();
+    unsubscribeClosed();
+  });
+
+  rewarded.load();
 };
 
 export const BannerAdComponent = ({ fixed = false }) => {

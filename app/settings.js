@@ -128,6 +128,19 @@ export default function Settings() {
 
             <TouchableOpacity
               style={styles.settingItem}
+              onPress={async () => {
+                const { scheduleDailyReminder, scheduleStreakReminder } = require("../services/notificationService");
+                await scheduleDailyReminder();
+                await scheduleStreakReminder();
+                Alert.alert("Notifications Enabled 🔔", "You'll now receive daily coding reminders!");
+              }}
+            >
+              <Ionicons name="notifications-outline" size={24} color="#000000" />
+              <Text style={styles.settingText}>Enable Notifications</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.settingItem}
               onPress={handleContactUs}
             >
               <FontAwesome name="send" size={24} color="#000000" />

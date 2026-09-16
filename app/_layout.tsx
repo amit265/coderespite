@@ -14,6 +14,7 @@ import { requestTrackingPermission } from "../services/trackingInit";
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Platform, StatusBar, View, Text, TouchableOpacity, Linking, useWindowDimensions } from 'react-native';
+import analytics from '@react-native-firebase/analytics';
 import { initializeMobileAds } from "../services/adInit";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -26,7 +27,7 @@ import { EmojiText } from "../constants/constants";
 import { useUpdateChecker } from "../hooks/useUpdateChecker";
 import { initNotifications } from "../services/notificationService";
 import UpdateModal from "../components/UpdateModal";
-
+import { initPurchases } from "../services/purchasesService";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -97,6 +98,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     initNotifications();
+    initPurchases();
   }, []);
 
   const { width: windowWidth } = useWindowDimensions();
@@ -143,6 +145,13 @@ export default function RootLayout() {
   // Load user data initially
   useEffect(() => {
     const load = async () => {
+      // Log app open to Firebase Analytics
+      try {
+        await analytics().logAppOpen();
+      } catch (err) {
+        console.log("Analytics error: ", err);
+      }
+
       const data = await getUserData();
 
       setUserDataState(data);
@@ -150,6 +159,19 @@ export default function RootLayout() {
     };
     load();
   }, [update]);
+
+  useEffect(() => {
+    if (userData?.profile?.isPro) {
+      setAdConfig(prev => ({
+        ...prev,
+        showAds: false,
+        showInterstitialAds: false,
+        showAppOpenAds: false,
+        showNativeAds: false,
+        showBannerAds: false,
+      }));
+    }
+  }, [userData?.profile?.isPro]);
 
 
   // Update AsyncStorage + context state

@@ -128,6 +128,7 @@ export default function TabsLayout() {
                   <AntDesign name="questioncircleo" size={24} color={color} />
                 );
                 break;
+
               case "profile":
                 iconComponent = (
                   <Ionicons
@@ -155,6 +156,7 @@ export default function TabsLayout() {
         <Tabs.Screen name="learn" options={{ title: "Learn" }} listeners={webTabListener} />
         <Tabs.Screen name="flashcards" options={{ title: "Flashcards" }} listeners={webTabListener} />
         <Tabs.Screen name="index" options={{ title: "Home" }} />
+
         <Tabs.Screen name="quiz" options={{ title: "Quiz" }} listeners={webTabListener} />
         <Tabs.Screen name="profile" options={{ title: "Profile" }} listeners={webTabListener} />
       </Tabs>
@@ -182,6 +184,31 @@ export default function TabsLayout() {
         }}
       >
         <Ionicons name="chatbubbles" size={28} color="white" />
+      </TouchableOpacity>
+
+      {/* Floating Action Button (FAB) for Code Playground */}
+      <TouchableOpacity
+        onPress={() => router.push("/playground")}
+        activeOpacity={0.8}
+        style={{
+          position: "absolute",
+          bottom: tabBarBottom + tabBarHeight + 20,
+          left: 20,
+          backgroundColor: "#28a745",
+          width: 56,
+          height: 56,
+          borderRadius: 28,
+          justifyContent: "center",
+          alignItems: "center",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 6,
+          elevation: 8,
+          zIndex: 999,
+        }}
+      >
+        <Ionicons name="code-slash" size={28} color="white" />
       </TouchableOpacity>
 
       <Modal

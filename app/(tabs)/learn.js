@@ -249,13 +249,64 @@ export default function Learn() {
             </View>
           ) : (
             <View style={{ paddingHorizontal: 16 }}>
+              {/* Learning Paths Section */}
+              <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginTop: 10, marginBottom: 12, color: "#1F2937" }}>
+                Curated Learning Paths
+              </Text>
+              <View style={{ gap: 12, marginBottom: 24 }}>
+                {[
+                  { id: 'web_dev', title: 'Web Developer in 30 Days', desc: 'HTML → CSS → JS → React', courses: ['html', 'css', 'javascript', 'react'], icon: 'globe-outline', color: '#10B981' },
+                  { id: 'interview_ready', title: 'Interview Ready', desc: 'DSA → TypeScript', courses: ['dsa', 'typescript'], icon: 'briefcase-outline', color: '#F59E0B' },
+                  { id: 'python_master', title: 'Python Master', desc: 'Python for Beginners', courses: ['python'], icon: 'logo-python', color: '#3B82F6' },
+                ].map((path) => (
+                  <TouchableOpacity
+                    key={path.id}
+                    onPress={() => {
+                      const { setEnrolledPath } = require('../../services/userStorage');
+                      setEnrolledPath(path.id);
+                      Alert.alert("Enrolled!", `You are now enrolled in the ${path.title} path.`);
+                      // Find first course in path
+                      const firstCourse = allCourses.find(c => c.id === path.courses[0]);
+                      if (firstCourse) {
+                        handleCardPress(firstCourse);
+                      }
+                    }}
+                    style={{
+                      backgroundColor: 'white',
+                      borderRadius: 16,
+                      padding: 16,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      shadowColor: path.color,
+                      shadowOffset: { width: 0, height: 2 },
+                      shadowOpacity: 0.1,
+                      shadowRadius: 4,
+                      elevation: 3,
+                      borderLeftWidth: 4,
+                      borderLeftColor: path.color,
+                    }}
+                  >
+                    <View style={{ backgroundColor: path.color + '20', padding: 12, borderRadius: 12, marginRight: 16 }}>
+                      <Ionicons name={path.icon} size={24} color={path.color} />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ fontSize: 16, fontFamily: "nunito-bold", color: "#1F2937", marginBottom: 2 }}>{path.title}</Text>
+                      <Text style={{ fontSize: 13, fontFamily: "nunito", color: "#6B7280" }}>{path.desc}</Text>
+                    </View>
+                    <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginBottom: 16, color: "#1F2937" }}>
+                All Courses
+              </Text>
               {/* Default Courses Section */}
               <View 
                 style={{ 
                   flexDirection: 'row', 
                   flexWrap: 'wrap', 
                   justifyContent: 'space-between',
-                  paddingTop: 10
                 }}
               >
                 {allCourses.filter(c => !c?.id?.toString().startsWith("AI_")).map((item, index) => (

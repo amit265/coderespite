@@ -2,7 +2,7 @@ const packageJson = require("./package.json");
 
 module.exports = {
   expo: {
-    name: "CodeRespite",
+    name: "CodeRespite: Learn to Code",
     description:
       "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
@@ -69,8 +69,10 @@ module.exports = {
     plugins: [
       "expo-secure-store",
       "expo-router",
+      "expo-notifications",
       "@react-native-firebase/app",
       "@react-native-firebase/analytics",
+      "@react-native-firebase/messaging",
       [
         "expo-splash-screen",
         {

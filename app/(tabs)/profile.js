@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useContext, useEffect, useState, useRef, useMemo } from "react";
-import { Modal, ScrollView, Text, View, Animated, Platform } from "react-native";
+import { Modal, ScrollView, Text, View, Animated, Platform, TouchableOpacity } from "react-native";
 import ProgressBar from "../../components/home/ProgressBar";
 import PageTransition from "../../components/PageTransition";
 import ProfileModal from "../../components/ProfileModal";
@@ -98,8 +98,54 @@ export default function Profile() {
           {/* Streak Heatmap */}
           <FadeInSection delay={250}>
             <View className="px-4 bg-white mx-4 rounded-lg mt-4 p-4 shadow-sm">
-              <Text style={{ fontSize: 16, fontFamily: "nunito-bold", marginBottom: 10, color: "#000" }}>🔥 Activity Streak</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                <Text style={{ fontSize: 16, fontFamily: "nunito-bold", color: "#000" }}>🔥 Activity Streak</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ fontSize: 14, fontFamily: "nunito-bold", color: "#3B82F6", marginRight: 4 }}>
+                    {userData?.streak?.freezes || 0}
+                  </Text>
+                  <Text style={{ fontSize: 14 }}>❄️</Text>
+                </View>
+              </View>
               <StreakHeatmap data={heatmapData} />
+              
+              <TouchableOpacity
+                onPress={() => {
+                  const { showRewardedAd } = require("../../services/AdManager");
+                  const { addStreakFreeze } = require("../../services/userStorage");
+                  const { Alert } = require("react-native");
+                  
+                  // Optional: Show loading state here if we wanted
+                  showRewardedAd(
+                    async () => {
+                      await addStreakFreeze(1);
+                      if (updateUser) {
+                        updateUser(prev => {
+                          if (!prev.streak) prev.streak = { currentStreak: 0, freezes: 0 };
+                          prev.streak.freezes = (prev.streak.freezes || 0) + 1;
+                          return { ...prev };
+                        });
+                      }
+                      Alert.alert("Reward Earned! ❄️", "You've earned 1 Streak Freeze! This will automatically protect your streak if you miss a day.");
+                    },
+                    () => {}
+                  );
+                }}
+                style={{
+                  marginTop: 16,
+                  backgroundColor: "#EFF6FF",
+                  padding: 12,
+                  borderRadius: 12,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderWidth: 1,
+                  borderColor: "#BFDBFE"
+                }}
+              >
+                <Text style={{ fontSize: 16, marginRight: 8 }}>📺</Text>
+                <Text style={{ fontFamily: "nunito-bold", color: "#1D4ED8" }}>Watch Ad to Earn a Freeze ❄️</Text>
+              </TouchableOpacity>
             </View>
           </FadeInSection>
 
@@ -132,8 +178,18 @@ export default function Profile() {
           )}
 
           {/* 5. Action Buttons */}
-          <FadeInSection delay={400}>
+          <FadeInSection delay={350}>
             <View className="px-4 mt-2">
+              <Button
+                text={"Badges & Achievements 🏆"}
+                type
+                onPress={() => router.push("/badges")}
+              />
+            </View>
+          </FadeInSection>
+
+          <FadeInSection delay={400}>
+            <View className="px-4 mt-4">
               <Button
                 text={"Quiz History"}
                 type

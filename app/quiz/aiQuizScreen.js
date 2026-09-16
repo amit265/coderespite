@@ -88,6 +88,7 @@ export default function AIQuizScreen() {
   const [result, setResult] = useState({});
   const [loading, setLoading] = useState(true);
   const [shuffledOptions, setShuffledOptions] = useState([]);
+  const [isDailyChallenge, setIsDailyChallenge] = useState(false);
 
   const slideAnim = useRef(new Animated.Value(0)).current;
 
@@ -99,6 +100,7 @@ export default function AIQuizScreen() {
           const parsed = JSON.parse(stored);
           setQuizTitle(parsed.title || "AI Quiz");
           setQuestions(parsed.quiz || []);
+          setIsDailyChallenge(parsed.isDailyChallenge || false);
         } else {
           Alert.alert("Error", "No quiz template found.");
           router.back();
@@ -210,7 +212,13 @@ export default function AIQuizScreen() {
       
       // Award XP
       if (scorePercent > 0 && gainXP) {
-        await gainXP(scorePercent * 0.5);
+        let xpToGain = scorePercent * 0.5;
+        if (isDailyChallenge) {
+          xpToGain += 50;
+          const today = new Date().toISOString().split("T")[0];
+          await AsyncStorage.setItem("@daily_challenge_completed", today);
+        }
+        await gainXP(xpToGain);
       }
 
       const attemptedDate = new Date().toISOString();

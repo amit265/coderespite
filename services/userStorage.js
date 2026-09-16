@@ -8,6 +8,10 @@ const defaultUserData = {
     name: "user",
     avatar: "avatar2.png",
     firstTime: true,
+    enrolledPath: null,
+    isPro: false,
+    aiChatsUsedToday: 0,
+    lastChatDate: null,
   },
   preferences: {
     darkMode: false,
@@ -20,6 +24,12 @@ const defaultUserData = {
   },
   progress: {
     // courses will be added dynamically: html, css, js, etc.
+  },
+  streak: {
+    currentStreak: 0,
+    longestStreak: 0,
+    freezes: 1, // Start with 1 free freeze
+    lastStudyDate: null,
   },
 };
 
@@ -65,6 +75,9 @@ export const gainXP = async (earnedXP) => {
 
     return data;
   });
+  
+  // Earning XP counts as studying, update the streak
+  await updateStreak();
 };
 
 // Update progress in a course
@@ -96,6 +109,26 @@ export const markNotFirstTime = async () => {
   });
 };
 
+export const setEnrolledPath = async (pathId) => {
+  await updateUserData((data) => {
+    data.profile.enrolledPath = pathId;
+    return data;
+  });
+};
+
+export const incrementAIChatCount = async () => {
+  await updateUserData((data) => {
+    const today = new Date().toISOString().split("T")[0];
+    if (data.profile.lastChatDate !== today) {
+      data.profile.aiChatsUsedToday = 1;
+      data.profile.lastChatDate = today;
+    } else {
+      data.profile.aiChatsUsedToday = (data.profile.aiChatsUsedToday || 0) + 1;
+    }
+    return data;
+  });
+};
+
 export const clearAllData = async () => {
   try {
     await AsyncStorage.clear();
@@ -103,6 +136,74 @@ export const clearAllData = async () => {
   } catch (e) {
     console.error("Failed to clear AsyncStorage:", e);
   }
+};
+
+// Streak System Methods
+export const updateStreak = async () => {
+  await updateUserData((data) => {
+    if (!data.streak) {
+      data.streak = { currentStreak: 0, longestStreak: 0, freezes: 1, lastStudyDate: null };
+    }
+    
+    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+    
+    if (data.streak.lastStudyDate === today) {
+      return data; // Already studied today
+    }
+    
+    if (!data.streak.lastStudyDate) {
+      // First time studying
+      data.streak.currentStreak = 1;
+      data.streak.longestStreak = 1;
+    } else {
+      const lastDate = new Date(data.streak.lastStudyDate);
+      const currentDate = new Date(today);
+      const diffTime = Math.abs(currentDate - lastDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 1) {
+        // Studied yesterday
+        data.streak.currentStreak += 1;
+      } else if (diffDays > 1) {
+        // Missed one or more days
+        const missedDays = diffDays - 1;
+        if (data.streak.freezes >= missedDays) {
+          // Used freezes
+          data.streak.freezes -= missedDays;
+          data.streak.currentStreak += 1;
+        } else {
+          // Streak broken
+          data.streak.currentStreak = 1;
+        }
+      }
+      
+      if (data.streak.currentStreak > data.streak.longestStreak) {
+        data.streak.longestStreak = data.streak.currentStreak;
+      }
+    }
+    
+    // Reward a streak freeze for every 7 day streak
+    if (data.streak.currentStreak > 0 && data.streak.currentStreak % 7 === 0) {
+      data.streak.freezes += 1;
+    }
+    
+    data.streak.lastStudyDate = today;
+    return data;
+  });
+  
+  // Schedule a reminder for tomorrow since the user studied today
+  const { scheduleStreakReminder } = require('./notificationService');
+  await scheduleStreakReminder();
+};
+
+export const addStreakFreeze = async (amount = 1) => {
+  await updateUserData((data) => {
+    if (!data.streak) {
+      data.streak = { currentStreak: 0, longestStreak: 0, freezes: 1, lastStudyDate: null };
+    }
+    data.streak.freezes += amount;
+    return data;
+  });
 };
 
 export const logAllAsyncStorage = async () => {

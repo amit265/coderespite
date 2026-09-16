@@ -30,7 +30,8 @@ const GROQ_MODELS = [
   "groq/compound",
 ];
 const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
-import { allCoursesContext } from "../context/context";
+import { allCoursesContext, userDetailsContext } from "../context/context";
+import { incrementAIChatCount } from "../services/userStorage";
 
 // Cross-platform clipboard helper
 // - Web: uses navigator.clipboard (no native module needed)
@@ -51,6 +52,7 @@ export default function MeowgrammerChat() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { allCourses } = useContext(allCoursesContext);
+  const { userData } = useContext(userDetailsContext);
 
   // allMessages = full history kept in memory (for API context window)
   // displayMessages = paginated slice shown in the FlatList
@@ -153,6 +155,18 @@ When a user asks about a topic that is covered by one of these courses, proactiv
   const handleSend = async () => {
     const text = inputText.trim();
     if (!text) return;
+
+    // Check Freemium Limits
+    const isPro = userData?.profile?.isPro;
+    const today = new Date().toISOString().split("T")[0];
+    const chatsUsed = userData?.profile?.lastChatDate === today ? (userData?.profile?.aiChatsUsedToday || 0) : 0;
+    
+    if (!isPro && chatsUsed >= 10) {
+      router.push("/paywall");
+      return;
+    }
+
+    await incrementAIChatCount();
 
     const userMsg = {
       id: `user_${Date.now()}`,

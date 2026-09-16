@@ -11,17 +11,21 @@ import { useAppInitialization } from "../hooks/useAppInitialization";
 export default function Index() {
   const router = useRouter();
 
-  const { isReady, showCustomSplash } = useAppInitialization();
+  const { isReady, showCustomSplash, isFirstTime } = useAppInitialization();
 
   useEffect(() => {
     if (isReady) {
       const delay = Platform.OS === 'web' ? 2500 : 500;
       const timer = setTimeout(() => {
-        router.replace("(tabs)");
+        if (isFirstTime) {
+          router.replace("onboarding");
+        } else {
+          router.replace("(tabs)");
+        }
       }, delay);
       return () => clearTimeout(timer);
     }
-  }, [isReady]);
+  }, [isReady, isFirstTime]);
 
   if (showCustomSplash || isReady) {
     return <SplashScreenComponent />;
@@ -74,7 +78,11 @@ export default function Index() {
             <Button
               text={"Let's Start!"}
               onPress={() => {
-                router.replace("(tabs)");
+                if (isFirstTime) {
+                  router.replace("onboarding");
+                } else {
+                  router.replace("(tabs)");
+                }
               }}
             />
           </View>

@@ -26,6 +26,8 @@ import { allCoursesContext, userDetailsContext, adConfigContext } from "../../co
 import { BannerAdComponent, showInterstitialAd } from "../../services/AdManager";
 import { logAnalyticsEvent } from "../../services/analyticsService";
 import Markdown from "react-native-markdown-display";
+import ViewShot from "react-native-view-shot";
+import * as Sharing from "expo-sharing";
 
 // --- Animated Score Card (Entrance) ---
 const AnimatedScoreCard = ({ children }) => {
@@ -164,10 +166,25 @@ export default function QuizResultScreen() {
     };
   }, [quizData]);
 
+
+  const viewShotRef = useRef(null);
+
   const handleShareScore = async () => {
     try {
-      const message = `I scored ${getPercMarks}% on "${quizData?.quizTitle || 'Quiz'}" in CodeRespite! Can you beat my score? 🐾\n\n${DESTYA_SHARE_LINK}`;
-      await Share.share({ message });
+      if (Platform.OS === 'web') {
+        const message = `I scored ${getPercMarks}% on "${quizData?.quizTitle || 'Quiz'}" in CodeRespite! Can you beat my score? 🐾\n\n${DESTYA_SHARE_LINK}`;
+        await Share.share({ message });
+      } else {
+        if (viewShotRef.current) {
+          const uri = await viewShotRef.current.capture();
+          if (await Sharing.isAvailableAsync()) {
+            await Sharing.shareAsync(uri, {
+              dialogTitle: `I scored ${getPercMarks}% on CodeRespite!`,
+              mimeType: "image/jpeg"
+            });
+          }
+        }
+      }
       logAnalyticsEvent("score_shared", {
         quizId: quizData?.quizId || "unknown",
         score: getPercMarks
@@ -190,6 +207,7 @@ export default function QuizResultScreen() {
   };
 
   const renderItem = ({ item, index }) => {
+    // ... existing renderItem code ...
     const quizItem = item[1];
     const userAnswer = quizItem?.userChoice ?? "Not answered";
     const correctAnswer = quizItem?.correctAns ?? "Not available";
@@ -202,94 +220,26 @@ export default function QuizResultScreen() {
             padding: 20,
             borderWidth: 1,
             marginHorizontal: 5,
-            marginTop: 10, // increased margin for spacing
-            borderRadius: 20, // rounded corners
-            backgroundColor: quizItem?.isCorrect
-              ? "#DCFCE7" // light green (Tailwind green-100)
-              : "#FEE2E2", // light red (Tailwind red-100)
+            marginTop: 10,
+            borderRadius: 20,
+            backgroundColor: quizItem?.isCorrect ? "#DCFCE7" : "#FEE2E2",
             borderColor: quizItem?.isCorrect ? "#86EFAC" : "#FCA5A5",
           }}
         >
-          <Text
-            style={{ fontFamily: "nunito-bold", fontSize: 16, marginBottom: 8 }}
-          >
-            {questionText}
-          </Text>
-
+          <Text style={{ fontFamily: "nunito-bold", fontSize: 16, marginBottom: 8 }}>{questionText}</Text>
           {!quizItem?.isCorrect && (
-            <Text
-              style={{
-                fontFamily: "nunito",
-                fontSize: 15,
-                color: colors.ERROR,
-              }}
-            >
+            <Text style={{ fontFamily: "nunito", fontSize: 15, color: colors.ERROR }}>
               Your Answer: {userAnswer}
             </Text>
           )}
-
-          <Text
-            style={{
-              fontFamily: "nunito-bold",
-              fontSize: 15,
-              color: colors.PRIMARY,
-              marginTop: 4,
-            }}
-          >
-            {!quizItem?.isCorrect ? "Correct Answer" : "Answer"}:{" "}
-            {correctAnswer}
+          <Text style={{ fontFamily: "nunito-bold", fontSize: 15, color: colors.PRIMARY, marginTop: 4 }}>
+            {!quizItem?.isCorrect ? "Correct Answer" : "Answer"}: {correctAnswer}
           </Text>
-
           {quizItem?.explanation && (
-            <View
-              style={{
-                marginTop: 8,
-                padding: 10,
-                backgroundColor: "rgba(255,255,255,0.5)",
-                borderRadius: 10,
-              }}
-            >
-              <Markdown style={markdownStyles}>
-                {`💡 ${quizItem?.explanation}`}
-              </Markdown>
+            <View style={{ marginTop: 8, padding: 10, backgroundColor: "rgba(255,255,255,0.5)", borderRadius: 10 }}>
+              <Markdown style={markdownStyles}>{`💡 ${quizItem?.explanation}`}</Markdown>
             </View>
           )}
-
-          <TouchableOpacity
-            onPress={() => {
-              router.push({
-                pathname: "/quiz/detailedExplanation",
-                params: {
-                  question: questionText,
-                  userAnswer,
-                  correctAnswer,
-                  explanation: quizItem?.explanation || "No explanation provided.",
-                },
-              });
-            }}
-            style={{
-              marginTop: 12,
-              backgroundColor: colors.PRIMARY,
-              paddingVertical: 10,
-              paddingHorizontal: 16,
-              borderRadius: 12,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 6,
-            }}
-          >
-            <Ionicons name="information-circle-outline" size={18} color="white" />
-            <Text
-              style={{
-                color: "white",
-                fontFamily: "nunito-bold",
-                fontSize: 14,
-              }}
-            >
-              Detail View
-            </Text>
-          </TouchableOpacity>
         </View>
       </AnimatedResultItem>
     );
@@ -299,44 +249,16 @@ export default function QuizResultScreen() {
     <PageTransition>
       <SafeScreen>
         <View style={{ flex: 1, backgroundColor: colors.BACKGROUND }}>
-          {/* Confetti Overlay */}
           {showConfetti && (
-            <View
-              pointerEvents="none" // Ensure touches pass through
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 999,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <LottieView
-                source={require("../../assets/fun.json")}
-                autoPlay
-                loop={false}
-                onAnimationFinish={() => setShowConfetti(false)}
-                style={{ width: "100%", height: "100%" }}
-                resizeMode="cover"
-              />
+            <View pointerEvents="none" style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 999, justifyContent: "center", alignItems: "center" }}>
+              <LottieView source={require("../../assets/fun.json")} autoPlay loop={false} onAnimationFinish={() => setShowConfetti(false)} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
             </View>
           )}
-
           {loading && (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
               <ActivityIndicator color="black" size={36} />
             </View>
           )}
-
           <FlashList
             estimatedItemSize={100}
             data={quizResult ? Object.entries(quizResult) : []}
@@ -344,130 +266,64 @@ export default function QuizResultScreen() {
             style={{ paddingBottom: 20 }}
             ListHeaderComponent={
               <View>
-                {/* Header */}
                 <View className="flex flex-row items-center gap-2 mb-4">
                   <Pressable onPress={() => router.back()} hitSlop={10}>
                     <Ionicons name="close" size={30} color="black" />
                   </Pressable>
-                  <Text
-                    style={{
-                      fontFamily: "nunito-bold",
-                      fontSize: 20,
-                      color: colors.BLACK,
-                    }}
-                  >
-                    Quiz Summary
-                  </Text>
+                  <Text style={{ fontFamily: "nunito-bold", fontSize: 20, color: colors.BLACK }}>Quiz Summary</Text>
                 </View>
 
                 {quizData?.result ? (
                   <View style={{ width: "100%", paddingHorizontal: 20 }}>
-                    {/* Animated Score Card */}
-                    <AnimatedScoreCard>
-                      <View
-                        style={{
-                          backgroundColor: colors.WHITE,
-                          padding: 24,
-                          borderRadius: 24,
-                          marginTop: 40,
-                          alignItems: "center",
-                          // Shadow
-                          shadowColor: "#000",
-                          shadowOffset: { width: 0, height: 4 },
-                          shadowOpacity: 0.1,
-                          shadowRadius: 10,
-                          elevation: 5,
-                        }}
-                      >
-                        <Image
-                          source={require("../../assets/images/trophy.png")}
-                          style={{ width: 100, height: 100, marginTop: -70 }}
-                        />
-                        <Text
-                          style={{
-                            fontSize: 24,
-                            fontFamily: "nunito-bold",
-                            marginTop: 10,
-                          }}
-                        >
-                          {getPercMarks > 60
-                            ? "Congratulations!"
-                            : "Keep Practicing!"}
-                        </Text>
-                        <Text
-                          style={{
-                            fontFamily: "nunito",
-                            color: colors.GRAY,
-                            textAlign: "center",
-                            fontSize: 16,
-                            marginTop: 4,
-                          }}
-                        >
-                          You scored {getPercMarks}%
-                        </Text>
-
-                        {/* Stats Row */}
+                    <ViewShot ref={viewShotRef} options={{ format: "jpg", quality: 0.9 }}>
+                      <AnimatedScoreCard>
                         <View
                           style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            marginTop: 20,
-                            width: "100%",
-                            gap: 10,
+                            backgroundColor: colors.WHITE,
+                            padding: 24,
+                            borderRadius: 24,
+                            marginTop: 40,
+                            alignItems: "center",
+                            shadowColor: "#000",
+                            shadowOffset: { width: 0, height: 4 },
+                            shadowOpacity: 0.1,
+                            shadowRadius: 10,
+                            elevation: 5,
                           }}
                         >
-                          <View style={styles.statBox}>
-                            <Text style={styles.statLabel}>Total</Text>
-                            <Text style={styles.statValue}>
-                              {totalQuestion}
-                            </Text>
-                          </View>
-                          <View
-                            style={[
-                              styles.statBox,
-                              { backgroundColor: "#DCFCE7" },
-                            ]}
-                          >
-                            <Text
-                              style={[styles.statLabel, { color: "#166534" }]}
-                            >
-                              Correct
-                            </Text>
-                            <Text
-                              style={[styles.statValue, { color: "#166534" }]}
-                            >
-                              {correctAns}
-                            </Text>
-                          </View>
-                          <View
-                            style={[
-                              styles.statBox,
-                              { backgroundColor: "#FEE2E2" },
-                            ]}
-                          >
-                            <Text
-                              style={[styles.statLabel, { color: "#991B1B" }]}
-                            >
-                              Wrong
-                            </Text>
-                            <Text
-                              style={[styles.statValue, { color: "#991B1B" }]}
-                            >
-                              {totalQuestion - correctAns}
-                            </Text>
+                          <Image source={require("../../assets/images/trophy.png")} style={{ width: 100, height: 100, marginTop: -70 }} />
+                          <Text style={{ fontSize: 24, fontFamily: "nunito-bold", marginTop: 10 }}>
+                            {getPercMarks > 60 ? "Congratulations!" : "Keep Practicing!"}
+                          </Text>
+                          <Text style={{ fontFamily: "nunito", color: colors.GRAY, textAlign: "center", fontSize: 16, marginTop: 4 }}>
+                            You scored {getPercMarks}%
+                          </Text>
+
+                          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20, width: "100%", gap: 10 }}>
+                            <View style={styles.statBox}>
+                              <Text style={styles.statLabel}>Total</Text>
+                              <Text style={styles.statValue}>{totalQuestion}</Text>
+                            </View>
+                            <View style={[styles.statBox, { backgroundColor: "#DCFCE7" }]}>
+                              <Text style={[styles.statLabel, { color: "#166534" }]}>Correct</Text>
+                              <Text style={[styles.statValue, { color: "#166534" }]}>{correctAns}</Text>
+                            </View>
+                            <View style={[styles.statBox, { backgroundColor: "#FEE2E2" }]}>
+                              <Text style={[styles.statLabel, { color: "#991B1B" }]}>Wrong</Text>
+                              <Text style={[styles.statValue, { color: "#991B1B" }]}>{totalQuestion - correctAns}</Text>
+                            </View>
                           </View>
                         </View>
-                      </View>
-                    </AnimatedScoreCard>
+                      </AnimatedScoreCard>
+                    </ViewShot>
 
-                    {/* Buttons */}
                     <View style={{ marginTop: 24, gap: 10 }}>
                       <Button text={"Attempt Again"} onPress={attemptAgain} />
                       <Button text={"Share Score 📤"} onPress={handleShareScore} />
                       <Button
                         text={"Back to Home"}
                         onPress={() => router.replace("/(tabs)")}
-                        type="outline" // Assuming Button supports outline/text only
+                        type="outline"
                         backgroundColor="transparent"
                         color={colors.PRIMARY}
                       />

@@ -9,6 +9,7 @@ import Header from "../../components/home/Header";
 import QuickActionGrid from "../../components/home/QuickActionGrid";
 import WelcomeCard from "../../components/home/WelcomeCard";
 import JumpBackInCard from "../../components/home/JumpBackInCard";
+import DailyChallengeCard from "../../components/home/DailyChallengeCard";
 import LevelUpModal from "../../components/LevelUpModal";
 import PageTransition from "../../components/PageTransition";
 import ProfileModal from "../../components/ProfileModal";
@@ -148,6 +149,11 @@ export default function Home() {
         >
           <FadeInSection delay={100}>
             <WelcomeCard userData={userData} />
+          </FadeInSection>
+
+          {/* New Daily Challenge Card */}
+          <FadeInSection delay={125}>
+            <DailyChallengeCard />
           </FadeInSection>
 
           <FadeInSection delay={150}>
