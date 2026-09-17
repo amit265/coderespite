@@ -89,7 +89,11 @@ export default function QuickActionGrid() {
 
     // Small delay to allow the bounce animation to play before switching screens
     setTimeout(() => {
-      router.push(`(tabs)/${tab}`);
+      if (tab === "profile") {
+        router.push(`/(tabs)/${tab}`);
+      } else {
+        router.push(`/${tab}`);
+      }
     }, 150);
   };
 
