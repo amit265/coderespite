@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useRef } from "react";
-import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert, ScrollView } from "react-native";
+import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert, ScrollView, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
@@ -11,6 +11,10 @@ import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import { NativeAdComponent } from "../../services/AdManager";
 import AsyncStorage from "../../services/storage";
 import { CustomAlert } from "../../components/shared/GlobalAlert";
+
+// Calculate dynamic width for 2-column grid
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const CARD_WIDTH = (SCREEN_WIDTH - 32 - 16) / 2; // Screen width - horizontal padding (32) - middle gap (16)
 
 // --- New Animated Card Component ---
 const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
@@ -73,8 +77,8 @@ const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
       >
         <Animated.View
           style={{
-            width: 160,
-            height: 160,
+            width: CARD_WIDTH,
+            height: CARD_WIDTH,
             borderRadius: 24, // Increased radius for a modern look
             overflow: "hidden",
             position: "relative",
@@ -339,6 +343,7 @@ export default function Learn() {
                   flexDirection: 'row', 
                   flexWrap: 'wrap', 
                   justifyContent: 'space-between',
+                  paddingHorizontal: 16,
                 }}
               >
                 {allCourses.filter(c => !c?.id?.toString().startsWith("AI_")).map((item, index) => (
@@ -363,6 +368,7 @@ export default function Learn() {
                       flexDirection: 'row', 
                       flexWrap: 'wrap', 
                       justifyContent: 'space-between',
+                      paddingHorizontal: 16,
                     }}
                   >
                     {allCourses.filter(c => c?.id?.toString().startsWith("AI_")).map((item, index) => (

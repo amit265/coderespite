@@ -84,7 +84,7 @@ const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
         onPress={onPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
-        style={{ margin: 12 }} // m-3
+        style={{ margin: 8, flex: 1 }} // Reduced margin for grid, added flex: 1
       >
         <Animated.View
           style={{
@@ -95,7 +95,7 @@ const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
             shadowOpacity: 0.1,
             shadowRadius: 10,
             elevation: 5,
-            padding: 24, // p-6
+            padding: 16, // Reduced padding for grid
             alignItems: "center",
             justifyContent: "center",
             transform: [{ scale: scaleAnim }], // Bind scale animation
@@ -105,10 +105,10 @@ const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
           <View
             style={{
               width: "100%",
-              height: 200,
+              height: 120, // Reduced height for grid
               borderRadius: 16,
               overflow: "hidden",
-              marginBottom: 16,
+              marginBottom: 12, // Reduced margin for grid
               position: "relative",
             }}
           >
@@ -143,7 +143,7 @@ const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
           {/* Text Content */}
           <View style={{ width: "100%" }}>
             <Text
-              style={{ fontSize: 18, fontFamily: "Nunito-Bold", color: "black" }}
+              style={{ fontSize: 16, fontFamily: "Nunito-Bold", color: "black" }} // Reduced font size
               numberOfLines={2}
             >
               {item?.title}
@@ -151,7 +151,7 @@ const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
 
             <Text
               style={{
-                fontSize: 14,
+                fontSize: 12, // Reduced font size
                 fontFamily: "Nunito-SemiBold",
                 color: "#6b7280",
                 marginTop: 4,
@@ -366,12 +366,13 @@ export default function Quiz() {
           </Text>
         ) : (
           <FlashList
-            estimatedItemSize={120}
+            estimatedItemSize={180} // Adjusted for new height
             data={filteredQuizzes}
+            numColumns={2} // Use 2 columns
             keyExtractor={(item) => item.id.toString() + item.title}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 100 }}
+            contentContainerStyle={{ paddingBottom: 100, paddingHorizontal: 8 }} // Padding for grid edges
           />
         )}
       </SafeScreen>

@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useRef } from "react";
-import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert } from "react-native";
+import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
@@ -11,6 +11,10 @@ import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import { NativeAdComponent } from "../../services/AdManager";
 import AsyncStorage from "../../services/storage";
 import { CustomAlert } from "../../components/shared/GlobalAlert";
+
+// Calculate dynamic width for 2-column grid
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const CARD_WIDTH = (SCREEN_WIDTH - 32 - 16) / 2; // Screen width - horizontal padding (32) - middle gap (16)
 
 // --- Animated Card Component ---
 const AnimatedCard = ({ item, index, onPress, onDelete }) => {
@@ -72,8 +76,8 @@ const AnimatedCard = ({ item, index, onPress, onDelete }) => {
       >
         <Animated.View
           style={{
-            width: 160,
-            height: 160,
+            width: CARD_WIDTH,
+            height: CARD_WIDTH,
             borderRadius: 24,
             overflow: "hidden",
             position: "relative",
