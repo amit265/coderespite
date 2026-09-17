@@ -1,11 +1,30 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { allCoursesContext } from "../context/context";
 
 export default function QuickStats({ userData }) {
   const progress = userData?.progress || {};
   const { allCourses } = useContext(allCoursesContext);
+  const [aiQuizCount, setAiQuizCount] = useState(0);
+
+  useEffect(() => {
+    const loadAiQuizzes = async () => {
+      try {
+        const stored = await AsyncStorage.getItem("@attemptedQuiz_data");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) {
+            setAiQuizCount(parsed.length);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load AI quiz count for QuickStats:", err);
+      }
+    };
+    loadAiQuizzes();
+  }, []);
 
   const progressEntries = Object.entries(progress).filter(
     ([courseName, courseData]) => courseData && typeof courseData === "object"
@@ -18,7 +37,8 @@ export default function QuickStats({ userData }) {
   const totalEnrolled = progressEntries.length || 0;
   const totalLoved = progressEntries.reduce((total, course) => total + getStatCount(course[1], "flashcardsLoved"), 0);
   const totalViewed = progressEntries.reduce((total, course) => total + getStatCount(course[1], "flashcardsViewed"), 0);
-  const totalQuizzes = progressEntries.reduce((total, course) => total + getStatCount(course[1], "attemptedQuizzes"), 0);
+  const courseQuizzes = progressEntries.reduce((total, course) => total + getStatCount(course[1], "attemptedQuizzes"), 0);
+  const totalQuizzes = courseQuizzes + aiQuizCount;
 
   const stats = [
     { label: "Enrolled Courses", value: totalEnrolled, icon: "library", color: "#3B82F6", bg: "#EFF6FF" },
