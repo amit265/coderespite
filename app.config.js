@@ -32,6 +32,7 @@ module.exports = {
         NSUserTrackingUsageDescription:
           "This identifier will be used to deliver personalized ads to you.",
         ITSAppUsesNonExemptEncryption: false,
+        UIBackgroundModes: ["remote-notification"],
       },
       googleServicesFile: "./GoogleService-Info.plist",
     },
