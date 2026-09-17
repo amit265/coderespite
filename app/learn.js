@@ -209,14 +209,9 @@ export default function Learn() {
   return (
     <PageTransition>
       <SafeScreen>
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, marginBottom: 16, marginTop: 8 }}>
-          <TouchableOpacity onPress={() => router.back()} style={{ padding: 4 }}>
-            <Ionicons name="arrow-back" size={24} color="#1F2937" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 24, fontFamily: "nunito-bold", color: "black", marginLeft: 16 }}>
-            Courses
-          </Text>
-        </View>
+        <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
+          Courses
+        </Text>
 
         <RefreshWrapper
           onRefresh={refreshData}
