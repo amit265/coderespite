@@ -127,7 +127,7 @@ export default function InterviewIndex() {
 
         {/* Info note */}
         <Text style={[styles.note, { paddingBottom: insets.bottom + 16 }]}>
-          🔋 AI credits reset to 5 daily. Watch an ad on Home for +3 bonus credits.
+          🔋 AI credits reset to 20 daily. Watch an ad in Profile for +10 bonus credits.
         </Text>
       </ScrollView>
     </PageTransition>

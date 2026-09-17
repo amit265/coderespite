@@ -26,8 +26,7 @@ import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
 import RefreshWrapper from "../../components/shared/RefreshWrapper"; // 👈 Import Wrapper
 import { NativeAdComponent, showRewardedAd } from "../../services/AdManager";
 import { getAdFreeRemainingMs, activateAdFree } from "../../services/adFreeService";
-import PowerUps from "../../components/PowerUps";
-import { addCreditsFromAd } from "../../services/aiCreditsService";
+import { getAiCredits } from "../../services/aiCreditsService";
 
 // --- Helper Component for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -210,11 +209,7 @@ export default function Home() {
             </TouchableOpacity>
           </FadeInSection>
 
-          {/* Ad-Free Banner */}
-          <FadeInSection delay={280}>
-            <PowerUps credits={aiCredits} refreshCredits={refreshCreditsFromHome} />
-          </FadeInSection>
-
+          {/* Featured Courses */}
           <FadeInSection delay={300}>
             <FeaturedLessonGrid
               allCourses={allCourses}

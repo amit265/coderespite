@@ -2,9 +2,9 @@ import AsyncStorage from './storage';
 
 const AI_CREDITS_KEY = 'ai_credits';
 const AI_CREDITS_DATE_KEY = 'ai_credits_date';
-const AI_CREDITS_DEFAULT = 3;   // Minimum credits guaranteed each day
-const AI_CREDITS_MAX = 10;       // Hard cap on max credits held
-const AI_CREDITS_PER_AD = 3;     // Credits earned by watching a rewarded ad
+const AI_CREDITS_DEFAULT = 20;   // Minimum credits guaranteed each day
+const AI_CREDITS_MAX = 100;       // Hard cap on max credits held
+const AI_CREDITS_PER_AD = 10;     // Credits earned by watching a rewarded ad
 
 /**
  * Get today's date as a YYYY-MM-DD string for daily reset checks.
