@@ -359,39 +359,6 @@ export default function Quiz() {
             </View>
           </View>
         </View>
-        {/* 🤖 AI Quiz Generator Banner */}
-        <TouchableOpacity
-          onPress={() => router.push("/quiz/aiGenerator")}
-          style={{
-            marginHorizontal: 16,
-            marginBottom: 16,
-            backgroundColor: "#0C1D59",
-            borderRadius: 16,
-            padding: 16,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderWidth: 1.5,
-            borderColor: "#132F94",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1,
-            shadowRadius: 5,
-            elevation: 3,
-          }}
-        >
-          <View style={{ flex: 1, paddingRight: 4 }}>
-            <Text style={{ color: "#FFA500", fontSize: 16, fontWeight: "bold", fontFamily: "nunito-bold", marginBottom: 4 }}>
-              🤖 AI Quiz Generator
-            </Text>
-            <Text style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: 12, fontFamily: "nunito", lineHeight: 16 }}>
-              Configure Groq API and test your knowledge on any custom topic!
-            </Text>
-          </View>
-          <View style={{ backgroundColor: "#FFA500", borderRadius: 12, padding: 8, marginLeft: 12 }}>
-            <AntDesign name="arrowright" size={18} color="#0C1D59" />
-          </View>
-        </TouchableOpacity>
 
         {filteredQuizzes.length === 0 ? (
           <Text className="text-center text-gray-500 font-nunito-bold mt-10">

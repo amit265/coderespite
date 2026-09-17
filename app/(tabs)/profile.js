@@ -11,7 +11,7 @@ import UserCard from "../../components/UserCard";
 import StreakHeatmap from "../../components/StreakHeatmap";
 import PowerUps from "../../components/PowerUps";
 import { generateLastNDaysData } from "../../services/generateLastNDaysData";
-import { userDetailsContext, aiCreditsContext } from "../../context/context";
+import { userDetailsContext, aiCreditsContext, allCoursesContext } from "../../context/context";
 import { CustomAlert } from "../../components/shared/GlobalAlert";
 // --- Helper for Staggered Animation ---
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -51,10 +51,19 @@ const FadeInSection = ({ children, delay = 0 }) => {
 
 export default function Profile() {
   const { userData, updateUser } = useContext(userDetailsContext);
+  const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
   const { credits: aiCredits, setCredits: setAiCredits, refreshCredits } = useContext(aiCreditsContext);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   const heatmapData = useMemo(() => generateLastNDaysData(userData?.progress, userData?.activityLog), [userData?.progress, userData?.activityLog]);
+
+  const activeCourses = useMemo(() => {
+    if (!userData?.progress || !allCourses) return [];
+    const enrolledKeys = Object.keys(userData.progress).filter(
+      key => userData.progress[key] && typeof userData.progress[key] === "object"
+    );
+    return allCourses.filter(course => enrolledKeys.includes(course.title));
+  }, [userData?.progress, allCourses]);
 
   useEffect(() => {
     const username = userData?.profile?.name ?? ""; 
@@ -126,6 +135,65 @@ export default function Profile() {
               <QuickStats userData={userData} />
             </View>
           </FadeInSection>
+
+          {/* Active Courses */}
+          {activeCourses.length > 0 && (
+            <FadeInSection delay={320}>
+              <View style={styles.menuContainer}>
+                <Text style={styles.menuTitle}>Active Learning Paths & Courses</Text>
+                <ScrollView 
+                  horizontal 
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ gap: 12 }}
+                  style={{ marginTop: 4, paddingBottom: 8 }}
+                >
+                  {activeCourses.map((course) => {
+                    const progressData = userData.progress[course.title];
+                    const completedPercentage = progressData?.percentage || 0;
+                    
+                    return (
+                      <TouchableOpacity
+                        key={course.id}
+                        onPress={() => {
+                          if (setSelectedCourse) setSelectedCourse(course);
+                          router.push(`/learn/courses/${course.id}`);
+                        }}
+                        style={{
+                          backgroundColor: 'white',
+                          borderRadius: 16,
+                          padding: 16,
+                          width: 220,
+                          borderWidth: 1,
+                          borderColor: '#F3F4F6',
+                          shadowColor: '#000',
+                          shadowOffset: { width: 0, height: 2 },
+                          shadowOpacity: 0.05,
+                          shadowRadius: 4,
+                          elevation: 2,
+                        }}
+                      >
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
+                          <View style={{ backgroundColor: '#EEF2FF', padding: 10, borderRadius: 10, marginRight: 10 }}>
+                            <Ionicons name="book" size={20} color="#6366F1" />
+                          </View>
+                          <Text style={{ fontSize: 16, fontFamily: "nunito-bold", color: "#1F2937", flex: 1 }} numberOfLines={1}>
+                            {course.title}
+                          </Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
+                          <Text style={{ fontSize: 12, fontFamily: "nunito", color: "#6B7280" }}>Progress</Text>
+                          <Text style={{ fontSize: 12, fontFamily: "nunito-bold", color: "#6366F1" }}>{Math.round(completedPercentage)}%</Text>
+                        </View>
+                        <View style={{ height: 6, backgroundColor: '#E0E7FF', borderRadius: 3, overflow: 'hidden' }}>
+                          <View style={{ width: `${Math.min(completedPercentage, 100)}%`, height: '100%', backgroundColor: '#6366F1', borderRadius: 3 }} />
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </ScrollView>
+              </View>
+            </FadeInSection>
+          )}
 
           {/* 5. Action Menu */}
           <FadeInSection delay={350}>

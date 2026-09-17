@@ -151,7 +151,7 @@ export default function Learn() {
   const router = useRouter();
   const { setClickCount } = useContext(adConfigContext);
   const { allCourses, setSelectedCourse } = useContext(allCoursesContext);
-  const { updateCourse } = useContext(userDetailsContext);
+  const { updateCourse, userData, updateUser } = useContext(userDetailsContext);
   const { refreshData, globalRefreshing } = useGlobalRefresh();
 
   const handleCardPress = (item) => {
@@ -248,57 +248,88 @@ export default function Learn() {
               <Text className="text-gray-500 font-nunito-bold">Pull down to load courses</Text>
             </View>
           ) : (
-            <View style={{ paddingHorizontal: 16 }}>
+            <View style={{ paddingVertical: 16 }}>
               {/* Learning Paths Section */}
-              <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginTop: 10, marginBottom: 12, color: "#1F2937" }}>
+              <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginBottom: 12, paddingHorizontal: 16, color: "#1F2937" }}>
                 Curated Learning Paths
               </Text>
-              <View style={{ gap: 12, marginBottom: 24 }}>
+              <ScrollView 
+                horizontal 
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: 16, gap: 16 }}
+                style={{ paddingBottom: 12 }}
+              >
                 {[
                   { id: 'web_dev', title: 'Web Developer in 30 Days', desc: 'HTML → CSS → JS → React', courses: ['html', 'css', 'javascript', 'react'], icon: 'globe-outline', color: '#10B981' },
                   { id: 'interview_ready', title: 'Interview Ready', desc: 'DSA → TypeScript', courses: ['dsa', 'typescript'], icon: 'briefcase-outline', color: '#F59E0B' },
                   { id: 'python_master', title: 'Python Master', desc: 'Python for Beginners', courses: ['python'], icon: 'logo-python', color: '#3B82F6' },
-                ].map((path) => (
-                  <TouchableOpacity
-                    key={path.id}
-                    onPress={() => {
-                      const { setEnrolledPath } = require('../../services/userStorage');
-                      setEnrolledPath(path.id);
-                      CustomAlert.alert("Enrolled!", `You are now enrolled in the ${path.title} path.`);
-                      // Find first course in path
-                      const firstCourse = allCourses.find(c => c.id === path.courses[0]);
-                      if (firstCourse) {
-                        handleCardPress(firstCourse);
-                      }
-                    }}
-                    style={{
-                      backgroundColor: 'white',
-                      borderRadius: 16,
-                      padding: 16,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      shadowColor: path.color,
-                      shadowOffset: { width: 0, height: 2 },
-                      shadowOpacity: 0.1,
-                      shadowRadius: 4,
-                      elevation: 3,
-                      borderLeftWidth: 4,
-                      borderLeftColor: path.color,
-                    }}
-                  >
-                    <View style={{ backgroundColor: path.color + '20', padding: 12, borderRadius: 12, marginRight: 16 }}>
-                      <Ionicons name={path.icon} size={24} color={path.color} />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={{ fontSize: 16, fontFamily: "nunito-bold", color: "#1F2937", marginBottom: 2 }}>{path.title}</Text>
-                      <Text style={{ fontSize: 13, fontFamily: "nunito", color: "#6B7280" }}>{path.desc}</Text>
-                    </View>
-                    <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
-                  </TouchableOpacity>
-                ))}
-              </View>
+                ].map((path) => {
+                  const isEnrolled = userData?.profile?.enrolledPath === path.id;
+                  
+                  return (
+                    <TouchableOpacity
+                      key={path.id}
+                      onPress={async () => {
+                        if (!isEnrolled) {
+                          if (updateUser) {
+                            await updateUser((data) => {
+                              if (!data.profile) data.profile = {};
+                              data.profile.enrolledPath = path.id;
+                              return data;
+                            });
+                          } else {
+                            const { setEnrolledPath } = require('../../services/userStorage');
+                            setEnrolledPath(path.id);
+                          }
+                          CustomAlert.alert("Enrolled!", `You are now enrolled in the ${path.title} path.`);
+                        }
+                        
+                        // Find first course in path
+                        const firstCourse = allCourses.find(c => c.id === path.courses[0]);
+                        if (firstCourse) {
+                          handleCardPress(firstCourse);
+                        }
+                      }}
+                      style={{
+                        backgroundColor: 'white',
+                        borderRadius: 20,
+                        padding: 16,
+                        width: 260,
+                        shadowColor: path.color,
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.15,
+                        shadowRadius: 8,
+                        elevation: 4,
+                        borderTopWidth: 4,
+                        borderTopColor: path.color,
+                      }}
+                    >
+                      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
+                        <View style={{ backgroundColor: path.color + '20', padding: 12, borderRadius: 12, marginRight: 12 }}>
+                          <Ionicons name={path.icon} size={24} color={path.color} />
+                        </View>
+                        {isEnrolled && (
+                          <View style={{ backgroundColor: '#F3F4F6', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8 }}>
+                            <Text style={{ fontSize: 10, fontFamily: 'nunito-bold', color: '#4B5563', textTransform: 'uppercase' }}>Active</Text>
+                          </View>
+                        )}
+                      </View>
+                      <Text style={{ fontSize: 18, fontFamily: "nunito-bold", color: "#1F2937", marginBottom: 4 }}>{path.title}</Text>
+                      <Text style={{ fontSize: 13, fontFamily: "nunito", color: "#6B7280", marginBottom: 16 }}>{path.desc}</Text>
+                      
+                      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, borderTopColor: '#F3F4F6', paddingTop: 12 }}>
+                        <Text style={{ fontSize: 12, fontFamily: "nunito-bold", color: path.color }}>
+                          {isEnrolled ? "Continue Path" : "Enroll Now"}
+                        </Text>
+                        <Ionicons name="arrow-forward" size={16} color={path.color} />
+                      </View>
+                    </TouchableOpacity>
+                  );
+                })}
+              </ScrollView>
+            </View>
 
-              <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginBottom: 16, color: "#1F2937" }}>
+              <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginBottom: 16, paddingHorizontal: 16, color: "#1F2937" }}>
                 All Courses
               </Text>
               {/* Default Courses Section */}
