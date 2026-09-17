@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Platform } from '
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
+import SyntaxHighlighter from 'react-native-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import SafeScreen from '../../../../components/SafeScreen';
 import { allCoursesContext } from '../../../../context/context';
 import { PRACTICE_PROGRAMS } from '../../../../assets/data/programs';
@@ -46,7 +48,15 @@ function ProgramCell({ program }) {
         </View>
         
         <ScrollView style={styles.codeScroll} horizontal showsHorizontalScrollIndicator={false}>
-          <Text style={styles.codeText}>{program.solutionCode}</Text>
+          <SyntaxHighlighter 
+            language="javascript" 
+            style={dracula} 
+            customStyle={{ padding: 12, margin: 0, backgroundColor: 'transparent' }}
+            fontSize={13}
+            fontFamily={Platform.OS === 'ios' ? 'Menlo' : 'monospace'}
+          >
+            {program.solutionCode}
+          </SyntaxHighlighter>
         </ScrollView>
       </View>
     </View>
