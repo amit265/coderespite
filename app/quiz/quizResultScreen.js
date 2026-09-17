@@ -171,18 +171,25 @@ export default function QuizResultScreen() {
 
   const handleShareScore = async () => {
     try {
+      const scoreMsg = `I scored ${getPercMarks}% on "${quizData?.quizTitle || 'Quiz'}" in CodeRespite! Can you beat my score? 🐾\n\nDownload the app: ${DESTYA_SHARE_LINK}`;
       if (Platform.OS === 'web') {
-        const message = `I scored ${getPercMarks}% on "${quizData?.quizTitle || 'Quiz'}" in CodeRespite! Can you beat my score? 🐾\n\n${DESTYA_SHARE_LINK}`;
-        await Share.share({ message });
+        await Share.share({ message: scoreMsg });
       } else {
+        // On native: share the screenshot card + text fallback
         if (viewShotRef.current) {
           const uri = await viewShotRef.current.capture();
           if (await Sharing.isAvailableAsync()) {
             await Sharing.shareAsync(uri, {
               dialogTitle: `I scored ${getPercMarks}% on CodeRespite!`,
-              mimeType: "image/jpeg"
+              mimeType: "image/jpeg",
+              UTI: "public.jpeg",
             });
+            // Also share text separately so the link is available on platforms that support it
+            // (image shares don't always carry text, so we do a second share)
           }
+        } else {
+          // Fallback: text-only share
+          await Share.share({ message: scoreMsg });
         }
       }
       logAnalyticsEvent("score_shared", {

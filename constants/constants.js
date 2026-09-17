@@ -2,14 +2,23 @@ import React from "react";
 import { Platform, Text } from "react-native";
 
 export const STORE_LINK = Platform.select({
-  ios: "https://apps.apple.com/app/id6760843431", // Replace with your actual iOS App ID if different
+  ios: "https://apps.apple.com/app/id6760843431",
   android: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
   default: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
 });
 
-export const DESTYA_SHARE_LINK = "https://destyastudio.com/products/code-respite";
+// Platform-aware app link: uses store deep-link on mobile, website on web
+export const DESTYA_SHARE_LINK = Platform.select({
+  ios: "https://apps.apple.com/app/id6760843431",
+  android: "https://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite",
+  default: "https://destyastudio.com/products/code-respite",
+});
 
-export const SHARE_MESSAGE = "Check out this amazing app!\n\n" + DESTYA_SHARE_LINK;
+export const SHARE_MESSAGE = Platform.select({
+  ios: `🐾 I've been learning to code with CodeRespite! Check it out on the App Store:\nhttps://apps.apple.com/app/id6760843431`,
+  android: `🐾 I've been learning to code with CodeRespite! Check it out on Google Play:\nhttps://play.google.com/store/apps/details?id=com.mindcraftlearning.coderespite`,
+  default: `🐾 I've been learning to code with CodeRespite! Check it out here:\nhttps://destyastudio.com/products/code-respite`,
+});
 
 export const Emoji = ({ children, style }) => {
   // Filter out fontFamily from incoming style to prevent overriding the system font on iOS

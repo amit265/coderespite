@@ -65,7 +65,7 @@ export default function DailyChallengeScreen() {
         throw new Error("Empty quiz generated");
       }
     } catch (error) {
-      console.error(error);
+      console.error("[DailyChallenge] Failed to generate challenge:", error);
       CustomAlert.alert(
         "Challenge Issue",
         "We couldn't generate your challenge today. Please try again later.",

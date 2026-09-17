@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/colors";
-import { EmojiText } from "../constants/constants";
+import { EmojiText, STORE_LINK } from "../constants/constants";
 import { CustomAlert } from "./shared/GlobalAlert";
 
 export default function BadgeModal({ visible, onClose, badge }) {
@@ -48,17 +48,19 @@ export default function BadgeModal({ visible, onClose, badge }) {
   const handleShare = async () => {
     if (!badge) return;
     try {
+      const storeLink = STORE_LINK;
+      const shareMessage = `${badge.message}\n\nLearn to code with CodeRespite! 🐾\n${storeLink}`;
       if (Platform.OS === 'web') {
         if (navigator.clipboard) {
-          await navigator.clipboard.writeText(badge.message);
+          await navigator.clipboard.writeText(shareMessage);
           CustomAlert.alert("Achievement Copied! 📋", "Your coding achievement message is copied to clipboard!");
         } else {
-          CustomAlert.alert("My Coding Achievement", badge.message);
+          CustomAlert.alert("My Coding Achievement", shareMessage);
         }
         return;
       }
       await Share.share({
-        message: badge.message,
+        message: shareMessage,
       });
     } catch (error) {
       console.error("Share achievement error:", error);

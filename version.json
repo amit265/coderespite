@@ -1,9 +1,11 @@
 {
-  "latestVersion": "1.2.0",
+  "latestVersion": "1.2.2",
   "whatsNew": [
-    "Improved tablet layout with a focused, centered view.",
-    "Fixed missing banner ads on AI Course flashcards.",
-    "Ads now smoothly hide when disconnected, fixing blank spaces.",
-    "Added pull-to-refresh to fetch latest content easily."
+    "New Programs Notebook - browse and copy code solutions by language and topic.",
+    "Consistent back button navigation across all individual screens.",
+    "Daily Challenge page redesigned with a cleaner header.",
+    "Fixed a Text rendering crash on the Daily Challenge screen.",
+    "Sharing now links directly to the App Store or Play Store on your platform.",
+    "Replaced all em dashes in content for better rendering on all devices."
   ]
 }
