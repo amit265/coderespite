@@ -2,15 +2,15 @@ import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useRef } from "react";
 import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert, ScrollView, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import PageTransition from "../../components/PageTransition";
-import SafeScreen from "../../components/SafeScreen";
-import RefreshWrapper from "../../components/shared/RefreshWrapper";
-import { courseIcons } from "../../constants/constants";
-import { adConfigContext, allCoursesContext, userDetailsContext } from "../../context/context";
-import { useGlobalRefresh } from "../../hooks/useGlobalRefresh";
-import { NativeAdComponent } from "../../services/AdManager";
-import AsyncStorage from "../../services/storage";
-import { CustomAlert } from "../../components/shared/GlobalAlert";
+import PageTransition from "../components/PageTransition";
+import SafeScreen from "../components/SafeScreen";
+import RefreshWrapper from "../components/shared/RefreshWrapper";
+import { courseIcons } from "../constants/constants";
+import { adConfigContext, allCoursesContext, userDetailsContext } from "../context/context";
+import { useGlobalRefresh } from "../hooks/useGlobalRefresh";
+import { NativeAdComponent } from "../services/AdManager";
+import AsyncStorage from "../services/storage";
+import { CustomAlert } from "../components/shared/GlobalAlert";
 
 // Calculate dynamic width for 2-column grid
 // Removed Dimensions requirement as we will use flex percentages
@@ -94,7 +94,7 @@ const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
         >
           <Image
             source={
-              courseIcons[item?.icon] || require("../../assets/default-icon.png")
+              courseIcons[item?.icon] || require("../assets/default-icon.png")
             }
             style={{
               width: "100%",
@@ -283,7 +283,7 @@ export default function Learn() {
                               return data;
                             });
                           } else {
-                            const { setEnrolledPath } = require('../../services/userStorage');
+                            const { setEnrolledPath } = require('../services/userStorage');
                             setEnrolledPath(path.id);
                           }
                           CustomAlert.alert("Enrolled!", `You are now enrolled in the ${path.title} path.`);

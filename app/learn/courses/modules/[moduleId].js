@@ -99,7 +99,7 @@ export default function ModuleDetail() {
           </Text>
           <TouchableOpacity
             style={styles.backButtonLarge}
-            onPress={() => router.replace("/(tabs)/learn")}
+            onPress={() => router.replace("/learn")}
           >
             <Text style={styles.backButtonText}>Back to Courses</Text>
           </TouchableOpacity>

@@ -18,16 +18,16 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import PageTransition from "../../components/PageTransition";
-import SafeScreen from "../../components/SafeScreen";
-import colors from "../../constants/colors";
-import { courseIcons } from "../../constants/constants";
+import PageTransition from "../components/PageTransition";
+import SafeScreen from "../components/SafeScreen";
+import colors from "../constants/colors";
+import { courseIcons } from "../constants/constants";
 import {
   adConfigContext,
   allCoursesContext,
   userDetailsContext,
-} from "../../context/context";
-import { NativeAdComponent } from "../../services/AdManager";
+} from "../context/context";
+import { NativeAdComponent } from "../services/AdManager";
 
 // --- New Animated Quiz Card Component ---
 const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
@@ -115,7 +115,7 @@ const AnimatedQuizCard = ({ item, index, onPress, matchedAttempt }) => {
             <Image
               source={
                 courseIcons[item.courseIcon] ||
-                require("../../assets/default-icon.png")
+                require("../assets/default-icon.png")
               }
               style={{ width: "100%", height: "100%", resizeMode: "cover" }}
             />

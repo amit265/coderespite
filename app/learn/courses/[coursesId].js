@@ -139,7 +139,7 @@ export default function CourseModules() {
               {"We couldn't resolve the requested course curriculum."}
             </Text>
             <TouchableOpacity
-              onPress={() => router.replace("/(tabs)/learn")}
+              onPress={() => router.replace("/learn")}
               style={{ backgroundColor: colors.PRIMARY, paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 }}
             >
               <Text style={{ color: "white", fontSize: 16, fontFamily: "nunito-bold" }}>Back to Courses</Text>

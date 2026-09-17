@@ -339,7 +339,7 @@ export default function QuizId() {
               {"We couldn't resolve the requested practice quiz."}
             </Text>
             <TouchableOpacity
-              onPress={() => router.replace("/(tabs)/quiz")}
+              onPress={() => router.replace("/quiz")}
               style={{ backgroundColor: colors.PRIMARY, paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 }}
             >
               <Text style={{ color: "white", fontSize: 16, fontFamily: "nunito-bold" }}>Back to Quizzes</Text>

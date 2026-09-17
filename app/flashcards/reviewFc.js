@@ -158,7 +158,7 @@ export default function SRSReviewScreen() {
             <Text style={styles.emptySub}>
               No flashcards are currently due for review. Keep learning new courses to grow your spaced-repetition deck!
             </Text>
-            <TouchableOpacity style={styles.exploreBtn} onPress={() => router.replace("/(tabs)/flashcards")}>
+            <TouchableOpacity style={styles.exploreBtn} onPress={() => router.replace("/flashcards")}>
               <Text style={styles.exploreBtnText}>Explore Flashcards</Text>
             </TouchableOpacity>
           </View>

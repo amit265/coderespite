@@ -128,7 +128,7 @@ export default function QuizHistory() {
                   <View className="w-full">
                     <Button
                       text={"Take a Quiz"}
-                      onPress={() => router.push("/(tabs)/quiz")}
+                      onPress={() => router.push("/quiz")}
                     />
                   </View>
                 </View>

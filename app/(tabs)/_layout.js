@@ -145,11 +145,6 @@ export default function TabsLayout() {
         <Tabs.Screen name="courses" options={{ title: "Courses" }} listeners={webTabListener} />
         <Tabs.Screen name="practice" options={{ title: "Practice" }} listeners={webTabListener} />
         <Tabs.Screen name="profile" options={{ title: "Profile" }} listeners={webTabListener} />
-        
-        {/* Hidden legacy tabs (still route-able but hidden from tab bar) */}
-        <Tabs.Screen name="learn" options={{ href: null }} />
-        <Tabs.Screen name="flashcards" options={{ href: null }} />
-        <Tabs.Screen name="quiz" options={{ href: null }} />
       </Tabs>
 
 
