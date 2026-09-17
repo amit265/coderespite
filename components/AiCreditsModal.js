@@ -3,6 +3,7 @@ import { View, Text, Modal, TouchableOpacity, StyleSheet, ActivityIndicator } fr
 import { Ionicons } from '@expo/vector-icons';
 import { aiCreditsContext } from '../context/context';
 import { showRewardedAd } from '../services/AdManager';
+import { addCreditsFromAd } from '../services/aiCreditsService';
 
 export default function AiCreditsModal({ visible, onClose, onCreditsAdded }) {
   const { credits, refreshCredits } = useContext(aiCreditsContext);
@@ -13,7 +14,6 @@ export default function AiCreditsModal({ visible, onClose, onCreditsAdded }) {
     showRewardedAd(
       async () => {
         // On reward earned
-        const { addCreditsFromAd } = await import('../services/aiCreditsService');
         const newCount = await addCreditsFromAd();
         await refreshCredits();
         setLoading(false);

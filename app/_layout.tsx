@@ -8,7 +8,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
-import GlobalAlertComponent, { globalAlertRef } from "../components/shared/GlobalAlert";
+import GlobalAlertComponent, { globalAlertRef, CustomAlert } from "../components/shared/GlobalAlert";
 import { useFonts } from "expo-font";
 import * as Network from 'expo-network';
 import { Stack, SplashScreen } from 'expo-router';
@@ -105,9 +105,7 @@ export default function RootLayout() {
       setOnAdRewardSuccess(() => onSuccess);
       showRewarded();
     } else {
-      import('../components/shared/GlobalAlert').then(({ CustomAlert }) => {
-        CustomAlert.alert("Ad loading", "The rewarded video is still loading. Please try again in a few seconds.");
-      });
+      CustomAlert.alert("Ad loading", "The rewarded video is still loading. Please try again in a few seconds.");
       loadRewarded();
     }
   }, [isRewardedLoaded, showRewarded, loadRewarded]);
