@@ -8,6 +8,58 @@ import { allCoursesContext } from '../../../../context/context';
 import { PRACTICE_PROGRAMS } from '../../../../assets/data/programs';
 import { CustomAlert } from '../../../../components/shared/GlobalAlert';
 
+// Custom basic syntax highlighter for React Native
+const highlightCode = (code) => {
+  if (!code) return null;
+  
+  // Very basic regex to match tokens
+  const keywordRegex = /\b(const|let|var|function|return|if|else|for|while|import|from|export|default|class|new|async|await|try|catch)\b/g;
+  const stringRegex = /(['"`])(.*?)\1/g;
+  const commentRegex = /(\/\/.*|\/\*[\s\S]*?\*\/)/g;
+  const numberRegex = /\b(\d+)\b/g;
+
+  // Split code into tokens (this is a simplified approach, a real tokenizer is much more complex)
+  // We'll just apply basic colors. A simple way is to match all types and split the string.
+  // To avoid overlapping matches, we'll use a combined regex.
+  const tokenRegex = /(\/\/.*|\/\*[\s\S]*?\*\/)|(['"`][\s\S]*?['"`])|\b(const|let|var|function|return|if|else|for|while|import|from|export|default|class|new|async|await|try|catch)\b|\b(\d+)\b/g;
+
+  const elements = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = tokenRegex.exec(code)) !== null) {
+    const textBefore = code.slice(lastIndex, match.index);
+    if (textBefore) {
+      elements.push(<Text key={`text_${lastIndex}`} style={{ color: '#E5E7EB' }}>{textBefore}</Text>);
+    }
+
+    let color = '#E5E7EB'; // default
+    if (match[1]) {
+      // Comment
+      color = '#6B7280';
+    } else if (match[2]) {
+      // String
+      color = '#A7F3D0';
+    } else if (match[3]) {
+      // Keyword
+      color = '#F472B6';
+    } else if (match[4]) {
+      // Number
+      color = '#FBBF24';
+    }
+
+    elements.push(<Text key={`token_${match.index}`} style={{ color }}>{match[0]}</Text>);
+    lastIndex = tokenRegex.lastIndex;
+  }
+
+  const textAfter = code.slice(lastIndex);
+  if (textAfter) {
+    elements.push(<Text key={`text_${lastIndex}`} style={{ color: '#E5E7EB' }}>{textAfter}</Text>);
+  }
+
+  return <Text style={styles.codeText}>{elements}</Text>;
+};
+
 function ProgramCell({ program }) {
   const [copied, setCopied] = useState(false);
 
@@ -46,7 +98,7 @@ function ProgramCell({ program }) {
         </View>
         
         <ScrollView style={styles.codeScroll} horizontal showsHorizontalScrollIndicator={false}>
-          <Text style={styles.codeText}>{program.solutionCode}</Text>
+          {highlightCode(program.solutionCode)}
         </ScrollView>
       </View>
     </View>
@@ -188,10 +240,10 @@ const styles = StyleSheet.create({
     color: '#6B7280',
   },
   codeWrapper: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#1E1E1E',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#333333',
     overflow: 'hidden',
   },
   codeHeader: {
@@ -200,14 +252,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#2D2D2D',
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#333333',
   },
   codeLanguage: {
     fontSize: 12,
     fontFamily: 'nunito-bold',
-    color: '#4B5563',
+    color: '#9CA3AF',
   },
   copyBtn: {
     flexDirection: 'row',
@@ -218,7 +270,7 @@ const styles = StyleSheet.create({
   copyText: {
     fontSize: 12,
     fontFamily: 'nunito-bold',
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   codeScroll: {
     maxHeight: 400,
@@ -227,6 +279,6 @@ const styles = StyleSheet.create({
     padding: 12,
     fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
     fontSize: 13,
-    color: '#1F2937',
+    color: '#E5E7EB',
   }
 });
