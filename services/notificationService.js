@@ -88,7 +88,7 @@ export const scheduleStreakReminder = async () => {
       body: "Your coding streak is about to break! Jump in for 5 minutes to save it. 🔥",
       sound: true,
     },
-    trigger: triggerDate,
+    trigger: { type: 'date', date: triggerDate },
   });
 
   // Save the ID so we can cancel it later
