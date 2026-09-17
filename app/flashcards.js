@@ -204,9 +204,14 @@ export default function FlashCards() {
   return (
     <PageTransition>
       <SafeScreen>
-        <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginVertical: 16 }}>
-          FlashCards
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, marginBottom: 16, marginTop: 8 }}>
+          <TouchableOpacity onPress={() => router.back()} style={{ padding: 4 }}>
+            <Ionicons name="arrow-back" size={24} color="#1F2937" />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 24, fontFamily: "nunito-bold", color: "black", marginLeft: 16 }}>
+            FlashCards
+          </Text>
+        </View>
 
         <RefreshWrapper
           onRefresh={refreshData}

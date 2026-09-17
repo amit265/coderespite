@@ -3,6 +3,7 @@ import {
   Entypo,
   FontAwesome,
   MaterialCommunityIcons,
+  Ionicons,
 } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
@@ -289,9 +290,14 @@ export default function Quiz() {
   return (
     <PageTransition>
       <SafeScreen>
-        <Text className="text-2xl font-nunito-bold mb-4 text-black text-center py-2">
-          Quiz
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, marginBottom: 16, marginTop: 8 }}>
+          <TouchableOpacity onPress={() => router.back()} style={{ padding: 4 }}>
+            <Ionicons name="arrow-back" size={24} color="#1F2937" />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 24, fontFamily: "nunito-bold", color: "black", marginLeft: 16 }}>
+            Quiz
+          </Text>
+        </View>
 
         <View className="flex-row items-center px-4 mb-4" style={{ gap: 10 }}>
           {/* Picker Container */}

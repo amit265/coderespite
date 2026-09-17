@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator, Alert, StyleSheet } from "react-native";
 import { useRouter, Stack } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "../../services/storage";
 import SafeScreen from "../../components/SafeScreen";
 import PageTransition from "../../components/PageTransition";
@@ -86,10 +87,10 @@ export default function DailyChallengeScreen() {
           {/* Custom Header with Back Button */}
           <View style={styles.header}>
             <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-              <Text style={styles.backButtonText}>← Back</Text>
+              <Ionicons name="arrow-back" size={24} color="#0C1D59" />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>Daily Challenge 🎯</Text>
-            <View style={{ width: 60 }} /> {/* Spacer to balance flex header */}
+            <View style={{ width: 24 }} /> {/* Spacer to balance flex header */}
           </View>
           
           <View style={styles.card}>
@@ -156,19 +157,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   backButton: {
-    padding: 10,
-    backgroundColor: "white",
-    borderRadius: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  backButtonText: {
-    fontFamily: "nunito-bold",
-    color: "#0C1D59",
-    fontSize: 16,
+    padding: 5,
   },
   headerTitle: {
     fontSize: 22,
