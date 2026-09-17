@@ -1,5 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, StyleSheet, Animated, Alert } from 'react-native';
 import colors from '../../constants/colors';
 
 export const globalAlertRef = React.createRef();
@@ -10,9 +10,7 @@ export const CustomAlert = {
       globalAlertRef.current.alert(title, message, buttons, options);
     } else {
       console.warn("GlobalAlert not mounted, falling back to native Alert");
-      import('react-native').then(({ Alert }) => {
-        Alert.alert(title, message, buttons, options);
-      });
+      Alert.alert(title, message, buttons, options);
     }
   }
 };
