@@ -8,6 +8,7 @@ const actions = [
   { icon: "📇", label: "Flashcards", bg: "bg-yellow-100", tab: "flashcards" },
   { icon: "📝", label: "Quiz", bg: "bg-green-100", tab: "quiz" },
   { icon: "👤", label: "Profile", bg: "bg-purple-100", tab: "profile" },
+  { icon: "💻", label: "Programs Notebook", bg: "bg-pink-100", tab: "notebook", fullWidth: true },
 ];
 
 // --- Individual Animated Button ---
@@ -49,7 +50,7 @@ const ActionButton = ({ action, index, onPress }) => {
   return (
     <Animated.View
       style={{
-        width: "48%", // Maintain layout
+        width: action.fullWidth ? "100%" : "48%", // Maintain layout
         transform: [{ scale: popAnim }], // Apply entrance pop
       }}
     >
@@ -59,8 +60,9 @@ const ActionButton = ({ action, index, onPress }) => {
         onPressOut={handlePressOut}
       >
         <Animated.View
-          className={`h-28 mb-4 ${action.bg} rounded-xl p-4`}
+          className={`mb-4 ${action.bg} rounded-xl p-4`}
           style={{
+            minHeight: 112,
             // Apply press shrink/grow
             transform: [{ scale: pressAnim }],
             // Add shadow manually for better animation performance
