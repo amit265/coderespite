@@ -232,7 +232,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
               </View>
             </View>
 
-            <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
+            <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 20, paddingBottom: 80 }} showsVerticalScrollIndicator={false}>
               <Text style={styles.sectionLabel}>Choose a topic:</Text>
               <View style={{ gap: 8, marginBottom: 20 }}>
                 {TOPICS.map((t) => (
@@ -303,7 +303,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
             <Animated.View style={[styles.progressFill, { width: progressWidth }]} />
           </View>
 
-          <ScrollView keyboardShouldPersistTaps="handled" ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
+          <ScrollView keyboardShouldPersistTaps="handled" ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
             {/* Question card */}
             <View style={styles.questionCard}>
               <View style={styles.questionBadge}>
@@ -365,7 +365,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
             </TouchableOpacity>
           </View>
 
-          <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
+          <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 20, paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
             {/* Summary card */}
             <View style={styles.summaryCard}>
               <Text style={styles.summaryTitle}>Overall Summary</Text>

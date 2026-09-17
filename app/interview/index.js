@@ -74,7 +74,7 @@ export default function InterviewIndex() {
     <PageTransition>
       <ScrollView 
         style={[styles.root, { paddingTop: insets.top + 8 }]}
-        contentContainerStyle={{ paddingBottom: insets.bottom + 120 }}
+        contentContainerStyle={{ paddingBottom: insets.bottom + 16 }}
       >
         {/* Back + header */}
         <View style={styles.header}>

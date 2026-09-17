@@ -509,7 +509,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         </View>
 
         {/* AI Disclaimer */}
-        <Text style={[styles.disclaimer, { paddingBottom: insets.bottom + 70 }]}>
+        <Text style={[styles.disclaimer, { paddingBottom: Math.max(insets.bottom, 8) }]}>
           🤖 Meowgrammer uses AI and may make mistakes. Do not rely on it for critical decisions.
         </Text>
       </View>
