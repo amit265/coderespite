@@ -98,7 +98,7 @@ export default function Favorites() {
                   text="Explore FlashCards"
                   onPress={() => {
                     setClickCount((prev) => prev + 1);
-                    router.push("/(tabs)/flashcards");
+                    router.push("/flashcards");
                   }}
                 />
               </View>

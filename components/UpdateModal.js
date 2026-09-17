@@ -1,11 +1,11 @@
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View, ScrollView, Platform, Linking } from "react-native";
 import colors from "../constants/colors";
+import { STORE_LINK } from "../constants/constants";
 
 export default function UpdateModal({ visible, changelog, remoteVersion, onClose }) {
   const handleUpdate = () => {
-    const storeLink = "https://destyastudio.com/products/code-respite";
-    Linking.openURL(storeLink).catch((err) =>
+    Linking.openURL(STORE_LINK).catch((err) =>
       console.error("Failed to open store link:", err)
     );
     onClose();
