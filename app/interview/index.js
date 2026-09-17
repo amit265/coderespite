@@ -1,7 +1,7 @@
 // app/interview/index.js
 // Mode selection screen — Mock Interview vs Q&A Tutor
 import React, { useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Animated, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -72,7 +72,10 @@ export default function InterviewIndex() {
 
   return (
     <PageTransition>
-      <View style={[styles.root, { paddingTop: insets.top + 8 }]}>
+      <ScrollView 
+        style={[styles.root, { paddingTop: insets.top + 8 }]}
+        contentContainerStyle={{ paddingBottom: insets.bottom + 120 }}
+      >
         {/* Back + header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} hitSlop={16} style={styles.backBtn}>
@@ -126,13 +129,13 @@ export default function InterviewIndex() {
         <Text style={[styles.note, { paddingBottom: insets.bottom + 16 }]}>
           🔋 AI credits reset to 5 daily. Watch an ad on Home for +3 bonus credits.
         </Text>
-      </View>
+      </ScrollView>
     </PageTransition>
   );
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#F8F9FF' },
+  root: { flex: 1, backgroundColor: '#CBE7F7' },
   header: { paddingHorizontal: 16, paddingBottom: 4 },
   backBtn: { padding: 6, alignSelf: 'flex-start' },
   heroSection: { alignItems: 'center', paddingHorizontal: 24, marginBottom: 28 },

@@ -6,7 +6,7 @@ import {
   ActivityIndicator, Alert, StyleSheet, KeyboardAvoidingView,
   Platform, Animated,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Markdown from 'react-native-markdown-display';
@@ -53,11 +53,37 @@ async function callGroq(apiKey, messages) {
 
 export default function MockInterview() {
   const router = useRouter();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const { credits, refreshCredits } = useContext(aiCreditsContext);
   const scrollRef = useRef(null);
 
   const [stage, setStage] = useState(STAGE.TOPIC);
+
+  // Prevent back navigation during active interview
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+      if (stage !== STAGE.INTERVIEW) {
+        return;
+      }
+
+      e.preventDefault();
+
+      CustomAlert.alert(
+        'Quit Interview?',
+        'Your progress will be lost. Are you sure you want to leave?',
+        [
+          { text: 'Cancel', onPress: () => {} },
+          {
+            text: 'Leave',
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ]
+      );
+    });
+
+    return unsubscribe;
+  }, [navigation, stage]);
   const [topic, setTopic] = useState('');
   const [customTopic, setCustomTopic] = useState('');
   const [questions, setQuestions] = useState([]);  // [{question, userAnswer, feedback}]
@@ -194,7 +220,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
       <>
         <AiCreditsModal visible={showCreditsModal} onClose={() => setShowCreditsModal(false)} onCreditsAdded={refreshCredits} />
         <PageTransition>
-          <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#F8F9FF' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+          <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#CBE7F7' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
             <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
               <TouchableOpacity onPress={() => router.back()} hitSlop={14} style={styles.backBtn}>
                 <Ionicons name="arrow-back" size={24} color="#1F2937" />
@@ -206,7 +232,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
               </View>
             </View>
 
-            <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 80 }} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
               <Text style={styles.sectionLabel}>Choose a topic:</Text>
               <View style={{ gap: 8, marginBottom: 20 }}>
                 {TOPICS.map((t) => (
@@ -257,7 +283,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
 
     return (
       <PageTransition>
-        <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#F8F9FF' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#CBE7F7' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
           <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
             <TouchableOpacity onPress={() => CustomAlert.alert('Quit Interview?', 'Your progress will be lost.', [
               { text: 'Cancel', style: 'cancel' },
@@ -277,7 +303,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
             <Animated.View style={[styles.progressFill, { width: progressWidth }]} />
           </View>
 
-          <ScrollView ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: 120 }} showsVerticalScrollIndicator={false}>
+          <ScrollView ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
             {/* Question card */}
             <View style={styles.questionCard}>
               <View style={styles.questionBadge}>
@@ -330,7 +356,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
   if (stage === STAGE.RESULTS && results) {
     return (
       <PageTransition>
-        <View style={{ flex: 1, backgroundColor: '#F8F9FF' }}>
+        <View style={{ flex: 1, backgroundColor: '#CBE7F7' }}>
           <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
             <View style={{ width: 32 }} />
             <Text style={styles.headerTitle}>🏁 Results</Text>
@@ -339,7 +365,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
             </TouchableOpacity>
           </View>
 
-          <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
+          <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
             {/* Summary card */}
             <View style={styles.summaryCard}>
               <Text style={styles.summaryTitle}>Overall Summary</Text>
@@ -379,7 +405,7 @@ const mdStyles = {
 };
 
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingBottom: 12, backgroundColor: '#F8F9FF' },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingBottom: 12, backgroundColor: '#CBE7F7' },
   backBtn: { padding: 4 },
   headerTitle: { fontFamily: 'quicksand-bold', fontSize: 17, color: '#1F2937' },
   creditPill: { flexDirection: 'row', alignItems: 'center', gap: 3, backgroundColor: '#F5F3FF', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20 },

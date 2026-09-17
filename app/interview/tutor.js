@@ -509,7 +509,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         </View>
 
         {/* AI Disclaimer */}
-        <Text style={[styles.disclaimer, { paddingBottom: Math.max(insets.bottom, 8) }]}>
+        <Text style={[styles.disclaimer, { paddingBottom: insets.bottom + 70 }]}>
           🤖 Meowgrammer uses AI and may make mistakes. Do not rely on it for critical decisions.
         </Text>
       </View>
@@ -640,7 +640,7 @@ const markdownStyles = {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#F8F9FF",
+    backgroundColor: "#CBE7F7",
   },
   header: {
     flexDirection: "row",
