@@ -113,7 +113,7 @@ export default function RootLayout() {
   }, [isRewardedLoaded, showRewarded, loadRewarded]);
 
   const [favorites, setFavorites] = useState([]);
-  const [aiCredits, setAiCredits] = useState(5);
+  const [aiCredits, setAiCredits] = useState(20);
 
   useEffect(() => {
     const loadFavorites = async () => {

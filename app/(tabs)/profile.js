@@ -122,9 +122,51 @@ export default function Profile() {
             </View>
           </FadeInSection>
 
-          {/* AI Credits & Power Ups */}
+          {/* Dedicated AI Credits Card */}
           <FadeInSection delay={280}>
             <View className="px-4 mt-2">
+              <View style={{
+                backgroundColor: '#EDE9FE',
+                borderRadius: 16,
+                padding: 20,
+                borderWidth: 1,
+                borderColor: '#C4B5FD',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                  <View style={{
+                    width: 48, height: 48, borderRadius: 24,
+                    backgroundColor: '#8B5CF6',
+                    alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <Ionicons name="sparkles" size={24} color="white" />
+                  </View>
+                  <View>
+                    <Text style={{ fontFamily: 'quicksand-bold', fontSize: 16, color: '#4C1D95' }}>
+                      AI Credits
+                    </Text>
+                    <Text style={{ fontFamily: 'nunito-bold', fontSize: 24, color: '#4C1D95', marginTop: -2 }}>
+                      {aiCredits} <Text style={{ fontSize: 14, color: '#6D28D9' }}>/ 100</Text>
+                    </Text>
+                  </View>
+                </View>
+                <View style={{ alignItems: 'flex-end' }}>
+                  <Text style={{ fontFamily: 'nunito', fontSize: 12, color: '#6D28D9', textAlign: 'right' }}>
+                    Available for
+                  </Text>
+                  <Text style={{ fontFamily: 'nunito-bold', fontSize: 12, color: '#6D28D9', textAlign: 'right' }}>
+                    Code & Tutor AI
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </FadeInSection>
+
+          {/* AI Credits & Power Ups */}
+          <FadeInSection delay={290}>
+            <View className="px-4 mt-4">
               <PowerUps credits={aiCredits} refreshCredits={refreshCredits} />
             </View>
           </FadeInSection>

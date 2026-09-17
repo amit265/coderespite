@@ -59,7 +59,7 @@ export default function PowerUps({ credits, refreshCredits }) {
   const handleWatchAiCredits = () => {
     CustomAlert.alert(
       "Get AI Credits",
-      "Watch a short video ad to earn 3 AI Credits. You can hold up to 10 credits at once. Proceed?",
+      "Watch a short video ad to earn 10 AI Credits. You can hold up to 100 credits at once. Proceed?",
       [
         { text: "Cancel", style: "cancel" },
         { 
@@ -160,14 +160,8 @@ export default function PowerUps({ credits, refreshCredits }) {
             Need more AI Credits?
           </Text>
           <Text style={{ fontFamily: 'nunito', fontSize: 12, color: '#6B7280' }}>
-            Watch an ad to get +3 AI credits
+            Watch an ad to get +10 AI credits
           </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 4 }}>
-            <MaterialCommunityIcons name="robot-outline" size={12} color="#8B5CF6" />
-            <Text style={{ fontFamily: 'nunito-bold', fontSize: 12, color: '#8B5CF6' }}>
-              {credits} / 10 AI credits available
-            </Text>
-          </View>
         </View>
         <TouchableOpacity
           onPress={handleWatchAiCredits}
