@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useRef } from "react";
-import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert } from "react-native";
+import { Image, Text, View, Animated, Pressable, TouchableOpacity , Alert, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PageTransition from "../../components/PageTransition";
 import SafeScreen from "../../components/SafeScreen";
