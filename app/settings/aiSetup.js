@@ -53,7 +53,7 @@ export default function AISetupGuide() {
             <Text style={styles.headerTitle}>AI Configuration Guide</Text>
           </View>
 
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+          <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {/* Why section */}
             <View style={styles.card}>
               <View style={styles.sectionHeader}>

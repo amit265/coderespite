@@ -96,7 +96,7 @@ export default function AIGenerator() {
             <View style={{ width: 28 }} />
           </View>
 
-          <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
             <View style={styles.card}>
               <Text style={styles.cardTitle}>📝 Select Quiz Topic</Text>
               <Text style={styles.cardDesc}>

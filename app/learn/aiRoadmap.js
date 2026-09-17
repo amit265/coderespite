@@ -121,7 +121,7 @@ export default function AIRoadmap() {
             <View style={{ width: 28 }} />
           </View>
 
-          <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
             <View style={styles.card}>
               <Text style={styles.cardTitle}>🎯 What do you want to learn?</Text>
               <Text style={styles.cardDesc}>

@@ -220,7 +220,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
       <>
         <AiCreditsModal visible={showCreditsModal} onClose={() => setShowCreditsModal(false)} onCreditsAdded={refreshCredits} />
         <PageTransition>
-          <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#CBE7F7' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+          <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#CBE7F7' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}>
             <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
               <TouchableOpacity onPress={() => router.back()} hitSlop={14} style={styles.backBtn}>
                 <Ionicons name="arrow-back" size={24} color="#1F2937" />
@@ -232,7 +232,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
               </View>
             </View>
 
-            <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
+            <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
               <Text style={styles.sectionLabel}>Choose a topic:</Text>
               <View style={{ gap: 8, marginBottom: 20 }}>
                 {TOPICS.map((t) => (
@@ -283,7 +283,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
 
     return (
       <PageTransition>
-        <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#CBE7F7' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#CBE7F7' }} behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}>
           <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
             <TouchableOpacity onPress={() => CustomAlert.alert('Quit Interview?', 'Your progress will be lost.', [
               { text: 'Cancel', style: 'cancel' },
@@ -303,7 +303,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
             <Animated.View style={[styles.progressFill, { width: progressWidth }]} />
           </View>
 
-          <ScrollView ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
+          <ScrollView keyboardShouldPersistTaps="handled" ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
             {/* Question card */}
             <View style={styles.questionCard}>
               <View style={styles.questionBadge}>
@@ -365,7 +365,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
             </TouchableOpacity>
           </View>
 
-          <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
+          <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 120 }} showsVerticalScrollIndicator={false}>
             {/* Summary card */}
             <View style={styles.summaryCard}>
               <Text style={styles.summaryTitle}>Overall Summary</Text>
