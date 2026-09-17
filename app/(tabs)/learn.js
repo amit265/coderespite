@@ -13,8 +13,7 @@ import AsyncStorage from "../../services/storage";
 import { CustomAlert } from "../../components/shared/GlobalAlert";
 
 // Calculate dynamic width for 2-column grid
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const CARD_WIDTH = (SCREEN_WIDTH - 32 - 16) / 2; // Screen width - horizontal padding (32) - middle gap (16)
+// Removed Dimensions requirement as we will use flex percentages
 
 // --- New Animated Card Component ---
 const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
@@ -67,6 +66,7 @@ const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
       style={{
         opacity: fadeAnim,
         transform: [{ translateY: slideAnim }], // Controls entrance slide
+        width: '47.5%', // 47.5% for two columns with space-between
       }}
     >
       <Pressable
@@ -77,8 +77,8 @@ const AnimatedLearnCard = ({ item, index, onPress, onDelete }) => {
       >
         <Animated.View
           style={{
-            width: CARD_WIDTH,
-            height: CARD_WIDTH,
+            width: '100%',
+            aspectRatio: 1, // Keeps it a perfect square
             borderRadius: 24, // Increased radius for a modern look
             overflow: "hidden",
             position: "relative",
