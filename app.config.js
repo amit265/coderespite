@@ -27,7 +27,7 @@ module.exports = {
       supportsTablet: true,
       bundleIdentifier: "com.destyastudio.coderespite",
       icon: "./assets/iosIcon.png",
-      buildNumber: "5",
+      buildNumber: "6",
       infoPlist: {
         NSUserTrackingUsageDescription:
           "This identifier will be used to deliver personalized ads to you.",
@@ -43,7 +43,7 @@ module.exports = {
       },
       edgeToEdgeEnabled: true,
       package: "com.mindcraftlearning.coderespite",
-      versionCode: 29,
+      versionCode: 30,
       googleServicesFile: "./google-services.json",
       permissions: ["com.google.android.gms.permission.AD_ID"],
       intentFilters: [

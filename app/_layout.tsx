@@ -16,6 +16,7 @@ import { requestTrackingPermission } from "../services/trackingInit";
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Platform, StatusBar, View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
+// @ts-ignore
 import analytics from '@react-native-firebase/analytics';
 import { initializeMobileAds } from "../services/adInit";
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -38,7 +39,6 @@ const queryClient = new QueryClient();
 
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN || "",
-  enableInExpoDevelopment: true,
   debug: false,
 });
 

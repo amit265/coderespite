@@ -1,7 +1,9 @@
 /* eslint-env node */
+/* eslint-env node */
 const fs = require('fs');
 const path = require('path');
 
+// eslint-disable-next-line no-undef
 const bundlePath = path.join(__dirname, '../assets/data/all_courses_bundled.json');
 let courses = [];
 if (fs.existsSync(bundlePath)) {
