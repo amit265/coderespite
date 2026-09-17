@@ -78,10 +78,11 @@ export default function DailyChallengeScreen() {
   };
 
   return (
-    <PageTransition>
-      <SafeScreen>
-        <Stack.Screen options={{ headerShown: false }} />
-        <View style={styles.container}>
+    <>
+      <Stack.Screen options={{ headerShown: false }} />
+      <PageTransition>
+        <SafeScreen>
+          <View style={styles.container}>
           {/* Custom Header with Back Button */}
           <View style={styles.header}>
             <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
@@ -135,8 +136,9 @@ export default function DailyChallengeScreen() {
             )}
           </View>
         </View>
-      </SafeScreen>
-    </PageTransition>
+        </SafeScreen>
+      </PageTransition>
+    </>
   );
 }
 

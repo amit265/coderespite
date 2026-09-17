@@ -360,10 +360,11 @@ export default function QuizId() {
   }
 
   return (
-    <PageTransition>
+    <>
       <Stack.Screen options={{ gestureEnabled: false }} />
-      <SafeScreen>
-        <View style={{ flex: 1 }}>
+      <PageTransition>
+        <SafeScreen>
+          <View style={{ flex: 1 }}>
           {/* Top Bar */}
           <View
             style={{
@@ -502,8 +503,8 @@ export default function QuizId() {
         </View>
 
         {/* Bottom Banner Ad */}
-        
-      </SafeScreen>
-    </PageTransition>
+              </SafeScreen>
+      </PageTransition>
+    </>
   );
 }

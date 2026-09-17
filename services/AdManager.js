@@ -278,8 +278,6 @@ export const NativeAdComponent = () => {
 
   if (!adsReady || !adConfig?.showAds || !adConfig?.showNativeAds) return null;
 
-  console.log("[Ads] NativeAdView type:", typeof NativeAdView);
-  console.log("[Ads] Rendering NativeAdView...");
   return (
     <View style={[{
       opacity: isAdLoaded ? 1 : 0,
