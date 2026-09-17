@@ -108,32 +108,33 @@ export default function PowerUps({ credits, refreshCredits }) {
         </View>
         <View style={{ flex: 1 }}>
           <Text style={{ fontFamily: 'quicksand-bold', fontSize: 14, color: isAdFreeActive ? '#065F46' : '#1F2937' }}>
-            {isAdFreeActive ? `Ad-Free: ${timeLeft} left ✅` : 'Go Ad-Free for 15 min'}
+            {isAdFreeActive ? 'Ad-Free Active ✅' : 'Go Ad-Free for 15 min'}
           </Text>
           <Text style={{ fontFamily: 'nunito', fontSize: 12, color: '#6B7280' }}>
             {isAdFreeActive ? 'All ads paused. Enjoy!' : `Watch an ad for uninterrupted learning`}
           </Text>
         </View>
-        {!isAdFreeActive && (
-          <TouchableOpacity
-            onPress={handleWatchAdFree}
-            disabled={adFreeLoading || !isRewardedLoaded}
-            style={{
-              backgroundColor: !isRewardedLoaded ? '#9CA3AF' : '#132F94',
-              paddingHorizontal: 12,
-              paddingVertical: 8,
-              borderRadius: 12,
-              alignItems: 'center',
-              justifyContent: 'center',
-              minWidth: 64,
-            }}
-          >
-            {adFreeLoading || !isRewardedLoaded
+        <TouchableOpacity
+          onPress={handleWatchAdFree}
+          disabled={isAdFreeActive || adFreeLoading || !isRewardedLoaded}
+          style={{
+            backgroundColor: isAdFreeActive ? '#10B981' : (!isRewardedLoaded ? '#9CA3AF' : '#132F94'),
+            paddingHorizontal: 12,
+            paddingVertical: 8,
+            borderRadius: 12,
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: 64,
+          }}
+        >
+          {isAdFreeActive 
+            ? <Text style={{ color: 'white', fontFamily: 'nunito-bold', fontSize: 12 }}>{timeLeft}</Text>
+            : (adFreeLoading || !isRewardedLoaded
               ? <ActivityIndicator size="small" color="white" />
               : <Text style={{ color: 'white', fontFamily: 'nunito-bold', fontSize: 12 }}>Watch Ad</Text>
-            }
-          </TouchableOpacity>
-        )}
+            )
+          }
+        </TouchableOpacity>
       </View>
 
       {/* AI Credits Banner */}
