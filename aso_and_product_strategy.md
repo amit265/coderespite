@@ -49,7 +49,7 @@ To rank in Google Play and the Apple App Store, we bypass broad terms and target
 
 ### 📖 Full Store Description (Optimized for Conversion & Indexing)
 ```
-Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾
+Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite - your pocket-sized AI coding companion! 🐾
 
 Are you a beginner learning to code, or a developer prepping for a big tech interview? Start active recall learning with interactive quizzes, spaced-repetition flashcards, and Ask Meowgrammer, your built-in AI tutor!
 

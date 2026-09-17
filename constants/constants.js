@@ -251,7 +251,7 @@ export const levels = [
     level: "Level 7",
     title: "Tactical Tabby",
     description:
-      "Strategic and precise — your learning is no longer random, but calculated.",
+      "Strategic and precise - your learning is no longer random, but calculated.",
   },
   {
     id: 8,
@@ -283,7 +283,7 @@ export const WELCOME_MESSAGES = [
   "Code. Learn. Repeat. 🔁",
   "Fuel up your brain with some quizzes 🧠",
   "Time for a quick revision? Let’s brush up your skills! 🔁",
-  "Flashcards and quizzes ready — let’s reinforce your knowledge! 🧠",
+  "Flashcards and quizzes ready - let’s reinforce your knowledge! 🧠",
   "Just a few minutes a day keeps the bugs away! 🐞",
   "Master one concept at a time. You've got this! 💪",
   "Quick recap time! Let’s tackle a few flashcards 🔄",

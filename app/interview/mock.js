@@ -1,5 +1,5 @@
 // app/interview/mock.js
-// Mock Interview — AI asks 5 questions, user answers, AI gives feedback
+// Mock Interview - AI asks 5 questions, user answers, AI gives feedback
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity, ScrollView,
@@ -181,7 +181,7 @@ Format: Start with a score like "Score: 7/10" on its own line, then 2-3 sentence
         setCurrentQ((prev) => prev + 1);
         setTimeout(() => scrollRef.current?.scrollTo({ y: 0, animated: true }), 100);
       } else {
-        // All done — generate overall summary
+        // All done - generate overall summary
         await generateSummary(updatedQs, apiKey);
       }
     } catch (err) {

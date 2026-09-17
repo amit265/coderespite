@@ -121,7 +121,7 @@ export default function AdFreeScreen() {
               <>
                 <Ionicons name="play-circle" size={22} color="white" />
                 <Text style={styles.watchAdText}>
-                  {isActive ? 'Session Already Active' : 'Watch Ad — Get 15 Min Free'}
+                  {isActive ? 'Session Already Active' : 'Watch Ad - Get 15 Min Free'}
                 </Text>
               </>
             )}

@@ -1,6 +1,6 @@
 # CodeRespite: Refresh Your Tech Skills 🐾
 
-CodeRespite is a gamified, AI-powered micro-learning mobile application built with React Native and Expo. Tailored for software engineers prepping for technical interviews or developers establishing daily learning habits, it combines spaced repetition, active recall, and a personalized AI tutor—**Meowgrammer** 🐾—to make code learning engaging and effective.
+CodeRespite is a gamified, AI-powered micro-learning mobile application built with React Native and Expo. Tailored for software engineers prepping for technical interviews or developers establishing daily learning habits, it combines spaced repetition, active recall, and a personalized AI tutor - **Meowgrammer** 🐾 - to make code learning engaging and effective.
 
 ---
 

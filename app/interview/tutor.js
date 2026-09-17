@@ -26,7 +26,7 @@ import AiCreditsModal from "../../components/AiCreditsModal";
 import PageTransition from "../../components/PageTransition";
 import { CustomAlert } from "../../components/shared/GlobalAlert";
 
-// 5-tier model fallback chain — same as destya-fitness-app
+// 5-tier model fallback chain - same as destya-fitness-app
 const GROQ_MODELS = [
   "openai/gpt-oss-120b",
   "openai/gpt-oss-20b",
@@ -91,7 +91,7 @@ The app has the following courses and modules that users can study:
 ${courseList || "Courses are still loading..."}
 
 When a user asks about a topic that is covered by one of these courses, proactively mention that they can find it in the app. For example:
-> 🐾 *Psst — you can practice this in the app! Check out the **React Native** course → **State Management and Hooks** module.*
+> 🐾 *Psst - you can practice this in the app! Check out the **React Native** course → **State Management and Hooks** module.*
 
 ## Rules
 1. Explain coding concepts using simple, humorous cat-themed analogies.
@@ -224,7 +224,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
           const content = data.choices[0]?.message?.content?.trim();
           if (content) {
             replyContent = content;
-            break; // success — stop trying fallbacks
+            break; // success - stop trying fallbacks
           }
           throw new Error("Empty response from model: " + model);
         } catch (err) {
@@ -375,7 +375,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
             )}
           </View>
 
-          {/* Action row — only for AI responses */}
+          {/* Action row - only for AI responses */}
           {!isUser && (
             <View style={styles.actionRow}>
               <TouchableOpacity
@@ -432,7 +432,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         </View>
       </View>
 
-      {/* Messages — flex:1 so it fills available space and input stays at bottom */}
+      {/* Messages - flex:1 so it fills available space and input stays at bottom */}
       <FlatList
         ref={flatListRef}
         data={displayMessages}
@@ -483,7 +483,7 @@ When a user asks about a topic that is covered by one of these courses, proactiv
         </View>
       )}
 
-      {/* Input panel — stays pinned just above the keyboard */}
+      {/* Input panel - stays pinned just above the keyboard */}
       <View style={styles.inputWrapper}>
         {/* Row: text field + send button */}
         <View style={styles.inputContainer}>
@@ -539,7 +539,7 @@ const markdownStyles = {
     fontStyle: "italic",
     color: "#4B5563",
   },
-  // Inline code — e.g. `useState`
+  // Inline code - e.g. `useState`
   code_inline: {
     fontFamily: Platform.OS === "ios" ? "Courier New" : "monospace",
     fontSize: 13,
@@ -549,7 +549,7 @@ const markdownStyles = {
     paddingHorizontal: 5,
     paddingVertical: 1,
   },
-  // Fenced code blocks — ``` js ... ```
+  // Fenced code blocks - ``` js ... ```
   fence: {
     backgroundColor: "#1E0D47",
     borderRadius: 10,

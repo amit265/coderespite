@@ -33,15 +33,15 @@ export const getAiCredits = async () => {
       if (currentCredits < AI_CREDITS_DEFAULT) {
         currentCredits = AI_CREDITS_DEFAULT;
         await AsyncStorage.setItem(AI_CREDITS_KEY, String(currentCredits));
-        console.log('[AiCredits] New day — credits refilled to', AI_CREDITS_DEFAULT);
+        console.log('[AiCredits] New day - credits refilled to', AI_CREDITS_DEFAULT);
       } else {
-        console.log('[AiCredits] New day — credits kept at', currentCredits);
+        console.log('[AiCredits] New day - credits kept at', currentCredits);
       }
       return currentCredits;
     }
 
     if (stored === null) {
-      // First ever launch — initialize credits
+      // First ever launch - initialize credits
       await AsyncStorage.setItem(AI_CREDITS_DATE_KEY, today);
       await AsyncStorage.setItem(AI_CREDITS_KEY, String(AI_CREDITS_DEFAULT));
       return AI_CREDITS_DEFAULT;

@@ -1,5 +1,5 @@
 // app/interview/index.js
-// Mode selection screen — Mock Interview vs Q&A Tutor
+// Mode selection screen - Mock Interview vs Q&A Tutor
 import React, { useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';

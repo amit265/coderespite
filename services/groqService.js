@@ -1,6 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 
-// 5-tier model fallback chain — same as destya-fitness-app
+// 5-tier model fallback chain - same as destya-fitness-app
 // Tries each model in order; only fails after all 5 are exhausted.
 const GROQ_MODELS = [
   "openai/gpt-oss-120b",

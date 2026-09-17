@@ -1,5 +1,5 @@
 /**
- * purchasesService.js — REMOVED
+ * purchasesService.js - REMOVED
  *
  * This app is completely free. RevenueCat has been removed.
  * Ad-free experience is now available via rewarded ads (see adFreeService.js).

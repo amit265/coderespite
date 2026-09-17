@@ -4,7 +4,7 @@ module.exports = {
   expo: {
     name: "CodeRespite: Learn to Code",
     description:
-      "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite—your pocket-sized AI coding companion! 🐾",
+      "Master programming languages, prepare for technical interviews, and build developer habits with CodeRespite - your pocket-sized AI coding companion! 🐾",
     slug: "coderespite",
     version: packageJson.version,
     orientation: "portrait",

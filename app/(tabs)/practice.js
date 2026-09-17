@@ -1,5 +1,5 @@
 // app/(tabs)/practice.js
-// Practice tab — Shows the Practice Programs course browser
+// Practice tab - Shows the Practice Programs course browser
 import { useRouter } from 'expo-router';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import {

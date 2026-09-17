@@ -92,7 +92,7 @@ const AdManager = () => {
         appPauseCount.current += 1;
 
         if (isAdFreeSessionActive) {
-          console.log("[Ads] Ad-free session active — skipping app open ad.");
+          console.log("[Ads] Ad-free session active - skipping app open ad.");
           interstitialJustShown.current = false;
           return;
         }
@@ -122,7 +122,7 @@ const AdManager = () => {
       clickCount % adConfig?.interstitialFrequency === 0
     ) {
       if (isAdFreeSessionActive) {
-        console.log("[Ads] Ad-free session active — skipping interstitial.");
+        console.log("[Ads] Ad-free session active - skipping interstitial.");
         return;
       }
       showInterstitialAd(adConfig);
