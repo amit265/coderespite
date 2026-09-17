@@ -248,8 +248,9 @@ export default function Learn() {
               <Text className="text-gray-500 font-nunito-bold">Pull down to load courses</Text>
             </View>
           ) : (
-            <View style={{ paddingVertical: 16 }}>
-              {/* Learning Paths Section */}
+            <>
+              <View style={{ paddingVertical: 16 }}>
+                {/* Learning Paths Section */}
               <Text style={{ fontSize: 20, fontFamily: "nunito-bold", marginBottom: 12, paddingHorizontal: 16, color: "#1F2937" }}>
                 Curated Learning Paths
               </Text>
@@ -376,7 +377,7 @@ export default function Learn() {
                   </View>
                 </>
               )}
-            </View>
+            </>
           )}
         </RefreshWrapper>
       </SafeScreen>
