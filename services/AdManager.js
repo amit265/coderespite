@@ -208,10 +208,13 @@ export const useRewardedAdLoader = () => {
 };
 
 export const BannerAdComponent = ({ fixed = false }) => {
-  if (!adConfigContext || !adConfigContext.Provider) return null;
-  const { adConfig, adsReady, isAdFreeSessionActive } = useContext(adConfigContext);
+  const context = useContext(adConfigContext);
   const [isAdLoaded, setIsAdLoaded] = useState(false);
   const insets = useSafeAreaInsets();
+
+  if (!adConfigContext || !adConfigContext.Provider || !context) return null;
+  
+  const { adConfig, adsReady, isAdFreeSessionActive } = context;
 
   if (!adsReady || !adConfig.showAds || !adConfig.showBannerAds || isAdFreeSessionActive) return null;
 
@@ -264,21 +267,14 @@ export const GlobalSmartBanner = () => {
 };
 
 export const NativeAdComponent = () => {
-  if (!adConfigContext || !adConfigContext.Provider) {
+  const contextValues = useContext(adConfigContext);
+  const [isAdLoaded, setIsAdLoaded] = useState(false);
+
+  if (!adConfigContext || !adConfigContext.Provider || !contextValues) {
     return null;
   }
   
-  let contextValues;
-  try {
-    contextValues = useContext(adConfigContext);
-    console.log("[Ads] useContext succeeded!", !!contextValues);
-  } catch (e) {
-    console.log("[Ads] useContext FAILED:", e.message);
-    throw e;
-  }
-  
   const { adConfig, adsReady } = contextValues;
-  const [isAdLoaded, setIsAdLoaded] = useState(false);
 
   if (!adsReady || !adConfig?.showAds || !adConfig?.showNativeAds) return null;
 
